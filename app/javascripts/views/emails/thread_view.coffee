@@ -1,7 +1,6 @@
 Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
-  setup: (->
+  setup: Ember.on 'didInsertElement', ->
     Ember.run.scheduleOnce 'afterRender', this, 'addListener'
-  ).on 'didInsertElement'
 
   addListener: ->
     $(window).on "scroll.regularScroller", @didScroll.bind(this)
@@ -64,6 +63,5 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
       @addObserver('controller.isLoading', observer)
       @get('controller').send 'showMore'
 
-  teardown: ( ->
+  teardown: Ember.on 'willDestroyElement', ->
     $(window).off ".regularScroller"
-  ).on 'willDestroyElement'

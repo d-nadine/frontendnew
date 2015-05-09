@@ -616,3 +616,12 @@
   position: relative;
   top: 65px;
 }
+
+.empty-emails, .email-history, .email-form-component {
+  position: relative;
+  top: 66px;
+}
+
+.email-form-component {
+  overflow: hidden;
+}

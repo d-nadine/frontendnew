@@ -22,5 +22,5 @@ Radium.ThreadItemView = Radium.View.extend
 
         return unless ele?.id
 
-        Ember.$.scrollTo("##{ele.id}", 0, {offset: -100})
+        Ember.$.scrollTo("##{ele.id}", 0, {offset: -148})
         parentController.set 'initialised', true
