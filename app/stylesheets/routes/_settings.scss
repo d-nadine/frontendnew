@@ -468,3 +468,14 @@ input.api-field {
 .service p {
   padding-bottom: 0;
 }
+
+.settings-general-component {
+  .excluded-domains {
+    list-style: none;
+
+    .btn-remove-field {
+      position: relative;
+      top: -4px;
+    }
+  }
+}

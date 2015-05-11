@@ -88,6 +88,13 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
 
+  domain: Ember.computed 'primaryEmail', ->
+    return unless primaryEmail = @get('primaryEmail.value')
+
+    return unless primaryEmail.indexOf('@') > 0
+
+    primaryEmail.split('@').pop()
+
   email: Ember.computed.alias 'primaryEmail.value'
   phone: Ember.computed.alias 'primaryPhone.value'
   city: Ember.computed.alias 'primaryAddress.city'

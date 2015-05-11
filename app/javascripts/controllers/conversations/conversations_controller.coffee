@@ -8,6 +8,20 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
       false
 
+    ignoreDomain: (contact) ->
+      domain = contact.get('domain')
+
+      excludedDomain = Radium.ExcludedDomain.createRecord
+                         domain: domain
+
+      excludedDomain.save(this)
+
+      models = @filter (c) -> c.get('model.sender.primaryEmail.value').indexOf(domain) > 0
+
+      @removeObjects models
+
+      false
+
     updateConversation: (action, controller, contact) ->
       if action == "track"
         return @send "track", contact

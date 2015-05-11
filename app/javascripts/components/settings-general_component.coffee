@@ -1,5 +1,10 @@
 Radium.SettingsGeneralComponent = Ember.Component.extend
   actions:
+    deleteExcludedDomain: (domain) ->
+      @sendAction "deleteExcludedDomain", domain
+
+      false
+
     switchShareInbox: ->
       return if @get('isSaving')
 

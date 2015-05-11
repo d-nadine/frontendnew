@@ -3,4 +3,17 @@
   {{country-picker changeCountry="changeCurrency" current=currentCurrency countryList=Radium.Currencies}}
   <h3>Share Inbox</h3>
   {{toggle-switch checked=inboxIsShared action="switchShareInbox" disabled=isSaving}}
+  <h3>Excluded Domains</h3>
+  <ul class="excluded-domains">
+    {{#each domain in excludedDomains}}
+      <li>
+        <span>{{domain.domain}}</span>
+        <a href="#" class="btn btn-link btn-remove-field" {{action "deleteExcludedDomain" domain}}>
+          <i class="ss-symbolicons-block ss-trash cancel"></i>
+        </a>
+      </li>
+    {{else}}
+      <li>You are not currently excluding any domains.</li>
+    {{/each}}
+  </ul>
 </div>

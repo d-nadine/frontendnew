@@ -7,4 +7,9 @@ Radium.ConversationActionsComponent = Ember.Component.extend
 
       false
 
+    ignoreDomain: (contact) ->
+      @get('actionTarget').send "ignoreDomain", contact
+
+      false
+
   actionTarget: Ember.computed.oneWay 'targetObject.parentController.targetObject'

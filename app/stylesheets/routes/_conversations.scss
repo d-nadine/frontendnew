@@ -214,7 +214,6 @@
 .conversations-view .conversations-sidebar .item > div:nth-child(1) {
   margin-bottom: 3px;
   font-size: 13px;
-  color: #666;
   padding: 5px 0;
   border-radius: 5px;
 }
@@ -247,5 +246,23 @@
     width: 8%;
     margin-right: 6%;
     float: right;
+    color: #666;
+  }
+}
+
+.conversations-view .conversations-table td.choose {
+  overflow: visible;
+  white-space: normal;
+  padding-right: 10px;
+
+  div.dropdown {
+    display: inline-block;
+    position: absolute;
+    margin-left: 6px;
+  }
+
+  ul.dropdown-menu {
+    position: absolute;
+    left: -100px;
   }
 }
