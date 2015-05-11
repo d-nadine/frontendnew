@@ -93,7 +93,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
     return unless primaryEmail.indexOf('@') > 0
 
-    primaryEmail.split('@').pop()
+    "@#{primaryEmail.split('@').pop()}"
 
   email: Ember.computed.alias 'primaryEmail.value'
   phone: Ember.computed.alias 'primaryPhone.value'

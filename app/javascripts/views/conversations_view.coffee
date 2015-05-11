@@ -33,14 +33,12 @@ Radium.ConversationsView = Radium.View.extend
 
     @set 'isAtBottom', (current >= scrollHeight)
 
-  setup: (->
+  setup: Ember.on 'didInsertElement', ->
     $(window).on 'resize.resizeTable', @resizeTable.bind(this)
 
     @$(@get('elementSelector')).on 'scroll.conversations', @atContentEnd.bind(this)
 
     @resizeTable()
-  ).on 'didInsertElement'
 
-  teardown: (->
+  teardown: Ember.on 'willDestroyElement', ->
     @$(@get('elementSelector')).off 'scroll.conversations'
-  ).on 'willDestroyElement'

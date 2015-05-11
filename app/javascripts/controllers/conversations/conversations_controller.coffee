@@ -9,7 +9,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       false
 
     ignoreDomain: (contact) ->
-      domain = contact.get('domain')
+      domain = "#{contact.get('domain')}"
 
       excludedDomain = Radium.ExcludedDomain.createRecord
                          domain: domain
