@@ -1,4 +1,8 @@
 {{thirdpartyIcon model}}
 {{#link-to "emails.thread" "inbox" model}}
-  {{truncate model.subject length="100"}}
+  {{#if model.subject.length}}
+    {{truncate model.subject length="100"}}
+  {{else}}
+    (no subject)
+  {{/if}}
 {{/link-to}}
