@@ -22,47 +22,20 @@
 
     <div class="form-box-controls">
       {{#if compactFormButtons}}
-        <div class="btn-group form-switcher-small">
-          <button {{action "submitForm"}} class="btn btn-large">
-            {{#if showTodoForm}}
-              <i class="ss-standard ss-check green"></i> Add Task
-            {{/if}}
-            {{#if showMeetingForm}}
-              <i class="ss-standard ss-calendar green"></i> Add Task
-            {{/if}}
-            {{#if showNoteForm}}
-              <i class="ss-standard ss-notebook green"></i> Add Note
-            {{/if}}
-            {{#if showEmailForm}}
-              <i class="ss-standard ss-mail green"></i> Add Email
-            {{/if}}
-          </button>
-          <button class="btn btn-large dropdown-toggle needsclick" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            {{#if todoForm}}
-            <li>
-              <a href="#" {{action "showForm" "todo"}}><i class="ss-standard ss-check"></i> Todo</a>
-            </li>
-            {{/if}}
-            {{#if meetingForm}}
-            <li>
-              <a href="#" {{action "showForm" "meeting"}}><i class="ss-standard ss-calendar"></i> Meeting</a>
-            </li>
-            {{/if}}
-            {{#if noteForm}}
-            <li>
-              <a href="#" {{action "showForm" "note"}}><i class="ss-standard ss-notebook"></i> Note</a>
-            </li>
-            {{/if}}
-            {{#if emailForm}}
-            <li>
-              <a href="#" {{action "showForm" "email"}}><i class="ss-standard ss-mail"></i> Email</a>
-            </li>
-            {{/if}}
-          </ul>
-        </div>
+        <button {{action "submitForm"}} class="btn btn-primary btn-large">
+          {{#if showTodoForm}}
+            Add Task
+          {{/if}}
+          {{#if showMeetingForm}}
+            Add Task
+          {{/if}}
+          {{#if showNoteForm}}
+            Add Note
+          {{/if}}
+          {{#if showEmailForm}}
+            Add Email
+          {{/if}}
+        </button>
       {{else}}
         <div class="form-switcher">
           {{#if todoForm}}

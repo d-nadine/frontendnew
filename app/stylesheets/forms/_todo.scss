@@ -2,10 +2,18 @@
   .primary {
     position: relative;
 
-    .events-list-item-button .ss-check {
-      font-size: 18px;
-      position: absolute;
+    .events-list-item-button {
+      background: none;
+      padding: 0;
       top: 7px;
+      margin-top: 6px;
+
+      .ss-check {
+        font-size: 18px;
+      }
+      &:hover {
+        color: $text;
+      }
     }
 
     &.is-finished {
@@ -79,7 +87,7 @@
 
   .todo {
     margin: {
-      left: 60px;
+      left: 40px;
       right: 140px;
     }
 

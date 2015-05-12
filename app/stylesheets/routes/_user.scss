@@ -174,68 +174,171 @@
     width: 96%;
     margin: 20px 2% 0;
   }
-  h2 {
-    font-size: 24px;
-    margin-bottom: 5px;
-  }
+  .tasks-content {
+    max-width: 835px;
 
-  .form-box-controls {
-    width: 100%;
-    display: inline-block;
-    z-index: 9;
-    position: relative;
-    top: 0;
+    h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
 
-    a {
-      color: $text;
-      padding: 15px 30px;
+    .form-box-controls {
       display: inline-block;
+      z-index: 9;
+      position: relative;
+      top: 0;
 
-      &.active {
-        background: white;
-        border: 1px solid $border;
-        border-bottom: 1px solid white;
+      a {
+        color: $text;
+        padding: 15px 30px;
+        display: inline-block;
+
+        &.active {
+          background: white;
+          border: 1px solid $border;
+          border-bottom: 1px solid white;
+        }
+
+        i {
+          position: relative;
+          top: 2px;
+          margin-right: 6px;
+        }
+      }
+    }
+    .form-container {
+      width: calc(100% - 43px);
+      display: inline-block;
+      background: white;
+      border: 1px solid $border;
+      z-index: 2;
+      position: relative;
+      top: -2px;
+      padding: 20px;
+
+      .forms-todo-view {
+        display: inline-block;
+        float: left;
+        line-height: 1;
+
+        .todo {
+          margin: 0 0 0 20px;
+
+          textarea {
+            font-size: 16px;
+          }
+        }
       }
 
-      i {
-        position: relative;
-        top: 2px;
-        margin-right: 6px;
+      button.finish-todo {
+        display: none;
+      }
+      .todo-form {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 0;
+
+        .primary {
+          width: 535px;
+          float: left;
+        }
+        .btn-options {
+          float: left;
+          margin: 20px 20px 0 20px;
+        }
+
+        &.is-expanded {
+
+          .control-box {
+            width: 330px;
+          }
+        }
+      }
+    }
+    .task-list {
+      background: white;
+      border: 1px solid $border;
+      padding: 10px 30px;
+
+      .has-reference {
+
+        .primary {
+          background-color: transparent;
+          border: 0px;
+
+          textarea {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 200px;
+            white-space: nowrap;
+          }
+        }
+      }
+      h3 {
+        border-bottom: 1px solid #dedede;
       }
     }
   }
-  .form-container {
-    width: 100%;
-    display: inline-block;
-    background: white;
-    border: 1px solid $border;
-    z-index: 2;
-    position: relative;
-    top: -2px;
+}
 
-    button.finish-todo {
-      display: none;
+
+.expanded-fields {
+  float: left;
+  background-color: white;
+  width: calc(100% - 30px);
+  border: 0px;
+  box-shadow: none;
+  z-index: 9;
+
+  .field-group {
+
+    .field {
+      height: 46px;
+
+      .prepend-group {
+        float: left;
+        height: auto;
+        line-height: 46px;
+        margin-left: 10px;
+
+        .btn {
+          padding: 0;
+
+          i {
+            top: 2px;
+          }
+        }
+      }
+      .text {
+        float: left;
+        line-height: 46px;
+        padding-right: 15px;
+      }
+      &.autocomplete-textbox-component {
+
+        input[type=text] {
+          width: calc(100% - 164px);
+        }
+      }
     }
-    .todo-form {
-      width: 100%;
-      display: inline-block;
-
-      .primary {
-        width: 70%;
-        margin: 20px 0 0 30px;
-        float: left;
-      }
-      .btn-options {
-        float: left;
-        margin: 20px 0 0 20px;
-      }
-
-      .expanded-fields {
-        float: left;
-        background-color: white;
-        margin-left: 30px;
-        width: calc(100% - 90px);
-      }
+    .control-box {
+      width: auto;
     }
+  }
+}
+
+.is-expanded {
+  display: inline-block;
+}
+.task-list {
+
+  .expanded-fields {
+    padding-left: 40px;
+    width: calc(100% - 40px);
+    margin-bottom: 20px;
+  }
+  .primary {
+    background: transparent;
+    border: 0px;
   }
 }

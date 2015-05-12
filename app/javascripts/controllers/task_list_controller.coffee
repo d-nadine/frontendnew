@@ -15,8 +15,7 @@ Radium.TaskListController = Radium.ArrayController.extend Radium.ShowMoreMixin,
           content: Ember.A()
           name: name
 
-        unless group.get('name') == 'today'
-          displayName = group.get('name').replace(/\_/g, ' ').split(' ').map((word) -> word.capitalize()).join(' ')
+        displayName = group.get('name').replace(/\_/g, ' ').split(' ').map((word) -> word.capitalize()).join(' ')
 
         group.set 'displayName', displayName
         group.set 'position', @getPosition(group)
