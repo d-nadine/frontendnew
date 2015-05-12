@@ -229,8 +229,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     customFieldsConfig = customFields.map (field) =>
       identifier = "#{field.get('name')}-#{field.get('type')}-#{field.get('id')}"
 
-      @set identifier, field
-
       col =
         id: identifier
         classNames: "custom-field"
@@ -254,7 +252,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     cols = combined.filter((c) -> savedColumns.contains(c.id))
 
-    cols = @initialColumns unless cols.length
+    unless cols.length
+      cols = combined.filter((c) => @initialColumns.contains(c.id))
 
     cols.setEach 'checked', true
 
@@ -264,4 +263,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   checkedColumnsDidChange: Ember.observer 'checkedColumns.length', ->
     checked = @get('checkedColumns').filter((c) -> c.checked).mapProperty 'id'
+
+    return unless checked.length
+
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)

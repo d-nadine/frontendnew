@@ -41,13 +41,19 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller = @controllerFor 'peopleIndex'
 
-    controller.set 'customFields', Radium.CustomField.find({})
-
     controller.send 'updateTotals'
     controller.set 'filter', filter
     controller.set 'allChecked', false
     controller.get('content').setEach 'isChecked', false
     controller.set 'searchText', ''
+
+    new Ember.RSVP.Promise (resolve, reject) ->
+      Radium.CustomField.find({}).then((results) ->
+        controller.set 'customFields', results
+        resolve()
+      ).catch (error) ->
+        Ember.Logger.error(error)
+        reject error
 
   model: (params) ->
     controller = @controllerFor 'peopleIndex'
@@ -75,8 +81,6 @@ Radium.PeopleIndexRoute = Radium.Route.extend
       savedColumns = controller.initialColumns
 
       localStorage.setItem controller.SAVED_COLUMNS, JSON.stringify(savedColumns)
-
-    controller.get('columns').filter((c) -> savedColumns.contains(c.id)).setEach 'checked', true
 
   deactivate: ->
     @controller.set 'newTags', Ember.A()
