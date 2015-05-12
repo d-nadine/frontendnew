@@ -763,6 +763,39 @@
   .left-table th {
     height: 44px !important;
   }
+
+  .custom-field .sidebar-panel-content{
+    width: auto;
+    padding: 0;
+    background-color: inherit;
+    border-bottom: none;
+    color: inherit;
+  }
+
+  .custom-field .sidebar-panel-content .control-group {
+    margin-bottom: 0;
+
+    .customfield-textinput-component, .customfield-urlinput-component {
+      position: relative;
+      top: 8px;
+      border: transparent;
+      outline: none;
+
+      &::-webkit-input-placeholder {
+        font-style: italic;
+      }
+    }
+
+    .customfield-currencyinput-component {
+      position: relative;
+      top: 8px;
+
+      .ember-text-field.span2 {
+        width: 150px;
+        margin-right: 10px;
+      }
+    }
+  }
 }
 
 .modal-backdrop {

@@ -1,5 +1,5 @@
 # FIXME: this can be replace with the component helper when we upgrade to 1.11.0
-Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourcePath, options) ->
+Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourcePath, tableCell, options) ->
   customField = Ember.Handlebars.get(this, customFieldPath, options)
   resource = Ember.Handlebars.get(this, resourcePath, options)
 

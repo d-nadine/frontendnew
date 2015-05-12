@@ -25,13 +25,17 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
       return @cancel() unless resource.get('isDirty')
 
       resource.save(parent).then (result) =>
-        parent.send 'flashSuccess', 'The field has been updated'
+        unless @get('tableCell')
+          parent.send 'flashSuccess', 'The field has been updated'
 
         return @cancel()
 
-  customFieldValue: Ember.computed 'resource', 'field', ->
+  customFieldValue: Ember.computed 'resource.customFieldMap', 'field', ->
+    return unless customFieldMap = @get('resource.customFieldMap')
+
     field = @get('field')
-    @get('resource.customFieldMap').get(field)
+
+    customFieldMap.get(field)
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
@@ -43,6 +47,19 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
     resource = @get('resource')
 
     Ember.assert "You must supply a resource to a customfield-editor", resource
+
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+
+    return unless @get('tableCell')
+
+    customFields = @get('customFields')
+
+    @set 'field', customFields.findBy('id', @get('fieldId'))
+
+    customFieldMap = @get('resource').getCustomFieldMap(customFields)
+
+    @set "resource.customFieldMap", customFieldMap
 
   isEditing: false
   isSaving: false
@@ -75,6 +92,9 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
 
   cancel: ->
     @set 'isSaving', false
+
+    return if @get('tableCell')
+
     @set 'isEditing', false
 
   keyDown: (e) ->
@@ -89,3 +109,13 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
     return if input.get(0).tagName == "TEXTAREA"
 
     @send 'save'
+
+  focusOut: (e) ->
+    return unless e.target.tagName == 'INPUT'
+
+    return unless @get('tableCell')
+
+    return unless e.target?.value?.length
+
+    Ember.run.next =>
+      @send "save"

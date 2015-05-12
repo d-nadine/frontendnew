@@ -146,7 +146,6 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       classNames: "next-task-date"
       heading: "Next Task Date"
       binding: "nextTaskDateDisplay"
-      checked: true
       sortOn: "next_task_date"
     }
     {

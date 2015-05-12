@@ -222,7 +222,45 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   pageSize: 25
 
-  checkedColumns: Ember.computed.filterBy 'columns', 'checked'
+  combinedColumns: Ember.computed 'columns.[]', 'customFields.[]', ->
+    columns = @get('columns')
+    customFields = @get('customFields') || []
+
+    customFieldsConfig = customFields.map (field) =>
+      identifier = "#{field.get('name')}-#{field.get('type')}-#{field.get('id')}"
+
+      @set identifier, field
+
+      col =
+        id: identifier
+        classNames: "custom-field"
+        isCustomField: true
+        heading: field.get('name')
+        bindings: [
+          {name: "fieldId", value: field.get('id'), static: true}
+          {name: "resource", value: "model"}
+          {name: "parent", value: "parentController.targetObject"}
+          {name: "customFields", value: "parentController.targetObject.customFields"}
+          {name: "isEditing", value: true, static: true}
+          {name: "tableCell", value: true, static: true}
+        ]
+        component: "customfield-editor"
+
+      col
+
+    combined = columns.concat customFieldsConfig
+
+    savedColumns = JSON.parse(localStorage.getItem(@SAVED_COLUMNS))
+
+    cols = combined.filter((c) -> savedColumns.contains(c.id))
+
+    cols = @initialColumns unless cols.length
+
+    cols.setEach 'checked', true
+
+    combined
+
+  checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
 
   checkedColumnsDidChange: Ember.observer 'checkedColumns.length', ->
     checked = @get('checkedColumns').filter((c) -> c.checked).mapProperty 'id'

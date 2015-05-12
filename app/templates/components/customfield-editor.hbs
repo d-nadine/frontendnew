@@ -8,9 +8,11 @@
   </div>
 {{else}}
   <div class="control-group">
-    <label class="control-label">{{field.name}}</label>
+    {{#unless tableCell}}
+      <label class="control-label">{{field.name}}</label>
+    {{/unless}}
     <div class="controls">
-      {{renderCustomField field resource}}
+      {{renderCustomField field resource tableCell}}
     </div>
   </div>
 {{/unless}}

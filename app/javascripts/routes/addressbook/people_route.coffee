@@ -41,6 +41,8 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller = @controllerFor 'peopleIndex'
 
+    controller.set 'customFields', Radium.CustomField.find({})
+
     controller.send 'updateTotals'
     controller.set 'filter', filter
     controller.set 'allChecked', false
