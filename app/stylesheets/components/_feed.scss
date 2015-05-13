@@ -1,7 +1,9 @@
 .feed {
-  border-top: 1px solid $control-border-color;
+  border: 1px solid $border;
   background: white;
-  max-width: 835px;
+  max-width: 775px;
+  padding: 10px 30px 20px;
+  margin-top: 10px;
 }
 
 .feed .activity:last-of-type {

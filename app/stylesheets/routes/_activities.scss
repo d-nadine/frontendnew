@@ -1,8 +1,7 @@
 .activity {
   margin: 0;
-  padding: 10px 0;
+  padding: 10px 0 10px 10px;
   clear: both;
-  border-bottom: 1px solid $control-border-color;
 
   p {
     margin: 0;
@@ -12,17 +11,26 @@
 .activity-icon {
   margin: 10px 0 0 10px;
   color: #cecece;
+
+  i {
+    position: relative;
+    top: 2px;
+  }
 }
 .activity .timestamp {
     margin-top: 10px;
+    width: 60px;
 }
 .activity .timestamp time {
   color: $muted;
   margin-right: 10px;
+  font-size: 11px;
 }
 
 .activity-content {
-  margin-left: 50px;
+  margin-left: 115px;
+  margin-top: 9px;
+
   .span1 {
     width: 38px;
     margin-left: -10px;
@@ -37,6 +45,18 @@
     position: relative;
     top: 12px;
     left: 10px;
+  }
+  .email-subject {
+    display: inline-block;
+    margin-top: 5px;
+
+    a {
+      font-weight: 400;
+    }
+  }
+  a {
+    color: $text;
+    font-weight: 600;
   }
 }
 
@@ -126,5 +146,25 @@
     position: relative;
     top: 10px;
     color: #3A87AD;
+  }
+}
+
+.show-more-component {
+
+  .btn-load-more {
+    display: inline-block;
+    text-align: center;
+    margin-top: 15px;
+
+    i {
+      float: none;
+    }
+  }
+}
+
+.assigned-task {
+
+  a {
+    font-weight: 400;
   }
 }

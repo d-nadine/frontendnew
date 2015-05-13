@@ -205,6 +205,9 @@
           margin-right: 6px;
         }
       }
+      .btn-primary {
+        padding: 13px 32px;
+      }
     }
     .form-container {
       width: calc(100% - 43px);
@@ -220,12 +223,20 @@
         display: inline-block;
         float: left;
         line-height: 1;
+        width: 80%;
 
         .todo {
           margin: 0 0 0 20px;
 
           textarea {
             font-size: 16px;
+          }
+        }
+        .expanded-fields {
+          width: 120%;
+
+          .btn-primary {
+            display: none;
           }
         }
       }
@@ -237,14 +248,17 @@
         width: 100%;
         display: inline-block;
         margin-bottom: 0;
+        padding-left: 0;
 
         .primary {
-          width: 535px;
+          width: 80%;
+          min-width: 470px;
           float: left;
         }
         .btn-options {
           float: left;
-          margin: 20px 20px 0 20px;
+          margin-left: 20px;
+          line-height: 47px;
         }
 
         &.is-expanded {
@@ -273,9 +287,6 @@
             white-space: nowrap;
           }
         }
-      }
-      h3 {
-        border-bottom: 1px solid #dedede;
       }
     }
   }
@@ -329,6 +340,7 @@
 
 .is-expanded {
   display: inline-block;
+  width: calc(100% - 14px);
 }
 .task-list {
 
@@ -341,4 +353,15 @@
     background: transparent;
     border: 0px;
   }
+}
+
+.task-list h3,
+.feed h3 {
+  border-bottom: 1px solid #dedede;
+  font-weight: 300;
+}
+
+.forms-todo-view {
+  display: inline-block;
+  width: 100%;
 }

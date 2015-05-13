@@ -58,7 +58,7 @@
 
   .primary {
     background-color: $input;
-    padding: 12px 12px 12px 0;
+    padding: 7px 12px 7px 0;
     border: solid 1px $border;
 
     a, a:focus, a:visited {
@@ -70,11 +70,6 @@
     .form-icon {
       width: 60px;
       text-align: center;
-    }
-
-    &.is-focused {
-      border-color: $link;
-      @include box-shadow(0 0 3px $link);
     }
 
     &.is-finished {

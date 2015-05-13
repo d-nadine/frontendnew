@@ -25,33 +25,33 @@
       Options
     {{/if}}
   </a>
+</div>
 
-  {{#if isExpanded}}
-    <div class="expanded-fields">
-      <div class="form-row">
-        <div class="field-group meeting-form-invite">
-          {{date-picker date=finishBy class="field" submitForm="trySubmit" ignoreEmpty=true}}
-          {{autocomplete-textbox source=users value=user queryKey="displayName" validations=userValidations validator=controller validationField="user" leader="Assigned To"}}
+{{#if isExpanded}}
+  <div class="expanded-fields">
+    <div class="form-row">
+      <div class="field-group meeting-form-invite">
+        {{date-picker date=finishBy class="field" submitForm="trySubmit" ignoreEmpty=true}}
+        {{autocomplete-textbox source=users value=user queryKey="displayName" validations=userValidations validator=controller validationField="user" leader="Assigned To"}}
+      </div>
+    </div>
+
+    {{#if isEditable}}
+      <div class="form-row form-buttons">
+        {{#if showAddAction}}
+          {{partial 'add_action'}}
+        {{/if}}
+        <div class="pull-right">
+          {{#if showAddAction}}
+            <button class="btn btn-link" {{action "deleteTask" model}}>Delete todo</button>
+          {{/if}}
+          <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
         </div>
       </div>
+    {{/if}}
 
-      {{#if isEditable}}
-        <div class="form-row form-buttons">
-          {{#if showAddAction}}
-            {{partial 'add_action'}}
-          {{/if}}
-          <div class="pull-right">
-            {{#if showAddAction}}
-              <button class="btn btn-link" {{action "deleteTask" model}}>Delete todo</button>
-            {{/if}}
-            <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
-          </div>
-        </div>
-      {{/if}}
+    {{partial 'forms/tasks'}}
 
-      {{partial 'forms/tasks'}}
-
-      {{partial 'forms/footer'}}
-    </div>
-  {{/if}}
-</div>
+    {{partial 'forms/footer'}}
+  </div>
+{{/if}}
