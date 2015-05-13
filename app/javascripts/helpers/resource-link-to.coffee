@@ -1,5 +1,5 @@
 Radium.typeToLinks =
-  email: 'emails.show'
+  email: 'emails.thread'
   meeting: 'calendar.task'
   todo: 'calendar.task'
 
