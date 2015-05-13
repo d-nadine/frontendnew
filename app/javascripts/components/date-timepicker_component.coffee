@@ -4,6 +4,7 @@ Radium.DateTimepickerComponent = Ember.Component.extend
       @set('isSubmitted', true)
       return if  @get('selectedDate')?.isBeforeNow()
       @sendAction 'submitDate', @get('model'), @get('selectedDate')
+      Ember.$('.send-later')?.hide()
 
       false
 

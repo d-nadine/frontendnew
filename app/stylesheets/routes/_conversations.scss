@@ -156,6 +156,12 @@
   width: calc(100% - 150px) !IMPORTANT;
 }
 
+.conversations-table .email-sender {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .conversations-table .table-container .variadic-table th {
   background: transparent;
   border-top: none;

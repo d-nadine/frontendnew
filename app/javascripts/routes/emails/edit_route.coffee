@@ -49,7 +49,7 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
     @controllerFor('emailsEdit').setProperties props
 
     emailForm = Radium.DraftEmailForm.create()
-    emailForm.reset()
+    emailForm.reset(false)
 
     emailForm.setProperties
       id: model.get('id')

@@ -70,6 +70,9 @@ Radium.EmailForm = Radium.Form.extend Radium.FormsAttachmentMixin,
     @get('to.length') && @get('html.length')
 
 Radium.DraftEmailForm = Radium.EmailForm.extend
+  init: ->
+    @set 'content', Ember.Object.create()
+
   reset: ->
     @_super.apply this, arguments
     @set 'id', null

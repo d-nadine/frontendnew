@@ -87,6 +87,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       @set 'form.isDraft', true
       @sendAction 'saveEmail', form, transitionFolder: transitionFolder
 
+      false
+
     scheduleDelivery: (form, date) ->
       if typeof date is "string"
         if date == 'tomorrow'
@@ -124,7 +126,14 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       Ember.run.next =>
         @set('checkForResponseSet', false)
 
-      @send('saveEmail', form) if @get('isDraft')
+      @sendAction('saveEmail', form)
+
+      false
+
+    cancelDelivery: (form) ->
+      form.set 'sendTime', null
+
+      @send 'saveAsDraft', form, 'drafts'
 
       false
 
@@ -172,7 +181,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       newMessage = "#{current}<br/><br/>#{signature}"
 
-      @set 'html', newMessage
+      @set 'form.html', newMessage
       editable.html(newMessage)
       editable.height("+=50")
 
@@ -182,6 +191,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       # FIXME: restore cursor to position
       # before signature added
       # editable.restoreCursor(currentLength)
+
+      @EventBus.publish('removePlaceHolder')
 
       @set 'signatureAdded', true
       false

@@ -25,6 +25,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @EventBus.subscribe('placeholderInsered', this, 'onPlaceholderInserted')
     @EventBus.subscribe('customFieldInserted', this, 'onCustomFieldInserted')
     @EventBus.subscribe('insertTemplate', this, 'onTemplateInserted')
+    @EventBus.subscribe('removePlaceHolder', this, 'onRemovePlaceHolder')
 
   setup: Ember.on 'didInsertElement', ->
     textarea = @$('textarea')
@@ -65,10 +66,10 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @set 'content', ''
     editable.addClass('placeholder').one 'focus', @removePlaceHolder.bind(this)
 
-  removePlaceHolder: ->
+  removePlaceHolder: (clearHtml = true) ->
     editable = @$('.note-editable')
     editable.removeClass('placeholder')
-    editable.html('')
+    editable.html('') if clearHtml
     @set 'placeholderShown', true
 
   addOverrides: ->
@@ -170,6 +171,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @EventBus.unsubscribe('placeholderInsered')
     @EventBus.unsubscribe('customFieldInserted')
     @EventBus.unsubscribe('insertTemplate')
+    @EventBus.unsubscribe('removePlaceHolder')
     @_super.apply this, arguments
 
     @$('.note-editable').off 'focus'
@@ -238,6 +240,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     Ember.run.next =>
       @doUpdate()
+
+  onRemovePlaceHolder: ->
+    @removePlaceHolder(false)
 
   onCustomFieldInserted: (customField) ->
     node = """

@@ -2,6 +2,7 @@ Radium.ConversationsColumnsConfig = Ember.Mixin.create
   fixedColumns: Ember.A([
     {
       heading: 'Contact'
+      classNames: 'email-sender'
       bindings: [{
         name: "contact",
         value: "model.contact"

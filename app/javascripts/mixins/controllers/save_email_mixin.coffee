@@ -13,7 +13,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       unless form.get('id')
         email = Radium.Email.createRecord form.get('data')
       else
-        email = @modelFor 'emailsEdit'
+        email = @get('model')
         email.setProperties form.get('data')
 
       isDraft = email.get('isDraft')
@@ -102,6 +102,18 @@ Radium.SaveEmailMixin = Ember.Mixin.create
           @send "flashSuccess", "The bulk email will be sent on #{job.sendTime.toHumanFormatWithTime()}"
 
         @getTransitionTo().call this, "people.index", "all", queryParams: bulkParams.returnParameters
+
+    addSignature: (signature) ->
+      settings = @getController('userSettings').get('model')
+      settings.set 'signature', signature
+
+      settings.save(this).then =>
+        @send 'flashSuccess', 'Signature updated'
+
+  needs: ['tags', 'contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar', 'templatesNew']
+
+  settings: Ember.computed.alias 'controllers.userSettings.model'
+  signature: Ember.computed.alias 'settings.signature'
 
   getTransitionTo: ->
     if this instanceof Ember.Controller || this instanceof Ember.ObjectController || this instanceof Ember.ArrayController
