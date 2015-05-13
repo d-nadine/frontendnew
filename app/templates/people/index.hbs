@@ -1,8 +1,9 @@
 <div class="page-header row-fluid">
   <div class="contacts-sidebar">
     <span class="count">
+      {{log companiesTotal}}
       {{#link-to "addressbook.companies"}}
-        <span class="count-companies">{{companiesTotal}} XXX companies ></span>
+        <span class="count-companies">{{companiesTotal}} companies ></span>
       {{/link-to}}
       {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="") currentWhen="people.index"}}
         <span class="count-people">{{contactsTotal}} people</span>

@@ -27,7 +27,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
-      compactFormButtons: true
       todoForm: @get('todoForm')
       noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')

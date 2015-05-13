@@ -45,7 +45,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
   formBox: Ember.computed 'todoForm', 'noteForm', 'meetingForm', ->
     Radium.FormBox.create
-      compactFormButtons: true
       todoForm: @get('todoForm')
       noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')

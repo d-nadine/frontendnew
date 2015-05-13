@@ -6,9 +6,9 @@ Radium.AddressbookController = Radium.ArrayController.extend Radium.BulkActionCo
       Radium.AddressbookTotals.find({}).then (results) =>
         totals = results.get('firstObject')
 
-        @set 'contactsTotal', totals.get('contacts')
-        @set 'companiesTotal', totals.get('companies')
-        @set 'untrackedTotal', totals.get('untracked')
+        @set 'contactsTotal', totals.get('contacts') || 0
+        @set 'companiesTotal', totals.get('companies') || 0
+        @set 'untrackedTotal', totals.get('untracked') || 0
 
         @set 'noContacts', totals.get('contacts') == 0
 
