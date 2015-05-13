@@ -104,13 +104,13 @@ Radium.SaveEmailMixin = Ember.Mixin.create
         @getTransitionTo().call this, "people.index", "all", queryParams: bulkParams.returnParameters
 
   getTransitionTo: ->
-    if this instanceof Ember.Controller
+    if this instanceof Ember.Controller || this instanceof Ember.ObjectController || this instanceof Ember.ArrayController
       @transitionToRoute
     else
       @transitionTo
 
   getController: (controller) ->
-    if this instanceof Ember.Controller
+    if this instanceof Ember.Controller || this instanceof Ember.ObjectController || this instanceof Ember.ArrayController
       @get("controllers.#{controller}")
     else
       @controllerFor(controller)

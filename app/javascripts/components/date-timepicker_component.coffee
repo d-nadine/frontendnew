@@ -5,10 +5,13 @@ Radium.DateTimepickerComponent = Ember.Component.extend
       return if  @get('selectedDate')?.isBeforeNow()
       @sendAction 'submitDate', @get('model'), @get('selectedDate')
 
+      false
+
   selectedDate: null
 
-  init: ->
+  _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
+
     @set 'isSubmitted', false
     @set 'selectedDate', Ember.DateTime.create().advance(day: 1)
 
