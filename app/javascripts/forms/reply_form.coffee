@@ -16,9 +16,10 @@ Radium.ReplyForm = Radium.EmailForm.extend
 
     @set 'subject', subject
 
-    to = repliedTo.get('toList').slice()
+    to = repliedTo.get('toContacts').slice()
+                  .concat(repliedTo.get('toUsers').slice())
 
-    to.pushObject(repliedTo.get('.sender'))
+    to.pushObject(repliedTo.get('sender'))
 
     currentUserEmail = @get('currentUser.email')?.toLowerCase()
 

@@ -175,7 +175,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
     appendSignature: ->
       editable = @$('.note-editable')
-      current = @get('form.html') || ''
+      current = editable.html()
       currentLength = editable.text().length
       signature = @get('signature').replace(/\n/g, '<br/>')
 
@@ -183,6 +183,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       @set 'form.html', newMessage
       editable.html(newMessage)
+      @set 'form.html', newMessage
       editable.height("+=50")
 
       # FIXME: editor menu appears sometims
