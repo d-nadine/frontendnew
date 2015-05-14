@@ -132,7 +132,7 @@
     </div>
     <div class="actions">
       <div {{bind-attr class=":follow-up bulkMode"}}>
-        <input type="checkbox" {{bind-attr checked=checkForResponseSet}} {{action "cancelCheckForResponse" form on="change"}}/>
+        {{x-check checked=checkForResponseSet disabled=allChecked classNames="check" action="cancelCheckForResponse"}}
         <span>Create a task if no reply in</span>
         <div class="dropdown check-response-opener">
           <a class="drop" role="button"  href="#">
