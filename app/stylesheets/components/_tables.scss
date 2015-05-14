@@ -36,3 +36,36 @@
     right: -14px;
   }
 }
+
+
+
+
+.table-container {
+  
+  .variadic-table-component {
+
+    .variadic-table {
+
+      th {
+        border-bottom: 1px solid $border;
+        border-top: 1px solid $border;
+        background: #fff;
+      }
+    }
+  }
+
+  .left-table {
+    th:first-of-type,
+    td:first-of-type {
+      border-left: 1px solid $border;
+    }
+  }
+  .right-table {
+    th:last-of-type,
+    td:last-of-type {
+      border-right: 1px solid $border;
+    }
+  }
+
+
+}

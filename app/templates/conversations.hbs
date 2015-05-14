@@ -1,5 +1,5 @@
 <div class="conversations-container row-fluid">
-  <div class="conversations-sidebar span2">
+  <div class="conversations-sidebar">
 
     <div id="totals" class="group">
       <p>My Inbox</p>
@@ -47,7 +47,7 @@
               <i class="ss-standard ss-users"></i>
             </span>
             <span>All</span>
-            <span>{{allUsersTotals}}</span>
+            <span class="badge">{{allUsersTotals}}</span>
           </div>
         </div>
         {{users-totals usersTotals=usersTotals query="team" action="showUserRecords" parent=this}}
@@ -65,7 +65,7 @@
   <div class="conversations-table span10">
     <div class="toolbar span12">
       <div class="left">
-        <a href="#" class="btn" {{action "emailAll"}}/>Compose</a>
+        <a href="#" class="btn btn-primary" {{action "emailAll"}}/>Compose</a>
         <div class="btn-group">
           <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Actions <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

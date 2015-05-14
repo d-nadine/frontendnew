@@ -2,7 +2,7 @@
 .btn:focus {
   background: $blue;
   background: #dedede;
-  color: white;
+  color: $text;
   text-shadow: none;
   border: none;
   border-radius: 3px;
@@ -11,6 +11,7 @@
 
   &.btn-primary {
     background: $blue;
+    color: #fff;
 
     &:hover {
       background: $lightblue;
