@@ -137,6 +137,7 @@
   }
 
   .subhead .filter-wrap .variables .field {
+    border: none;
     background: #fff;
     height: 20px;
     width: auto;
@@ -150,6 +151,46 @@
     height: 20px;
     display: inline-block;
     margin-right: 8px;
+
+    &.delete {
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .subhead .filter-wrap .variables .operator {
+    background: #fff url("/images/icons/dropdown.png") no-repeat;
+    background-size: 11px;
+    background-position: calc(100% - 5px) center;
+    border: 0px solid #ccc;
+    color: #000;
+    font-weight: bold;
+    outline: 0px;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    border-radius: 0px;
+    height: 30px;
+    margin: -5px -4px 0 -4px;
+    width: auto;
+    padding: 5px 25px 5px 10px;
+    line-height: 22px;
+  }
+
+  .subhead .filter-wrap .variables .value {
+    display: inline-block;
+    background: #fff;
+    height: 30px;
+    line-height: 32px;
+    padding: 0 10px;
+    min-width: 100px;
+
+    &[placeholder]:empty:before {
+      content: attr(placeholder);
+      color: #ccc;
+    }
   }
 
   .subhead .tools a.btn-contact, .subhead .tools .btn-group > a {
