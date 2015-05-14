@@ -3,17 +3,13 @@
     {{#if showComments}}
       <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
     {{/if}}
-    <a tabindex="3" class="btn btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
+    <a tabindex="3" class="btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
       {{#if isExpanded}}
         Hide
       {{else}}
         Options
       {{/if}}
     </a>
-
-    <div class="form-icon pull-left">
-      <i class="ss-standard ss-calendar inline-form-icon"></i>
-    </div>
 
     {{#if showSuccess}}
       <span class="success green pull-right">Meeting saved</span>
@@ -37,19 +33,19 @@
       <div class="form-row">
         <div class="field-group">
           {{date-picker date=startsAt leader='' class="field starts-at"}}
-          {{view view.startsAt class="field"}} to {{view view.endsAt class="field"}}
+          {{view view.startsAt class="field"}} <span class="meeting-to">to</span> {{view view.endsAt class="field"}}
         </div>
       </div>
       <div class="form-row">
         <div class="field-group">
-          {{autocomplete-textbox source=locations value=location icon="ss-icon ss-standard ss-location" queryKey="name" writeableValue=true}}
+          {{autocomplete-textbox source=locations value=location icon="ss-icon ss-standard ss-location" queryKey="name" writeableValue=true placeholder="Location"}}
         </div>
       </div>
       <div class="form-row">
         <div class="field-group">
           <label class="icon-label"><i class="ss-symbolicons-block ss-write"></i></label>
           <div class="field-group-input">
-            {{input type="text" value=description class="input-block-level" placeholder="description" action="submit"}}
+            {{input type="text" value=description class="input-block-level" placeholder="Description" action="submit"}}
           </div>
           <div class="clearfix">
             <div class="pull-right">
@@ -80,6 +76,11 @@
             </div>
           {{/unless}}
         </div>
+        {{#if calendarsOpen}}
+          <div class="field-group meeting-existing">
+            {{partial 'forms/existing_meetings'}}
+          </div>
+        {{/if}}
         {{#if attendees.length}}
           <div class="field-group meeting-form-attendees">
             <label class="icon-label">
@@ -88,11 +89,6 @@
             <ul class="unstyled meeting-form-attendees-list">
               {{each attendees itemViewClass="Radium.MeetingAttendeesView" itemController="meetingAttendeeItem"}}
             </ul>
-          </div>
-        {{/if}}
-        {{#if calendarsOpen}}
-          <div class="field-group">
-            {{partial 'forms/existing_meetings'}}
           </div>
         {{/if}}
       </div>

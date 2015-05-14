@@ -1,6 +1,10 @@
 .note-form {
   .rd-conversation-input {
-    margin-left: 60px;
+    margin-left: 45px;
+
+    &:focus {
+      outline: 0;
+    }
   }
 
   > .primary {
@@ -9,7 +13,8 @@
     i.ss-notepad {
       position: absolute;
       left: 14px;
-      top: 15px;
+      top: 5px;
+      font-size: 18px;
     }
   }
 }

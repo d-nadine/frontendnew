@@ -57,6 +57,13 @@
     max-height: none;
     position: static;
     padding: 15px;
+
+    .addresses {
+
+      .autocomplete {
+        padding: 0;
+      }
+    }
   }
 
   .recipients {
@@ -67,15 +74,15 @@
     margin-bottom: 10px;
 
     label {
-      margin: 0 10px 0 27px;
+      margin: 0 10px 0 0px;
       float: left;
       cursor: default;
-      line-height: 35px;
+      line-height: 50px;
       color: #6e6e6e;
     }
 
     .toggles {
-      line-height: 30px;
+      line-height: 50px;
     }
   }
 
@@ -109,6 +116,11 @@
     position: relative;
     display: inline-block;
     // IF YOU USE FLOAT: LEFT HERE THE RICH TEXT EDITOR IN THE EMAIL FORM SCREWS UP
+
+    .combobox {
+      line-height: 50px;
+      height: 50px;
+    }
   }
 
   .more-options {
@@ -128,7 +140,7 @@
   .textbox-wrap {
     position: relative;
     width: inherit;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 20px;
   }
 
@@ -375,6 +387,11 @@
 
   .upload-filelist-component {
     margin-top: 45px;
+  }
+
+  .subject-wrap {
+    line-height: 50px;
+    height: 50px;
   }
 }
 

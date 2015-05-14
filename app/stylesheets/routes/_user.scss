@@ -169,7 +169,9 @@
   }
 }
 
-.user-view {
+.user-view,
+.contact-view,
+.calendar-view {
   .main-content {
     width: 96%;
     margin: 20px 2% 0;
@@ -181,111 +183,24 @@
       font-size: 24px;
       margin-bottom: 5px;
     }
+  }
 
-    .form-box-controls {
-      display: inline-block;
-      z-index: 9;
-      position: relative;
-      top: 0;
+  .task-list {
+    background: white;
+    border: 1px solid $border;
+    padding: 10px 30px;
 
-      a {
-        color: $text;
-        padding: 15px 30px;
-        display: inline-block;
+    .has-reference {
 
-        &.active {
-          background: white;
-          border: 1px solid $border;
-          border-bottom: 1px solid white;
-        }
+      .primary {
+        background-color: transparent;
+        border: 0px;
 
-        i {
-          position: relative;
-          top: 2px;
-          margin-right: 6px;
-        }
-      }
-      .btn-primary {
-        padding: 13px 32px;
-      }
-    }
-    .form-container {
-      width: calc(100% - 43px);
-      display: inline-block;
-      background: white;
-      border: 1px solid $border;
-      z-index: 2;
-      position: relative;
-      top: -2px;
-      padding: 20px;
-
-      .forms-todo-view {
-        display: inline-block;
-        float: left;
-        line-height: 1;
-        width: 80%;
-
-        .todo {
-          margin: 0 0 0 20px;
-
-          textarea {
-            font-size: 16px;
-          }
-        }
-        .expanded-fields {
-          width: 120%;
-
-          .btn-primary {
-            display: none;
-          }
-        }
-      }
-
-      button.finish-todo {
-        display: none;
-      }
-      .todo-form {
-        width: 100%;
-        display: inline-block;
-        margin-bottom: 0;
-        padding-left: 0;
-
-        .primary {
-          width: 80%;
-          min-width: 470px;
-          float: left;
-        }
-        .btn-options {
-          float: left;
-          margin-left: 20px;
-          line-height: 47px;
-        }
-
-        &.is-expanded {
-
-          .control-box {
-            width: 330px;
-          }
-        }
-      }
-    }
-    .task-list {
-      background: white;
-      border: 1px solid $border;
-      padding: 10px 30px;
-
-      .has-reference {
-
-        .primary {
-          background-color: transparent;
-          border: 0px;
-
-          textarea {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 200px;
-            white-space: nowrap;
-          }
+        textarea {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 200px;
+          white-space: nowrap;
         }
       }
     }
@@ -293,54 +208,9 @@
 }
 
 
-.expanded-fields {
-  float: left;
-  background-color: white;
-  width: calc(100% - 30px);
-  border: 0px;
-  box-shadow: none;
-  z-index: 9;
-
-  .field-group {
-
-    .field {
-      height: 46px;
-
-      .prepend-group {
-        float: left;
-        height: auto;
-        line-height: 46px;
-        margin-left: 10px;
-
-        .btn {
-          padding: 0;
-
-          i {
-            top: 2px;
-          }
-        }
-      }
-      .text {
-        float: left;
-        line-height: 46px;
-        padding-right: 15px;
-      }
-      &.autocomplete-textbox-component {
-
-        input[type=text] {
-          width: calc(100% - 164px);
-        }
-      }
-    }
-    .control-box {
-      width: auto;
-    }
-  }
-}
 
 .is-expanded {
   display: inline-block;
-  width: calc(100% - 14px);
 }
 .task-list {
 
