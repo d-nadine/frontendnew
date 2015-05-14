@@ -2,8 +2,8 @@
   <i class="ss-standard ss-delete"></i>
 </a>
 <span>{{query.displayName}}</span>
-{{#x-select value=selectedOperator action="selectOperator" class="operator showing"}}
-  {{#each operator in selectedOperator}}
+{{#x-select value=query.selectedOperator action="selectedOperator" class="operator showing"}}
+  {{#each operator in operatorSelection}}
     {{#x-option value=operator.value}}{{operator.text}}{{/x-option}}
   {{/each}}
 {{/x-select}}

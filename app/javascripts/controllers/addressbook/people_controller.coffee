@@ -3,8 +3,17 @@ require "controllers/addressbook/people_mixin"
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   actions:
-    modifyQuery: (query) ->
-      p query
+    runCustomQuery: (queryParts) ->
+      Ember.assert 'empty array sent to runCustomQuery', queryParts.length
+
+      model = @get('model')
+      params = model.get('params')
+
+      delete params.custom_query
+
+      params = Ember.merge custom_query, params
+
+      model.set 'params', params
 
       false
 
@@ -231,7 +240,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     columns = @get('columns')
     customFields = @get('customFields') || []
 
-    customFieldsConfig = customFields.map (field) =>
+    customFieldsConfig = customFields.map (field) ->
       identifier = "#{field.get('name')}-#{field.get('type')}-#{field.get('id')}"
 
       col =

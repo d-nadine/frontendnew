@@ -7,7 +7,7 @@ Radium.XQueryComponent = Ember.Component.extend
 
   classNameBindings: [':field']
 
-  selectedOperator: Ember.computed 'query.operator', ->
+  operatorSelection: Ember.computed 'query.operator', ->
     switch @get('query.operator')
       when "text" then [
         {value: "equals", text: "is"}
@@ -30,6 +30,7 @@ Radium.XQueryComponent = Ember.Component.extend
     placeholder: Ember.computed.oneWay 'controller.queryPlaceholder'
     parent: Ember.computed.oneWay 'controller.parent'
     query: Ember.computed.oneWay 'controller.query'
+    operatorSelection: Ember.computed.oneWay 'controller.operatorSelection'
     contenteditable: "true"
 
     keyDown:(e)  ->
@@ -38,12 +39,17 @@ Radium.XQueryComponent = Ember.Component.extend
 
         unless text.length
           @$().addClass 'is-invalid'
+          return false
 
-        query = @get('query')
+        q = @get('query')
 
-        query.input = text
+        query =
+          field: q.key,
+          operatorType: q.operator
+          operator: q.selectedOperator || @get('operatorSelection')[0].value
+          value: text
 
-        @get('parent.parent').send 'modifyQuery', query
+        @get('parent').send 'modifyQuery', query
 
         return false
 
