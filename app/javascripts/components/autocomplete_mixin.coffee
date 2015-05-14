@@ -45,7 +45,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       return finish object
 
     unless object instanceof DS.Model
-      return finish(object.get(@field))
+      return finish(@getValue(object))
 
     @set('isLoading', true)
     subject = object.get('person') || object
@@ -56,7 +56,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       @set('isLoading', false)
       subject.removeObserver('isLoaded')
 
-      finish(object.get(@field))
+      finish(@getValue(object))
 
     if subject.get('isLoaded')
       observer()
@@ -67,7 +67,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     if typeof item == "string"
       item
     else
-      item.get @field
+      field = @field
+      item[@field] || item.get(field)
 
   queryParameters: (query) ->
     scopes = @get('scopes')

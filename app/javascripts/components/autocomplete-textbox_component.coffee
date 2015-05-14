@@ -14,7 +14,13 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       value = if typeof object == "string"
                 object
               else
-                object.get('person') || object
+                unless object.hasOwnProperty('get')
+                  object
+                else
+                  object.get('person') || object
+
+        if @actionOnly
+          return @sendAction 'action', value
 
         if @writeableValue && @hasOwnProperty 'queryKey'
           @set('value', value.get(@queryKey))

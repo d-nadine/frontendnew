@@ -267,3 +267,31 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     return unless checked.length
 
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
+
+  queryFields: [
+    {
+      key: "name"
+      displayName: "Name"
+      operator: "text"
+    }
+    {
+      key: "email"
+      displayName: "Email"
+      operator: "text"
+    }
+    {
+      key: "company"
+      displayName: "Company"
+      operator: "text"
+    }
+    {
+      key: "city"
+      displayName: "City"
+      operator: "text"
+    }
+    {
+      key: "last-activity"
+      displayName: "Last Activity"
+      operator: "number"
+    }
+  ]
