@@ -1,8 +1,6 @@
 Radium.QueryBuilderComponent = Ember.Component.extend
   actions:
     modifyQuery: (query) ->
-      #package up queryparts and send to parent
-
       queryParts = @actualQueries
 
       queryParts.push query

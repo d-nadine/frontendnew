@@ -11,6 +11,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       delete params.custom_query
 
+      custom_query = "custom_query": JSON.stringify(queryParts)
+
       params = Ember.merge custom_query, params
 
       model.set 'params', params
