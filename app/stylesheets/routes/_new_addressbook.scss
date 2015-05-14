@@ -191,6 +191,10 @@
       content: attr(placeholder);
       color: #ccc;
     }
+
+    &.is-invalid {
+      border: 1px solid $red;
+    }
   }
 
   .subhead .tools a.btn-contact, .subhead .tools .btn-group > a {

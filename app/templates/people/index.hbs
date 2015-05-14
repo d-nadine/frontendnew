@@ -74,25 +74,7 @@
           </a>
         </div>
       </div>
-      <div class="filter-wrap">
-        <div class="combobox-container">
-          {{autocomplete-textbox source=queryFields value=value class="field" queryKey="displayName" placeholder="Filter By" actionOnly=true}}
-        </div>
-        <div class="variables">
-          <div class="field">
-            <a href="#" class="delete">
-              <i class="ss-standard ss-delete"></i>
-            </a>
-            <span>Company</span>
-          </div>
-          <select id="text" class="operator showing">
-            <option>is</option>
-            <option>is not</option>
-            <option>like</option>
-          </select>
-          <div class="value" contenteditable="true" placeholder="Something"></div>
-        </div>
-      </div>
+      {{query-builder queries=queries fields=queryFields parent=this}}
     </div>
     <div class="working-anim">
       {{#if working}}

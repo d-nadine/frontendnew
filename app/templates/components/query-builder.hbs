@@ -1,0 +1,8 @@
+<div class="variables">
+  {{#each selectedQuery in selectedQueries}}
+    {{x-query query=selectedQuery parent=this}}
+  {{/each}}
+</div>
+<div class="combobox-container">
+  {{autocomplete-textbox source=fields value=value class="field" queryKey="displayName" placeholder="Filter By" actionOnly=true action="addPotentialQuery"}}
+</div>

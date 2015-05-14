@@ -1,0 +1,10 @@
+<a href="#" class="delete" {{action "removeQuery" query}}>
+  <i class="ss-standard ss-delete"></i>
+</a>
+<span>{{query.displayName}}</span>
+{{#x-select value=selectedOperator action="selectOperator" class="operator showing"}}
+  {{#each operator in selectedOperator}}
+    {{#x-option value=operator.value}}{{operator.text}}{{/x-option}}
+  {{/each}}
+{{/x-select}}
+{{view queryValue}}

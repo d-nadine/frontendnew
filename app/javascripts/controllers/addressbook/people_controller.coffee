@@ -3,6 +3,11 @@ require "controllers/addressbook/people_mixin"
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   actions:
+    modifyQuery: (query) ->
+      p query
+
+      false
+
     unTrackAll: ->
       detail =
         jobType: Radium.BulkActionsJob
@@ -267,6 +272,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     return unless checked.length
 
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
+
+  queries: Ember.A()
 
   queryFields: [
     {
