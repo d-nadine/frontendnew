@@ -11,12 +11,12 @@ Radium.XQueryComponent = Ember.Component.extend
     switch @get('query.operator')
       when "text" then [
         {value: "equals", text: "is"}
-        {value: "not-equals", text: "is not"}
+        {value: "not_equals", text: "is not"}
         {value: "like", text: "is like"}
       ]
       when "number" then [
-        {value: "greater-than", text: "more than"}
-        {value: "less-than", text: "less than"}
+        {value: "greater_than", text: "more than"}
+        {value: "less_than", text: "less than"}
       ]
 
   queryPlaceholder: Ember.computed 'query.operator', ->

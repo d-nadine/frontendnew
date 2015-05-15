@@ -308,7 +308,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       operator: "text"
     }
     {
-      key: "last-activity"
+      key: "last_activity"
       displayName: "Last Activity"
       operator: "number"
     }
