@@ -1,7 +1,29 @@
 Radium.XQueryComponent = Ember.Component.extend
   actions:
     removeQuery: (query) ->
-      @get('parent').send 'removeQuery', query
+      @get('parent').send 'removeQuery', query, @get('index')
+
+      false
+
+    changeOperator: ->
+      Ember.run.next =>
+        text = @$('.value').text() || ''
+
+        return unless text.length
+
+        index = @get('index')
+
+        return unless @get('parent.potentialQueries').objectAt index
+
+        q = @get('query')
+
+        query =
+          field: q.key,
+          operatorType: q.operator
+          operator: q.selectedOperator || @get('operatorSelection')[0].value
+          value: text
+
+        @get('parent').send "modifyQuery", query, index
 
       false
 

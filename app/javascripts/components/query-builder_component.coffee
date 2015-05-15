@@ -2,7 +2,7 @@ Radium.QueryBuilderComponent = Ember.Component.extend
   actions:
     modifyQuery: (query, index) ->
       if current = @actualQueries.objectAt(index)
-        existing = @actualQueries.removeAt index
+        @actualQueries.removeAt index
         @actualQueries.insertAt index, query
       else
         @actualQueries.pushObject query
@@ -16,8 +16,11 @@ Radium.QueryBuilderComponent = Ember.Component.extend
 
       false
 
-    removeQuery: (query) ->
-      @get('actualQueries').removeObject query
+    removeQuery: (query, index) ->
+      @get('actualQueries').removeAt index
+      @get('potentialQueries').removeAt index
+
+      @get('parent').send 'runCustomQuery', @actualQueries
 
       false
 
