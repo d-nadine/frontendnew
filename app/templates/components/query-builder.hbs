@@ -1,6 +1,6 @@
 <div class="variables">
   {{#each selectedQuery in potentialQueries}}
-    {{x-query query=selectedQuery parent=this}}
+    {{x-query query=selectedQuery parent=this index=_view.contentIndex}}
   {{/each}}
 </div>
 <div class="combobox-container">

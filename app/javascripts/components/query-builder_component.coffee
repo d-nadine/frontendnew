@@ -1,11 +1,13 @@
 Radium.QueryBuilderComponent = Ember.Component.extend
   actions:
-    modifyQuery: (query) ->
-      queryParts = @actualQueries
+    modifyQuery: (query, index) ->
+      if current = @actualQueries.objectAt(index)
+        existing = @actualQueries.removeAt index
+        @actualQueries.insertAt index, query
+      else
+        @actualQueries.pushObject query
 
-      queryParts.push query
-
-      @get('parent').send 'runCustomQuery', queryParts
+      @get('parent').send 'runCustomQuery', @actualQueries
 
       false
 

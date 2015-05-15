@@ -31,6 +31,7 @@ Radium.XQueryComponent = Ember.Component.extend
     parent: Ember.computed.oneWay 'controller.parent'
     query: Ember.computed.oneWay 'controller.query'
     operatorSelection: Ember.computed.oneWay 'controller.operatorSelection'
+    index: Ember.computed.oneWay 'controller.index'
     contenteditable: "true"
 
     keyDown:(e)  ->
@@ -49,7 +50,7 @@ Radium.XQueryComponent = Ember.Component.extend
           operator: q.selectedOperator || @get('operatorSelection')[0].value
           value: text
 
-        @get('parent').send 'modifyQuery', query
+        @get('parent').send 'modifyQuery', query, @get('index')
 
         return false
 
