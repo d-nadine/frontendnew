@@ -24,12 +24,15 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
 
     checkMessageItem: ->
       currentPath = @get('currentPath')
+
       model = @get('model.model')
 
       predicate = (item) ->
                     !item.get('isDeleted') && !item.get('isChecked')
 
-      if model.filterProperty('isChecked').get('length')
+      checked = model.filter (e) -> e.get('isChecked')
+
+      if checked.get('length')
         return if currentPath == 'messages.bulk_actions'
         @transitionToRoute 'messages.bulk_actions'
       else if currentPath == 'messages.bulk_actions'

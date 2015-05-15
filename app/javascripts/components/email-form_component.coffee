@@ -121,8 +121,10 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       $(window).trigger('click.date-send-menu')
       false
 
-    cancelCheckForResponse: (form) ->
-      return unless @get('form.checkForResponse')
+    cancelCheckForResponse: ->
+      form = @get('form')
+
+      return unless form.get('checkForResponse')
 
       form.set 'checkForResponse', null
 

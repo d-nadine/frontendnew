@@ -5497,7 +5497,7 @@ define("ember-handlebars/controls/checkbox",
 
       init: function() {
         this._super();
-        this.on('change', this, this._updateElementValue);
+        this.on('change', this._updateElementValue);
       },
 
       didInsertElement: function() {

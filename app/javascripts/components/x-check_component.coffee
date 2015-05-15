@@ -5,7 +5,7 @@ Radium.XCheckComponent = Ember.Component.extend
     Ember.run.schedule('actions', this, 'sendNotification')
 
   sendNotification: ->
-    @sendAction('sendCheck')
+    @sendAction('action')
 
   init: ->
     @_super.apply this, arguments

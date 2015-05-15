@@ -10,9 +10,6 @@ Radium.BulkActionViewMixin = Ember.Mixin.create
       @$('.action-forms form').each  ->
         @reset()
 
-    @get('assignTodo').reset() if @get('assignTodo')
-    @get('statusTodo').reset() if @get('statusTodo')
-
   assignTodoField: Radium.FormsTodoFieldView.extend
     valueBinding: 'controller.reassignTodo'
     placeholder: "Add related todo?"

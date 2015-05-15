@@ -6,27 +6,27 @@
   {{render 'form_box' formBox}}
 
   <ul class="unstyled bulk-actions-list">
-    {{#each controller}}
+    {{#each email in controller}}
       <li>
         <div class="pull-right">
-          {{formatDateTime timestamp}}
+          {{formatDateTime email.timestamp}}
         </div>
-        {{x-check checked=isChecked disabled=disabled sendCheck='checkMessageItem' target="controller"}}
+        {{x-check checked=email.model.isChecked disabled=disabled action='checkMessageItem'}}
         <div class="bulk-actions-list-content">
           <div class="message-item-avatar pull-left">
-            {{#if sender.isLoaded}}
-              {{avatar sender style="medium"}}
+            {{#if email.sender.isLoaded}}
+              {{avatar email.sender style="medium"}}
             {{else}}
               {{partial 'is_loading'}}
             {{/if}}
           </div>
           <div class="clearfix">
-            <h5 class="message-item-title">{{resource-link-to sender}}</h5>
+            <h5 class="message-item-title">{{resource-link-to email.sender}}</h5>
             <p class="message-item-subject">
-              {{subject}}
-              {{#unless subject}}&nbsp;{{/unless}}
+              {{email.subject}}
+              {{#unless email.subject}}&nbsp;{{/unless}}
             </p>
-            {{#if hasAttachments}}
+            {{#if email.hasAttachments}}
               <i class="ss-standard ss-attach"></i>
             {{/if}}
           </div>

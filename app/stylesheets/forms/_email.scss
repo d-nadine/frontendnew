@@ -571,7 +571,7 @@
 
         a {
           color: $grey;
-          
+          cursor: pointer;
           &.btn-messages-action {
             margin-right: 25px;
           }
@@ -602,7 +602,6 @@
 }
 
 .email-options {
-  text-align: right;
   margin-top: 9px;
 }
 
