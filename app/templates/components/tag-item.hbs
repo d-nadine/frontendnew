@@ -1,0 +1,14 @@
+<a class="tag" href="#" {{action "showTagsContacts" tag}}>
+  <div class="nav-pills-left">
+    <i>&nbsp;</i>
+    <span>{{tag.name}}</span>
+  </div>
+  <div class="nav-pills-right total">
+    <span>{{contactsTotal}}</span>
+  </div>
+  <div class="nav-pills-right delete">
+    <span>
+      <i class="ss-standard ss-trash" {{action "deleteTag" tag bubbles=false}}></i>
+    </span>
+  </div>
+</a>

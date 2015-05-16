@@ -6,39 +6,53 @@ Radium.XQueryComponent = Ember.Component.extend
       false
 
     changeOperator: ->
-      Ember.run.next =>
-        text = @$('.value').text() || ''
+      @sendQuery()
 
-        return unless text.length
+      return false
 
-        index = @get('index')
+  sendQuery: ->
+    Ember.run.debounce this, @executeQuery, 300
 
-        return unless @get('parent.potentialQueries').objectAt index
+  executeQuery: ->
+    Ember.run.next =>
+      editable = @$('.value')
 
-        q = @get('query')
+      text = editable.text() || ''
 
-        query =
-          field: q.key,
-          operatorType: q.operator
-          operator: q.selectedOperator || @get('operatorSelection')[0].value
-          value: text
+      unless text.length
+        editable.addClass 'is-invalid'
+        return false
 
-        @get('parent').send "modifyQuery", query, index
+      return unless text.length
 
-      false
+      index = @get('index')
+
+      return unless @get('parent.potentialQueries').objectAt index
+
+      q = @get('query')
+
+      query =
+        field: q.key,
+        operatorType: q.operator
+        operator: q.selectedOperator || @get('operatorSelection')[0].value
+        value: text
+
+      @get('parent').send "modifyQuery", query, index
+
+    false
 
   classNameBindings: [':field']
 
   operatorSelection: Ember.computed 'query.operator', ->
     switch @get('query.operator')
       when "text" then [
+        {value: "like", text: "is like"}
         {value: "equals", text: "is"}
         {value: "not_equals", text: "is not"}
-        {value: "like", text: "is like"}
       ]
       when "number" then [
-        {value: "greater_than", text: "more than"}
         {value: "less_than", text: "less than"}
+        {value: "greater_than", text: "more than"}
       ]
 
   queryPlaceholder: Ember.computed 'query.operator', ->
@@ -58,25 +72,16 @@ Radium.XQueryComponent = Ember.Component.extend
 
     keyDown:(e)  ->
       if e.keyCode == @ENTER
-        text = $(e.target).text() || ''
-
-        unless text.length
-          @$().addClass 'is-invalid'
-          return false
-
-        q = @get('query')
-
-        query =
-          field: q.key,
-          operatorType: q.operator
-          operator: q.selectedOperator || @get('operatorSelection')[0].value
-          value: text
-
-        @get('parent').send 'modifyQuery', query, @get('index')
-
         return false
 
       @$().removeClass('is-invalid') if @$().hasClass('is-invalid')
+
+      @get('controller').sendQuery()
+
+    focusOut: (e) ->
+      @get('controller').sendQuery()
+
+      return false
 
     _setup: Ember.on 'didInsertElement', ->
       Ember.run.scheduleOnce 'afterRender', this, '_afterRender'

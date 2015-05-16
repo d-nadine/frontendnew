@@ -1,0 +1,12 @@
+
+<a class="tag" href="#" {{action "showCustomQueryContacts" customQuery}}>
+  <div class="nav-pills-left">
+    <i>&nbsp;</i>
+    <span>{{customQuery.name}}</span>
+  </div>
+  <div class="nav-pills-right delete">
+    <span>
+      <i class="ss-standard ss-trash" {{action "deleteCustomQuery" customQuery bubbles=false}}></i>
+    </span>
+  </div>
+</a>

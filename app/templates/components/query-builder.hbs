@@ -6,3 +6,8 @@
 <div class="combobox-container">
   {{autocomplete-textbox source=fields value=value class="field" queryKey="displayName" placeholder="Filter By" actionOnly=true action="addPotentialQuery"}}
 </div>
+{{#if saveAvailable}}
+  <div class="save-dynamic-list">
+    <button class="btn" {{action "addNewCustomQuery"}}>Save Dynamic List</button>
+  </div>
+{{/if}}

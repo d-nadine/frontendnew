@@ -3,6 +3,39 @@ require "controllers/addressbook/people_mixin"
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   actions:
+    addNewCustomQuery: (queryParts) ->
+      customQuery =
+        customQueryParts: queryParts
+
+
+      unless currentCustomQuery = @get('currentCustomQuery')
+        @get('newCustomQueries').addObject customQuery
+
+      @set 'currentCustomQuery', customQuery
+
+      false
+
+    saveCustomQuery: (query) ->
+      currentUser = @get('currentUser')
+
+      customQuery = currentUser.get('customQueries').createRecord(name: query.name)
+
+      query.customQueryParts.forEach (part) ->
+        customQuery.get('customQueryParts').createRecord part
+
+      currentUser.save(this).then( (result) =>
+        @send 'flashSuccess', "The dynamic list #{result.get('name')} has been created."
+
+        customQuery = result.get('customQueries').find (q) -> q.get('name') == query.name
+
+        Ember.assert "customQuery was not found", customQuery
+
+        @send 'showCustomQueryContacts', customQuery
+      ).finally =>
+        @get('newCustomQueries').clear()
+
+      false
+
     runCustomQuery: (queryParts) ->
       Ember.assert 'empty array sent to runCustomQuery', queryParts.length
 
@@ -51,6 +84,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     createTag: ->
       @get('newTags').pushObject Ember.Object.create name: ''
+
+      false
 
     saveCity: (context) ->
       unless context.get('model.city')
@@ -141,6 +176,19 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
       false
 
+    showCustomQueryContacts: (query) ->
+      @transitionToRoute 'people.index', 'dynamicquery', queryParams: customquery: query.get('uid')
+      false
+
+    deleteCustomQuery: (query) ->
+      currentUser = @get('currentUser')
+      currentUser.get('customQueries').removeObject query
+
+      currentUser.save(this).then =>
+        @send 'flashSuccess', "Custom Query deleted"
+
+      false
+
     deleteTag: (tag) ->
       tagName = tag.get('name')
       tagId = tag.get('id')
@@ -168,10 +216,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   contactsTotal: Ember.computed.oneWay 'controllers.addressbook.contactsTotal'
 
-  queryParams: ['user', 'tag', 'company', 'contactimportjob']
+  queryParams: ['user', 'tag', 'company', 'contactimportjob', 'customquery']
   user: null
   company: null
   contactimportjob: null
+  customquery: null
 
   filter: null
 
@@ -182,6 +231,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   isNoList: Ember.computed.equal 'filter', 'no_list'
   isTagged: Ember.computed.equal 'filter', 'tagged'
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
+  isQuery: Ember.computed.equal 'filter', 'dynamicquery'
 
   newTags: Ember.A()
 
@@ -230,6 +280,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     if tag = @get('tag') && @get('isTagged')
       return Ember.merge params, tag: @get('tag')
+
+    if query = @get('customquery') && @get('isQuery')
+      return Ember.merge params, customquery: @get('customquery')
 
     params
 
@@ -285,6 +338,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
 
   queries: Ember.A()
+  newCustomQueries: Ember.A()
 
   queryFields: [
     {

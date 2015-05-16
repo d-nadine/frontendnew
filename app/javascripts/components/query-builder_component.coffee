@@ -1,5 +1,10 @@
 Radium.QueryBuilderComponent = Ember.Component.extend
   actions:
+    addNewCustomQuery: ->
+      @get('parent').send 'addNewCustomQuery', @actualQueries
+
+      false
+
     modifyQuery: (query, index) ->
       if current = @actualQueries.objectAt(index)
         @actualQueries.removeAt index
@@ -8,6 +13,8 @@ Radium.QueryBuilderComponent = Ember.Component.extend
         @actualQueries.pushObject query
 
       @get('parent').send 'runCustomQuery', @actualQueries
+
+      @set('queryRan', true)
 
       false
 
@@ -20,6 +27,8 @@ Radium.QueryBuilderComponent = Ember.Component.extend
       @get('actualQueries').removeAt index
       @get('potentialQueries').removeAt index
 
+      return unless @actualQueries.length
+
       @get('parent').send 'runCustomQuery', @actualQueries
 
       false
@@ -28,3 +37,8 @@ Radium.QueryBuilderComponent = Ember.Component.extend
 
   potentialQueries: Ember.A()
   actualQueries: []
+
+  queryRan: false
+
+  saveAvailable: Ember.computed 'queryRan', ->
+    @get('queryRan')

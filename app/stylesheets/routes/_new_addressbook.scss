@@ -266,6 +266,10 @@
     width: calc(100% - 24px);
   }
 
+  .contacts-sidebar .new-listitem {
+    @include add-blinker;
+  }
+
   .contacts-sidebar .nav {
     margin-bottom: 25px;
   }
@@ -890,6 +894,10 @@
         margin-right: 10px;
       }
     }
+  }
+
+  .nav-pills > li {
+    float: none;
   }
 }
 

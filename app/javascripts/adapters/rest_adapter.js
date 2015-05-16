@@ -19,8 +19,8 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
   addAttribute: function(hash, key, value) {
     switch(key){
     case 'created_at':
-      case 'updated_at':
-        return;
+    case 'updated_at':
+      return;
       default:
         this._super.apply(this, arguments);
     }
@@ -447,7 +447,12 @@ Radium.RESTAdapter.map('Radium.UserInvitation', {
 Radium.RESTAdapter.map('Radium.User', {
   isAdmin: {key: 'admin'},
   settings: {key: 'settings_id'},
-  contactInfo: {embedded: 'always'}
+  contactInfo: {embedded: 'always'},
+  customQueries: {embedded: 'always'}
+});
+
+Radium.RESTAdapter.map('Radium.CustomQuery', {
+  customQueryParts: {embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.UserSettings', {

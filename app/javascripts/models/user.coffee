@@ -46,6 +46,8 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   token: DS.attr('string')
 
+  customQueries: DS.hasMany('Radium.CustomQuery')
+
   name: Ember.computed 'firstName', 'lastName', ->
     "#{@get("firstName")} #{@get("lastName")}"
 
