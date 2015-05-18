@@ -64,7 +64,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller.set('tag', params.tag) if params.tag
 
-    controller.set('query', params.customquery) if params.customquery
+    controller.set('customquery', params.customquery) if params.customquery
 
     controller.set('company', params.company)
 

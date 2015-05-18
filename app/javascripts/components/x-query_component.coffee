@@ -33,7 +33,7 @@ Radium.XQueryComponent = Ember.Component.extend
 
       query =
         field: q.key,
-        operatorType: q.operator
+        operator_type: q.operator
         operator: q.selectedOperator || @get('operatorSelection')[0].value
         value: text
 

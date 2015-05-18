@@ -7,7 +7,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       customQuery =
         customQueryParts: queryParts
 
-
       unless currentCustomQuery = @get('currentCustomQuery')
         @get('newCustomQueries').addObject customQuery
 
@@ -21,6 +20,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       customQuery = currentUser.get('customQueries').createRecord(name: query.name)
 
       query.customQueryParts.forEach (part) ->
+        part.operatorType = part.operator_type
+        delete part.operator_type
         customQuery.get('customQueryParts').createRecord part
 
       currentUser.save(this).then( (result) =>
@@ -187,6 +188,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       currentUser.save(this).then =>
         @send 'flashSuccess', "Custom Query deleted"
 
+      @transitionToRoute 'people.index', 'all', queryParams: customquery: ''
       false
 
     deleteTag: (tag) ->
@@ -281,8 +283,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     if tag = @get('tag') && @get('isTagged')
       return Ember.merge params, tag: @get('tag')
 
-    if query = @get('customquery') && @get('isQuery')
-      return Ember.merge params, customquery: @get('customquery')
+    if @get('isQuery')
+      Ember.assert "You must have a query query for a custom query queryParam", customquery = @get('customquery')
+      return Ember.merge params, customquery: customquery
 
     params
 
