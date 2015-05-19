@@ -43,6 +43,9 @@ Radium.QueryBuilderComponent = Ember.Component.extend
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
 
+    @EventBus.unsubscribe "clearQuery"
+    @EventBus.unsubscribe "showQuery"
+
     @$().css 'display', 'none'
 
   classNameBindings: [':filter-wrap']
