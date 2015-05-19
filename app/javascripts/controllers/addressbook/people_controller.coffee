@@ -422,6 +422,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       operatorType: "text"
     }
     {
+      field: "source"
+      displayName: "Source"
+      operatorType: "text"
+    }
+    {
       field: "deals_closed"
       displayName: "Deals Closed"
       operatorType: "number"
