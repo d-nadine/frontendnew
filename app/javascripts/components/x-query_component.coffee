@@ -30,18 +30,25 @@ Radium.XQueryComponent = Ember.Component.extend
 
       return unless @get('parent.potentialQueries').objectAt index
 
-      unless isBoolean
-        query =
-          field: q.field,
-          operatorType: q.operatorType
-          operator: q.operator || @get('operatorSelection')[0].value
-          value: text
-      else
-        query =
-          field: q.field,
-          operatorType: q.operatorType
-          operator: "exists"
-          value: q.value || @get('operatorSelection')[0].value
+      getOperator = (q) =>
+                       if isBoolean
+                         "exists"
+                       else
+                         q.operator || @get('operatorSelection')[0].value
+
+
+      getValue = (q) =>
+                    if isBoolean
+                      q.value || @get('operatorSelection')[0].value
+                    else
+                      text
+      query =
+        field: q.field,
+        operatorType: q.operatorType
+        operator: getOperator(q)
+        value: getValue(q)
+
+      p query
 
       @get('parent').send "modifyQuery", query, index
 
@@ -72,6 +79,9 @@ Radium.XQueryComponent = Ember.Component.extend
 
   isBoolean: Ember.computed 'query.operatorType', ->
     @get('query.operatorType') == "boolean"
+
+  isGeneric: Ember.computed 'query.operatorType', ->
+    !['boolean'].contains @get('query.operatorType')
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
