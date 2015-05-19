@@ -16,26 +16,32 @@ Radium.XQueryComponent = Ember.Component.extend
   executeQuery: ->
     Ember.run.next =>
       q = @get('query')
+      isBoolean = @get('isBoolean')
 
       editable = @$('.value')
 
       text = editable?.text() || ''
 
-      unless text.length
+      if !isBoolean &&  !!!text.length
         editable?.addClass 'is-invalid'
         return false
-
-      return unless text.length
 
       index = @get('index')
 
       return unless @get('parent.potentialQueries').objectAt index
 
-      query =
-        field: q.field,
-        operatorType: q.operatorType
-        operator: q.operator || @get('operatorSelection')[0].value
-        value: text
+      unless isBoolean
+        query =
+          field: q.field,
+          operatorType: q.operatorType
+          operator: q.operator || @get('operatorSelection')[0].value
+          value: text
+      else
+        query =
+          field: q.field,
+          operatorType: q.operatorType
+          operator: "exists"
+          value: q.operator || @get('operatorSelection')[0].value
 
       @get('parent').send "modifyQuery", query, index
 
@@ -51,14 +57,28 @@ Radium.XQueryComponent = Ember.Component.extend
         {value: "not_equals", text: "is not"}
       ]
       when "number" then [
-        {value: "less_than", text: "less than"}
         {value: "greater_than", text: "more than"}
+        {value: "less_than", text: "less than"}
+      ]
+      when "boolean" then [
+        {value: "true", text: "Exists"}
+        {value: "false", text: "Not exists"}
       ]
 
   queryPlaceholder: Ember.computed 'query.operator', ->
     switch @get('query.operator')
       when "text" then "something"
       when "number" then "days"
+
+  isBoolean: Ember.computed 'query.operatorType', ->
+    @get('query.operatorType') == "boolean"
+
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
+    return unless @get('isBoolean')
+
+    @executeQuery()
 
   queryValue: Ember.View.extend Radium.KeyConstantsMixin,
     classNameBindings: [':value']

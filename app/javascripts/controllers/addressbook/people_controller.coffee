@@ -403,8 +403,38 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       operatorType: "text"
     }
     {
-      field: "last_activity"
-      displayName: "Last Activity"
+      field: "events"
+      displayName: "Events"
+      operatorType: "number"
+    }
+    {
+      field: "inactive"
+      displayName: "Inactive"
+      operatorType: "number"
+    }
+    {
+      field: "contact_status"
+      displayName: "Contact Status"
+      operatorType: "text"
+    }
+    {
+      field: "deals_closed"
+      displayName: "Deals Closed"
+      operatorType: "number"
+    }
+    {
+      field: "next_task"
+      displayName: "Next Task"
+      operatorType: "boolean"
+    }
+    {
+      field: "activity_seven_days_total"
+      displayName: "Activities in the last 7 days"
+      operatorType: "number"
+    }
+    {
+      field: "activity_thirty_days_total"
+      displayName: "Activities in the last 30 days"
       operatorType: "number"
     }
   ]
