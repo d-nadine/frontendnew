@@ -15,12 +15,14 @@ Radium.XQueryComponent = Ember.Component.extend
 
   executeQuery: ->
     Ember.run.next =>
+      q = @get('query')
+
       editable = @$('.value')
 
-      text = editable.text() || ''
+      text = editable?.text() || ''
 
       unless text.length
-        editable.addClass 'is-invalid'
+        editable?.addClass 'is-invalid'
         return false
 
       return unless text.length
@@ -29,12 +31,10 @@ Radium.XQueryComponent = Ember.Component.extend
 
       return unless @get('parent.potentialQueries').objectAt index
 
-      q = @get('query')
-
       query =
-        field: q.key,
-        operator_type: q.operator
-        operator: q.selectedOperator || @get('operatorSelection')[0].value
+        field: q.field,
+        operator_type: q.operatorType
+        operator: q.operator || @get('operatorSelection')[0].value
         value: text
 
       @get('parent').send "modifyQuery", query, index
@@ -43,8 +43,8 @@ Radium.XQueryComponent = Ember.Component.extend
 
   classNameBindings: [':field']
 
-  operatorSelection: Ember.computed 'query.operator', ->
-    switch @get('query.operator')
+  operatorSelection: Ember.computed 'query.operatorType', ->
+    switch @get('query.operatorType')
       when "text" then [
         {value: "like", text: "is like"}
         {value: "equals", text: "is"}
@@ -78,13 +78,11 @@ Radium.XQueryComponent = Ember.Component.extend
 
       @get('controller').sendQuery()
 
-    focusOut: (e) ->
-      @get('controller').sendQuery()
-
-      return false
-
     _setup: Ember.on 'didInsertElement', ->
       Ember.run.scheduleOnce 'afterRender', this, '_afterRender'
+
+      if value = @get('query.value')
+        @$().text(value)
 
     _afterRender: ->
       @$().focus()

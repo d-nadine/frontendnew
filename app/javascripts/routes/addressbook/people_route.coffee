@@ -86,5 +86,30 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
       localStorage.setItem controller.SAVED_COLUMNS, JSON.stringify(savedColumns)
 
+  afterModel: (model) ->
+    controller = @controllerFor 'peopleIndex'
+    currentUser = controller.get('currentUser')
+
+    controller.set 'potentialQueries', Ember.A()
+    controller.set 'actualQueries', Ember.A()
+
+    unless controller.get('isQuery')
+      return controller.resetCustomQuery()
+
+    customQuery = currentUser.get('customQueries').find (q) -> q.get('uid') == model.params.customquery
+
+    potentialQueries = customQuery.get('customQueryParts').map (part) ->
+                         field: part.get('field')
+                         operatorType: part.get('operatorType')
+                         operator: part.get('operator')
+                         displayName: controller.queryFields.find((q) -> q.field == part.get('field')).displayName
+                         value: part.get('value')
+
+    controller.set 'potentialQueries', potentialQueries.slice()
+    controller.set 'actualQueries', potentialQueries.slice()
+
   deactivate: ->
     @controller.set 'newTags', Ember.A()
+    @controller.set 'potentialQueries', Ember.A()
+    @controller.set 'actualQueries', Ember.A()
+    @set 'customquery', null

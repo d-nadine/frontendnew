@@ -3,6 +3,20 @@ require "controllers/addressbook/people_mixin"
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   actions:
+    toggleFilter: ->
+      element = $('.query-builder-component')
+
+      componentIsVisible = $('.query-builder-component').is(':visible')
+
+      @set 'currentCustomQuery', null
+
+      if componentIsVisible
+        element.fadeOut()
+      else
+        element.fadeIn()
+
+      false
+
     addNewCustomQuery: (queryParts) ->
       customQuery =
         customQueryParts: queryParts
@@ -37,8 +51,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
-    runCustomQuery: (queryParts) ->
-      Ember.assert 'empty array sent to runCustomQuery', queryParts.length
+    runCustomQuery: (queryParts, refresh) ->
+      unless queryParts.length
+        return unless refresh
+        @send "toggleFilter"
+        return Ember.run.next =>
+          @get("container").lookup('route:peopleIndex').refresh()
 
       model = @get('model')
       params = model.get('params')
@@ -170,15 +188,19 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         @set 'tagsTotals', totals.get('tagsTotals')
 
     showUsersContacts: (user) ->
-      @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id')
+      @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id'), customquery: ''
       false
 
     showTagsContacts: (tag) ->
-      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id')
+      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), customquery: ''
       false
 
     showCustomQueryContacts: (query) ->
+      $('.query-builder-component').show()
+      @set 'customquery', query.get('uid')
+
       @transitionToRoute 'people.index', 'dynamicquery', queryParams: customquery: query.get('uid')
+
       false
 
     deleteCustomQuery: (query) ->
@@ -264,7 +286,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     @get('users').reject (user) -> user == currentUser
 
-  filterParams: Ember.computed 'filter', 'user', 'tag', 'company', 'contactimportjob', ->
+  filterParams: Ember.computed 'filter', 'user', 'tag', 'company', 'contactimportjob', 'customquery', ->
     params =
       public: true
       private: false
@@ -285,6 +307,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     if @get('isQuery')
       Ember.assert "You must have a query query for a custom query queryParam", customquery = @get('customquery')
+
       return Ember.merge params, customquery: customquery
 
     params
@@ -331,6 +354,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     combined
 
+  resetCustomQuery: ->
+    @EventBus.publish "clearQuery"
+
+  showCustomQuery: ->
+    @EventBus.publish "showQuery"
+
   checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
 
   checkedColumnsDidChange: Ember.observer 'checkedColumns.length', ->
@@ -340,33 +369,34 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
 
-  queries: Ember.A()
   newCustomQueries: Ember.A()
+  potentialQueries: Ember.A()
+  actualQueries: []
 
   queryFields: [
     {
-      key: "name"
+      field: "name"
       displayName: "Name"
-      operator: "text"
+      operatorType: "text"
     }
     {
-      key: "email"
+      field: "email"
       displayName: "Email"
-      operator: "text"
+      operatorType: "text"
     }
     {
-      key: "company"
+      field: "company"
       displayName: "Company"
-      operator: "text"
+      operatorType: "text"
     }
     {
-      key: "city"
+      field: "city"
       displayName: "City"
-      operator: "text"
+      operatorType: "text"
     }
     {
-      key: "last_activity"
+      field: "last_activity"
       displayName: "Last Activity"
-      operator: "number"
+      operatorType: "number"
     }
   ]

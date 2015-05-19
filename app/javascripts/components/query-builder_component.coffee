@@ -14,8 +14,6 @@ Radium.QueryBuilderComponent = Ember.Component.extend
 
       @get('parent').send 'runCustomQuery', @actualQueries
 
-      @set('queryRan', true)
-
       false
 
     addPotentialQuery: (field) ->
@@ -24,21 +22,40 @@ Radium.QueryBuilderComponent = Ember.Component.extend
       false
 
     removeQuery: (query, index) ->
-      @get('actualQueries').removeAt index
-      @get('potentialQueries').removeAt index
+      actualQueries = @get('actualQueries')
+      potentialQueries = @get('potentialQueries')
+      actualQueries.removeAt(index) if actualQueries.objectAt(index)
+      potentialQueries.removeAt(index) if potentialQueries.objectAt(index)
 
-      return unless @actualQueries.length
-
-      @get('parent').send 'runCustomQuery', @actualQueries
+      @get('parent').send 'runCustomQuery', @actualQueries, !!!@actualQueries.length
 
       false
 
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
+    @EventBus.subscribe "clearQuery", this, "onClearQuery"
+    @EventBus.subscribe "showQuery", this, "onShowQuery"
+
+    if @get('actualQueries.length')
+      @$().css 'display', 'inline-block'
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    @$().css 'display', 'none'
+
   classNameBindings: [':filter-wrap']
 
-  potentialQueries: Ember.A()
-  actualQueries: []
+  saveAvailable: Ember.computed 'actualQueries.[]', ->
+    !!@get('actualQueries').length
 
-  queryRan: false
+  onClearQuery: ->
+    return unless el = @$()
 
-  saveAvailable: Ember.computed 'queryRan', ->
-    @get('queryRan')
+    el.css 'display', 'none'
+
+  onShowQuery: ->
+    return unless el = @$()
+
+    el.css 'display', 'inline-block'
