@@ -39,14 +39,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         customQuery = currentUser.get('customQueries').createRecord(name: query.name)
 
       query.customQueryParts.forEach (part) ->
-        part.operatorType = part.operator_type
-        delete part.operator_type
+        part.operatorType = part.operatorType
         customQuery.get('customQueryParts').createRecord part
 
       currentUser.save(this).then( (result) =>
         @send 'flashSuccess', "The dynamic list #{result.get('name')} has been created."
 
-        customQuery = result.get('customQueries').find (q) -> q.get('name') == query.name
+        customQuery = result.get('customQueries').find (q) -> q.get('name') == customQuery.get('name')
 
         Ember.assert "customQuery was not found", customQuery
 
@@ -210,12 +209,16 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     deleteCustomQuery: (query) ->
       currentUser = @get('currentUser')
+
+      customQueryUid = query.get('uid')
+
       currentUser.get('customQueries').removeObject query
 
       currentUser.save(this).then =>
         @send 'flashSuccess', "Custom Query deleted"
 
-      @transitionToRoute 'people.index', 'all', queryParams: customquery: ''
+      if @get('isQuery') && @get('customquery') == customQueryUid
+        @transitionToRoute 'people.index', 'all', queryParams: customquery: ''
       false
 
     deleteTag: (tag) ->
