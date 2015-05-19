@@ -2,11 +2,17 @@
   <i class="ss-standard ss-delete"></i>
 </a>
 <span>{{query.displayName}}</span>
-{{#x-select value=query.operator action="changeOperator" class="operator showing"}}
-  {{#each operator in operatorSelection}}
-    {{#x-option value=operator.value}}{{operator.text}}{{/x-option}}
-  {{/each}}
-{{/x-select}}
 {{#unless isBoolean}}
+  {{#x-select value=query.operator action="changeOperator" class="operator showing"}}
+    {{#each operator in operatorSelection}}
+      {{#x-option value=operator.value}}{{operator.text}}{{/x-option}}
+    {{/each}}
+  {{/x-select}}
   {{view queryValue}}
+{{else}}
+  {{#x-select value=query.value action="changeOperator" class="operator showing"}}
+    {{#each operator in operatorSelection}}
+      {{#x-option value=operator.value}}{{operator.text}}{{/x-option}}
+    {{/each}}
+  {{/x-select}}
 {{/unless}}

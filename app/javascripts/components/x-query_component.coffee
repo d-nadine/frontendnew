@@ -41,7 +41,7 @@ Radium.XQueryComponent = Ember.Component.extend
           field: q.field,
           operatorType: q.operatorType
           operator: "exists"
-          value: q.operator || @get('operatorSelection')[0].value
+          value: q.value || @get('operatorSelection')[0].value
 
       @get('parent').send "modifyQuery", query, index
 
