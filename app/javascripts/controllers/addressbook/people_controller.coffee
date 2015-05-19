@@ -8,6 +8,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       componentIsVisible = $('.query-builder-component').is(':visible')
 
+      unless @get('isQuery')
+        @set 'potentialQueries', Ember.A()
+        @set 'actualQueries', Ember.A()
+
       if componentIsVisible
         element.fadeOut()
       else

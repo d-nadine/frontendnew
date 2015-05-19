@@ -46,6 +46,9 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
         bulkParams.ids = []
         bulkParams.filter = controller.get('filter')
 
+        if controller.get('isQuery')
+          bulkParams.customquery = controller.get('customquery')
+
         if controller.get('tag') && controller.get('isTagged')
           bulkParams.tag = findRecord(Radium.Tag, bulkParams.tag)
         else if controller.get('isAssignedTo') && user_id = controller.get('user')

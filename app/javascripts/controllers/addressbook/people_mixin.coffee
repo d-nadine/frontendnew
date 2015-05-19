@@ -29,7 +29,13 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
     executeActions: (action, detail) ->
       checkedContent = @get('checkedContent')
-      allChecked = @get('allChecked')
+
+      allChecked = if @get('isQuery')
+                      @get('allChecked')
+                   else
+                      @get('allChecked') && !!!@get('potentialQueries.length')
+
+      p allChecked
 
       unless allChecked || checkedContent.length
         return @send 'flashError', "You have not selected any items."
@@ -64,6 +70,10 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
         job.set('assignedTo', detail.user)
       else if action == "status"
         job.set('status', detail.status)
+
+      if @get("isQuery")
+        Ember.assert "you must have a customquery for an isQuery", @get('customquery')
+        job.set 'customquery', @get('customquery')
 
       if @get('tag') && @get('isTagged')
         tag = Radium.Tag.all().find (t) => t.get('id') == @get('tag')

@@ -7,3 +7,4 @@ Radium.BulkActionProperties = Ember.Mixin.create
   newTags: DS.attr('array')
   filter: DS.attr('string')
   like: DS.attr('string')
+  customquery: DS.attr('string')
