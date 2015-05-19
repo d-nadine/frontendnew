@@ -8,8 +8,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       componentIsVisible = $('.query-builder-component').is(':visible')
 
-      @set 'currentCustomQuery', null
-
       if componentIsVisible
         element.fadeOut()
       else
@@ -17,11 +15,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
-    addNewCustomQuery: (queryParts) ->
+    persistCustomQuery: (queryParts) ->
       customQuery =
         customQueryParts: queryParts
 
-      unless currentCustomQuery = @get('currentCustomQuery')
+      if @get('isQuery')
+        @send "saveCustomQuery", customQuery
+      else
         @get('newCustomQueries').addObject customQuery
 
       @set 'currentCustomQuery', customQuery
@@ -31,7 +31,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     saveCustomQuery: (query) ->
       currentUser = @get('currentUser')
 
-      customQuery = currentUser.get('customQueries').createRecord(name: query.name)
+      if @get('isQuery')
+        customQuery = currentUser.get('customQueries').find (q) => q.get('uid') == @get('customquery')
+
+        customQuery.get('customQueryParts').clear()
+      else
+        customQuery = currentUser.get('customQueries').createRecord(name: query.name)
 
       query.customQueryParts.forEach (part) ->
         part.operatorType = part.operator_type

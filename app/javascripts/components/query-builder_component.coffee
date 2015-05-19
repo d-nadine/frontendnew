@@ -1,7 +1,7 @@
 Radium.QueryBuilderComponent = Ember.Component.extend
   actions:
-    addNewCustomQuery: ->
-      @get('parent').send 'addNewCustomQuery', @actualQueries
+    persistCustomQuery: ->
+      @get('parent').send 'persistCustomQuery', @actualQueries
 
       false
 
