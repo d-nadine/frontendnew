@@ -55,7 +55,7 @@ Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin
     @get('meetings').forEach (meeting) -> items.pushObject meeting
 
     if user = @get('user')
-      items = items.filter (item) =>
+      items = items.filter (item) ->
         item.constructor is Radium.Todo && item.get('user') == user
 
     currentUser = @get('currentUser')

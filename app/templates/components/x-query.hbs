@@ -9,6 +9,9 @@
     {{/each}}
   {{/x-select}}
 {{/if}}
+{{#if isUser}}
+  {{autocomplete-textbox class="users" source=users value=query.value queryKey="displayName" action="queryByUser"}}
+{{/if}}
 {{#if isGeneric}}
   {{#x-select value=query.operator action="changeOperator" class="operator showing"}}
     {{#each operator in operatorSelection}}

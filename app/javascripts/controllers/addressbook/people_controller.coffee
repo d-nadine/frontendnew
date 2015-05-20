@@ -385,6 +385,26 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   potentialQueries: Ember.A()
   actualQueries: []
 
+  combinedQueryFields: Ember.computed 'customFields.[]', ->
+    queryFields = @queryFields
+    customFields = @get('customFields') || []
+
+    return queryFields unless customFields.get('length')
+
+    customFieldOperatorMap =
+      "text": "text"
+      "currency": "number"
+      "url": "text"
+
+    customFieldsMapping = customFields.toArray().reject((f) -> f.get('type') == 'date')
+                                      .map (f) ->
+                                              field: f.get('name')
+                                              displayName: f.get('name')
+                                              operatorType: customFieldOperatorMap[f.get('type')]
+                                              customfieldid: f.get('id')
+
+    queryFields.concat customFieldsMapping
+
   queryFields: [
     {
       field: "name"
@@ -425,6 +445,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       field: "source"
       displayName: "Source"
       operatorType: "text"
+    }
+    {
+      field: "assigned_to"
+      displayName: "Assigned To"
+      operatorType: "user"
     }
     {
       field: "deals_closed"

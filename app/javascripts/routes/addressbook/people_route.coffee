@@ -102,8 +102,9 @@ Radium.PeopleIndexRoute = Radium.Route.extend
                          field: part.get('field')
                          operatorType: part.get('operatorType')
                          operator: part.get('operator')
-                         displayName: controller.queryFields.find((q) -> q.field == part.get('field')).displayName
+                         displayName: controller.get('combinedQueryFields').find((q) -> q.field == part.get('field')).displayName
                          value: part.get('value')
+                         customfieldid: part.get('customfieldid')
 
     controller.set 'potentialQueries', potentialQueries.slice()
     controller.set 'actualQueries', potentialQueries.slice()
