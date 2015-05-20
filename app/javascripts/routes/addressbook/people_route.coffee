@@ -96,7 +96,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     unless controller.get('isQuery')
       return controller.resetCustomQuery()
 
-    customQuery = currentUser.get('customQueries').find (q) -> q.get('uid') == model.params.customquery
+    customQuery = currentUser.get('customQueries').find (q) -> q.get('uid') == controller.get('customquery')
 
     potentialQueries = customQuery.get('customQueryParts').map (part) ->
                          field: part.get('field')

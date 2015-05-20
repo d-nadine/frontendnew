@@ -318,7 +318,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       return Ember.merge params, tag: @get('tag')
 
     if @get('isQuery')
-      Ember.assert "You must have a query query for a custom query queryParam", customquery = @get('customquery')
+      customquery = @get('customquery')
+      Ember.assert "You must have a query query for a custom query queryParam", customquery
 
       return Ember.merge params, customquery: customquery
 
