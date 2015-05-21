@@ -37,7 +37,10 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
     deleteUser: (user) ->
       c = confirm("Are you sure you want to delete #{user.get('name')}? This cannot be undone")
 
-      user.deleteRecord() if c
+      return unless c
+
+      user.delete(this).then =>
+        @send 'flashSuccess', "User has been deleted."
 
     resendInvite: (user) ->
       details = user.getProperties('name', 'email')

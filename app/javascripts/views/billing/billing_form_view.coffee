@@ -38,7 +38,7 @@ Radium.BillingFormView = Radium.View.extend
     scrollToCard: ->
       Ember.$.scrollTo('.settings-group', 800, {offset: - 100})
 
-  setUp: ( ->
+  setup: Ember.on 'didInsertElement', ->
     @get('controller').on('cardError', this, 'onCardError') if @get('controller').on
 
     Ember.run.scheduleOnce 'afterRender', 'this', =>
@@ -49,17 +49,14 @@ Radium.BillingFormView = Radium.View.extend
         organizationName.focus()
         @send 'scrollToCard'
 
-  ).on 'didInsertElement'
-
   onCardError: ->
     @send 'scrollToCard'
 
-  teardown: ( ->
+  teardown: Ember.on 'willDestroyElement', ->
     clone = this.$().clone()
     @$().parent().prepend(clone)
     clone.slideUp 'slow', ->
       clone.remove()
-  ).on 'willDestroyElement'
 
   classNameBindings: [':form-horizontal', ':hide']
   templateName: 'billing/billing_form'

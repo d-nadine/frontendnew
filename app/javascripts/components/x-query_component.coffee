@@ -45,7 +45,6 @@ Radium.XQueryComponent = Ember.Component.extend
                        else
                          q.operator || @get('operatorSelection')[0].value
 
-
       getValue = (q) =>
                     if isBoolean
                       q.value || @get('operatorSelection')[0].value
