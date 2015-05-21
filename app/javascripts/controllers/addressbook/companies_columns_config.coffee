@@ -43,6 +43,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         {name: "assignedTo", value: "assignedTo"},
         {name: "assignees", value: "assignees"},
         {name: "model", value: "model"},
+        {name: "parent", value: "parentController.targetObject"}
       ]
     }]
   )

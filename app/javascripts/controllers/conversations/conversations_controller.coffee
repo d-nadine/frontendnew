@@ -3,6 +3,27 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   Radium.ConversationsColumnsConfig,
   Radium.TrackContactMixin,
   actions:
+    completeAssignTo: (model, user) ->
+      changed = @filter (m) =>
+                  return false if @get('isIncoming') && user.get('id') == @get('currentUser.id')
+                  return false if @get('user') == user.get('id')
+                  m.get('model.sender.user') == user
+
+
+      @send 'updateTotals'
+
+      return unless !!changed.length
+
+      Ember.run this, 'removeObjects', changed
+
+      ele = Ember.$("[user-data-id=#{user.get('id')}]")
+
+      return unless !!ele.length
+
+      ele.addClass('blink').addClass('active')
+
+      false
+
     showUserRecords: (user, query) ->
       @transitionToRoute 'conversations', query, queryParams: user: user.get('id')
 

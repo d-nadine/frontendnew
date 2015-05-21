@@ -20,6 +20,7 @@ Radium.ConversationsColumnsConfig = Ember.Mixin.create
         {name: "assignedTo", value: "model.contact.user"},
         {name: "assignees", value: "assignees"},
         {name: "model", value: "model.contact"},
+        {name: "parent", value: "parentController.targetObject"}
       ]
     }
     {

@@ -7,6 +7,12 @@ Radium.UserTotalComponent = Ember.Component.extend
 
   classNameBindings: [':item', 'isCurrent:active']
 
+  attributeBindings: ['userTotalId:user-data-id']
+
+  userTotalId: Ember.computed 'isShared', 'userTotal.id', ->
+    return if @get('isShared')
+    @get('userTotal.id')
+
   user: Ember.computed 'userTotal.id', ->
     Radium.User.all().find (u) => u.get('id') == @get('userTotal.id').toString()
 

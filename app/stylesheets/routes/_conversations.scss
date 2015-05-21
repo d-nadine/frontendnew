@@ -32,6 +32,12 @@
   max-width: 100px;
 }
 
+.conversations-sidebar .user-total-component {
+  &.blink {
+    @include add-blinker;
+  }
+}
+
 .conversations-sidebar .user-total-component .tooltip {
   font-size: 18px;
 }

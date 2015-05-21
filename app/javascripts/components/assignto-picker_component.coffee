@@ -5,14 +5,14 @@ Radium.AssigntoPickerComponent = Ember.Component.extend Radium.PositionDropdownM
     assign: (model, user) ->
       model.set 'user', user
 
-      model.one 'didUpdate', =>
-        @send 'flashSuccess', "#{model.get('displayName')} has been assigned to #{user.get('displayName')}"
+      parent = @get('parent')
 
-      model.one 'becameInvalid', =>
-        @send 'flashError', model
+      model.save(parent).then (result) ->
+        parent.send 'flashSuccess', "#{model.get('displayName')} has been assigned to #{user.get('displayName')}"
 
-      model.one 'bemameError', =>
-        @send 'an error has occurred and the assignment was not completed'
+      return unless parent
+      return unless parent._actions['completeAssignTo']
 
-      @get('store').commit()
+      parent.send "completeAssignTo", model, user
+
       false
