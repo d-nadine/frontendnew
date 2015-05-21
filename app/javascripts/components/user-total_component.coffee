@@ -13,3 +13,16 @@ Radium.UserTotalComponent = Ember.Component.extend
   isCurrent: Ember.computed 'parent.conversationType', 'user.id', ->
     parent = @get('parent')
     parent.get('conversationType') == @get('query') && parent.get('user') == @get('user.id')
+
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
+    @$('.who').tooltip()
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    el = @$('.who')
+
+    if el.data('tooltip')
+      el.tooltip('destroy')

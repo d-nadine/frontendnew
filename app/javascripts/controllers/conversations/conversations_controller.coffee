@@ -81,6 +81,8 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
         @set 'totalsLoading', false
 
+      false
+
     checkAll: ->
       content = @get('content')
 

@@ -25,6 +25,17 @@
   margin-bottom: 5px;
 }
 
+.conversations-sidebar .group.shared .who {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100px;
+}
+
+.conversations-sidebar .user-total-component .tooltip {
+  font-size: 18px;
+}
+
 .conversations-sidebar .item {
   width: calc(100% - 30px);
   display: inline-block;
@@ -63,12 +74,10 @@
   display: inline-block;
 }
 
-
 .toolbar input {
   height: 30px !important;
   margin-bottom: 0;
 }
-
 
 .toolbar .right {
   float: right;
@@ -134,7 +143,6 @@
   width: 100%;
 }
 
-
 .loading-gif {
   background: #e3e3e3;
   position: absolute;
@@ -198,6 +206,7 @@
 .conversations-table .variadic-table tbody tr td.choose {
   min-width: 100px;
 }
+
 .conversations-table .variadic-table tbody tr td.subject {
   width: auto;
 

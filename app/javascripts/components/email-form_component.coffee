@@ -275,7 +275,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
-    el = @$('info')
+    el = @$('.info')
 
     if el.data('tooltip')
       el.tooltip('destroy')

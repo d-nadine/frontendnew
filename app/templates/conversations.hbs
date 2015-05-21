@@ -54,11 +54,11 @@
       </div>
     {{/if}}
     {{#if sharedTotals}}
-      <div id="assigned" class="group">
+      <div id="assigned" class="group shared">
         <div class="group-name">
           <p>Shared Inboxes</p>
         </div>
-        {{users-totals usersTotals=sharedTotals query="shared" action="showUserRecords" parent=this}}
+        {{users-totals usersTotals=sharedTotals query="shared" action="showUserRecords" parent=this isShared=true}}
       </div>
     {{/if}}
   </div>
