@@ -465,8 +465,7 @@ $item-border: #dddddd;
   .sub-nav {
 
     .email-folders {
-      padding: 20px 10px;
-      border-bottom: 1px solid $border;
+      padding: 20px 10px 16px;
       line-height: 44px;
       display: inline-block;
       width: calc(100% - 20px);
@@ -543,6 +542,9 @@ $item-border: #dddddd;
           margin-top: -3px;
         }
       }
+      .scroll-pane {
+        border-top: 1px solid $border;
+      }
     }
     .content-right {
       display: inline-block;
@@ -557,7 +559,7 @@ $item-border: #dddddd;
         position: fixed;
         z-index: 100;
         width: 100%;
-        background: #f2f4f5;
+        background: $background;
         height: 64px;
         top: 68px;
         margin-left: -13px;
@@ -608,6 +610,7 @@ $item-border: #dddddd;
       }
 
       .right-column {
+        margin-top: 67px;
         color: $text;
         position: fixed;
         z-index: 101;
