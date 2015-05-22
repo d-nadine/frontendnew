@@ -598,105 +598,112 @@ input[type="radio"]:checked + label {
     }
   }
 
+}
 
-  .forms-meeting-view {
 
-    .meeting-form {
-      padding-left: 0;
+.forms-meeting-view {
 
-      .primary {
+  .meeting-form {
+    padding-left: 0;
+
+    .primary {
+      display: inline-block;
+      width: 100%;
+
+      .btn-link {
+        margin-right: 15px;
+      }
+    }
+    .field-group {
+
+      .field {
+        float: left;
+
+        i {
+
+          &.ss-location {
+            float: left;
+            font-size: 18px;
+            position: relative;
+            top: 16px;
+            left: 7px;
+          }
+        }
+      }
+      .starts-at {
+        margin-right: 20px;
+      }
+      .meeting-to {
+        float: left;
         display: inline-block;
+        line-height: 48px;
+        padding: 0 10px;
+      }
+    }
+    .expanded-fields {
+      margin-top: 10px;
+
+      .form-row {
+        display: inline-block;
+        float: left;
+        clear: both;
         width: 100%;
 
-        .btn-link {
-          margin-right: 15px;
-        }
-      }
-      .field-group {
-
-        .field {
-          float: left;
-
-          i {
-
-            &.ss-location {
-              float: left;
-              font-size: 18px;
-              position: relative;
-              top: 16px;
-              left: 7px;
-            }
-          }
-        }
-        .starts-at {
-          margin-right: 20px;
-        }
-        .meeting-to {
-          float: left;
+        .field-group {
           display: inline-block;
-          line-height: 48px;
-          padding: 0 10px;
-        }
-      }
-      .expanded-fields {
-        margin-top: 10px;
+          position: relative;
 
-        .form-row {
-          display: inline-block;
-          float: left;
-          clear: both;
-          width: 100%;
-
-          .field-group {
-            display: inline-block;
-            position: relative;
-
-            label {
-              position: absolute;
-            }
-          }
-        }
-        .field {
-
-          &.autocomplete-textbox-component {
-            width: 420px;
-
-            input[type=text] {
-              width: calc(100% - 84px);
-              margin-left: 3px;
-            }
+          label {
+            position: absolute;
           }
         }
       }
-      .meeting-form-invite {
+      .field {
 
-        .autocomplete {
-          width: 380px;
-          
-          > ul {
-            border-radius: 0px;
+        &.autocomplete-textbox-component {
+          width: 420px;
 
-            input {
-              padding: 0 0 0 22px;
-            }
-          }
-        }
-        .pull-right {
-          line-height: 46px;
-
-          .btn {
-            background: none;
+          input[type=text] {
+            width: calc(100% - 84px);
+            margin-left: 3px;
           }
         }
       }
     }
+    .meeting-form-invite {
 
-    ~ .form-box-controls {
-      display: none;
+      .autocomplete {
+        width: 380px;
+        
+        > ul {
+          border-radius: 0px;
+
+          input {
+            padding: 0 0 0 22px;
+          }
+        }
+      }
+      .pull-right {
+        line-height: 46px;
+
+        .btn {
+          background: none;
+        }
+      }
     }
   }
 
-}
+  ~ .form-box-controls {
+    display: none;
+  }
+  .upload-button {
+    display: none;
+  }
 
+  .comments-view {
+    width: 100%;
+    display: inline-block;
+  }
+}
 
 
