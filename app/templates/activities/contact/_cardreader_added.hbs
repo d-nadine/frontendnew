@@ -1,0 +1,9 @@
+<p>
+  {{resource-link-to reference}} added via scanned business card.
+  <br/>
+  by {{resource-link-to reference.user}}
+  <br/>
+  download <a {{bind-attr href="reference.vcardUrl"}}>vcard</a>
+  <br/>
+  <img {{bind-attr src="reference.businessCardUrl"}} style="height:100px;width:100px;float:left">
+</p>

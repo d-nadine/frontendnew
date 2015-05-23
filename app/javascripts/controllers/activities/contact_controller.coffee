@@ -10,6 +10,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   isInfoChange: Ember.computed.is 'event', 'contact_info_change'
   isOpen: Ember.computed.is 'event', 'open'
   isTodoCreated: Ember.computed.is 'event', 'todo_created'
+  isCardReaderAdded: Ember.computed.is 'event', 'cardreader_add'
 
   contact: Ember.computed.alias 'reference'
   company: Ember.computed.alias 'meta.company'

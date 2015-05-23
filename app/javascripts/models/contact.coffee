@@ -66,6 +66,8 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   ignored: DS.attr('boolean')
   archived: DS.attr('boolean')
 
+  businessCardUrl: DS.attr('string')
+  vcardUrl: DS.attr('string')
   dealsClosedTotalValue: DS.attr('number')
   dealsClosedTotal: DS.attr('number')
   activitySevenDaysTotal: DS.attr('number')
