@@ -2,12 +2,12 @@
   <span>
     {{avatar user}}
   </span>
-  <span class="who" data-toggle="tooltip" data-placement="bottom" {{bind-attr data-original-title="user.email"}}>
+  <span class="who" data-toggle="tooltip" data-placement="right" {{bind-attr data-original-title="user.email"}}>
     {{#if isShared}}
       @{{user.email}}
     {{else}}
       {{user.displayName}}
     {{/if}}
   </span>
-  <span>{{userTotal.total}}</span>
+  <span class="badge">{{userTotal.total}}</span>
 </div>

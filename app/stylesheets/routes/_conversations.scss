@@ -70,6 +70,9 @@
   &.blink {
     @include add-blinker;
   }
+  .tooltip .tooltip-inner {
+    font-size: 14px;
+  }
 }
 
 .conversations-sidebar .user-total-component .tooltip {
@@ -205,6 +208,9 @@
 }
 
 .conversations-table {
+  display: inline-block;
+  width: calc(100% - 240px);
+  margin-left: 20px;
 
   .toolbar {
     padding-top: 0;
