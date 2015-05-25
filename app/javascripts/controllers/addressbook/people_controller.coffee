@@ -343,7 +343,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         isCustomField: true
         heading: field.get('name')
         bindings: [
-          {name: "fieldId", value: field.get('id'), static: true}
+          {name: "field", value: field, static: true}
           {name: "resource", value: "model"}
           {name: "parent", value: "parentController.targetObject"}
           {name: "customFields", value: "parentController.targetObject.customFields"}

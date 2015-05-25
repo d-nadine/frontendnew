@@ -55,7 +55,7 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
 
     customFields = @get('customFields')
 
-    @set 'field', customFields.findBy('id', @get('fieldId'))
+    return if @get("resource.customFieldMap")
 
     customFieldMap = @get('resource').getCustomFieldMap(customFields)
 

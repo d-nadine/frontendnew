@@ -15,6 +15,14 @@ Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
 
       @get('model').pushObject(Ember.Object.create(isNew: true, type: 'text'))
 
+      all = Radium.Contact.all()
+
+      setTimeout ->
+        all.forEach (c) -> c.set('customFieldMap', null) if c.get('customFieldMap')
+      , 0
+
+      false
+
     updateCustomField: (customField) ->
       customField.save(this).then (result) =>
         @send 'flashSuccess', 'Custom Field Saved.'

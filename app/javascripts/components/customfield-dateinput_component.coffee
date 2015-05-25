@@ -25,4 +25,6 @@ Radium.CustomfieldDateinputComponent = Ember.Component.extend Radium.CustomField
       return
 
     Ember.run.next =>
+      return if @isDestroyed || @isDestroying
+
       @set 'internalDate', Ember.DateTime.parse(value)
