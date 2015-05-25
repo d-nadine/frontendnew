@@ -211,6 +211,7 @@
 
 .is-expanded {
   display: inline-block;
+  width: calc(100% - 20px);
 }
 .task-list {
 
