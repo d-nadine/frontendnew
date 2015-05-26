@@ -1,16 +1,18 @@
 Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
   style = options.hash.style || options.hash.size || 'small'
 
-  props = if style == 'large'
+  props = if style == 'dashboard'
+            {height: 244, width: 244}
+          else if style == 'large'
             {height: 124, width: 124}
+          else if style == 'sidebar'
+            {height: 72, width: 72}
           else if style == 'medium'
             {height: 64, width: 64}
-          else if style == 'small'
-            {height: 30, width: 30}
           else if style == 'contacts-table'
             {height: 32, width: 32}
-          else if style == 'dashboard'
-            {height: 244, width: 244}
+          else if style == 'small'
+            {height: 30, width: 30}
           else if style == 'tiny'
             {height: 22, width: 22}
           else

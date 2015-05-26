@@ -26,11 +26,17 @@
   .header{
     width: 100%;
     position: relative;
+    float: left;
+    margin-top: 25px;
 
     > div{
       @include display-box;
       @include box-pack(justify);
       position: relative;
+    }
+    h4 {
+      font-size: 22px;
+      color: $text;
     }
   }
 
@@ -173,8 +179,8 @@
 .contact-view,
 .calendar-view {
   .main-content {
-    width: 96%;
-    margin: 20px 2% 0;
+    width: 100%;
+    margin: 20px 0 0;
   }
   .tasks-content {
     max-width: 835px;

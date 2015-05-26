@@ -13,53 +13,7 @@
   </div>
 
   <div class="sidebar-panel">
-    <div class="sidebar-panel-content">
-      <div class="contact-type">
-        {{render 'sidebar/contact_status' model}}
-      </div>
-    </div>
-  </div>
-
-  {{#unless isPersonal}}
-    <div class="sidebar-panel sidebar-panel-grey">
-      <div class="sidebar-panel-content">
-        <table class="table sidebar-table">
-          <tbody>
-            {{#each deals}}
-              <tr>
-                <td>{{#link-to "deal" this}}{{name}}{{/link-to}}
-                <td class="text-right">
-                  <strong>{{currency value}} ({{status}})</strong>
-                </td>
-              </tr>
-            {{/each}}
-            <tr>
-              <td>Deal totals</td>
-              <td class="text-right">
-                <strong>{{currency dealsTotal}}</strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        {{#if deals.length}}
-          <div class="clearfix">
-            See {{#link-to "pipeline.resourceDeals" this}}deals{{/link-to}} with {{displayName}}
-          </div>
-        {{/if}}
-        <div class="clearfix">
-          {{#link-to "deals.fromContact" model class="btn btn-primary pull-right"}}
-            <i class="ss-standard ss-plus"></i> Deal
-          {{/link-to}}
-        </div>
-      </div>
-    </div>
-  {{/unless}}
-
-  <div class="sidebar-panel">
     <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-navigate"></i> Contact
-      </h6>
     </div>
     <div class="sidebar-panel-content">
       {{render 'sidebar/phone_numbers' model}}
@@ -70,6 +24,8 @@
       {{render "sidebar/addresses" model}}
     </div>
   </div>
+
+  {{render 'sidebar/assigned_to' model}}
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
@@ -92,8 +48,6 @@
   {{#each field in customFields }}
     {{customfield-editor field=field resource=model parent=this}}
   {{/each}}
-
-  {{render 'sidebar/assigned_to' model}}
 
   {{partial 'shared/followers'}}
 
