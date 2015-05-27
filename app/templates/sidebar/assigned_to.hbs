@@ -1,4 +1,4 @@
-<div class="sidebar-panel">
+<div class="sidebar-panel" id="sidebar-assigned">
   <div class="sidebar-panel-header">
     <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
     <h6 class="sidebar-panel-title">
@@ -28,14 +28,6 @@
           <span class="title muted">{{title}}</span>
         </p>
       {{/if}}
-      <div class="createdAt">
-        <dl class="dl-horizontal">
-          <dt>Source</dt>
-          <dd>{{source}}</dd>
-          <dt>Date added</dt>
-          <dd>{{formatDateTime createdAt format="date"}}</dd>
-        </dl>
-      </div>
     </div>
   </div>
 </div>

@@ -1,22 +1,18 @@
 .autocomplete {
   ul.as-selections {
-    height: 44px;
     margin: 0;
     padding: 0;
     border: none;
     overflow: hidden;
     @include box-shadow(none);
-    padding-left: 10px;
+    width: 220px;
+    background: transparent;
 
     li {
       margin: 0;
-      height: 50px;
-      line-height: 50px;
+      height: 26px;
+      line-height: 26px;
       overflow: visible;
-
-      input {
-        height: 44px !important;
-      }
     }
 
     li.as-selection-item,
@@ -42,8 +38,7 @@
       @include box-shadow(none);
       font-size: inherit;
       padding: 4px 6px;
-      margin-right: 10px;
-      margin-top: 7px;
+      margin: 0 10px 10px 0;
       height: 28px;
       line-height: 28px;
       font-family: inherit;
@@ -67,11 +62,12 @@
     }
 
     li.as-original input {
-      line-height: 46px;
+      line-height: 10px;
       height: auto;
-      font-size: inherit;
-      padding: 4px 6px;
+      font-size: 13px;
+      padding: 4px 2px;
       width: auto;
+      background-color: transparent;
     }
   }
 }

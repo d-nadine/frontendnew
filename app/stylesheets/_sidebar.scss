@@ -1,5 +1,5 @@
 .sidebar {
-  width: 320px;
+  width: 300px;
   position: fixed;
   top: $navbar-height;
   left: 0;
@@ -236,7 +236,7 @@
 }
 
 .sidebar-panel-header {
-  padding: 10px 18px 0;
+  padding: 10px 0 0;
   vertical-align: middle;
   border-top: 1px solid $border;
 
@@ -275,7 +275,7 @@
 
 .sidebar-panel-content {
   width: 100%;
-  padding: 18px;
+  padding: 18px 0;
   color: #6e6e6e;
   @include box-sizing(border-box);
 
@@ -285,6 +285,11 @@
 
   a:not(.btn) {
     color: darken(#6e6e6e, 10%);
+    float: left;
+  }
+  .control-group {
+    display: inline-block;
+    width: 100%;
   }
 
   ul.typeahead a.active, ul.typeahead li.active a {
@@ -458,3 +463,34 @@
 .sidebar .country-picker {
   position: static;
 }
+
+#sidebar-assigned {
+
+  p a {
+    line-height: 30px;
+    margin-left: 10px;
+  }
+}
+#sidebar-source {
+
+  i {
+    margin-right: 10px;
+  }
+}
+#sidebar-about {
+
+  i {
+    margin-right: 10px;
+  }
+}
+#sidebar-list {
+
+  i {
+    float: left;
+    margin-right: 24px;
+  }
+  .sidebar-tags-view {
+    display: inline-block;
+  }
+}
+
