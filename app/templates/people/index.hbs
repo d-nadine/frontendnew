@@ -64,7 +64,13 @@
                   </li>
                 </ul>
               </li>
-              <li><a href="#" {{action "unTrackAll"}}>Untrack</a></li>
+              {{#unless isPotential}}
+                <li><a href="#" {{action "unTrackAll"}}>Untrack</a></li>
+              {{else}}
+                <li>
+                  <a href="#" {{action "trackAll"}}>Track</a>
+                </li>
+              {{/unless}}
               <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
             </ul>
           </div>
@@ -102,6 +108,17 @@
   <div class="contacts-sidebar">
     <a href="#" {{action "createTag"}} class="btn list-new">New List</a>
     <ul class="nav nav-pills">
+      <li {{bind-attr class="isPotential:active"}}>
+        {{#link-to "people.index" "potential" (query-params user="" tag="" company="" contactimportjob="" customquery="")}}
+          <div class="nav-pills-left">
+            <i class="ss-symbolicons ss-lock" data-original-title="" title=""></i>
+            <span>My Contacts</span>
+          </div>
+          <div class="nav-pills-right">
+            <span>{{potential}}</span>
+          </div>
+        {{/link-to}}
+      </li>
       <li {{bind-attr class="isAll:active"}}>
         {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" customquery="")}}
           <div class="nav-pills-left">
@@ -201,7 +218,7 @@
     {{/if}}
   </div>
   {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
-  {{#if noContacts}}
+  {{#if displayNoContacts}}
     <div class="message">
       <i class="ss-standard ss-user"></i>
       <h1>Add your first contact</h1>

@@ -1,6 +1,16 @@
 Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
   Radium.CheckableMixin,
   actions:
+    trackAll: ->
+      detail =
+        jobType: Radium.BulkActionsJob
+        modelType: Radium.Contact
+        public: false
+        private: true
+
+      @send "executeActions", "track", detail
+      false
+
     showMore: ->
       return if @get('content.isLoading')
       @get('model').expand()
@@ -34,8 +44,6 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
                       @get('allChecked')
                    else
                       @get('allChecked') && !!!@get('potentialQueries.length')
-
-      p allChecked
 
       unless allChecked || checkedContent.length
         return @send 'flashError', "You have not selected any items."
@@ -111,6 +119,11 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
         this[local].apply this, args
 
     @get('controllers.addressbook').send 'updateTotals'
+
+  localTrack: (contact, dataset) ->
+    contact.set 'isChecked', false
+    Ember.run.next =>
+      @get('model').removeObject contact
 
   localDelete: (model, dataset) ->
     dataset.removeObject model

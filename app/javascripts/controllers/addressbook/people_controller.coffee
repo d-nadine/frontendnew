@@ -194,6 +194,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         @set 'noList', totals.get('noList')
         @set 'usersTotals', totals.get('usersTotals')
         @set 'tagsTotals', totals.get('tagsTotals')
+        @set 'potential', totals.get('potential')
+
+      false
 
     showUsersContacts: (user) ->
       @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id'), customquery: ''
@@ -251,6 +254,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   tags: Ember.computed.oneWay 'controllers.tags'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   contactsTotal: Ember.computed.oneWay 'controllers.addressbook.contactsTotal'
+  untrackedIndex: Ember.computed.oneWay 'controllers.untrackedIndex'
 
   queryParams: ['user', 'tag', 'company', 'contactimportjob', 'customquery']
   user: null
@@ -260,6 +264,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   filter: null
 
+  isPotential: Ember.computed.equal 'filter', 'potential'
   isAll: Ember.computed.equal 'filter', 'all'
   isNew: Ember.computed.equal 'filter', 'new'
   isNoTasks: Ember.computed.equal 'filter', 'notasks'
@@ -381,6 +386,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     return unless checked.length
 
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
+
+  displayNoContacts: Ember.computed 'noContacts', 'isPotential', 'potential', 'filter', ->
+    return false if @get('isPotential') && @get('potential') > 0
+
+    !!@get('noContacts')
 
   newCustomQueries: Ember.A()
   potentialQueries: Ember.A()

@@ -11,16 +11,6 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
         @set 'filtered', totals.get('filtered')
         @set 'spam', totals.get('spam')
 
-    trackAll: ->
-      detail =
-        jobType: Radium.BulkActionsJob
-        modelType: Radium.Contact
-        public: false
-        private: true
-
-      @send "executeActions", "track", detail
-      false
-
     deleteAll: ->
       detail =
         jobType: Radium.BulkActionsJob
@@ -59,11 +49,6 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
         dataset.removeObject contact
 
         @get('addressbook').send 'updateTotals'
-
-  localTrack: (contact, dataset) ->
-    contact.set 'isChecked', false
-    Ember.run.next =>
-      @get('model').removeObject contact
 
   searchText: "",
   needs: ['addressbook', 'peopleIndex']
