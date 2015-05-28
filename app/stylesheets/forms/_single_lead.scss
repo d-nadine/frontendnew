@@ -6,16 +6,12 @@
   clear: both;
   float: left;
   padding: 7px 0;
-  height: 48px;
+  min-height: 48px;
 }
 
 .form .item > div {
   display: inline-block;
   float: left;
-}
-
-.form .item input[type=radio] {
-  
 }
 
 .form .item input[type=checkbox] {

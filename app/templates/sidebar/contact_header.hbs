@@ -3,19 +3,6 @@
     <div class="control-group">
       {{upload-avatar model=model finishedUpload='stopEditing'}}
     </div>
-    <div class="control-group">
-      <label class="control-label">Name</label>
-      <div class="controls">
-        {{view view.contactName valueBinding="form.name" classNameBindings=":field controller.isValid::is-invalid :detail" placeholder="Name" viewName="name"}}
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label">Title</label>
-      <div class="controls">
-        {{view view.contactTitle valueBinding="form.title" class="field detail" placeholder="Title" viewName="title"}}
-      </div>
-    </div>
-  </div>
 {{else}}
   <div class="user-avatar pull-left">
     {{#if isLoaded}}
@@ -41,11 +28,6 @@
       {{else}}
         <span class="empty empty-name">Add name</span>
       {{/if}}
-    </div>
-
-
-    <div class="company-title">
-      <span class="title muted">{{title}}</span>
     </div>
   </div>
 {{/if}}

@@ -97,14 +97,19 @@ input[type=file]{
 .attachment i {
   position: relative;
   top: 5px;
-  margin-right: 5px;
+  margin-right: 10px;
+  float: left;
 }
 
 .attachment a {
-  position: relative;
-  top: 1px;
-  left: 8px;
   display: inline-block;
+}
+
+.attachment .upload-file-component {
+
+  > div {
+    width: calc(100% - 24px);
+  }
 }
 
 .attachment .progress {
@@ -120,7 +125,12 @@ input[type=file]{
 }
 
 .attachment .uploaded-by {
-  padding-left: 12px;
+  float: left;
+  line-height: 26px;
+  
+  a {
+    padding-left: 4px;
+  }
 }
 
 .attachment .delete {
@@ -129,4 +139,5 @@ input[type=file]{
   left: 8px;
   color: #666;
   display: inline-block;
+  float: right;
 }

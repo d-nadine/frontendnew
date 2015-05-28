@@ -16,6 +16,24 @@
   .inline-editor-open{
     input{
       margin-bottom: 0;
+      border-radius: 0px;
+      box-shadow: none;
+      height: 40px;
+      padding: 0 8px;
+      margin-bottom: 6px;
+    }
+    .control-box {
+      height: 40px !important;
+      margin-bottom: 10px;
+
+      .add-on {
+        line-height: 40px;
+      }
+    }
+    .extra-field a,
+    .extra-delete a {
+      height: 35px;
+      line-height: 35px;
     }
   }
 

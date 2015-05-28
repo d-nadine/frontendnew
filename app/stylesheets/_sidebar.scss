@@ -24,6 +24,7 @@
   .sidebar-panel:first-of-type .sidebar-panel-content {
     border-bottom: 0px;
     padding-bottom: 0;
+    margin-bottom: 10px;
   }
 
   .sidebar-panel-content.custom-field {
@@ -65,7 +66,7 @@
     padding-top: 10px;
   }
   .sidebar-panel:nth-of-type(2) dt {
-    width: 30px;
+    width: 14px;
     text-align: left;
     padding-right: 20px;
   }
@@ -248,7 +249,6 @@
 
 .form .sidebar-panel .upload-filelist-component .upload-file-component.item {
   float: none;
-  margin-left: 14px;
 
   .ss-attach {
     top: 5px;
@@ -278,7 +278,15 @@
   padding: 18px 0;
   color: #6e6e6e;
   @include box-sizing(border-box);
+  display: inline-block;
 
+  .item {
+    height: auto;
+
+    .extra-field {
+      display: none;
+    }
+  }
   .name {
     margin: 0;
   }
@@ -295,6 +303,21 @@
   ul.typeahead a.active, ul.typeahead li.active a {
     color: $white;
   }
+
+  ul.typeahead {
+    width: 195px;
+
+    li {
+      a {
+        color: $text;
+        width: calc(100% - 30px);
+      }
+      &.active a {
+        color: white;
+      }
+    }
+  }
+
   .company-picker, .contact-picker {
     ul.typeahead li a {
       background-color: $bright;
@@ -349,9 +372,8 @@
 
   dd {
     margin-left: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    width: calc(100% - 45px);
+    display: inline-block;
 
     .field {
       margin: 0;
@@ -444,11 +466,12 @@
   }
 
   .extra-delete {
-    margin-right: 15px;
+    padding-right: 0;
   }
 
   .primary-check {
     margin-right: 5px;
+    line-height: 35px;
   }
 }
 
@@ -463,7 +486,29 @@
 .sidebar .country-picker {
   position: static;
 }
+#sidebar-contact-info {
 
+  dd > a {
+    text-overflow: ellipsis;
+    width: calc(100% - 55px);
+    overflow-x: hidden;
+    white-space: nowrap;
+  }
+}
+#sidebar-social {
+  display: inline-block;
+  margin-top: 20px;
+
+  a {
+    font-size: 15px;
+    margin-right: 22px;
+    color: #aaa;
+
+    &.active {
+      color: #666;
+    }
+  }
+}
 #sidebar-assigned {
 
   p a {
@@ -471,26 +516,29 @@
     margin-left: 10px;
   }
 }
-#sidebar-source {
-
-  i {
-    margin-right: 10px;
-  }
-}
 #sidebar-about {
 
   i {
     margin-right: 10px;
+  }
+  textarea {
+    width: calc(100% - 14px);
+  }
+  .sidebar-panel-content > div {
+    line-height: 30px;
   }
 }
 #sidebar-list {
 
   i {
     float: left;
-    margin-right: 24px;
+    margin-right: 18px;
   }
   .sidebar-tags-view {
     display: inline-block;
   }
 }
-
+.multiple-control-component {
+  margin-bottom: 25px;
+  display: inline-block;
+}

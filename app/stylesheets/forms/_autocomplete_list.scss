@@ -68,6 +68,11 @@
       padding: 4px 2px;
       width: auto;
       background-color: transparent;
+
+      &::-webkit-input-placeholder {
+        font-style: italic;
+        color: #b4b4b4;
+      }
     }
   }
 }
@@ -108,7 +113,3 @@ div.autocomplete:not(.tags) {
   }
 }
 
-ul.as-list {
-  margin-left: -11px;
-  margin-top: 21px;
-}

@@ -14,13 +14,15 @@
       {{/if}}
     </div>
     {{#if multiple}}
-      <div class="extra-delete">
+      <div class="pull-left">
+        <input type="radio" {{action "setPrimary" item}} {{bind-attr checked=item.isPrimary}} {{bind-attr name=icon}}>
+        <span class="primary-check">Primary</span>
+      </div>
+      <div class="pull-right extra-delete">
         <a href="#" {{action "removeSelection" item}}>
           <i class="ss-standard ss-trash"></i>
         </a>
       </div>
-      <input type="radio" {{action "setPrimary" item}} {{bind-attr checked=item.isPrimary}} {{bind-attr name=icon}}>
-      <span class="primary-check">Primary</span>
     {{/if}}
   </div>
 </div>

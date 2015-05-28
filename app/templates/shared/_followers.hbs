@@ -1,7 +1,7 @@
 <div class="sidebar-panel">
   <div class="sidebar-panel-header">
     <h6 class="sidebar-panel-title">
-      <i class="ss-standard ss-users"></i> Followers
+      Followers
     </h6>
   </div>
   <div class="sidebar-panel-content">
@@ -16,5 +16,14 @@
         <li>No followers yet!</li>
       {{/each}}
     </ul>
+
+    {{#if canFollow}}
+      {{#unless isFollowing}}
+        <button class="btn-text btn-muted pull-right" {{action "follow" bubbles=false}}>Follow</button>
+      {{else}}
+        <span class="label label-success">Following</span>
+        <button class="btn-text btn-muted pull-right" {{action "unfollow" bubbles=false}}>Unfollow</button>
+      {{/unless}}
+    {{/if}}
   </div>
 </div>

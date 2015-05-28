@@ -11,10 +11,6 @@
         <div>
           {{autocomplete-textbox source=users value=controller.form.user queryKey="displayName" validations=userValidations validator=controller validationField="user" action="stopEditing"}}
         </div>
-        <div class="source">
-          <label class="control-label">Source</label>
-          {{autocomplete-textbox source=leadSources value=controller.form.source validations=userValidations validator=controller validationField="user" action="stopEditing"}}
-        </div>
       {{else}}
         {{#link-to "user" user}}
           {{#if user.isLoaded}}

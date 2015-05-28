@@ -78,3 +78,23 @@
     box-shadow: none;
   }
 }
+
+.btn-muted {
+  color: #6e6e6e;
+
+  &:hover {
+    color: #6e6e6e;
+  }
+}
+
+button.btn-text {
+  background-color: transparent;
+  border: 0px;
+  padding: 0;
+  font-size: 14px;
+  color: #6e6e6e;
+
+  &:focus {
+    outline: 0;
+  }
+}
