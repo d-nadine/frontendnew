@@ -39,12 +39,6 @@
   .inline-editor{
     position: relative;
 
-    .ss-write {
-      opacity: 0.15;
-      font-size: 12px;
-      @include transition(opacity 0.25s);
-    }
-
     &:hover{
       .ss-write {
         opacity: 0.5;
@@ -156,6 +150,14 @@
       color: $bright;
     }
   }
+  .ss-write {
+    opacity: 0;
+    font-size: 12px;
+    @include transition(opacity 0.25s);
+    position: relative;
+    top: 2px;
+  }
+
 }
 
 .reference-meta {

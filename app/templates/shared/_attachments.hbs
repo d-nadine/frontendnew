@@ -1,19 +1,21 @@
-<div class="sidebar-panel">
+<div class="sidebar-panel" id="sidebar-attachment"> 
   <div class="sidebar-panel-header">
-    {{#unless hideUploader}}
-    <div class="pull-right upload-file-btn">
-      {{file-uploader files=controller.files disableSave=disableSave model=model class="btn-file btn-messages-action"}}
-    </div>
-    {{/unless}}
     <h6 class="sidebar-panel-title">
       Attachments
     </h6>
   </div>
-  {{#if controller.files}}
-    {{upload-filelist files=files}}
-  {{else}}
-    <div class="sidebar-panel-content">
-      No attachments
-    </div>
-  {{/if}}
+  <div class="sidebar-panel-content">
+    {{#if controller.files}}
+      {{upload-filelist files=files}}
+    {{else}}
+      <div class="sidebar-panel-content">
+        No attachments
+      </div>
+    {{/if}}
+    {{#unless hideUploader}}
+      <div class="pull-right upload-file-btn">
+        {{file-uploader files=controller.files disableSave=disableSave model=model class="btn-text btn-muted pull-right"}}
+      </div>
+    {{/unless}}
+  </div>
 </div>

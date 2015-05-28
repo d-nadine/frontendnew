@@ -58,7 +58,7 @@
       color: #626262;
     }
   }
-  &:not(.btn-black):hover {
+  &:not(.btn-black):not(.btn-muted):hover {
     color: $lightblue;
   }
   i {
@@ -83,7 +83,7 @@
   color: #6e6e6e;
 
   &:hover {
-    color: #6e6e6e;
+    color: $text;
   }
 }
 

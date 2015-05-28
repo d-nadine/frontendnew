@@ -1,6 +1,5 @@
 <div class="sidebar-panel" id="sidebar-assigned">
   <div class="sidebar-panel-header">
-    <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
     <h6 class="sidebar-panel-title">
       Assigned To
     </h6>
@@ -20,7 +19,7 @@
           {{/if}}
         {{/link-to}}
         <p>
-          {{#link-to "user" user}}{{user.name}}{{/link-to}}<br/>
+          {{#link-to "user" user}}{{user.name}}{{/link-to}}<i class="ss-standard ss-write pull-right"></i><br/>
           <span class="title muted">{{title}}</span>
         </p>
       {{/if}}

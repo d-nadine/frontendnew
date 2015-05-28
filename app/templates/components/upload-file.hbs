@@ -1,5 +1,5 @@
 <i class="ss-standard ss-attach"></i>
-<div>
+<div class="upload-item">
 {{#if name}}
   {{#unless file.isUploading}}
     <a href="{{unbound file.attachment.url}}" target="_new" class="uploaded-file">
@@ -23,7 +23,7 @@
   </div>
 {{else}}
   {{#unless hideUploadedBy}}
-    <span class="uploaded-by">uploaded by{{resource-link-to file.attachment.uploadedBy}}</span>
+    <span class="uploaded-by"><span>uploaded by</span>{{resource-link-to file.attachment.uploadedBy}}</span>
   {{/unless}}
   <a href="#" {{action "removeFile" file}} class="delete">
     <i class="ss-standard ss-delete"></i>

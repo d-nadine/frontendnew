@@ -5,15 +5,13 @@
         {{autocomplete-textbox scopes="company" value=controller.form.company queryKey="displayName" validations=companyValidations validator=controller validationField="company" isValid=isValid writeableValue=true saveModel="createCompany" action="modelChanged" disabled=isDisabled}}
       </div>
     {{else}}
-      <div class="pull-right">
-        <i class="ss-standard ss-write" {{action "toggleEditor" target=view bubbles=false}}></i>
-      </div>
       <div class="not-editing">
         {{#if company}}
           <p class="company-link">
             {{#link-to 'company' company}}
               {{company.displayName}}
             {{/link-to}}
+            <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
           </p>
         {{else}}
           <span class="empty">Add company</span>

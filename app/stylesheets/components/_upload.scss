@@ -127,9 +127,10 @@ input[type=file]{
 .attachment .uploaded-by {
   float: left;
   line-height: 26px;
-  
-  a {
-    padding-left: 4px;
+
+  span {
+    float: left;
+    margin-right: 4px;
   }
 }
 

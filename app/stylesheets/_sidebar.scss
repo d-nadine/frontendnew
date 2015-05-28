@@ -1,5 +1,5 @@
 .sidebar {
-  width: 300px;
+  width: 310px;
   position: fixed;
   top: $navbar-height;
   left: 0;
@@ -135,7 +135,6 @@
   .company-type,
   .contact-type{
     width: 100%;
-    // height: 30px;
     position: relative;
   }
 
@@ -234,6 +233,11 @@
     color: #fff !important;
     text-decoration: underline;
   }
+}
+
+.sidebar-panel {
+  width: 100%;
+  display: inline-block;
 }
 
 .sidebar-panel-header {
@@ -511,9 +515,13 @@
 }
 #sidebar-assigned {
 
-  p a {
+  p {
     line-height: 30px;
-    margin-left: 10px;
+
+    a {
+      line-height: 30px;
+      margin-left: 10px;
+    }
   }
 }
 #sidebar-about {
@@ -526,6 +534,11 @@
   }
   .sidebar-panel-content > div {
     line-height: 30px;
+
+    &.about-text {
+      line-height: 1.4;
+      margin-bottom: 22px;
+    }
   }
 }
 #sidebar-list {
@@ -538,7 +551,58 @@
     display: inline-block;
   }
 }
+#sidebar-attachment {
+
+  .upload-item {
+    position: relative;
+
+    .uploaded-by {
+      float: left;
+      margin-right: 1px;
+    }
+    .upload-file {
+      padding-right: 25px;
+    }
+    .delete {
+      position: absolute;
+      width: 18px;
+      right: 0;
+      left: auto;
+      top: -2px;
+    }
+  }
+  .upload-file-btn {
+
+    a {
+      font-size: 14px;
+
+      .upload-button {
+        display: none;
+      }
+    }
+  }
+}
+#sidebar-delete {
+  border-top: 1px solid $border;
+}
+
 .multiple-control-component {
   margin-bottom: 25px;
   display: inline-block;
+}
+
+.sidebar-panel-main {
+
+  .contact-types-list {
+
+    dd {
+      width: 100%;
+
+      .company-link {
+        display: inline-block;
+        width: 100%;
+        line-height: 35px;
+      }
+    }
+  }
 }

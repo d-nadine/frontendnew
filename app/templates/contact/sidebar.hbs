@@ -20,7 +20,7 @@
       {{render 'sidebar/email_addresses' model}}
       {{render 'sidebar/phone_numbers' model}}
       <dl class="dl-horizontal contact-types-list">
-        <dt><i class="ss-standard ss-globe muted"></i></dt>
+        <dt><i class="ss-standard ss-earth muted"></i></dt>
         <dd>
           dynamo.com <i class="ss-standard ss-write pull-right"></i>
         </dd>
@@ -44,9 +44,9 @@
 
   {{partial 'shared/attachments'}}
 
-  <div class="sidebar-panel">
+  <div class="sidebar-panel" id="sidebar-delete">
     <div class="sidebar-panel-content">
-      <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete</button>
+      <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Contact</button>
     </div>
   </div>
 </div>
