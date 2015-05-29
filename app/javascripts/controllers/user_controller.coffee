@@ -29,6 +29,9 @@ Radium.UserController = Radium.ObjectController.extend
 
     Math.floor(closedDealsTotal / salesGoal)
 
+  canDelete: Ember.computed 'userIsCurrentUser', 'currentUser.isAdmin', ->
+    !@get('userIsCurrentUser') && @get('currentUser.isAdmin')
+
   formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create
       compactFormButtons: true

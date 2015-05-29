@@ -102,7 +102,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   city: Ember.computed.alias 'primaryAddress.city'
 
   added: Ember.computed 'createdAt', ->
-    @get('createdAt').toFormattedString("%B %Y")
+    @get('createdAt').toFormattedString("%B %d, %Y")
 
   openDeals: Ember.computed 'deals.[]', ->
     @get('deals').filterProperty 'isOpen'

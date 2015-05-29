@@ -135,11 +135,13 @@
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      {{#unless userIsCurrentUser}}
+      {{#if canDelete}}
         <button class="btn btn-danger btn-large btn-block" {{action "confirmDeletion"}}>Delete</button>
       {{else}}
-        {{#link-to "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/link-to}}
-      {{/unless}}
+        {{#if userIsCurrentUser}}
+          {{#link-to "settings.profile" class="btn btn-large btn-block"}}Edit My Profile{{/link-to}}
+        {{/if}}
+      {{/if}}
     </div>
   </div>
   {{#if userIsCurrentUser}}
