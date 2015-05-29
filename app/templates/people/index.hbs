@@ -4,15 +4,11 @@
       <div class="nav-wrap">
         <span class="count">
           <span {{bind-attr class=":chosen content.isLoading:is-loading"}}>
-          {{#unless content.isLoading}}
             {{checkedTotal}}
-          {{/unless}}
           </span>
           <span class="divider">/</span>
           <span {{bind-attr class=":total content.isLoading:is-loading"}}>
-            {{#unless content.isLoading}}
-              {{totalRecords}}
-            {{/unless}}
+            {{totalRecords}}
           </span>
           <span class="subtitle">CONTACTS</span>
         </span>

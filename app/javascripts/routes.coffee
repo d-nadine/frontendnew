@@ -66,6 +66,7 @@ Radium.Router.map ->
 
   @resource 'addressbook', ->
     @resource 'people', ->
+      @route 'contacts'
       @route 'index', path: '/:filter'
     @route 'untracked'
     @route 'companies'

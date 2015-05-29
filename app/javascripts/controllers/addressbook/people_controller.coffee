@@ -188,13 +188,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       Radium.ContactsTotals.find({}).then (results) =>
         totals = results.get('firstObject')
         @set 'all', totals.get('all')
+        @set 'potential', totals.get('potential')
         @set 'new', totals.get('new')
         @set 'noTasks', totals.get('noTasks')
         @set 'inactive', totals.get('inactive')
         @set 'noList', totals.get('noList')
         @set 'usersTotals', totals.get('usersTotals')
         @set 'tagsTotals', totals.get('tagsTotals')
-        @set 'potential', totals.get('potential')
 
       false
 

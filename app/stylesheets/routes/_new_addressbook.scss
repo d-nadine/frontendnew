@@ -49,6 +49,7 @@
     .chosen, .total {
       display: inline-block;
       text-align: right;
+      min-width: 15px;
 
       &.is-loading {
         visibility: hidden;
