@@ -1,3 +1,5 @@
+window.ENV.environment = 'development'
+
 Ember.Application.initializer
   name: 'adapterUrl'
   after: 'store'

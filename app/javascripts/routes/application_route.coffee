@@ -11,8 +11,8 @@ Radium.ApplicationRoute = Radium.Route.extend
       true
 
     error: (error, transition, route) ->
-      console.log "In the error route handler in route #{route.constructor} and #{transition.targetName} and error #{error}"
-      console.log(error.stack) if error.stack
+      Ember.Logger.error "In the error route handler in route #{route.constructor} and #{transition.targetName} and error #{error}"
+      Ember.Logger.error error
 
     logOut: ->
       Radium.get('authManager').logOut(@get('store._adapter.url'))

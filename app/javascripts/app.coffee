@@ -52,8 +52,7 @@ Ember.RSVP.configure 'onerror', (e) ->
       ==============================
       """
 
-  console.log e.message
-  console.log e.stack
+  Ember.Logger.Error e
 
 require /lib\/radium\/base/
 

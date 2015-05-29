@@ -1,3 +1,5 @@
+window.ENV.environment = 'production'
+
 Ember.Application.initializer
   name: 'adapterUrl'
   after: 'store'
@@ -17,10 +19,7 @@ Ember.Application.initializer
   initialize: (container, application) ->
     Stripe.setPublishableKey('pk_live_RX5MutadKEj3S5VKOYsSSncC')
 
-# FIXME: we should be reporting these errors
-# using honeybadger or something?
 Ember.onerror = (e) ->
   return if e.message == "TransitionAborted"
 
-  console.log e.message
-  console.log e.stack
+  Ember.Logger.error e

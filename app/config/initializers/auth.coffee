@@ -44,3 +44,9 @@ Ember.Application.initializer
       else
         Ember.$('[class^=ball]').hide()
         Radium.advanceReadiness()
+
+        return if Ember.ENV.environment != "production" || location.pathname != "/"
+
+        Ember.run.next ->
+          router = container.lookup('router:main')
+          router.transitionTo "people.index", "all"

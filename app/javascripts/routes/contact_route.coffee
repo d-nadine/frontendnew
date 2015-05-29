@@ -56,7 +56,7 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
 
         resolve(model)
       ).catch (error) ->
-        Ember.Logger.error(error.stack)
+        Ember.Logger.error(error)
         reject(model)
 
   setupController: (controller, model) ->
