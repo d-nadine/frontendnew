@@ -49,4 +49,4 @@ Ember.Application.initializer
 
         Ember.run.next ->
           router = container.lookup('router:main')
-          router.transitionTo "people.index", "all"
+          router.transitionTo "people.contacts"

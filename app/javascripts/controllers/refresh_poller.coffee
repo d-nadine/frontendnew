@@ -32,10 +32,8 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
       currentUser.set 'syncState', 'waiting'
       currentUser.set 'emailsImported', 0
 
-      currentUser.one 'didUpdate', ->
+      currentUser.save(this).then ->
         currentUser.reload()
-
-      @get('controller.store').commit()
 
     unless currentUser.get('inCleanState')
       currentUser.addObserver 'currentState.stateName', observer

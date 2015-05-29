@@ -1,6 +1,10 @@
 Radium.PeopleContactsRoute = Radium.Route.extend
   beforeModel: (transition) ->
     self = this
+
+    unless @controllerFor('currentUser').get('initialContactsImported')
+      return @transitionTo "people.index", "potential"
+
     new Ember.RSVP.Promise (resolve, reject) ->
       Radium.ContactsTotals.find({public_and_potential_only: true})
       .then((totals) ->

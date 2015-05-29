@@ -114,3 +114,4 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     @controller.set 'potentialQueries', Ember.A()
     @controller.set 'actualQueries', Ember.A()
     @set 'customquery', null
+    @controller.stop() if @controller.get('isPolling')

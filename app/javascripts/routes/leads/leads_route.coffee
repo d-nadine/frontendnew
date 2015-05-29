@@ -12,10 +12,12 @@ Radium.LeadsRoute = Ember.Route.extend
 
     poller.set 'currentUser', currentUser
     poller.start()
-    @controllerFor('leadsSingle').set 'totalsPoller', poller
+    controller.set 'totalsPoller', poller
 
   deactivate: ->
     @_super.apply this, arguments
+    controller = @controllerFor('leadsSingle')
+
     return unless @controller.get('totalsPoller')
 
     @controller.get('totalsPoller').stop()
