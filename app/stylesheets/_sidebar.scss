@@ -201,7 +201,20 @@
     margin-bottom: 0;
   }
   .form-inline {
-    margin: 7px 5px;
+    
+    input {
+      border: 1px solid $border;
+      border-radius: 0px;
+      width: calc(100% - 12px);
+      margin-right: 0px;
+      height: 40px;
+    }
+    button {
+      width: 100%;
+      margin-top: 10px;
+      background: #8CC18C;
+      color: $text;
+    }
   }
 
   .not-editing .empty-name {
@@ -284,6 +297,14 @@
   @include box-sizing(border-box);
   display: inline-block;
 
+  > .contact-types-list {
+    margin-bottom: 15px;
+  }
+  .sidebar-addresses-view {
+    margin-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+  }
   .item {
     height: auto;
 
