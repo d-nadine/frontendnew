@@ -21,10 +21,12 @@
     }
   }
 
-  .sidebar-panel:first-of-type .sidebar-panel-content {
+  .form > .sidebar-panel:first-of-type .sidebar-panel-content {
     border-bottom: 0px;
     padding-bottom: 0;
     margin-bottom: 10px;
+    border-top: 1px solid $border;
+    margin-top: 20px;
   }
 
   .sidebar-panel-content.custom-field {
@@ -409,6 +411,11 @@
       }
     }
   }
+  strong {
+    font-weight: 200;
+    font-style: italic;
+    color: #888;
+  }
 }
 
 .sidebar-user-panel {
@@ -549,6 +556,8 @@
 
   i {
     margin-right: 10px;
+    position: relative;
+    top: 2px;
   }
   textarea {
     width: calc(100% - 14px);
