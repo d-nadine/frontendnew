@@ -4,7 +4,7 @@ $switchTransition: .15s ease-out;
   position: relative;
   display: inline-block;
   vertical-align: top;
-  width: 70px;
+  width: 90px;
   height: 26px;
   padding: 3px;
   border-radius: 18px;
@@ -24,12 +24,10 @@ $switchTransition: .15s ease-out;
   position: relative;
   display: block;
   height: inherit;
-  font-size: 12px;
-  text-transform: uppercase;
-  background: #bdc3c7;
+  font-size: 14px;
+  font-weight: 600;
+  background: #8CC34A;
   border-radius: inherit;
-  box-shadow: inset 0 1px 2px rgba(black, .12),
-              inset 0 0 2px rgba(black, .15);
   @include transition($switchTransition);
   @include transition-property(opacity background);
 
@@ -51,14 +49,11 @@ $switchTransition: .15s ease-out;
     content: attr(data-on);
     left: 11px;
     color: white;
-    text-shadow: 0 1px rgba(black, .2);
     opacity: 0;
   }
 
   .switch-input:checked ~ & {
-    background: $blue;
-    box-shadow: inset 0 1px 2px rgba(black, .15),
-                inset 0 0 3px rgba(black, .2);
+    background: #8CC34A;
 
     &:before { opacity: 0; }
     &:after { opacity: 1; }
@@ -66,7 +61,7 @@ $switchTransition: .15s ease-out;
 }
 
 .switch-input:checked ~ .switch-handle {
-  background: $lightblue;
+  background: #88DA1F;
 }
 
 .switch-handle {
@@ -75,15 +70,13 @@ $switchTransition: .15s ease-out;
   left: 6px;
   width: 20px;
   height: 20px;
-  background: #f7f7f7;
+  background: #88DA1F;
   border-radius: 10px;
-  box-shadow: 1px 1px 5px rgba(black, .2);  
   @include transition(left #{$switchTransition});
 
   .switch-input:checked ~ & {
-    left: 49px;
-    box-shadow: -1px 1px 5px rgba(black, .2);
+    left: 69px;
   }
 }
-.switch-green > .switch-input:checked ~ .switch-label { background: #4fb845; }
+.switch-green > .switch-input:checked ~ .switch-label { background: #88DA1F; }
 
