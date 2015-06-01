@@ -1,5 +1,7 @@
+require "mixins/controllers/poller_mixin"
+
 Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
-  interval: 1000
+  interval: 3000
   isLoading: Ember.computed.alias 'controller.isLoading'
   allPagesLoaded: Ember.computed.alias 'controller.allPagesLoaded'
   page: Ember.computed.alias 'controller.page'
@@ -8,14 +10,17 @@ Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
     currentUser = @get('currentUser')
     Ember.assert "You need to pass set currentUser on the InitialImportPoller", currentUser
 
-    controller = @get('controller')
+    return unless user = @get('currentUser.model')
 
-    if currentUser.get('initialMailImported')
-      controller.get('container').lookup('route:messages').refresh()
+    messagesRoute = currentUser.container.lookup('route:messages')
+    messagesSidebarController = currentUser.container.lookup('controller:messagesSidebar')
 
+    if user.get('initialMailImported')
       @stop()
 
-    if @get('page') <= 2 && !@get('isLoading') && !@get('allPagesLoaded')
-      controller.send 'showMore'
+      return messagesRoute.refresh()
 
-    currentUser.reload()
+    if @get('page') <= 2 && !@get('isLoading') && !@get('allPagesLoaded')
+      messagesSidebarController.send 'showMore'
+
+    user.reload()

@@ -2,7 +2,7 @@ require "controllers/addressbook/people_mixin"
 
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
-   Radium.PollerMixin,
+  Radium.PollerMixin,
   actions:
     toggleFilter: ->
       element = $('.query-builder-component')
@@ -406,9 +406,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     @send "updateTotals"
 
     currentUser.one 'didReload', =>
-      return @stop() if currentUser.get('initialContactsImported')
-      p "polling for contacts"
       @container.lookup('route:peopleIndex').refresh()
+
+      return @stop() if currentUser.get('initialContactsImported')
 
     currentUser.reload()
 

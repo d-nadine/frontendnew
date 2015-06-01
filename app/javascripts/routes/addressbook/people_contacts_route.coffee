@@ -12,7 +12,7 @@ Radium.PeopleContactsRoute = Radium.Route.extend
         all = totals.get('all')
         potential = totals.get('potential')
 
-        if all == 0 && potential > 0
+        if all == 0
           self.transitionTo "people.index", "potential"
         else
           self.transitionTo "people.index", "all"

@@ -204,7 +204,7 @@
     {{#unless currentUser.initialContactsImported}}
       <div class="alert alert-info initial-importing text-center">
         {{view Radium.ProgressBar percentageBinding="currentUser.contactsImported"}}
-        <p><img src="/images/loading/ajax-loader.gif"/> {{currentUser.emailsImported}}% of your contacts have been imported&hellip;</p>
+        <p><img src="/images/loading/ajax-loader.gif"/> {{currentUser.contactsImported}}% of your contacts have been imported&hellip;</p>
       </div>
     {{/unless}}
 

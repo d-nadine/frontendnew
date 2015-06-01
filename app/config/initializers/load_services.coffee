@@ -14,3 +14,9 @@ Ember.Application.initializer
 
     application.inject('component', 'ProfileService', 'profile-service:current')
     application.inject('controller', 'ProfileService', 'profile-service:current')
+
+    initImportPoller = Radium.InitialImportPoller.create
+      currentUser: container.lookup('controller:currentUser')
+
+    application.register('importpoller-service:current', initImportPoller, instantiate: false)
+    application.inject('route', 'initialImportPoller', 'importpoller-service:current')

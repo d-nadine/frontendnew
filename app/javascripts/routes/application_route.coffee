@@ -173,13 +173,6 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('notifications').start()
     @controllerFor('messages').start()
 
-    unless @controllerFor('currentUser').get('initialMailImported')
-      initialImporter = Radium.InitialImportPoller.create
-        currentUser: @controllerFor('currentUser').get('model')
-        controller: @controllerFor('messagesSidebar')
-
-      initialImporter.start()
-
   deactivate: ->
     @controllerFor('notifications').stop()
     @controllerFor('messages').stop()

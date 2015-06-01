@@ -260,7 +260,19 @@ Radium.MessagesRoute = Radium.Route.extend
       outlet: 'messages-sidebar-content'
       controller: controller
 
+  activate: ->
+    @_super.apply this, arguments
+
+    return if @controllerFor('currentUser').get('initialMailImported')
+
+    @get('initialImportPoller').start()
+
   deactivate: ->
+    initImportPoller = @get('initialImportPoller')
+
+    if initImportPoller.get('isPolling')
+      initImportPoller.stop()
+
     @controllerFor('messagesSidebar').send 'reset'
     @render 'nothing',
       into: 'application'

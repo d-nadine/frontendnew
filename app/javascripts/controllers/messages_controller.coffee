@@ -1,6 +1,8 @@
 require 'mixins/controllers/poller_mixin'
 
-Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin, Radium.SelectableMixin, Radium.PollerMixin,
+Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
+  Radium.SelectableMixin,
+  Radium.PollerMixin,
   drawerOpen: false
   folder: null
   pageSize: 5
