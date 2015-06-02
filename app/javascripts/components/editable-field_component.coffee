@@ -102,11 +102,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   attributeBindings: ['contenteditable']
   isTransitioning: false
 
-  contenteditable: Ember.computed "isSaving", ->
-    if @get("isSaving")
-      "false"
-    else
-      "true"
+  # we need to start with false for ellipsis bug in IE and safari
+  contenteditable: "false"
 
   bufferedProxy: Ember.computed 'model', ->
     BufferedObjectProxy.create content: @get('model')
@@ -123,6 +120,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     "/#{routable.humanize().pluralize()}/#{routable.get('id')}"
 
   setup: Ember.on 'didInsertElement', ->
+    @$().parent().on 'click', @clickHandler.bind(this)
+
     @$().on 'focus', @focusContent.bind(this)
 
     bufferKey = @get('bufferKey')
@@ -177,6 +176,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       setMarkup()
 
   teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    @$()?.parent().off 'click'
     @$()?.off 'focus', @focusContent.bind(this)
 
   input: (e) ->
@@ -210,10 +211,26 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     true
 
-  click: (e) ->
+  clickHandler: (e) ->
     if $(e.target).hasClass 'route'
       @send 'activateLink'
       return false
+
+    @enableContentEditable()
+
+  enableContentEditable: ->
+    return unless @$().length
+
+    el = @$()
+    parent = el.parent()
+
+    parent.css('text-overflow','clip')
+
+    Ember.run =>
+      @set "contenteditable", "true"
+    Ember.run.next =>
+      @setEndOfContentEditble()
+      parent().scrollLeft(el.width())
 
   focusContent: (e) ->
     return unless @$().length
@@ -223,7 +240,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     el.parents('td:first').addClass('active')
 
-    @setEndOfContentEditble()
+    @enableContentEditable()
 
   focusOut: (e) ->
     Ember.run.next =>
@@ -231,4 +248,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     return unless @$().length
 
-    @$().parents('td:first').removeClass('active')
+    el = @$()
+
+    @set "contenteditable", "false"
+    el.parents('td:first').removeClass('active')
+    el.parent().css('text-overflow','ellipsis')
