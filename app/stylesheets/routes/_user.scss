@@ -189,6 +189,15 @@
       font-size: 24px;
       margin-bottom: 5px;
     }
+    ul.as-selections li {
+      height: 46px;
+      line-height: 46px;
+
+      input {
+        line-height: 46px;
+        padding: 0 0 0 34px;
+      }
+    }
   }
   .form {
     padding-left: 22px;
@@ -209,7 +218,6 @@
         textarea {
           overflow: hidden;
           text-overflow: ellipsis;
-          width: 200px;
           white-space: nowrap;
         }
       }

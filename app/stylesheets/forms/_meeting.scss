@@ -260,8 +260,15 @@
   }
 
   .invitee-actions {
-    opacity: 0;
-    @include transition(opacity 0.25s);
+
+    a {
+      background: transparent;
+      padding: 0 5px;
+
+      &:hover {
+        color: $text;
+      }
+    }
   }
 
   &:hover .invitee-actions {

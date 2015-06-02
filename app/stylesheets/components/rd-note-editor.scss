@@ -1,6 +1,5 @@
 .rd-note-editor {
-  padding-left: 38px;
-
+  
   a.cancel, .save, .delete {
     cursor: default;
     opacity: 0;
@@ -44,5 +43,6 @@
     line-height: 1.55;
     font-size: 15px;
     margin-top: 10px;
+    word-wrap: break-word;
   }
 }

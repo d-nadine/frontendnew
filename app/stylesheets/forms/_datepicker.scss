@@ -34,3 +34,10 @@
 .datepicker.dropdown-menu {
   z-index: 99999;
 }
+
+.datepicker {
+
+  .switch {
+    display: table-cell;
+  }
+}
