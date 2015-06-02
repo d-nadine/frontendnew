@@ -13,14 +13,30 @@ Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
     return unless user = @get('currentUser.model')
 
     messagesRoute = currentUser.container.lookup('route:messages')
+    peopleRoute = currentUser.container.lookup('route:peopleIndex')
     messagesSidebarController = currentUser.container.lookup('controller:messagesSidebar')
+    currentPath = currentUser.container.lookup('controller:application').get('currentPath')
+
+    p currentPath
+    refresh = ->
+      p "refreshing...."
+      if currentPath == "addressbook.people.index"
+        p "people refresh"
+        peopleRoute.refresh()
+      else if currentPath.indexOf('messages') != -1
+        p "messages refresh"
+        messagesSidebarController.send 'showMore'
+
+      user.reload()
 
     if user.get('initialMailImported')
       @stop()
 
-      return messagesRoute.refresh()
+      p "finishing....."
+      peopleRoute.refresh()
+      messagesRoute.refresh()
+      return
 
-    if @get('page') <= 2 && !@get('isLoading') && !@get('allPagesLoaded')
-      messagesSidebarController.send 'showMore'
+    refresh()
 
     user.reload()

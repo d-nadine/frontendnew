@@ -265,7 +265,11 @@ Radium.MessagesRoute = Radium.Route.extend
 
     return if @controllerFor('currentUser').get('initialMailImported')
 
-    @get('initialImportPoller').start()
+    initImportPoller = @get('initialImportPoller')
+
+    return if initImportPoller.get('isPolling')
+
+    initImportPoller.start()
 
   deactivate: ->
     @_super.apply this, arguments

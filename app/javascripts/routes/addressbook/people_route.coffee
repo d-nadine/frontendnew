@@ -90,7 +90,11 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     return if @controllerFor('currentUser').get('initialMailImported')
 
-    @get('initialImportPoller').start()
+    initImportPoller = @get('initialImportPoller')
+
+    return if initImportPoller.get('isPolling')
+
+    initImportPoller.start()
 
   afterModel: (model) ->
     controller = @controllerFor 'peopleIndex'
