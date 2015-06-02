@@ -228,6 +228,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     Ember.run =>
       @set "contenteditable", "true"
+
     Ember.run.next =>
       @setEndOfContentEditble()
       parent.scrollLeft(el.width())
