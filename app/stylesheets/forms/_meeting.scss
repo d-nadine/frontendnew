@@ -73,12 +73,12 @@
       span.topic{
         position: relative;
         overflow: hidden;
-        margin-left: 70px;
         display: block;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 30px;
         cursor:pointer;
-        color: $muted;
+        color: $text;
+        font-weight: 400;
 
         a, a:focus, a:visited {
           font-weight: bold;
