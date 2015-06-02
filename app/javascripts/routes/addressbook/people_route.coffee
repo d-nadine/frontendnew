@@ -79,12 +79,18 @@ Radium.PeopleIndexRoute = Radium.Route.extend
       params: filterParams
 
   activate: ->
+    @_super.apply this, arguments
+
     controller = @controllerFor('peopleIndex')
 
     unless savedColumns = JSON.parse(localStorage.getItem(controller.SAVED_COLUMNS))
       savedColumns = controller.initialColumns
 
       localStorage.setItem controller.SAVED_COLUMNS, JSON.stringify(savedColumns)
+
+    return if @controllerFor('currentUser').get('initialMailImported')
+
+    @get('initialImportPoller').start()
 
   afterModel: (model) ->
     controller = @controllerFor 'peopleIndex'
@@ -110,8 +116,14 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     controller.set 'actualQueries', potentialQueries.slice()
 
   deactivate: ->
+    @_super.apply this, arguments
     @controller.set 'newTags', Ember.A()
     @controller.set 'potentialQueries', Ember.A()
     @controller.set 'actualQueries', Ember.A()
     @set 'customquery', null
-    @controller.stop() if @controller.get('isPolling')
+
+    initImportPoller = @get('initialImportPoller')
+
+    if initImportPoller.get('isPolling')
+      initImportPoller.stop()
+

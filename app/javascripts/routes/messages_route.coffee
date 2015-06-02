@@ -268,6 +268,7 @@ Radium.MessagesRoute = Radium.Route.extend
     @get('initialImportPoller').start()
 
   deactivate: ->
+    @_super.apply this, arguments
     initImportPoller = @get('initialImportPoller')
 
     if initImportPoller.get('isPolling')

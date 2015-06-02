@@ -2,7 +2,6 @@ require "controllers/addressbook/people_mixin"
 
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
-  Radium.PollerMixin,
   actions:
     toggleFilter: ->
       element = $('.query-builder-component')
@@ -392,25 +391,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     return false if @get('isPotential') && @get('potential') > 0
 
     !!@get('noContacts')
-
-  interval: 10000
-
-  onPoll: ->
-    currentUser = @get('currentUser')
-
-    if currentUser.get('initialContactsImported')
-      return @stop()
-    else
-      @start() unless @get('isPolling')
-
-    @send "updateTotals"
-
-    currentUser.one 'didReload', =>
-      @container.lookup('route:peopleIndex').refresh()
-
-      return @stop() if currentUser.get('initialContactsImported')
-
-    currentUser.reload()
 
   newCustomQueries: Ember.A()
   potentialQueries: Ember.A()

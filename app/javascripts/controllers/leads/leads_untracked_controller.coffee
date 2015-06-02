@@ -2,6 +2,7 @@ require "controllers/addressbook/people_mixin"
 require "controllers/leads/untracked_columns_config"
 
 Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
+  Radium.PollerMixin,
   Radium.UntrackedColumnsConfig,
   actions:
     updateTotals: ->
@@ -54,6 +55,25 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
   needs: ['addressbook', 'peopleIndex']
 
   addressbook: Ember.computed.oneWay "controllers.addressbook"
+
+  interval: 10000
+
+  onPoll: ->
+    currentUser = @get('currentUser')
+
+    if currentUser.get('initialContactsImported')
+      return @stop()
+    else
+      @start() unless @get('isPolling')
+
+    @send "updateTotals"
+
+    currentUser.one 'didReload', =>
+      @container.lookup('route:untrackedIndex').refresh()
+
+      return @stop() if currentUser.get('initialContactsImported')
+
+    currentUser.reload()
 
   public: false
   private: true

@@ -82,6 +82,12 @@
       </ul>
     </div>
     <div class="table-container untracked">
+      {{#unless currentUser.initialContactsImported}}
+        <div class="alert alert-info initial-importing text-center">
+          {{view Radium.ProgressBar percentageBinding="currentUser.contactsImported"}}
+          <p><img src="/images/loading/ajax-loader.gif"/> {{currentUser.contactsImported}}% of your contacts have been imported&hellip;</p>
+        </div>
+      {{/unless}}
       <div class="left-table">
         {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
       </div>
