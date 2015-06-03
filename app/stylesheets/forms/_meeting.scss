@@ -1,10 +1,8 @@
 .meeting-form-container{
   position: relative;
+  margin-bottom: 15px;
 
   .meeting-form {
-    .btn-link {
-      color: #000;
-    }
 
     div.is-valid {
       border: 1px solid $valid-input-border;
@@ -73,15 +71,15 @@
       span.topic{
         position: relative;
         overflow: hidden;
-        display: block;
-        font-size: 16px;
-        line-height: 30px;
-        cursor:pointer;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        cursor: pointer;
         color: $text;
         font-weight: 400;
 
         a, a:focus, a:visited {
-          font-weight: bold;
+          font-weight: 400;
           color: $blue;
         }
 
@@ -91,6 +89,10 @@
 
         a:last-of-type:after{
           content: '';
+        }
+        .meeting-date {
+          color: $muted;
+          font-size: 16px;
         }
       }
 

@@ -60,8 +60,27 @@
     }
   }
 
-  &.is-expandable .primary {
-    cursor: pointer
+  &.is-expandable {
+    display: inline-block;
+    width: calc(100% - 20px);
+
+    .btn-options {
+      line-height: 48px;
+      font-size: 14px;
+      color: $icon;
+      right: 0;
+
+      &:focus,
+      &:hover {
+        color: $icon !important;
+        cursor: pointer;
+        outline: 0;
+      }
+    }
+    .primary {
+      cursor: pointer;
+      float: left;
+    }
   }
 
   // style the todo's pointer

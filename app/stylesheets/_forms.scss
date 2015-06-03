@@ -101,14 +101,17 @@
 
     .reference-meta {
       margin: 0 40px;
+      line-height: 1;
 
       p {
         margin: 5px 0;
+        color: $muted;
       }
 
       a {
-        font-weight: bold;
-        color: $blue;
+        font-weight: 400;
+        color: $muted;
+        font-size: 16px;
       }
 
       i {
@@ -162,7 +165,6 @@
 
 .reference-meta {
   position: relative;
-  color: #797979;
 
   a {
     font-weight: bold;
@@ -199,13 +201,16 @@
 }
 
 .overdue-alert {
-  color: #FF0000;
-  margin-top: 6px;
+  color: $red;
+
+  i {
+    position: relative;
+    top: 3px;
+  }
 }
 
 .form-box-comments-icon {
   font-size: 20px;
-  margin: 10px 0 0 10px;
   color: $muted;
 }
 
@@ -222,6 +227,14 @@
   .form-container {
     flex: 1;
     @include box-flex(1);
+
+    .is-expandable {
+      padding-left: 0;
+
+      .primary {
+        width: 90%;
+      }
+    }
   }
 
   .form-box-controls {
@@ -613,7 +626,11 @@ input[type="radio"]:checked + label {
       width: 100%;
 
       .btn-link {
-        margin-right: 15px;
+        margin-left: 15px;
+
+        &:focus {
+          text-decoration: none;
+        }
       }
     }
     .field-group {
@@ -704,4 +721,63 @@ input[type="radio"]:checked + label {
   }
 }
 
+
+
+.task-list {
+
+  h3 {
+    &:not(:first-of-type) {
+      margin-top: 40px;
+    }
+  }
+  .is-expandable {
+    display: inline-block;
+    width: calc(100% - 20px);
+  }
+
+  .forms-todo-view {
+
+    .primary {
+      width: calc(100% - 35px);
+    }
+  }
+  .meeting-form-container {
+
+    .primary {
+      display: table;
+
+      .icon,
+      .topic,
+      .additional {
+        display: table-cell;
+      }
+
+      .icon {
+        width: 5%;
+
+        i {
+          position: relative;
+          top: 2px;
+          color: $icon;
+        }
+      }
+      .topic {
+        width: 85%;
+      }
+      .additional {
+        vertical-align: top;
+        width: 10%;
+        padding-top: 2px;
+        border-radius: 0;
+
+        a {
+
+          i {
+            color: $icon;
+          }
+        }
+      }
+    }
+  }
+}
 

@@ -1,31 +1,38 @@
 <div {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary :expander"}} {{action "expand" target="view"}}>
-    {{#if showComments}}
-      <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
-    {{/if}}
-    <a tabindex="3" class="btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
-      {{#if isExpanded}}
-        Hide
-      {{else}}
-        Options
-      {{/if}}
-    </a>
-
     {{#if showSuccess}}
       <span class="success green pull-right">Meeting saved</span>
     {{/if}}
 
+    <span class="icon"><i class="ss-standard ss-calendar"></i></span>
+
     {{#if showTopicTextBox}}
-      {{view view.topicField classNames="field field-blend-in" viewName="topic"}}
+      {{view view.topicField classNames="field field-blend-in topic" viewName="topic"}}
     {{else}}
       <span class="topic">
         {{topic}} with
         {{#each attendees}}
           {{resource-link-to this}}
         {{/each}}
-        at {{view.readableStartsAt}}
+        <br>
+        <span class="meeting-date">{{view.readableStartsAt}}</span>
       </span>
     {{/if}}
+
+    <div class="additional">
+      <a tabindex="3" class="btn-link pull-right" {{action "toggleExpanded" bubbles=false}}>
+        {{#if isExpanded}}
+          <i class="ss-standard ss-navigateup"></i>
+        {{else}}
+          <i class="ss-standard ss-navigatedown"></i>
+        {{/if}}
+      </a>
+
+      {{#if showComments}}
+        <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
+      {{/if}}
+    </div>
+
   </div>
 
   {{#if isExpanded}}
