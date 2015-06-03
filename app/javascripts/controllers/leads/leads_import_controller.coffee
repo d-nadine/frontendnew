@@ -29,7 +29,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         return @send 'flashError', 'You must select a user to assign the contacts to.'
 
 
-      data = @getImportData(false, selectedHeaders).map (item) ->
+      data = @getImportData(true, selectedHeaders).map (item) ->
                                     item.fields.map (item) -> item
 
       unless data.length
@@ -38,14 +38,14 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
 
       postHeaders = selectedHeaders.mapProperty('name')
 
-      importJob = Radium.ContactImportJob.createRecord
+      importJobParams =
+                    type: Radium.ContactImportJob.humanize()
                     headers: postHeaders
                     contactStatus: @get('contactStatus')
                     fileName: @get('importFile').name
                     public: true
                     assignedTo: assignedTo
                     tagNames: @get('tagNames').mapProperty('name')
-                    rows: data
 
       hasCollectionMarker = (label, item) ->
         new RegExp("^#{label} \\d+$", 'i').test(item)
@@ -59,10 +59,10 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         name: item.get('name').toLowerCase()
 
       if postHeaders.any(hasEmails)
-        importJob.set('emailMarkers', headerInfo.get('emailMarkers').map(collectionMapping))
+        importJobParams['emailMarkers'] = headerInfo.get('emailMarkers').map(collectionMapping)
 
       if postHeaders.any(hasPhoneNumbers)
-        importJob.set('phoneNumberMarkers', headerInfo.get('phoneNumberMarkers').map(collectionMapping))
+        importJobParams['phoneNumberMarkers'] = headerInfo.get('phoneNumberMarkers').map(collectionMapping)
 
       headerData = @get('headerData').mapProperty('name')
 
@@ -70,11 +70,17 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         index: f.get('index')
         custom_field_id: f.get('field.id')
 
-      importJob.set 'customFieldMappings', mappings
+      importJobParams['customFieldMappings'] = mappings
 
       @set('importing', true)
 
-      importJob.save(this).then( =>
+      url = "#{@get('store._adapter.url')}/contact_import_jobs"
+      uploader = @get('uploader')
+      importFile = @get('importFile')
+
+      Ember.assert "no importFile supplied to the import function of the import controller", importFile
+
+      uploader.upload(importFile, importJobParams, url).then( =>
         @pollForJob(importJob)
         @set 'isSubmitted', false
       ).catch (result) =>
@@ -83,6 +89,8 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         @set('importing', false)
         @set 'isSubmitted', false
         @send 'reset'
+
+      false
 
     reset: ->
       @setProperties
@@ -190,6 +198,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
 
   init: ->
     @_super.apply this, arguments
+
     self = this
     @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 

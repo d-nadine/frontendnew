@@ -3,21 +3,8 @@ require 'lib/radium/ember-uploader'
 Radium.UploadingMixin = Ember.Mixin.create
   percentage: 0
 
-  setup: Ember.on 'didInsertElement', ->
-    @_super.apply this, arguments
-    url = "#{@get('controller.store._adapter.url')}/uploads"
-    @setUploader(url)
-
-  setUploader: (url) ->
-    @set('uploader', Ember.Uploader.create
-                        url: url,
-                        model: @get('controller.model'))
-
-    @get('uploader').on('didUpload', this, 'onDidUpload')
-    @get('uploader').on('progress', this, 'onDidProgress')
-    @get('uploader')
-
   uploadFiles: (files) ->
+    @get('uploader').on('progress', this, 'onDidProgress')
     @set('disableSave', true)
     uploader = @get('uploader')
     uploadToFiles = @get('files')
@@ -35,7 +22,18 @@ Radium.UploadingMixin = Ember.Mixin.create
               else
                 bucket: @get('bucket')
 
-      uploader.upload(file, hash).then @handlerFactory(wrappedFile).bind(this)
+      uploader.upload(file, hash)
+        .then(@handlerFactory(wrappedFile).bind(this))
+        .catch (error) =>
+          Ember.Logger.error error
+          controller = if this instanceof Ember.Component
+                         @get('targetObject')
+                       else
+                          this
+
+          route = controller.container.lookup('route:application')
+
+          route.send 'flashError', "an error has occurred and the file could not be uploaded."
 
     false
 
@@ -53,14 +51,10 @@ Radium.UploadingMixin = Ember.Mixin.create
       isUploading = @get('files').any (file) -> file.get('isUploading')
       @set('disableSave', isUploading)
 
-  onDidUpload: (data) ->
-    setTimeout =>
-      @set 'percentage', 0
-    , 200
-    @get('controller.model').reload()
-
   onDidProgress: (percent) ->
+    return if @isDestroyed || @isDestroying
     @set('percentage', percent)
 
   isUploadingDidChange: Ember.observer 'uploader.isUploading', ->
+    return if @isDestroyed || @isDestroying
     @set('percentage', 1)

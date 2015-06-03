@@ -1,6 +1,5 @@
 Radium.ContactImportJob = Radium.Model.extend
   headers: DS.attr('array')
-  rows: DS.attr('array', defaultValue: [])
   tagNames: DS.attr('array', defaultValue: [])
   additionalFields: DS.attr('array', defaultValue: [])
   contactStatus: DS.belongsTo('Radium.ContactStatus')

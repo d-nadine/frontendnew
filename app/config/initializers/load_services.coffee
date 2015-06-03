@@ -1,5 +1,7 @@
 Ember.Application.initializer
   name: 'load-services'
+  after: 'store'
+  before: 'registerComponentLookup'
   initialize: (container, application) ->
     eventBus = Radium.EventBus.create()
 
@@ -20,3 +22,13 @@ Ember.Application.initializer
 
     application.register('importpoller-service:current', initImportPoller, instantiate: false)
     application.inject('route', 'initialImportPoller', 'importpoller-service:current')
+
+    store = container.lookup('store:main')
+
+    uploader = Ember.Uploader.create()
+
+    application.register('uploader:current', uploader, instantiate: false)
+
+    application.inject('component', 'uploader', 'uploader:current')
+    application.inject('controller', 'uploader', 'uploader:current')
+    application.inject('view', 'uploader', 'uploader:current')

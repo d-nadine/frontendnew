@@ -11,6 +11,8 @@ Ember.Application.initializer
     store.get('_adapter').reopen
       url: 'http://localhost:9292'
 
+    container.lookup('uploader:current').set 'url', "#{store.get('_adapter.url')}/uploads"
+
 Ember.Application.initializer
   name: 'developmentCookie'
   after: 'store'

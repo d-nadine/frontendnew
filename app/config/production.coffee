@@ -13,6 +13,8 @@ Ember.Application.initializer
     store.get('_adapter').reopen
       url: window.API_HOST || 'http://api.radiumcrm.com'
 
+    container.lookup('uploader:current').set 'url', "#{store.get('_adapter.url')}/uploads"
+
 Ember.Application.initializer
   name: 'stripePublicKey'
   after: 'store'

@@ -17,14 +17,14 @@ Radium.UploadAvatarComponent = Ember.Component.extend Radium.UploadingMixin,
 
     file = e.target.files[0]
 
-    url = "#{@get('controller.store._adapter.url')}/avatars"
-    uploader = @setUploader(url)
+    url = "#{@get('store._adapter.url')}/avatars"
+    uploader = @get('uploader')
     model = @get('model')
     modelAttributes = type: model.humanize(), id: model.get('id')
 
     @set 'isUploading', true
 
-    uploader.upload(file, modelAttributes).then((data) =>
+    uploader.upload(file, modelAttributes, url).then((data) =>
       store = @get("controller.store")
       adapter = store.adapterForType(model.constructor)
       adapter.didFindRecord(store, model.constructor, data, model.get('id'))

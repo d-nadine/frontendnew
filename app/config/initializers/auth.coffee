@@ -1,6 +1,6 @@
 Ember.Application.initializer
   name: 'auth'
-  after: 'store'
+  after: 'adapterUrl'
   initialize: (container, application) ->
     Radium.set('authManager', Radium.AuthManager.create())
 
@@ -37,7 +37,9 @@ Ember.Application.initializer
 
       # we need to get the user to grant access if it has been revoked
       if user.get('refreshFailed')
-        store = currentUserController.get('store')
+        store = container.lookup('store:main')
+
+        Ember.assert "you need a store in the container of the auth initializer", store
 
         apiUrl = store.get('_adapter.url')
         Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
