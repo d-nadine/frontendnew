@@ -3,6 +3,31 @@ require 'mixins/controllers/poller_mixin'
 Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   Radium.SelectableMixin,
   Radium.PollerMixin,
+  actions:
+    refresh: ->
+      return if !@get('canRefresh') || @get('isSyncing')
+
+      currentUser = @get('currentUser')
+
+      job = Radium.EmailSyncJob.createRecord
+              user: currentUser
+
+      job.save(this).then((result) =>
+        currentUser.reload()
+
+        currentUser.one 'didReload', =>
+          refreshPoller = @get('refreshPoller')
+
+          refreshPoller.set 'controller', this
+
+          refreshPoller.start()
+      ).catch =>
+        @set 'isSyncing', false
+
+      @set 'isSyncing', true
+
+      false
+
   drawerOpen: false
   folder: null
   pageSize: 5
@@ -17,6 +42,12 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
     @_super.apply this, arguments
     @set 'refreshPoller', Radium.RefreshPoller.create()
     @set 'currentFolder', @get('folders').find (f) -> f.name == "inbox"
+
+  canRefresh: Ember.computed 'folder.length', ->
+    @get('folder') == 'inbox'
+
+  viewingTemplates: Ember.computed 'folder', ->
+    @get('folder') == 'templates'
 
   currentFolderName: Ember.computed 'currentFolder', ->
     @get('currentFolder.title')
