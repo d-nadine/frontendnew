@@ -92,14 +92,14 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
         importJob.save(this).then( =>
           @pollForJob(importJob)
-          @set 'isSubmitted', false
         )
-      ).catch (error) =>
+      ).catch((error) =>
         @send 'flashError', 'an error has occurred and the job could not be completed.'
         @set 'pollImportJob', importJob
         @set('importing', false)
-        @set 'isSubmitted', false
         @send 'reset'
+      ).finally =>
+        @set 'isSubmitted', false
 
     reset: ->
       @setProperties
@@ -371,6 +371,10 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
   fakeProgressWidth: Ember.computed 'progressIndicator', ->
     "width: #{@get('progressIndicator')}%"
+
+  _teardown: ->
+    if progressTick = @get('progressTick')
+      Ember.run.cancel progressTick
 
   progress: ->
     unless @get('isSubmitted')

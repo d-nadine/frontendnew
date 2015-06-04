@@ -102,9 +102,6 @@
         </div>
         <div class="submit">
           <hr>
-          <div class="progress progress-striped">
-            <div class="bar" {{bind-attr style="fakeProgressWidth"}}></div>
-          </div>
           <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-large btn-primary">
             {{#if isSaving}}
               <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Importing</span>
@@ -156,9 +153,16 @@
   {{/unless}}
   {{#if importing}}
     <div class="well">
-      <h4>Importing contacts from <code>{{importFile.name}}</code></h4>
-      {{view Radium.ProgressBar percentageBinding="percentage"}}
-      <h5>It is safe to navigate away or close the browser.  The import will complete.</h5>
+      {{#unless isSubmitted}}
+        <h4>Importing contacts from <code>{{importFile.name}}</code></h4>
+        {{view Radium.ProgressBar percentageBinding="percentage"}}
+        <h5>It is safe to navigate away or close the browser.  The import will complete.</h5>
+      {{else}}
+        <h4>File is uploading....</h4>
+        <div class="progress progress-striped">
+          <div class="bar" {{bind-attr style="fakeProgressWidth"}}></div>
+        </div>
+      {{/unless}}
     </div>
   {{/if}}
   <div id="previous-imports">
