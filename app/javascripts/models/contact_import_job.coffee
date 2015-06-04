@@ -1,9 +1,9 @@
 Radium.ContactImportJob = Radium.Model.extend
+  file: DS.belongsTo('Radium.Attachment')
   headers: DS.attr('array')
   tagNames: DS.attr('array', defaultValue: [])
   additionalFields: DS.attr('array', defaultValue: [])
   contactStatus: DS.belongsTo('Radium.ContactStatus')
-  fileName: DS.attr('string')
   createdAt: DS.attr('datetime')
   updatedAt: DS.attr('datetime')
   importedCount: DS.attr('number')

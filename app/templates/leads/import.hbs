@@ -102,6 +102,9 @@
         </div>
         <div class="submit">
           <hr>
+          <div class="progress progress-striped">
+            <div class="bar" {{bind-attr style="fakeProgressWidth"}}></div>
+          </div>
           <button {{action "importContacts"}} {{bind-attr disabled=isSaving}} class="btn btn-large btn-primary">
             {{#if isSaving}}
               <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Importing</span>

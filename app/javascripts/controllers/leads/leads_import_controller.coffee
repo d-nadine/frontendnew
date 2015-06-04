@@ -8,8 +8,9 @@ rejectEmpty = (headerInfo, key) ->
         else
           Ember.isEmpty(info)
 
-Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin,
+Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   Radium.UserComboboxProps,
+
   actions:
     importContacts: ->
       selectedHeaders = @get('selectedHeaders')
@@ -20,6 +21,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
 
       headerInfo = @get('headerInfo')
 
+      @set('progressIndicator', 0)
       @set('isSubmitted', true)
 
       if (!headerInfo.firstName && !headerInfo.lastName) && !headerInfo.name && !headerInfo.emailMarkers.length
@@ -36,10 +38,11 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         @send 'flashError', "There are no valid rows in the imported file."
         return
 
+      @progress()
+
       postHeaders = selectedHeaders.mapProperty('name')
 
-      importJobParams =
-                    type: Radium.ContactImportJob.humanize()
+      importJob = Radium.ContactImportJob.createRecord
                     headers: postHeaders
                     contactStatus: @get('contactStatus')
                     fileName: @get('importFile').name
@@ -59,10 +62,10 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         name: item.get('name').toLowerCase()
 
       if postHeaders.any(hasEmails)
-        importJobParams['emailMarkers'] = headerInfo.get('emailMarkers').map(collectionMapping)
+        importJob.set('emailMarkers', headerInfo.get('emailMarkers').map(collectionMapping))
 
       if postHeaders.any(hasPhoneNumbers)
-        importJobParams['phoneNumberMarkers'] = headerInfo.get('phoneNumberMarkers').map(collectionMapping)
+        importJob.set('phoneNumberMarkers', headerInfo.get('phoneNumberMarkers').map(collectionMapping))
 
       headerData = @get('headerData').mapProperty('name')
 
@@ -70,27 +73,33 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         index: f.get('index')
         custom_field_id: f.get('field.id')
 
-      importJobParams['customFieldMappings'] = mappings
+      importJob.set 'customFieldMappings', mappings
 
       @set('importing', true)
 
-      url = "#{@get('store._adapter.url')}/contact_import_jobs"
       uploader = @get('uploader')
+
+      Ember.assert "you must have a bucket to upload", @get('bucket')
+
+      hash = bucket: @get('bucket')
+
       importFile = @get('importFile')
 
-      Ember.assert "no importFile supplied to the import function of the import controller", importFile
+      uploader.upload(importFile, hash).then((result) =>
+        attachment = DS.Model.instanceFromHash(result, "attachment", Radium.Attachment, @get('store'))
 
-      uploader.upload(importFile, importJobParams, url).then( =>
-        @pollForJob(importJob)
-        @set 'isSubmitted', false
-      ).catch (result) =>
+        importJob.set 'file', attachment
+
+        importJob.save(this).then( =>
+          @pollForJob(importJob)
+          @set 'isSubmitted', false
+        )
+      ).catch (error) =>
         @send 'flashError', 'an error has occurred and the job could not be completed.'
         @set 'pollImportJob', importJob
         @set('importing', false)
         @set 'isSubmitted', false
         @send 'reset'
-
-      false
 
     reset: ->
       @setProperties
@@ -121,6 +130,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
         f.set('mapping', null)
         f.set('index', null)
 
+      @set('bucket', Math.random().toString(36).substr(2,9))
     initialFileUploaded: (imported) ->
       @set 'isUploading', false
       unless imported.data.length
@@ -190,6 +200,7 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
   isSubmitted: true
   customFieldMappings: Ember.A()
   contactImportJobs: Ember.A()
+  bucket: Math.random().toString(36).substr(2,9)
 
   sortedJobs: Ember.computed.sort 'contactImportJobs', (a, b) ->
     left = b.get('createdAt') || Ember.DateTime.create()
@@ -198,7 +209,6 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
 
   init: ->
     @_super.apply this, arguments
-
     self = this
     @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
@@ -356,3 +366,32 @@ Radium.LeadsImportController = Radium.ObjectController.extend Radium.PollerMixin
       @set('percentage', percentage)
 
     job.reload()
+
+  progressIndicator: 0
+
+  fakeProgressWidth: Ember.computed 'progressIndicator', ->
+    "width: #{@get('progressIndicator')}%"
+
+  progress: ->
+    unless @get('isSubmitted')
+      @_teardown()
+      return
+
+    progressTick = Ember.run.later this, =>
+      nextProgress = @get('progressIndicator') + 3
+
+      if nextProgress >= 100
+        nextProgress = 0
+
+      Ember.run.next =>
+        if @isDestroyed || @isDestroying
+          @_teardown()
+          return
+
+        @set 'progressIndicator', nextProgress
+
+      @progress()
+    , 300
+
+    @set "progressTick", progressTick
+
