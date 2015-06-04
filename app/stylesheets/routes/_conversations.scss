@@ -46,7 +46,7 @@
 }
 
 .conversations-sidebar .group {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 
   > p,
   .group-name > p {
@@ -149,15 +149,17 @@
 
 .toolbar .right .chat {
   margin-right: 10px;
+  font-size: 16px;
+  line-height: 44px;
+
+  i {
+    padding-right: 5px;
+  }
 }
 
 
 .toolbar .right a:hover {
   text-decoration: none;
-}
-
-.toolbar .right .chat:hover {
-  background: #e9e9e9;
 }
 
 .toolbar .btn-group button:focus {
@@ -219,7 +221,7 @@
 }
 
 .conversations-table .table-container {
-  width: calc(100% - 150px) !IMPORTANT;
+  width: calc(100% - 10px) !IMPORTANT;
 }
 
 .conversations-table .email-sender {
@@ -230,6 +232,11 @@
 
 .conversations-table .table-container .variadic-table th {
 
+}
+
+.conversations-table .table-container .right-table .variadic-table {
+  width: 100%;
+  table-layout: auto;
 }
 
 .conversations-table .variadic-table .check {
@@ -243,28 +250,38 @@
 }
 
 .conversations-table .right-table .variadic-table {
-  td.assign {
+  .assign {
     min-width: 150px;
+    width: 17%;
+
+    .assignto-picker-component {
+      width: 100%;
+    }
   }
+  .next-task {
+    width: 17%;
+  }
+
 }
 
 .conversations-table .variadic-table tbody tr .assign .assignto {
   height: auto;
 }
 
-.conversations-table .variadic-table tr th.choose {
-
+.conversations-table .variadic-table .caret {
+  right: 14px;
 }
 
-.conversations-table .variadic-table tbody tr td.choose {
+.conversations-table .variadic-table tbody tr .choose {
   min-width: 100px;
+  width: 12%;
 }
 
-.conversations-table .variadic-table tbody tr td.subject {
-  width: auto;
+.conversations-table .variadic-table tbody tr .subject {
+  width: 42%;
 
   a {
-    width: calc(19vw + 20px);
+    width: calc(100% - 40px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -274,9 +291,12 @@
   }
 
   img {
-    float: right;
+    float: left;
     position: relative;
-    top: 8px;
+    top: 13px;
+    width: 22px;
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%);
   }
 }
 
@@ -317,7 +337,8 @@
 
   div.dropdown {
     display: inline-block;
-    position: absolute;
+    float: left;
+    margin-left: 4px;
   }
 
   ul.dropdown-menu {
@@ -327,10 +348,22 @@
 }
 
 td.email-sender {
-  line-height: 48px;
+
+  img {
+    float: left;
+  }
+  a {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 80%;
+    word-break: break-word;
+    margin: 5px 0 0 5px;
+  }
 }
-td.received {
-  width: 100px;
+.received {
+  width: 12%;
 }
 .assignto-picker-component .assignto {
   margin-top: 5px;

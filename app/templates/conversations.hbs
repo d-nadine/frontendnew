@@ -65,9 +65,9 @@
   <div class="conversations-table">
     <div class="toolbar">
       <div class="left">
-        <a href="#" class="btn btn-primary" {{action "emailAll"}}/>Compose</a>
+        <a href="#" class="btn btn-primary btn-large" {{action "emailAll"}}/>Compose</a>
         <div class="btn-group">
-          <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Actions <span class="caret"></span></button>
+          <button type="button" data-toggle="dropdown" class="btn btn-default btn-large dropdown-toggle">Actions <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a href="#" {{action "emailAll"}}>Compose</a></li>
             <li class="divider"></li>
@@ -105,7 +105,7 @@
         </div>
       </div>
       <div class="right">
-        {{#link-to "messages" "inbox" class="chat"}}<i class="ss-standard ss-chat"></i>{{/link-to}}
+        {{#link-to "messages" "inbox" class="chat"}}<i class="ss-standard ss-chat"></i> Messages{{/link-to}}
       </div>
     </div>
     <div class="table-container companies">
