@@ -44,15 +44,17 @@ Ember.RSVP.configure 'onerror', (e) ->
   return if e.message == "TransitionAborted"
 
   if e.hasOwnProperty 'responseText'
-    return p """
-      ===============================
+    text = """
+      ================================
       Request failed with: #{e.status}
       status: #{e.statusText}
       response: #{e.responseText}
-      ==============================
+      ================================
       """
 
-  Ember.Logger.Error e
+    return Ember.Logger.error(text)
+
+  Ember.Logger.error e
 
 require /lib\/radium\/base/
 

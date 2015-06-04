@@ -5,7 +5,9 @@
     "-Promise",
     "$",
     "DS",
-    "module"
+    "module",
+    "Ember",
+    "Radium"
   ],
   "browser": true,
   "boss": true,

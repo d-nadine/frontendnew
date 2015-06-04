@@ -1,4 +1,6 @@
-"use strict";
+(function () {
+   'use strict';
+}());
 
 var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach,
   map = Ember.EnumerableUtils.map;
@@ -16,7 +18,7 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
     });
   },
 
-  addAttribute: function(hash, key, value) {
+  addAttribute: function(hash, key) {
     switch(key){
     case 'created_at':
     case 'updated_at':
@@ -30,14 +32,8 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
     if(['attachment_ids'].indexOf(key) === -1){
       return this._super.apply(this, arguments);
     }
-    var type = record.constructor,
-        name = relationship.key,
-        serializedHasMany = [],
-        includeType = (relationship.options && relationship.options.polymorphic),
-        manyArray, embeddedType;
-
-    // Get the DS.ManyArray for the relationship off the record
-    manyArray = get(record, name);
+    var name = relationship.key,
+        manyArray = get(record, name);
 
     hash[key] = manyArray.map(function(item){ return item.get('id'); });
   },
@@ -88,7 +84,7 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
   serializer: Radium.RESTSerializer,
 
   didError: function(store, type, record, xhr){
-    if ([402, 403, 409, 412].contains(xhr.status) ){
+    if ([400, 402, 403, 409, 412].contains(xhr.status) ){
       var json = JSON.parse(xhr.responseText),
           errors = {};
 
@@ -126,7 +122,6 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
     options = options || {url: '/' + record.humanize().pluralize() + '/' + record.get('id') + '/activities'};
 
     var type = relationship.type,
-        root = this.rootForType(type),
         url = this.url + options.url,
         self = this;
 
