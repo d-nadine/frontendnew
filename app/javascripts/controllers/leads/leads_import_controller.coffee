@@ -40,17 +40,15 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
       @progress()
 
-      postHeaders = selectedHeaders.mapProperty('name')
-
       importJob = Radium.ContactImportJob.createRecord
-                    headers: postHeaders
+                    headerMappings: selectedHeaders
                     contactStatus: @get('contactStatus')
                     public: true
                     assignedTo: assignedTo
                     tagNames: @get('tagNames').mapProperty('name')
 
       hasCollectionMarker = (label, item) ->
-        new RegExp("^#{label} \\d+$", 'i').test(item)
+        new RegExp("^#{label} \\d+$", 'i').test(item.name)
 
       hasEmails = hasCollectionMarker.bind(null, "Email Address")
       hasPhoneNumbers = hasCollectionMarker.bind(null, "Phone Number")
@@ -60,10 +58,10 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         primary: item.get('isPrimary')
         name: item.get('name').toLowerCase()
 
-      if postHeaders.any(hasEmails)
+      if selectedHeaders.any(hasEmails)
         importJob.set('emailMarkers', headerInfo.get('emailMarkers').map(collectionMapping))
 
-      if postHeaders.any(hasPhoneNumbers)
+      if selectedHeaders.any(hasPhoneNumbers)
         importJob.set('phoneNumberMarkers', headerInfo.get('phoneNumberMarkers').map(collectionMapping))
 
       headerData = @get('headerData').mapProperty('name')
@@ -223,13 +221,18 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
       result = Ember.A()
 
+      dataHeaders = self.get('headerData').mapProperty('name')
+
       headers.forEach (header) ->
         headerInfoProp = self.get("headerInfo.#{header}")
 
         unless Ember.isArray(headerInfoProp)
-          hash = Ember.Object.create
+          fileColumn = headerInfoProp.get('name')
+
+          hash =
             name: header.replace(/([A-Z])/g, ' $1').replace(/^./, (str) -> str.toUpperCase())
-            marker: headerInfoProp.get('name')
+            marker: fileColumn
+            index: dataHeaders.indexOf(fileColumn)
 
           return result.push(hash)
 
@@ -237,9 +240,11 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         singlular = header.singularize()
 
         headerInfoProp.forEach (prop) ->
-          hash = Ember.Object.create
-                   name: "#{singlular} #{counter + 1}"
-                   marker: headerInfoProp.objectAt(counter).get('value.name')
+          fileColumn = headerInfoProp.objectAt(counter).get('value.name')
+          hash =
+            name: "#{singlular} #{counter + 1}"
+            marker: fileColumn
+            index: dataHeaders.indexOf(fileColumn)
 
           result.push(hash)
           counter++
@@ -250,10 +255,12 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         if f.get('mapping')
           headers.push fieldName
           headerInfoProp = self.get("headerInfo.#{f.get('mapping.name')}")
-          hash = Ember.Object.create
-                   name: fieldName
-                   marker: fieldName
-                   mapping: f.get('mapping.name')
+          fileColumn = f.get('mapping.name')
+
+          hash =
+            name: fieldName
+            marker: fileColumn
+            index: dataHeaders.indexOf(fileColumn)
 
           f.set('index', (headers.length - 1))
 
@@ -306,10 +313,10 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
     data = data.map (row) ->
       Ember.Object.create
         fields: selectedHeaders.map (header) ->
-          if mapping = header.get('mapping')
+          if mapping = header.mapping
             index = headerData.indexOf(mapping)
           else
-            index = headerData.indexOf(header.get('marker'))
+            index = headerData.indexOf(header.marker)
 
           row[index]
 
