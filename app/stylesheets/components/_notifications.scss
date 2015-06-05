@@ -1,5 +1,6 @@
 .notifications {
-  background-color: $active-state;
+  background: $background;
+  border-right: 1px solid $border;
   @include user-select(none);
 }
 
@@ -39,7 +40,10 @@
     strong,
     .btn-link,
     a {
-      color: $link;
+      color: $blue;
+    }
+    i.ss-delete {
+      color: #666;
     }
   }
 }
@@ -47,17 +51,52 @@
 .notification-item-header,
 .notification-item-footer {
   a {
-    color: #fff;
+    color: $blue;
     text-shadow: 0 1px 0 rgba(black, 0.5);
   }
 }
 
 .notification-item-header {
   margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
 
   h4 {
     margin-top: 0;
     font-size: 16px;
+    text-shadow: none;
+    font-weight: 400;
+
+    a {
+      text-shadow: none;
+    }
+  }
+  h5 {
+    line-height: 44px;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-shadow: none;
+  }
+  button {
+    box-shadow: none;
+    
+    i {
+      color: #fff;
+    }
+    &:focus {
+      padding: 0;
+      background-color: transparent;
+
+      i {
+        font-size: 14px;
+        top: 2px;
+        right: 3px;
+      }
+    }
+    &:active {
+      box-shadow: none;
+      background-color: transparent;
+    }
   }
 }
 
@@ -104,3 +143,38 @@
 .attention {
   color: #ba0039;
 }
+
+.notifications-assign-contact-view {
+  border-bottom: 1px solid $border;
+}
+
+.notification-item-top {
+  border-bottom: 1px solid $border; 
+
+  .pull-left {
+    display: inline-block;
+  }
+  .pull-right {
+    line-height: 44px;
+  }
+}
+
+
+.notification-left {
+  float: left;
+  width: 87%;
+}
+.notification-right {
+  display: table;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 13%;
+  margin: auto;
+
+  .pull-right {
+
+  }
+}
+

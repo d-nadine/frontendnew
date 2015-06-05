@@ -142,11 +142,11 @@
 
   .more-options {
     display: inline-block;
-    height: 35px;
+    height: 50px;
     margin-bottom: 15px;
     float: right;
     vertical-align: bottom;
-    line-height: 35px;
+    line-height: 50px;
   }
 
   .email-form.single-mode .email-form-body .message .more-options a {
@@ -203,6 +203,7 @@
     border-right: 1px solid #a9a9a9;
     border-left: 1px solid #a9a9a9;
     border-bottom: 1px solid #a9a9a9;
+    color: $blue;
   }
 
   .message .textbox-wrap .prompt .cancel {
@@ -301,6 +302,9 @@
 
   .actions {
     margin-top: 25px;
+    display: inline-block;
+    width: 100%;
+    line-height: 44px;
   }
 
   .actions .follow-up .dropdown {

@@ -36,12 +36,18 @@
         }
 
         &.active {
-          background: $background;
-          color: $text;
           text-shadow: none;
           border-top-left-radius: 3px;
           border-top-right-radius: 3px;
           font-weight: 600;
+        }
+
+        &:not(.notifications-link) {
+
+          &.active {
+            background: $background;
+            color: $text;
+          }
         }
       }
     }

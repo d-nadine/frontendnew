@@ -210,7 +210,6 @@
 
     > a {
       margin-right: 41px;
-      font-size: 15px;
       
       &.btn-text,
       &.btn-filter {
@@ -223,6 +222,9 @@
     }
     .btn-group {
       margin-top: 3px;
+    }
+    .btn-filter {
+      font-size: 15px;
     }
   }
 

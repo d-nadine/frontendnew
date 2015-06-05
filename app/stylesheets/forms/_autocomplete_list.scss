@@ -107,9 +107,11 @@ li.as-result-item, li.as-message {
 
 div.autocomplete:not(.tags) {
   ul.as-list {
-    left: 0 !important;
+    left: 8px !important;
+    top: 52px !important;
     box-shadow: none;
     border-radius: none;
+    width: 400px !important;
   }
 }
 

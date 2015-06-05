@@ -72,7 +72,7 @@
     <div class="message">
       {{#if showSubject}}
         <div class="subject-wrap">
-          {{autocomplete-textbox autocompleteType=Radium.Template value=form.subject queryKey="subject" queryParameters=templateQueryParameters writeableValue=true placeholder="subject" action="insertTemplate" tabindex="2"}}
+          {{autocomplete-textbox autocompleteType=Radium.Template value=form.subject queryKey="subject" queryParameters=templateQueryParameters writeableValue=true placeholder="Subject" action="insertTemplate" tabindex="2"}}
         </div>
       {{/if}}
       <div class="more-options">
@@ -180,7 +180,7 @@
         </div>
       </div>
       <div class="btn-group btn-send vanilla">
-        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#" tabindex="4">
+        <a class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" href="#" tabindex="4">
           Send
           <span class="caret"></span>
         </a>
@@ -203,7 +203,7 @@
           </li>
         </ul>
       </div>
-      <button {{action "deleteFromEditor"}} class="btn cancel">Cancel</button>
+      <button {{action "deleteFromEditor"}} class="btn cancel btn-large">Cancel</button>
     </div>
     {{partial 'emails/check_for_response'}}
   </div>

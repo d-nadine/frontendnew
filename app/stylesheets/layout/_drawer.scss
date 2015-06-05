@@ -2,7 +2,7 @@
   max-width: 370px;
   @extend .sidebar;
   z-index: 99;
-  color: #fff;
+  color: $text;
   background-color: #303030;
   @include translateX(-100%);
   @include transition(transform 0.25s);
