@@ -283,8 +283,6 @@ input.api-field {
 }
 
 .pipeline-checklist-item {
-  margin: 0 0 5px;
-  border-bottom: 1px solid rgba(black, 0.1);
 
   .btn, .btn-group {
     vertical-align: top;
@@ -319,7 +317,7 @@ input.api-field {
 }
 
 .pipeline-state-create {
-  margin: 20px;
+  margin: 40px 0;
 }
 
 .checklist-kind {
@@ -476,6 +474,81 @@ input.api-field {
     .btn-remove-field {
       position: relative;
       top: -4px;
+    }
+  }
+}
+
+.settings-wrap {
+  margin-left: 10px;
+
+  .pipeline-states-list {
+
+    .pipeline-state-item {
+      display: inline-block;
+      width: 1000px;
+
+      .pipeline-top {
+        float: left;
+        display: inline-block;
+        width: 400px;
+
+        input {
+          line-height: 42px;
+          height: 42px;
+          padding: 0 0 0 10px;
+          float: left;
+          margin-bottom: 0;
+
+          &.inline-field:hover,
+          &.inline-field:focus {
+            background: #eee;
+          }
+        }
+        .btn-toolbar {
+          float: left;
+          margin: 0;
+        }
+      }
+      .pipeline-bottom {
+        float: left;
+        display: inline-block;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .pipeline-checklist-item-view {
+
+        .input-prepend {
+          float: left;
+
+          input {
+            line-height: 42px;
+            height: 42px;
+            padding: 0 0 0 10px;
+          }
+        }
+        .input-append {
+          margin-bottom: 0;
+          margin-left: 20px;
+          float: left;
+
+          input {
+            height: 42px;
+            padding: 0;
+          }
+          .add-on {
+            height: 34px;
+            line-height: 34px;
+          }
+        }
+        > .btn-group {
+          margin-left: 20px;
+        }
+      }
+      .pipeline-delete-btn {
+        background: $red;
+        color: #fff;
+      }
     }
   }
 }

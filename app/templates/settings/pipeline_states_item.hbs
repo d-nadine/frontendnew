@@ -1,4 +1,4 @@
-<div class="span2">
+<div class="pipeline-top">
   {{view view.pipelineStateName class="inline-field"}}
   <div class="btn-toolbar">
     {{#if currentUser.isAdmin}}
@@ -12,15 +12,15 @@
           {{action "movePipelineStateDown" this}}>▼</button>
         </div>
       {{/if}}
-      <div class="btn btn-mini btn-danger pipeline-delete-btn" {{action "confirmDeletion" this}}>
-        <i class="ss-symbolicons-block ss-trash"></i>
-      </div>
     {{/if}}
   </div>
 </div>
 {{#if currentUser.isAdmin}}
-  <div class="span8">
+  <div class="pipeline-bottom">
     {{each checklist itemViewClass="Radium.PipelineChecklistItemView" itemController="pipelineChecklistItem"}}
     {{render "pipelineChecklistItem" newChecklistItem}}
   </div>
 {{/if}}
+<div class="btn btn-mini btn-danger pipeline-delete-btn" {{action "confirmDeletion" this}}>
+  <i class="ss-symbolicons-block ss-trash"></i>
+</div>
