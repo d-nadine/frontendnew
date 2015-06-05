@@ -160,9 +160,14 @@
 }
 
 
+.notification-picture {
+  display: inline-block;
+  float: left;
+  width: 14%;
+}
 .notification-left {
   float: left;
-  width: 87%;
+  width: 73%;
 }
 .notification-right {
   display: table;
@@ -175,6 +180,19 @@
 
   .pull-right {
 
+    button {
+      margin-right: 12px;
+      width: 20px;
+      text-align: center;
+
+      i {
+        font-size: 14px;
+        left: 5px;
+      }
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 }
 
