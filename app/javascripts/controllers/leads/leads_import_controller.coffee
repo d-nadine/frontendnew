@@ -45,7 +45,6 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
       importJob = Radium.ContactImportJob.createRecord
                     headers: postHeaders
                     contactStatus: @get('contactStatus')
-                    fileName: @get('importFile').name
                     public: true
                     assignedTo: assignedTo
                     tagNames: @get('tagNames').mapProperty('name')
