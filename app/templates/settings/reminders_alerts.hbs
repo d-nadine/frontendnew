@@ -75,32 +75,41 @@
 
   <fieldset>
     <legend>Alerts</legend>
-    <p {{bind-attr class=":control-inline-text notifications.leadIgnored.enabled::control-disabled"}}>
-      If a lead is ignored for more than {{input type="number"
-        value=notifications.leadIgnored.duration
-        placeholder="1"
-        class="input-mini"
-        disabledBinding="leadIgnoredDisabled"}}
-         days highlight that lead
-    </p> {{toggle-switch class="checked inline" checked=notifications.leadIgnored.enabled}}
+    <div>
+      <p {{bind-attr class=":control-inline-text notifications.leadIgnored.enabled::control-disabled"}}>
+        If a lead is ignored for more than {{input type="number"
+          value=notifications.leadIgnored.duration
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="leadIgnoredDisabled"}}
+           days highlight that lead
+      </p> 
+      {{toggle-switch class="checked inline" checked=notifications.leadIgnored.enabled}}
+    </div>
 
-    <p {{bind-attr class=":control-inline-text notifications.clientIgnored.enabled::control-disabled"}}>
-      If a client is ignored for more than {{input type="number"
-        value=notifications.clientIgnored.duration
-        placeholder="1"
-        class="input-mini"
-        disabledBinding="clientIgnoredDisabled"}}
-         days highlight that client
-    </p> {{toggle-switch class="checked inline" checked=notifications.clientIgnored.enabled}}
+    <div>
+      <p {{bind-attr class=":control-inline-text notifications.clientIgnored.enabled::control-disabled"}}>
+        If a client is ignored for more than {{input type="number"
+          value=notifications.clientIgnored.duration
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="clientIgnoredDisabled"}}
+           days highlight that client
+      </p> 
+      {{toggle-switch class="checked inline" checked=notifications.clientIgnored.enabled}}
+    </div>
 
-    <p {{bind-attr class=":control-inline-text notifications.taskIgnored.enabled::control-disabled"}}>
-      If a client is ignored for more than {{input type="number"
-        value=notifications.taskIgnored.duration
-        placeholder="1"
-        class="input-mini"
-        disabledBinding="taskIngoredDisabled"}}
-         days highlight that client
-    </p> {{toggle-switch checked=notifications.taskIgnored.enabled}}
+    <div>
+      <p {{bind-attr class=":control-inline-text notifications.taskIgnored.enabled::control-disabled"}}>
+        If a client is ignored for more than {{input type="number"
+          value=notifications.taskIgnored.duration
+          placeholder="1"
+          class="input-mini"
+          disabledBinding="taskIngoredDisabled"}}
+           days highlight that client
+      </p> 
+      {{toggle-switch checked=notifications.taskIgnored.enabled}}
+    </div>
     <div {{bind-attr class=":control-group notifications.remoteMeetings.enabled::control-disabled"}}>
       <label class="control-label long-label">Send enabled alerts as an email also</label>
       <div class="controls">

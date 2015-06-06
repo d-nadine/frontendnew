@@ -25,6 +25,11 @@
 .settings-group {
   margin: 0 0 20px;
   border-bottom: 1px solid #ddd;
+  line-height: 45px;
+
+  h4 {
+    line-height: 40px;
+  }
 }
 
 .settings-title,
@@ -60,10 +65,19 @@
 .settings-form {
   fieldset {
     @extend .settings-group;
+    width: 550px;
 
     &:last-child {
       border-bottom: none;
       margin: 0;
+    }
+
+    > div {
+      margin-bottom: 15px;
+
+      .toggle-switch {
+        float: right;
+      }
     }
   }
 
@@ -119,7 +133,7 @@ input.inline-field {
   &:hover,
   &:focus {
     @include box-shadow(none);
-    background: lightyellow;
+    background: #eee;
   }
 
   &.large-inline-field {
@@ -208,11 +222,13 @@ input.api-field {
   }
 
   .is-admin {
-    background: lightyellow;
+    background: #eee;
   }
 }
 
 .settings-users-list {
+  margin-top: 30px;
+
   li {
     padding: {
       right: 10px;
@@ -308,6 +324,15 @@ input.api-field {
   .is-editing & {
     vertical-align: top;
   }
+  a {
+    position: relative;
+    top: 2px;
+    margin-left: 4px;
+
+    &:hover {
+      color: $text;
+    }
+  }
 }
 
 .pipeline-checklist-item-read {
@@ -348,7 +373,7 @@ input.api-field {
 .lead-sources {
   li {
     padding: 2px 0;
-    line-height: 30px;
+    line-height: 50px;
     border-bottom: 1px solid $control-border-color;
 
     input[type="text"] {
@@ -369,8 +394,17 @@ input.api-field {
 
 .lead-source-item {
   float: left;
-  line-height: 30px;
+  line-height: 50px;
   width: 224px;
+
+  i {
+    position: relative;
+    top: 2px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .integrations .service{
@@ -549,6 +583,37 @@ input.api-field {
         background: $red;
         color: #fff;
       }
+    }
+  }
+  .settings-main {
+    display: inline-block;
+    float: left;
+    width: 1000px;
+
+    .checkbox {
+      padding-top: 0;
+    }
+    .help-block {
+      margin-top: 8px;
+    }
+    .control-group {
+      margin-bottom: 25px;
+    }
+    .switch {
+      margin-left: 35px;
+    }
+    .form-actions {
+      padding-left: 0;
+    }
+    .country-picker .selected-container b {
+      top: 0;
+    }
+    .settings-company-view fieldset {
+      width: 750px;
+    }
+
+    .invite-user-view {
+      margin-bottom: 20px;
     }
   }
 }

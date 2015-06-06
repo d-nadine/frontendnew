@@ -8,13 +8,11 @@
     {{/each}}
   </ol>
 
-  <div class="row">
-    <div class="span5 pipeline-state-create">
-      {{#if currentUser.isAdmin}}
-        <button class="btn btn-large btn-success" {{action "createLeadSource" bubbles=false}}>
-          Add Lead Source
-        </button>
-      {{/if}}
-    </div>
+  <div class="span5 pipeline-state-create">
+    {{#if currentUser.isAdmin}}
+      <button class="btn btn-large btn-success" {{action "createLeadSource" bubbles=false}}>
+        Add Lead Source
+      </button>
+    {{/if}}
   </div>
 </div>
