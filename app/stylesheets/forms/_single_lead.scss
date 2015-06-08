@@ -7,6 +7,7 @@
   float: left;
   padding: 7px 0;
   min-height: 48px;
+  width: 100%;
 }
 
 .form .item > div {
@@ -529,4 +530,32 @@
 
 .field .btn-clear {
   margin: 4px 20px;
+}
+
+.leads-view {
+
+  ul.as-selections {
+    height: 46px;
+    width: 455px;
+
+    li.as-original {
+      height: 46px;
+
+      input.as-input {
+        line-height: 46px;
+        padding: 0 0 0 12px;
+        margin: 0;
+        float: left;
+        width: 60px !important;
+
+        &::-webkit-input-placeholder {
+          font-size: 14px;
+          font-style: normal;
+        }
+      }
+    }
+    li.as-selection-item {
+      margin: 5px 0 5px 5px;
+    }
+  }
 }
