@@ -363,6 +363,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         @send 'reset'
         @set 'importFile', null
         Radium.Contact.find({})
+        @get('container').lookup('route:leadsImport').refresh()
         return
 
       importedCount = job.get('importedCount')
