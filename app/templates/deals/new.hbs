@@ -118,15 +118,15 @@
       </div>
       <hr/>
       {{partial 'validation_error_message'}}
-      <div class="pull-right control-group actions">
-        <button class="btn btn-large publish" {{bind-attr disabled="isSaving"}} {{action "saveAsDraft"}}>Save as draft</button>
-        <button class="btn btn-success btn-large publish"  {{bind-attr disabled="isSaving"}} {{action "publish"}}>
+      <div class="pull-left control-group actions">
+        <button class="btn btn-success btn-large publish btn-primary"  {{bind-attr disabled="isSaving"}} {{action "publish"}}>
           {{#if isSaving}}
             <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Saving</span>
           {{else}}
             Publish
           {{/if}}
         </button>
+        <button class="btn btn-large publish" {{bind-attr disabled="isSaving"}} {{action "saveAsDraft"}}>Save as draft</button>
       </div>
     </fieldset>
   </form>

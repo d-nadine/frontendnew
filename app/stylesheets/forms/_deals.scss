@@ -1,5 +1,5 @@
 .deals-new-view{
-  margin-left: 43px;
+  margin-left: 10px;
   // FIXME: use twitter bootstrap globally or remove this....forever
   textarea:focus,
   input[type="text"]:focus,
@@ -31,15 +31,16 @@
   .combobox input[type="text"]{
     width: 194px;
     border: 0px;
-    line-height: 34px;
-    height: 33px;
+    line-height: 50px;
+    height: 50px;
     box-shadow: none;
     border-radius: 0px;
     @include transition(border linear 0.2s);
+    font-size: 14px;
   }
 
-  .ss-delete {
-    top: 7px !important;
+  .form {
+    padding-left: 0;
   }
 
   .checklist.block{
@@ -65,7 +66,7 @@
     margin-bottom: -20px;
 
     .progress {
-      height: 32px;
+      height: 48px;
 
       .progress-info{
         display: inline-block;
@@ -89,7 +90,7 @@
 
     .total{
       position: absolute;
-      top: 5px;
+      top: 14px;
       left: 115px;
       font-size: 24px;
 
@@ -147,26 +148,27 @@
   }
 
   .deal-value {
-    height: 33px;
+    height: 50px;
   }
 
   .dollar{
+    float: left;
     font-weight: bold;
-    padding: 4px 0;
-    line-height: 26px;
+    line-height: 50px;
     position: relative;
-    top: 1px;
     margin-right: 6px;
     margin-left: 10px;
+    font-size: 16px;
   }
 
   .controls.add-files{
-    margin-left: 51px;
+    margin-left: 0px;
   }
 
   .controls.add-files .file-uploader-component{
-    top: 2px;
+    top: 0px;
     color: $blue;
+    margin-left: 5px;
   }
 
   hr{
@@ -182,14 +184,23 @@
     input {
       height: 48px;
       padding: 0 0 0 10px;
-      border-right: 0;
+      border-radius: 0;
+      border: 1px solid $border;
+    }
+    &:after {
+      position: relative;
+      top: 3px;
+      vertical-align: middle;
+    }
+    textarea {
+      border-radius: 0px;
     }
   }
 
   .secondary{
     margin: 0;
-    padding: 10px;
-    background-color: $background;
+    padding: 50px;
+    background-color: white;
     border: solid 1px $dark-background;
 
     .saving{
@@ -223,7 +234,7 @@
   }
 
   .combobox{
-    line-height: 23px;
+    line-height: 50px;
   }
 
   fieldset{
@@ -232,9 +243,23 @@
 
   .control-label{
     text-align: left;
-    width: 110px;
+    width: 140px;
     margin: 0;
     padding: 0;
     line-height: 50px;
+  }
+  .control-group {
+
+    .btn-group {
+      float: left;
+      margin-left: 10px;
+
+      button {
+        height: 50px;
+      }
+    }
+  }
+  .dropbox {
+    margin: 30px 0;
   }
 }
