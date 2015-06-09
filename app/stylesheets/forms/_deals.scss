@@ -179,6 +179,11 @@
       position: relative;
       top: 5px;
     }
+    input {
+      height: 48px;
+      padding: 0 0 0 10px;
+      border-right: 0;
+    }
   }
 
   .secondary{
@@ -228,5 +233,8 @@
   .control-label{
     text-align: left;
     width: 110px;
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
   }
 }

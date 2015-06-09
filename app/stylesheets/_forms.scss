@@ -53,7 +53,7 @@
   .primary {
     background-color: $input;
     border: solid 1px $border;
-    line-height: 46px;
+    line-height: 48px;
 
     a, a:focus, a:visited {
       color: #4d4d4d;
@@ -624,6 +624,7 @@ input[type="radio"]:checked + label {
     .primary {
       display: inline-block;
       width: 100%;
+      line-height: 48px;
 
       .btn-link {
         margin-left: 15px;
@@ -632,6 +633,16 @@ input[type="radio"]:checked + label {
           text-decoration: none;
         }
       }
+      .icon {
+        float: left;
+        margin-left: 15px;
+
+        i {
+          position: relative;
+          top: 2px;
+        }
+      }
+      .meeting
     }
     .field-group {
 
