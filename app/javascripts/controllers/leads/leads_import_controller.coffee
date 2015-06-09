@@ -88,6 +88,9 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         importJob.set 'file', attachment
 
         importJob.save(this).then( =>
+          Radium.ContactImportJob.find({}).then (results) =>
+            @set 'contactImportJobs', results
+
           @pollForJob(importJob)
         )
       ).catch((error) =>
@@ -207,7 +210,6 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   init: ->
     @_super.apply this, arguments
     self = this
-    @addObserver 'sortedJobs.[]', this, 'jobsLoaded'
 
     @set 'headerInfo', @getNewHeaderInfo()
 
@@ -272,26 +274,6 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
       return Ember.A() unless headers.length
 
       result
-
-  jobsLoaded: ->
-    removeObserver = =>
-      @removeObserver 'sortedJobs.[]', this, 'jobsLoaded'
-
-    if @get('importing')
-      removeObserver()
-      return
-
-    unless firstJob = @get('sortedJobs.firstObject')
-      removeObserver()
-      return
-
-    unless firstJob.get('isProcessing')
-      removeObserver()
-      return
-
-    removeObserver()
-
-    @pollForJob(firstJob)
 
   previewData: Ember.computed 'selectedHeaders.[]', ->
     selectedHeaders = @get('selectedHeaders').slice()
