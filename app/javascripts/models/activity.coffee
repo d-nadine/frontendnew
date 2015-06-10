@@ -19,28 +19,28 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
 
   todo: DS.belongsTo('Radium.Todo')
 
-  reference: ((key, value) ->
-    if arguments.length == 2 && value
-      property = value.constructor.toString().split('.')[1]
-      associationName = "_reference#{property}"
-      @set associationName, value
-    else
-      @get('_referenceAttachment') ||
-        @get('_referenceCompany') ||
-        @get('_referenceContact') ||
-        @get('_referenceDeal') ||
-        @get('_referenceEmail') ||
-        @get('_referenceMeeting') ||
-        @get('_referenceTodo') ||
-        @get('_referenceInvitation')
-  ).property('_referenceAttachment',
+  reference: Ember.computed '_referenceAttachment',
     '_referenceCompany',
     '_referenceContact',
     '_referenceDeal',
     '_referenceEmail',
     '_referenceMeeting',
     '_referenceTodo',
-    '_referenceInvitation')
+    '_referenceInvitation', ->
+      if arguments.length == 2 && value
+        property = value.constructor.toString().split('.')[1]
+        associationName = "_reference#{property}"
+        @set associationName, value
+      else
+        @get('_referenceAttachment') ||
+          @get('_referenceCompany') ||
+          @get('_referenceContact') ||
+          @get('_referenceDeal') ||
+          @get('_referenceEmail') ||
+          @get('_referenceMeeting') ||
+          @get('_referenceTodo') ||
+          @get('_referenceInvitation')
+
   _referenceAttachment: DS.belongsTo('Radium.Attachment')
   _referenceCompany: DS.belongsTo('Radium.Company')
   _referenceContact: DS.belongsTo('Radium.Contact')

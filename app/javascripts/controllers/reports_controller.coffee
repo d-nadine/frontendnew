@@ -32,12 +32,13 @@ Radium.ReportsController = Ember.ArrayController.extend
 
   account: Ember.computed.alias 'controllers.account'
   app: Ember.computed.alias 'controllers.application'
-  domain: (->
+
+  domain: Ember.computed 'startDate', 'endDate', ->
     if !!@get("startDate") and !!@get("endDate")
       start = d3.time.day(@get('startDate'))
       end =  d3.time.day(@get('endDate'))
       [start, end]
-  ).property('startDate', 'endDate')
+
   startDate: null
   endDate: null
   defaultSelectedUser: 'Everyone'

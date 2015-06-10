@@ -7,7 +7,7 @@ Radium.RelatedTasksController = Ember.ArrayController.extend Radium.Groupable,
   groupBy: (task) ->
     if task.get('isFinished') then 'finished' else 'unfinished'
 
-  sortedGroups: (->
+  sortedGroups: Ember.computed 'groupedContent.[]', ->
     # get the groups to assign the internal variables
     @get 'groupedContent'
 
@@ -26,5 +26,3 @@ Radium.RelatedTasksController = Ember.ArrayController.extend Radium.Groupable,
       @get('groupsMap')['unfinished']
       @get('groupsMap')['finished']
     ])
-  ).property('groupedContent.[]')
-

@@ -9,10 +9,8 @@ Radium.PipelineItemController = Radium.ObjectController.extend Radium.ChecklistT
       @send "flashSuccess", "deleted!"
 
   needs: ['pipeline']
-  workflowGroups: ( ->
+  workflowGroups: Ember.computed 'controllers.pipeline.model.workflowGroups.[]', ->
     @get('controllers.pipeline.workflowGroups')
-  ).property('controllers.pipeline.model.workflowGroups.[]')
 
-  isCheckedDidChange: ( ->
+  isCheckedDidChange: Ember.observer 'isChecked', ->
     @applyBufferedChanges()
-  ).observes('isChecked')

@@ -1,7 +1,6 @@
 Radium.NotificationItemController = Radium.ObjectController.extend
-  timeInHumanFormat: ( ->
+  timeInHumanFormat: Ember.computed 'time', ->
     @get('time').toHumanFormat()
-  ).property('time')
 
 Radium.NotificationsAssignController = Radium.NotificationItemController.extend()
 Radium.NotificationsAssignContactController = Radium.NotificationsAssignController.extend()

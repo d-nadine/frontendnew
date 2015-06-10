@@ -5,11 +5,10 @@ Radium.LeadStatusesController = Ember.ArrayProxy.extend
     { name: "Personal", value: "personal" }
   ]
 
-  statuses: ( ->
+  statuses: Ember.computed 'model.[]', ->
     return unless @get('content').length
 
     @get('content').map (status) ->
       Ember.Object.create
         name: status.name.toUpperCase()
         value: status.value
-  ).property('model.[]')

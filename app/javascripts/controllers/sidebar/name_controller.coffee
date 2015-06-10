@@ -18,6 +18,5 @@ Radium.SidebarNameController = Radium.SidebarBaseController.extend
 
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.NameForm.create()
-  ).property()

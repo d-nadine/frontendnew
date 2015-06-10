@@ -8,11 +8,10 @@ Radium.ChangeStatusForm = Radium.Form.extend
     description: @get('todo')
   ).property().volatile()
 
-  isValid: ( ->
+  isValid: Ember.computed 'status', 'lostBecause', ->
     if @get('status').toLowerCase() == 'lost' && !@get('lostBecause.length')
       return false
     @get('status')
-  ).property('status', 'lostBecause')
 
   reset: ->
     @_super.apply this, arguments
@@ -23,7 +22,7 @@ Radium.ChangeStatusForm = Radium.Form.extend
     return new Ember.RSVP.Promise (resolve, reject) =>
       status = @get('status')
 
-      deals = @get('deals').reject (deal) =>
+      deals = @get('deals').reject (deal) ->
         deal.get('status') == status
 
       resolve() unless @get('deals.length')

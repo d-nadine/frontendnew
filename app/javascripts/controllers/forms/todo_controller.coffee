@@ -39,9 +39,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
       self = this
 
       finish = ->
-        model.set('isFinished', true)
+        isFinished = !!!model.get('isFinished')
+        model.set('isFinished', isFinished)
 
-        model.one 'didUpdate', ->
+        model.save().then ->
           if currentPath != 'user.index'
             user?.reload()
 
@@ -49,8 +50,6 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
             return
 
           reference.reload()
-
-        store.commit()
 
       unless @get('animate')
         return finish()

@@ -94,7 +94,8 @@ Radium.InlineEditorView = Ember.View.extend
   textField: Ember.TextField.extend
     isEditing: Ember.computed.alias('parentView.isEditing')
 
-    placeholder: (-> @get('value')).property()
+    placeholder: Ember.computed ->
+      @get('value')
 
     click: (event) ->
       event.stopPropagation() if @get 'isEditing'
@@ -105,7 +106,8 @@ Radium.InlineEditorView = Ember.View.extend
   textArea: Ember.TextArea.extend
     isEditing: Ember.computed.alias('parentView.isEditing')
 
-    placeholder: (-> @get('value')).property()
+    placeholder: Ember.computed ->
+      @get('value')
 
     click: (event) ->
       event.stopPropagation() if @get 'isEditing'

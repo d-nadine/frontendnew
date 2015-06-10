@@ -4,7 +4,7 @@ Radium.Attachment = Radium.Model.extend
   bucket: DS.attr('string')
   uploadedBy: DS.belongsTo('Radium.User')
 
-  reference: ((key, value) ->
+  reference: Ember.computed '_referenceDeal', '_referenceEmail', '_referenceContact', '_referenceCompany', (key, value) ->
     if arguments.length == 2 && value
       property = value.constructor.split('.')[1].toLowerCase()
       @set property, value
@@ -15,7 +15,7 @@ Radium.Attachment = Radium.Model.extend
       @get('_referenceCompany') ||
       @get('_referenceMeeting') ||
       @get('_referenceTemplate')
-  ).property('_referenceDeal', '_referenceEmail', '_referenceContact', '_referenceCompany')
+
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceCompany: DS.belongsTo('Radium.Company')
   _referenceDeal: DS.belongsTo('Radium.Deal')

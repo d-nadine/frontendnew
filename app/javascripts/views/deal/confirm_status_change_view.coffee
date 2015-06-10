@@ -6,12 +6,12 @@ Radium.DealConfirmStatusChangeView = Radium.ModalView.extend
     placeholder: 'Supply a reason why this deal was lost.'
     valueBinding: 'targetObject.lostBecause'
     isLost: Ember.computed.alias 'targetObject.isLost'
-    isValid: (->
+
+    isValid: Ember.computed 'value', 'targetObject.isSubmitted', 'targetObject.isLost', ->
       return unless @get('isLost')
       @get('value.length')
-    ).property('value', 'targetObject.isSubmitted', 'targetObject.isLost')
-    isInvalid: ( ->
+
+    isInvalid: Ember.computed 'value', 'targetObject.isSubmitted', 'targetObject.isLost', ->
       return unless @get('targetObject.isSubmitted')
       not @get('isValid')
-    ).property('value', 'targetObject.isSubmitted', 'targetObject.isLost')
-  )
+    )

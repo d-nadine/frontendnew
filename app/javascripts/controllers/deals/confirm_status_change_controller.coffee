@@ -9,13 +9,11 @@ Radium.DealConfirmStatusChangeController = Radium.ObjectController.extend
 
   isSubmitted: false
 
-  isLost: (->
+  isLost: Ember.computed 'status', ->
     @get('status') == 'lost'
-  ).property('status')
 
-  isValid: ( ->
+  isValid: Ember.computed 'lostBecause', 'isSubmitted', 'isLost', ->
     return false unless @get('isSubmitted')
     return true unless @get('isLost')
 
     @get('lostBecause.length')
-  ).property('lostBecause', 'isSubmitted', 'isLost')

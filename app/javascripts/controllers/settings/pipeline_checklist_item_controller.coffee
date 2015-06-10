@@ -24,7 +24,7 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
       @discardBufferedChanges()
       @set('isEditing', false)
 
-  selectedDateString: (->
+  selectedDateString: Ember.computed 'content.date', ->
     date = @get('content.date')
 
     switch date
@@ -34,7 +34,6 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
       when 7 then dateString = "1 Week"
 
     dateString
-  ).property('content.date')
 
   account: Ember.computed.alias 'parentController.account'
 
@@ -43,7 +42,7 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
     "meeting"
   ]
 
-  isValid: ( ->
+  isValid: Ember.computed 'description', 'weight', 'kind', 'date', ->
     model = @get('model')
 
     return unless model
@@ -51,4 +50,3 @@ Radium.PipelineChecklistItemController = Radium.ObjectController.extend Buffered
     return false unless model.get('weight')
 
     true
-  ).property('description', 'weight', 'kind', 'date')

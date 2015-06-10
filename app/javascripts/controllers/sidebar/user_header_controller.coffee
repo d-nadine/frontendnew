@@ -22,13 +22,11 @@ Radium.SidebarUserHeaderController = Radium.SidebarBaseController.extend
 
   needs: ['companies']
 
-  isValid: ( ->
+  isValid: Ember.computed 'form.firstName', 'isEditing', ->
     return unless @get('isEditing')
     return if Ember.isEmpty @get('form.firstName')
     @get('form.firstName.length') >= 3
     @get('form.lastName.length') >= 3
-  ).property('form.firstName', 'isEditing')
 
-  form: ( ->
+  form: ->
     Radium.UserHeaderForm.create()
-  ).property()

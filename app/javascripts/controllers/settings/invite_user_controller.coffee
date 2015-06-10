@@ -34,16 +34,13 @@ Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserM
   newUserEmail: null
   error: null
 
-  # FIXME: Should be done on the server and return 422
-  isDuplicate: ( ->
+  isDuplicate: Ember.computed 'newUserEmail', ->
     email = @get('newUserEmail')
     !!@get('users').filterProperty('email', email).get('length')
-  ).property('newUserEmail')
 
-  isValidEmail: (->
+  isValidEmail: Ember.computed 'newUserEmail', 'isDuplicate', ->
     email = @get('newUserEmail')
     isValid = @emailIsValid email
     isValid and not @get('isDuplicate')
-  ).property('newUserEmail', 'isDuplicate')
 
   isDisabled: Ember.computed.not 'isValidEmail'

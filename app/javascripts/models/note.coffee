@@ -5,8 +5,7 @@ Radium.Note = Radium.Model.extend Radium.CommentsMixin,
   displayName: Ember.computed.alias 'body'
   notifications: DS.hasMany('Radium.Notification', inverse: '_referenceNote')
 
-
-  reference: ((key, value) ->
+  reference: Ember.computed '_referenceContact', '_referenceDeal', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany', (key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]
       associationName = "_reference#{property}"
@@ -19,7 +18,7 @@ Radium.Note = Radium.Model.extend Radium.CommentsMixin,
       @get('_referenceEmail') ||
       @get('_referenceMeeting') ||
       @get('_referenceTodo')
-  ).property('_referenceContact', '_referenceDeal', '_referenceEmail', '_referenceMeeting', '_referenceTodo', '_referenceCompany')
+
   _referenceContact: DS.belongsTo('Radium.Contact', inverse: 'notes')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceEmail: DS.belongsTo('Radium.Email')

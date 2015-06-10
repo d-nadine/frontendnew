@@ -22,6 +22,5 @@ Radium.SidebarPhoneController = Radium.SidebarBaseController.extend
 
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.PhoneForm.create()
-  ).property()

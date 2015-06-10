@@ -9,8 +9,7 @@ Radium.DealNewBaseRoute = Radium.Route.extend
 
   dealForm:  Radium.computed.newForm('deal')
 
-  # FIXME: Why is expectedCloseDate not making its way over to the controller?
-  dealFormDefaults: ( ->
+  dealFormDefaults: Ember.computed ->
     isNew: true
     contact: null
     description: ''
@@ -18,4 +17,3 @@ Radium.DealNewBaseRoute = Radium.Route.extend
     email: null
     checklist: Ember.A()
     expectedCloseDate: @controllerFor("clock").get("endOfNextWeek")
-  ).property()

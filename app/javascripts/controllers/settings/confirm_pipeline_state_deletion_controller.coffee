@@ -4,19 +4,17 @@ Radium.SettingsConfirmPipelineStateDeletionController = Radium.ObjectController.
   selectedOtherState: null
   isUpdatingDeals: false
 
-  hasDeals: ( ->
+  hasDeals: Ember.computed 'model', 'isUpdatingDeals', ->
     deals = Radium.Deal.all()
 
     return false unless deals.get('length')
 
     deals.some (deal) =>
       deal.get('status') == @get('model.name')
-  ).property('model', 'isUpdatingDeals')
 
-  otherStates: ( ->
+  otherStates: Ember.computed 'accountSettings.workflowStates.[]', 'hasDeals', 'isUpdatingDeals', ->
     @get('accountSettings.workflowStates').reject (item) =>
                                         item == @get('model.name')
-  ).property('accountSettings.workflowStates.[]', 'hasDeals', 'isUpdatingDeals')
 
   transferDeals: ->
     deals = Radium.Deal.all().filter (deal) => deal.get('status') == @get('model.name')

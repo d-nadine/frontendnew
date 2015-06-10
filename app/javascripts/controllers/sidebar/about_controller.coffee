@@ -18,9 +18,8 @@ Radium.SidebarAboutController = Radium.SidebarBaseController.extend
 
   isValid: true
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.AboutForm.create()
-  ).property()
 
   markedUpAbout: Ember.computed 'model.about', ->
     @get('model.about').replace("\n", "<br/>")

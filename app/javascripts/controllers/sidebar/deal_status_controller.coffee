@@ -43,11 +43,9 @@ Radium.SidebarDealStatusController = Radium.SidebarBaseController.extend
   statuses: Ember.computed.alias('controllers.pipeline.dealStates')
   isValid: true
 
-  isLost: ( ->
+  isLost: Ember.computed 'form.status', ->
     return unless @get('form.status')
     @get('form.status').toLowerCase() == 'lost'
-  ).property('form.status')
 
-  form: ( ->
+  form: Ember.computed ->
     Radium.DealStatusForm.create()
-  ).property()

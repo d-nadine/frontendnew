@@ -13,7 +13,7 @@ Radium.Notification = Radium.Model.extend
   timeFormatted: Ember.computed 'time', ->
     time.toHumanFormatWithTime() if time = @get('time')
 
-  reference: ((key, value) ->
+  reference: Ember.computed '_referenceContact', '_referenceDeal', '_referenceMeeting', '_referenceEmail', '_referenceUser', '_referenceContactImportJob', '_referenceNote', (key, value) ->
     if arguments.length == 2 && value != undefined
       property = value.constructor.toString().split('.')[1]
       associationName = "_reference#{property}"
@@ -31,7 +31,7 @@ Radium.Notification = Radium.Model.extend
         @get('_referenceInvitation') ||
         @get('_referenceContactImportJob') ||
         @get('_referenceNote')
-  ).property('_referenceContact', '_referenceDeal', '_referenceMeeting', '_referenceEmail', '_referenceUser', '_referenceContactImportJob', '_referenceNote')
+
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceDeal: DS.belongsTo('Radium.Deal')
   _referenceMeeting: DS.belongsTo('Radium.Meeting')

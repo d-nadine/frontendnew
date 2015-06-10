@@ -3,6 +3,5 @@ Radium.CalendarTaskItemController = Radium.ObjectController.extend
 
   selectedTask: Ember.computed.alias 'controllers.calendarSidebar.selectedTask'
 
-  isSelected: ( ->
+  isSelected: Ember.computed 'selectedTask', ->
     @get('selectedTask') == @get('model.model')
-  ).property('selectedTask')
