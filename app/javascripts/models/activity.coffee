@@ -19,14 +19,7 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
 
   todo: DS.belongsTo('Radium.Todo')
 
-  reference: Ember.computed '_referenceAttachment',
-    '_referenceCompany',
-    '_referenceContact',
-    '_referenceDeal',
-    '_referenceEmail',
-    '_referenceMeeting',
-    '_referenceTodo',
-    '_referenceInvitation', ->
+  reference: Ember.computed '_referenceAttachment','_referenceCompany','_referenceContact','_referenceDeal','_referenceEmail','_referenceMeeting','_referenceTodo','_referenceInvitation', (key, value) ->
       if arguments.length == 2 && value
         property = value.constructor.toString().split('.')[1]
         associationName = "_reference#{property}"
