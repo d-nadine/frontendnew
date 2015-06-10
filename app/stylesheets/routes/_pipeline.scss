@@ -2,6 +2,7 @@
   width: 100%;
   display: inline-block;
   border: none;
+  margin-bottom: 30px;
 
   h1, h3 {
     margin-top: 0;
@@ -63,13 +64,28 @@
 }
 
 .pipeline-grand-total {
-  h3 {
-    font-weight: normal;
+  color: #777;
+  line-height: 44px;
+  margin-right: 80px;
+  
+  .pipeline-total {
+    color: $text;
+    font-weight: 700;
   }
+}
+.pipeline-new-form {
+  display: inline-block;
 
-  span {
+  a {
+    margin-right: 5px;
+  }
+  .pipeline-reset {
     font-size: 14px;
-    color: $muted;
+    margin-left: 15px;
+
+    i {
+      font-size: 13px;
+    }
   }
 }
 
@@ -89,6 +105,8 @@
   float: right;
   vertical-align: middle;
   background: #e9e9e9;
+  text-align: right;
+  font-size: 16px;
 
   h3 {
     font-weight: normal;
@@ -99,6 +117,9 @@
     line-height: 60px;
     display: inline-block;
     color: #888;
+  }
+  span {
+    font-weight: 600;
   }
 
   .pipeline-lost-view & {
@@ -118,9 +139,32 @@
   margin-bottom: 0;
   border-bottom: 1px solid #ccc;
 
+  .column-sort {
+    color: $text;
+
+    i {
+      position: static;
+      margin-left: 10px;
+    }
+  }
+
   th {
     text-align: left;
-    color: #6e6e6e;
+    color: $text;
+  }
+
+  td {
+    
+    a {
+      color: $text;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  tr.pipeline-workflow-deals-row + tr:not(.pipeline-workflow-deals-row)  {
+    display: none;
   }
 
   .next-task-widget {
@@ -141,6 +185,13 @@
   .name,
   .deal {
     width: percentage(148px / $base-width);
+  }
+
+  .deal {
+
+    p span a:first-of-type {
+      font-weight: 600;
+    }
   }
 
   .assigned-to {
@@ -179,6 +230,26 @@
   .pay-by,
   .forecast {
     width: percentage(144px / $base-width);
+  }
+
+  td.forecast {
+  
+    a {
+      color: $blue !important;
+      font-weight: 600;
+    }
+  }
+
+  tr.show-more {
+    
+    td {
+      padding: 0;
+      border-top: 0;
+
+      .btn-load-more {
+        margin: 10px 0;
+      }
+    }
   }
 
   .value {
@@ -234,14 +305,20 @@
   .search-input {
     width: 300px;
   }
+  input {
+    border-radius: 0px !important;
+    height: 48px;
+    padding: 0 0 0 36px;
+  }
 }
 
-.pipeline-workflows-list .pipeline-workflows-list-item:last-of-type {
-  width: 100%;
-  margin: 20px 0;
-  padding: 0 5px;
+.pipeline-workflows-list {
+  width: calc(100% - 60px);
+  margin: 20px 0 0;
+  padding: 10px 30px;
   clear: both;
-  background-color: #e9e9e9;
+  background-color: white;
+  border: 1px solid $border;
 }
 
 .alert-container{
@@ -255,3 +332,32 @@
 .new-lead{
   margin-top: 50px;
 }
+
+.pipeline-view {
+
+  .pipeline-index-view {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+
+    .page-header-controls {
+
+      .search-field {
+        
+        input {
+          width: 350px;
+          margin-left: 10px;
+        }
+      }
+      .needsclick {
+        box-shadow: none;
+        color: $text;
+        margin-left: 20px;
+
+        i.ss-action {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+

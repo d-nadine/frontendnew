@@ -1,5 +1,6 @@
 <div class="btn-group">
-  <button {{bind-attr class=":btn :btn-main :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+  <button {{bind-attr class=":btn :btn-main :btn-none :dropdown-toggle :needsclick controller.hasCheckedContent::muted"}} data-toggle="dropdown">
+    <i class="ss-standard ss-action"></i>
     Actions <span {{bind-attr class=":caret hasCheckedContent::hide"}}></span>
   </button>
   {{#if hasCheckedContent}}

@@ -6,6 +6,7 @@ Radium.PipelineViewBase = Ember.View.extend Radium.BulkActionViewMixin,
   pipelineSearch: Ember.TextField.extend
     type: "text"
     valueBinding: 'targetObject.searchText'
+    placeholder: "Search"
     keyDown: (e) ->
       return unless e.keyCode ==13
 

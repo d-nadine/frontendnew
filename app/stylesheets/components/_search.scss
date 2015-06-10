@@ -13,11 +13,10 @@
     top: 0;
     left: 10px;
     font-size: 15px;
-    line-height: 32px;
+    line-height: 48px;
   }
 
   input[type="text"] {
-    height: 33px;
     padding-left: 10px;
     @include box-sizing(border-box);
   }

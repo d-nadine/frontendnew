@@ -3,7 +3,7 @@ Radium.RdDaterangepickerComponent = Ember.Component.extend
   endDate: new Date()
   past: true
   future: false
-  placeholderText: "Select Date Range"
+  placeholderText: "Date Range"
 
   keyPress: (event) ->
     if event.keyCode == 13

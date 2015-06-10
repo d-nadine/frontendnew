@@ -8,4 +8,49 @@
     box-shadow: none;
     cursor: pointer;
   }
+  &.opensleft:before {
+    display: none;
+  }
+
+  .ranges {
+    width: 180px;
+    margin: 0 !important;
+
+    li {
+      background-color: transparent;
+      border: 0;
+      border-bottom: 1px solid $border;
+      border-radius: 0px;
+      margin-bottom: 0;
+      line-height: 30px;
+      color: $black;
+
+      &.active,
+      &:hover {
+        border: 0;
+        margin-bottom: 1px;
+      }
+    }
+
+    .range_inputs {
+      margin-top: 8px;
+
+      .btn-none {
+        margin-left: 25px;
+      }
+      label {
+        padding-left: 7px;
+        margin-bottom: 0;
+      }
+      .input-mini {
+        padding-top: 0;
+      }
+      .cancelBtn {
+        line-height: 36px;
+      }
+    }
+  }
+}
+.daterange-field {
+  width: 182px;
 }

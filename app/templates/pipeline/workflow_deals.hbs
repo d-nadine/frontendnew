@@ -44,7 +44,7 @@
         {{partial 'pipeline/deal_contact'}}
         <td class="assigned-to">
           <p>
-            <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span></br>
+            <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span>
             <span class="title">{{user.title}}</span>
           <p>
         </td>
@@ -84,7 +84,7 @@
       </tr>
     {{else}}
       <tr>
-        <td colspan="9">
+        <td colspan="11">
           No deals
           {{#if isTextFiltering}}
             matching "{{searchText}}"
@@ -95,11 +95,10 @@
         </td>
       </tr>
     {{/each}}
-    <tr>
-      <td colspan="9">
+    <tr class="show-more">
+      <td colspan="11">
         {{partial "shared/show_more"}}
       </td>
     </tr>
   </tbody>
 </table>
-{{partial "pipeline/totals"}}

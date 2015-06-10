@@ -1,28 +1,24 @@
 <div class="page-header pipeline-header">
   <div class="pull-left">
-    <div class="pipeline-title pull-left">
-      <h1>{{title}}</h1>
-    </div>
     <div class="pull-left pipeline-grand-total">
-      <h3><span>Total</span> {{currency total}}</h3>
+      <span>Active Pipeline Total > </span> <span class="pipeline-total">{{currency total}}</span>
     </div>
+  </div>
+
+  <div class="pipeline-new-form">
+    {{partial "pipeline/add_lead_btn"}}
+    <a href="#" class="btn btn-none pipeline-reset" {{action "resetFilters"}}><i class="ss-standard ss-sync"></i> Reset</a>
   </div>
 
   <div class="pull-right page-header-controls">
     <form class="form-search pipeline-search">
-      <i class="ss-symbolicons-block ss-search"></i>
-      {{view view.pipelineSearch class="field search-text"}}
-    </form>
-    <form class="form-search pipeline-search">
-      <i class="ss-symbolicons-block ss-calendar"></i>
-
       {{rd-daterangepicker startDate=filterStartDate endDate=filterEndDate past=false future=true}}
     </form>
-    <a href="#" class="btn btn-main btn-primary" {{action "resetFilters"}}>
-      Reset
-    </a>
 
-    {{partial "pipeline/add_lead_btn"}}
+    <form class="form-search pipeline-search search-field">
+      {{view view.pipelineSearch class="field search-text"}}
+    </form>
+    
     {{partial "pipeline/actions_btn"}}
     {{partial "pipeline/form_buttons"}}
   </div>
@@ -96,16 +92,17 @@
       </tbody>
     </table>
   </div>
-  <div class="pipeline-workflows-list">
-      {{#if activeDeals.length}}
-        <div class="pipeline-workflows-list-item">
-          <div class="page-header">
-            <h3>All Active Deals ({{arrangedDealsLength}})</h3>
-          </div>
-          <div class="deals">
-            {{render 'pipeline/workflow_deals' activeDeals}}
-          </div>
+  {{#if activeDeals.length}}
+    <div class="pipeline-workflows-list">
+      <div class="pipeline-workflows-list-item">
+        <div class="page-header">
+          <h3>All Active Deals ({{arrangedDealsLength}})</h3>
         </div>
-      {{/if}}
-  </div>
+        <div class="deals">
+          {{render 'pipeline/workflow_deals' activeDeals}}
+        </div>
+      </div>
+    </div>
+    {{partial "pipeline/totals"}}
+  {{/if}}
 {{/unless}}
