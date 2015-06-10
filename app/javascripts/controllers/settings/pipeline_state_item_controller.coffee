@@ -22,7 +22,7 @@ Radium.PipelineStateItemController = Radium.ObjectController.extend BufferedProx
 
       return unless account.get('isDirty')
 
-      account.save(this).then (result) =>
+      account.save().then (result) =>
         @send 'resetNewItem'
         @send 'flashSuccess', 'Updated'
 

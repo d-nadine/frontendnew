@@ -11,5 +11,5 @@ Radium.TemplatesEditController = Radium.Controller.extend
 
       return unless model.get('isDirty')
 
-      model.save(this).then (result) =>
+      model.save().then (result) =>
         @send 'flashSuccess', "Template saved!"

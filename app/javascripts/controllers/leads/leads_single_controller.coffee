@@ -90,7 +90,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
       if Ember.isEmpty('companyName')
         model.set('removeCompany', true)
 
-      model.save(this).then((result) =>
+      model.save().then((result) =>
         msg()
 
         @hashifyRelationships()

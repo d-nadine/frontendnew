@@ -9,7 +9,7 @@ Radium.TemplatesNewController = Radium.Controller.extend
 
       form.setFilesOnModel(template)
 
-      template.save(this).then (result) =>
+      template.save().then (result) =>
         form.set 'isSubmitted', false
         form.reset()
 

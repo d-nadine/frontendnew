@@ -87,7 +87,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
         importJob.set 'file', attachment
 
-        importJob.save(this).then( =>
+        importJob.save().then( =>
           Radium.ContactImportJob.find({}).then (results) =>
             @set 'contactImportJobs', results
 

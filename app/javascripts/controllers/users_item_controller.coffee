@@ -9,23 +9,15 @@ Radium.UserItemController = Radium.ObjectController.extend Ember.Evented,
 
       user.set('isAdmin', not isAdmin)
 
-      user.one 'didUpdate', =>
+      user.save().then(=>
         message = if isAdmin
                     'user no longer admin'
                   else
                     'user is now an admin'
 
         @send 'flashSuccess', message
-
-      user.one 'becameInvalid', (result) =>
-        @send 'flashError', result
+      ).catch (error) =>
         @resetModel()
-
-      user.one 'becameError', (result) =>
-        @send 'flashError', result
-        @resetModel()
-
-      @get('store').commit()
 
   isCurrentUser: Ember.computed 'model', ->
     @get('model') == @get('currentUser')

@@ -25,7 +25,7 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
         @send 'close'
         @send 'flashError', 'An error has occurred and the caccount cannot be deleted.'
 
-      account.one 'didDelete', =>
+      account.delete().then =>
         apiUrl = @get('store').get('_adapter.url')
         Radium.get('authManager').logOut(apiUrl)
 
@@ -39,17 +39,15 @@ Radium.SettingsCompanyRoute = Radium.Route.extend
 
       return unless c
 
-      user.delete(this).then =>
+      user.delete().then =>
         @send 'flashSuccess', "User has been deleted."
 
     resendInvite: (user) ->
       details = user.getProperties('name', 'email')
       details.invitedAt = Ember.DateTime.create()
       resend = Radium.ResendUserInvite.createRecord(details)
-      resend.one 'didCreate', (item) =>
+      resend.save().then (item) =>
         @send('didResendInvite', item.get('email'))
-
-      @store.commit()
 
     didResendInvite: (email) ->
       alert "Did resend invite to #{email}"

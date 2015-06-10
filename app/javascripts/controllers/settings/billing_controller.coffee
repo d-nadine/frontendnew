@@ -26,7 +26,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       Ember.assert "There is no active subscription to canel", activeSubscription
 
-      billing.one 'didUpdate', =>
+      billing.save().then =>
         activeSubscription.reload()
 
         activeSubscription.one 'didReload', =>
@@ -59,7 +59,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       billing = @get('model')
 
-      billing.one 'didUpdate', (result) =>
+      billing.save().then (result) =>
         @set('token', null) if @get('token')
         @set 'isPersisting', false
         @send 'flashSuccess', 'Your billing information has been updated.'
@@ -88,7 +88,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
                 account: currentUser.get('account')
                 subscriptionPlan: subscriptionPlan
 
-      trial.save(this).then =>
+      trial.save().then =>
         @set 'isPersisting', false
 
         @send "flashSuccess", "The trial #{subscriptionPlan.get('name')} has been created."
@@ -122,7 +122,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       @applyBufferedChanges()
 
-      billing.one 'didUpdate', =>
+      billing.save().then =>
         @send 'flashSuccess', "You are now on the #{subscriptionPlan.get('name')} plan, reloading in 5 seconds..."
         setInterval((-> window.location.reload()), 3000)
 

@@ -28,11 +28,11 @@ Radium.ReassignForm = Radium.Form.extend
           todo.set 'reference', deal
           transaction.add todo
 
-        deal.one 'didUpdate', =>
+        deal.one 'didUpdate', ->
           deal.set 'isChecked', false
           resolve() unless @get('deals.length')
 
-        deal.one 'becameInvalid', (result) =>
+        deal.one 'becameInvalid', (result) ->
           transaction.rollback()
           reject(result)
 

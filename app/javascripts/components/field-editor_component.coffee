@@ -32,7 +32,7 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       self = this
 
-      model.save(parent).then((result) ->
+      model.save().then((result) ->
         parent.send 'flashSuccess', 'The field has been updated.'
 
         self.set 'isSaving', false
@@ -42,7 +42,7 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         @$('input[type=text]').focus()
         bufferedProxy.set 'name', result.get('_data.name')
         bufferedProxy.applyBufferedChanges()
-        model.save(self)
+        model.save()
       false
 
     edit: ->
@@ -87,7 +87,7 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       parent = @get('parent')
 
-      model.delete(parent).then (result) ->
+      model.delete().then (result) ->
         parent.send 'flashSuccess', 'The field has been deleted.'
 
       false

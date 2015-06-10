@@ -15,7 +15,7 @@ Radium.CompanyRoute = Radium.Route.extend
 
       name = company.get('name')
 
-      company.delete(this).then =>
+      company.delete().then =>
         @send 'closeModal'
 
         @send 'flashSuccess', "The company #{name} has been deleted"

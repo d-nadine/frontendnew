@@ -9,7 +9,7 @@ Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
 
       newRecord = Radium.CustomField.createRecord(customField.toHash())
 
-      newRecord.save(this).then (result) =>
+      newRecord.save().then (result) =>
         model.insertAt index, newRecord
         @send 'flashSuccess', 'Custom Field Saved.'
 
@@ -24,7 +24,7 @@ Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
       false
 
     updateCustomField: (customField) ->
-      customField.save(this).then (result) =>
+      customField.save().then (result) =>
         @send 'flashSuccess', 'Custom Field Saved.'
 
     addNewCustomField: ->
@@ -41,7 +41,7 @@ Radium.SettingsCustomFieldsController = Ember.ArrayController.extend
 
       return remove() if isNew
 
-      customField.delete(this).then remove
+      customField.delete().then remove
 
   lastItem: Ember.computed.oneWay 'model.lastObject'
 

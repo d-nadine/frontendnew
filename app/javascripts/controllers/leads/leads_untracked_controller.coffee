@@ -28,7 +28,7 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
 
       currentUser = @get('currentUser')
 
-      track.save(this).then (result) =>
+      track.save().then (result) =>
         @send "flashSuccess", "Contact is now tracked in Radium"
 
         dataset = @get('model')
@@ -42,7 +42,7 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
         currentUser.reload()
 
     destroyContact: (contact)->
-      contact.delete(this).then (result) =>
+      contact.delete().then (result) =>
         @send "flashSuccess", "Contact deleted"
 
         dataset = @get('model')

@@ -19,7 +19,7 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
 
       @send 'closeModal'
 
-      contact.delete(this).then (result) =>
+      contact.delete().then (result) =>
         @send 'flashSuccess', "The contact #{name} has been deleted"
 
         peopleDataset = @controllerFor('peopleIndex').get('model')

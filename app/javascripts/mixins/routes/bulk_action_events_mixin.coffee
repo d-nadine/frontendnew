@@ -70,12 +70,10 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
 
       addressBook = @controllerFor('addressbook').get('content')
 
-      record.one 'didDelete', ->
+      record.delete().then ->
         if item = addressBook.find((el) -> el == record)
           console.log "found item"
           addressBook.removeObject item
-
-      @get('store').commit()
 
       @send "flashSuccess", "Record has been deleted."
 

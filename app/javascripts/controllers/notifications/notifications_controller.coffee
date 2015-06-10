@@ -33,7 +33,7 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
       job = Radium.DestroyNotificationsJob.createRecord
         user: currentUser
 
-      job.save(this).then =>
+      job.save().then =>
         @send 'flashSuccess', "All Notifications Deleted"
         complete()
 

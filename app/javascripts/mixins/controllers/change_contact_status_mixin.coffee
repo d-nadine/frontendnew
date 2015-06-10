@@ -9,15 +9,7 @@ Radium.ChangeContactStatusMixin = Ember.Mixin.create
 
       existingDeals = Radium.Deal.all().slice()
 
-      contact.one 'didUpdate', (result) =>
+      contact.save().then((result) =>
         @send "flashSuccess", "Contact updated!"
-
-      contact.one 'becameInvalid', (result) =>
-        @send 'flashError', result
+      ).catch (error) =>
         @resetModel()
-
-      contact.one 'becameError', (result) =>
-        @send 'flashError', "an error happened and the profile could not be updated"
-        @resetModel()
-
-      @get('store').commit()

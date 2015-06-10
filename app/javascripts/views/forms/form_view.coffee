@@ -17,7 +17,7 @@ Radium.FormView = Radium.View.extend Radium.FlashNewViewMixin,
       @toggleProperty 'isExpanded'
 
       Ember.run.next =>
-        @$('TEXTAREA:first').setCursorPosition()
+        @$('TEXTAREA:first')?.setCursorPosition()
 
       false
 

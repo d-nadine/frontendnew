@@ -20,10 +20,8 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
 
       self = this
 
-      todo.one 'didCreate', (result) ->
+      todo.save().then (result) ->
         self.send 'todoAdded', result
-
-      @get('store').commit()
 
     todoAdded: (todo) ->
       contact = @get('model')
@@ -49,8 +47,13 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
-    reference: @get('model')
-    finishBy: null
-    user: @get('currentUser')
+    self = this
+    ret =
+      reference: @get('model')
+      finishBy: null
+      user: @get('currentUser')
+      modal: true
+      closeFunc: ->
+        self.$('.modal').modal('hide')
 
   isEditable: true

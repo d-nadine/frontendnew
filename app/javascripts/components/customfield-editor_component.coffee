@@ -24,7 +24,7 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
 
       return @cancel() unless resource.get('isDirty')
 
-      resource.save(parent).then (result) =>
+      resource.save().then (result) =>
         unless @get('tableCell')
           parent.send 'flashSuccess', 'The field has been updated'
 

@@ -5,15 +5,9 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
     changeStatus: (email, newStatus) ->
       email.set('isPersonal', false)
 
-      email.one 'didUpdate', (result) =>
+      email.save().then((result) =>
         @send "flashSuccess", "email has been made public"
-
-      email.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        @resetModel()
-
-      email.one 'becameError', (result) =>
-        @send 'flashError', "an error happened and the profile could not be updated"
+      ).catch (error) =>
         @resetModel()
 
       @_super.call(this, newStatus)
@@ -21,7 +15,6 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
     dismissExtension: ->
       @set 'currentUser.settings.alerts.extensionSeen', true
       @get('store').commit()
-
 
   activeDeal: Ember.computed.alias('contact.deals.firstObject')
   nextTask: Ember.computed.alias('contact.nextTask')

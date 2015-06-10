@@ -45,11 +45,11 @@ Radium.ChangeStatusForm = Radium.Form.extend
           todo.set 'reference', deal
           transaction.add todo
 
-        deal.one 'didUpdate', (result) =>
+        deal.one 'didUpdate', (result) ->
           deal.set 'isChecked', false
           resolve() if deals.get('lastObject') == result
 
-        deal.one 'becameInvalid', (result) =>
+        deal.one 'becameInvalid', (result) ->
           transaction.rollback()
           reject(result)
 

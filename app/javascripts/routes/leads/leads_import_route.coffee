@@ -17,7 +17,7 @@ Radium.LeadsImportRoute = Radium.Route.extend
     deleteRecord: ->
       job = @controllerFor('contactImportJobConfirmation').get('model')
 
-      job.delete(this).then (result) =>
+      job.delete().then (result) =>
         @send 'closeModal'
 
         @send 'flashSuccess', "The job has been deleted"

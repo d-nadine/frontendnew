@@ -35,12 +35,10 @@ Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
 
       contact.set 'updateStatus', 'updated'
 
-      contact.one 'didUpdate', ->
+      contact.save().then ->
         contact.one 'didReload', ->
           contact.notifyPropertyChange('avatarKey')
         contact.reload()
-
-      @get('store').commit()
 
     unless contact.get('inCleanState')
       contact.addObserver 'currentState.stateName', observer

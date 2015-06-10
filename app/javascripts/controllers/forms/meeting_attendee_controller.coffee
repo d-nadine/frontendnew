@@ -6,18 +6,8 @@ Radium.MeetingAttendeeItemController = Radium.ObjectController.extend
 
       name = invitation.get('person.displayName')
 
-      invitation.one 'didDelete', =>
+      invitation.delete().then =>
         @send 'flashSuccess', "#{name} has been removed from this meeting"
-
-      invitation.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-
-      invitation.one 'becameError', =>
-        @send 'flashError', 'an error has occurred and the meeting invitation cannot be deleted'
-
-      invitation.deleteRecord()
-
-      @get('store').commit()
 
     resendInvite: (attendee) ->
       alert 'No server side implementation yet'

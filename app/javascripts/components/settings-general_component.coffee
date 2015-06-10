@@ -18,7 +18,7 @@ Radium.SettingsGeneralComponent = Ember.Component.extend
         unless currentUser.get('isDirty')
           return @set 'isSaving', false
 
-        currentUser.save(this).then((result) =>
+        currentUser.save().then((result) =>
           @set 'isSaving', false
         ).catch (error) =>
           Ember.Logger.error(error)
@@ -33,7 +33,7 @@ Radium.SettingsGeneralComponent = Ember.Component.extend
 
       targetObject = @get('targetObject')
 
-      account.save(targetObject).then (result) ->
+      account.save().then (result) ->
         targetObject.send 'flashSuccess', 'The currency has been changed.'
 
   currentCurrency: Ember.computed 'currentUser.account.currency', ->

@@ -20,7 +20,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     deleteTask: (model) ->
       msg = "#{model.humanize().capitalize()} has been deleted"
 
-      model.delete(this)
+      model.delete()
 
       @send 'flashSuccess', msg
 

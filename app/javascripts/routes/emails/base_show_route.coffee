@@ -20,21 +20,13 @@ Radium.ShowRouteBase = Radium.Route.extend
       # that for now.
       form.set('repliedTo.showReplyForm', false)
 
-      reply.one 'didCreate', =>
+      reply.save().then =>
         form.reset()
 
         Ember.run.next =>
           @transitionTo 'emails.sent', reply
 
-      reply.one 'becameInvalid', =>
-        @send 'flashError', reply
         reply.reset()
-
-      reply.one 'becameError', =>
-        @send 'flashError', 'An error has occurred and the eamil has not been sent'
-        reply.reset() 
-
-      @store.commit()
 
     forward: (form) ->
       form.set 'isSubmitted', true
@@ -49,17 +41,7 @@ Radium.ShowRouteBase = Radium.Route.extend
       # FIXME: hax for the same reason as above
       form.set 'email.showForwardForm', false
 
-      email.one 'didCreate', =>
+      email.save().then =>
         form.reset()
         Ember.run.next =>
           @transitionTo 'emails.show', email
-
-      email.one 'becameInvalid', =>
-        @send 'flashError',  email
-
-      email.one 'becameError', =>
-        @send 'flashError', 'An error has occurred and the eamil has not been sent'
-
-      @store.commit()
-
-

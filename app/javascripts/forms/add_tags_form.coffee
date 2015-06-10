@@ -27,14 +27,13 @@ Radium.AddTagsForm = Radium.Form.extend
       unless (all.contains(tagName))
         tag = Radium.Tag.createRecord name: tag.get('name')
 
-        tag.one 'didCreate', (result) =>
+        tag.save().then (result) =>
             model = @get('controller.model')
             model.addObject result
 
-          selectedContent.forEach (item) =>
+          selectedContent.forEach (item) ->
             item.get('tagNames').addObject Radium.TagName.createRecord name: tag.get('name')
 
-          @get('store').commit()
       else
-        selectedContent.forEach (item) =>
+        selectedContent.forEach (item) ->
           item.get('tagNames').addObject Radium.TagName.createRecord name: tag.get('name')

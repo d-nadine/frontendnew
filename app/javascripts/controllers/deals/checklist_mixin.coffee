@@ -37,17 +37,12 @@ Radium.ChecklistMixin = Ember.Mixin.create Ember.Evented,
                   else
                     @get('checklist').createRecord(newItem)
 
-      didCommit = (result) =>
-        @send 'reset'
-        @trigger 'newItemCreated'
-
       if @get('isNew')
         @get('checklist').addObject checklistItem
       else
-        checklistItem.one 'didCreate', didCommit
-        checklistItem.one 'didUpdate', didCommit
-
-        @get('store').commit()
+        checklistItem.save().then (result) =>
+          @send 'reset'
+          @trigger 'newItemCreated'
 
       @send 'reset'
       false

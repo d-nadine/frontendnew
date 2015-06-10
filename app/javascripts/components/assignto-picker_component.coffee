@@ -7,7 +7,7 @@ Radium.AssigntoPickerComponent = Ember.Component.extend Radium.PositionDropdownM
 
       parent = @get('parent')
 
-      model.save(parent).then (result) ->
+      model.save().then (result) ->
         parent.send 'flashSuccess', "#{model.get('displayName')} has been assigned to #{user.get('displayName')}"
 
       return unless parent

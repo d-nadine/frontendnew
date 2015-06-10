@@ -19,7 +19,7 @@ Radium.SidebarAddressesController = Radium.MultipleBaseController.extend Radium.
 
       @setAddressFromHash model, @get('form.addresses'), @emailIsValid
 
-      model.save(this)
+      model.save()
 
     setForm: ->
       recordArray = @get(@recordArray)

@@ -55,39 +55,27 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       model = @get('model')
 
-      self = this
-
-      success = (result) ->
-        self.set 'isSaving', false
-        value = self.get('model').get(self.get('bufferKey'))
-        unless value?.length
-          return self.send 'setPlaceholder'
-
-        if self.get('alternativeRoute')
-          model.one 'didReload', ->
-            self.notifyPropertyChange 'model'
-            self.$().html self.get('markUp')
-
-          model.reload()
-
       if containingAction = @get("save#{bufferKey.capitalize()}")
         @get('containingController').send containingAction, this
 
       bufferedProxy.applyBufferedChanges()
 
-      model.one 'didUpdate', success
-
-      model.one 'becameInvalid', =>
-        bufferedProxy.discardBufferedChanges()
-        @send 'flashError', model
+      model.save().then( =>
         @set 'isSaving', false
+        value = @get('model').get(@get('bufferKey'))
+        unless value?.length
+          return @send 'setPlaceholder'
 
-      model.one 'becameError', =>
+        if @get('alternativeRoute')
+          model.one 'didReload', ->
+            @notifyPropertyChange 'model'
+            @$().html @get('markUp')
+
+          model.reload()
+      ).catch((error) ->
         bufferedProxy.discardBufferedChanges()
-        @send 'flashError', "An error has occurred and the update could not be completed."
-        @send 'isSaving', false
-
-      @get('store').commit()
+      ).finally =>
+        @set 'isSaving', false
 
     setPlaceholder: ->
       @$().html("<em class='placeholder'>#{@get('placeholder')}</em>")

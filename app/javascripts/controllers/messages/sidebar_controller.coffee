@@ -8,7 +8,7 @@ Radium.MessagesSidebarController = Radium.ArrayController.extend Radium.Infinite
       job = Radium.EmailSyncJob.createRecord
               user: currentUser
 
-      job.save(this).then((result) =>
+      job.save().then((result) =>
         currentUser.reload()
 
         currentUser.one 'didReload', =>

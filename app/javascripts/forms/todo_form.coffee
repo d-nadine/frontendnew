@@ -28,6 +28,8 @@ Radium.TodoForm = Radium.Form.extend
       return @individualCommit()
 
   individualCommit: (deferred) ->
+    self = this
+
     return new Ember.RSVP.Promise (resolve, reject) =>
       return resolve() unless @get('isNew')
 
@@ -37,6 +39,8 @@ Radium.TodoForm = Radium.Form.extend
         created.set 'newTask', true
         text = "The task #{created.get("description")} has been created."
         result = {todo: created, confirmtation: text}
+        if self.get('modal')
+          self.get('closeFunc')()
 
         resolve(result)
 

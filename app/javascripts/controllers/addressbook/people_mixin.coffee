@@ -91,7 +91,7 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
         user = Radium.User.all().find (u) => u.get('id') == @get('user')
         job.set 'user', user
 
-      job.save(this).then( (result) =>
+      job.save().then( (result) =>
         @set 'working', false
         @send 'flashSuccess', 'The records have been updated.'
         Ember.run.once this, 'updateLocalRecords', job, detail

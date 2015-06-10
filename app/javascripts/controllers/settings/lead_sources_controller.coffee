@@ -15,7 +15,7 @@ Radium.SettingsLeadSourcesController = Radium.ArrayController.extend
     commit: ->
       account = @get('account')
 
-      account.save(this).then((result) =>
+      account.save().then((result) =>
         @send 'flashSuccess', 'Updated'
         @set 'isSaving', false
       ).catch (result) ->

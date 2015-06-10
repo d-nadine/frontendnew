@@ -10,7 +10,7 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
       company = Radium.Company.createRecord
                   name: @get('companyName')
 
-      company.one 'didCreate', (result) =>
+      company.save().then((result) =>
         addressbookController = @get('controllers.addressbook')
         addressbookController.send('updateTotals') if addressbookController
 
@@ -20,18 +20,8 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
 
         @send 'flashSuccess', "#{@get('companyName')} created."
         @trigger('formReset')
-
-      company.one 'becameInvalid', (result) =>
-        @set 'isSaving', false
-        @send 'flashError', company
-        result.reset()
-
-      company.one 'becameError', (result)  =>
-        @set 'isSaving', false
-        @send 'flashError', 'An error has occurred and the company could not be created.'
-        result.reset()
-
-      @get('store').commit()
+      ).finally =>
+        @set('isSaving', false)
 
     modelChanged: (company) ->
       @set 'company', company

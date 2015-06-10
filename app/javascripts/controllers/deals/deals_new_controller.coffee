@@ -14,7 +14,7 @@ Radium.DealsNewController = Radium.DealBaseController.extend Radium.ChecklistMix
 
       self = this
 
-      deal.save(this).then((result) =>
+      deal.save().then((result) =>
         Ember.run.next =>
           @set 'isSaving', false
           @transitionToRoute 'deal', deal

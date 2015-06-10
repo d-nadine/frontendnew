@@ -50,10 +50,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     cancelCheckForResponse: (email) ->
       email.set 'checkForResponse', null
 
-      email.one 'didUpdate', (result) =>
+      email.save().then (result) =>
         @send 'flashSuccess', 'Response check cancelled'
 
-      @get('store').commit()
+      false
 
     closeForms: ->
       @set('showReplyForm', false)

@@ -3,18 +3,10 @@ Radium.SettingsRemindersAlertsController = Radium.ObjectController.extend Buffer
     update:  ->
       model = @get('model')
 
-      model.one 'didUpdate', =>
+      model.save().then(=>
         @send 'flashSuccess', 'Your notificaiton settings have been updated.'
-
-      model.one 'becameError', (result) =>
-        @send 'flashError', result
+      ).catch (error) ->
         result.reset()
-
-      model.one 'becameInvalid', (result) =>
-        @send 'flashError', result
-        result.reset()
-
-      @get('store').commit()
 
     cancel: ->
       @get('model.transaction').rollback()

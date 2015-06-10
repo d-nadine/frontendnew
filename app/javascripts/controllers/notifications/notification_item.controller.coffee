@@ -34,15 +34,7 @@ Radium.NotificationsNewInvitationController = Radium.NotificationsAssignControll
 
       reference.set 'status', status
 
-      reference.one 'didUpdate', =>
+      reference.save().then(=>
         @send 'flashSuccess', "Invitation #{status}"
-
-      reference.one 'becameInvalid', (result) =>
-        @send 'flashError', result
+      ).catch (error) =>
         @resetModel()
-
-      reference.one 'becameError', (result) =>
-        @send 'flashError', "an error happened and the profile could not be updated"
-        @resetModel()
-
-      @get('store').commit()

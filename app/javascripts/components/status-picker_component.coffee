@@ -7,5 +7,5 @@ Radium.StatusPickerComponent = Ember.Component.extend Radium.PositionDropdownMix
 
       parent = @get('targetObject.parentController')
 
-      contact.save(parent).then (result) ->
+      contact.save().then (result) ->
         parent.send 'flashSuccess', 'Status added.'

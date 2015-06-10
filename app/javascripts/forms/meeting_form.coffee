@@ -46,7 +46,7 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
       @get('users').forEach (user) ->
         meeting.get('invitations').addObject person: type: 'user', id: user.get('id')
 
-      @get('contacts').forEach (contact) =>
+      @get('contacts').forEach (contact) ->
         if contact.get('id')
           meeting.get('invitations').addObject person: type: contact.get('typeName'), id: contact.get('id')
         else
@@ -54,8 +54,8 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
       @setFilesOnModel(meeting)
 
-    meeting.one 'didCreate', (result) =>
-      observer = =>
+    meeting.save().then (result) =>
+      observer = ->
         if result.get('meeting')
           result.set 'meeting.newTask', true
           result.removeObserver 'meeting', observer
@@ -77,7 +77,5 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
       contacts.forEach (contact) ->
         array.pushObject(contact) if contact.reload
 
-      array.forEach (model) =>
+      array.forEach (model) ->
         model.reload() unless model.get('currentState.stateName') == "root.loaded.reloading"
-
-    @get('store').commit()

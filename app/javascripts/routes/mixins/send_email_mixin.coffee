@@ -12,20 +12,8 @@ Radium.SendEmailMixin = Ember.Mixin.create
 
       form.set 'isSending', true
 
-      email.one 'didCreate', =>
+      email.save().then =>
         Ember.run.next =>
           form.set 'isSubmitted', false
           form.set 'isSending', false
           @transitionTo 'emails.sent', email
-
-      email.one 'becameInvalid', =>
-        form.set 'isSending', false
-        @send 'flashError', email
-
-      email.one 'becameError', =>
-        form.set 'isSending', false
-        @send 'flashError', 'An error has occurred and the email has not been sent'
-
-      @store.commit()
-
-

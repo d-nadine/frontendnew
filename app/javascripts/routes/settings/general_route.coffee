@@ -3,7 +3,7 @@ Radium.SettingsGeneralRoute = Radium.Route.extend
     deleteExcludedDomain: (domain) ->
       @controllerFor('settingsGeneral').get('model').removeObject(domain)
 
-      domain.delete(this)
+      domain.delete()
 
       false
 

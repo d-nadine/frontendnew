@@ -46,7 +46,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         part.operatorType = part.operatorType
         customQuery.get('customQueryParts').createRecord part
 
-      currentUser.save(this).then( (result) =>
+      currentUser.save().then( (result) =>
         @send 'flashSuccess', "The dynamic list #{result.get('name')} has been created."
 
         customQuery = result.get('customQueries').find (q) -> q.get('name') == customQuery.get('name')
@@ -98,7 +98,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       tag = Radium.Tag.createRecord(name: newTag.get('name'), account: @get('currentUser.account'))
 
-      tag.save(this).then (tag) =>
+      tag.save().then (tag) =>
         @get('newTags').removeObject newTag
 
         @send 'flashSuccess', "New list successfully created."
@@ -221,7 +221,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       currentUser.get('customQueries').removeObject query
 
-      currentUser.save(this).then =>
+      currentUser.save().then =>
         @send 'flashSuccess', "Custom Query deleted"
 
       if @get('isQuery') && @get('customquery') == customQueryUid
@@ -234,7 +234,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       return unless confirm("Are you sure you want to delete the #{tagName} list?")
 
-      tag.delete(this).then =>
+      tag.delete().then =>
         @send 'flashSuccess', "The tag #{tagName} has been deleted."
 
         @transitionToRoute "people.index", "all" if @tag == tagId

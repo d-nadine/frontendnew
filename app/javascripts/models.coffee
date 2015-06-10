@@ -12,24 +12,29 @@ Radium.PromiseProxy = Ember.ObjectProxy.extend Ember.PromiseProxyMixin,
 Radium.Model = DS.Model.extend Radium.TimestampsMixin,
   primaryKey: 'id'
 
-  delete: (context) ->
+  route: Ember.computed ->
+    @store.container.lookup('route:application')
+
+  delete:  ->
     self = this
+    route = @get('route')
 
     new Ember.RSVP.Promise (resolve, reject) ->
       self.deleteRecord()
 
       self.one 'didDelete', ->
-        resolve.call context
+        resolve.call self
 
       self.one 'becameError', ->
-        context.send 'flashError', 'An error has occured and the deletion could not be completed.'
+        route.send 'flashError', 'An error has occured and the deletion could not be completed.'
 
-        reject.call context
+        reject.call self
 
       self.get('store').commit()
 
-  save: (context) ->
+  save: ->
     self = this
+    route = @get('route')
 
     new Ember.RSVP.Promise (resolve, reject) ->
       success = (result) ->
@@ -38,14 +43,14 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
       self.one 'didCreate', success
       self.one 'didUpdate', success
 
-      self.addErrorHandlers(context, reject)
+      self.addErrorHandlers(reject)
 
       self.get('store').commit()
 
-  addErrorHandlers: (context, reject) ->
+  addErrorHandlers: (reject) ->
     self = this
     @one 'becameInvalid', (result) ->
-      context.send 'flashError', result
+      route.send 'flashError', result
 
       reject result
 
@@ -58,7 +63,7 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
     @one 'becameError', (result) ->
       self.reset() if self.get('id')
-      context.send 'flashError', 'An error has occurred and the operation could not be completed.'
+      route.send 'flashError', 'An error has occurred and the operation could not be completed.'
       reject result
 
       return if result.get('id')

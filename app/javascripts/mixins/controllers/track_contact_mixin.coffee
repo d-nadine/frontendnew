@@ -22,7 +22,7 @@ Radium.TrackContactMixin = Ember.Mixin.create
 
       addressbook = @getController('addressbook')
 
-      untrack.save(this).then (result) =>
+      untrack.save().then (result) =>
         @send "flashSuccess", "Contact is no longer tracked."
 
         untrackedController.pushObject contact

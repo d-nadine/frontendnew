@@ -23,7 +23,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
       email.set 'isSending', true
 
-      email.save(this).then((result) =>
+      email.save().then((result) =>
         Ember.run.next =>
           email.set 'isSending', false
           messagesController = @controllerFor('messages')

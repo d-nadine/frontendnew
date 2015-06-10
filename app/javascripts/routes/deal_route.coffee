@@ -20,7 +20,7 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
 
       name = deal.get('name')
 
-      deal.delete(this).then (result) =>
+      deal.delete().then (result) =>
         @transitionTo 'pipeline.index'
 
         @send 'flashSuccess', "Deal #{name} has been deleted"

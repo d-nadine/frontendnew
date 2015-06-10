@@ -35,7 +35,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       excludedDomain = Radium.ExcludedDomain.createRecord
                          domain: domain
 
-      excludedDomain.save(this)
+      excludedDomain.save()
 
       models = @filter (c) -> c.get('model.sender.primaryEmail.value').indexOf(domain) > 0
 
@@ -63,7 +63,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
       self = this
 
-      contact.save(this).then (result) ->
+      contact.save().then (result) ->
         contact.updateLocalProperty property, value
         self.removeObject controller.get('model')
         self.send 'updateTotals'
@@ -228,7 +228,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
           if not item.get('isDirty')
             finish()
 
-          item.save(this).then (result) ->
+          item.save().then (result) ->
             finish()
 
   queryParams: ['user']

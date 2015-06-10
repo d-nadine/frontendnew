@@ -94,7 +94,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
       isScheduled = !!job.get('sendTime')
 
-      job.save(this).then =>
+      job.save().then =>
         form.set 'isSubmitted', false
         unless isScheduled
           @send "flashSuccess", "The bulk email job has been created."
@@ -107,7 +107,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       settings = @getController('userSettings').get('model')
       settings.set 'signature', signature
 
-      settings.save(this).then =>
+      settings.save().then =>
         @send 'flashSuccess', 'Signature updated'
 
   needs: ['tags', 'contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar', 'templatesNew']

@@ -19,20 +19,10 @@ Radium.FollowFeedComponent = Ember.Component.extend
 
       Ember.assert "followable has not been set.", follow.get('followable')
 
-      follow.one 'didCreate', =>
+      follow.save().then =>
         @get('targetObject').send 'flashSuccess', follow.get('successMessage')
 
         [user, followable].forEach (m) -> m.reload()
-
-      follow.one "becameError", =>
-        @get('targetObject').send "flashError", follow.get('errorMessage')
-        user.reset()
-
-      follow.one "becameInvalid", (result) =>
-        @get('targetObject').send "flashError", result
-        user.reset()
-
-      @get('store').commit()
 
   isFollowing: Ember.computed 'followable.followers.[]', 'user', ->
     return true if @get('user') == @get('followable')

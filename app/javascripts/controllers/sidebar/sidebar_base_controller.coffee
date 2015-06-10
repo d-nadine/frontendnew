@@ -33,7 +33,7 @@ Radium.SidebarBaseController = Radium.ObjectController.extend
 
       @set 'isCommitting', true
 
-      model.save(this).then((result) =>
+      model.save().then((result) =>
         @send 'stopEditing' unless continueEditing
         @set 'isCommitting', false
       ).catch (result) =>
