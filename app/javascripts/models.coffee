@@ -98,6 +98,16 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
     @suspendRelationshipObservers ->
       @notifyPropertyChange 'data'
 
+  shallowCopy: ->
+    type = @constructor
+    self = this
+    hash = {}
+
+    type.eachAttribute (key, meta) ->
+      hash[key] = self.get(key)
+
+    hash
+
   reload: ->
     return unless @get('inCleanState')
 
