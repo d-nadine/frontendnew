@@ -1,6 +1,9 @@
 Radium.ToggleSwitchComponent = Ember.Component.extend
   classNames: ['toggle-switch']
 
+  dataOn: "On"
+  dataOff: "Off"
+
   setup: Ember.on 'init', ->
     @on 'change', this, @_updateElementValue
 

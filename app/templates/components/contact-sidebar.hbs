@@ -1,10 +1,13 @@
 <div class="sidebar-panel sidebar-panel-main">
   <div class="sidebar-panel-content">
     <div class="contact-detail">
-      {{avatar-picker person=contact class="user-avatar pull-left"}}
+      <div class="user-avatar pull-left">
+        {{avatar-picker person=contact}}
+      </div>
+      {{toggle-switch checked=shared action="switchShared" dataOn="Share" dataOff="private" dontPropagate=true}}
     </div>
 
-    {{!render 'sidebar/contact_header' contact}}
+    {{! render 'sidebar/contact_header' contact}}
     {{!render 'sidebar/contact_company' contact}}
 
     <div id="sidebar-social">

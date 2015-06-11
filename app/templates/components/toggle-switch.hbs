@@ -1,5 +1,6 @@
-<label for="{{unbound view.checkBoxId}}">
+<label for="{{unbound view.checkBoxId}}" class="switch">
   {{view.label}}
-  <input id="{{unbound view.checkBoxId}}" type="checkbox" {{bind-attr checked="checked"}}>
-  <div class="switch"></div>
+  <input id="{{unbound view.checkBoxId}}" type="checkbox" {{bind-attr checked="checked"}} class="switch-input">
+  <span class="switch-label" {{bind-attr data-on="dataOn" data-off="dataOff"}}></span>
+  <span class="switch-handle"></span>
 </label>
