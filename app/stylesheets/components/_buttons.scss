@@ -91,6 +91,11 @@
   background-color: transparent;
   box-shadow: none;
   padding: 0px !important;
+
+  &:hover {
+    background-color: transparent;
+    color: $muted;
+  }
 }
 
 button.btn-text {

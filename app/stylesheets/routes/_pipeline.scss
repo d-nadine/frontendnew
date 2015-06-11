@@ -77,7 +77,11 @@
   display: inline-block;
 
   a {
-    margin-right: 5px;
+    margin-right: 20px;
+
+    &.btn-primary {
+      margin-right: 30px;
+    }
   }
   .pipeline-reset {
     font-size: 14px;
@@ -85,6 +89,15 @@
 
     i {
       font-size: 13px;
+    }
+  }
+  .needsclick {
+    box-shadow: none;
+    color: $text;
+    margin-left: 20px;
+
+    i.ss-action {
+      font-size: 14px;
     }
   }
 }
@@ -222,6 +235,21 @@
   .next-task {
     width: percentage(250px / $base-width);
   }
+  .need-status {
+    padding-right: 40px;
+
+    .btn-group {
+      width: 100%;
+
+      .btn-main {
+        float: left;
+        line-height: 44px;
+      }
+      .needsclick {
+        float: right;
+      }
+    }
+  }
 
   .status {
     width: percentage(145px / $base-width);
@@ -312,7 +340,8 @@
   }
 }
 
-.pipeline-workflows-list {
+.pipeline-workflows-list,
+.pipeline-workflow-deals-list {
   width: calc(100% - 60px);
   margin: 20px 0 0;
   padding: 10px 30px;
@@ -335,7 +364,12 @@
 
 .pipeline-view {
 
-  .pipeline-index-view {
+  .tabbar {
+    display: inline-block;
+  }
+
+  .pipeline-index-view,
+  .pipeline-workflow-deals-view {
     width: calc(100% - 20px);
     margin-left: 10px;
 
@@ -348,14 +382,23 @@
           margin-left: 10px;
         }
       }
-      .needsclick {
-        box-shadow: none;
-        color: $text;
-        margin-left: 20px;
+    }
+    .pipeline-workflow-deals-row {
 
-        i.ss-action {
-          font-size: 14px;
+      .btn-main {
+        background-color: transparent;
+        box-shadow: none;
+        border-right: 0;
+        padding-left: 20px;
+
+        &:hover {
+          color: $text;
         }
+      }
+      .needsclick {
+        background-color: transparent;
+        border-left: 0px;
+        box-shadow: none;
       }
     }
   }

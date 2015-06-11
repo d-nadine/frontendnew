@@ -45,7 +45,6 @@
         <td class="assigned-to">
           <p>
             <span class="name">{{#link-to "user" user}}{{user.name}}{{/link-to}}</span>
-            <span class="title">{{user.title}}</span>
           <p>
         </td>
         <td class="last-activity">
@@ -54,9 +53,9 @@
         <td class="next-task">
           {{partial 'pipeline/pipeline_next_task'}}
         </td>
-        <td>
+        <td class="need-status">
           <div class="btn-group">
-            <button class="btn btn-main">{{status}}</button>
+            <button class="btn btn-main btn-none">{{status}}</button>
             <button class="btn dropdown-toggle needsclick" data-toggle="dropdown">
               <span class="caret"></span>
             </button>

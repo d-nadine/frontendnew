@@ -3,8 +3,6 @@
     <span>{{#link-to "deal" this}}{{name}}{{/link-to}}</span><br/>
     {{#if hasPrimaryContact}}
       {{resource-link-to contact}}
-      <small>{{contact.title}}</small>
-       {{resource-link-to company}}
     {{else}}
       <span class="no-primary">No Primary Contact</span>
     {{/if}}

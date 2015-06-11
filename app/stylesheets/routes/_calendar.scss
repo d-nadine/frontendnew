@@ -20,6 +20,15 @@ $calendar-off: #d8d9d9;
     @include breakpoint(landscape) {
       padding-left: 10px;
     }
+
+    .form-box-controls {
+      line-height: 52px;
+
+      a {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
   }
 
   .main-content {
@@ -48,7 +57,11 @@ $calendar-off: #d8d9d9;
   }
 
   .btn-group {
-    margin-top: 13px;
+    margin-top: 6px;
+
+    a {
+      margin-left: 10px;
+    }
   }
 }
 
@@ -81,8 +94,11 @@ $calendar-off: #d8d9d9;
 }
 
 .calendar-month-btn {
+  outline: 0;
+
   i {
-    font-size: 9px;
+    font-size: 9px !important;
+    margin-right: 0 !important;
     position: relative;
     margin: 2px 0 0;
   }
@@ -136,7 +152,7 @@ $calendar-off: #d8d9d9;
   padding: {
     top: 15px;
     bottom: 15px;
-    left: 0;
+    left: 15px;
   }
   font-size: 14px;
   line-height: 18px;
@@ -155,6 +171,11 @@ $calendar-off: #d8d9d9;
 
   a {
     display: block;
+
+    i {
+      margin-right: 12px;
+      font-size: 14px;
+    }
   }
 
   &.is-selected {

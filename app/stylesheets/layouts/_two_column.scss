@@ -17,12 +17,13 @@
   }
 
   .sidebar {
-    top: 259px;
+    top: 279px;
+    left: 10px;
   }
 
   &.is-scrolled {
     .sidebar {
-      top: 115px;
+      top: 135px;
     }
   }
 }
@@ -31,7 +32,7 @@
   height: 196px;
   position: fixed;
   top: $navbar-height;
-  left: 40px;
+  left: 0;
   right: 0;
   z-index: 10;
   border-bottom: 3px solid #797979;
@@ -86,7 +87,6 @@
 }
 
 .sticky-banner-collapsed-aside {
-  // width: 375px;
   margin-left: 5px;
 }
 
