@@ -61,10 +61,10 @@
                 </ul>
               </li>
               {{#unless isPotential}}
-                <li><a href="#" {{action "unTrackAll"}}>Untrack</a></li>
+                <li><a href="#" {{action "unTrackAll"}}>Make Private</a></li>
               {{else}}
                 <li>
-                  <a href="#" {{action "trackAll"}}>Track</a>
+                  <a href="#" {{action "trackAll"}}>Share</a>
                 </li>
               {{/unless}}
               <li><a href="#" {{action "confirmDeletion"}}>Delete</a></li>
