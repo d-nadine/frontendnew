@@ -63,10 +63,26 @@
     }
   }
 
+  .contact-detail .avatar-picker-component {
+    position: relative;
+  }
+
+  .contact-detail .user-change-avatar {
+    outline: none;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .contact-detail .user-change-avatar i{
+    opacity: 1;
+  }
+
   hr{
     margin: 10px 2px 10px 2px;
   }
-  
+
   .name {
     float: left;
     margin-top: 25px;

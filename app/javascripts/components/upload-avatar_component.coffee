@@ -28,10 +28,10 @@ Radium.UploadAvatarComponent = Ember.Component.extend Radium.UploadingMixin,
       store = @get("controller.store")
       adapter = store.adapterForType(model.constructor)
       adapter.didFindRecord(store, model.constructor, data, model.get('id'))
-      @sendAction 'finishedUpload'
       @set 'isUploading', false
-    , (data) =>
+      Ember.run.next =>
+        @sendAction "finishedUpload"
+    ).catch (error) =>
       @send 'flashError', 'an error has occurred and the avatar cannot be uploaded'
       @set 'isUploading', false
-    )
 
