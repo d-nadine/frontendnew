@@ -28,8 +28,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       modelValue = @get('model')?.get(@get('bufferKey')) || ''
       value = bufferedProxy.get(@get('bufferKey')) || ''
 
-      return unless bufferedProxy.hasBufferedChanges
-        @send('setPlaceholder') if bufferedProxy.get('isNew') && !value.length
+      unless bufferedProxy.hasBufferedChanges
+        @send('setPlaceholder') if bufferedProxy.get('isNew') || !value.length
         return
 
       if $.trim(value).length || modelValue.length
@@ -60,6 +60,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       bufferedProxy.applyBufferedChanges()
 
+      self = this
+
       model.save().then( =>
         @set 'isSaving', false
         value = @get('model').get(@get('bufferKey'))
@@ -68,8 +70,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
         if @get('alternativeRoute')
           model.one 'didReload', ->
-            @notifyPropertyChange 'model'
-            @$().html @get('markUp')
+            self.notifyPropertyChange 'model'
+            self.$().html self.get('markUp')
 
           model.reload()
       ).catch((error) ->
@@ -107,7 +109,27 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     "/#{routable.humanize().pluralize()}/#{routable.get('id')}"
 
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+
+    unless validator = @get('validator')
+      return
+
+    bufferKey = @get('bufferKey')
+    bufferDep = "bufferedProxy.#{bufferKey}"
+
+    Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, ->
+      value = @get('bufferedProxy').get(bufferKey)
+
+      return false unless value
+
+      isInvalid = not validator.test value
+
+      isInvalid
+
   setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
     @$().parent().on 'click', @clickHandler.bind(this)
 
     @$().on 'focus', @focusContent.bind(this)
@@ -127,16 +149,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       else
         value
 
-    if @get('validator')
-      Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, ->
-        value = @get('bufferedProxy').get(@get('bufferKey'))
-
-        return false unless value
-
-        isInvalid = not @get('validator').test value
-
-        isInvalid
-
     model = @get('model')
 
     setMarkup = =>
@@ -155,6 +167,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       setMarkup()
       model.removeObserver 'isLoaded', observer
 
+    return unless model
+
     unless model.get('isLoaded')
       Ember.run.next =>
         @$().html("<em class='loading'>loading....</em>")
@@ -171,19 +185,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   input: (e) ->
     text =  @$().text()
     @get('bufferedProxy').set(@get('bufferKey'), @$().text())
-    route = @get('route')
     @$().html @get('markUp')
     @setEndOfContentEditble()
-    a = @$('a.route')
 
   keyDown: (e) ->
-    # sadly classNameBindings does not seem to
-    # work with dynamic properties like isInvalid
-    if @get('isInvalid')
-      @$().addClass 'is-invalid'
-    else
-      @$().removeClass 'is-invalid'
-
     bufferedProxy = @get('bufferedProxy')
 
     if e.keyCode == @ENTER
