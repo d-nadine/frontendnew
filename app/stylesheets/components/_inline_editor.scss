@@ -1,17 +1,16 @@
-.inline-editor-component {
+.inline-editor-component, .inline-autocomplete-component {
   outline: none;
+
+  i {
+    cursor: pointer;
+    opacity: 0.35 !IMPORTANT;
+  }
 }
 
-.inline-editor-component .editable-field-component {
-  outline: none;
-}
-
-.inline-editor-component i {
-  cursor: pointer;
-}
-
-.inline-editor-component i {
-  opacity: 0.35 !IMPORTANT;
+.inline-editor-component, .inline-autocomplete-component {
+  .editable {
+    outline: none;
+  }
 }
 
 .is-enabled .inline-editor-text:hover {

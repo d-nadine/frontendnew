@@ -79,15 +79,23 @@
     opacity: 1;
   }
 
-  .contact-detail .inline-editor-component {
+  .contact-detail .inline-editor-component, .inline-autocomplete-component {
     float: left;
-    margin-top: 25px;
     width: 100%;
-    font-size: 22px;
     color: #2d2d30;
+
+    em {
+      color: #888;
+    }
   }
 
-  .contact-detail .inline-editor-component .editable-field-component {
+  .contact-detail .inline-editor-component {
+    font-size: 22px;
+    margin-top: 25px;
+  }
+
+  .inline-autocomplete-component {
+    margin-top: 10px;
   }
 
   hr{

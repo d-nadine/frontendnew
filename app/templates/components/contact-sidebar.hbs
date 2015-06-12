@@ -7,5 +7,6 @@
       {{toggle-switch checked=shared action="switchShared" dataOn="Share" dataOff="private" dontPropagate=true}}
       {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name"}}
     </div>
+    {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company"}}
   </div>
 </div>
