@@ -1,11 +1,2 @@
-Radium.InlineEditorComponent = Ember.Component.extend
-  actions:
-    selectContent: ->
-      el = @$('.editable-field-component')
-
-      later = Ember.run.later ->
-        el.selectText()
-        Ember.run.cancel later
-      , 10
-
-      false
+require "components/inline_editor_base"
+Radium.InlineEditorComponent = Radium.InlineEditorBase.extend()
