@@ -4,7 +4,7 @@
       {{#link-to "addressbook.companies"}}
         <span class="count-companies">{{companiesTotal}} companies ></span>
       {{/link-to}}
-      {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="") currentWhen="people.index"}}
+      {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" hidesidebar=false) currentWhen="people.index"}}
         <span class="count-people">{{contactsTotal}} people</span>
       {{/link-to}}
     </span>
@@ -15,7 +15,7 @@
       </div>
       <ul class="nav nav-pills">
         <li {{bind-attr class="isPotential:active"}}>
-          {{#link-to "people.index" "potential" (query-params user="" tag="" company="" contactimportjob="" customquery="")}}
+          {{#link-to "people.index" "potential" (query-params user="" tag="" company="" contactimportjob="" customquery="" hidesidebar=false)}}
           <div class="nav-pills-left">
             <i class="ss-symbolicons ss-lock" data-original-title="" title=""></i>
             <span>My Contacts</span>
@@ -26,7 +26,7 @@
           {{/link-to}}
         </li>
         <li {{bind-attr class="isAll:active"}}>
-          {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="")}}
+          {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" hidesidebar=false)}}
             <div class="nav-pills-left">
               <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
               <span>All</span>
@@ -48,7 +48,7 @@
           </a>
         </li>
         <li {{bind-attr class="isNew:active"}}>
-          {{#link-to "people.index" "new" (query-params user="" tag="")}}
+          {{#link-to "people.index" "new" (query-params user="" tag="" hidesidebar=false)}}
             <div class="nav-pills-left">
               <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
               <span>New</span>
@@ -59,7 +59,7 @@
           {{/link-to}}
         </li>
         <li {{bind-attr class="isNoTasks:active"}}>
-          {{#link-to "people.index" "notasks" (query-params user="" tag="")}}
+          {{#link-to "people.index" "notasks" (query-params user="" tag="" hidesidebar=false)}}
             <div class="nav-pills-left">
               <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
               <span>No Tasks</span>
@@ -70,7 +70,7 @@
           {{/link-to}}
         </li>
         <li {{bind-attr class="isLosing:active"}}>
-          {{#link-to "people.index" "losing" (query-params user="" tag="")}}
+          {{#link-to "people.index" "losing" (query-params user="" tag="" hidesidebar=false)}}
             <div class="nav-pills-left">
               <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
               <span>Losing Touch</span>
@@ -81,7 +81,7 @@
           {{/link-to}}
         </li>
         <li {{bind-attr class="isNoList:active"}}>
-          {{#link-to "people.index" "no_list" (query-params user="" tag="")}}
+          {{#link-to "people.index" "no_list" (query-params user="" tag=""  hidesidebar=false)}}
             <div class="nav-pills-left">
               <i class="ss-symbolicons ss-lightning" data-original-title="" title=""></i>
               <span>No List</span>
