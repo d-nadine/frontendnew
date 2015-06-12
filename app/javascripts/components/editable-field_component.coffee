@@ -98,7 +98,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   bufferedProxy: Ember.computed 'model', ->
     BufferedObjectProxy.create content: @get('model')
 
-  route: Ember.computed "model", 'alternativeRoute', ->
+  route: Ember.computed "model", 'alternativeRoute', 'notRoutable', ->
+    return if @get('notRoutable')
+
     routable = if alternative = @get('alternativeRoute')
                  if alternative = @get('model').get(alternative)
                    alternative
@@ -112,11 +114,23 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
 
-    unless validator = @get('validator')
-      return
-
+    modelDep = "model.#{bufferKey}"
     bufferKey = @get('bufferKey')
     bufferDep = "bufferedProxy.#{bufferKey}"
+
+    Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', 'alternativeRoute', modelDep, ->
+      value = @get('bufferedProxy').get(@get('bufferKey'))
+
+      return '' unless value
+
+      if @get('route')
+        "<a class='route' href='#{@get('route')}'>#{value}</a>"
+      else
+        value
+
+
+    unless validator = @get('validator')
+      return
 
     Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, ->
       value = @get('bufferedProxy').get(bufferKey)
@@ -138,16 +152,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     bufferDep = "bufferedProxy.#{bufferKey}"
 
     modelDep = "model.#{bufferKey}"
-
-    Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', 'alternativeRoute', modelDep, ->
-      value = @get('bufferedProxy').get(@get('bufferKey'))
-
-      return '' unless value
-
-      if @get('route')
-        "<a class='route' href='#{@get('route')}'>#{value}</a>"
-      else
-        value
 
     model = @get('model')
 
@@ -200,6 +204,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     if e.keyCode == @ESCAPE
       bufferedProxy.discardBufferedChanges()
       @$().html @get('markUp')
+      @setEndOfContentEditble()
       return false
 
     true

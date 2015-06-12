@@ -20,3 +20,18 @@ $.fn.setEndOfContentEditble = ->
   selection = window.getSelection()
   selection.removeAllRanges()
   selection.addRange(range)
+
+$.fn.selectText = ->
+  doc = document
+  element = @[0]
+
+  if doc.body.createTextRange
+    range = document.body.createTextRange()
+    range.moveToElementText element
+    range.select()
+  else if window.getSelection
+    selection = window.getSelection()
+    range = document.createRange()
+    range.selectNodeContents element
+    selection.removeAllRanges()
+    selection.addRange range

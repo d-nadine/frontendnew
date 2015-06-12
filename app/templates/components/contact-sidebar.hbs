@@ -5,16 +5,7 @@
         {{avatar-picker person=contact}}
       </div>
       {{toggle-switch checked=shared action="switchShared" dataOn="Share" dataOff="private" dontPropagate=true}}
-    </div>
-
-    {{! render 'sidebar/contact_header' contact}}
-    {{!render 'sidebar/contact_company' contact}}
-
-    <div id="sidebar-social">
-      <a href="#" class="active"><i class="ss-icon ss-social ss-twitter"></i></a>
-      <a href="#" class="active"><i class="ss-icon ss-social ss-facebook"></i></a>
-      <a href="#"><i class="ss-icon ss-social ss-googleplus"></i></a>
-      <a href="#"><i class="ss-icon ss-social ss-linkedin"></i></a>
+      {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name"}}
     </div>
   </div>
 </div>

@@ -1,4 +1,20 @@
-.is-enabled .inline-editor-text:hover { 
+.inline-editor-component {
+  outline: none;
+}
+
+.inline-editor-component .editable-field-component {
+  outline: none;
+}
+
+.inline-editor-component i {
+  cursor: pointer;
+}
+
+.inline-editor-component i {
+  opacity: 0.35 !IMPORTANT;
+}
+
+.is-enabled .inline-editor-text:hover {
   cursor: pointer;
 }
 

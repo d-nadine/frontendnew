@@ -504,11 +504,11 @@ input[type="radio"] + label span {
   cursor: pointer;
 }
 input[type="radio"] + label span:hover {
-  background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -20px top no-repeat; 
+  background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -20px top no-repeat;
 }
 input[type="radio"]:checked + label {
   color: $blue;
-  
+
   span {
     background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') 0px top no-repeat;
   }
