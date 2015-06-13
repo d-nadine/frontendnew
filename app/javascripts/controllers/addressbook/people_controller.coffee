@@ -1,7 +1,9 @@
 require "controllers/addressbook/people_mixin"
+require "mixins/save_contact_actions"
 
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
+  Radium.SaveContactActions,
   actions:
     toggleFilter: ->
       element = $('.query-builder-component')
@@ -123,20 +125,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           name: 'work'
           isPrimary: true
           city: city
-
-    saveCompanyName: (context) ->
-      if Ember.isEmpty(context.get('bufferedProxy.companyName')) && context.get('model.company')
-        context.set('bufferedProxy.removeCompany', true)
-        context.set('bufferedProxy.company', null)
-
-      model = context.get('model')
-
-      model.one 'didReload', (result) =>
-        unless company = model.get('company')
-          return
-
-        @get('controllers.addressbook').send 'updateTotals'
-        company.reload()
 
     savePhone: (context) ->
       unless context.get('model.phone')

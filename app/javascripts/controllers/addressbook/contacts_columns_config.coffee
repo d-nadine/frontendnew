@@ -57,7 +57,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         static: true
       ],
       actions: [
-        name: "saveEmail"
+        name: "saveAction"
         value: "saveEmail"
       ]
       sortOn: "email"
@@ -99,8 +99,8 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       }],
       actions: [
         {
-          name: "saveCompanyName"
-          value: "saveCompanyName"
+          name: "saveAction"
+          value: "saveCompany"
         }
       ]
       context: "company"
@@ -190,7 +190,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       ],
       actions: [
         {
-          name: 'saveCity'
+          name: 'saveAction'
           value: 'saveCity'
           static: true
         }
@@ -219,7 +219,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       ],
       actions: [
         {
-          name: 'savePhone'
+          name: 'saveAction'
           value: 'savePhone'
           static: true
         }

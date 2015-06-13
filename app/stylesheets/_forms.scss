@@ -36,7 +36,7 @@
     right: 0;
   }
 
-  .inline-editor{
+  .inline-editor, .inline-editor-component, .inline-autocomplete-component {
     position: relative;
 
     &:hover{

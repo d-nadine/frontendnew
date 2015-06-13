@@ -89,6 +89,15 @@
     }
   }
 
+  .inline-autocomplete-component {
+    &.company {
+      i {
+        position: relative;
+        top: -2px;
+      }
+    }
+  }
+
   .contact-detail .inline-editor-component {
     font-size: 22px;
     margin-top: 25px;

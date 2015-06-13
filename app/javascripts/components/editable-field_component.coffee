@@ -55,8 +55,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       model = @get('model')
 
-      if containingAction = @get("save#{bufferKey.capitalize()}")
-        @get('containingController').send containingAction, this
+      if saveAction = @get("saveAction")
+        @get('containingController').send saveAction, this
 
       bufferedProxy.applyBufferedChanges()
 
@@ -85,7 +85,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
   # hacky need to use controller of the table component for certain functions
   containingController: Ember.computed ->
-    @get('targetObject.parentController.targetObject')
+    if parent = @get('parent')
+      parent
+    else
+      @get('targetObject.parentController.targetObject')
 
   classNames: ['editable']
   classNameBindings: ['isSaving', 'isInvalid']
@@ -155,20 +158,13 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     model = @get('model')
 
-    setMarkup = =>
-      markUp = @get('markUp')
-
-      unless markUp?.length
-        @send 'setPlaceholder'
-      else
-        @$().html markUp
-
     observer = =>
       return unless model.get('isLoaded')
 
       @notifyPropertyChange modelDep
 
-      setMarkup()
+      @setMarkup()
+
       model.removeObserver 'isLoaded', observer
 
     return unless model
@@ -179,12 +175,22 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         model.addObserver 'isLoaded', observer
         return
     else
-      setMarkup()
+      @setMarkup()
 
   teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     @$()?.parent().off 'click'
     @$()?.off 'focus', @focusContent.bind(this)
+
+  setMarkup: ->
+    markUp = @get('markUp')
+
+    unless markUp?.length
+      @send 'setPlaceholder'
+    else
+      @$().html markUp
+
+    @setEndOfContentEditble()
 
   input: (e) ->
     text =  @$().text()
@@ -203,8 +209,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     if e.keyCode == @ESCAPE
       bufferedProxy.discardBufferedChanges()
-      @$().html @get('markUp')
-      @setEndOfContentEditble()
+      markUp = @get('markUp')
+
+      @setMarkup()
+
       return false
 
     true

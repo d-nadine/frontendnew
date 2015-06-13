@@ -1,7 +1,10 @@
+require "mixins/save_contact_actions"
+
 Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.UpdateContactPoller,
   Radium.CanFollowMixin,
   Radium.TrackContactMixin,
+  Radium.SaveContactActions,
   Ember.Evented,
   actions:
     removeMultiple: (relationship, item) ->
