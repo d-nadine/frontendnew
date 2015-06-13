@@ -529,8 +529,8 @@
 .sidebar .country-picker {
   position: static;
 }
-#sidebar-contact-info {
 
+#sidebar-contact-info {
   dd > a {
     text-overflow: ellipsis;
     width: calc(100% - 55px);
@@ -538,8 +538,8 @@
     white-space: nowrap;
   }
 }
-#sidebar-social {
-  display: inline-block;
+
+.social-medialist-component {
   margin-top: 20px;
 
   a {
@@ -550,8 +550,13 @@
     &.active {
       color: #666;
     }
+
+    &:not(.active) {
+      color: #aaa;
+    }
   }
 }
+
 #sidebar-assigned {
 
   p {
