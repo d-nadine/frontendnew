@@ -15,8 +15,7 @@
     </div>
     {{#if multiple}}
       <div class="pull-left">
-        <input type="radio" {{action "setPrimary" item}} {{bind-attr checked=item.isPrimary}} {{bind-attr name=icon}}>
-        <span class="primary-check">Primary</span>
+        {{x-radio leader="Primary" name="icon" value=true selection=item.isPrimary action="setPrimary" item=item}}
       </div>
       <div class="pull-right extra-delete">
         <a href="#" {{action "removeSelection" item}}>

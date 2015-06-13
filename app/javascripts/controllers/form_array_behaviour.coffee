@@ -42,7 +42,7 @@ Radium.FormArrayBehaviour = Ember.Mixin.create
           item.record.setProperties(name: item.get('name'), value: item.get('value'), isPrimary: item.get('isPrimary'))
         else
           if item.get('value.length') && item.get('value') != "+1"
-            @get("content.#{relationship}").createRecord item.getProperties('name', 'value', 'isPrimary')
+            @get("model.#{relationship}").createRecord item.getProperties('name', 'value', 'isPrimary')
 
   createFormFromRelationship: (model, relationship, formArray) ->
     recordArray = model.get(relationship)
