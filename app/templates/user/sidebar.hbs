@@ -88,26 +88,6 @@
     </div>
   </div>
 
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        My Assigned Contacts
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      {{#if contacts.length}}
-        <div class="assigned-contacts">
-          {{#link-to "people.index" "all" (query-params company="" user=id tag="" contactimportjob="" customquery="")}}
-            <span {{bind-attr class=":assigned-count :pull-right"}}>{{contacts.length}}</span>
-            My Assigned Contacts
-          {{/link-to}}
-        </div>
-      {{else}}
-        <p>No contacts have been assigned.</p>
-      {{/if}}
-    </div>
-  </div>
-
   {{partial 'shared/followers'}}
 
   <div class="sidebar-panel">

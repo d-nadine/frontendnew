@@ -17,6 +17,11 @@
     position: absolute;
     top: 50%;
     right: 10px;
+
+    i.ss-delete {
+      position: relative;
+      top: 2px;
+    }
   }
 
   h4 {
@@ -362,10 +367,6 @@
 }
 
 .pipeline-view {
-
-  .tabbar {
-    display: inline-block;
-  }
 
   .pipeline-index-view,
   .pipeline-workflow-deals-view {

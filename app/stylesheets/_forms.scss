@@ -768,21 +768,25 @@ input[type="radio"]:checked + label {
 
       .icon {
         width: 5%;
+        float: none;
 
         i {
           position: relative;
-          top: 2px;
+          top: -3px;
           color: $icon;
         }
       }
       .topic {
         width: 85%;
+        vertical-align: top;
+        padding-top: 5px;
       }
       .additional {
         vertical-align: top;
         width: 10%;
         padding-top: 2px;
         border-radius: 0;
+        float: none;
 
         a {
 

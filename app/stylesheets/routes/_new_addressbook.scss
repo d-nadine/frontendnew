@@ -660,10 +660,10 @@
 
   .variadic-table tbody tr {
     td {
+
       a {
         text-decoration: none;
       }
-
     }
 
     td .editable {
@@ -712,7 +712,6 @@
       .activity {
         border-bottom: 0px;
         padding: 0;
-        margin-top: 10px;
 
         .activity-icon {
           margin: 0px 0 0 4px;
@@ -735,10 +734,14 @@
           overflow: hidden;
           text-overflow: ellipsis;
           margin-left: 30px;
+          margin-top: 0;
           padding-right: 5px;
 
           p {
             display: inline;
+          }
+          .email-subject {
+            margin-top: 0;
           }
         }
 
@@ -754,7 +757,8 @@
     }
 
     td.events, td.inactive, td.next-task-date, td.last-activity, td.source, td.added, td.deals-closed-total, td.deals-total, td.events-seven, td.events-thirty {
-      background: #f6fcff;
+      background-image: url('images/backgrounds/diagonal_lines.png') !important;
+      background-size: 10px 10px !important;
     }
 
     td.name {
@@ -766,11 +770,26 @@
     }
 
     td.tags {
+      padding-left: 10px;
+
       div:first-of-type {
         min-width: 350px;
         max-width: 350px;
         max-height: 50px;
         overflow: hidden;
+      }
+
+      .as-selection-item {
+        margin-bottom: 0;
+      }
+
+      .as-original {
+        line-height: 36px;
+        height: 36px;
+
+        input {
+          line-height: 30px;
+        }
       }
     }
 
@@ -792,6 +811,7 @@
     }
 
     .next-task {
+      padding-left: 10px;
       padding-right: 10px;
 
       a.dropdown-toggle:hover {
@@ -809,6 +829,7 @@
     }
 
     .assign {
+      padding-left: 10px;
       padding-right: 10px;
 
       .btn-group {
@@ -828,6 +849,8 @@
           }
 
           .to {
+            overflow: hidden;
+            text-overflow: ellipsis;
             white-space: nowrap;
             width: calc(100% - 32px);
             height: 22px;
@@ -840,6 +863,9 @@
           position: relative;
           top: 8px;
         }
+      }
+      > div {
+        width: 160px;
       }
     }
 
@@ -864,7 +890,17 @@
       ul > li:not(.edit) > a {
         width: 82%;
       }
+      .status-picker-component {
+
+        i {
+          color: $muted;
+        }
+      }
     }
+  }
+
+  .table-sorter-component {
+    width: 100%;
   }
 
   .editableList:empty:before {

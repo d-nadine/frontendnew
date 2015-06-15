@@ -230,3 +230,26 @@
     margin-bottom: 10px;
   }
 }
+
+.company-view {
+
+  .sticky-banner {
+    height: 40px;
+
+    .sticky-banner-content {
+      display: none;
+    }
+
+    .sticky-banner-collapsed {
+      display: block;
+    }
+  }
+  .sidebar {
+    top: 135px;
+    left: 20px;
+  }
+  .main-content {
+    margin-top: 80px;
+    margin-left: 42px;
+  }
+}
