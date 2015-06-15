@@ -400,7 +400,7 @@
 
   dd {
     margin-left: 0;
-    width: calc(100% - 45px);
+    width: calc(100% - 35px);
     display: inline-block;
 
     .field {
@@ -458,8 +458,18 @@
   position: static;
 }
 
-.deal-title .resource-name {
-  cursor: pointer;
+.deal-title {
+  .ss-write {
+    font-size: 14px;
+    float: right;
+    position: relative;
+    top: 9px;
+  }
+
+  .resource-name {
+    cursor: pointer;
+    font-size: 16px;
+  }
 }
 
 .formatted-close-date {
