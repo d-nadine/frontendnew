@@ -8,3 +8,5 @@ Radium.EmailAddressesComponent = Radium.MultipleBaseComponent.extend
   relationship: "emailAddresses"
 
   emailAddresses: Ember.A()
+
+  emailValidations: ['email']

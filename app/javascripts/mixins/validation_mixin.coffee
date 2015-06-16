@@ -51,12 +51,15 @@ Radium.ValidationMixin = Ember.Mixin.create
 
     @set('validator.errorMessages', errorMessages)
 
-  autocompleteInit: Ember.on 'didInsertElement', ->
+  validationInit: Ember.on 'init', ->
+    @_super.apply this, arguments
+
     unless validations = @get('validations')
       return
 
     Ember.assert 'You must spcecify a validator with validations.', @get('validator')
     Ember.assert "You must specify a validation field to build error messages.", @get('validationField')
+    Ember.assert "You need to initialize an errorMessages array for the ValidationMixin.", @get('validator.errorMessages')
 
   validationsLength: Ember.computed.oneWay 'validations.length'
 

@@ -15,23 +15,37 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
 
     stopEditing: ->
       @set 'isSaving', true
+      @set 'isSubmitted', true
 
-      arr = @get(@relationship)
+      Ember.run.next =>
+        errorMessages = @get('errorMessages')
 
-      model = @get("model")
+        if errorMessages.get('length')
+          return @get('errorMessages').clear()
 
-      @setModelFromHash(model, @relationship, arr)
+        arr = @get(@relationship)
 
-      finish = =>
-        @get(@relationship).clear()
-        @set 'isEditing', false
-        @set 'isSaving', false
+        model = @get("model")
 
-      unless model.get('isDirty')
-        finish()
+        @setModelFromHash(model, @relationship, arr)
 
-      model.save().then(finish).finally =>
-        @set 'isSaving', false
+        finish = =>
+          @get(@relationship).clear()
+          @set 'isEditing', false
+          @set 'isSaving', false
+          @set 'isSubmitted', false
+          @get('errorMessages').clear()
+
+        unless model.get('isDirty')
+          finish()
+
+        self = this
+
+        model.save( ->
+          self.set 'isSubmitted', false
+          self.get('errorMessages').clear()
+        ).then(finish).finally ->
+          self.set 'isSaving', false
 
       false
 
@@ -39,3 +53,6 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
 
   isEditing: false
   isSaving: false
+  isSubmitted: false
+  isInvalid: false
+  errorMessages: Ember.A()
