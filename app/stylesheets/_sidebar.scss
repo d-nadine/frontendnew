@@ -526,6 +526,12 @@
   }
 }
 
+.sidebar .email-addresses-component {
+  &:not(.inline-editor-open) {
+    cursor: pointer;
+  }
+}
+
 .sidebar .country-picker {
   position: static;
 }

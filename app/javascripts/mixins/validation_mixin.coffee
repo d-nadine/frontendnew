@@ -63,7 +63,7 @@ Radium.ValidationMixin = Ember.Mixin.create
 
   validationsLength: Ember.computed.oneWay 'validations.length'
 
-  isInvalid: Ember.computed 'validator.isSubmitted', 'validator.isSubmitted', 'validator.isValid', 'value', ->
+  isInvalid: Ember.computed 'validator.isSubmitted', 'validator.isSubmitted', 'validator.isValid', 'value', 'errorMessages.[]', ->
     return false unless @get('validationsLength')
 
     validator = @get('validator')

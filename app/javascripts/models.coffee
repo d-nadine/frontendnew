@@ -49,6 +49,8 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
   addErrorHandlers: (reject) ->
     self = this
+    route = @get('route')
+
     @one 'becameInvalid', (result) ->
       route.send 'flashError', result
 

@@ -56,3 +56,33 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
   isSubmitted: false
   isInvalid: false
   errorMessages: Ember.A()
+
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
+    $(window).on 'click.inline', (e) =>
+      return unless @get('isEditing')
+
+      target = $(e.target)
+      tagName = e.target.tagName.toLowerCase()
+
+      if (!['input', 'button',  'select', 'i', 'a'].contains(tagName)) || target.hasClass('resource-name')
+        @send 'stopEditing'
+        return
+
+      return if tagName == 'a' && e.target?.target == "_blank"
+
+      e.preventDefault()
+      e.stopPropagation()
+      false
+
+  stopPropagation: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    return false
+
+  click: (e) ->
+    unless @get('isEditing')
+      @set 'isEditing', true
+      @send 'startEditing'
+      return @stopPropagation(e)

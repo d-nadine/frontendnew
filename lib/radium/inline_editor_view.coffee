@@ -36,7 +36,7 @@ Radium.InlineEditorView = Ember.View.extend
   stopPropagation: (evt) ->
     evt.stopPropagation()
     evt.preventDefault()
-    return false;
+    return false
 
   click: (evt) ->
     return unless @get('activateOnClick')

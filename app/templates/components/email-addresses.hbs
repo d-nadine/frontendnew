@@ -11,9 +11,7 @@
   {{else}}
     <i class="ss-standard ss-write pull-right" {{action "startEditing" bubbles=false}}></i>
     {{#if model.primaryEmail.value}}
-      {{#link-to "emails.mailTo" "inbox" model}}
       <strong>{{model.primaryEmail.name}}</strong> {{model.primaryEmail.value}}
-      {{/link-to}}
     {{else}}
       <span class="empty">Add email here</span>
     {{/if}}
