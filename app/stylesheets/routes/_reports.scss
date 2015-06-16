@@ -3,12 +3,14 @@
   $bg: #dbdbdb;
   padding: 15px;
   background: $bg;
+  top: 70px;
+  left: 0;
 
   .pin-filter & {
     position: fixed;
-    top: 60px;
+    top: 70px;
     right: 0;
-    left: 40px;
+    left: 0;
     z-index: 9999;
     @include box-shadow(0 2px 2px rgba(black, 0.2));
 
@@ -124,4 +126,16 @@
 .report-anchor {
   height: 95px;
   display: block;
+}
+
+
+.reports-view {
+
+  .single-column-container {
+    padding: 96px 40px;
+
+    .page-header {
+      padding-top: 20px;
+    }
+  }
 }
