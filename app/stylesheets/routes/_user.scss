@@ -30,8 +30,6 @@
     margin-top: 25px;
 
     > div{
-      @include display-box;
-      @include box-pack(justify);
       position: relative;
     }
     h4 {

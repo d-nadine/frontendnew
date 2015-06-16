@@ -218,15 +218,11 @@
   margin: 0 0 20px;
   display: -webkit-flex;
   display: flex;
-  @include display-box;
-  @include box-orient(horizontal);
-  @include box-align(stretch);
   width: 100%;
   display: inline-block;
 
   .form-container {
     flex: 1;
-    @include box-flex(1);
 
     .is-expandable {
       padding-left: 0;
@@ -238,7 +234,6 @@
   }
 
   .form-box-controls {
-    @include box-flex(0);
     display: inline-block;
     z-index: 9;
     position: relative;

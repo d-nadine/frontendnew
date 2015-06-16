@@ -11,13 +11,10 @@
 }
 
 .pipeline-breadcrumb-list {
-  @include display-box;
-  @include box-orient(horizontal);
-  @include box-align(stretch);
+
 }
 
 .pipeline-breadcrumb-item {
- @include box-flex(1);
 
   &:last-child .pipeline-breadcrumb-button {
     border-right: none;

@@ -21,7 +21,7 @@
 }
 
 @mixin animation($animation) {
-  @include experimental(animation, $animation, -moz, -webkit, -o, -ms, not -khtml, official);
+
 }
 
 @-webkit-keyframes blinker {
