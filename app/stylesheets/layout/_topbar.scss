@@ -1,6 +1,6 @@
 $navbar: #313131;
 
-#topbar {
+.topbar {
   position: fixed !important;
 
   .navbar-inner {
@@ -107,5 +107,10 @@ $navbar: #313131;
 
   .navbar-search {
     display: none;
+  }
+
+  .nav-bar-tag.highlight {
+    background-color: #fff;
+    @include add-blinker;
   }
 }

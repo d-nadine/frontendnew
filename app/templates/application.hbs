@@ -1,4 +1,4 @@
-{{view Radium.NavbarView}}
+{{nav-bar currentUser=currentUser configurableTags=configurableTags transitionToTag="transitionToTag"}}
 <div id="drawer-buttons">
   <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action "toggleNotifications"}} href="#">
     <i class="ss-standard ss-clock"></i>

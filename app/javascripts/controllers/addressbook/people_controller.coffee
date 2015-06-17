@@ -239,6 +239,26 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
         @transitionToRoute "people.index", "all" if @tag == tagId
 
+        @get('controllers.application').notifyPropertyChange 'tags'
+
+      false
+
+    makeTagConfigurable: (tag) ->
+      return if tag.get('configurable')
+
+      tag.set('configurable', true)
+
+      tag.save().then (result) ->
+        Ember.run.next ->
+          ele = $(".nav [data-tag-id=#{tag.get('id')}]")
+          ele.addClass 'highlight'
+
+          cancel = Ember.run.later ->
+            ele.removeClass 'highlight'
+
+            Ember.run.cancel cancel
+          , 2000
+
       false
 
   localUntrack: (contact, dataset) ->

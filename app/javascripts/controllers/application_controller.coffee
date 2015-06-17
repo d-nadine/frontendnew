@@ -1,5 +1,11 @@
 Radium.ApplicationController = Radium.ObjectController.extend
-  needs: ['notifications']
+  actions:
+    transitionToTag: (tag) ->
+      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), customquery: ''
+
+      false
+
+  needs: ['notifications', 'tags']
   isSidebarVisible: false
   isTwoColumn: false
   isNotificationsOpen: Ember.computed.alias 'controllers.notifications.drawerOpen'
@@ -18,3 +24,6 @@ Radium.ApplicationController = Radium.ObjectController.extend
       document.title = "."
       document.title = title
     , 200
+
+  tags: Ember.computed.oneWay 'controllers.tags'
+  configurableTags: Ember.computed.oneWay 'tags.configurableTags'
