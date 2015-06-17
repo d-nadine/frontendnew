@@ -244,11 +244,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       false
 
     makeTagConfigurable: (tag) ->
-      return if tag.get('configurable')
-
-      tag.set('configurable', true)
+      tag.toggleProperty('configurable')
 
       tag.save().then (result) ->
+        return unless tag.get('configurable')
+
         Ember.run.next ->
           ele = $(".nav [data-tag-id=#{tag.get('id')}]")
           ele.addClass 'highlight'
