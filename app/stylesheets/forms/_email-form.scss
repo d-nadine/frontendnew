@@ -77,6 +77,10 @@
         }
       }
     }
+
+    h5 {
+      font-weight: 400;
+    }
   }
 
   .note-statusbar {
@@ -91,7 +95,7 @@
     margin-bottom: 10px;
 
     label {
-      margin: 0 10px 0 0px;
+      margin: 0 10px 0 10px;
       float: left;
       cursor: default;
       line-height: 50px;
@@ -100,6 +104,7 @@
 
     .toggles {
       line-height: 50px;
+      margin-right: 10px;
     }
   }
 
@@ -157,7 +162,7 @@
   .textbox-wrap {
     position: relative;
     width: inherit;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 20px;
   }
 

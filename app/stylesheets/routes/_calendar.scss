@@ -40,6 +40,8 @@ $calendar-off: #d8d9d9;
     @include transition(transform 0.25s);
     @include translateX(-100%);
   }
+
+
 }
 
 .calendar-toolbar {

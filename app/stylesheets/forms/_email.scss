@@ -623,8 +623,6 @@
 
 .email-form-component {
   overflow-x: hidden;
-  margin-top: 66px;
-  max-width: 1000px;
 
   input::-webkit-input-placeholder {
     color: $muted !important;
@@ -644,5 +642,13 @@
     li.as-selection-item {
       margin-top: 7px;
     }
+  }
+  .email-form {
+    border: 0;
+  }
+  .recipients {
+    padding: 0;
+    line-height: 30px;
+    height: 30px;
   }
 }

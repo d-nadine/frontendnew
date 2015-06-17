@@ -640,6 +640,12 @@ input[type="radio"]:checked + label {
       .additional {
         display: inline-block;
         float: right;
+        margin-right: 15px;
+
+        i {
+          position: relative;
+          top: 2px;
+        }
       }
     }
     .field-group {
@@ -697,6 +703,12 @@ input[type="radio"]:checked + label {
           }
         }
       }
+      .icon-label {
+
+        .ss-write {
+          opacity: 1;
+        }
+      }
     }
     .meeting-form-invite {
 
@@ -712,6 +724,10 @@ input[type="radio"]:checked + label {
 
         .btn {
           background: none;
+
+          &:hover {
+            color: $text;
+          }
         }
       }
     }
@@ -727,6 +743,33 @@ input[type="radio"]:checked + label {
   .comments-view {
     width: 100%;
     display: inline-block;
+  }
+
+
+  .autocomplete {
+
+    .as-original {
+      height: 46px;
+
+      .as-input {
+        padding: 0 0 0 32px;
+        height: 46px;
+        line-height: 46px;
+
+        &::-webkit-input-placeholder {
+          font-style: normal;
+          font-size: 14px;
+        }
+        &::-moz-input-placeholder {
+          font-style: normal;
+          font-size: 14px;
+        }
+        &:-ms-input-placeholder {
+          font-style: normal;
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 

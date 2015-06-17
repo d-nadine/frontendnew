@@ -1,6 +1,6 @@
 {{#with item.model.model}}
   {{#link-to "calendar.task" this}}
-    <button {{action "finishTask" this bubbles=false}} {{bind-attr class="isFinished :btn :btn-link :pull-left :events-list-item-button"}}>
+    <button {{action "finishTask" this bubbles=false}} {{bind-attr class="isFinished :btn :btn-link :pull-left :events-list-item-button :btn-none"}}>
       {{taskIcon this}}
     </button>
     <button {{action "deleteTask" this}} class="btn-icon delete close pull-right">

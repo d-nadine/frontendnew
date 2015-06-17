@@ -21,8 +21,9 @@
   }
 }
 .activity .timestamp {
-    margin-top: 10px;
-    width: 60px;
+  margin-top: 10px;
+  width: 60px;
+  display: inline-block;
 }
 .activity .timestamp time {
   color: $muted;
@@ -85,9 +86,9 @@
   font-weight: bold;
 
   i.event {
-    font-size: 28px;
+    font-size: 14px;
     position: relative;
-    top: 5px;
+    top: 2px;
   }
 
   a, a:active, a:visited, a:hover {
@@ -95,8 +96,6 @@
   }
 
   .timestamp time {
-    position: relative;
-    top: 10px;
     color: #468847;
     margin-right: 10px;
   }

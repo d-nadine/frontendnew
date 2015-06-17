@@ -19,8 +19,7 @@ Radium.ReportsView = Ember.View.extend
 
   reportsScrollHandler: ->
     top = $(window).scrollTop()
-    # offset = @get 'mainFilterOffset'
-    offset = 107
+    offset = @get 'mainFilterOffset'
     
     if (top > offset)
       @set 'isFilterPinned', true
