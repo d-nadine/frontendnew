@@ -1,4 +1,4 @@
 <h4>The contact import job has completed</h4>
 <p>File Name: {{reference.fileName}}</p>
 <p>Uploaded At: {{formatDateTime reference.createdAt format="full"}}</p>
-<h4>Click {{#link-to "people.index" "all" (query-params contactimportjob=reference.id company="" user="" tag="" customquery="")}}{{membersText}}here{{/link-to}} to view.</h4>
+<h4>Click {{#link-to "people.index" "all" (query-params contactimportjob=reference.id company="" user="" tag="" customquery="" hidesidebar=false)}}{{membersText}}here{{/link-to}} to view.</h4>

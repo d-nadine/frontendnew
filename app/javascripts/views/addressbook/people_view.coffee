@@ -1,7 +1,8 @@
 Radium.PeopleIndexView = Radium.View.extend Radium.ScrollTopMixin,
+  classNameBindings: ['controller.hidesidebar:hide-sidebar']
   setup: Ember.on 'didInsertElement', ->
-    @resizeTableContainer()
-    $(window).on 'resize.table-container-resize', @resizeTableContainer.bind(this)
+    # @resizeTableContainer()
+    # $(window).on 'resize.table-container-resize', @resizeTableContainer.bind(this)
     $(document).on 'click.clear-menu', @clearMenus.bind(this)
     @$('.col-selector .dropdown-toggle').on 'click.col-selector', @showHideColumnSelector
 

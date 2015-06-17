@@ -101,7 +101,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
         else
           @send "flashSuccess", "The bulk email will be sent on #{job.sendTime.toHumanFormatWithTime()}"
 
-        @getTransitionTo().call this, "people.index", "all", queryParams: bulkParams.returnParameters, customquery: ''
+        @getTransitionTo().call this, "people.index", "all", queryParams: bulkParams.returnParameters, customquery: '', hidesidebar: false
 
     addSignature: (signature) ->
       settings = @getController('userSettings').get('model')
