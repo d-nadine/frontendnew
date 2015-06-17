@@ -1,4 +1,15 @@
 #addressbook, .conversations-table {
+  .hide-sidebar {
+    .contacts-sidebar {
+      display: none;
+    }
+
+    .table-container {
+      margin-left: 10px;
+      width: calc(100% - 18px) !important;
+    }
+  }
+
   .message {
     background: #ecf3fd;
     border: 1px solid #4587e7;
@@ -373,6 +384,19 @@
       width: 19px;
       margin-right: 6px;
     }
+  }
+
+  .tag-item-component .nav-tag{
+    z-index: 1000;
+    position: absolute;
+  }
+
+  .tag-item-component:not(.is-configured) .nav-tag {
+    opacity: 0;
+  }
+
+  .tag-item-component:hover .nav-tag{
+    opacity: 1;
   }
 
   .nav-pills-right {
