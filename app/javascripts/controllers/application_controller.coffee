@@ -1,7 +1,7 @@
 Radium.ApplicationController = Radium.ObjectController.extend
   actions:
     transitionToTag: (tag) ->
-      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), customquery: ''
+      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), hidesidebar: true
 
       false
 

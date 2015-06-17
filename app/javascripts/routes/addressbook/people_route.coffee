@@ -37,6 +37,8 @@ Radium.PeopleIndexRoute = Radium.Route.extend
       refreshModel: true
     customquery:
       refreshModel: true
+    hidesidebar:
+      refreshModel: true
 
   beforeModel: (transition) ->
     filter = transition.params['people.index'].filter
@@ -71,6 +73,8 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     controller.set('contactimportjob', params.contactimportjob)
 
     controller.set 'filter', params.filter
+
+    controller.set('hidesidebar', params.hidesidebar) if params.hidesidebar
 
     filterParams = controller.get('filterParams')
 
@@ -124,6 +128,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     @controller.set 'newTags', Ember.A()
     @controller.set 'potentialQueries', Ember.A()
     @controller.set 'actualQueries', Ember.A()
+    @controller.set 'hidesidebar', false
     @set 'customquery', null
 
     initImportPoller = @get('initialImportPoller')

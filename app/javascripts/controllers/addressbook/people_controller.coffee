@@ -199,18 +199,18 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       false
 
     showUsersContacts: (user) ->
-      @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id'), customquery: ''
+      @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id'), customquery: '', hidesidebar: false
       false
 
     showTagsContacts: (tag) ->
-      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), customquery: ''
+      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), customquery: '', hidesidebar: false
       false
 
     showCustomQueryContacts: (query) ->
       $('.query-builder-component').show()
       @set 'customquery', query.get('uid')
 
-      @transitionToRoute 'people.index', 'dynamicquery', queryParams: customquery: query.get('uid')
+      @transitionToRoute 'people.index', 'dynamicquery', queryParams: customquery: query.get('uid'), hidesidebar: false
 
       false
 
@@ -225,7 +225,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         @send 'flashSuccess', "Custom Query deleted"
 
       if @get('isQuery') && @get('customquery') == customQueryUid
-        @transitionToRoute 'people.index', 'all', queryParams: customquery: ''
+        @transitionToRoute 'people.index', 'all', queryParams: customquery: '', hidesidebar: false
       false
 
     deleteTag: (tag) ->
@@ -237,7 +237,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       tag.delete().then =>
         @send 'flashSuccess', "The tag #{tagName} has been deleted."
 
-        @transitionToRoute "people.index", "all" if @tag == tagId
+        @transitionToRoute "people.index", "all", queryParams: customquery: '', hidesidebar: false if @tag == tagId
 
         @get('controllers.application').notifyPropertyChange 'tags'
 
@@ -276,11 +276,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   contactsTotal: Ember.computed.oneWay 'controllers.addressbook.contactsTotal'
   untrackedIndex: Ember.computed.oneWay 'controllers.untrackedIndex'
 
-  queryParams: ['user', 'tag', 'company', 'contactimportjob', 'customquery']
+  queryParams: ['user', 'tag', 'company', 'contactimportjob', 'customquery', 'hidesidebar']
   user: null
   company: null
   contactimportjob: null
   customquery: null
+  hidesidebar: false
 
   filter: null
 

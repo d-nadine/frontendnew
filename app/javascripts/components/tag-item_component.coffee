@@ -37,6 +37,3 @@ Radium.TagItemComponent = Ember.Component.extend
       return
 
     tag.total
-
-  click: (e) ->
-    p e.target
