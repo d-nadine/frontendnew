@@ -1,4 +1,4 @@
-#topbar {
+.topbar {
   position: fixed !important;
 
   .navbar-inner {
@@ -192,5 +192,10 @@
       padding: 2px 6px;
       background: #c6262f;
     }
+  }
+
+  .nav-bar-tag.highlight {
+    background-color: #fff;
+    @include add-blinker;
   }
 }

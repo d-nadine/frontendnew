@@ -375,6 +375,16 @@
     }
   }
 
+  .tag-item-component .nav-tag{
+    position: absolute;
+    opacity: 0;
+  }
+
+  .tag-item-component:hover .nav-tag{
+    z-index: 1000;
+    opacity: 1;
+  }
+
   .nav-pills-right {
     width: 51px;
     float: left;

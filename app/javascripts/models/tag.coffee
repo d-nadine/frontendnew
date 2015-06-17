@@ -3,5 +3,6 @@ Radium.Tag = Radium.Model.extend
   description: DS.attr('string')
   contacts: DS.hasMany('Radium.Contact')
   companies: DS.hasMany('Radium.Company', inverse: 'tags')
+  configurable: DS.attr('boolean')
 
   displayName: Ember.computed.alias 'name'

@@ -10,6 +10,10 @@ Radium.TagItemComponent = Ember.Component.extend
 
       false
 
+    makeTagConfigurable: ->
+      @get('parent').send 'makeTagConfigurable', @get('tag')
+      false
+
   classNameBindings: ['isCurrent:active']
   isTagged: Ember.computed.oneWay 'parent.isTagged'
   tagsTotals: Ember.computed.oneWay 'parent.tagsTotals'
@@ -33,3 +37,6 @@ Radium.TagItemComponent = Ember.Component.extend
       return
 
     tag.total
+
+  click: (e) ->
+    p e.target
