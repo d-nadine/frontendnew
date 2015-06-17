@@ -387,12 +387,15 @@
   }
 
   .tag-item-component .nav-tag{
+    z-index: 1000;
     position: absolute;
+  }
+
+  .tag-item-component:not(.is-configured) .nav-tag {
     opacity: 0;
   }
 
   .tag-item-component:hover .nav-tag{
-    z-index: 1000;
     opacity: 1;
   }
 
