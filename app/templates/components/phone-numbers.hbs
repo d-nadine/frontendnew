@@ -1,0 +1,21 @@
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-phone muted"></i></dt>
+  <dd>
+    {{#if isEditing}}
+      {{#each phoneNumber in phoneNumbers}}
+        {{#multiple-control item=phoneNumber items=phoneNumbers model=model relationship="phoneNumbers" saveModel="stopEditing" labels=Radium.PhoneLabels}}
+          {{phone-input type="text" value=value enter="stopEditing"}}
+        {{/multiple-control}}
+      {{/each}}
+    {{else}}
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
+      {{#if model.primaryPhone.value}}
+        <a href="tel:{{unbound model.primaryPhone.value}}">
+          <strong>{{model.primaryPhone.name}}</strong> {{model.primaryPhone.value}}
+        </a>
+      {{else}}
+        <span class="empty">Add Phone Number here</span>
+      {{/if}}
+    {{/if}}
+  </dd>
+</dl>
