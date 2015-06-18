@@ -15,6 +15,9 @@
     &:hover {
       background: $lightblue;
     }
+    &.dropdown-toggle {
+      background-color: $blue;
+    }
   }
   &:hover {
     color: white;

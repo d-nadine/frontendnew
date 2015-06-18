@@ -223,7 +223,7 @@
     border: none;
   }
 
-  .autocomplete.is-invalid{
+  .autocomplete.is-invalid {
     border: none;
   }
 
@@ -623,6 +623,8 @@
 
 .email-form-component {
   overflow-x: hidden;
+  margin-top: 66px;
+  border: 1px solid $border;
 
   input::-webkit-input-placeholder {
     color: $muted !important;
@@ -642,13 +644,46 @@
     li.as-selection-item {
       margin-top: 7px;
     }
+    input {
+      padding-top: 0;
+    }
   }
   .email-form {
     border: 0;
   }
   .recipients {
+    float: left;
+    margin-bottom: -1px;
     padding: 0;
-    line-height: 30px;
-    height: 30px;
+    line-height: 50px;
+    height: 50px;
+
+    .as-original {
+      line-height: 50px;
+      height: 50px;
+
+      input {
+        padding-top: 0;
+      }
+    }
   }
+  .is-async {
+    background-color: white;
+
+    .add-on {
+      background-color: white;
+    }
+  }
+}
+
+.block {
+
+  .email-form-component {
+    margin-top: 0;
+    border: 0;
+  }
+}
+
+.note-editor {
+  border-color: $border;
 }
