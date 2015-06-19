@@ -7,8 +7,6 @@
       </div>
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
-      <!-- DELETE addresses.hbs, controller, view ->
-      <!-- DELETE partial shared/addresses -->
       {{#if model.primaryAddress}}
         <div class="readonly readonly-address">
           <div>{{model.primaryAddress.email}}</div>
