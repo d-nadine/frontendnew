@@ -104,7 +104,6 @@
       line-height: 1;
 
       p {
-        margin: 5px 0;
         color: $muted;
       }
 
@@ -610,6 +609,9 @@ input[type="radio"]:checked + label {
 
 }
 
+.task-reference-component {
+  margin-top: -4px;
+}
 
 .forms-meeting-view {
 

@@ -684,6 +684,7 @@
 
   .variadic-table tbody tr {
     td {
+      padding: 0 5px;
 
       a {
         text-decoration: none;
@@ -783,6 +784,10 @@
 
     td.name {
       font-weight: 600;
+
+      img {
+        width: 24px;
+      }
     }
 
     td.phone {
