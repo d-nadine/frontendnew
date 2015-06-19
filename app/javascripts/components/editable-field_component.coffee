@@ -242,7 +242,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   focusContent: (e) ->
     return unless @$().length
     el = $(@$())
-    if $(el.html()).hasClass('placeholder')
+
+    value = @get('bufferedProxy').get(@bufferKey)
+
+    unless value
       el.empty()
 
     el.parents('td:first').addClass('active')

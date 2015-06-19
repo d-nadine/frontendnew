@@ -16,5 +16,11 @@
   <div class="sidebar-panel-content">
     {{email-addresses model=contact parent=parent}}
     {{phone-numbers model=contact parent=parent}}
+    <dl class="dl-horizontal contact-types-list">
+      <dt><i class="ss-standard ss-earth muted"></i></dt>
+      <dd>
+        {{inline-editor model=contact bufferKey="website" notRoutable=true placeholder="Add Website" parent=targetObject}}
+      </dd>
+    </dl>
   </div>
 </div>
