@@ -54,17 +54,6 @@
   }
 
   .pull-right {
-  
-    .settings {
-      float: left;
-      line-height: 40px;
-      padding-right: 7px;
-
-      i {
-        color: #fff;
-        font-size: 16px;
-      }
-    }
 
     .nav {
       margin: 0;
@@ -144,7 +133,6 @@
     }
 
     i {
-      margin-left: 5px;
       position: relative;
       top: 1px;
       font-size: 12px;
@@ -154,7 +142,7 @@
 
     &.active,
     &.active i {
-      color: #fff;
+      color: #333;
     }
   }
 
@@ -197,5 +185,19 @@
   .nav-bar-tag.highlight {
     background-color: #fff;
     @include add-blinker;
+  }
+
+  .nav-icons {
+
+    li {
+
+      a {
+        padding: 12px 20px 20px;
+
+        &.active {
+          background-color: transparent;
+        }
+      }
+    }
   }
 }

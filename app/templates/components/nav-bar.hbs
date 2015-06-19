@@ -10,17 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <div class="pull-right">
-        {{#link-to "settings" class="settings"}}
-          <i class="ss-standard ss-settings"></i>
-        {{/link-to}}
         {{render "search/main"}}
-        <ul class="nav">
-          <li>
-            <a href="#" {{action "logOut"}}>
-              <i class="ss-standard ss-logout"></i>
-            </a>
-          </li>
-        </ul>
       </div>
       <div class="collapse nav-collapse main-nav-collapse">
         <ul class="nav main-nav">
@@ -41,6 +31,12 @@
           </li>
 
           <li>
+            {{#link-to "people.contacts" title="Contacts"}}
+              Contacts
+            {{/link-to}}
+          </li>
+
+          <li>
             {{#link-to "user" currentUser}}
               Tasks
             {{/link-to}}
@@ -51,16 +47,11 @@
               {{tag-link tag=tag transitionToTag="transitionToTag"}}
             </li>
           {{/each}}
-
-          <li>
-            {{#link-to "people.contacts" title="Contacts"}}
-              <i class="ss-symbolicons-block ss-users"></i>
-            {{/link-to}}
-          </li>
-
+        </ul>
+        <ul class="nav pull-right nav-icons">
           <li>
             {{#link-to "pipeline" title="Pipeline"}}
-              <i class="ss-standard ss-barchart"></i>
+              <i class="ss-standard ss-briefcase"></i>
             {{/link-to}}
           </li>
 
@@ -74,6 +65,18 @@
             {{#link-to "reports" title="Reports"}}
               <i class="ss-symbolicons-block ss-barchart"></i>
             {{/link-to}}
+          </li>
+
+          <li>
+            {{#link-to "settings" class="settings"}}
+              <i class="ss-standard ss-settings"></i>
+            {{/link-to}}
+          </li>
+
+          <li>
+            <a href="#" {{action "logOut"}}>
+              <i class="ss-standard ss-logout"></i>
+            </a>
           </li>
         </ul>
       </div>
