@@ -4,7 +4,7 @@
     {{#if isEditing}}
       {{#each phoneNumber in phoneNumbers}}
         {{#multiple-control item=phoneNumber items=phoneNumbers model=model relationship="phoneNumbers" saveModel="stopEditing" labels=Radium.PhoneLabels}}
-          {{phone-input type="text" value=value enter="stopEditing"}}
+          {{phone-input type="text" value=value enter="stopEditing" class="field" skipValidation=true}}
         {{/multiple-control}}
       {{/each}}
     {{else}}

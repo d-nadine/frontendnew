@@ -11,6 +11,9 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
 
       @createFormFromRelationship @get('model'), @relationship, arr
 
+      Ember.run.next =>
+        @$('input.field:first').focus()
+
       false
 
     stopEditing: ->
@@ -35,6 +38,10 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
           @set 'isSaving', false
           @set 'isSubmitted', false
           @get('errorMessages').clear()
+
+        isPrimaryCount = model.get(@relationship).filter((i) -> i.get('isPrimary')).toArray().length
+
+        Ember.assert "You have 0 or more than 1 multiples with isPrimary true", isPrimaryCount == 1
 
         unless model.get('isDirty')
           finish()
@@ -65,6 +72,9 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
 
       target = $(e.target)
       tagName = e.target.tagName.toLowerCase()
+
+      if ['x-check'].any((c) -> target.hasClass(c))
+        return
 
       if (!['input', 'button',  'select', 'i', 'a'].contains(tagName)) || target.hasClass('resource-name')
         @send 'stopEditing'

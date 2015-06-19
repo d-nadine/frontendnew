@@ -19,6 +19,8 @@ Radium.PhoneInputComponent = Ember.TextField.extend Radium.KeyConstantsMixin,
     ), 50
 
   isInvalid: Ember.computed 'value', ->
+    return false if @get('skipValidation')
+
     value = @get('value')
 
     return false unless value?.length

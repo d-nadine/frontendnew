@@ -8,6 +8,8 @@ Radium.FormArrayBehaviour = Ember.Mixin.create
         if @_actions.stopEditing
           @send 'stopEditing'
 
+      false
+
     removeSelection: (item) ->
       parent = @get('parent')
 
