@@ -14,6 +14,9 @@ Radium.XCheckComponent = Ember.Component.extend
   setup: Ember.on 'didInsertElement', ->
     this.$('input').prop('checked', !!this.get('checked'))
 
+  teardown: Ember.on 'willDestroyElement', ->
+    @off "change"
+
   _updateElementValue: ->
     @set 'checked', this.$('input').prop('checked')
 

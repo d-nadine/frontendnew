@@ -1,0 +1,28 @@
+<dl class="dl-horizontal contact-types-list">
+  <dt><i class="ss-standard ss-buildings muted"></i></dt>
+  <dd>
+    {{#if isEditing}}
+      <div>
+        {{multiple-address addresses=addresses parent=this hasEmail=hasEmail positionDropdown=positionDropdown}}
+      </div>
+    {{else}}
+      <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
+      <!-- DELETE addresses.hbs, controller, view ->
+      <!-- DELETE partial shared/addresses -->
+      {{#if model.primaryAddress}}
+        <div class="readonly readonly-address">
+          <div>{{model.primaryAddress.email}}</div>
+          <div>{{model.primaryAddress.phone}}</div>
+          <div>{{model.primaryAddress.street}}</div>
+          <div>{{model.primaryAddress.formatted}}</div>
+          <div>{{model.primaryAddress.country-display country=country}}</div>
+          <div class="location hidden">
+            <a href="#"><i class="ss-standard ss-location"></i></a>
+          </div>
+        </div>
+      {{else}}
+        <span class="empty">Click to add an address</span>
+      {{/if}}
+    {{/if}}
+  </dd>
+</dl>

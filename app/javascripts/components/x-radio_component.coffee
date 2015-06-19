@@ -10,11 +10,9 @@ Radium.XRadioComponent = Ember.Component.extend
 
     Ember.run.schedule('actions', this, 'sendNotification')
 
-  selectionDidChange: Ember.observer 'checked', ->
     Ember.run.next =>
-      return unless el = @$()
-
-      el.prop('checked', @get('checked'))
+      el = @$('input[type=radio]')
+      el.prop('checked', @get('value') == @get('selection'))
 
   radioButtonId: Ember.computed ->
     "checker-#{@get('elementId')}"

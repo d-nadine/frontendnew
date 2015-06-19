@@ -15,7 +15,7 @@
   <div id="addressType">
     {{#each address in addresses}}
       <div>
-        <input name="current" type="radio" {{bind-attr checked=address.isCurrent}} {{action "changeAddress" address on="change"}}><span>{{capitalize address.name}}</span>
+        {{x-radio name="current" value=true selection=address.isCurrent action="changeAddress" item=address leader=address.name}}
       </div>
     {{/each}}
   </div>
