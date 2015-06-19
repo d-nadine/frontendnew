@@ -59,6 +59,7 @@ Radium.DatePickerComponent = Ember.Component.extend
     disabledBinding: 'targetObject.disabled'
     date: Ember.computed.alias 'targetObject.date'
     classNameBindings: [":date-picker"]
+    placeholder: 'Due Date'
 
     init: ->
       @_super.apply(this, arguments)

@@ -1,6 +1,10 @@
 .datepicker-control-box {
+  height: 30px;
+  
   .prepend-group {
     height: 33px;
+    float: left;
+    margin-left: 10px;
 
     .btn {
       height: 33px;
@@ -22,7 +26,8 @@
   }
 
   input {
-    width: 240px;
+    width: calc(100% - 40px);
+    float: left;
     padding-left: 0px;
 
     &.timepicker {
