@@ -28,4 +28,6 @@
       {{tag-autosuggest source=tags destination=contact.tagNames addTag="addTag" removeTag="removeTag" placeholder="add to lists"}}
    </div>
   </div>
+
+  {{assign-to model=contact users=users user=contact.user validator=targetObject}}
 </div>

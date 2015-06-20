@@ -77,3 +77,7 @@
     }
   }
 }
+
+.sync.is-invalid, is-async.is-invalid {
+  border: 1px solid $red !IMPORTANT;
+}

@@ -1,4 +1,4 @@
-<div class="sidebar-panel" id="sidebar-assigned">
+<div class="sidebar-panel sidebar-assigned">
   <div class="sidebar-panel-header">
     <h6 class="sidebar-panel-title">
       Assigned To
@@ -8,7 +8,7 @@
     <div class="assigned-to control-group">
       {{#if isEditing}}
         <div>
-          {{autocomplete-textbox source=users value=controller.form.user queryKey="displayName" validations=userValidations validator=controller validationField="user" action="stopEditing"}}
+          {{autocomplete-textbox source=users value=form.user queryKey="displayName" validations=userValidations validator=this validationField="user" action="stopEditing"}}
         </div>
       {{else}}
         {{#link-to "user" user}}
@@ -20,7 +20,7 @@
         {{/link-to}}
         <p>
           {{#link-to "user" user}}{{user.name}}{{/link-to}}<i class="ss-standard ss-write pull-right"></i><br/>
-          <span class="title muted">{{title}}</span>
+          <span class="title muted">{{user.title}}</span>
         </p>
       {{/if}}
     </div>

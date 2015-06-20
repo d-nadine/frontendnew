@@ -15,8 +15,9 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   needs: ['users', 'contacts', 'companies', 'countries', 'accountSettings', 'contactStatuses']
 
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
-  companies: Ember.computed.alias 'controllers.companies'
+  companies: Ember.computed.oneWay 'controllers.companies'
   contact: Ember.computed.alias 'model'
+  users: Ember.computed.oneWay 'controllers.users'
 
   customFields: Ember.A()
 
