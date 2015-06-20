@@ -1,12 +1,14 @@
 Radium.AddContactsComponent = Ember.Component.extend
   actions:
-    addSelection: (lookup) ->
+    addContact: (lookup) ->
       @get('parent.contactRefs').createRecord
         contact: lookup.get("person")
 
       @get('store').commit()
 
-    removeSelection: (contact) ->
+      false
+
+    removeContact: (contact) ->
       ref = @get('parent.contactRefs').find (ref) -> ref.get('contact.id') == contact.get('id')
 
       return unless ref
@@ -15,25 +17,22 @@ Radium.AddContactsComponent = Ember.Component.extend
 
       @get('store').commit()
 
+      false
+
   isEditable: true
 
-  contactsPicker: Radium.AsyncAutocompleteView.extend
-    actions:
-      addSelection: (item) ->
-        @get('controller').send('addSelection', item)
+  queryParameters: (query) ->
+    term: query
+    email_only: false
+    scopes: ['contact']
 
-      removeSelection: (item) ->
-        @get('controller').send('removeSelection', item)
+  filterResults: (item) ->
+    parent = @get('parent')
+    return if parent.get('contact') == item.get('person')
 
-    sourceBinding: 'controller.targetObject.model.contacts'
-    isEditable: Ember.computed.alias 'controller.isEditable'
-    queryParameters: (query) ->
-      term: query
-      email_only: false
-      scopes: ['contact']
+    not parent.get('contacts').mapProperty('id').contains(item.id)
 
-    filterResults: (item) ->
-      parent = @get('targetObject.parent')
-      return if parent.get('contact') == item.get('person')
+  _setup: Ember.on 'init', ->
+    @_super.apply this, arguments
 
-      not parent.get('contacts').mapProperty('id').contains(item.id)
+    @filterResults = @filterResults.bind(this)

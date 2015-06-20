@@ -1,6 +1,19 @@
 Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   Radium.AttachedFilesMixin,
   actions:
+    addAttendee: (item) ->
+      if @get('isNew')
+        @send('addSelection', item)
+      else
+        @send('addAttendeeToExistingMeeting', item)
+
+      false
+
+    removeAttendee: (item) ->
+      @send('removeSelection', item)
+
+      false
+
     addAttendeeToExistingMeeting: (attendee) ->
       person = attendee.get('person')
 
@@ -129,9 +142,12 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
   contactList: Ember.computed.alias 'controllers.contacts'
   meetingUsers: null
   calendarsOpen: null
+  currentUserEmail: Ember.computed.alias 'currentUser.email'
 
-  init: ->
+  _setup: Ember.on 'init', ->
     @_super.apply this, arguments
+    @filterResults = @filterResults.bind(this)
+
     @set 'meetingUsers', Radium.MeetingUsers.create(parent: this)
     @set 'meetingUsers.meetingId', this.get('id')
     @set 'calendarsOpen', false
@@ -219,3 +235,12 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       attendees.insertAt(0, organizer)
 
     attendees
+
+  queryParameters: (query) ->
+    term: query
+    email_only: true
+    scopes: ['user', 'contact']
+
+  filterResults: (item) ->
+    item.get('email').toLowerCase() != @get('currentUserEmail').toLowerCase() &&
+    !@get('participants').map((selection) -> selection.get('email')).contains(item.get('email'))

@@ -31,7 +31,7 @@
     {{/if}}
     {{#if showOptions}}
       <div class="addresses">
-        <div {{bind-attr class="view.toList.isInvalid:is-invalid view.toList.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
+        <div {{bind-attr class="toIsInvalid:is-invalid toIsValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
           <span class="toggles pull-right">
             {{#unless showCc}}
               <a href="#" class="muted" tabindex="7" {{action "expandList" 'cc'}}>CC</a>
@@ -41,29 +41,29 @@
             {{/unless}}
           </span>
           <label>To:</label>
-          {{view to tabindex=1 placeholder="Names or email addresses" viewName="toList"}}
+          {{email-autosuggest tabindex=1 destination=form.to placeholder="Names or email addresses" showAvatar=false class="email" isValid=toIsValid isInvalid=toIsInvalid}}
         </div>
+      </div>
 
         {{#if showCc }}
           <div class="field control-box control-box-block-level recipients cc">
             <label>CC</label>
-            {{view cc tabindex=8 placeholder="Names or email addresses" viewName="cc"}}
+            {{email-autosuggest tabindex=8 destination=form.cc placeholder="Names or email addresses" showAvatar=false class="email"}}
           </div>
         {{/if}}
 
         {{#if showBcc }}
           <div class="field control-box control-box-block-level recipients bcc">
             <label>BCC</label>
-            {{view bcc tabindex=8 placeholder="Names or email addresses" viewName="bcc"}}
+            {{email-autosuggest tabindex=9 destination=form.bcc placeholder="Names or email addresses" showAvatar=false class="email"}}
           </div>
         {{/if}}
-      </div>
     {{/if}}
     {{#if bulkMode}}
       <div class="addresses bulk">
         {{#unless fromPeople}}
           <div {{bind-attr class="bulkListView.isInvalid:is-invalid bulkListView.isValid:is-valid :field :control-box :control-box-block-level :recipients"}}>
-            {{view bulk tabindex=1 source=form.to placeholder="Add recipient or list" viewName="bulkListView" deleteOnBackSpace=false}}
+            {{email-autosuggest tabindex=1 destination=form.to placeholder="Names or email addresses" showAvatar=false class="email" deleteOnBackSpace=false queryParameters=bulkQueryParameters}}
           </div>
         {{/unless}}
         {{bulk-recipients recipients=form.to readonly=fromPeople removeFromBulkList="removeFromBulkList"}}

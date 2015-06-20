@@ -1,5 +1,4 @@
 require 'lib/radium/time_picker_view'
-require 'lib/radium/meeting_autocomplete_view'
 require 'views/forms/focus_textarea_mixin'
 
 Radium.FormsMeetingView = Radium.FormView.extend
@@ -85,8 +84,6 @@ Radium.FormsMeetingView = Radium.FormView.extend
     isInvalid: Ember.computed 'isSubmitted', 'controller.startsAt', 'controller.endsAt', 'date', ->
       return false unless @get('isSubmitted')
       @get('controller.endsAtIsInvalid')
-
-  attendees: Radium.MeetingAutocompleteView.extend()
 
   cancelMeetingDisabled: Ember.computed 'controller.isDisabled', 'controller.isNew', ->
     @get('controller.isDisabled') || @get('controller.isNew')

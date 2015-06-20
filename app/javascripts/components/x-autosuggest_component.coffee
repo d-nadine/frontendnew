@@ -3,13 +3,20 @@ require 'components/key_constants_mixin'
 Radium.XAutosuggestComponent = Ember.Component.extend
   actions:
     addSelection: (item) ->
+      if @get('addSelection')
+        return @sendAction "addSelection", item
+
       @get('destination').addObject item
 
     removeSelection: (item) ->
+      if @get('removeSelection')
+        return @sendAction "removeSelection", item
+
       @get('destination').removeObject item
 
   classNameBindings: [
     'isInvalid'
+    'isValid'
     'hasUsers:is-valid'
     ':autocomplete'
   ]
@@ -60,7 +67,7 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
     return unless source.get('length')
 
-    results = source.filter(@get('parentView').filterResults.bind(this))
+    results = source.filter(@get('targetObject').filterResults.bind(this))
                    .map (item) =>
                       @mapSearchResult.call this, item
 
@@ -81,11 +88,11 @@ Radium.XAutosuggestComponent = Ember.Component.extend
   autocomplete: Ember.TextField.extend Radium.KeyConstantsMixin,
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'targetObject.currentUser'
-    destinationBinding: 'parentView.destination'
-    placeholderBinding: 'parentView.placeholder'
-    sourceBinding: 'parentView.source'
-    tabindexBinding: 'parentView.tabindex'
-    deleteOnBackSpace: Ember.computed.oneWay 'parentView.deleteOnBackSpace'
+    destinationBinding: 'targetObject.destination'
+    placeholderBinding: 'targetObject.placeholder'
+    sourceBinding: 'targetObject.source'
+    tabindexBinding: 'targetObject.tabindex'
+    deleteOnBackSpace: Ember.computed.oneWay 'targetObject.deleteOnBackSpace'
 
     keyDown: (e) ->
       args = Array.prototype.slice.call(arguments)
@@ -98,14 +105,14 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       value = @get('value') || ''
 
-      if e.keyCode == @SPACE && @get('parentView.allowSpaces')
+      if e.keyCode == @SPACE && @get('targetObject.allowSpaces')
         return callSuper()
 
       if [@SPACE, @ENTER].contains e.keyCode
-        unless @get('parentView').newItemCriteria(value)
+        unless @get('targetObject').newItemCriteria(value)
           return callSuper()
 
-        @get('parentView').selectionAdded value
+        @get('targetObject').selectionAdded value
         @set 'value', ''
         return false
 
@@ -117,7 +124,7 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       return unless last
 
-      @get('parentView').send('removeSelection', last)
+      @get('targetObject').send('removeSelection', last)
 
       false
 
@@ -132,24 +139,24 @@ Radium.XAutosuggestComponent = Ember.Component.extend
         searchObjProps: "name"
         formatList: @formatList.bind(this)
         getAvatar: @getAvatar.bind(this)
-        selectionAdded: @get('parentView').selectionAdded.bind(@get('parentView'))
+        selectionAdded: @get('targetObject').selectionAdded.bind(@get('targetObject'))
         resultsHighlight: true
         canGenerateNewSelections: true
         usePlaceholder: true
         retrieveLimit: 8
         startText: @get('placeholder')
         keyDelay: 100
-        minChars: @get('parentView').get('minChars')
+        minChars: @get('targetObject').get('minChars')
 
-      if @get('parentView').newItemCriteria
-        options = $.extend {}, options, newItemCriteria: @get('parentView').newItemCriteria.bind(this)
+      if @get('targetObject').newItemCriteria
+        options = $.extend {}, options, newItemCriteria: @get('targetObject').newItemCriteria.bind(this)
 
-      @$().autoSuggest {retrieve: @get('parentView').retrieve.bind(this)}, options
+      @$().autoSuggest {retrieve: @get('targetObject').retrieve.bind(this)}, options
 
     formatList: (data, elem) ->
       content = ""
 
-      if @get('parentView.showAvatarInResults')
+      if @get('targetObject.showAvatarInResults')
         content = """
           #{@getAvatar(data)}
           #{data.name}

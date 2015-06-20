@@ -316,35 +316,18 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
     @get('showOptions')
 
-  to: Radium.EmailAsyncAutocompleteView.extend
-    classNameBindings: [':email']
-    sourceBinding: 'controller.form.to'
-    showAvatar: false
-    isInvalid: Ember.computed 'controller.isSubmitted', 'controller.form.to.[]', ->
-      return unless @get('controller.isSubmitted')
+  toIsInvalid: Ember.computed 'isSubmitted', 'form.to.[]', ->
+    return unless @get('isSubmitted')
 
-      !!!@get('controller.form.to.length')
+    !!!@get('form.to.length')
 
-    isValid: Ember.computed 'controller.form.to.[]', ->
-      @get('controller.form.to.length') > 0
+  toIsValid: Ember.computed 'form.to.[]', ->
+    @get('form.to.length') > 0
 
-  cc: Radium.EmailAsyncAutocompleteView.extend
-    classNameBindings: [':email']
-    sourceBinding: 'controller.form.cc'
-    showAvatar: false
-
-  bcc: Radium.EmailAsyncAutocompleteView.extend
-    classNameBindings: [':email']
-    sourceBinding: 'controller.form.bcc'
-    showAvatar: false
-
-  bulk: Radium.EmailAsyncAutocompleteView.extend
-    classNameBindings: [':email']
-    showAvatar: false
-    queryParameters: (query) ->
-      scopes: ['user', 'contact', 'tag']
-      term: query
-      email_only: true
+  bulkQueryParameters: (query) ->
+    scopes: ['user', 'contact', 'tag']
+    term: query
+    email_only: true
 
   signatureTextArea: Radium.TextArea.extend
     classNameBindings: ['isInvalid']

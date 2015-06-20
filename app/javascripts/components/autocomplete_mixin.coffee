@@ -132,12 +132,10 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     @set('isLoading', true)
 
-    @autocompleteItemType().find(queryParameters).then((results) =>
+    @autocompleteItemType().find(queryParameters).then((results) ->
       process results
+    ).finally =>
       @set('isLoading', false)
-
-    , Radium.rejectionHandler)
-    .then(null, Radium.rejectionHandler)
 
     null
 
