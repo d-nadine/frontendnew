@@ -374,6 +374,22 @@
   display: none;
 }
 
+.sidebar .inline-editor-component.is-editing {
+  border: 1px solid #cacaca;
+  background: white;
+  padding: 2px;
+}
+
+.sidebar .sidebar-panel .sidebar-list {
+  .ss-list {
+    float: left;
+  }
+
+  .tag-picker-component .tags {
+    margin-left: 35px;
+  }
+}
+
 .sidebar-panel-header {
   i.ss-write {
     margin: 5px 10px 0 0;
