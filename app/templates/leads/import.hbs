@@ -96,7 +96,7 @@
             <div class="icon"><i class="ss-social"></i></div>
             <div class="description">Add to Lists</div>
             <div class="field">
-              {{tag-picker model=this tagNames=tagNames}}
+              {{tag-autosuggest source=tags destination=tagNames addTag="addTag" removeTag="removeTag" placeholder="add to lists"}}
             </div>
           </div>
         </div>

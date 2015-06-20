@@ -1,0 +1,18 @@
+<ul class="as-selections">
+  {{#each selection in destination}}
+    <li {{bind-attr class=":as-selection-item :blur"}}>
+        <a class="as-close" {{action "removeSelection" selection target="view" bubbles=false}}>×</a>
+      {{#if showAvatar}}
+        {{avatar selection}}
+      {{/if}}
+      {{#if selection.name}}
+        {{selection.name}}
+      {{else}}
+        {{selection.email}}
+      {{/if}}
+    </li>
+  {{/each}}
+  <li class="as-original">
+    {{view autocomplete}}
+  </li>
+</ul>

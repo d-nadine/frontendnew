@@ -1,8 +1,10 @@
 require 'mixins/multiple_address_behaviour'
+require "mixins/persist_tags_mixin"
 
 Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviour,
   Radium.MultipleAddressBehaviour,
   Radium.TrackContactMixin,
+  Radium.PersistTagsMixin,
   Ember.Evented,
   actions:
     modelChanged: (model) ->
@@ -142,6 +144,14 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
   addresses: Ember.A()
   needs: ['users', 'accountSettings', 'contactStatuses', 'addressbook', 'peopleIndex']
+
+  isNew: Ember.computed.oneWay 'model.isNew'
+
+  tagNames: Ember.computed 'form', 'model', ->
+    if form = @get('form')
+      form.get('tagNames')
+    else if model = @get('model')
+      model.get('tagNames')
 
   contactCustomFields: []
 

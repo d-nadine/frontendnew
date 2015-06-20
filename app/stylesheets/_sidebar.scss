@@ -380,16 +380,6 @@
   padding: 2px;
 }
 
-.sidebar .sidebar-panel .sidebar-list {
-  .ss-list {
-    float: left;
-  }
-
-  .tag-picker-component .tags {
-    margin-left: 35px;
-  }
-}
-
 .sidebar-panel-header {
   i.ss-write {
     margin: 5px 10px 0 0;
@@ -609,16 +599,18 @@
     }
   }
 }
-#sidebar-list {
 
+.sidebar-list {
   i {
     float: left;
     margin-right: 18px;
   }
-  .sidebar-tags-view {
+
+  .autocomplete {
     display: inline-block;
   }
 }
+
 #sidebar-attachment {
 
   .upload-item {

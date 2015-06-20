@@ -1,4 +1,5 @@
 require 'mixins/user_combobox_props'
+require "mixins/persist_tags_mixin"
 
 rejectEmpty = (headerInfo, key) ->
         info = headerInfo.get(key)
@@ -10,6 +11,7 @@ rejectEmpty = (headerInfo, key) ->
 
 Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   Radium.UserComboboxProps,
+  Radium.PersistTagsMixin,
 
   actions:
     importContacts: ->

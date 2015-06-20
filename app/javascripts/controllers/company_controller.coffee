@@ -1,4 +1,7 @@
+require "mixins/persist_tags_mixin"
+
 Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
+  Radium.PersistTagsMixin,
   Radium.CanFollowMixin,
   actions:
     displayDeals: ->

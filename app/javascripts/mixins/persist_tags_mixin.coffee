@@ -1,4 +1,4 @@
-Radium.SidebarTagsController = Radium.ObjectController.extend
+Radium.PersistTagsMixin = Ember.Mixin.create
   actions:
     addTag: (tag) ->
       return if @get('tagNames').mapProperty('name').contains tag
@@ -23,7 +23,7 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
           if tag = tags.find((tag) -> tag.get('name') == tagName)
             addressbook.pushObject tag
 
-    removeSelection: (tag) ->
+    removeTag: (tag) ->
       return unless @get('tagNames').mapProperty('name').contains(tag.get('name'))
 
       @get('tagNames').removeObject(tag)
@@ -31,4 +31,5 @@ Radium.SidebarTagsController = Radium.ObjectController.extend
       @get('store').commit()
 
   needs: ['tags', 'addressbook']
-  isEditable: true
+  tags: Ember.computed.oneWay 'controllers.tags'
+

@@ -1,16 +1,19 @@
 require "mixins/save_contact_actions"
+require "mixins/persist_tags_mixin"
 
 Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.UpdateContactPoller,
   Radium.CanFollowMixin,
   Radium.TrackContactMixin,
   Radium.SaveContactActions,
+  Radium.PersistTagsMixin,
   Ember.Evented,
   actions:
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
 
-  needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'contactStatuses']
+  needs: ['users', 'contacts', 'companies', 'countries', 'accountSettings', 'contactStatuses']
+
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   companies: Ember.computed.alias 'controllers.companies'
   contact: Ember.computed.alias 'model'

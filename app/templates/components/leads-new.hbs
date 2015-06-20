@@ -36,7 +36,7 @@
 {{/each}}
 <div class="item">
   <div class="field">
-    {{tag-picker model=model tagNames=model.tagNames placeholder="asdf"}}
+    {{tag-autosuggest source=tags destination=model.tagNames addTag="addTag" removeTag="removeTag" placeholder="add to lists"}}
   </div>
 </div>
 <div class="item">

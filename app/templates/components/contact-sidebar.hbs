@@ -25,7 +25,7 @@
     {{multiple-addresses model=contact parent=parent}}
     <div class="sidebar-list">
       <i class="ss-standard ss-list"></i>
-      {{tag-picker model=contact tagNames=contact.tagNames placeholder="add to lists"}}
-   </Div>
+      {{tag-autosuggest source=tags destination=contact.tagNames addTag="addTag" removeTag="removeTag" placeholder="add to lists"}}
+   </div>
   </div>
 </div>

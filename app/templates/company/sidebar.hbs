@@ -38,7 +38,7 @@
     </div>
     <div class="sidebar-panel-content">
       <div class="tag-picker">
-        {{render 'sidebar/tags' model}}
+        {{tag-autosuggest source=tags destination=model.tagNames addTag="addTag" removeTag="removeTag" placeholder="add to lists"}}
       </div>
     </div>
   </div>

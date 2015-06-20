@@ -1,4 +1,6 @@
-Radium.VariadicItemController = Radium.ObjectController.extend
+require "mixins/persist_tags_mixin"
+
+Radium.VariadicItemController = Radium.ObjectController.extend Radium.PersistTagsMixin,
   needs: ['users']
   users: Ember.computed.oneWay 'controllers.users'
   contactStatuses: Ember.computed.oneWay 'parentController.targetObject.contactStatuses'

@@ -261,8 +261,13 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       heading: "Lists"
       bindings: [
         {name: "model", value: "model"}
+        {name: "destination", value: "model.tagNames"}
+        {name: "source", value: "tags"}
+        {name: "abortResize", value: true, static: true}
+        {name: "addTag", value: "addTag", static: true}
+        {name: "removeTag", value: "removeTag", static: true}
       ]
-      component: "tag-picker"
+      component: "tag-autosuggest"
     }
     {
       id: "status"
