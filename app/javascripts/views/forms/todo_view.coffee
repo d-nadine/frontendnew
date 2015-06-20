@@ -1,4 +1,3 @@
-require 'lib/radium/checkbox'
 require 'views/forms/todo_field_view'
 require 'views/forms/form_view'
 require 'views/forms/focus_textarea_mixin'

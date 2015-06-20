@@ -1,8 +1,7 @@
 require 'lib/radium/progress_bar'
-require 'lib/radium/radio'
 require 'lib/radium/value_validation_mixin'
 
-Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMixin,
+Radium.DealsNewView = Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMixin,
   actions:
     toggleChecklist: (evt) ->
       return if @get('disabled')
@@ -34,8 +33,10 @@ Radium.DealsNewView= Ember.View.extend Radium.ScrollTopMixin, Radium.ScrollTopMi
   dealStates: Ember.View.extend
     template: Ember.Handlebars.compile """
       <ul>
-      {{#each controller.statuses}}
-        {{view Radium.Radiobutton selectedValueBinding="controller.status" name="type" leaderBinding="this" valueBinding="this" tagName="li"}}
+      {{#each status in controller.statuses}}
+        <li>
+        {{x-radio name="type" selection=controller.status leader=status value=status}}
+        </li>
       {{/each}}
       </ul>
     """
