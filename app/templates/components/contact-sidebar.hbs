@@ -46,9 +46,9 @@
     </div>
   </div>
 
-  {{partial 'shared/attachments'}}
-
   {{#each field in customFields }}
-    {{customfield-editor field=field resource=model parent=this}}
+    {{customfield-editor field=field resource=contact parent=targetObject}}
   {{/each}}
+
+  {{sidebar-attachments files=targetObject.files model=contact}}
 </div>

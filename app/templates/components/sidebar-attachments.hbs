@@ -1,0 +1,19 @@
+<div class="sidebar-panel-header">
+  <h6 class="sidebar-panel-title">
+    Attachments
+  </h6>
+</div>
+<div class="sidebar-panel-content">
+  {{#if files}}
+    {{upload-filelist files=files}}
+  {{else}}
+    <div class="sidebar-panel-content">
+      No attachments
+    </div>
+  {{/if}}
+  {{#unless hideUploader}}
+    <div class="pull-right upload-file-btn">
+      {{file-uploader files=files disableSave=disableSave model=model class="btn-text btn-muted pull-right"}}
+    </div>
+  {{/unless}}
+</div>
