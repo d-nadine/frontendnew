@@ -1,0 +1,7 @@
+<i {{bind-attr class=":ss-standard icon"}}></i>
+{{#unless isEditing}}
+  {{leader}} {{value}}
+{{else}}
+  {{autocomplete-textbox source=source value=form.value validations=validations validator=this validationField=validationField action="stopEditing"}}
+{{/unless}}
+<i class="ss-standard ss-write pull-right"></i>

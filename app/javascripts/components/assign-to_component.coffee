@@ -21,5 +21,5 @@ Radium.AssignToComponent = Ember.Component.extend Radium.InlineEditoBehaviour,
       @get('model').save()
         .finally => @get('isSubmitted', false)
 
-    isValid: Ember.computed 'form.user', 'isSubmitted', ->
-      @get('form.user')
+  isValid: Ember.computed 'form.user', 'isSubmitted', ->
+    @get('form.user')

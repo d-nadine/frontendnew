@@ -1,5 +1,5 @@
 Radium.InlineEditoBehaviour = Ember.Mixin.create
-  classNameBindings: ['isEditing:inline-editor-open']
+  classNameBindings: ['isEditing:inline-editor-open', ':editor']
 
   isEditing: false
   isSaving: false

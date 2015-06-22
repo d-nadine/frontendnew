@@ -18,6 +18,7 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
   companies: Ember.computed.oneWay 'controllers.companies'
   contact: Ember.computed.alias 'model'
   users: Ember.computed.oneWay 'controllers.users'
+  leadSources: Ember.computed.oneWay 'controllers.accountSettings.leadSources'
 
   customFields: Ember.A()
 

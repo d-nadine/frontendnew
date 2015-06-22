@@ -39,13 +39,16 @@
     </div>
     <div class="sidebar-panel-content">
       {{inline-editor model=contact bufferKey="about" notRoutable=true placeholder="Add about text" parent=targetObject class="about-text" multiline=true}}
-    <div>
-      <i class="ss-standard ss-earth"></i> from {{source}} <i class="ss-standard ss-write pull-right"></i>
     </div>
+    {{inline-dropdown icon="ss-earth" leader="from" model=contact value=contact.source key="source" source=leadSources}}
     <div>
       <i class="ss-standard ss-user"></i> added on {{formatDateTime contact.createdAt format="date"}}
     </div>
   </div>
-</div>
 
+  {{partial 'shared/attachments'}}
+
+  {{#each field in customFields }}
+    {{customfield-editor field=field resource=model parent=this}}
+  {{/each}}
 </div>
