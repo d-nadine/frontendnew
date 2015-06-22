@@ -7,7 +7,9 @@ Radium.SocialMediaComponent = Ember.Component.extend
   personsMedia: Ember.computed 'person.contactInfo.socialProfiles.[]', 'socialMedia', ->
     socialMedia = @get('socialMedia')
 
-    @get('person.contactInfo.socialProfiles').find (p) ->
+    return unless socialProfiles = @get('person.contactInfo.socialProfiles')
+
+    socialProfiles.find (p) ->
       p.get('type') == socialMedia
 
 

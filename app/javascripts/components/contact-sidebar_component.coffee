@@ -21,6 +21,11 @@ Radium.ContactSidebarComponent = Ember.Component.extend
       contact.save().finally =>
         @set 'isSaving', false
 
+    confirmDeletion: ->
+      @sendAction "confirmDeletion"
+
+      false
+
   classNameBindings: [':form']
 
   shared: false

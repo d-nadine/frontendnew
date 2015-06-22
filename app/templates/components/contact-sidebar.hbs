@@ -51,4 +51,10 @@
   {{/each}}
 
   {{sidebar-attachments files=targetObject.files model=contact}}
+
+  <div class="sidebar-panel sidebar-delete">
+    <div class="sidebar-panel-content">
+      <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Contact</button>
+    </div>
+  </div>
 </div>
