@@ -2,7 +2,7 @@
   
   a.cancel, .save, .delete {
     cursor: default;
-    opacity: 0;
+    opacity: 1;
     transition: .2s;
   }
   &.is-editing {
@@ -10,11 +10,15 @@
       cursor: pointer;
       opacity: 1;
     }
+    .actions {
+      display: block;
+    }
   }
   .actions {
     text-align: right;
     margin-top: 10px;
     margin-bottom: 10px;
+    display: none;
   }
   .editable-name {
     font-weight: 600;

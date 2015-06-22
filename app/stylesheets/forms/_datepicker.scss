@@ -1,13 +1,13 @@
 .datepicker-control-box {
   height: 30px;
-  
+
   .prepend-group {
-    height: 33px;
+    height: inherit;
     float: left;
     margin-left: 10px;
 
     .btn {
-      height: 33px;
+      height: inherit;
       padding: {
         top: 0;
         bottom: 0;
@@ -44,5 +44,45 @@
 
   .switch {
     display: table-cell;
+  }
+  &:before {
+    display: none;
+  }
+  &:after {
+    display: none;
+  }
+}
+
+.date-timepicker-component {
+
+  .date-picker-component {
+    float: left;
+    width: 240px;
+    height: 44px;
+    line-height: 44px;
+    margin-left: 10px;
+    background: white;
+
+    .text {
+      float: left;
+      line-height: inherit;
+    }
+    .date-picker {
+      width: calc(100% - 90px);
+      margin-left: 10px;
+      height: inherit;
+    }
+  }
+  .time-picker {
+    float: left;
+    margin-left: 10px;
+    width: 140px;
+    height: 44px;
+    line-height: 44px;
+    background: white;
+
+    input {
+      height: inherit !important;
+    }
   }
 }

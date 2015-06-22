@@ -134,6 +134,9 @@
     display: inline-block;
     width: 100%;
     margin-top: 10px;
+    position: relative;
+
+
   }
 
   .subject-wrap {
@@ -154,6 +157,9 @@
     float: right;
     vertical-align: bottom;
     line-height: 50px;
+    position: absolute;
+    top: 8px;
+    right: 0;
   }
 
   .email-form.single-mode .email-form-body .message .more-options a {
@@ -196,6 +202,10 @@
     position: absolute;
     top: 10px;
     color: #a9a9a9;
+  }
+
+  .note-editable {
+    width: 100%;
   }
 
   .textbox-wrap .prompt {
@@ -376,7 +386,8 @@
     z-index: 9999;
     display: none;
     width: 30%;
-    right: 95px;
+    right: 30px;
+    margin-top: -70px;
   }
 
   .send-later .datepicker-wrap .datepicker {
@@ -388,11 +399,6 @@
   .send-later .datepicker-wrap .datepicker .date-timepicker-component {
     background: #f9f9f9;
     display: block;
-  }
-
-  .send-later .datepicker-wrap .datepicker .date-timepicker-component .control-box.timepicker {
-    position: relative;
-    top: 4px;
   }
 
   .send-later .datepicker-wrap .datepicker .date-timepicker-component .submit {
