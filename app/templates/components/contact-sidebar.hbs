@@ -30,4 +30,22 @@
   </div>
 
   {{assign-to model=contact users=users user=contact.user validator=targetObject}}
+
+  <div class="sidebar-panel sidebar-about">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        About
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{inline-editor model=contact bufferKey="about" notRoutable=true placeholder="Add about text" parent=targetObject class="about-text" multiline=true}}
+    <div>
+      <i class="ss-standard ss-earth"></i> from {{source}} <i class="ss-standard ss-write pull-right"></i>
+    </div>
+    <div>
+      <i class="ss-standard ss-user"></i> added on {{formatDateTime contact.createdAt format="date"}}
+    </div>
+  </div>
+</div>
+
 </div>

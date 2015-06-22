@@ -5,11 +5,21 @@ Radium.AssignToComponent = Ember.Component.extend Radium.InlineEditoBehaviour,
   Radium.UserComboboxProps,
   actions:
     startEditing: ->
-      @set 'form', Ember.Object.create user: null
+      @set 'form', Ember.Object.create user: @get('user')
 
     stopEditing: ->
       @set 'isSubmitted', true
-      p @get('isValid')
+
+      return unless @get('form.user')
+
+      @set 'isEditing', false
+
+      @set('model.user', @get('form.user'))
+
+      return unless @get('model.isDirty')
+
+      @get('model').save()
+        .finally => @get('isSubmitted', false)
 
     isValid: Ember.computed 'form.user', 'isSubmitted', ->
       @get('form.user')

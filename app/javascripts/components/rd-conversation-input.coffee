@@ -47,22 +47,9 @@ Radium.RdConversationInputComponent = Ember.Component.extend Radium.KeyConstants
 
   keyDown: (e) ->
     if e.keyCode == @ENTER
-      docFragment = document.createDocumentFragment()
-      newEle = document.createTextNode('\n')
-      docFragment.appendChild newEle
-      newEle = document.createElement('br')
-      docFragment.appendChild newEle
-      range = window.getSelection().getRangeAt(0)
-      range.deleteContents()
-      range.insertNode docFragment
-      range = document.createRange()
-      range.setStartAfter newEle
-      range.collapse true
-      sel = window.getSelection()
-      sel.removeAllRanges()
-      sel.addRange range
-      false
       e.preventDefault()
+      @insertLineBreak()
+      false
 
   _setup: Ember.on 'didInsertElement', ->
     @get('targetObject').on('formReset', this, 'onFormReset')

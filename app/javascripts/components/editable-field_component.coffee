@@ -72,6 +72,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
           model.one 'didReload', ->
             self.notifyPropertyChange 'model'
             self.$().html self.get('markUp')
+            self.setEndOfContentEditble()
 
           model.reload()
       ).catch((error) ->
@@ -130,7 +131,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         "<a class='route' href='#{@get('route')}'>#{value}</a>"
       else
         value
-
 
     unless validator = @get('validator')
       return
@@ -193,8 +193,12 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     @setEndOfContentEditble()
 
   input: (e) ->
-    text =  @$().text()
-    @get('bufferedProxy').set(@get('bufferKey'), @$().text())
+    text =  if @get('multiline')
+              @$().html()
+            else
+              @$().text()
+
+    @get('bufferedProxy').set(@get('bufferKey'), text)
     @$().html @get('markUp')
     @setEndOfContentEditble()
 
@@ -202,6 +206,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     bufferedProxy = @get('bufferedProxy')
 
     if e.keyCode == @ENTER
+      if @get('multiline')
+        e.preventDefault()
+        @insertLineBreak()
+        return false
       Ember.run.next =>
         @send 'updateModel'
       @$().blur()

@@ -9,7 +9,10 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
     setBindingValue: (object) ->
       @set "bufferedProxy.#{@get('bufferKey')}", object.get(@field)
 
-      @setEndOfContentEditble()
+      cancel = Ember.run.later =>
+        @setEndOfContentEditble()
+      , 50
+
       false
 
   getField: ->

@@ -27,6 +27,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
         else
           @set 'value', value
 
+      @set 'backup', value
+
       @getTypeahead().hide()
 
       return unless @get('action')
@@ -53,6 +55,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       false
 
     removeValue: ->
+      if value = @get('value')
+        @set 'backup', value
+
       @set('value', null)
       @autocompleteElement().val('').focus()
       @send 'showAll'
@@ -60,6 +65,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       event.stopPropagation()
       event.preventDefault()
       false
+
+  backup: null
 
   sync: Ember.computed.not 'isAsync'
 
@@ -88,15 +95,29 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
     @setValueText()
 
+    if value = @get('value')
+      @set 'backup', value
+
     @autocompleteElement().off 'blur'
     typeahead = @getTypeahead()
 
     $('body').on 'click.autocomplete.txt.component', (e) =>
+      text = @autocompleteElement().val() || length
+
+      unless text.length
+        Ember.run.next =>
+          @reset()
+
       if typeahead = @getTypeahead()
         typeahead.hide() if typeahead.shown
 
   autocompleteOver: Ember.on 'willDestroyElement', ->
     $('body').off 'click.autocomplete.txt.component'
+
+  reset: ->
+    return unless backup = @get('backup')
+
+    @set 'value', backup
 
   setValueText: ->
     el = @autocompleteElement()
@@ -145,3 +166,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       e.preventDefault()
 
     return false
+
+  keyDown: (e) ->
+    if e.keyCode != @ESCAPE
+      return @_super.apply this, arguments
+
+    @reset()
