@@ -21,6 +21,33 @@
     }
   }
 
+  .user-name {
+    position: absolute;
+    right: 0;
+  }
+
+  .user-detail .user-change-avatar,  .contact-detail .user-change-avatar {
+    outline: none;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .user-detail .user-change-avatar {
+    right: auto;
+    left: 52px;
+  }
+
+  .user-detail .avatar-picker-component i, .contact-detail .avatar-picker-component i {
+    opacity: 1;
+  }
+
+  .user-detail .avatar-picker-component .close {
+    position: relative;
+    left: -87px;
+  }
+
   .form > .sidebar-panel:first-of-type .sidebar-panel-content {
     border-bottom: 0px;
     padding-bottom: 0;

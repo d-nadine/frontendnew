@@ -1,7 +1,20 @@
 <div class="form">
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      {{render 'sidebar/user_header' model}}
+      <div class="user-detail">
+        <div class="user-avatar pull-left">
+          {{avatar-picker person=model}}
+        </div>
+      </div>
+      <div class="user-name">
+        <div class="header">
+          <h4 class="name">
+            {{inline-editor model=model bufferKey="firstName" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
+            {{inline-editor model=model bufferKey="lastName" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
+          </h4>
+          {{inline-editor model=model bufferKey="title" notRoutable=true placeholder="Add title" parent=this}}
+        </div>
+      </div>
     </div>
   </div>
   <div class="sidebar-panel">
