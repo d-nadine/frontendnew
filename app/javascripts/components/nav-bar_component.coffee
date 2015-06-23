@@ -1,5 +1,10 @@
 Radium.NavBarComponent = Ember.Component.extend
   actions:
+    toggleNotifications: ->
+      @sendAction "toggleNotifications"
+
+      false
+
     transitionToTag: (tag) ->
       @sendAction "transitionToTag", tag
 

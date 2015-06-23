@@ -98,7 +98,7 @@
   .sidebar-panel:nth-of-type(2) .sidebar-panel-content {
     padding-top: 10px;
   }
-  .sidebar-panel:nth-of-type(2) dt {
+  .sidebar-panel dt {
     width: 14px;
     text-align: left;
     padding-right: 20px;
@@ -348,6 +348,7 @@
   }
   .name {
     margin: 0;
+    line-height: 30px;
   }
 
   a:not(.btn) {
@@ -418,7 +419,7 @@
   }
 }
 
-.contact-types-list {
+.dl-horizontal {
   margin: 0 0 10px;
 
   .btn-remove-field {

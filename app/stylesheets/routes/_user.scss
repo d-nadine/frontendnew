@@ -186,19 +186,17 @@
 
 .user-view,
 .contact-view,
-.calendar-view {
+.company-view,
+.calendar-view,
+.deal-view {
 
   .main-content {
     width: 100%;
     margin: 20px 0 0;
   }
-}
-
-.user-view,
-.contact-view,
-.company-view,
-.calendar-view {
-  .tasks-content {
+  .tasks-content,
+  .form-box-view,
+  .task-list-view {
     max-width: 835px;
 
     h2 {

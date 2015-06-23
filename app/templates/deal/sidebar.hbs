@@ -1,4 +1,42 @@
 <div class="form">
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <h2 class="deal-title">
+        <i class="ss-standard ss-briefcase"></i>
+        {{inline-editor model=model bufferKey="name" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
+      </h2>
+    </div>
+  </div>
+  
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-target"></i></dt>
+        <dd>7 Days in Current Status</dd>
+      </dl>
+
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-like"></i></dt>
+        <dd>
+          {{#if isEditing}}
+            <div>
+              {{view view.statusSelect class="status-select"}}
+            </div>
+          {{else}}
+            <div class="deal-status">
+              <p>{{status}}<i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i></p>
+            </div>
+          {{/if}}
+        </dd>
+      </dl>
+
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-dollarsign"></i></dt>
+        <dd>{{amount}}</dd>
+      </dl>
+    </div>
+  </div>
+
   {{assign-to model=model users=users user=model.user validator=this}}
 
   {{#unless isPublic}}
@@ -14,7 +52,7 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-navigate"></i>Primary Contact
+        Primary Contact
       </h6>
     </div>
     <div class="sidebar-panel-content">
@@ -39,7 +77,7 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-users"></i>Additional Contacts
+        Additional Contacts
       </h6>
     </div>
     <div class="sidebar-panel-content">
@@ -48,36 +86,6 @@
       </div>
     </div>
   </div>
-
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard"></i>Expected Close Date
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      {{inline-datepicker model=model key="expectedCloseDate"}}
-    </div>
-  </div>
-
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        <i class="ss-standard ss-chart"></i> Forecast
-      </h6>
-    </div>
-    <div class="sidebar-panel-content">
-      {{view Radium.ProgressBar percentageBinding="percentage"}}
-      <div class="checklist-plus">
-        <a href="#checklistModal" {{action "showChecklist" this}} class="btn btn-success">
-          <i class="ss-standard ss-plus"></i>
-        </a>
-      </div>
-      <div {{bind-attr class=":total total:white"}}>{{total}}%</div>
-    </div>
-  </div>
-
-  {{inline-money model=model key="value" class="sidebar-panel" currencySymbol=currencySymbol}}
 
   <div class="sidebar-panel sidebar-about">
     <div class="sidebar-panel-header">
@@ -97,13 +105,6 @@
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <button class="btn btn-warning btn-block publish" {{action "togglePublished"}} {{bind-attr disabled=isSaving}}>
-        {{#if isPublic}}
-          Unpublish
-          {{else}}
-          Publish
-        {{/if}}
-      </button>
       <button class="btn btn-danger btn-block" {{action "confirmDeletion"}} {{bind-attr disabled=isSaving}}>Delete</button>
     </div>
   </div>

@@ -10,24 +10,6 @@
   }
 }
 
-.company-view,
-.deal-view {
-  .main-content {
-    margin-top: 199px;
-  }
-
-  .sidebar {
-    top: 279px;
-    left: 10px;
-  }
-
-  &.is-scrolled {
-    .sidebar {
-      top: 135px;
-    }
-  }
-}
-
 .sticky-banner {
   height: 196px;
   position: fixed;

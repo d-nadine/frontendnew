@@ -224,6 +224,7 @@
   .deal-status{
     p {
       font-size: 15px;
+      margin-bottom: 0;
     }
 
     .icon-edit{
@@ -319,5 +320,59 @@
     overflow: hidden;
     white-space: nowrap;
     line-height: 30px;
+  }
+}
+
+.deal-view {
+
+  .sidebar {
+
+    .deal-title {
+      display: inline-block;
+      width: 100%;
+      margin-left: 0;
+
+      > i {
+        float: left;
+        margin-right: 10px;
+        font-size: 22px;
+        position: relative;
+        top: 2px;
+      }
+      .inline-editor-component {
+        float: left;
+        display: inline-block;
+        width: calc(100% - 38px);
+        font-size: 22px;
+      }
+    }
+    .contacts-picker {
+
+      ul {
+        width: 100%;
+
+        li {
+          padding: 0;
+          background-color: transparent !important;
+          width: 100%;
+          height: auto;
+          border-radius: 0px;
+
+          img {
+            margin-right: 20px;
+          }
+
+          &.as-original {
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+  .main-content {
+
+    .sticky-banner {
+      display: none;
+    }
   }
 }
