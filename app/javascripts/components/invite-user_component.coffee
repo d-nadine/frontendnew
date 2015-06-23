@@ -1,4 +1,4 @@
-Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserMixin,
+Radium.InviteUserComponent = Ember.Component.extend
   actions:
     inviteUser: ->
       user = Radium.UserInvitation.createRecord
@@ -24,13 +24,13 @@ Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserM
 
       user.get('transaction').commit()
 
-    reset: ->
-      @setProperties
-        newUserEmail: null
-        error: null
+  reset: ->
+    @setProperties
+      newUserEmail: null
+      error: null
 
-  needs: 'users'
-  users: Ember.computed.alias 'controllers.users'
+  classNameBindings: [':form-inline', 'didInvite:success']
+
   newUserEmail: null
   error: null
 
@@ -44,3 +44,11 @@ Radium.InviteUserController = Radium.ObjectController.extend Radium.CurrentUserM
     isValid and not @get('isDuplicate')
 
   isDisabled: Ember.computed.not 'isValidEmail'
+
+  didInviteUser: Ember.observer 'didInvite', ->
+    if @get('didInvite')
+      Ember.run.later(=>
+        $.when(@$('.help-inline').fadeOut()).then(=>
+          @reset()
+        )
+      , 1500)

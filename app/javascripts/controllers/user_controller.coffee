@@ -6,6 +6,8 @@ Radium.UserController = Radium.ObjectController.extend
   isEditable: true
   isEditing: false
 
+  users: Ember.computed.oneWay 'controllers.users'
+
   userIsCurrentUser: Ember.computed 'model', 'currentUser', ->
     @get('model') == @get('currentUser')
 

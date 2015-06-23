@@ -148,7 +148,7 @@
   {{#if userIsCurrentUser}}
     <div class="sidebar-panel">
       <div class="sidebar-panel-content">
-        {{render "inviteUser"}}
+        {{invite-user users=users emailIsValid=emailIsValid}}
       </div>
     </div>
   {{/if}}
