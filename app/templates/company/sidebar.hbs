@@ -1,9 +1,16 @@
 <div class="sidebar-wrap">
-  {{render 'sidebar/name' model}}
+  <h2 class="deal-title">
+    {{inline-editor model=model bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
+  </h2>
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      {{render "sidebar/company_website" model}}
+      <dl class="dl-horizontal contact-types-list">
+        <dt><i class="ss-standard ss-earth muted"></i></dt>
+        <dd>
+          {{inline-editor model=model bufferKey="website" notRoutable=true placeholder="Add Website" parent=this externalUrl=true}}
+        </dd>
+    </dl>
       {{multiple-addresses model=model parent=this hasEmail=true}}
     </div>
   </div>
@@ -26,7 +33,7 @@
     </div>
   </div>
 
-  {{render 'sidebar/user' model}}
+  {{assign-to model=model users=users user=model.user validator=this}}
 
   <div class="sidebar-panel sidebar-about">
     <div class="sidebar-panel-header">

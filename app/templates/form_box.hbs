@@ -33,7 +33,8 @@
       {{render "forms/note" noteForm}}
     {{/if}}
     {{#if showEmailForm}}
-      {{email-form email=emailForm parent=this signature=signature addSignature="addSignature" mode="form" saveEmail="saveEmail"}}
+      {{log emailForm}}
+      {{email-form form=emailForm parent=this signature=signature addSignature="addSignature" mode="form" saveEmail="saveEmail"}}
     {{/if}}
 
     <div class="form-box-controls">

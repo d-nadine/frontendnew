@@ -43,7 +43,7 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
 
         isPrimaryCount = model.get(@relationship).filter((i) -> i.get('isPrimary')).toArray().length
 
-        Ember.assert "You have 0 or more than 1 multiples with isPrimary true", isPrimaryCount == 1
+        Ember.assert "You have 0 or more than 1 multiples with isPrimary true", isPrimaryCount <= 1
 
         unless model.get('isDirty')
           finish()

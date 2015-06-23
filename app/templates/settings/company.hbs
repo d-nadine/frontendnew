@@ -29,7 +29,9 @@
       </div>
       <div class="controls settings-user-details">
         {{#if isAdmin}}
-          {{render 'sidebar/name' account}}
+          <h2 class="deal-title">
+            {{inline-editor model=account bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
+          </h2>
         {{else}}
           <h4>{{companyName}}</h4>
         {{/if}}

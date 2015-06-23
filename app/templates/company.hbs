@@ -17,7 +17,9 @@
           <button class="btn" disabled="disabled">Follow</button>
         </div>
         <div class="deal-banner-details">
-          {{render 'sidebar/name' model}}
+          <h2 class="deal-title">
+            {{inline-editor model=model bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
+          </h2>
         </div>
       </div>
       <div class="pull-left company-banner-address">

@@ -13,8 +13,13 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
         @setEndOfContentEditble()
       , 50
 
+      @set 'isEditing', false
+
+      @$().blur()
+
       false
 
+  classNameBindings: ['isEditing']
   getField: ->
     @get('queryKey')
 

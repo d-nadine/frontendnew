@@ -374,7 +374,7 @@
   display: none;
 }
 
-.sidebar .inline-editor-component.is-editing {
+.sidebar .editable.is-editing, .inline-editor-component.is-editing {
   border: 1px solid #cacaca;
   background: white;
   padding: 2px;

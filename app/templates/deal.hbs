@@ -18,7 +18,10 @@
       </div>
     </div>
     <div class="pull-left deal-banner-details">
-      {{render 'sidebar/name' model}}
+      <h2 class="deal-title">
+        {{inline-editor model=model bufferKey="name" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
+      </h2>
+
       <p>
         {{#if reference}}
           Related to {{#link-to "emails.show" "inbox" reference}}{{reference.subject}}{{/link-to}}<br>

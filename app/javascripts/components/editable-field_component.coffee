@@ -19,9 +19,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         target.transitionToRoute routable.humanize(), routable
 
     updateModel: ->
-      if @get('isInvalid')
-        return @get('containingController').send 'flashError', 'Field is not valid.'
-
       unless bufferedProxy = @get('bufferedProxy')
         return
 
@@ -46,14 +43,26 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       bufferKey = @get('bufferKey')
 
+      model = @get('model')
+
       return unless bufferedProxy.hasBufferedChanges
 
+      backup = model.get(bufferKey)
+
+      resetModel = =>
+        bufferedProxy.discardBufferedChanges()
+        bufferedProxy.set bufferKey, backup
+        model.set bufferKey, backup
+        model.reset()
+        markUp = @get('markUp')
+
+        return @setMarkup()
+
       if @get('isInvalid')
-        return @get('containingController').send 'flashError', 'Field is not valid.'
+        @get('containingController').send 'flashError', 'Field is not valid.'
+        resetModel()
 
       @set 'isSaving', true
-
-      model = @get('model')
 
       if saveAction = @get("saveAction")
         @get('containingController').send saveAction, this
@@ -76,7 +85,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
           model.reload()
       ).catch((error) ->
-        bufferedProxy.discardBufferedChanges()
+        resetModel()
       ).finally =>
         @set 'isSaving', false
 
@@ -129,18 +138,31 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       if @get('route')
         "<a class='route' href='#{@get('route')}'>#{value}</a>"
+      else if @get('externalUrl')
+        "<a href='#{value}' target='_blank'>#{value}</a>"
       else
         value
 
-    unless validator = @get('validator')
-      return
 
-    Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, ->
+    return unless @get('validator') || @get('isRequired')
+
+    if validator = @get('validator')
+      if typeof validator == "string"
+        validatorRegex = new RegExp(validator)
+      else
+        validatorRegex = validator
+
+    Ember.defineProperty this, 'isInvalid', Ember.computed bufferDep, 'isRequired', ->
       value = @get('bufferedProxy').get(bufferKey)
+
+      if @get('isRequired') && !value
+        return true
 
       return false unless value
 
-      isInvalid = not validator.test value
+      return false unless validatorRegex
+
+      isInvalid = not validatorRegex.test value
 
       isInvalid
 
@@ -271,3 +293,5 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     @set "contenteditable", "false"
     el.parents('td:first').removeClass('active')
     el.parent().css('text-overflow','ellipsis')
+
+  isRequired: false

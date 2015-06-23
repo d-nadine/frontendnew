@@ -1,5 +1,5 @@
 <div class="form">
-  {{render 'sidebar/user' model}}
+  {{assign-to model=model users=users user=model.user validator=this}}
   {{render 'sidebar/deal_status' model}}
 
   {{#unless isPublic}}

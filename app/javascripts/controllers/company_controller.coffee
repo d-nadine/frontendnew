@@ -14,9 +14,9 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   needs: ['users', 'accountSettings',  'tags', 'companies', 'countries', 'contactStatuses', 'pipelineOpendeals']
   contactStatuses: Ember.computed.alias 'controllers.contactStatuses'
+  users: Ember.computed.oneWay 'controllers.users'
   loadedPages: [1]
 
-  # FIXME: How do we determine this?
   isEditable: true
 
   membersText: Ember.computed 'contacts.[]', ->
@@ -32,6 +32,8 @@ Radium.CompanyController = Radium.ObjectController.extend Radium.AttachedFilesMi
     return unless contacts
 
     contacts > @get('truncatedContacts.length')
+
+  nameValidations: ['required']
 
   groupedDeals: Ember.arrayComputed 'contacts', 'deals.@each.status', {
     initialValue: []
