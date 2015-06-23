@@ -13,6 +13,10 @@
     left: 88px;
   }
 
+  .editable.is-invalid {
+    border: 1px solid $red;
+  }
+
   .control-label{
     font-weight: bold;
   }

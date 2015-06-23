@@ -19,8 +19,18 @@
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      {{render 'sidebar/phone' model}}
-      {{render 'sidebar/email' model}}
+      <dl class="dl-horizontal contact-types-list">
+        <dt><i class="ss-standard ss-phone muted"></i></dt>
+        <dd>
+          {{inline-editor model=model bufferKey="phone" notRoutable=true placeholder="Add phone here" parent=this}}
+        </dd>
+      </dl>
+      <dl class="dl-horizontal contact-types-list">
+        <dt><i class="ss-standard ss-mail muted"></i></dt>
+        <dd>
+          {{inline-editor model=model bufferKey="email" notRoutable=true placeholder="Add email here" parent=this validator=Radium.EMAIL_REGEX}}
+        </dd>
+      </dl>
       {{#if model.contactInfo}}
         {{render 'sidebar/social' model.contactInfo}}
       {{/if}}
