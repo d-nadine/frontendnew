@@ -25,11 +25,6 @@
     width: 255px !IMPORTANT;
   }
 
-  .user-name {
-    position: absolute;
-    right: 0;
-  }
-
   .user-detail .user-change-avatar,  .contact-detail .user-change-avatar {
     outline: none;
     padding: 0;
@@ -41,6 +36,10 @@
   .user-detail .user-change-avatar {
     right: auto;
     left: 52px;
+
+    i {
+      left: 3px;
+    }
   }
 
   .user-detail .avatar-picker-component i, .contact-detail .avatar-picker-component i {
@@ -501,12 +500,15 @@
     font-size: 14px;
     float: right;
     position: relative;
-    top: 9px;
+    top: -4px;
   }
 
   .resource-name {
     cursor: pointer;
     font-size: 16px;
+  }
+  .editable-field-component {
+    line-height: 26px;
   }
 }
 

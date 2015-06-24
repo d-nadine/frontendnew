@@ -6,11 +6,27 @@
     }
   }
 
+  .user-detail {
+    display: inline-block;
+    float: left;
+  }
+
   .user-name {
-    position: absolute;
-    right: 0;
-    top: -6px;
-    left: 88px;
+    float: left;
+    width: calc(100% - 93px);
+
+    .header {
+      margin-top: 5px;
+
+      .name {
+        line-height: 14px;
+      }
+      .inline-editor-component {
+        float: left;
+        width: 100%;
+        margin-top: 9px;
+      }
+    }
   }
 
   .editable.is-invalid {
