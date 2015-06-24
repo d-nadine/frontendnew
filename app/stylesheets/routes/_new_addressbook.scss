@@ -244,7 +244,7 @@
   }
 
   .subhead .nav-wrap .tools .caret {
-    margin-top: 6px;
+    margin-top: 16px;
   }
 
   .subhead .col-selector {
@@ -512,11 +512,14 @@
     padding-left: 0 !important;
   }
 
+  .people-index-view .table-container {
+    width: calc(100% - 238px) !important;
+  }
+
   .table-container {
     position: relative;
     height: 100%;
     display: inline-block;
-    width: calc(100% - 238px) !important;
 
     .left-table,
     .right-table {
