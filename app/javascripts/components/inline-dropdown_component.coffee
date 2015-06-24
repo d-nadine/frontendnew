@@ -8,6 +8,7 @@ Radium.InlineDropdownComponent = Ember.Component.extend Radium.InlineEditoBehavi
       false
 
     stopEditing: ->
+      return if @isDestroyed || @isDestroying
       @set 'isSubmitted', true
 
       return unless value = @get('form.value')

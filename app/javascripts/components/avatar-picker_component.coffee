@@ -6,6 +6,7 @@ Radium.AvatarPickerComponent = Ember.Component.extend
      false
 
     stopEditing: ->
+      return if @isDestroyed || @isDestroying
       return if @get('isUploading')
       @set 'isEditing', false
 

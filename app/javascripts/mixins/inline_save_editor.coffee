@@ -6,6 +6,8 @@ Radium.InlineSaveEditor = Ember.Mixin.create
       false
 
     stopEditing: ->
+      return if @isDestroyed || @isDestroying
+
       @set 'isSubmitted', true
 
       return unless value = @get('form.value')

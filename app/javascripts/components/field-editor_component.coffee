@@ -150,6 +150,7 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     Ember.run.scheduleOnce 'afterRender', this, 'triggerEdit'
 
   stopEditing: (e) ->
+    return if @isDestroyed || @isDestroying
     return unless @get('isEditing')
 
     if ["BUTTON", "A"].contains e.target.tagName

@@ -7,6 +7,7 @@ Radium.MultipleControlComponent = Ember.Component.extend Radium.ComponentContext
       @sendAction('saveModel') if @get('saveModel')
 
     stopEditing: ->
+      return if @isDestroyed || @isDestroying
       @sendAction 'saveModel' unless @get('model.isNew')
 
     removeMultiple: (relationship, item) ->

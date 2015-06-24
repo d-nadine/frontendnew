@@ -19,6 +19,8 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
       false
 
     stopEditing: ->
+      return if @isDestroyed || @isDestroying
+
       @set 'isSaving', true
       @set 'isSubmitted', true
 

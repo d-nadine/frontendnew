@@ -8,6 +8,8 @@ Radium.AssignToComponent = Ember.Component.extend Radium.InlineEditoBehaviour,
       @set 'form', Ember.Object.create user: @get('user')
 
     stopEditing: ->
+      return if @isDestroyed || @isDestroying
+
       @set 'isSubmitted', true
 
       return unless @get('form.user')
