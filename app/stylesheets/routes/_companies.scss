@@ -24,3 +24,19 @@
     }
   }
 }
+
+.companies-view {
+
+  .subhead {
+    margin: 10px 15px 20px;
+
+    .count {
+      float: left;
+
+      .chosen,
+      .total {
+        font-size: 24px;
+      }
+    }
+  }
+}
