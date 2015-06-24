@@ -26,6 +26,20 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
       @get('store').commit()
       false
 
+    setPrimaryContact: (contact) ->
+      unless contact
+        @send 'flashError', 'You have not selected a contact'
+        return false
+
+      @set('model.contact', contact)
+
+      @set('form.contact', contact)
+
+      @get('model').save().then (result) =>
+        @send 'flashSuccess', "#{contact.get('displayName')} is now the primary contact."
+
+      false
+
   needs: ['accountSettings', 'users', 'contacts']
 
   users: Ember.computed.oneWay 'controllers.users'

@@ -7,6 +7,7 @@ Radium.DealView = Radium.View.extend Radium.StickyBannerMixin,
   didInsertElement: ->
     @_super.apply this, arguments
     @notifyPropertyChange('dealProgressBarWidth')
+    @set 'controller.form', Ember.Object.create(contact: @get('controller.model.contact'))
 
   dealProgressBarWidth: Ember.computed 'controller.status', ->
     return 0 unless Ember.$('.deal-progress').length

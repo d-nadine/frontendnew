@@ -1,6 +1,5 @@
 <div class="form">
   {{assign-to model=model users=users user=model.user validator=this}}
-  {{render 'sidebar/deal_status' model}}
 
   {{#unless isPublic}}
     <div class="sidebar-panel sidebar-panel-warning">
@@ -31,7 +30,7 @@
         {{/if}}
       </div>
       <div class="clearfix">
-        {{render 'sidebar/contact_picker' model}}
+         {{autocomplete-textbox scopes="contact" value=form.contact queryKey="displayName" action="setPrimaryContact" validations=contactValidations validator=controller validationField="contact" placeholder="Add Primary Contact" class="contact-picker"}}
         <p class="title muted">{{contact.title}}</p>
       </div>
     </div>

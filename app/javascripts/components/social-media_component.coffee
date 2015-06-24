@@ -29,4 +29,4 @@ Radium.SocialMediaComponent = Ember.Component.extend
     unless @get('hasMedia')
       return e.preventDefault()
 
-    @_super.apply this arguments
+    @_super.apply this, arguments
