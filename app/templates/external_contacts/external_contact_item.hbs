@@ -14,7 +14,7 @@
         <dl class="dl-horizontal contact-types-list">
         <dt><i class="ss-standard ss-mail muted"></i></dt>
         <dd>
-          {{#link-to "emails.mailTo" "inbox" this}} {{email}}{{/link-to}}
+          {{#link-to "contact" this (query-params form="email") class="btn btn-link"}}{{email}}{{/link-to}}
         </dd>
       </dl>
       </div>

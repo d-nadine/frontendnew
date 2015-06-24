@@ -30,7 +30,7 @@
     {{#unless contact.isPersonal}}
       <span class='badge badge-info'>Radium Contact</span>
       <p>
-        {{#link-to "emails.mailTo" "inbox" contact class="btn btn-link"}}
+        {{#link-to "contact" contact (query-params form="email") class="btn btn-link"}}
           <i class="ss-standard ss-mail"></i> {{contact.primaryEmail.value}}
         {{/link-to}}
         <br>
