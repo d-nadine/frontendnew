@@ -1,9 +1,7 @@
-require 'mixins/inline_editor_behaviour'
-
-Radium.InlineDropdownComponent = Ember.Component.extend Radium.InlineEditoBehaviour,
+Radium.InlineSaveEditor = Ember.Mixin.create
   actions:
     startEditing: ->
-      @set 'form', Ember.Object.create value: @get('value')
+      @set('form', Ember.Object.create(value: @get('model').get(@get('key'))))
 
       false
 
@@ -23,10 +21,7 @@ Radium.InlineDropdownComponent = Ember.Component.extend Radium.InlineEditoBehavi
 
       false
 
-  _initialize: Ember.on 'init', ->
+  _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
-    key = "form.#{@get('key')}"
-
-    Ember.defineProperty this, 'isValid', Ember.computed key, 'isSubmitted', ->
-      @get('form.user')
+    @set('form', Ember.Object.create(value: @get('model').get(@get('key'))))

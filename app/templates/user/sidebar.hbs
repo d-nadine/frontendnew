@@ -49,21 +49,6 @@
           <div class="pull-left">
             {{currentMonth}}
           </div>
-          <div class="sales-total pull-right">
-            {{#view Radium.InlineEditorView valueBinding="salesGoal"}}
-              {{#if isEditing}}
-                <div {{bind-attr class="view.isValid:success:error :control-group"}}>
-                  <div class="input-prepend">
-                    <span class="add-on">{{currencySymbol}}</span>
-                    {{input type="number" value=view.value class="field span2" min="0"}}
-                  </div>
-                </div>
-              {{else}}
-                <label class="control-label blue money">{{currency salesGoal}} <i class="ss-write pull-right" {{action "toggleEditor" target="view" bubbles=false}}></i></label>
-              {{/if}}
-            {{/view}}
-          </div>
-          <div class="clearfix"></div>
           <div class="sales-forecast">
             {{view Radium.ProgressBar percentageBinding="salesGoalPercentage"}}
             <div {{bind-attr class=":total salesGoalPercentage:white"}}>{{salesGoalPercentage}}%</div>

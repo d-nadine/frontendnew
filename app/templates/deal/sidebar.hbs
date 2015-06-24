@@ -56,12 +56,9 @@
       </h6>
     </div>
     <div class="sidebar-panel-content">
-      <div class="date-picker">
-        {{render 'sidebar/date_picker' model}}
-      </div>
+      {{inline-datepicker model=model key="expectedCloseDate"}}
     </div>
   </div>
-
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
@@ -80,7 +77,7 @@
     </div>
   </div>
 
-  {{render 'sidebar/amount' model}}
+  {{inline-money model=model key="value" class="sidebar-panel" currencySymbol=currencySymbol}}
 
   <div class="sidebar-panel sidebar-about">
     <div class="sidebar-panel-header">
@@ -90,9 +87,6 @@
     </div>
     <div class="sidebar-panel-content">
       {{inline-editor model=model bufferKey="about" notRoutable=true placeholder="Add about text" parent=this class="about-text" multiline=true}}
-      <div>
-        <i class="ss-standard ss-earth"></i> from {{source}} <i class="ss-standard ss-write pull-right"></i>
-      </div>
       <div>
         <i class="ss-standard ss-user"></i> added on {{formatDateTime createdAt format="date"}}
       </div>

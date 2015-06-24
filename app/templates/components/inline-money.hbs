@@ -1,0 +1,20 @@
+<div class="sidebar-panel-header">
+  <i class="ss-standard ss-write pull-right" {{action "toggleEditor" bubbles=false}}></i>
+  <h6 class="sidebar-panel-title">
+    <i class="ss-standard ss-dollarsign"></i> {{form.value}} Amount
+  </h6>
+</div>
+<div class="sidebar-panel-content">
+  {{#if isEditing}}
+    <div {{bind-attr class="isValid:success:error :control-group"}}>
+      <div class="input-prepend">
+        <span class="add-on">{{currencySymbol}}</span>
+        {{currency-input value=form.value class="span2" submit="stopEditing"}}
+      </div>
+    </div>
+  {{else}}
+    <span class="money inline-editor-text">
+      {{currency form.value}}
+    </span>
+  {{/if}}
+</div>
