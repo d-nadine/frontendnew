@@ -27,11 +27,11 @@ reduceByStatus = (crossfilterGroups, context) ->
   )
 
 Radium.ReportsController = Ember.ArrayController.extend
-  needs: ['application', 'account', 'accountSettings']
-  dealStates: Ember.computed.alias 'controllers.accountSettings.dealStates'
+  needs: ['application', 'account', 'accountSettings', 'pipeline']
 
-  account: Ember.computed.alias 'controllers.account'
-  app: Ember.computed.alias 'controllers.application'
+  dealStates: Ember.computed.oneWay 'controllers.accountSettings.dealStates'
+  account: Ember.computed.oneWay 'controllers.account'
+  app: Ember.computed.oneWay 'controllers.application'
 
   domain: Ember.computed 'startDate', 'endDate', ->
     if !!@get("startDate") and !!@get("endDate")
@@ -104,15 +104,15 @@ Radium.ReportsController = Ember.ArrayController.extend
     @set 'allCompanies', companies.all()
 
     totals = {}
-    allTotals.forEach (item) =>
+    allTotals.forEach (item) ->
       totals[item.key] = item.value
 
     status_totals = {}
-    allStatuses.forEach (item) =>
+    allStatuses.forEach (item) ->
       status_totals[item.key] = item.value
 
     deals = {}
-    allDeals.forEach (item) =>
+    allDeals.forEach (item) ->
       deals[item.key] = item.value
 
     workflowObjects = []
@@ -136,7 +136,7 @@ Radium.ReportsController = Ember.ArrayController.extend
     totalClosed = workflowObjects.filterBy('name', 'closed')[0].total
 
     @set('workflowObjects', workflowObjects)
-    @set('totalClosed', totalClosed)
+    @set('totalClosed', totalClosed || 0)
 
   actions:
     linkToPipeline: (state) ->

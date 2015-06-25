@@ -30,12 +30,12 @@
     {{#each workflow in workflowObjects}}
       <div class="summary">
         <div class="infographic">
-          {{report-icons 
+          {{report-icons
             total=workflow.status
             icon=workflow.icon
             fontFamily="ss-symbolicons"}}
         </div>
-        <div class="text-center summary-details"> 
+        <div class="text-center summary-details">
           <a href="#" {{action 'linkToPipeline' workflow.name}}>
             <h2>{{workflow.status}} {{workflow.name}}</h2>
           </a>
@@ -48,7 +48,7 @@
     {{/each}}
   </div>
 </div>
-<section id="report-sales-section" class="report-section">
+<section id="report-sales-section" {{bind-attr class="totalClosed::hidden :report-section"}}>
   <div class="page-header">
     <div class="pull-right report-section-total">
       {{currency totalClosed}}
@@ -56,16 +56,16 @@
     <h4>Sales</h4>
   </div>
   <div class="charts">
-    {{pie-chart 
-      dimension=user 
+    {{pie-chart
+      dimension=user
       group=users
       action="filterByUser"
       radius="120"
       title="Sales By Person"
       valueFormat="money"}}
 
-    {{pie-chart 
-      dimension=company 
+    {{pie-chart
+      dimension=company
       group=companies
       action="filterByCompany"
       radius="120"
