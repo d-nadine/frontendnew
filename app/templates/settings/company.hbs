@@ -5,11 +5,6 @@
         <button type="button" {{action "confirmDestroyAccount"}} class="btn btn-danger btn-main">
           Delete Organization And All Users
         </button>
-        <div class="import-switch">
-          <strong>Track all new mail automatically
-          {{#if isSaving}}<img src="/images/loading/ajax-loader.gif"/>{{/if}}</strong>
-          {{toggle-switch checked=account.importedContactsGlobal action="switchTrackAllContacts" dontPropagate=true}}
-       </div>
       {{/if}}
     </div>
     <div class="control-group">
@@ -32,6 +27,11 @@
           <h2 class="deal-title">
             {{inline-editor model=account bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
           </h2>
+           <div class="import-switch">
+             <strong>Track all new mail automatically
+             {{#if isSaving}}<img src="/images/loading/ajax-loader.gif"/>{{/if}}</strong>
+             {{toggle-switch checked=account.importedContactsGlobal action="switchTrackAllContacts" dontPropagate=true}}
+          </div>
         {{else}}
           <h4>{{companyName}}</h4>
         {{/if}}

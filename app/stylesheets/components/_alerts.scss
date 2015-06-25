@@ -23,11 +23,16 @@
     opacity: 1;
     font-size: 9px;
     line-height: 0;
-    top: 6px;
+    top: 1px;
     text-shadow: none;
     color: #fed1a7;
     background: #2d2d2d;
     @include border-radius(20px);
+
+    i {
+      position: relative;
+      top: 1px;
+    }
   }
 
   a {

@@ -1,5 +1,4 @@
 <div class="pipeline-top">
-  {{view view.pipelineStateName class="inline-field"}}
   <div class="btn-toolbar">
     {{#if currentUser.isAdmin}}
       {{#if parentController.hasMultipleItems}}
@@ -14,6 +13,7 @@
       {{/if}}
     {{/if}}
   </div>
+  {{view view.pipelineStateName class="inline-field"}}
 </div>
 {{#if currentUser.isAdmin}}
   <div class="pipeline-bottom">

@@ -105,10 +105,14 @@
 .form-horizontal .settings-user-details {
   overflow: hidden;
   margin-left: 150px;
+  width: 40%;
 
   h2 {
-    font-size: 17.5px;
     margin: 0 0 20px;
+
+    .resource-name {
+      font-size: 24px;
+    }
   }
 
   label.control-label {
@@ -122,6 +126,13 @@
       opacity: 0.3;
       font-size: 12px;
     }
+  }
+  #appendedPrependedInput {
+    float: left;
+  }
+  .user-phone {
+    float: left;
+    clear: both;
   }
 }
 
@@ -151,6 +162,7 @@ input.inline-field {
 .api-key-panel {
   .control-group {
     margin: 0;
+    margin-bottom: 0 !important;
   }
 
   .control-label {
@@ -186,6 +198,8 @@ input.api-field {
 
 .import-switch {
   margin-top: 25px;
+  line-height: 30px;
+
   .switch {
     position: relative;
     top: -3px;
@@ -227,7 +241,8 @@ input.api-field {
 }
 
 .settings-users-list {
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 40px;
 
   li {
     padding: {
@@ -504,6 +519,7 @@ input.api-field {
 .settings-general-component {
   .excluded-domains {
     list-style: none;
+    margin-left: 0;
 
     .btn-remove-field {
       position: relative;
@@ -524,7 +540,7 @@ input.api-field {
       .pipeline-top {
         float: left;
         display: inline-block;
-        width: 400px;
+        width: 500px;
 
         input {
           line-height: 42px;
@@ -532,6 +548,8 @@ input.api-field {
           padding: 0 0 0 10px;
           float: left;
           margin-bottom: 0;
+          margin-left: 30px;
+          width: 300px;
 
           &.inline-field:hover,
           &.inline-field:focus {
@@ -599,9 +617,6 @@ input.api-field {
     .control-group {
       margin-bottom: 25px;
     }
-    .switch {
-      margin-left: 35px;
-    }
     .form-actions {
       padding-left: 0;
     }
@@ -609,11 +624,23 @@ input.api-field {
       top: 0;
     }
     .settings-company-view fieldset {
-      width: 750px;
+      width: 100%;
     }
 
     .invite-user-view {
       margin-bottom: 20px;
+    }
+
+    .invite-user-component {
+      margin-bottom: 40px;
+
+      .invite-team {
+        height: 44px;
+        border-radius: 0px; 
+        box-shadow: none;
+        padding: 0 10px;
+        width: 300px;
+      }
     }
   }
 }
