@@ -33,7 +33,7 @@
     right: 0;
   }
 
-  .user-detail .user-change-avatar {
+  .user-change-avatar {
     right: auto;
     left: 52px;
 
@@ -41,6 +41,8 @@
       left: 3px;
     }
   }
+
+
 
   .user-detail .avatar-picker-component i, .contact-detail .avatar-picker-component i {
     opacity: 1;

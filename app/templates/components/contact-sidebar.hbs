@@ -39,10 +39,13 @@
     </div>
     <div class="sidebar-panel-content">
       {{inline-editor model=contact bufferKey="about" notRoutable=true placeholder="Add about text" parent=targetObject class="about-text" multiline=true}}
-    </div>
-    {{inline-dropdown icon="ss-earth" leader="from" model=contact value=contact.source key="source" source=leadSources}}
-    <div>
-      <i class="ss-standard ss-user"></i> added on {{formatDateTime contact.createdAt format="date"}}
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-earth muted"></i></dt>
+        <dd class="source">{{inline-dropdown leader="from" model=contact value=contact.source key="source" source=leadSources}}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-user muted"></i></dt>
+        <dd>added on {{formatDateTime contact.createdAt format="date"}}</dd>
     </div>
   </div>
 

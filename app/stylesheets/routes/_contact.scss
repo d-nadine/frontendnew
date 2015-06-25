@@ -77,6 +77,20 @@
     }
   }
 
+  .source {
+
+    .editor > i:first-of-type {
+      display: none;
+    }
+    .inline-editor-open .autocomplete-textbox {
+      width: 200px;
+
+      .add-on i {
+
+      }
+    }
+  }
+
   .inline-autocomplete-component {
     &.company {
       i {
