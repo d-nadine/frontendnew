@@ -8,3 +8,10 @@ Ember.Object.reopen
         ret[prop] = this[prop]
 
     ret
+
+this.oldDasherize = String.prototype.dasherize
+
+self = this
+
+String.prototype.dasherize = ->
+  self.oldDasherize.call(this).replace(/\//g, '-')
