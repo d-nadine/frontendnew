@@ -42,16 +42,13 @@
         <label class="control-label">Phone</label>
         {{view view.phone placeholder="Phone Number" class="user-phone" disabledBinding="isSaving"}}
       </div>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <div class="control-group">
-      <label class="control-label">
-        <i class="ss-standard ss-write blue"></i> Signature
-      </label>
-      <div class="controls">
-        {{textarea rows="3" cols="15" value=settings.signature disabledBinding="settings.isSaving"}}
+      <div class="control-group">
+        <label class="control-label">
+          Signature
+        </label>
+        <div class="controls">
+          {{textarea rows="3" cols="15" value=settings.signature disabledBinding="settings.isSaving"}}
+        </div>
       </div>
     </div>
   </fieldset>

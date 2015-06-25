@@ -1,13 +1,11 @@
 <div class="pipeline-states-list">
   {{each controller itemViewClass="Radium.PipelineStatesItemView"}}
 
-  <div class="row">
-    <div class="span5 pipeline-state-create">
-      {{#if currentUser.isAdmin}}
-        <button class="btn btn-large btn-success" {{action "createPipelineState" bubbles=false}}>
-          Add Pipeline State
-        </button>
-      {{/if}}
-    </div>
+  <div class="span5 pipeline-state-create">
+    {{#if currentUser.isAdmin}}
+      <button class="btn btn-large btn-success" {{action "createPipelineState" bubbles=false}}>
+        Add Pipeline State
+      </button>
+    {{/if}}
   </div>
 </div> <!-- /.pipeline-states-list -->
