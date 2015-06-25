@@ -1,4 +1,4 @@
-<div class="task-list">
+<div {{bind-attr class="model.length::hidden :task-list"}}>
   {{#if model.isLoading}}
     {{partial 'is_loading'}}
   {{else}}

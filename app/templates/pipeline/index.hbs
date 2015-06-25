@@ -8,7 +8,9 @@
   <div class="pipeline-new-form">
     {{partial "pipeline/add_lead_btn"}}
     {{partial "pipeline/form_buttons"}}
-    <a href="#" class="btn btn-none pipeline-reset" {{action "resetFilters"}}><i class="ss-standard ss-sync"></i> Reset</a>
+    {{#if filterStartDate}}
+      <a href="#" class="btn btn-none pipeline-reset" {{action "resetFilters"}}><i class="ss-standard ss-sync"></i> Reset</a>
+    {{/if}}
   </div>
 
   <div class="pull-right page-header-controls">

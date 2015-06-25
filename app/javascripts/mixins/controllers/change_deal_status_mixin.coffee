@@ -15,6 +15,10 @@ Radium.ChangeDealStatusMixin = Ember.Mixin.create
           @get('controllers.contact')?.notifyPropertyChange('dealsTotal')
 
       @set 'status', status
-      @send 'showStatusChangeConfirm', this, commit
+
+      if status == "lost"
+        @send 'showStatusChangeConfirm', this, commit
+      else
+        commit()
 
   needs: ['contact']
