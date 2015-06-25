@@ -309,7 +309,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     @get('forwardMode') || @get('replyMode')
 
   showOptions: Ember.computed 'singleMode', 'bulkMode', 'replyMode', 'forwardMode', 'formMode', ->
-    @get('singleMode') || @get('forwardMode') || @get('formMode')
+    !@get('bulkMode')
 
   showSubject: Ember.computed 'showOptions', 'replyMode', ->
     return true unless @get('replyMode')
