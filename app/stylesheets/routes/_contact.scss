@@ -329,6 +329,30 @@
     font-size: 24px;
     margin-bottom: 5px;
   }
+
+  .meeting-form-invite {
+
+    .date-picker-component {
+      width: 300px;
+
+      input {
+        width: calc(100% - 80px);
+      }
+    }
+  }
+
+  .email-form-component {
+
+    .email-autosuggest-component {
+
+      .as-selection-item {
+        height: 28px;
+        line-height: 26px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
+    }
+  }
 }
 .tasks-content {
 
