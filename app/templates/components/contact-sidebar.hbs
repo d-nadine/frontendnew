@@ -25,7 +25,7 @@
     {{multiple-addresses model=contact parent=parent}}
     <div class="sidebar-list">
       <i class="ss-standard ss-list"></i>
-      {{tag-autosuggest source=tags destination=contact.tagNames addTag="addTag" removeTag="removeTag" placeholder="add to lists"}}
+      {{tag-autosuggest source=tags destination=contact.tagNames addTag="addTag" removeTag="removeTag" placeholder="Add to lists"}}
    </div>
   </div>
 
@@ -41,11 +41,11 @@
       {{inline-editor model=contact bufferKey="about" notRoutable=true placeholder="Add about text" parent=targetObject class="about-text" multiline=true}}
       <dl class="dl-horizontal">
         <dt><i class="ss-standard ss-earth muted"></i></dt>
-        <dd class="source">{{inline-dropdown leader="from" model=contact value=contact.source key="source" source=leadSources}}</dd>
+        <dd class="source">{{inline-dropdown leader="From" model=contact value=contact.source key="source" source=leadSources}}</dd>
       </dl>
       <dl class="dl-horizontal">
         <dt><i class="ss-standard ss-user muted"></i></dt>
-        <dd>added on {{formatDateTime contact.createdAt format="date"}}</dd>
+        <dd>Added on {{formatDateTime contact.createdAt format="date"}}</dd>
     </div>
   </div>
 

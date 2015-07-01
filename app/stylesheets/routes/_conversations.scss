@@ -220,23 +220,11 @@
   }
 }
 
-.conversations-table .table-container {
-  width: calc(100% - 10px) !IMPORTANT;
-}
 
 .conversations-table .email-sender {
   max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.conversations-table .table-container .variadic-table th {
-
-}
-
-.conversations-table .table-container .right-table .variadic-table {
-  width: 100%;
-  table-layout: auto;
 }
 
 .conversations-table .variadic-table .check {
@@ -250,18 +238,56 @@
 }
 
 .conversations-table .right-table .variadic-table {
+  width: 100%;
+  table-layout: fixed;
+
   .assign {
-    min-width: 150px;
     width: 17%;
 
     .assignto-picker-component {
       width: 100%;
+
+      .assignto-left {
+        width: 100%;
+
+        .to {
+          width: calc(100% - 44px);
+        }
+      }
     }
   }
   .next-task {
     width: 17%;
   }
+  .subject {
+    width: 45%;
 
+    a {
+      width: calc(100% - 40px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 40px;
+    }
+
+    img {
+      float: left;
+      position: relative;
+      top: 10px;
+      width: 22px;
+      -webkit-filter: grayscale(100%); 
+      filter: grayscale(100%);
+    }
+  }
+  .received {
+    width: 8%;
+  }
+  .choose {
+    width: 13%;
+    border-right: 0 !important;
+  }
 }
 
 .conversations-table .variadic-table tbody tr .assign .assignto {
@@ -272,33 +298,7 @@
   right: 14px;
 }
 
-.conversations-table .variadic-table tbody tr .choose {
-  min-width: 100px;
-  width: 12%;
-}
 
-.conversations-table .variadic-table tbody tr .subject {
-  width: 42%;
-
-  a {
-    width: calc(100% - 40px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 40px;
-  }
-
-  img {
-    float: left;
-    position: relative;
-    top: 13px;
-    width: 22px;
-    -webkit-filter: grayscale(100%); 
-    filter: grayscale(100%);
-  }
-}
 
 .conversations-view .conversations-sidebar .item > div:nth-child(1) {
   font-size: 13px;
@@ -362,9 +362,7 @@ td.email-sender {
     margin: 5px 0 0 5px;
   }
 }
-.received {
-  width: 12%;
-}
+
 .assignto-picker-component .assignto {
   margin-top: 5px;
 }

@@ -12,7 +12,7 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "startEditing" bubbles=false}}></i>
       {{#if model.primaryEmail.value}}
-        <strong>{{model.primaryEmail.name}}</strong> {{model.primaryEmail.value}}
+        <strong><i class="ss-standard ss-star"></i></strong> <span class="contact-info-field">{{model.primaryEmail.value}}</span>
       {{else}}
         <span class="empty">Add email here</span>
       {{/if}}

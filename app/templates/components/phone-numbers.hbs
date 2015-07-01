@@ -11,7 +11,7 @@
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if model.primaryPhone.value}}
         <a href="tel:{{unbound model.primaryPhone.value}}">
-          <strong>{{model.primaryPhone.name}}</strong> {{model.primaryPhone.value}}
+          <strong><i class="ss-standard ss-star"></i></strong> <span class="contact-info-field">{{model.primaryPhone.value}}</span>
         </a>
       {{else}}
         <span class="empty">Add Phone Number here</span>

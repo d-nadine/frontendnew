@@ -14,6 +14,7 @@ Radium.EditorMixin = Ember.Mixin.create
 
     toggleEditorToolbar: ->
       @$('.note-toolbar').slideToggle "slow"
+      @$('.note-toolbar').toggleClass "toolbar-open"
 
     insertCustomFieldPlaceholder: (field) ->
       @EventBus.publish("customFieldInserted", field)

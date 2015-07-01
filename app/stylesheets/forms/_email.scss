@@ -659,7 +659,8 @@
     margin-bottom: -1px;
     padding: 0;
     line-height: 50px;
-    height: 50px;
+    min-height: 50px;
+    height: auto;
 
     .as-original {
       line-height: 50px;

@@ -1,11 +1,3 @@
-{{#if isPersonal}}
-  <div class="alert alert-info">
-    This contact is a personal contact.  Would you like to add this contact to Radium?
-  </div>
-  <div>
-    <button {{action "track" this}} {{bind-attr disabled=isSaving}} class="btn btn-block btn-large btn-primary">SHARE WITH RADIUM</button>
-  </div>
-{{/if}}
 <div {{bind-attr class=":tasks-content :contacts isPersonal"}}>
   {{render "form_box" formBox}}
   {{#if isUpdating}}

@@ -6122,26 +6122,26 @@
      * @param {String} [sPlacement]
      */
     var createTooltip = function ($container, keyMap, sPlacement) {
-      var invertedKeyMap = func.invertObject(keyMap);
-      var $buttons = $container.find('button');
+      // var invertedKeyMap = func.invertObject(keyMap);
+      // var $buttons = $container.find('button');
 
-      $buttons.each(function (i, elBtn) {
-        var $btn = $(elBtn);
-        var sShortcut = invertedKeyMap[$btn.data('event')];
-        if (sShortcut) {
-          $btn.attr('title', function (i, v) {
-            return v + ' (' + representShortcut(sShortcut) + ')';
-          });
-        }
-      // bootstrap tooltip on btn-group bug
-      // https://github.com/twbs/bootstrap/issues/5687
-      }).tooltip({
-        container: 'body',
-        trigger: 'hover',
-        placement: sPlacement || 'top'
-      }).on('click', function () {
-        $(this).tooltip('hide');
-      });
+      // $buttons.each(function (i, elBtn) {
+      //   var $btn = $(elBtn);
+      //   var sShortcut = invertedKeyMap[$btn.data('event')];
+      //   if (sShortcut) {
+      //     $btn.attr('title', function (i, v) {
+      //       return v + ' (' + representShortcut(sShortcut) + ')';
+      //     });
+      //   }
+      // // bootstrap tooltip on btn-group bug
+      // // https://github.com/twbs/bootstrap/issues/5687
+      // }).tooltip({
+      //   container: 'body',
+      //   trigger: 'hover',
+      //   placement: sPlacement || 'top'
+      // }).on('click', function () {
+      //   $(this).tooltip('hide');
+      // });
     };
 
     // createPalette

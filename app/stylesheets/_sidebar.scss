@@ -110,6 +110,19 @@
     display: inline-block;
     color: $icon;
   }
+  .sidebar-panel {
+
+    dt, dd {
+      line-height: 20px;
+    }
+    dd span.contact-info-field {
+      width: calc(100% - 30px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      float: left;
+    }
+  }
 
   table a {
     text-transform: capitalize;
@@ -332,9 +345,6 @@
   @include box-sizing(border-box);
   display: inline-block;
 
-  > .contact-types-list {
-    margin-bottom: 15px;
-  }
   .sidebar-addresses-view {
     margin-bottom: 5px;
     display: inline-block;
@@ -455,6 +465,7 @@
     font-weight: 200;
     font-style: italic;
     color: #888;
+    text-transform: capitalize;
   }
 }
 
@@ -582,7 +593,7 @@
   dd > a {
     text-overflow: ellipsis;
     width: calc(100% - 55px);
-    overflow-x: hidden;
+    overflow: hidden;
     white-space: nowrap;
   }
 }
@@ -701,4 +712,20 @@
       }
     }
   }
+}
+.contact-types-list i {
+  position: relative;
+  top: 2px;
+  float: left;
+
+  &.ss-write {
+    float: right;
+  }
+  &.ss-star {
+    margin-right: 4px;
+  }
+}
+
+em.placeholder {
+  color: #b4b4b4;
 }
