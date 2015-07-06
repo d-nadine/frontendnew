@@ -46,8 +46,6 @@
     }
   }
 
-
-
   &.just-added .primary {
     .todo textarea,
     .todo .mentions,
@@ -134,6 +132,25 @@
         width: auto !important;
         line-height: 31px;
       }
+    }
+  }
+}
+.forms-todo-view {
+
+  .meeting-form-invite {
+    margin-bottom: 0;
+
+    .date-picker-component {
+      float: left;
+      margin-right: 10px;
+      width: 300px;
+
+      .date-picker {
+        width: calc(100% - 80px);
+      }
+    }
+    .autocomplete-textbox-component {
+      float: left;
     }
   }
 }

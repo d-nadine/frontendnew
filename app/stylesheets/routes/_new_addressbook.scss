@@ -46,22 +46,6 @@
         .form-row {
           float: left;
           width: 70%;
-
-          .meeting-form-invite {
-            margin-bottom: 0;
-
-            .date-picker-component {
-              float: left;
-              margin-right: 10px;
-
-              .date-picker {
-                width: calc(100% - 80px);
-              }
-            }
-            .autocomplete-textbox-component {
-              float: left;
-            }
-          }
         }
         .form-buttons {
           width: 30%;
