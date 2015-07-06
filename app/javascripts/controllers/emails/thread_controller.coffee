@@ -1,4 +1,8 @@
-Radium.EmailsThreadController = Radium.ArrayController.extend
+require "mixins/save_contact_actions"
+require "mixins/persist_tags_mixin"
+
+Radium.EmailsThreadController = Radium.ArrayController.extend Radium.PersistTagsMixin,
+  Radium.SaveContactActions,
   actions:
     showMore: ->
       @set('isLoading', true)
@@ -29,11 +33,25 @@ Radium.EmailsThreadController = Radium.ArrayController.extend
 
         @set('isLoading', false)
 
-  needs: ['messages']
+  needs: ['messages', 'users', 'accountSettings']
+
+  users: Ember.computed.oneWay 'controllers.users'
+  leadSources: Ember.computed.oneWay 'controllers.accountSettings.leadSources'
+
+  customFields: Ember.A()
+
   selectedContent: Ember.computed.oneWay 'controllers.messages.selectedContent'
   pageSize: 7
   hasReplies: true
 
+  firstSender: Ember.computed.oneWay 'model.firstObject.sender', ->
+    @get('model.firstObject.sender')
+
+  senderIsContact: Ember.computed 'firstSender', ->
+    @get('firstSender') instanceof Radium.Contact
+
   setup: Ember.on 'init', ->
+    @_super.apply this, arguments
+
     @set 'allPagesLoaded', false
     @set 'intialised', false
