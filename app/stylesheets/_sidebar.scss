@@ -614,6 +614,7 @@
 
     &:not(.active) {
       color: #aaa;
+      cursor: default;
     }
   }
 }
