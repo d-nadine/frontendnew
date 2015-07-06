@@ -5,6 +5,23 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   Radium.HasTasksMixin,
   Radium.ChecklistTotalMixin,
 
+  daysInCurrentState: Ember.computed 'statusLastChangedAt', ->
+    unless lastChange = @get('statusLastChangedAt')
+      return "N/A"
+
+    now = Ember.DateTime.create()
+
+    timeDiff = Math.ceil((now.get('milliseconds') - lastChange.get('milliseconds')) / (1000 * 60))
+
+    if timeDiff <= 1
+      return "A few seconds"
+    else if timeDiff < 60
+      return "#{timeDiff} minute(s)"
+    else if timeDiff < (24 * 60)
+      return "#{Math.floor(timeDiff / 60)} hour(s)"
+    else
+      return "#{Math.floor(timeDiff / (24 * 60))} day(s)"
+
   statusLastChangedAt: DS.attr('datetime')
   expectedCloseDate: DS.attr('datetime')
   user: DS.belongsTo('Radium.User')

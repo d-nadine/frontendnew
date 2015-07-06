@@ -1,4 +1,3 @@
-# http://localhost:8080/calendar/meetings/1014
 Radium.TimeAgoView = Ember.View.extend
   template: Ember.Handlebars.compile """
     {{view.formattedContent}}
