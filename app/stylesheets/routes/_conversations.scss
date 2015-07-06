@@ -217,6 +217,13 @@
   .toolbar {
     padding-top: 0;
     padding-bottom: 22px;
+
+    .left {
+
+      .btn-primary {
+        margin-right: 41px;
+      }
+    }
   }
 }
 

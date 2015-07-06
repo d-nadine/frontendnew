@@ -1,17 +1,26 @@
 #alerts{
   position: fixed;
-  width: 80%;
-  top: 75px;
+  width: 100%;
+  top: 70px;
   z-index: $alerts-layer;
   text-align: center;
-  margin: 0 0 0 -40%;
-  left:50%;
+  margin: 0;
+  left: 0;
+  right: 0;
 }
 
 .alert {
-  color: #000;
-  border-color: #f88e28;
-  background-color: #fed1a7;
+  color: #305F1C;
+  border-color: #57AD32;
+  background-color: #CDEDC0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 600;
+  text-shadow: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   img {
     margin-right: 6px;
@@ -26,12 +35,13 @@
     top: 1px;
     text-shadow: none;
     color: #fed1a7;
-    background: #2d2d2d;
+    background: #57AD32;
     @include border-radius(20px);
 
     i {
       position: relative;
       top: 1px;
+      color: #fff;
     }
   }
 
