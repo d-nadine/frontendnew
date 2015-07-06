@@ -5,8 +5,8 @@
         {{avatar-picker person=contact class="control-group"}}
       </div>
       {{toggle-switch checked=shared action="switchShared" dataOn="Share" dataOff="Private" dontPropagate=true}}
-      {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name" parent=targetObject}}
     </div>
+    {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name" parent=targetObject}}
     {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" alternativeRoute="company" parent=targetObject saveAction="saveCompany"}}
     {{social-medialist person=contact}}
   </div>

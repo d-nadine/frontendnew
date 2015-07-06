@@ -150,11 +150,14 @@ input[type=file]{
     input[type=file] {
       &.upload-button, &.avatar-upload, &.csv-upload{
         &.avatar-upload {
-          position: relative;
-          top: 30px;
-          width: 10px;
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          width: 18px;
+          height: 16px;
           &:before {
             content: '✎';
+            padding: 0 4px;
           }
         }
       }

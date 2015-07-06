@@ -178,6 +178,7 @@
 .email-card {
   padding-top: 15px;
   padding-bottom: 15px;
+  width: 1000px;
 
   .text {
     overflow-x: hidden;
@@ -614,7 +615,6 @@
 }
 
 .email-history {
-  width: calc(100% - 240px);
   float: left;
   position: relative;
   top: 65px;
@@ -690,4 +690,58 @@
 
 .note-editor {
   border-color: $border;
+}
+
+.emails-thread-view {
+
+  .right-column {
+    margin-left: 0;
+    width: auto;
+    position: static;
+
+    .form {
+      width: 268px;
+
+      .sidebar-panel-content {
+        padding-top: 0;
+
+        dd {
+          width: calc(100% - 40px);
+          display: inline-block;
+
+          .contact-info-field {
+            width: calc(100% - 30px);
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+          &.source {
+
+            i:first-of-type {
+              display: none;
+            }
+          }
+        }
+        .contact-detail {
+          float: left;
+          width: 100%;
+        }
+        .inline-editor-component,
+        .inline-autocomplete-component {
+          float: left;
+          width: 100%;
+
+          &.is-editing {
+            border: none;
+            background: none;
+            padding: 0;
+          }
+        }
+        .social-medialist-component {
+          margin-top: 10px;
+          display: inline-block;
+        }
+      }
+    }
+  }
 }
