@@ -1,15 +1,1 @@
-{{#if isEditing}}
-  <div class="control-group">
-    <button type="button" class="close" {{action "stopEditing"}}>x</button>
-    {{upload-avatar model=person finishedUpload="stopEditing" isUploading=isUploading}}
-  </div>
-{{else}}
-  {{#if person.isLoaded}}
-    {{avatar person style="sidebar"}}
-    <button class="btn btn-mini user-change-avatar" {{action "startEditing"}}>
-      <i class="ss-standard ss-write"></i>
-    </button>
-  {{else}}
-    {{partial 'is_loading'}}
-  {{/if}}
-{{/if}}
+{{upload-avatar model=person finishedUpload="stopEditing" isUploading=isUploading}}

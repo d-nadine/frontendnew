@@ -2,7 +2,7 @@
   <div class="sidebar-panel-content">
     <div class="contact-detail">
       <div class="user-avatar pull-left">
-        {{avatar-picker person=contact}}
+        {{avatar-picker person=contact class="control-group"}}
       </div>
       {{toggle-switch checked=shared action="switchShared" dataOn="Share" dataOff="Private" dontPropagate=true}}
       {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name" parent=targetObject}}

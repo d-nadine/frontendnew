@@ -32,6 +32,7 @@ input[type=file]{
     &.avatar-upload {
       &:before {
         content: 'Select avatar';
+        content: '✎';
         position: absolute;
         line-height: 18px;
         padding: 4px 0;
@@ -141,4 +142,22 @@ input[type=file]{
   color: #666;
   display: inline-block;
   float: right;
+}
+
+.email-history, .contact-detail, .user-detail {
+  .avatar-picker-component {
+    position: relative;
+    input[type=file] {
+      &.upload-button, &.avatar-upload, &.csv-upload{
+        &.avatar-upload {
+          position: relative;
+          top: 30px;
+          width: 10px;
+          &:before {
+            content: '✎';
+          }
+        }
+      }
+    }
+  }
 }
