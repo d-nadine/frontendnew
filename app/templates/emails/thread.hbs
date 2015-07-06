@@ -15,8 +15,6 @@
   {{/each}}
   </div>
   <div class="right-column">
-    {{#if senderIsContact}}
-      {{contact-sidebar contact=firstSender tags=tags parent=this addTag="addTag" removeTag="removeTag" users=users user=currentUser leadSources=leadSources customFields=customFields confirmDeletion="confirmDeletion"}}
-    {{/if}}
+    {{outlet right}}
   </div>
 </div>

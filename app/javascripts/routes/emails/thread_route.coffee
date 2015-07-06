@@ -31,6 +31,18 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
         controller.set 'replies', []
         resolve(model)
 
+  renderTemplate: ->
+    controller = @controllerFor('emailsThread')
+    @render()
+    @render 'nothing',
+      outlet: 'right'
+      into: 'emails/thread'
+
+    @render 'emails/right',
+      outlet: 'right'
+      into: 'emails/thread'
+      controller: controller
+
   setupController: (controller, model) ->
     unless model.get('isRead')
       model.set('isRead', true)
