@@ -68,9 +68,14 @@ $comment-border: #cfcfcf;
   box-sizing: border-box;
   margin: 10px 0 0;
   resize: none;
+  display: inline-block;
 
   .text {
-    overflow: hidden;
+    
+    textarea {
+      float: left;
+      width: calc(100% - 30px);
+    }
   }
 
   textarea {
