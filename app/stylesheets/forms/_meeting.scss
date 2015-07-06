@@ -4,6 +4,13 @@
 
   .meeting-form {
 
+    .upload-item {
+      line-height: 26px;
+
+      .uploaded-file {
+        padding-left: 4px;
+      }
+    }
     div.is-valid {
       border: 1px solid $valid-input-border;
     }
