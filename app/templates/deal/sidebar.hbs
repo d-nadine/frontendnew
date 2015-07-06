@@ -7,7 +7,6 @@
       </h2>
     </div>
   </div>
-  
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       <dl class="dl-horizontal">
@@ -18,22 +17,11 @@
       <dl class="dl-horizontal">
         <dt><i class="ss-standard ss-like"></i></dt>
         <dd>
-          {{#if isEditing}}
-            <div>
-              {{view view.statusSelect class="status-select"}}
-            </div>
-          {{else}}
-            <div class="deal-status">
-              <p>{{status}}<i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i></p>
-            </div>
-          {{/if}}
+          {{deal-status statuses=statuses model=model key="status"}}
         </dd>
       </dl>
 
-      <dl class="dl-horizontal">
-        <dt><i class="ss-standard ss-dollarsign"></i></dt>
-        <dd>{{amount}}</dd>
-      </dl>
+      {{inline-money model=model key="value" class="sidebar-panel" currencySymbol=currencySymbol}}
     </div>
   </div>
 

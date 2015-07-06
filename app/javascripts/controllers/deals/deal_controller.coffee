@@ -40,7 +40,8 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
       false
 
-  needs: ['accountSettings', 'users', 'contacts']
+  needs: ['accountSettings', 'users', 'contacts', 'pipeline']
+  statuses: Ember.computed.alias('controllers.pipeline.dealStates')
 
   users: Ember.computed.oneWay 'controllers.users'
 

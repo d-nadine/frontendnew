@@ -217,8 +217,8 @@
   .status-select{
     width: 100%;
     position: relative;
-    top: 1px;
-    left: -2px;
+    top: -2px;
+    left: -7px;
   }
 
   .deal-status{
@@ -327,6 +327,9 @@
 
   .sidebar {
 
+    .deal-status-component {
+      top: -9px;
+    }
     .deal-title {
       display: inline-block;
       width: 100%;

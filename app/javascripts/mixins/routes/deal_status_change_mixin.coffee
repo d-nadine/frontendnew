@@ -3,7 +3,7 @@ Radium.DealStatusChangeMixin = Ember.Mixin.create
     confirmStatusChange: ->
       commit = @get('statusChangeCommit')
       controller = @get('statusChangeController')
-      if lostBecause = controller.get('lostBecause')
+      if lostBecause = @controllerFor('dealConfirmStatusChange').get('lostBecause')
         controller.get('model').set('lostBecause', lostBecause)
 
       commit.call controller

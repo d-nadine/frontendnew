@@ -16,7 +16,7 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
       target = $(e.target)
       tagName = e.target.tagName.toLowerCase()
 
-      if ['x-check'].any((c) -> target.hasClass(c))
+      if ['x-check', 'new-comment'].any((c) -> target.hasClass(c))
         return
 
       if (!['input', 'button',  'select', 'i', 'a'].contains(tagName)) || target.hasClass('resource-name')

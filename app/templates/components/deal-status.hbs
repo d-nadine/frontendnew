@@ -1,0 +1,15 @@
+<div class="sidebar-panel-content">
+  {{#if isEditing}}
+    <div>
+      {{#x-select value=form.value class="status-select" action="changeStatus"}}
+        {{#each status in statuses}}
+          {{#x-option value=status}}{{status}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
+    </div>
+  {{else}}
+    <div class="deal-status">
+      <p>{{form.value}}<i class="ss-standard ss-write pull-right" {{action "startEditing" target=view bubbles=false}}></i></p>
+    </div>
+  {{/if}}
+</div>
