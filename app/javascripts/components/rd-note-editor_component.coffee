@@ -1,17 +1,4 @@
 Radium.RdNoteEditorComponent = Ember.Component.extend
-  classNameBindings: [':rd-note-editor', 'isEditing', 'isDirty']
-  isEditing: false
-  isDirty: Ember.computed.readOnly 'buffer.hasBufferedChanges'
-  buffer: Ember.computed('note', ->
-    BufferedObjectProxy.create content: @get 'note'
-  )
-
-  setup: Ember.on 'didInsertElement', ->
-    Ember.oneWay this, 'hasFocus', 'isEditing'
-
-  focusOut: (e)->
-    Ember.run.debounce this, 'send', ['save'], 200
-
   actions:
     edit: ->
       @set 'isEditing', true
@@ -34,3 +21,16 @@ Radium.RdNoteEditorComponent = Ember.Component.extend
       return unless @get('isEditing')
       @get('buffer').discardBufferedChanges()
       @set 'isEditing', false
+
+  classNameBindings: [':rd-note-editor', 'isEditing', 'isDirty']
+  isEditing: false
+  isDirty: Ember.computed.readOnly 'buffer.hasBufferedChanges'
+  buffer: Ember.computed('note', ->
+    BufferedObjectProxy.create content: @get 'note'
+  )
+
+  setup: Ember.on 'didInsertElement', ->
+    Ember.oneWay this, 'hasFocus', 'isEditing'
+
+  focusOut: (e)->
+    Ember.run.debounce this, 'send', ['save'], 200
