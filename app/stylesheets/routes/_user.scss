@@ -255,6 +255,11 @@
   }
   .email-form-component {
     margin-top: 0;
+    width: 100%;
+
+    .as-original {
+      width: 200px;
+    }
   }
 }
 

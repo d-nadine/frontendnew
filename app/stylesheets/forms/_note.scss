@@ -1,6 +1,11 @@
 .note-form {
   .rd-conversation-input {
     margin-left: 45px;
+    line-height: 30px;
+    font-size: 18px;
+    min-height: 34px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
     &:focus {
       outline: 0;

@@ -227,7 +227,7 @@
       padding-left: 0;
 
       .primary {
-        width: 90%;
+        width: calc(100% - 40px);
       }
     }
   }
@@ -598,12 +598,13 @@ input[type="radio"]:checked + label {
   }
   
   .note-form {
-    width: 70%;
+    width: calc(100% - 160px);
     float: left;
     padding-left: 0;
 
     ~ .form-box-controls {
       float: right;
+      line-height: 52px;
     }
   }
 
