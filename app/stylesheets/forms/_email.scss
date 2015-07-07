@@ -175,10 +175,20 @@
   }
 }
 
+.email-main {
+  display: inline-block;
+  width: 100%;
+
+  .email-history {
+    width: calc(100% - 310px);
+    display: inline-block;
+  }
+}
+
 .email-card {
+  width: calc(100% - 70px);
   padding-top: 15px;
   padding-bottom: 15px;
-  width: 1000px;
 
   .text {
     overflow-x: hidden;
