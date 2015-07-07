@@ -225,6 +225,9 @@
       }
     }
   }
+  .read a {
+    font-weight: bold;
+  }
 }
 
 
@@ -239,6 +242,8 @@
 }
 
 .conversations-table .left-table .variadic-table {
+  width: 30%;
+
   td:last-of-type {
     min-width: 200px;
   }
@@ -296,6 +301,27 @@
     border-right: 0 !important;
   }
 }
+
+@media all and (min-width: 0px) and (max-width: 1280px) {
+
+  .conversations-table .left-table .variadic-table { 
+    width: auto;
+  }
+  .conversations-table .right-table .variadic-table {
+    table-layout: auto;
+
+    td,
+    th {
+      width: auto !important;
+    }
+
+    .choose .conversation-actions-component {
+      display: inline-block;
+      width: 110px;
+    }
+  }
+}
+
 
 .conversations-table .variadic-table tbody tr .assign .assignto {
   height: auto;
