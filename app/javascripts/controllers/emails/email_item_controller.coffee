@@ -7,6 +7,14 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @toggleProperty 'showFormBox'
       return
 
+    deleteFromEditor: ->
+      p "here we are"
+      @set('showReplyForm', false)
+      @set('showingAddDeal', false)
+      @set('showForwardForm', false)
+
+      false
+
     showCommentBox: ->
       @toggleProperty 'showCommentBox'
       false

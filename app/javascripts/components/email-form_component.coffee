@@ -215,6 +215,10 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       false
 
     deleteFromEditor: ->
+      if @get('forwardOrReply')
+        @get('form').reset()
+        @set 'mode', 'single'
+
       @sendAction "deleteFromEditor"
 
       false

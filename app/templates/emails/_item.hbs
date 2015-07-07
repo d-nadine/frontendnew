@@ -32,14 +32,14 @@
                   {{#if canArchive}}
                     <li>
                       <a class="btn btn-link btn-messages-action" {{action "archiveEmail" this}} {{bind-attr disabled=isSaving}}>
-                        <i class="ss-standard ss-box"></i> 
+                        <i class="ss-standard ss-box"></i>
                         <span>Archive</span>
                       </a>
                     </li>
                   {{/if}}
                   <li>
                     <a class="btn btn-link btn-messages-action" {{action "deleteEmail" this}} {{bind-attr disabled=isSaving}}>
-                      <i class="ss-symbolicons-block ss-trash"></i> 
+                      <i class="ss-symbolicons-block ss-trash"></i>
                       <span>Delete</span>
                     </a>
                   </li>
@@ -168,12 +168,12 @@
     <div>
       {{#if showReplyForm}}
         <div class="block block-arrow-top">
-          {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail"}}
+          {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor"}}
         </div>
       {{/if}}
 
       {{#if showForwardForm}}
-        {{email-form form=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail"}}
+        {{email-form form=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor"}}
       {{/if}}
 
       {{#if showFormBox}}
