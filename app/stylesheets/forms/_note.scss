@@ -1,11 +1,11 @@
 .note-form {
   .rd-conversation-input {
     margin-left: 45px;
-    line-height: 30px;
+    line-height: 20px;
     font-size: 18px;
     min-height: 34px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 17px;
+    padding-bottom: 2px;
 
     &:focus {
       outline: 0;
@@ -18,7 +18,7 @@
     i.ss-notepad {
       position: absolute;
       left: 14px;
-      top: 5px;
+      top: 18px;
       font-size: 18px;
     }
   }
