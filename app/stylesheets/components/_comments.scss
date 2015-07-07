@@ -57,6 +57,7 @@ $comment-border: #cfcfcf;
 }
 
 .comment-attachment-icon {
+  display: none;
   margin: 6px 0 0 10px;
   font-size: 14px;
   line-height: 32px;
@@ -71,7 +72,6 @@ $comment-border: #cfcfcf;
   display: inline-block;
 
   .text {
-    
     textarea {
       float: left;
       width: calc(100% - 30px);
