@@ -32,7 +32,6 @@ input[type=file]{
     &.avatar-upload {
       &:before {
         content: 'Select avatar';
-        content: '✎';
         position: absolute;
         line-height: 18px;
         padding: 4px 0;
@@ -154,7 +153,7 @@ input[type=file]{
           right: 0px;
           top: 0px;
           width: 18px;
-          height: 16px;
+          height: 14px;
           &:before {
             content: '✎';
             padding: 0 4px;

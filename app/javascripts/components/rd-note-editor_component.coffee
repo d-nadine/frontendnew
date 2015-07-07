@@ -21,7 +21,7 @@ Radium.RdNoteEditorComponent = Ember.Component.extend
   # other actions, including cancel. To get around this, we debounce
   # and delay the call to save by 200ms, so that if the focusOut
   # occured because of a click on the cancel button, the cancel will
-  # have been fired before the save occurs. 
+  # have been fired before the save occurs.
   focusOut: (e)->
     Ember.run.debounce this, 'send', ['save'], 200
 
