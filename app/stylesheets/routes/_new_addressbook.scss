@@ -588,7 +588,6 @@
 
     .left-table,
     .right-table {
-      margin-top: 20px;
 
       input[type="checkbox"] + label span {
         margin-left: 16px;
@@ -1182,6 +1181,11 @@
     padding-right: 0;
     padding-left: 0;
     margin-right: 0;
+  }
+
+  .left-table,
+  .right-table {
+    margin-top: 20px;
   }
 }
 
