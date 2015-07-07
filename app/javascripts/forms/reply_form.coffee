@@ -24,7 +24,7 @@ Radium.ReplyForm = Radium.EmailForm.extend
     currentUserEmail = @get('currentUser.email')?.toLowerCase()
 
     to = to.reject (person) ->
-      person.get('email').toLowerCase() == currentUserEmail
+      !person.get('email') || person.get('email').toLowerCase() == currentUserEmail
 
     @set('to', to)
 
