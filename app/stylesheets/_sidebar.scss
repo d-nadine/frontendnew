@@ -253,11 +253,15 @@
       width: calc(100% - 12px);
       margin-right: 0px;
       height: 40px;
+
+      &:focus {
+        outline: 0;
+        box-shadow: none;
+      }
     }
     button {
       width: 100%;
       margin-top: 10px;
-      background: #8CC18C;
       color: $text;
     }
   }
