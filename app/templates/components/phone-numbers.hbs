@@ -10,9 +10,11 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if model.primaryPhone.value}}
-        <a href="tel:{{unbound model.primaryPhone.value}}">
-          <strong><i class="ss-standard ss-star"></i></strong> <span class="contact-info-field">{{model.primaryPhone.value}}</span>
-        </a>
+        {{#each phone in sortedPhoneNumbers}}
+          <a href="tel:{{unbound phone.value}}">
+            <strong {{bind-attr class="phone.isPrimary::hidestar"}}><i class="ss-standard ss-star"></i></strong> <span class="contact-info-field">{{phone.value}}</span>
+          </a>
+        {{/each}}
       {{else}}
         <span class="empty">Add Phone Number here</span>
       {{/if}}
