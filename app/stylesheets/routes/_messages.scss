@@ -548,7 +548,7 @@ $item-border: #dddddd;
       padding-left: 10px;
       padding-top: 20px;
       margin-left: 327px;
-      margin-top: 70px;
+      margin-top: 131px;
 
       .email-menu {
         margin-bottom: 19px;
@@ -572,6 +572,11 @@ $item-border: #dddddd;
 
         .email-form-component {
           width: auto;
+          padding: 25px 20px 20px;
+          background: white;
+        }
+        .row-fluid {
+          margin-bottom: 20px;
         }
 
         .btn-group {
@@ -619,7 +624,7 @@ $item-border: #dddddd;
       }
 
       .right-column {
-        margin-top: 67px;
+        margin-top: 4px;
         color: $text;
         z-index: 101;
 
