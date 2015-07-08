@@ -162,9 +162,7 @@
 
     <div>
       {{#if showReplyForm}}
-        <div class="block block-arrow-top">
-          {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor"}}
-        </div>
+        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor"}}
       {{/if}}
 
       {{#if showForwardForm}}

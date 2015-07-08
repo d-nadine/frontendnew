@@ -634,7 +634,7 @@
 }
 
 .email-form-component {
-  margin-top: 66px;
+  margin-top: 5px;
   border: 1px solid $border;
 
   input::-webkit-input-placeholder {
@@ -654,6 +654,7 @@
 
     li.as-selection-item {
       margin-top: 7px;
+      margin-bottom: 7px;
     }
     input {
       padding-top: 0;

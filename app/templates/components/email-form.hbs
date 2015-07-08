@@ -16,19 +16,6 @@
   </div>
   <div class="email-form-body">
     {{partial 'forms/scheduled_email'}}
-    {{#if replyMode}}
-      <h5>
-        Reply to
-        {{list "form.to"}}
-        <a class="pull-right" href="#" {{action "toggleOptions"}}>More Options</a>
-      </h5>
-    {{/if}}
-    {{#if forwardMode}}
-      <h5>
-        Forward: {{form.subject}}
-        <a class="pull-right" href="#" {{action "expand"}}>More Options</a>
-      </h5>
-    {{/if}}
     {{#if showOptions}}
       <div class="addresses">
         <div {{bind-attr class="toIsInvalid:is-invalid toIsValid:is-valid :field :control-box :control-box-block-level :recipients"}}>

@@ -568,6 +568,11 @@ $item-border: #dddddd;
       }
 
       .email-options {
+        width: calc(100% - 8px);
+
+        .email-form-component {
+          width: auto;
+        }
 
         .btn-group {
           display: inline-block;
