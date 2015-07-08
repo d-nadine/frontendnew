@@ -180,7 +180,8 @@
   width: 100%;
 
   .email-history {
-    width: calc(100% - 310px);
+    width: calc(100% - 330px);
+    margin-right: 20px;
     display: inline-block;
   }
 }
@@ -712,6 +713,8 @@
 
     .form {
       width: 268px;
+      padding-left: 12px;
+      margin-right: 20px;
 
       .sidebar-panel-content {
         padding-top: 0;
@@ -725,12 +728,6 @@
             display: inline-block;
             text-overflow: ellipsis;
             overflow: hidden;
-          }
-          &.source {
-
-            i:first-of-type {
-              display: none;
-            }
           }
         }
         .contact-detail {
