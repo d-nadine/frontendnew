@@ -10,6 +10,8 @@
     }
   }
   
+  
+
   .next-task-component {
 
     .modal {
@@ -885,12 +887,23 @@
         margin-bottom: 0;
       }
 
-      .as-original {
-        line-height: 36px;
-        height: 36px;
+      .as-selections {
+        height: 40px;
+        width: auto;
+        
+        .as-selection-item {
+          margin-top: 4px;
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+        .as-original {
+          line-height: 36px;
+          height: 36px;
 
-        input {
-          line-height: 30px;
+          input {
+            line-height: 30px;
+            width: 110px !important;
+          }
         }
       }
     }
