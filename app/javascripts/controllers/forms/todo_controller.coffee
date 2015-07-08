@@ -122,6 +122,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
   timer: null
 
+  overdueText: Ember.computed 'finishBy', ->
+    "Was due on #{@get('finishBy').toHumanFormat()}"
+
   isCalendar: Ember.computed.equal 'controllers.application.currentPath', 'calendar.task'
   animate: Ember.computed.not 'isCalendar'
 

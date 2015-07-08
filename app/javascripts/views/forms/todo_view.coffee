@@ -9,6 +9,15 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
     @set 'store', @get('controller.store')
     @set 'model', @get("controller.model")
 
+    return unless @get('controller.overdue')
+
+    Ember.run.scheduleOnce 'afterRender', this, '_afterRender'
+
+  _afterRender: ->
+    return unless @get('controller.overdue')
+
+    @$('.overdue-alert')?.tooltip(html: true)
+
   finishView: Radium.View.extend Ember.ViewTargetActionSupport,
     tagName: 'button'
     classNameBindings: ["isFinished", ":btn", ":btn-link", ":pull-left", ":events-list-item-button", ":finish-todo"]

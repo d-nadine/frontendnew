@@ -2,7 +2,7 @@
   <div {{bind-attr class="isFinished view.isFocused :primary :expander"}} {{action "expand" target="view"}}>
     {{view view.finishView}}
     {{#if overdue}}
-      <span class="pull-right overdue-alert"><i class="ss-standard ss-clock" title="{{formatDateTime time format="date"}}"></i></span>
+      <span class="pull-right overdue-alert" data-toggle="tooltip" data-placement="right" {{bind-attr data-original-title="overdueText"}}><i class="ss-standard ss-clock"></i></span>
     {{/if}}
 
     {{#if comments.length}}
@@ -17,7 +17,7 @@
 
     {{partial "forms/reference"}}
   </div>
-  
+
   <a tabindex="3" class="btn-text pull-right btn-options" {{action "toggleExpanded" bubbles=false}}>
     {{#if isExpanded}}
       <i class="ss-standard ss-navigateup"></i>
