@@ -18,6 +18,12 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
 
     @$('.overdue-alert')?.tooltip(html: true)
 
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    if alert = @$('.overdue-alert')
+      alert.tooltip('destroy')
+
   finishView: Radium.View.extend Ember.ViewTargetActionSupport,
     tagName: 'button'
     classNameBindings: ["isFinished", ":btn", ":btn-link", ":pull-left", ":events-list-item-button", ":finish-todo"]
