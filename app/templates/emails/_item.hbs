@@ -53,11 +53,6 @@
               <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
             {{/unless}}
           </div>
-          {{#if isTracked}}
-            <div class="btn-group btn-add-to-radium">
-              <a class="" {{action "stopTracking" sender}}>Stop Tracking</a>
-            </div>
-          {{/if}}
         </div>
         {{#if isScheduled}}
           <div class="alert alert-success">
