@@ -255,6 +255,14 @@
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+
+        .tooltip {
+          width: 260px;
+
+          .tooltip-inner {
+            max-width: none;
+          }
+        }
       }
     }
   }
