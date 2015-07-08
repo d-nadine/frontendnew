@@ -706,7 +706,9 @@
   .right-column {
     margin-left: 0;
     width: auto;
-    position: static;
+    position: fixed;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     .form {
       width: 268px;

@@ -1,9 +1,18 @@
 Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
   setup: Ember.on 'didInsertElement', ->
-    Ember.run.scheduleOnce 'afterRender', this, 'addListener'
+    Ember.run.scheduleOnce 'afterRender', this, 'addListeners'
 
-  addListener: ->
-    $(window).on "scroll.regularScroller", @didScroll.bind(this)
+  addListeners: ->
+    win = $(window)
+    win.on "scroll.regularScroller", @didScroll.bind(this)
+    win.on "resize.right", @resizeRightColumn.bind(this)
+
+  resizeRightColumn: (e) ->
+    return unless right = @$('.right-column')
+
+    height = $(window).height() - right.position().top - 20
+
+    right.height(height)
 
   didScroll: ->
     return if @get('controller.allPagesLoaded')
@@ -65,3 +74,4 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
 
   teardown: Ember.on 'willDestroyElement', ->
     $(window).off ".regularScroller"
+    $('resize.right').off 'resize'

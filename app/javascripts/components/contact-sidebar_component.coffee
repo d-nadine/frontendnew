@@ -30,6 +30,7 @@ Radium.ContactSidebarComponent = Ember.Component.extend
 
   shared: false
   isSaving: false
+  condense: false
 
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
