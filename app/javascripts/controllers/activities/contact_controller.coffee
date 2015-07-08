@@ -19,6 +19,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
 
   icon: Ember.computed 'event', ->
     switch @get('event')
+      when 'todo_created' then 'check'
       when 'create' then 'star'
       when 'update' then 'write'
       when 'assign' then 'transfer'
