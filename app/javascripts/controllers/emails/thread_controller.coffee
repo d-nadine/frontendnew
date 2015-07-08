@@ -50,6 +50,8 @@ Radium.EmailsThreadController = Radium.ArrayController.extend Radium.PersistTags
   senderIsContact: Ember.computed 'firstSender', ->
     @get('firstSender') instanceof Radium.Contact
 
+  tagNames: Ember.computed.oneWay 'firstSender.tagNames'
+
   setup: Ember.on 'init', ->
     @_super.apply this, arguments
 

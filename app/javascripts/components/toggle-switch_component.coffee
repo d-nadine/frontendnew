@@ -4,8 +4,11 @@ Radium.ToggleSwitchComponent = Ember.Component.extend
   dataOn: "On"
   dataOff: "Off"
 
-  setup: Ember.on 'init', ->
+  _init: Ember.on 'init', ->
     @on 'change', this, @_updateElementValue
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @off 'change'
 
   checkBoxId: Ember.computed ->
     "checker-#{@get('elementId')}"
