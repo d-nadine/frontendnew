@@ -12,46 +12,55 @@
   
   .next-task-component {
 
-    .modal-header {
-      display: none;
-    }
-    .modal-body {
-      width: calc(100% - 30px) !important;
+    .modal {
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      width: 60%;
+      margin: auto;
 
-      .form {
-        padding-left: 0;
-        float: left;
+      .modal-header {
+        display: none;
+      }
+      .modal-body {
+        width: calc(100% - 30px) !important;
 
-        .primary {
-          width: calc(100% - 50px);
+        .form {
+          padding-left: 0;
+          float: left;
 
-          .events-list-item-button {
-            margin-top: 18px;
-            margin-left: 10px;
-          }
-          .todo {
-            margin-right: 0;  
-  
-            textarea {
-              overflow-y: hidden;
-              line-height: 40px;
+          .primary {
+            width: calc(100% - 50px);
+
+            .events-list-item-button {
+              margin-top: 18px;
+              margin-left: 10px;
+            }
+            .todo {
+              margin-right: 0;  
+      
+              textarea {
+                overflow-y: hidden;
+                line-height: 40px;
+              }
             }
           }
         }
-      }
-      .expanded-fields {
-        width: 100%;
-        margin-top: 5px;
+        .expanded-fields {
+          width: 100%;
+          margin-top: 5px;
 
-        .form-row {
-          float: left;
-          width: 70%;
-        }
-        .form-buttons {
-          width: 30%;
-          display: inline-block;
-          clear: none;
-          line-height: 54px;
+          .form-row {
+            float: left;
+            width: calc(100% - 110px);
+          }
+          .form-buttons {
+            width: auto;
+            display: inline-block;
+            clear: none;
+            line-height: 54px;
+          }
         }
       }
     }
