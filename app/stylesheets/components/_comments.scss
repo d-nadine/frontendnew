@@ -13,18 +13,6 @@ $comment-border: #cfcfcf;
   &:before {
     border-bottom-color: $comment-border;
   }
-
-  &:before {
-    width: 37px;
-    height: 12px;
-    margin-top: -12px;
-    position: absolute;
-    top: 0;
-    left: 36px;
-    content: "";
-    z-index: 1;
-    background: url("/images/backgrounds/comment-triangle.png") no-repeat 0 0;
-  }
 }
 
 .comments-list {

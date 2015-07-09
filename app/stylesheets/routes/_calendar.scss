@@ -34,14 +34,71 @@ $calendar-off: #d8d9d9;
   .main-content {
     max-width: 1600px;
     @include transition(padding 0.25s);
+
+    .calendar-task-header {
+      margin-bottom: 30px;
+
+      h3 {
+        line-height: 44px;
+      }
+    }
+
+    .is-expandable {
+
+      .primary {
+        width: calc(100% - 90px);
+        padding: 0 20px;
+        background-color: #fff;
+
+        &.is-finished {
+          border-color: $border;
+        }
+        .finish-todo {
+          line-height: 74px;
+          margin-top: 0;
+        }
+        .overdue-alert {
+          line-height: 74px;
+        }
+      }
+      .btn-options {
+        line-height: 74px;
+      }
+    }
+
+    .expanded-fields {
+      margin-top: 10px;
+      background-color: transparent;
+      border: 0;
+
+      .form-row {
+        display: inline-block;
+      }
+      .form-buttons {
+        float: right;
+      }
+      .field-group {
+        margin: 0;
+      }
+      
+      .date-picker-component {
+        background-color: #fff;
+      }
+
+      .comments-view {
+
+        .comments {
+          background-color: transparent;
+          padding: 0;
+        }
+      }
+    }
   }
 
   .sidebar {
     @include transition(transform 0.25s);
     @include translateX(-100%);
   }
-
-
 }
 
 .calendar-toolbar {
