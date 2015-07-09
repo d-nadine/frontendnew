@@ -7,16 +7,6 @@ Radium.PhoneNumbersComponent = Radium.MultipleBaseComponent.extend
   phoneNumbers: Ember.A()
 
 
-  sortedPhoneNumbers: Ember.computed 'model.phoneNumbers.[]', 'model.phoneNumbers.@each.isPrimary', ->
-    return Ember.A() unless @get('model.phoneNumbers.length')
-
-    @get('model.phoneNumbers').toArray().sort (left, right) ->
-      leftIsPrimary = left.get('isPrimary')
-      rightIsPrimary = right.get('isPrimary')
-
-      return -1 if leftIsPrimary
-      return 1 if rightIsPrimary
-
-      return 0
+  sortedPhoneNumbers: Radium.computed.sortByPrimary 'model', 'phoneNumbers'
 
   emailValidations: ['email']

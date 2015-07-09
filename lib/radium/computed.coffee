@@ -182,3 +182,22 @@ Radium.computed.addAllKeysProperty = (context, propertyName, objectPath, func) -
   args.push a_slice.call(arguments, -1)[0]
 
   Ember.defineProperty(context, propertyName, Ember.computed.apply(this, args))
+
+Radium.isPrimaryComparer = (left, right) ->
+  leftIsPrimary = left.get('isPrimary')
+  rightIsPrimary = right.get('isPrimary')
+
+  return -1 if leftIsPrimary
+  return 1 if rightIsPrimary
+
+  return 0
+
+Radium.computed.sortByPrimary = (key, relationship) ->
+  path = "#{key}.#{relationship}"
+  arrayProp = "#{path}.[]"
+  isPrimaryProp = "#{path}.@each.isPrimary"
+
+  func = ->
+    @get(path).toArray().sort Radium.isPrimaryComparer
+
+  Ember.computed arrayProp, isPrimaryProp, func
