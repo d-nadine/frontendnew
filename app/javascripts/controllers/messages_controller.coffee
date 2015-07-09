@@ -31,12 +31,14 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   drawerOpen: false
   folder: null
   pageSize: 5
-  needs: ['messagesSidebar']
+  needs: ['messagesSidebar', 'emailsThread']
   isLoading: Ember.computed.alias 'controllers.messagesSidebar.isLoading'
   currentPath: Ember.computed.alias 'controllers.application.currentPath'
   sortProperties: ['time']
   sortAscending: false
   drawerAction: 'toggleFolders'
+
+  senderIsContact: Ember.computed.oneWay 'controllers.emailsThread.senderIsContact'
 
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments

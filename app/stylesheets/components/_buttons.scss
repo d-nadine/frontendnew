@@ -54,6 +54,10 @@
   position: relative;
   vertical-align: middle;
 
+  &.hide {
+    visibility: hidden;
+  }
+
   &.btn-black {
     color: #29292c;
 
