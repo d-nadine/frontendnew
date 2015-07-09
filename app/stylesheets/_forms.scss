@@ -88,17 +88,6 @@
       .form-box-comments-icon {
         color: #cecece;
       }
-
-      &::after {
-        width: 96%;
-        content: '';
-        position: absolute;
-        height: 1px;
-        background-color: #797979;
-        margin: 0 auto;
-        left: 2%;
-        top: 50%;
-      }
     }
 
     .reference-meta {
