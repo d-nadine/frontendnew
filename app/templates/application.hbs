@@ -1,22 +1,4 @@
-{{nav-bar currentUser=currentUser configurableTags=configurableTags transitionToTag="transitionToTag" today=today toggleNotifications="toggleNotifications" logOut="logOut"}}
-<div id="drawer-buttons">
-  <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action "toggleNotifications"}} href="#">
-    <i class="ss-standard ss-notifications"></i>
-    {{#if notificationCount}}
-      {{badge notificationCount style="important"}}
-    {{/if}}
-  </a>
-
-  {{outlet buttons}}
-
-  <a href="#" {{bind-attr class=":hidden-desktop isTwoColumn::hidden"}} {{action "toggleSidebar"}} title="Show/hide sidebar">
-    <i {{bind-attr class=":ss-standard isSidebarVisible:ss-delete:ss-layout"}}></i>
-  </a>
-
-  {{#link-to "settings" class="settings"}}
-    <i class="ss-standard ss-settings"></i>
-  {{/link-to}}
-</div>
+{{nav-bar currentUser=currentUser configurableTags=configurableTags transitionToTag="transitionToTag" today=today toggleNotifications="toggleNotifications" logOut="logOut" notificationCount=notificationCount}}
 
 {{outlet drawer}}
 
