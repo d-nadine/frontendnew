@@ -3,6 +3,7 @@ require "mixins/persist_tags_mixin"
 
 Radium.EmailsThreadController = Radium.ArrayController.extend Radium.PersistTagsMixin,
   Radium.SaveContactActions,
+  Radium.AttachedFilesMixin,
   actions:
     showMore: ->
       @set('isLoading', true)
@@ -51,6 +52,8 @@ Radium.EmailsThreadController = Radium.ArrayController.extend Radium.PersistTags
     @get('firstSender') instanceof Radium.Contact
 
   tagNames: Ember.computed.oneWay 'firstSender.tagNames'
+
+  attachments: Ember.computed.oneWay 'firstSender.attachments'
 
   setup: Ember.on 'init', ->
     @_super.apply this, arguments

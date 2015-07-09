@@ -184,11 +184,8 @@ Radium.computed.addAllKeysProperty = (context, propertyName, objectPath, func) -
   Ember.defineProperty(context, propertyName, Ember.computed.apply(this, args))
 
 Radium.isPrimaryComparer = (left, right) ->
-  leftIsPrimary = left.get('isPrimary')
-  rightIsPrimary = right.get('isPrimary')
-
-  return -1 if leftIsPrimary
-  return 1 if rightIsPrimary
+  return -1 if left.get('isPrimary')
+  return 1 if right.get('isPrimary')
 
   return 0
 

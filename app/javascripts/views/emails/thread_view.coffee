@@ -4,6 +4,8 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
 
   addListeners: ->
     win = $(window)
+    win.off "scroll.regularScroller"
+    win.off "resize.right"
     win.on "scroll.regularScroller", @didScroll.bind(this)
     win.on "resize.right", @resizeRightColumn.bind(this)
 
@@ -43,14 +45,14 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
         scrollTop >= coord.top && scrollTop <= coord.bottom
 
       unless current
-        return @addListener()
+        return @addListeners()
 
       index = emailCoords.indexOf current
 
       current = emailCoords[index + 1]
 
       unless current
-        return @addListener()
+        return @addListeners()
 
       self = this
       observer = =>
@@ -62,7 +64,7 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
           ele = $(current.selector)
 
           onAfter = ->
-            self.addListener()
+            self.addListeners()
 
           return onAfter() unless ele
 
