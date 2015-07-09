@@ -4,6 +4,11 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   Radium.SelectableMixin,
   Radium.PollerMixin,
   actions:
+    showModalTodo: ->
+      $('.todo-modal').modal(backdrop: false)
+
+      return false
+
     refresh: ->
       return if !@get('canRefresh') || @get('isSyncing')
 
@@ -39,6 +44,18 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   drawerAction: 'toggleFolders'
 
   senderIsContact: Ember.computed.oneWay 'controllers.emailsThread.senderIsContact'
+
+  firstSender: Ember.computed.oneWay 'controllers.emailsThread.firstSender'
+
+  todoForm: Radium.computed.newForm('todo')
+
+  todoFormDefaults: Ember.computed 'firstSender', 'tomorrow', ->
+    reference: @get('firstSender')
+    finishBy: null
+    user: @get('currentUser')
+    modal: true
+    closeFunc: ->
+      self.$('.modal').modal('hide')
 
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments

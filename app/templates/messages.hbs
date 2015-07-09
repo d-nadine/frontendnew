@@ -10,9 +10,17 @@
       {{/link-to}}
     {{/unless}}
     {{#unless viewingTemplates}}
-      <a href="#" {{bind-attr class="senderIsContact::hide :btn-black :btn-text"}}><i class="ss-standard ss-check"></i> Add Task</a>
+      <a href="#" {{action "showModalTodo"}} {{bind-attr class="senderIsContact::invisible :btn-black :btn-text"}}><i class="ss-standard ss-check"></i> Add Task</a>
       {{#link-to "messages" "templates"class="btn-black btn-text"}}<i class="ss-standard ss-compose"></i> Templates{{/link-to}}
     {{/unless}}
   </div>
 {{/unless}}
 {{outlet}}
+<div class="todo-modal modal fade hide">
+  <div class="modal-header">
+    <button type="button" class="close">&times;</button>
+  </div>
+  <div class="modal-body">
+    {{render "forms/todo" todoForm}}
+  </div>
+<div>
