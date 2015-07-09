@@ -8,3 +8,58 @@
     overflow-y: visible;
   }
 }
+
+
+
+.todo-modal {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  width: 720px;
+  margin: auto;
+
+  .modal-header {
+    display: none;
+  }
+  .modal-body {
+    width: calc(100% - 30px) !important;
+
+    .form {
+      padding-left: 0;
+      float: left;
+
+      .primary {
+        width: calc(100% - 50px);
+
+        .events-list-item-button {
+          margin-top: 18px;
+          margin-left: 10px;
+        }
+        .todo {
+          margin-right: 0;  
+  
+          textarea {
+            overflow-y: hidden;
+            line-height: 40px;
+          }
+        }
+      }
+    }
+    .expanded-fields {
+      width: 100%;
+      margin-top: 5px;
+
+      .form-row {
+        float: left;
+        width: calc(100% - 110px);
+      }
+      .form-buttons {
+        width: auto;
+        display: inline-block;
+        clear: none;
+        line-height: 54px;
+      }
+    }
+  }
+}
