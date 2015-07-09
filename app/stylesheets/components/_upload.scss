@@ -8,7 +8,7 @@ input[type=file]{
   cursor: pointer;
   &:not(.avatar-upload) {
     position: absolute;
-    top: -1000px;
+    top: -1000000px;
   }
 
   &.upload-button, &.avatar-upload, &.csv-upload{
