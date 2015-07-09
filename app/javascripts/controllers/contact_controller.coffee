@@ -22,7 +22,6 @@ Radium.ContactController = Radium.ObjectController.extend Radium.AttachedFilesMi
 
   customFields: Ember.A()
 
-  # FIXME: How do we determine this?
   isEditable: true
   loadedPages: [1]
 

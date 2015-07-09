@@ -32,6 +32,12 @@ Radium.MessagesRoute = Radium.Route.extend
       ).catch (error) ->
         email.set 'isSending', false
 
+    routeToSender: (sender) ->
+      if sender instanceof Radium.User
+        return @transitionTo 'user', sender
+
+      @transitionTo 'contact', sender
+
     toggleFolders: ->
       @toggleProperty 'controller.drawerOpen'
       @send 'toggleDrawer', 'messages/folders'
