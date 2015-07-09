@@ -14,8 +14,6 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
       return unless !!changed.length
 
-      Ember.run this, 'removeObjects', changed
-
       ele = Ember.$("[user-data-id=#{user.get('id')}]")
 
       return unless !!ele.length
