@@ -58,9 +58,11 @@
     }
   }
 
-  &.is-expandable {
+  &.is-expandable,
+  &.just-added {
     display: inline-block;
     width: calc(100% - 20px);
+    padding-left: 0;
 
     .btn-options {
       line-height: 48px;

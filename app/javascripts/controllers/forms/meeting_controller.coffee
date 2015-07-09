@@ -133,7 +133,7 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
         @get('model').resetDates()
 
         @trigger 'formReset'
-      ), 1200)
+      ), 12000)
 
   needs: ['companies','contacts','users', 'calendarSidebar']
   now: Ember.computed.alias('clock.now')

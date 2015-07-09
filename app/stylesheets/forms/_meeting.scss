@@ -1,6 +1,5 @@
 .meeting-form-container{
   position: relative;
-  margin-bottom: 15px;
 
   .meeting-form {
 
@@ -55,6 +54,8 @@
     }
 
     .primary {
+      width: 100% !important;
+
       i.icon-comment{
         position: absolute;
         right: 4px;

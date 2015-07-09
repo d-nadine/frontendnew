@@ -139,19 +139,18 @@
 
   &.just-added {
     .primary {
-      background-color: $green;
-      color: $bright !important;
-    }
 
-    .mention-field-view textarea,
-    textarea,
-    a {
-      color: $bright !important;
+      .success-message {
+        line-height: 54px;
+      }
+      textarea {
+        width: calc(100% - 90px);
+      }
     }
 
     .checker label,
     .inline-form-icon {
-      color: $bright;
+      color: $green;
     }
   }
   .ss-write {
@@ -161,7 +160,21 @@
     position: relative;
     top: 2px;
   }
+  &.just-added.meeting-form {
 
+    .icon {
+      line-height: 50px;
+    }
+    .topic {
+      float: left;
+      margin-bottom: 0 !important;
+      margin-left: 10px;
+      line-height: 50px !important;
+    }
+    .meeting-date {
+      display: none;
+    }
+  }
 }
 
 .reference-meta {
@@ -225,7 +238,8 @@
   .form-container {
     flex: 1;
 
-    .is-expandable {
+    .is-expandable,
+    .just-added {
       padding-left: 0;
 
       .primary {

@@ -1,8 +1,5 @@
 <div {{bind-attr class="isExpandable isNew isEditable isExpanded justAdded :form :form-inline :meeting-form"}}>
   <div {{bind-attr class="isFinished view.isFocused showTopicTextBox:open:closed :primary :expander"}} {{action "expand" target="view"}}>
-    {{#if showSuccess}}
-      <span class="success green pull-right">Meeting saved</span>
-    {{/if}}
 
     <span class="icon"><i class="ss-standard ss-calendar"></i></span>
 
@@ -32,6 +29,9 @@
         <i class="ss-symbolicons-block ss-chat pull-right form-box-comments-icon"></i>
       {{/if}}
     </div>
+    {{#if showSuccess}}
+      <span class="success green pull-right">Meeting saved</span>
+    {{/if}}
 
   </div>
 
