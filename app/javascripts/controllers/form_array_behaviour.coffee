@@ -56,3 +56,5 @@ Radium.FormArrayBehaviour = Ember.Mixin.create
     recordArray.forEach (item) ->
       formArray.pushObject Ember.Object.create(
         isPrimary: item.get('isPrimary'), name: item.get('name'), value: item.get('value'), record: item)
+
+    formArray = formArray.sort Radium.isPrimaryComparer
