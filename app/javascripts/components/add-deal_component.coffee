@@ -29,4 +29,4 @@ Radium.AddDealComponent = Ember.Component.extend
   dealsExist: Ember.computed ->
     Radium.Deal.all().get('length')
 
-  classNameBindings: [':email-item-actions', ':new-message-row', ':block-blue', ':add-deal']
+  classNameBindings: [':email-item-actions', ':new-message-row', ':add-deal']
