@@ -7,7 +7,9 @@
           <div class="email-sender">{{resource-link-to sender}}</div>
           <div class="email-info">
             <div class="email-to">To: <b>{{list "toList"}}</b></div>
-            <div class="email-cc">Copy: {{list "ccList"}}</div>
+            {{#if ccList.length}}
+              <div class="email-cc">Copy: {{list "ccList"}}</div>
+            {{/if}}
           </div>
         </div>
         <div class="span6 pull-right email-header-actions">
@@ -81,9 +83,10 @@
           </div>
         {{/if}}
       </div>
-
+      <div class="row-flued subject">
+        <div><b>{{subject}}</b></div>
+      </div>
       <hr>
-
       <div class="email-wrap span12">
 
         <div class="content">
