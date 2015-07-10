@@ -9,9 +9,9 @@ Radium.EmailsShowRoute = Radium.ShowRouteBase.extend Radium.SaveEmailMixin,
   setupController: (controller, model) ->
     Ember.assert "a model should be sent to EmailsShowRoute", model
 
-    if !model.get('isRead')
+    if !model.get('isRead') && model instanceof Radium.Email
       model.set 'isRead', true
-      mode.save()
+      model.save()
 
     @controllerFor('messages').set 'selectedContent', model
     controller.set 'model', model
