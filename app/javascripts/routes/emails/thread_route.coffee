@@ -46,7 +46,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
   setupController: (controller, model) ->
     unless model.get('isRead')
       model.set('isRead', true)
-      @store.commit()
+      model.save()
 
     @controllerFor('messages').set 'selectedContent', model
 
