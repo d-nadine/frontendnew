@@ -165,10 +165,16 @@
     right: 0;
   }
 
-  .email-form.single-mode .email-form-body .message .more-options a {
-    color: #666;
-    margin-left: 9px;
+  .email-form.single-mode .email-form-body .message .more-options {
+
+    a {
+      color: #666;
+      margin-left: 9px;
+      text-align: left;
+      padding-left: 5px;
+    }
   }
+
 
   .textbox-wrap {
     position: relative;
