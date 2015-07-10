@@ -6,15 +6,26 @@ Radium.TemplateEditorComponent = Ember.Component.extend Radium.EditorMixin,
       form = @get('form')
       parent = @get('parent')
       currentUser = parent.get('currentUser')
-      emailForm = @newEmail
-      emailForm.reset()
+      emailForm = Ember.Object.create
+                    to: Ember.A()
+                    subject: ''
+                    html: ''
+                    isValid: true
 
       if !form.get('subject.length') || !form.get('html.length')
         return parent.send 'flashError', 'You must supply a subject line and an email body for an email template.'
 
-      emailForm.get('to').pushObject(Ember.Object.create(email: currentUser.get('email')))
+      emailForm.setFilesOnModel = ->
+      form.reset = ->
+
+      emailForm.get('to').pushObject(currentUser.get('email'))
       emailForm.set 'subject', form.get('subject')
       emailForm.set 'html', form.get('html')
+
+      emailForm.set 'data',
+        to: emailForm.get('to')
+        subject: emailForm.get('subject')
+        html: emailForm.get('html')
 
       @sendAction 'saveEmail', emailForm, dontTransition: true, dontAdd: true
 
@@ -33,7 +44,6 @@ Radium.TemplateEditorComponent = Ember.Component.extend Radium.EditorMixin,
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
-    @newEmail.reset()
     Ember.run.scheduleOnce 'afterRender', this, '_afterSetup'
 
   _tearDown: ->
@@ -57,5 +67,3 @@ Radium.TemplateEditorComponent = Ember.Component.extend Radium.EditorMixin,
     message = @get('form.html') || ''
 
     !!!message.length
-
-  newEmail: Radium.EmailForm.create()

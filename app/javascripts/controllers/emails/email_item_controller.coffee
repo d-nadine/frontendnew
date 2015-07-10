@@ -1,5 +1,6 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.SaveEmailMixin,
+  Radium.SaveTemplateMixin,
   Radium.EmailDealMixin,
   Radium.TrackContactMixin,
   actions:

@@ -14,7 +14,7 @@ Radium.TemplatesEditRoute = Ember.Route.extend Radium.SaveEmailMixin,
   afterModel: (model, transition) ->
     form = @templateForm
 
-    form.reset()
+    form.reset(false)
 
     form.setProperties
       id: model.get('id')

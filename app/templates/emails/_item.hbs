@@ -165,11 +165,11 @@
 
     <div>
       {{#if showReplyForm}}
-        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor"}}
+        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
       {{/if}}
 
       {{#if showForwardForm}}
-        {{email-form form=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor"}}
+        {{email-form form=forwardEmail parent=this signature=signature addSignature="addSignature" mode="forward" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
       {{/if}}
 
       {{#if showFormBox}}

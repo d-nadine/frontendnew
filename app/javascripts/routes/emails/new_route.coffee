@@ -79,7 +79,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     else
       model = @bulkEmail
 
-    model.reset()
+    model.reset(false)
 
     return model unless params.from_people
 
