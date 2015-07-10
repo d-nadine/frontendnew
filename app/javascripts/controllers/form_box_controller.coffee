@@ -1,4 +1,5 @@
 Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
+  Radium.SaveTemplateMixin,
   actions:
     showForm: (form) ->
       @get("#{form}Form").reset()
@@ -26,6 +27,8 @@ Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
   showNoteForm: Ember.computed.equal('activeForm', 'note')
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting')
   showEmailForm: Ember.computed.equal('activeForm', 'email')
+
+  template: null
 
   onFormChanged: (form) ->
     return unless form

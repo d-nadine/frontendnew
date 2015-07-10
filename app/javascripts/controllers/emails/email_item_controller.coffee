@@ -11,7 +11,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     deleteFromEditor: ->
       @set('showReplyForm', false)
       @set('showingAddDeal', false)
-      @set('showForwardForm', false)
 
       false
 
@@ -32,17 +31,9 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       return
 
     toggleReplyForm: ->
-      @set('showForwardForm', false)
       @set('showingAddDeal', false)
 
       @toggleProperty 'showReplyForm'
-      return
-
-    toggleForwardForm: ->
-      @set('showingAddDeal', false)
-      @set('showReplyForm', false)
-
-      @toggleProperty 'showForwardForm'
       return
 
     makePublic: ->
@@ -65,12 +56,10 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
     closeForms: ->
       @set('showReplyForm', false)
-      @set('showForwardForm', false)
       @set('showingAddDeal', false)
 
     toggleAddDealForm: ->
       @set('showReplyForm', false)
-      @set('showForwardForm', false)
       @toggleProperty 'showingAddDeal'
 
       false
@@ -82,11 +71,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
   removeSidebarItem: (item, action) ->
     if @get('showReplyForm')
       @send 'closeForms'
-      return
-
-    if @get('showForwardForm')
-      @send 'closeForms'
-
       return
 
     parentController = @get('parentController')
@@ -154,10 +138,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
     replyForm
 
-  forwardEmail: Ember.computed 'model', ->
-    Radium.ForwardEmailForm.create
-      email: @get('model')
-
   needs: ['tags', 'contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar']
 
   settings: Ember.computed.alias 'controllers.userSettings.model'
@@ -173,6 +153,5 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     @get('controllers.messages.folder') != 'archive'
 
   _initialize: Ember.on 'init', ->
-    @set('showForwardForm', false)
     @set('showingAddDeal', false)
     @set('showReplyForm', false)
