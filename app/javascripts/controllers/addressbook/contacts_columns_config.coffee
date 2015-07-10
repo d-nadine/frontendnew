@@ -1,6 +1,6 @@
 Radium.ContactColumnsConfig = Ember.Mixin.create
   SAVED_COLUMNS: "saved_checked_columns"
-  initialColumns: ['email', 'company', "events", "inactive", "next-task", "next-task-date", "assign"]
+  initialColumns: ['email', 'company', "events", "inactive", "next-task", "next-task-date", "sharing", "assign"]
   fixedColumns: Ember.A([
     {
       classNames: "name"
@@ -147,6 +147,27 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       heading: "Next Task Date"
       binding: "nextTaskDateDisplay"
       sortOn: "next_task_date"
+    }
+    {
+      id: "sharing"
+      classNames: "sharing"
+      heading: "Sharing"
+      component: "toggle-switch"
+      bindings: [
+        {name: "checked", value: "model.isPublic"}
+        {name: "parentContext", value: "parentController.targetObject"}
+        {name: "model", value: "model"}
+        {name: "dataOn", value: "Shared", static: true}
+        {name: "dataOff", value: "Private", static: true}
+        {name: "dontPropagate", value: true, static: true}
+      ]
+      actions: [
+        {
+          name: 'action'
+          value: 'switchShared'
+          static: true
+        }
+      ]
     }
     {
       id: "assign"

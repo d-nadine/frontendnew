@@ -15,6 +15,20 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
       return if @get('content.isLoading')
       @get('model').expand()
 
+      false
+
+    switchShared: (contact) ->
+      return if @get('isSaving')
+
+      @set 'isSaving', false
+
+      contact.toggleProperty('isPublic')
+
+      contact.save().finally =>
+        @set 'isSaving', false
+
+      false
+
     saveEmail: (context) ->
       unless context.get('model.email')
         email = context.get('bufferedProxy.email')

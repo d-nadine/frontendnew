@@ -58,6 +58,27 @@ Radium.UntrackedColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
+      id: "sharing"
+      classNames: "sharing"
+      heading: "Sharing"
+      component: "toggle-switch"
+      bindings: [
+        {name: "checked", value: "model.isPublic"}
+        {name: "parentContext", value: "parentController.targetObject"}
+        {name: "model", value: "model"}
+        {name: "dataOn", value: "Shared", static: true}
+        {name: "dataOff", value: "Private", static: true}
+        {name: "dontPropagate", value: true, static: true}
+      ]
+      actions: [
+        {
+          name: 'action'
+          value: 'switchShared'
+          static: true
+        }
+      ]
+    }
+    {
       id: "untracked-actions"
       classNames: "untracked-actions"
       component: "untracked-actions"

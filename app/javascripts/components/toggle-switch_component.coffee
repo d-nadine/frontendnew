@@ -14,7 +14,10 @@ Radium.ToggleSwitchComponent = Ember.Component.extend
     "checker-#{@get('elementId')}"
 
   _updateElementValue: ->
-    @sendAction()
+    if parentContext = @get('parentContext')
+      parentContext.send @get("action"), @get('model')
+    else
+      @sendAction()
 
     return if @get('dontPropagate')
 
