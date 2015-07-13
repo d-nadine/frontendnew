@@ -321,3 +321,4 @@ Radium.MessagesIndexRoute = Radium.Route.extend
     route = messagesController.get('nextRoute')
 
     @transitionTo route, folder, item
+
