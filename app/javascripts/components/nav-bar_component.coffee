@@ -1,5 +1,10 @@
 Radium.NavBarComponent = Ember.Component.extend
   actions:
+    logOut: ->
+      @sendAction "logOut"
+
+      false
+
     toggleNotifications: ->
       @sendAction "toggleNotifications"
 
