@@ -31,4 +31,4 @@ Ember.Application.initializer
   initialize: (container, application) ->
     Raven.config('https://48041647d09340b89dc618e2a2ebb6ec@app.getsentry.com/48070',
       release: '1.0.0'
-      whitelistUrls: ['frontend.radiumcrm.com']).install()
+      whitelistUrls: []).install()
