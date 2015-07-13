@@ -56,6 +56,12 @@ Ember.RSVP.configure 'onerror', (e) ->
 
   Ember.Logger.error e
 
+logError = Ember.Logger.error.bind(Ember.Logger)
+
+Ember.Logger.error = (error) ->
+  logError error
+  Raven.captureException(error)
+
 require /lib\/radium\/base/
 
 require 'lib/radium/computed'
