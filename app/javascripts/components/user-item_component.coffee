@@ -23,4 +23,6 @@ Radium.UserItemComponent = Ember.Component.extend
     unless userId = @get('user.id')
       return
 
-    usersTotals.find((user) -> user.id == parseInt(userId)).total
+    return unless usersTotals = usersTotals.find((user) -> user.id == parseInt(userId))
+
+    usersTotals.total

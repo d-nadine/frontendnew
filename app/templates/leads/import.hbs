@@ -40,13 +40,13 @@
           {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow icon="ss-buildings"}}
           {{#each email in headerInfo.emailMarkers}}
             {{#multiple-control item=email items=headerInfo.emailMarkers model=headerInfo relationship="emailMarkers" icon= "ss-mail" source=headerData labels=Radium.EmailLabels}}
-              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
+              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name" placeholder="Map Email Address"}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
-          {{#each email in headerInfo.phoneNumberMarkers}}
-            {{#multiple-control item=email items=headerInfo.phoneNumberMarkers model=headerInfo relationship="phoneNumberMarkers" icon= "ss-phone" source=headerData labels=Radium.PhoneLabels}}
-              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name"}}
+          {{#each phoneNumber in headerInfo.phoneNumberMarkers}}
+            {{#multiple-control item=phoneNumber items=headerInfo.phoneNumberMarkers model=headerInfo relationship="phoneNumberMarkers" icon= "ss-phone" source=headerData labels=Radium.PhoneLabels}}
+              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name" placeholder="Map Phone Numbe"}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
