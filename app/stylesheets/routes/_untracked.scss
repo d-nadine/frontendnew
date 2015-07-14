@@ -1,6 +1,27 @@
-#addressbook {
+.untracked-view {
+
+  .subhead {
+
+    .count {
+      float: left;
+      width: 225px;
+    }
+    .tools {
+      line-height: 36px;
+
+      .caret {
+        margin-left: 4px;
+      }
+    }
+  }
+
+  .contacts-sidebar {
+    padding: 0 !important;
+  }
+
   .untracked {
     margin-left: 0 !important;
+    width: calc(100% - 225px);
 
     .left-table {
       width: 50%;
