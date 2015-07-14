@@ -1,11 +1,81 @@
 .leads-import-view {
+  .form {
+
+    .item {
+
+      > .control-box {
+        width: 320px !important;
+
+        input {
+          height: 52px;
+        }
+      }
+      &.multi {
+
+        .selection {
+
+          .autocomplete-textbox {
+            margin-left: 21px;
+            width: 320px;
+          }
+        }
+      }
+      .icon {
+        line-height: 52px;
+        margin-right: 5px;
+      }
+      .description {
+        line-height: 52px;
+      }
+      .contact-status {
+        line-height: 50px;
+        width: auto;
+
+        select {
+          height: 50px;
+          width: 320px;
+        }
+      }
+      .field {
+        width: auto;
+      }
+      .as-selections {
+        border: none;
+        border-radius: none;
+        height: 52px;
+
+        .as-selection-item {
+          margin-top: 8px;
+          margin-bottom: 8px;
+        }
+        .as-original {
+          height: 52px;
+          line-height: 52px;
+
+          .as-input {
+            line-height: 52px;
+          }
+        }
+      }
+      .as-result-item {
+        margin-top: 10px;
+      }
+    }
+
+    .submit {
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+
+
   .form-horizontal .control-label {
     text-align: left;
   }
 
   .form .item .field.contact-status {
-    width: 380px;
-
     border: none;
 
     a.edit {
