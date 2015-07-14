@@ -17,6 +17,18 @@
           .autocomplete-textbox {
             margin-left: 21px;
             width: 320px;
+            float: left;
+          }
+          .extra-field {
+            float: left;
+          }
+          .xradio-component {
+            margin-left: 10px;
+            margin-right: 5px;
+
+            label {
+              line-height: 52px;
+            }
           }
         }
       }
