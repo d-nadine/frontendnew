@@ -8,7 +8,7 @@
     {{#each domain in excludedDomains}}
       <li>
         <span>{{domain.domain}}</span>
-        <a href="#" class="btn btn-link btn-remove-field" {{action "deleteExcludedDomain" domain}}>
+        <a href="#" class="btn btn-none btn-remove-field" {{action "deleteExcludedDomain" domain}}>
           <i class="ss-symbolicons-block ss-trash cancel"></i>
         </a>
       </li>

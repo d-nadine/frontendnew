@@ -560,7 +560,11 @@ input.api-field {
 
     .btn-remove-field {
       position: relative;
-      top: -4px;
+      margin-left: 10px;
+
+      i {
+        font-size: 14px;
+      }
     }
   }
 }
