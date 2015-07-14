@@ -1,9 +1,7 @@
 <div class="item active">
+  <h3>{{subject}} {{#if hasAttachments}}<i class="ss-standard ss-attach"></i>{{/if}}</h3>
   <div class="item-wrap">
-    <h3>{{subject}} {{#if hasAttachments}}<i class="ss-standard ss-attach"></i>{{/if}}</h3>
-    {{! <div class="preview">{{{truncatedHTML}\}\}</div> }}
     <div class="stats">
-      <!--<span class="open">38% open</span>-->
       <span class="sent">{{sentCount}} sent</span>
       {{#if lastUsed}}
         <span class="last">last used - </span>
