@@ -51,4 +51,4 @@ Ember.Application.initializer
 
         Ember.run.next ->
           router = container.lookup('router:main')
-          router.transitionTo "people.contacts"
+          router.replaceWith "people.contacts"

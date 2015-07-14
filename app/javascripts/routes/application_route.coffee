@@ -182,7 +182,7 @@ Radium.ApplicationRoute = Radium.Route.extend
 
   afterModel: ->
     if @controllerFor('currentUser').get('subscriptionInvalid')
-      @transitionTo 'settings.billing'
+      @replaceWith 'settings.billing'
 
   setupController: (controller, deals) ->
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()

@@ -86,7 +86,7 @@ Radium.CalendarIndexRoute = Radium.Route.extend
 
     controller.set 'isLoading', true
 
-    Ember.RSVP.hash(hash).then =>
+    Ember.RSVP.hash(hash).then ->
       controller.set 'isLoading', false
 
   renderTemplate: ->

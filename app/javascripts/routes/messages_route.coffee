@@ -304,7 +304,7 @@ Radium.MessagesIndexRoute = Radium.Route.extend
     transitionToEmpty = =>
       folder = messagesController.get('folder') || 'inbox'
 
-      @transitionTo 'emails.empty', folder
+      @replaceWith 'emails.empty', folder
 
       return
 

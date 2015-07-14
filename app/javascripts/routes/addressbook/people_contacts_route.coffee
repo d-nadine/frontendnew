@@ -13,10 +13,10 @@ Radium.PeopleContactsRoute = Radium.Route.extend
         potential = totals.get('potential')
 
         if all == 0
-          self.transitionTo "people.index", "potential", queryParams: hidesidebar: false
+          self.replaceWith "people.index", "potential", queryParams: hidesidebar: false
         else
-          self.transitionTo "people.index", "all", queryParams: hidesidebar: false
+          self.replaceWith "people.index", "all", queryParams: hidesidebar: false
         resolve()
       ).catch (error) ->
-        self.transitionTo "people.index", "all", queryParams: hidesidebar: false
+        self.replaceWith "people.index", "all", queryParams: hidesidebar: false
         reject(error)

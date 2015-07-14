@@ -5,7 +5,7 @@ Radium.InviteUserComponent = Ember.Component.extend
         email: @get('newUserEmail')
 
       user.one 'didCreate', =>
-        @send 'flashSuccess', 'The invitation has been sent'
+        @sendAction 'flashSuccess', 'The invitation has been sent'
         @set 'newUserEmail', null
 
       user.one 'becameInvalid', =>
@@ -14,12 +14,12 @@ Radium.InviteUserComponent = Ember.Component.extend
         if new RegExp('\\b' + @get('plan') + '\\b').test(error)
           @set 'error', error
         else
-          @send 'flashError', user
+          @sendAction 'flashError', user
 
         user.deleteRecord()
 
       user.one 'becameError', =>
-        @send 'flashError', 'An error has occurred and the invitation cannot be sent.'
+        @sendAction 'flashError', 'An error has occurred and the invitation cannot be sent.'
         user.deleteRecord()
 
       user.get('transaction').commit()

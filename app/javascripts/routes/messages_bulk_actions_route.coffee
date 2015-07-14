@@ -66,7 +66,7 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
     unless checkedContent.get('length')
       @controllerFor('messagesSidebar').send 'reset'
       Ember.run.next =>
-        @transitionTo 'messages', @controllerFor('messages').get('folder')
+        @replaceWith 'messages', @controllerFor('messages').get('folder')
 
       return
 

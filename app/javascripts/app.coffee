@@ -60,6 +60,9 @@ logError = Ember.Logger.error.bind(Ember.Logger)
 
 Ember.Logger.error = (error) ->
   logError error
+
+  return unless window.ENV.environment == "production"
+
   Raven.captureException(error)
 
 require /lib\/radium\/base/

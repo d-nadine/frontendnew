@@ -10,12 +10,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
   actions:
     willTransition: (transition) ->
       if transition.targetName == "messages.index"
-        controller = @controllerFor('messages')
         @controllerFor('messagesSidebar').send 'reset'
-
-        @transitionTo 'messages.index', transition.params.messages.folder
-
-        return false
 
       true
 
@@ -55,7 +50,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     qps = transition.state.fullQueryParams || {}
 
     if qps.from_people && !@controllerFor('peopleIndex').get('hasCheckedContent')
-        return @transitionTo 'people.index', 'all'
+        return @replaceWith 'people.index', 'all'
 
     self = this
     new Ember.RSVP.Promise (resolve, reject) ->
