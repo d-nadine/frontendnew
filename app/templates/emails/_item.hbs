@@ -43,12 +43,6 @@
                   </li>
                 </ul>
               </div>
-
-            {{else}}
-              {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
-                <i class="ss-standard ss-write"></i> Edit
-              {{/link-to}}
-              <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
             {{/unless}}
           </div>
         </div>
@@ -93,6 +87,15 @@
           </div>
         </div>
       </div>
+
+      {{#if isDraft}}
+        <div class="email-draft-options">
+          {{#link-to "emails.edit" model class="btn btn-link btn-messages-action"}}
+            <i class="ss-standard ss-write"></i> Edit
+          {{/link-to}}
+          <button tabindex="6" {{action "sendDraft" this controller bubbles=false}} {{bind-attr disabled=isSaving}} class="btn btn-primary btn-main btn-wide">Send</button>
+        </div>
+      {{/if}}
     </div>
   </div>
   <div class="email-options">
