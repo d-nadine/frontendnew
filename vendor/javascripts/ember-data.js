@@ -1,4 +1,4 @@
-// Last commit: 9e4fc98 (2015-02-06 15:33:40 +0000)
+// Last commit: 378d093 (2015-07-14 15:45:42 +0100)
 
 
 (function() {
@@ -3440,6 +3440,10 @@ var DirtyState = {
       record.send('invokeLifecycleCallbacks');
     },
 
+    becomeDirty: function(record) {
+      record.transitionTo('updated.uncommitted');
+    },
+
     rollback: Ember.K,
 
     unloadRecord: function(record) {
@@ -3500,6 +3504,10 @@ var DirtyState = {
     unloadRecord: function(record) {
       record.clearRelationships();
       record.transitionTo('deleted.saved');
+    },
+
+    loadedData: function(record) {
+      record.transitionTo('loaded.created.uncommitted');
     }
   }
 };

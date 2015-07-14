@@ -104,7 +104,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     $('body').on 'click.autocomplete.txt.component', (e) =>
       text = @autocompleteElement().val() || length
 
-      unless text.length
+      if !text.length && !@get('dontReset')
         Ember.run.next =>
           @reset()
 

@@ -40,13 +40,13 @@
           {{import-header leader="Company Name" source=headerData value=headerInfo.companyName row=firstDataRow icon="ss-buildings"}}
           {{#each email in headerInfo.emailMarkers}}
             {{#multiple-control item=email items=headerInfo.emailMarkers model=headerInfo relationship="emailMarkers" icon= "ss-mail" source=headerData labels=Radium.EmailLabels}}
-              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name" placeholder="Email Address"}}
+              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name" placeholder="Email Address" dontReset=true}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
           {{#each phoneNumber in headerInfo.phoneNumberMarkers}}
             {{#multiple-control item=phoneNumber items=headerInfo.phoneNumberMarkers model=headerInfo relationship="phoneNumberMarkers" icon= "ss-phone" source=headerData labels=Radium.PhoneLabels}}
-              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name" placeholder="Phone Number"}}
+              {{autocomplete-textbox source=_parent.headerData value=value queryKey="name" placeholder="Phone Number" dontReset=true}}
               {{previewData value}}
             {{/multiple-control}}
           {{/each}}
@@ -90,7 +90,7 @@
           <div class="item">
             <div class="icon"><i class="ss-social"></i></div>
             <div class="description">Assigned To</div>
-            {{autocomplete-textbox source=users value=assignedTo queryKey="displayName" validations=userValidations validator=this validationField="assigned" isValid=isValid}}
+            {{autocomplete-textbox source=users value=assignedTo queryKey="displayName" validations=userValidations validator=this validationField="assigned" isValid=isValid dontReset=true}}
           </div>
           <div class="item">
             <div class="icon"><i class="ss-social"></i></div>

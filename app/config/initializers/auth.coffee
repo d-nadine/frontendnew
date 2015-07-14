@@ -7,7 +7,7 @@ Ember.Application.initializer
     Radium.User.find(name: 'me').then (records) ->
       user = records.get('firstObject')
 
-      Raven.setUser
+      Raven.setUserContext
         id: user.get('id')
         email: user.get('email')
 
