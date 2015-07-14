@@ -675,9 +675,23 @@
   .upload-item {
     position: relative;
 
+    .uploaded-file {
+      line-height: 10px;
+      width: 100%;
+
+      span {
+        width: 90%;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 20px;
+      }
+    }
+
     .uploaded-by {
       float: left;
       margin-right: 1px;
+      clear: both;
     }
     .upload-file {
       padding-right: 25px;
