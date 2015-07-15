@@ -691,6 +691,17 @@
       background-color: white;
     }
   }
+  .modal-backdrop {
+    position: absolute;
+
+    .modal {
+      position: absolute;
+
+      .form {
+        padding-left: 0;
+      }
+    }
+  }
 }
 
 .block {
