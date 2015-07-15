@@ -157,6 +157,14 @@ input[type=file]{
           &:before {
             content: '✎';
             padding: 0 4px;
+            font-family: "SSStandard";
+            font-size: 11px;
+            color: $muted;
+          }
+          &:hover {
+            &:before {
+              color: #000;
+            }
           }
         }
       }
