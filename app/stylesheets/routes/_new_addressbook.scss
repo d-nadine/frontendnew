@@ -5,8 +5,12 @@
     }
 
     .table-container {
-      margin-left: 10px;
-      width: calc(100% - 18px) !important;
+      width: 100% !important;
+
+      .subhead {
+        margin-left: 15px;
+        width: calc(100% - 15px);
+      }
     }
   }
 
@@ -531,7 +535,7 @@
   }
 
   .people-index-view .table-container {
-    width: calc(100% - 238px) !important;
+    width: calc(100% - 238px);
   }
 
   .table-container {

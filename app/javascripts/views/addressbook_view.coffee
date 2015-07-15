@@ -13,5 +13,3 @@ Radium.AddressbookView = Ember.View.extend
 
   teardownWindowResizeListener: Ember.on 'willDestroyElement', ->
     $(window).off 'resize.AddressbookView'
-
-  classNames: ['addressbook-full-width']
