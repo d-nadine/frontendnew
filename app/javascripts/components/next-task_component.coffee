@@ -15,7 +15,7 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
       todo = Radium.Todo.createRecord
                user: user
                reference: @get('model')
-               description: "follow up"
+               description: "Follow-up"
                finishBy: date
 
       self = this

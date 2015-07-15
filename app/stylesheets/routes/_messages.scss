@@ -146,8 +146,7 @@ $item-border: #dddddd;
   .messages-list-item-timestamp {
     position: relative;
     display: inline-block;
-    height: 30px;
-    line-height: 30px;
+    top: -4px;
     font-size: 11px;
 
     time {
@@ -253,6 +252,10 @@ $item-border: #dddddd;
       display: inline-block;
       margin-top: 10px;
     }
+  }
+  .messages-list-item-timestamp {
+    height: 30px;
+    line-height: 30px;
   }
 }
 
