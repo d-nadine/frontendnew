@@ -149,7 +149,6 @@ $item-border: #dddddd;
     height: 30px;
     line-height: 30px;
     font-size: 11px;
-    line-height: 1em;
 
     time {
       padding-right: 4px;
@@ -240,7 +239,7 @@ $item-border: #dddddd;
 
   .stats {
     background: #f9f9f9;
-    width: 240px;
+    width: 205px;
     float: left;
     padding: 0px 15px 7px;
     vertical-align: middle;
@@ -259,6 +258,7 @@ $item-border: #dddddd;
 
 .messages-list-item.template .item-wrap {
   display: inline-block;
+  width: 100%;
 }
 
 .messages-list-item.template h3 {
@@ -274,11 +274,10 @@ $item-border: #dddddd;
 }
 
 .messages-list-item.template .delete {
-  position: absolute;
-  right: 13px;
-  top: 50px;
   font-size: 16px;
   display: none;
+  float: right;
+  margin-top: 16px;
 }
 
 .messages-list-item.template:hover .delete {
