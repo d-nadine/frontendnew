@@ -193,7 +193,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     unless model.get('isLoaded')
       Ember.run.next =>
-        @$().html("<em class='loading'>loading....</em>")
+        @$().html("<em class='loading'>Loading....</em>")
         model.addObserver 'isLoaded', observer
         return
     else
