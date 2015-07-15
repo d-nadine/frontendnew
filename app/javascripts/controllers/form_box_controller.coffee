@@ -28,6 +28,11 @@ Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting')
   showEmailForm: Ember.computed.equal('activeForm', 'email')
 
+  needs: ['userSettings']
+
+  settings: Ember.computed.alias 'controllers.userSettings.model'
+  signature: Ember.computed.alias 'settings.signature'
+
   template: null
 
   onFormChanged: (form) ->

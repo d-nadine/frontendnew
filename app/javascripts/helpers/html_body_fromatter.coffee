@@ -33,7 +33,7 @@ Ember.Handlebars.registerBoundHelper 'htmlBodyFormatter', (email, options) ->
     """
 
     $iFrame = iFrameContainer.children('iframe')
-    iFrame = $iFrame.get(0)
+    return unless iFrame = $iFrame.get(0)
 
     frameWindow = iFrame.contentWindow
     frameDocument = frameWindow.document

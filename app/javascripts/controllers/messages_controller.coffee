@@ -60,7 +60,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
     @set 'refreshPoller', Radium.RefreshPoller.create()
-    @set 'currentFolder', @get('folders').find (f) -> f.name == "inbox"
 
   canRefresh: Ember.computed 'folder.length', ->
     @get('folder') == 'inbox'
@@ -68,8 +67,13 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   viewingTemplates: Ember.computed 'folder', ->
     @get('folder') == 'templates'
 
-  currentFolderName: Ember.computed 'currentFolder', ->
-    @get('currentFolder.title')
+  currentFolderName: Ember.computed 'folder', ->
+    return unless folder = @get('folder')
+
+    folderName = folder.name || folder
+
+    currentFolder = @get('folders').find (f) -> f.name == folderName
+    currentFolder.title
 
   folders: [
     { title: 'Inbox', name: 'inbox', icon: 'mail' }

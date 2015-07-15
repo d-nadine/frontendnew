@@ -60,13 +60,16 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   onFormReset: ->
     return unless editable = @$('.note-editable')
 
-    editable.addClass('placeholder')
-    editable.html('')
     @set 'placeholderShown', false
+
+    editable.addClass('placeholder')
     @set 'content', ''
-    editable.addClass('placeholder').one 'focus', @removePlaceHolder.bind(this)
+    editable.html('')
+    Ember.run.next =>
+      editable.addClass('placeholder').one 'focus', @removePlaceHolder.bind(this)
 
   removePlaceHolder: (clearHtml = true) ->
+    return if @get('placeholderShown')
     editable = @$('.note-editable')
     editable.removeClass('placeholder')
     editable.html('') if clearHtml

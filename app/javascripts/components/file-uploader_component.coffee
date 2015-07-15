@@ -23,4 +23,5 @@ Radium.FileUploaderComponent = Ember.Component.extend Radium.UploadingMixin,
 
   addClickHandler: ->
     Ember.run.next =>
-      @$().one 'click', Ember.run.bind(this, @handleClick)
+      return unless el = @$()
+      el.one 'click', Ember.run.bind(this, @handleClick)
