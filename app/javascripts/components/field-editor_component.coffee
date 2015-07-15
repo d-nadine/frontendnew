@@ -121,9 +121,6 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     @send 'save'
 
-  currentUser: Ember.computed ->
-    @get('container').lookup('controller:currentUser').get('model')
-
   isValid: Ember.computed 'name', 'isEditing', ->
     return false unless @get('isEditing')
 

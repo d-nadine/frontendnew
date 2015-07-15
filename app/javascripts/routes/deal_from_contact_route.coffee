@@ -8,7 +8,7 @@ Radium.DealsFromContactRoute = Radium.DealNewBaseRoute.extend
     controller = @controllerFor 'dealsNew'
     @_super.call this, controller, model
     controller.set 'contact', model
-    controller.set 'model.user', @controllerFor('currentUser').get('model')
+    controller.set 'model.user', @get('currentUser')
 
   renderTemplate: ->
     @render 'deals.new',

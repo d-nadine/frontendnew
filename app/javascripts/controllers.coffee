@@ -1,6 +1,6 @@
 requireAll /mixins\/controllers/
 
-ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
+ControllerMixin = Ember.Mixin.create Ember.Evented,
   actions:
     addErrorHandlersToModel: (model) ->
       model.one 'becameInvalid', (result) =>
@@ -17,7 +17,6 @@ ControllerMixin = Ember.Mixin.create Radium.CurrentUserMixin, Ember.Evented,
   clock: Ember.computed.alias('controllers.clock')
   tomorrow: Ember.computed.alias('clock.endOfTomorrow')
   now: Ember.computed.alias('clock.now')
-  currentUser: Ember.computed.alias 'controllers.currentUser.model'
   isAdmin: Ember.computed.bool 'currentUser.isAdmin', true
   nonAdmin: Ember.computed.not 'isAdmin'
   plan: Ember.computed.alias 'currentUser.account.billing.subscriptionPlan.planId'

@@ -92,7 +92,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
       localStorage.setItem controller.SAVED_COLUMNS, JSON.stringify(savedColumns)
 
-    return if @controllerFor('currentUser').get('initialMailImported')
+    return if @get('currentUser').get('initialMailImported')
 
     initImportPoller = @get('initialImportPoller')
 

@@ -1,7 +1,7 @@
 Radium.TrackContactMixin = Ember.Mixin.create
   actions:
     track: (contact) ->
-      controller = @getController('untrackedIndex')
+      controller = @get('untrackedIndex')
 
       contact.updateLocalProperty('isPublic', true)
 
@@ -15,12 +15,12 @@ Radium.TrackContactMixin = Ember.Mixin.create
       untrack = Radium.UntrackedContact.createRecord
                   contact: contact
 
-      untrackedController = @getController('untrackedIndex')
-      peopleController = @getController('peopleIndex')
+      untrackedController = @get('untrackedIndex')
+      peopleController = @get('peopleIndex')
 
-      currentUser = @getController('currentUser').get('model')
+      currentUser = @get('currentUser')
 
-      addressbook = @getController('addressbook')
+      addressbook = @get('addressbook')
 
       untrack.save().then (result) =>
         @send "flashSuccess", "Contact is no longer tracked."
@@ -33,14 +33,12 @@ Radium.TrackContactMixin = Ember.Mixin.create
 
         currentUser.reload()
 
-  needs: ['untrackedIndex', 'peopleIndex', 'addressbook']
+  # UPGRADE: replace with inject
+  untrackedIndex: Ember.computed ->
+    @container.lookup('controller:untrackedIndex')
 
-  getController: (controller) ->
-    controller = if this instanceof Ember.Route
-                   @controllerFor(controller)
-                 else
-                   @get("controllers.#{controller}")
+  peopleIndex: Ember.computed ->
+    @container.lookup('controller:peopleIndex')
 
-    Ember.assert 'controller not found in TrackContactMixin#getController', controller
-
-    controller
+  addressBook: Ember.computed ->
+    @container.lookup('controller:addressbook')

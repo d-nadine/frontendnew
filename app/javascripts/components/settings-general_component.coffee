@@ -11,7 +11,7 @@ Radium.SettingsGeneralComponent = Ember.Component.extend
       Ember.run.next =>
         @set 'isSaving', true
 
-        currentUser = @get('currentUser').get('model')
+        currentUser = @get('currentUser')
 
         currentUser.set 'shareInbox', @get('inboxIsShared')
 

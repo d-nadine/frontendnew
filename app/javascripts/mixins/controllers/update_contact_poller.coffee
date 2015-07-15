@@ -28,7 +28,7 @@ Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
 
     contact = @get('contact')
 
-    observer = =>
+    observer = ->
       return unless contact.get('inCleanState')
 
       contact.removeObserver 'currentState.stateName', observer

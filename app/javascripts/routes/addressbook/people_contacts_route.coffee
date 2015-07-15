@@ -2,7 +2,7 @@ Radium.PeopleContactsRoute = Radium.Route.extend
   beforeModel: (transition) ->
     self = this
 
-    unless @controllerFor('currentUser').get('initialContactsImported')
+    unless @get('currentUser').get('initialContactsImported')
       return @transitionTo "people.index", "potential", queryParams: hidesidebar: false
 
     new Ember.RSVP.Promise (resolve, reject) ->

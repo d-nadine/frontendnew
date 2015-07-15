@@ -1,14 +1,1 @@
-<div {{bind-attr class=":tasks-content :contacts isPersonal"}}>
-  {{render "form_box" formBox}}
-  {{#if isUpdating}}
-    <div class="well">
-      <h4>Updating details....</h4>
-    </div>
-  {{else}}
-    {{render "task_list" currentTasks}}
-  {{/if}}
-</div>
-
-{{#unless isUpdating}}
-  {{render "feed" activities}}
-{{/unless}}
+{{x-contact contact=contact customFields=customFields form=form}}

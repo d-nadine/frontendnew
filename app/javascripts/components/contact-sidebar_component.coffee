@@ -1,12 +1,12 @@
 Radium.ContactSidebarComponent = Ember.Component.extend
   actions:
     addTag: (tag) ->
-      @sendAction "addTag", tag
+      @sendAction "addTag", @get('contact'), tag
 
       false
 
     removeTag: (tag) ->
-      @sendAction "removeTag", tag
+      @sendAction "removeTag", @get('contact'), tag
 
       false
 

@@ -1,20 +1,20 @@
 Radium.PersistTagsMixin = Ember.Mixin.create
   actions:
-    addTag: (tag) ->
-      return if @get('tagNames').mapProperty('name').contains tag
+    addTag: (model, tag) ->
+      return if model.get('tagNames').mapProperty('name').contains tag
 
-      if @get('isNew')
-        return if @get('tagNames').mapProperty('name').contains tag
+      if model.get('isNew')
+        return if model.get('tagNames').mapProperty('name').contains tag
 
         newTag = Radium.Tag.createRecord name: tag
 
         newTag.save()
 
-        return @get('tagNames').addObject Ember.Object.create name: tag
+        return model.get('tagNames').addObject Ember.Object.create name: tag
 
-      tag = @get('tagNames').createRecord(name: tag)
+      tag = model.get('tagNames').createRecord(name: tag)
 
-      addressbook = @get('controllers.addressbook.content')
+      addressbook = @get('addressbook.content')
 
       tagName = tag.get('name')
 
@@ -23,13 +23,17 @@ Radium.PersistTagsMixin = Ember.Mixin.create
           if tag = tags.find((tag) -> tag.get('name') == tagName)
             addressbook.pushObject tag
 
-    removeTag: (tag) ->
-      return unless @get('tagNames').mapProperty('name').contains(tag.get('name'))
+    removeTag: (model, tag) ->
+      return unless model.get('tagNames').mapProperty('name').contains(tag.get('name'))
 
-      @get('tagNames').removeObject(tag)
+      model.get('tagNames').removeObject(tag)
 
-      @get('store').commit()
+      model.save()
 
-  needs: ['tags', 'addressbook']
-  tags: Ember.computed.oneWay 'controllers.tags'
+  # UPGRADE: replace with inject
+  tags: Ember.computed ->
+    @container.lookup('controller:tags')
+
+  addressbook: Ember.computed ->
+    @container.lookup('controller:addressbook')
 

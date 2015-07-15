@@ -167,7 +167,7 @@ Radium.MessagesRoute = Radium.Route.extend
 
       item.one updateEvent, =>
         if isSelectedContent
-          currentUser = @controllerFor('currentUser').get('model')
+          currentUser = @get('currentUser')
 
           nextItem = threadController.find (email) -> email.get('sender') != currentUser
 
@@ -271,7 +271,7 @@ Radium.MessagesRoute = Radium.Route.extend
   activate: ->
     @_super.apply this, arguments
 
-    return if @controllerFor('currentUser').get('initialMailImported')
+    return if @get('currentUser').get('initialMailImported')
 
     initImportPoller = @get('initialImportPoller')
 

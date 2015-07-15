@@ -1,6 +1,6 @@
 CalendarItem = Ember.ObjectController.extend()
 
-Radium.CalendarIndexController = Ember.Controller.extend Radium.CurrentUserMixin,
+Radium.CalendarIndexController = Ember.Controller.extend
   needs: ['users', 'clock', 'calendarSidebar']
 
   clock: Ember.computed.alias('controllers.clock')

@@ -6,7 +6,7 @@ Radium.LeadsNewRoute = Ember.Route.extend
     initialLeadSource = @controllerFor('account').get('leadSources.firstObject') || ''
     controller.set 'model.initialLeadSource', initialLeadSource
     controller.get('model').reset()
-    controller.set 'model.user', @controllerFor('currentUser').get('model')
+    controller.set 'model.user', @get('currentUser')
 
   contactForm:  Radium.computed.newForm('contact')
 

@@ -7,7 +7,7 @@ Radium.LeadsFromCompanyRoute = Radium.Route.extend
     initialLeadSource = @controllerFor('account').get('leadSources.firstObject') || ''
     controller.set 'model.initialLeadSource', initialLeadSource
     controller.get('model').reset()
-    controller.set 'user', @controllerFor('currentUser').get('model')
+    controller.set 'user', @get('currentUser')
     controller.set 'company', model
     controller.set 'model.companyName', model.get('name')
     controller.set 'expandImmediately', true

@@ -7,12 +7,24 @@ Ember.Application.initializer
     Radium.User.find(name: 'me').then (records) ->
       user = records.get('firstObject')
 
+      application.register('current:user', user, instantiate: false, singleton: true)
+
+      application.inject 'component', 'currentUser', 'current:user'
+      application.inject 'controller', 'currentUser', 'current:user'
+      application.inject 'route', 'currentUser', 'current:user'
+
+      Radium.Form.reopen
+        currentUser: user
+
+      initImportPoller = Radium.InitialImportPoller.create
+        currentUser: container.lookup('current:user')
+
+      application.register('importpoller-service:current', initImportPoller, instantiate: false)
+      application.inject('route', 'initialImportPoller', 'importpoller-service:current')
+
       Raven.setUserContext
         id: user.get('id')
         email: user.get('email')
-
-      currentUserController = container.lookup('controller:currentUser')
-      currentUserController.set 'model', user
 
       window.Intercom "boot",
         app_id: window.INTERCOM_APP_ID
