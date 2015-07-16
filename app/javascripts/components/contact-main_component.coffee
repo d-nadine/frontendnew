@@ -17,6 +17,15 @@ Radium.UpdateContactPoller,
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
 
+    saveEmail: (email) ->
+      @_super email, dontTransition: true
+
+      return unless email.get('isValid')
+
+      @flashMessenger.success 'Email Sent!'
+
+      false
+
   # UPGRADE: replace with inject
   contactStatuses: Ember.computed ->
     @container.lookup('controller:contactStatuses')

@@ -24,3 +24,21 @@ Ember.Application.initializer
     application.inject('component', 'uploader', 'uploader:current')
     application.inject('controller', 'uploader', 'uploader:current')
     application.inject('view', 'uploader', 'uploader:current')
+
+    # UPGRADE: I think we need to do away with flash messages into an outlet
+    # but we can abstract that into an object for now
+    flashMessenger = Ember.Object.create
+      success: ->
+        @sendFlash ["flashSuccess"].concat(Array.prototype.slice.call(arguments))
+
+      error: ->
+        @sendFlash ["flashError"].concat(Array.prototype.slice.call(arguments))
+
+      sendFlash: (args) ->
+        route = container.lookup('route:application')
+        route.send.apply route, args
+
+    application.register('flash:messenger', flashMessenger, instantiate: false)
+
+    application.inject('component', 'flashMessenger', 'flash:messenger')
+    application.inject('controller', 'flashMessenger', 'flash:messenger')

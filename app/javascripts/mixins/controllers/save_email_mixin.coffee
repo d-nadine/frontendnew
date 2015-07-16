@@ -121,5 +121,6 @@ Radium.SaveEmailMixin = Ember.Mixin.create
     else
       @transitionTo
 
+  # UPGRADE: use inject
   getController: (controller) ->
     @container.lookup("controller:#{controller}")

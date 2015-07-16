@@ -9,7 +9,7 @@ Radium.FormsNoteController = Radium.FormController.extend
 
       @set('model.body', body)
       @get('model').commit().then (confirmation) =>
-        @send('flashSuccess', "Note added") if confirmation
+        @flashMessenger.success("Note Added!") if confirmation
       ,
       (error) =>
         @send 'flashError', error
