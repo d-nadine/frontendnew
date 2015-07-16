@@ -257,7 +257,7 @@
   table-layout: fixed;
 
   .assign {
-    width: 17%;
+    width: 16%;
 
     .assignto-picker-component {
       width: 100%;
@@ -272,10 +272,10 @@
     }
   }
   .next-task {
-    width: 17%;
+    width: 18%;
   }
   .subject {
-    width: 45%;
+    width: 41%;
 
     a {
       width: calc(100% - 40px);
@@ -297,10 +297,10 @@
     }
   }
   .received {
-    width: 8%;
+    width: 70px;
   }
   .choose {
-    width: 13%;
+    width: 114px;
     border-right: 0 !important;
   }
 }
