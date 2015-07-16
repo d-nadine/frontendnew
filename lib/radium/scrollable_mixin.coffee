@@ -7,21 +7,9 @@ Radium.ScrollableMixin = Em.Mixin.create
   isAtBottom: false
   isAtTop: false
 
-  willDestroyElement: ->
-    @$().data('jsp').destroy()
-    $(window).off 'resize.jscrollpane'
-
-  getDimensions: ->
-    $this = @$()
-    return unless $this
-    offset = parseFloat($this.parent().css('top'))
-    height = $(window).height() - offset
-    width = $this.innerWidth()
-    dimensions =
-      width: width
-      height: height
-
-  setupScollbar: (->
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+    return if @get('noscroll')
     $(window).on('resize.jscrollpane', @_resize.bind(this))
     dimensions = @getDimensions()
 
@@ -36,7 +24,22 @@ Radium.ScrollableMixin = Em.Mixin.create
         horizontalGutter: 0
       )
       .on('jsp-scroll-y', @didScrollHandler.bind(this))
-  ).on('didInsertElement')
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    return if @get('noscroll')
+    @$().data('jsp').destroy()
+    $(window).off 'resize.jscrollpane'
+
+  getDimensions: ->
+    $this = @$()
+    return unless $this
+    offset = parseFloat($this.parent().css('top'))
+    height = $(window).height() - offset
+    width = $this.innerWidth()
+    dimensions =
+      width: width
+      height: height
 
   # Event handler for scrolling on Y axis, dispatches to public hooks
   didScrollHandler: (event, scrollPositionY, isAtTop, isAtBottom) ->

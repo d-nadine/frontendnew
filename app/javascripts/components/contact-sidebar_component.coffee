@@ -1,4 +1,4 @@
-Radium.ContactSidebarComponent = Ember.Component.extend
+Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
   actions:
     addTag: (tag) ->
       @sendAction "addTag", @get('contact'), tag

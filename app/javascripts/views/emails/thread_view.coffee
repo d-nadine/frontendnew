@@ -1,5 +1,6 @@
 Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
   setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
     Ember.run.scheduleOnce 'afterRender', this, 'addListeners'
 
   addListeners: ->
@@ -12,7 +13,7 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
   resizeRightColumn: (e) ->
     return unless right = @$('.right-column')
 
-    height = $(window).height() - right.position().top - 20
+    height = $(window).height() - right.position().top - 100
 
     right.height(height)
 
@@ -75,5 +76,7 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
       @get('controller').send 'showMore'
 
   teardown: Ember.on 'willDestroyElement', ->
-    $(window).off ".regularScroller"
-    $('resize.right').off 'resize'
+    @_super.apply this, arguments
+    win = $(window)
+    win.off ".regularScroller"
+    win.off 'resize.right'

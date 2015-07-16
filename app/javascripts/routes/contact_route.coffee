@@ -70,11 +70,5 @@ Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
       Ember.run.next ->
         controller.trigger 'formChanged', form
 
-  renderTemplate: ->
-    @render()
-    @render 'contact/sidebar',
-      into: 'contact'
-      outlet: 'sidebar'
-
   deactivate: ->
     @controller.set 'form', null
