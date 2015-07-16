@@ -169,6 +169,11 @@
     }
   }
 }
+.sidebar {
+  .loading-bar {
+    display: none !important;
+  }
+}
 
 .email-item-actions {
   .block-arrow-top{

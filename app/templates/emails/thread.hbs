@@ -2,9 +2,7 @@
   {{partial 'emails/importing'}}
   <div class="email-history">
   {{#if isLoading}}
-    {{!-- <div class="email-nav"> --}}
-      {{partial 'is_loading'}}
-    {{!-- </div> --}}
+    {{partial 'is_loading'}}
   {{/if}}
   {{#each model itemController="emailThreadItem" itemViewClass="Radium.ThreadItemView"}}
     {{#if isLoaded}}
