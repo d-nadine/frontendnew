@@ -225,8 +225,11 @@
       }
     }
   }
-  .read a {
+  .unread a {
     font-weight: bold;
+  }
+  .read td {
+    background: $background;
   }
 }
 
