@@ -43,7 +43,7 @@ $calendar-off: #d8d9d9;
       }
     }
 
-    .is-expandable {
+    .is-expandable.has-reference {
 
       .primary {
         width: calc(100% - 90px);
