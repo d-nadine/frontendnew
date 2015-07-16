@@ -122,7 +122,4 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       @transitionTo
 
   getController: (controller) ->
-    if this instanceof Ember.Controller || this instanceof Ember.ObjectController || this instanceof Ember.ArrayController
-      @get("controllers.#{controller}")
-    else
-      @controllerFor(controller)
+    @container.lookup("controller:#{controller}")

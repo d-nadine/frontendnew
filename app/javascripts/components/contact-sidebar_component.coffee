@@ -28,6 +28,19 @@ Radium.ContactSidebarComponent = Ember.Component.extend
 
   classNameBindings: [':form']
 
+  # UPGRADE: replace with inject
+  contactStatuses: Ember.computed ->
+    @container.lookup('controller:contactStatuses')
+
+  companies: Ember.computed ->
+    @container.lookup('controller:companies')
+
+  users: Ember.computed ->
+    @container.lookup('controller:users')
+
+  leadSources: Ember.computed ->
+    @container.lookup('controller:accountSettings').get('leadSources')
+
   shared: false
   isSaving: false
   condense: false

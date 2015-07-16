@@ -6,11 +6,12 @@ require "mixins/persist_tags_mixin"
 require "mixins/controllers/track_contact_mixin"
 require "mixins/controllers/attached_files_mixin"
 
-Radium.XContactComponent = Ember.Component.extend  Radium.AttachedFilesMixin,
+Radium.ContactMainComponent = Ember.Component.extend  Radium.AttachedFilesMixin,
 Radium.UpdateContactPoller,
   Radium.TrackContactMixin,
   Radium.SaveContactActions,
   Radium.PersistTagsMixin,
+  Radium.SaveEmailMixin,
   Ember.Evented,
   actions:
     removeMultiple: (relationship, item) ->
