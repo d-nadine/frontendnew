@@ -663,7 +663,9 @@ $item-border: #dddddd;
     }
   }
   .email-history {
-    width: 800px;
+    width: 80%;
+    min-width: 700px;
+    max-width: 1000px;
 
     .email-card {
       width: calc(100% - 40px);
