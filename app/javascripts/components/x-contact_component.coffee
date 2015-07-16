@@ -20,16 +20,6 @@ Radium.XContactComponent = Ember.Component.extend
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     Ember.run.scheduleOnce 'afterRender', this, 'addListeners'
-    $(window).on "resize.sidebar", @resizeSidebar.bind(this)
 
-  resizeSidebar: (e) ->
-    return unless right = @$('.contact-sidebar-component')
-
-    height = $(window).height() - right.position().top - 100
-
-    right.height(height)
-
-  teardown: Ember.on 'willDestroyElement', ->
-    @_super.apply this, arguments
-    $('resize.sidebar').off 'resize'
-
+  addListeners: ->
+    p "foo"

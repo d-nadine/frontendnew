@@ -13,7 +13,7 @@ Radium.EmailsThreadView = Radium.View.extend Radium.GetEmailCoords,
   resizeRightColumn: (e) ->
     return unless right = @$('.right-column')
 
-    height = $(window).height() - right.position().top - 100
+    height = $(window).height() - right.position().top - 20
 
     right.height(height)
 
