@@ -1,12 +1,15 @@
+require "mixins/persist_tags_mixin"
+
 Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
+  Radium.PersistTagsMixin,
   actions:
     addTag: (tag) ->
-      @sendAction "addTag", @get('contact'), tag
+      @_super @get('contact'), tag
 
       false
 
     removeTag: (tag) ->
-      @sendAction "removeTag", @get('contact'), tag
+      @_super @get('contact'), tag
 
       false
 
@@ -40,6 +43,9 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
 
   leadSources: Ember.computed ->
     @container.lookup('controller:accountSettings').get('leadSources')
+
+  tags: Ember.computed ->
+    @container.lookup('controller:tags')
 
   shared: false
   isSaving: false

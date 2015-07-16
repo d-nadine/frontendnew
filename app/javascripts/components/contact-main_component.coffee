@@ -2,7 +2,6 @@ require "mixins/save_contact_actions"
 require "mixins/persist_tags_mixin"
 require "mixins/controllers/update_contact_poller"
 require "mixins/save_contact_actions"
-require "mixins/persist_tags_mixin"
 require "mixins/controllers/track_contact_mixin"
 require "mixins/controllers/attached_files_mixin"
 
