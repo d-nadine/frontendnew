@@ -18,8 +18,6 @@
 
         //create the picker HTML object
         var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +
-                '<div class="calendar left"></div>' +
-                '<div class="calendar right"></div>' +
                 '<div class="ranges">' +
                   '<div class="range_inputs">' +
                     '<div class="daterangepicker_start_input">' +
@@ -34,6 +32,8 @@
                     '<button class="applyBtn pull-right" disabled="disabled"></button>&nbsp;' +
                   '</div>' +
                 '</div>' +
+                '<div class="calendar left"></div>' +
+                '<div class="calendar right"></div>' +
               '</div>';
 
         //custom options
