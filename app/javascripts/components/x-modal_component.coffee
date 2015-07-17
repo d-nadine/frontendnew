@@ -1,13 +1,11 @@
-Radium.ModalView = Radium.View.extend
-  layout: Ember.Handlebars.compile """
-    <div class="modal-backdrop">
-      <div class="modal fade">
-        {{yield}}
-      </div>
-    </div>
-  """
+Radium.XModalComponent = Ember.Component.extend
+  actions:
+    closeModal: ->
+      @sendAction "close"
 
-  _setup: Ember.on 'didinsertElement', ->
+      false
+
+  _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     @$('.modal').addClass('in')
 
@@ -24,3 +22,4 @@ Radium.ModalView = Radium.View.extend
     superFunction = @__nextSuper.bind this
 
     @$().one $.support.transition.end, superFunction
+

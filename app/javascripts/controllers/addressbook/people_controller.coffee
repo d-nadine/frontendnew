@@ -5,6 +5,22 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   Radium.SaveContactActions,
   actions:
+    showContactModal: (contact) ->
+      @set 'modalContact', contact
+
+      Ember.run.next =>
+        @set 'showContactModal', true
+
+      false
+
+    closeContactModal: ->
+      @set 'showContactModal', false
+
+      Ember.run.next =>
+        @set 'showContactModal', null
+
+      false
+
     toggleFilter: ->
       element = $('.query-builder-component')
 
@@ -405,6 +421,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   newCustomQueries: Ember.A()
   potentialQueries: Ember.A()
   actualQueries: []
+  showContactModal: false
+  modalContact: null
+
+  closeModals: ->
+    @set 'modalContact', null
+    @set 'showContactModal', false
 
   combinedQueryFields: Ember.computed 'customFields.[]', ->
     queryFields = @queryFields

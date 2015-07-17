@@ -1,0 +1,13 @@
+<div class="modal-backdrop">
+  <div class="modal fade">
+    <div class="modal fade">
+      <div class="modal-header">
+        <button type="button" class="close" {{action "closeModal"}} aria-hidden="true">×</button>
+        <h3>{{header}}</h3>
+      </div>
+      <div class="modal-body">
+        {{yield}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -231,3 +231,8 @@
     </div>
   {{/if}}
 </div>
+{{#if showContactModal}}
+  {{#x-modal close="closeContactModal"}}
+    {{x-contact contact=modalContact tags=tags parent=this addTag="addContactTag" removeTag="removeContactTag" customFields=customFields files=files condenseSidebar=true}}
+  {{/x-modal}}
+{{/if}}

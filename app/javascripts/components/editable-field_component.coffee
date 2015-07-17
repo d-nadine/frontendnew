@@ -8,6 +8,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     activateLink: ->
       target = @get('containingController')
 
+      if routeAction = @get("routeAction")
+        return target.send routeAction, @get('model')
+
       routable = if alternative = @get('alternativeRoute')
                    @get('model').get(alternative)
                  else

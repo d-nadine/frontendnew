@@ -130,6 +130,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
     @controller.set 'actualQueries', Ember.A()
     @controller.set 'hidesidebar', false
     @set 'customquery', null
+    @controller.closeModals()
 
     initImportPoller = @get('initialImportPoller')
 

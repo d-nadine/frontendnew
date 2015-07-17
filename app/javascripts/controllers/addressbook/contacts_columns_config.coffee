@@ -19,6 +19,11 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         name: "bufferKey",
         value: "name"
         static: true
+      },
+      {
+        name: "routeAction",
+        value: "showContactModal",
+        static: true
       }]
       avatar: true
       checked: true

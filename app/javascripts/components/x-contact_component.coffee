@@ -16,10 +16,3 @@ Radium.XContactComponent = Ember.Component.extend
       false
 
   classNames: ['two-column-layout']
-
-  setup: Ember.on 'didInsertElement', ->
-    @_super.apply this, arguments
-    Ember.run.scheduleOnce 'afterRender', this, 'addListeners'
-
-  addListeners: ->
-    p "foo"
