@@ -98,6 +98,9 @@ $calendar-off: #d8d9d9;
   .sidebar {
     @include transition(transform 0.25s);
     @include translateX(-100%);
+
+    border-right: 1px solid #ccc;
+    background-color: white;
   }
 }
 
