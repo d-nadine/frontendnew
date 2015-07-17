@@ -15,12 +15,12 @@
 
 .checklist-items{
   background-color: $bright;
-  border: 1px solid $dark-background;
   margin-bottom: 0;
   padding-left: 10px;
   padding-right: 10px;
   label{
     display: inline;
+    font-size: 16px;
   }
   table{
     margin-top: 10px;
@@ -29,9 +29,11 @@
       td{
         padding: 5px;
         vertical-align: middle;
+        line-height: 30px;
 
         input.field {
           margin-bottom: 0;
+          height: 34px;
         }
 
         &.check{
@@ -46,6 +48,19 @@
         .icon-plus{
           position: relative;
           top: -2px;
+        }
+        &.checklist-number {
+          width: 100px;
+          display: inline-block;
+
+          .field {
+            float: left;
+          }
+          span {
+            float: left;
+            line-height: 44px;
+            margin-left: 6px;
+          }
         }
       }
     }

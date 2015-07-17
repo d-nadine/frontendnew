@@ -11,8 +11,8 @@
                 {{description}}
               </label>
             </td>
-            <td {{bind-attr class="isFinished:is-finished:muted"}}>
-              {{weight}}%
+            <td {{bind-attr class="isFinished:is-finished"}}>{{weight}}%</td>
+            <td {{bind-attr class="isFinished:is-finished:muted"}} colspan="2">
               {{#if isAdditional}}
                 <a href="#" class="additional" {{action "removeAdditionalItem" this bubbles=false}}>
                   delete
@@ -41,8 +41,8 @@
             </label>
             {{view view.newItemDescription class="field input-xlarge" viewName="itemDescription"}}
           </td>
-          <td>
-            {{view view.newItemWeight type="number" max="100" class="field input-mini"}}%
+          <td class="checklist-number">
+            {{view view.newItemWeight type="number" max="100" class="field input-mini"}} <span>%</span>
           </td>
           <td>
             <div class="btn-group">
