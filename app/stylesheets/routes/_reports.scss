@@ -1,8 +1,18 @@
 // Filter bar layout
+.reports-view:not(.pin-filter) {
+  #master-filter {
+    padding-left: 0;
+
+    .option:first-of-type {
+      padding-left: 0;
+    }
+  }
+}
+
 .reports-filter {
   $bg: #dbdbdb;
   padding: 15px;
-  background: $bg;
+  background: $background;
   top: 70px;
   left: 0;
 
@@ -12,13 +22,15 @@
     right: 0;
     left: 0;
     z-index: 9999;
-    @include box-shadow(0 2px 2px rgba(black, 0.2));
+    border-bottom: 1px solid $border;
 
     & + .reports-filter-placeholder {
       height: 120px;
     }
+    #master-filter {
+      padding-left: 15px;
+    }
   }
-
 
   input[type="text"] {
     margin: 0;
@@ -110,6 +122,10 @@
   &.pie-chart .reset {
     left: 0;
   }
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+  }
 }
 
 #report-sales-section .charts {
@@ -136,6 +152,17 @@
 
     .page-header {
       padding-top: 20px;
+
+      h4 {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+    }
+    .summary-details {
+
+      h2 {
+        font-size: 26px;
+      }
     }
   }
 }
