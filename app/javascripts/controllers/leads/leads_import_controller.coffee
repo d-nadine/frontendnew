@@ -141,11 +141,11 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
       map = (item) -> Ember.Object.create name: item
 
-      headerData = imported.data[0].map map
+      unless headerData = imported.data[0].map map
+        return @send "flashError", "the file contains no valid data"
 
-      start = if @get('firstRowIsHeader') then 1 else 0
-
-      firstDataRow = imported.data[start].map map
+      unless firstDataRow = imported.data[1].map map
+        return @send "flashError", "the file contains no valid data"
 
       @setProperties
         showInstructions: false
@@ -347,6 +347,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         @send 'reset'
         @set 'importFile', null
         Radium.Contact.find({})
+        Radium.Tag.find({})
         @get('container').lookup('route:leadsImport').refresh()
         return
 

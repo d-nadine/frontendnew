@@ -236,6 +236,8 @@ Radium.MessagesRoute = Radium.Route.extend
   setupController: (controller, model) ->
     return unless model
 
+    return Ember.A() if typeof model.toArray != "function"
+
     controller.set 'model', model.toArray()
 
     return unless model.get('length')

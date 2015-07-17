@@ -25,10 +25,10 @@
     {{#if initialImported}}
       <div class="form form-horizontal">
         <div class="main">
-          <div class="control-group">
+          <div class="control-group hidden">
             <label class="control-label">First Row is Header</label>
             <div class="controls">
-              {{x-check checked=firstRowIsHeader class="checker-block"}}
+              {{x-check checked=firstRowIsHeader class="checker-block" disabled=true}}
             </div>
           </div>
           {{import-header leader="First Name" source=headerData value=headerInfo.firstName row=firstDataRow icon="ss-user"}}

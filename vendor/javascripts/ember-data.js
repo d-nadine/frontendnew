@@ -3721,6 +3721,11 @@ var RootState = {
       },
 
       reloadRecord: Ember.K,
+
+      becameError: function(record) {
+        record.transitionTo('error');
+        record.send('invokeLifecycleCallbacks');
+      }
     },
 
     // If there are no local changes to a record, it remains
