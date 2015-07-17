@@ -50,10 +50,7 @@
   .email-subject {
     display: inline-block;
     margin-top: 5px;
-
-    a {
-      font-weight: 400;
-    }
+    margin-bottom: 5px;
   }
   a {
     color: $text;

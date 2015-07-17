@@ -1,7 +1,11 @@
 <p>
-  {{#if email.isLoaded}}
-    {{resource-link-to email}}
-  {{/if}}
-  <br/>
   sent to {{resource-link-to contact}}
+  <div class="email-subject">
+    {{#if email.isLoaded}}
+      {{resource-link-to email}}
+    {{/if}}
+  </div>
+  <div class="email-body">
+    {{{email.formattedEmailBody}}}
+  </div>
 </p>

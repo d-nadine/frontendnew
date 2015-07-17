@@ -30,7 +30,7 @@ Ember.Handlebars.registerHelper "resource-link-to", (path, options) ->
     args.unshift path
 
     if resource.constructor is Radium.Email
-      folder = if Ember.ControllerMixin.detect(this) && @container.lookup('current:user').get('model') == this.get("sender")
+      folder = if Ember.ControllerMixin.detect(this) && @container.lookup('current:user') == resource.get("sender")
                 "sent"
                else
                  "inbox"

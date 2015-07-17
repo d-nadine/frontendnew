@@ -10,7 +10,6 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
     return unless emailId
 
     activity = @get('model')
-    store = @get('store')
 
     Radium.Email.find(emailId).then( (result) =>
       return if @isDestroyed || @isDestroying
@@ -20,5 +19,4 @@ Radium.ActivityAssignMixin = Ember.Mixin.create
       # from the meta field, then it will do
       return if result.constructor is Error
       return if result.constructor != Radium.Email && !result.get('isError')
-      activity.deleteRecord()
-      store.commit()
+      activity.delete()

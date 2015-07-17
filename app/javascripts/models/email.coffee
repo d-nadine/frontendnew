@@ -72,6 +72,15 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   time: Ember.computed 'sentAt', 'updatedAt', ->
     @get('sentAt') || @get('updatedAt')
 
+  formattedEmailBody: Ember.computed 'message', ->
+    return "loading....." if @get('isLoading')
+
+    body = @get('message') || ''
+
+    return '' unless body.length
+
+    body.replace /\n/g, '<br/>'
+
   clearRelationships: ->
     activities = []
 
