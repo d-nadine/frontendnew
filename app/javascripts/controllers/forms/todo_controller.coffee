@@ -82,6 +82,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
 
             @send('flashSuccess', result.confirmation) if result?.confirmation
 
+            if contact = result.todo.get('_referenceContact')
+              contact.reload()
+
             # A bit hacky, we could use sendAction if this was a component
             if @get('target') instanceof Radium.NextTaskComponent
               @get('target').send 'todoAdded', result.todo
@@ -96,7 +99,9 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
             data.finishBy = null
             model.set('_data', data)
           @send 'addErrorHandlersToModel', model
-          @get('store').commit()
+          model.save().then (result) ->
+            if contact = result.get('_referenceContact')
+              contact.reload()
 
         Ember.run.next =>
           if parentController = @get('parentController')

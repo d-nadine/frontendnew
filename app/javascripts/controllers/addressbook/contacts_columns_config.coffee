@@ -28,6 +28,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       avatar: true
       checked: true
       sortOn: "name"
+      context: "model"
       component: 'editable-field'
     }
   ])

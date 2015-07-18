@@ -2,7 +2,7 @@ Ember.Handlebars.registerBoundHelper 'dynamicAvatar', (context, property, option
   args = Array::slice.call(arguments, 2)
 
   context = if property.hasOwnProperty "context"
-              item.get(property.context)
+              @get(property.context)
             else
               context
 
