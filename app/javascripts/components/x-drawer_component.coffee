@@ -37,7 +37,7 @@ Radium.XDrawerComponent = Ember.Component.extend
       return unless el.hasClass('open')
 
       if target.parents('.xdrawer-component').length
-        return false
+        return true
 
       if target.hasClass 'dismiss-single'
         return false
