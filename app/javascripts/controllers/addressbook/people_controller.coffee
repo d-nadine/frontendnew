@@ -6,10 +6,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.SaveContactActions,
   actions:
     showContactModal: (contact) ->
-      @set 'modalContact', contact
-
-      Ember.run.next =>
-        @set 'showContactModal', true
 
       false
 
