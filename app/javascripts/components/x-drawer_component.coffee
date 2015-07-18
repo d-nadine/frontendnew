@@ -1,7 +1,6 @@
 Radium.XDrawerComponent = Ember.Component.extend
   actions:
     closeDrawer: ->
-
       sendClose = =>
         @sendAction 'closeDrawer'
         false
@@ -27,3 +26,40 @@ Radium.XDrawerComponent = Ember.Component.extend
     @$()[0].offsetWidth
 
     @$().addClass 'open'
+
+    el = this.$()
+
+    self = this
+
+    $('body').on 'click.xdrawer', (e) ->
+      target = $(e.target)
+
+      return unless el.hasClass('open')
+
+      if target.hasClass 'dismiss-single'
+        return false
+
+      classNames = e.target.className.split(' ')
+
+      drawerIcons = ['notifications-link', 'ss-notifications', 'email-folders', 'ss-inbox', 'ss-clock']
+
+      if Ember.EnumerableUtils.intersection(classNames, drawerIcons).length
+        return false
+
+      if e.target.tagName == "A"
+        self.send "closeDrawer"
+        return false
+
+      return if target.hasClass('ss-clock')
+      return if target.hasClass('badge-important')
+      return if $.contains(el[0], e.target)
+
+      self.send "closeDrawer"
+
+      e.stopPropagation()
+      e.preventDefault()
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    $('body').off 'click.xdrawer'

@@ -1,6 +1,17 @@
 require "mixins/persist_tags_mixin"
 
 Radium.VariadicItemController = Radium.ObjectController.extend Radium.PersistTagsMixin,
+  actions:
+    addTag: (tag) ->
+      @_super @get('model'), tag
+
+      false
+
+    removeTag: (tag) ->
+      @_super @get('model'), tag
+
+      false
+
   needs: ['users']
   users: Ember.computed.oneWay 'controllers.users'
   contactStatuses: Ember.computed.oneWay 'parentController.targetObject.contactStatuses'
