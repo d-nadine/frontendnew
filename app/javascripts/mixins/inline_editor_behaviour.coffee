@@ -10,7 +10,7 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
-    $(window).on 'click.inline', (e) =>
+    $('body').on 'click.inline', (e) =>
       return unless @get('isEditing')
 
       target = $(e.target)

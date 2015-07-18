@@ -42,6 +42,8 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
           @set 'isSaving', false
           @set 'isSubmitted', false
           @get('errorMessages').clear()
+          Ember.run.next ->
+            model.trigger 'modelUpdated', self, model
 
         isPrimaryCount = model.get(@relationship).filter((i) -> i.get('isPrimary')).toArray().length
 
@@ -52,10 +54,7 @@ Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
 
         self = this
 
-        model.save( ->
-          self.set 'isSubmitted', false
-          self.get('errorMessages').clear()
-        ).then(finish).finally ->
+        model.save().then(finish).finally ->
           self.set 'isSaving', false
 
       false

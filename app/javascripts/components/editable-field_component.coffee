@@ -77,6 +77,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       model.save().then( =>
         @set 'isSaving', false
         value = @get('model').get(@get('bufferKey'))
+
+        Ember.run.next ->
+          model.trigger 'modelUpdated', self, model
+
         unless value?.length
           return @send 'setPlaceholder'
 
@@ -183,6 +187,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     model = @get('model')
 
+    model.on 'modelUpdated', @modelUpdated.bind(this)
+
     observer = =>
       return unless model.get('isLoaded')
 
@@ -202,18 +208,30 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     else
       @setMarkup()
 
+  modelUpdated: (raiser, model) ->
+    return if @isDestroyed || @isDestroying
+    return if raiser == this
+
+    @setMarkup()
+
   teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     @$()?.parent().off 'click'
     @$()?.off 'focus', @focusContent.bind(this)
 
+    return unless model = @get('model')
+
+    model.off 'modelUpdated'
+
   setMarkup: ->
     markUp = @get('markUp')
+
+    return unless el = @$()
 
     unless markUp?.length
       @send 'setPlaceholder'
     else
-      @$().html markUp
+      el.html markUp
 
     @setEndOfContentEditble()
 
