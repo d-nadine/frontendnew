@@ -16,7 +16,7 @@
         <ul class="nav main-nav">
 
           <li>
-            <a {{bind-attr class=":notifications-link isNotificationsOpen:active"}} {{action "toggleNotifications"}} href="#">
+            <a class="notifications-link" {{action "toggleNotifications"}} href="#">
               <i class="ss-standard ss-notifications"></i>
               {{#if notificationCount}}
                 {{badge notificationCount style="important"}}

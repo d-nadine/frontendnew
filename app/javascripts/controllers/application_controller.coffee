@@ -7,8 +7,6 @@ Radium.ApplicationController = Radium.ObjectController.extend
 
   needs: ['notifications', 'tags']
   isSidebarVisible: false
-  isTwoColumn: false
-  isNotificationsOpen: Ember.computed.alias 'controllers.notifications.drawerOpen'
   today: Ember.DateTime.create()
   currentDrawer: null
   notificationCount: 0

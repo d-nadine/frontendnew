@@ -33,7 +33,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
 
       false
 
-  drawerOpen: false
   folder: null
   pageSize: 5
   needs: ['messagesSidebar', 'emailsThread']
