@@ -195,6 +195,7 @@ Radium.computed.sortByPrimary = (key, relationship) ->
   isPrimaryProp = "#{path}.@each.isPrimary"
 
   func = ->
-    @get(path).toArray().sort Radium.isPrimaryComparer
+    return unless coll = @get(path)
+    coll.toArray().sort Radium.isPrimaryComparer
 
   Ember.computed arrayProp, isPrimaryProp, func

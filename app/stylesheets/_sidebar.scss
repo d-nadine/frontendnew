@@ -1,5 +1,7 @@
 .sidebar {
-  width: 310px;
+  &:not(.contact-drawer) {
+    width: 310px;
+  }
   position: fixed;
   top: $navbar-height;
   left: 0;

@@ -1,5 +1,8 @@
 .drawer-view {
-  max-width: 370px;
+  &:not(.contact-drawer) {
+    max-width: 370px;
+  }
+
   @extend .sidebar;
   z-index: 99;
   color: $text;
@@ -15,4 +18,26 @@
     background-color: rgba(0,0,0, 0.5);
   }
 
+}
+
+$contact-drawer-width: 70%;
+
+.contact-drawer.drawer-view {
+  max-width: $contact-drawer-width;
+  width: $contact-drawer-width;
+  z-index: 90;
+  background: lighten($background, 10%);
+  border-right: 1px solid $border;
+}
+
+.contact-drawer.drawer-view .sidebar {
+  top: 0;
+}
+
+.contact-drawer.drawer-view .two-column-layout{
+  padding: 0px 10px 60px 340px;
+}
+
+.drawer-view .close {
+  font-size: 25px;
 }

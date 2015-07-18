@@ -22,7 +22,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       },
       {
         name: "routeAction",
-        value: "showContactModal",
+        value: "showContactDrawer",
         static: true
       }]
       avatar: true

@@ -21,5 +21,5 @@ Radium.XModalComponent = Ember.Component.extend
     # ember release
     superFunction = @__nextSuper.bind this
 
-    @$().one $.support.transition.end, superFunction
+    modal.one $.support.transition.end, superFunction
 

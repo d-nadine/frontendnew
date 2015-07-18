@@ -231,3 +231,8 @@
     </div>
   {{/if}}
 </div>
+{{#if showContactDrawer}}
+  {{#x-drawer class="contact-drawer" closeDrawer="closeContactDrawer"}}
+    {{x-contact contact=modalContact tags=tags parent=this addTag="addContactTag" removeTag="removeContactTag" customFields=customFields files=files condenseSidebar=true}}
+  {{/x-drawer}}
+{{/if}}
