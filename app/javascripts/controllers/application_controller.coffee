@@ -8,9 +8,11 @@ Radium.ApplicationController = Radium.ObjectController.extend
   needs: ['notifications', 'tags']
   isSidebarVisible: false
   today: Ember.DateTime.create()
-  currentDrawer: null
   notificationCount: 0
   title: 'Radium'
+
+  showNotifications: false
+
   titleChanged: Ember.observer 'notificationCount', ->
     title = @get('title')
     notificationCount = @get('notificationCount')
@@ -23,5 +25,6 @@ Radium.ApplicationController = Radium.ObjectController.extend
       document.title = title
     , 200
 
+  notifications: Ember.computed.oneWay 'controllers.notifications'
   tags: Ember.computed.oneWay 'controllers.tags'
   configurableTags: Ember.computed.oneWay 'tags.configurableTags'

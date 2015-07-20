@@ -21,10 +21,3 @@ Radium.PipelineRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealSt
 
     Radium.Pipeline.create
       settings: @controllerFor('accountSettings')
-
-  renderTemplate: ->
-    @render into: 'application'
-
-    @render 'pipeline/drawer_buttons',
-      outlet: 'buttons'
-      into: 'application'

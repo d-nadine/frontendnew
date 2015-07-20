@@ -22,9 +22,10 @@ Ember.Application.initializer
       application.register('importpoller-service:current', initImportPoller, instantiate: false)
       application.inject('route', 'initialImportPoller', 'importpoller-service:current')
 
-      Raven.setUserContext
-        id: user.get('id')
-        email: user.get('email')
+      if window.ENV.environment == "production"
+        Raven.setUserContext
+          id: user.get('id')
+          email: user.get('email')
 
       window.Intercom "boot",
         app_id: window.INTERCOM_APP_ID

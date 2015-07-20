@@ -25,24 +25,20 @@ Radium.ApplicationRoute = Radium.Route.extend
       @send 'flashSuccess', msg
 
     toggleNotifications: ->
-      controller = @controllerFor('notifications')
+      controller = @controllerFor('application')
 
-      if controller.get('drawerOpen')
-        controller.set('drawerOpen', false)
-        @send 'closeDrawer'
+      if controller.get('showNotifications')
+        controller.set('showNotifications', false)
       else
-        controller.set('drawerOpen', true)
+        @EventBus.publish('closeDrawers')
+        controller.set('showNotifications', true)
 
-        @render 'notifications',
-          outlet: 'drawer'
-          into: 'application'
-
-        @set 'router.openDrawer', name
-
-        @controllerFor('application').set 'notificationCount', 0
+        controller.set 'notificationCount', 0
 
         Ember.run.later =>
-          notifications = @controllerFor('notifications').get('model')
+          notificationsController = @controllerFor 'notifications'
+
+          notifications = notificationsController.get('model')
 
           return unless notifications.get('length')
 
@@ -55,6 +51,8 @@ Radium.ApplicationRoute = Radium.Route.extend
           @get('store').commit()
         , 200
 
+      false
+
     notificationDelete: (reference) ->
       notifications =  Radium.Notification.all().filter (notification) ->
         notification.get('reference') == reference
@@ -64,29 +62,8 @@ Radium.ApplicationRoute = Radium.Route.extend
       notifications.forEach (notification) ->
         notification.deleteRecord()
 
-    toggleDrawer: (name) ->
-      if @get('router.openDrawer') == name
-        @send 'closeDrawer'
-      else
-        route = name.split('/')[0]
-
-        Ember.assert("Could not find a matching controller for: #{name}", route)
-
-        @render name,
-          outlet: 'drawer'
-          into: 'application'
-          controller: @controllerFor(route)
-
-        @set 'router.openDrawer', name
-
     toggleSidebar: ->
       @toggleProperty('controller.isSidebarVisible')
-
-    closeDrawer: ->
-      @disconnectOutlet(
-        outlet: 'drawer'
-        parentView: 'application'
-      )
 
     closeModal: ->
       @disconnectOutlet(

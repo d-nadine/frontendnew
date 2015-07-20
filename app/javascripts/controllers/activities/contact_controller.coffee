@@ -1,4 +1,26 @@
 Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium.ActivityAssignMixin,
+  actions:
+    showReplyForm: ->
+      @set 'showReplyForm', true
+
+      false
+
+    closeReplyForm: ->
+      @set 'showReplyForm', false
+
+      false
+
+
+  showReplyForm: false
+
+  replyEmail: Ember.computed 'model', 'email', ->
+    replyForm = Radium.ReplyForm.create
+      currentUser: @get('currentUser')
+
+    replyForm.set('repliedTo', @get('email'))
+
+    replyForm
+
   isCreate: Ember.computed.is 'event', 'create'
   isUpdate: Ember.computed.is 'event', 'update'
   isAssign: Ember.computed.is 'event', 'assign'

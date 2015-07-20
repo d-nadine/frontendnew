@@ -102,7 +102,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     typeahead = @getTypeahead()
 
     $('body').on 'click.autocomplete.txt.component', (e) =>
-      text = @autocompleteElement().val() || length
+      return unless el = @autocompleteElement()
+
+      text = el.val() || ''
 
       if !text.length && !@get('dontReset')
         Ember.run.next =>

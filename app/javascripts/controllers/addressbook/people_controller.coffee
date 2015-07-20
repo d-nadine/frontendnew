@@ -420,6 +420,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   showContactDrawer: false
   modalContact: null
 
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+
+    @EventBus.subscribe "closeDrawers", this, @closeModals.bind(this)
+
   closeModals: ->
     @set 'modalContact', null
     @set 'showContactDrawer', false

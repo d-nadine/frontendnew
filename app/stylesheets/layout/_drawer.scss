@@ -1,6 +1,7 @@
 .drawer-view {
   &:not(.contact-drawer) {
     max-width: 370px;
+    width: 370px;
   }
 
   @extend .sidebar;

@@ -1,6 +1,10 @@
 {{nav-bar currentUser=currentUser configurableTags=configurableTags transitionToTag="transitionToTag" today=today toggleNotifications="toggleNotifications" logOut="logOut" notificationCount=notificationCount}}
 
-{{outlet drawer}}
+{{#if showNotifications}}
+  {{#x-drawer class="notifications" closeDrawer="toggleNotifications"}}
+    {{render 'notifications' notifications}}
+  {{/x-drawer}}
+{{/if}}
 
 {{outlet modal}}
 

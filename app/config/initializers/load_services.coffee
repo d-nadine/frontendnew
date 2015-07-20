@@ -9,6 +9,7 @@ Ember.Application.initializer
 
     application.inject('component', 'EventBus', 'event-bus:current')
     application.inject('controller', 'EventBus', 'event-bus:current')
+    application.inject('route', 'EventBus', 'event-bus:current')
 
     profileService = Radium.ProfileService.create()
 

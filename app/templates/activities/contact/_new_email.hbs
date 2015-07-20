@@ -1,4 +1,15 @@
 <p>
+  <div class="pull-right">
+    <a href="#" {{action "showReplyForm"}}>
+      <i class="ss-standard ss-reply"></i>
+      Reply
+    </a>
+  </div>
+  {{#if showReplyForm}}
+    {{#x-modal close="closeReplyForm"}}
+      {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
+    {{/x-modal}}
+  {{/if}}
   {{resource-link-to contact}} emailed {{resource-link-to user}}
   <br>
   <div class="email-subject">
@@ -7,6 +18,6 @@
     {{/if}}
   </div>
   <div class="email-body">
-    {{{email.formattedEmailBody}}}
+    {{text-expander text=email.formattedEmailBody}}
   </div>
 </p>

@@ -40,7 +40,6 @@ Radium.MessagesController = Radium.ArrayController.extend Radium.CheckableMixin,
   currentPath: Ember.computed.alias 'controllers.application.currentPath'
   sortProperties: ['time']
   sortAscending: false
-  drawerAction: 'toggleFolders'
 
   senderIsContact: Ember.computed.oneWay 'controllers.emailsThread.senderIsContact'
 

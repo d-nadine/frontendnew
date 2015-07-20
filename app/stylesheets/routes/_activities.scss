@@ -71,6 +71,13 @@
   }
 }
 
+.activity-content .modal .modal-body {
+  position: static;
+  max-height: auto;
+  overflow-y: visible;
+  padding: 0;
+}
+
 .activity.deal.closed,
 .activity.deal.pay {
   color: #468847;

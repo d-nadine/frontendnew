@@ -43,8 +43,6 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
 
   itemController: 'notificationsItem'
 
-  drawerOpen: false
-  drawerAction: 'toggleNotifications'
   page: 1
   allPagesLoaded: false
   modelQuery: (page, pageSize) ->

@@ -32,10 +32,6 @@ Radium.MessagesRoute = Radium.Route.extend
       ).catch (error) ->
         email.set 'isSending', false
 
-    toggleFolders: ->
-      @toggleProperty 'controller.drawerOpen'
-      @send 'toggleDrawer', 'messages/folders'
-
     selectFolder: (folder) ->
       @controllerFor('messages').set('folder', folder)
 
@@ -245,10 +241,6 @@ Radium.MessagesRoute = Radium.Route.extend
     @controllerFor('messagesSidebar').send 'loadInitialPages'
 
   renderTemplate: (controller, context) ->
-    @render 'messages/drawer_buttons', outlet: 'buttons'
-
-    # FIXME this seems wrong. It uses drawer_panel for
-    # some reason. This seems like an Ember bug
     @render into: 'application'
 
     @render 'messages/sidebar',
@@ -290,7 +282,6 @@ Radium.MessagesRoute = Radium.Route.extend
     @render 'nothing',
       into: 'application'
       outlet: 'buttons'
-    @send 'closeDrawer'
 
 Radium.MessagesIndexRoute = Radium.Route.extend
   beforeModel: ->

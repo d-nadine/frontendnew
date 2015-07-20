@@ -1,2 +1,2 @@
-Radium.NotificationsView = Radium.DrawerView.extend
+Radium.NotificationsView = Radium.View.extend Radium.ScrollableMixin,
   classNames: 'notifications'

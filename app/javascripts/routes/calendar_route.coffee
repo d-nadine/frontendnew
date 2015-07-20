@@ -23,9 +23,6 @@ Radium.CalendarRoute = Radium.Route.extend
       if onTask && task != @controllerFor('calendarTask').get('model')
         @transitionTo 'calendar.task', task
 
-    toggleCalendarDrawer: ->
-      @controllerFor('calendar').toggleProperty('isCalendarDrawerOpen')
-
     selectUser: (user) ->
       @controllerFor('calendar').set 'user', user
       @send 'closeDrawer'
@@ -43,10 +40,6 @@ Radium.CalendarRoute = Radium.Route.extend
     @render 'calendar/sidebar',
       outlet: 'sidebar',
       into: 'calendar'
-
-    @render 'calendar/drawer_buttons',
-      outlet: 'buttons'
-      into: 'application'
 
 Radium.CalendarIndexRoute = Radium.Route.extend
   serialize: (model) ->
