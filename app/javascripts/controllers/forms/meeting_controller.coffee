@@ -162,16 +162,6 @@ Radium.FormsMeetingController = Radium.FormController.extend BufferedProxy,
       if (reference.constructor is Radium.Contact) && reference.get('primaryEmail.value')
         @get('content.contacts').addObject(reference)
 
-  isEditable: Ember.computed 'isSubmitted', 'isNew', 'justAdded', 'isFinished', 'isSaving', ->
-    return false if @get('isSaving')
-    return false if @get('isSubmitted')
-    return true if @get('isNew')
-    return false if @get('justAdded')
-    return false if @get('isFinished')
-    return true if @get('currentUser') is @get('organizer')
-    return true unless @get('invitations.length')
-    @get('invitations').find((invitation) => invitation.get('person') == @get('currentUser'))
-
   locations: Ember.computed 'companies.[]', ->
     @get('companies').map (company) ->
       name = company.get('name')

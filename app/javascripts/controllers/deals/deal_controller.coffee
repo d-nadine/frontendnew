@@ -51,9 +51,6 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   isPublic: Ember.computed.not 'isUnpublished'
   statusDisabled: Ember.computed.not('isPublic')
 
-  # FIXME: How do we determine this?
-  isEditable: true
-
   contacts: Ember.computed 'controllers.contacts.[]', ->
     @get('controllers.contacts').filter (contact) ->
       contact.get('isPublic')

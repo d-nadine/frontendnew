@@ -40,7 +40,6 @@ Radium.UpdateContactPoller,
 
   customFields: Ember.A()
 
-  isEditable: true
   loadedPages: [1]
 
   dealsTotal: Ember.computed 'deals.[]', ->

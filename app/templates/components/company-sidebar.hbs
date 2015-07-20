@@ -1,0 +1,99 @@
+<div class="sidebar-wrap">
+  <h2 class="deal-title">
+    {{inline-editor model=company bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
+  </h2>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <dl class="dl-horizontal contact-types-list">
+        <dt><i class="ss-standard ss-earth muted"></i></dt>
+        <dd>
+          {{inline-editor model=company bufferKey="website" notRoutable=true placeholder="Add Website" parent=this externalUrl=true}}
+        </dd>
+      </dl>
+      {{multiple-addresses model=company parent=this hasEmail=true}}
+    </div>
+  </div>
+
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <div class="pull-right company-members-link">
+        {{#link-to "people.index" "all" (query-params company=company.id user="" tag="" contactimportjob="" customquery="" hidesidebar=false)}}{{membersText}}{{/link-to}}
+      </div>
+      <h6 class="sidebar-panel-title">
+        Contacts
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="members">
+        {{#if company.contacts.length}}
+          <div class="clearfix">
+            {{#each contact in truncatedContacts}}
+              <div class="media">
+                <div class="invitee-thumb pull-left">
+                  {{#if contact.isLoaded}}
+                    {{avatar contact size=small class="img-polaroid"}}
+                  {{else}}
+                    {{partial 'is_loading'}}
+                  {{/if}}
+                </div>
+                <div class="media-body">
+                  <div class="media-heading">
+                    {{#link-to 'contact' contact}}{{contact.displayName}}{{/link-to}}
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          {{#if hasMoreContacts}}
+            {{#link-to "people.index" "notasks" (query-params company=id contactimportjob="" user="" tag="" customquery="" hidesidebar=false)}}...{{/link-to}}
+          {{/if}}
+        {{else}}
+          <label> No Members</label>
+        {{/if}}
+      </div>
+    </div>
+    <div class="sidebar-panel-content">
+      {{#link-to "leads.fromCompany" company classNames="btn btn-block btn-main btn-primary add-contact"}}<i class="add icon-plus"></i>Add Contact{{/link-to}}
+    </div>
+  </div>
+
+  {{assign-to model=company users=users user=company.user validator=this}}
+
+  <div class="sidebar-panel sidebar-about">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        About
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      {{inline-editor model=company bufferKey="about" notRoutable=true placeholder="Add about text" parent=this class="about-text" multiline=true}}
+      <div>
+        <i class="ss-standard ss-user"></i> added on {{formatDateTime createdAt format="date"}}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        Lists
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="tag-picker">
+        {{tag-autosuggest source=tags destination=company.tagNames addTag="addTag" removeTag="removeTag" placeholder="Add to lists"}}
+      </div>
+    </div>
+  </div>
+
+  {{sidebar-attachments files=files model=company}}
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete</button>
+    </div>
+  </div>
+</div>

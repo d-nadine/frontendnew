@@ -1,4 +1,4 @@
-<div {{bind-attr class="isExpandable isEditable isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
+<div {{bind-attr class="isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
   <div {{bind-attr class="isFinished view.isFocused :primary :expander"}} {{action "expand" target="view"}}>
     {{view view.finishView}}
     {{#if overdue}}
@@ -36,19 +36,17 @@
       </div>
     </div>
 
-    {{#if isEditable}}
-      <div class="form-row form-buttons">
+    <div class="form-row form-buttons">
+      {{#if showAddAction}}
+        {{partial 'add_action'}}
+      {{/if}}
+      <div class="pull-right">
         {{#if showAddAction}}
-          {{partial 'add_action'}}
+          <button class="btn btn-link" {{action "deleteTask" model}}>Delete todo</button>
         {{/if}}
-        <div class="pull-right">
-          {{#if showAddAction}}
-            <button class="btn btn-link" {{action "deleteTask" model}}>Delete todo</button>
-          {{/if}}
-          <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
-        </div>
+        <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
       </div>
-    {{/if}}
+    </div>
 
     {{partial 'forms/tasks'}}
 

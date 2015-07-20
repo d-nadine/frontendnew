@@ -7,7 +7,7 @@ Radium.ModalView = Radium.View.extend
     </div>
   """
 
-  _setup: Ember.on 'didinsertElement', ->
+  _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     @$('.modal').addClass('in')
 

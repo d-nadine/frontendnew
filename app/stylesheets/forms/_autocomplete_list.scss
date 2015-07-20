@@ -48,10 +48,8 @@
         border-color: $dark;
       }
 
-      &.is-editable{
-        &:hover{
-          cursor: pointer;
-        }
+      &:hover{
+        cursor: pointer;
       }
 
       a.as-close{

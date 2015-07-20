@@ -1,5 +1,4 @@
 Radium.MeetingAttendeesView = Radium.View.extend
-  isEditable: Ember.computed.not 'controller.parentController.isNew'
   isOrganizer: Ember.computed.alias 'controller.isOrganizer'
   tagName: 'li'
   attributeBindings: ['controller.title:title']

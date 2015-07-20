@@ -31,16 +31,9 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
 
   showSuccess: Ember.computed.alias('justAdded')
 
-  isEditable: Ember.computed 'content', 'content.isEditable', 'isSaving', ->
-    return true if @get('isNew')
-    return false if @get('isSubmitted')
-    return false if @get('justAdded')
-    return false if @get('isSaving')
-    true
-
-  isDisabled: Ember.computed 'model', 'isEditable', ->
+  isDisabled: Ember.computed 'model', ->
     return true if @get('justAdded')
-    @get('content.isEditable') is false
+    false
 
   hasComments: Ember.computed.present('comments')
   showAddAction: Ember.computed.not('isNew')

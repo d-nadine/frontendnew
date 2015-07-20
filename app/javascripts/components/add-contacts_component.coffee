@@ -19,8 +19,6 @@ Radium.AddContactsComponent = Ember.Component.extend
 
       false
 
-  isEditable: true
-
   queryParameters: (query) ->
     term: query
     email_only: false

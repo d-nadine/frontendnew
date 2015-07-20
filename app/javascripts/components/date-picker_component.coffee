@@ -28,8 +28,6 @@ Radium.DatePickerComponent = Ember.Component.extend
     ':datepicker-control-box'
   ]
 
-  isEditable: true
-
   leader: 'Due'
 
   textBinding: 'textToDateTransform'

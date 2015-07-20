@@ -28,9 +28,3 @@ Radium.CompanyRoute = Radium.Route.extend
 
         addressbookController = @controllerFor('addressbook')
         addressbookController.send('updateTotals') if addressbookController
-
-  renderTemplate: ->
-    @render()
-    @render 'company/sidebar',
-      into: 'company'
-      outlet: 'sidebar'

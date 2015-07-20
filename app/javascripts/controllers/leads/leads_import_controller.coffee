@@ -193,7 +193,6 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   firstRowIsHeader: true
   importedData: Ember.A()
   tagNames: Ember.A()
-  isEditable: true
   contactStatus: null
   pollImportJob: null
   headerInfo: null

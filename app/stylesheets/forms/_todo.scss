@@ -83,8 +83,6 @@
     }
   }
 
-  // style the todo's pointer
-  &.is-expandable:not(.is-editable) .todo textarea,
   &.is-expandable:not(.is-expanded) .todo textarea {
     cursor: pointer;
   }

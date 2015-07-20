@@ -292,7 +292,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     @$('.drop').off 'click'
     $(window).off 'click.date-send-menu'
 
-  isEditable: true
   signatureAdded: false
   showSignatureModal: false
 

@@ -54,5 +54,3 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
     modal: true
     closeFunc: ->
       self.$('.modal').modal('hide')
-
-  isEditable: true

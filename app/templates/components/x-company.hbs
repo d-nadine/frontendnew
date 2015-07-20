@@ -1,0 +1,32 @@
+<div class="two-column-layout">
+  <div class="sidebar">
+    {{company-sidebar company=company parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields confirmDeletion="confirmDeletion" files=files}}
+  </div>
+  <div class="main-content">
+    <div class="sticky-banner company-banner">
+      <div class="sticky-banner-collapsed">
+        <div>
+          <div class="pull-right">
+            <button class="btn">
+              <i class="ss-standard ss-plus"></i> Add Deal
+            </button>
+          </div>
+          <ul class="inline">
+            {{#each group in groupedDeals}}
+              <li>
+                <a href="#">
+                  {{group.count}} {{group.name}} ({{currency group.value}})
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="tasks-content">
+      {{!TODO Add form/tasks list}}
+    </div>
+    {{render "feed" company.activities}}
+  </div>
+</div>
