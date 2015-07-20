@@ -1,6 +1,6 @@
 require "mixins/controllers/attached_files_mixin"
 
-Radium.XCompanyComponent = Ember.Component.extend
+Radium.XCompanyComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   actions:
     displayDeals: ->
       deals = Ember.A()
@@ -20,6 +20,8 @@ Radium.XCompanyComponent = Ember.Component.extend
   classNames: ['page-view']
 
   nameValidations: ['required']
+
+  model: Ember.computed.oneWay 'company'
 
   groupedDeals: Ember.arrayComputed 'company.contacts', 'deals.@each.status', {
     initialValue: []

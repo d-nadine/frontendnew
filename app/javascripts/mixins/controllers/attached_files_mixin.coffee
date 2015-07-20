@@ -1,8 +1,12 @@
 Radium.AttachedFilesMixin = Ember.Mixin.create
-  files: Ember.computed 'attachments.[]', 'model.files.[]', ->
-    return @get('model.files') if @get('model.files')
+  files: Ember.computed 'model.attachments.[]', 'attachments.[]', 'model.files.[]', ->
+    return unless model = @get('model')
 
-    attachments = @get('attachments')
+    files = model.get('files')
+
+    return files if files
+
+    attachments = @get('attachments') || model.get('attachments')
 
     Ember.assert "You need to have an attachments property", attachments
 

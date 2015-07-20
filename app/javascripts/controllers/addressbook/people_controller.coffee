@@ -36,10 +36,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         {
           name: "customFields",
           value: "customFields"
-        },
-        {
-          name: "files",
-          value: "files"
         }]
         component: 'x-contact'
       }
@@ -75,10 +71,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         {
           name: "parent",
           value: "this"
-        },
-        {
-          name: "files",
-          value: "files"
         }]
         component: 'x-company'
       }

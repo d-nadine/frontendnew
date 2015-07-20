@@ -1,4 +1,4 @@
-// Last commit: 378d093 (2015-07-14 15:45:42 +0100)
+// Last commit: 6a7468c (2015-07-20 16:11:06 +0100)
 
 
 (function() {
@@ -3695,6 +3695,9 @@ var RootState = {
           once(function() {
             record.trigger('didLoad');
           });
+        },
+        loadedData: function(record) {
+          record.transitionTo('loaded.created.uncommitted');
         }
       }
     },

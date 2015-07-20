@@ -1,4 +1,6 @@
-Radium.XContactComponent = Ember.Component.extend
+require "mixins/controllers/attached_files_mixin"
+
+Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   actions:
     addTag: (tag) ->
       @sendAction "addTag", @get('contact'), tag
@@ -16,3 +18,5 @@ Radium.XContactComponent = Ember.Component.extend
       false
 
   classNames: ['two-column-layout']
+
+  model: Ember.computed.oneWay 'contact'
