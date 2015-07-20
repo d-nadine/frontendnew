@@ -1,4 +1,5 @@
 Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium.ActivityAssignMixin,
+  Radium.SaveEmailMixin,
   actions:
     showReplyForm: ->
       @set 'showReplyForm', true
@@ -10,6 +11,22 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
 
       false
 
+    saveEmail: (email) ->
+      @_super email, dontTransition: true
+
+      return unless email.get('isValid')
+
+      @flashMessenger.success 'Email Sent!'
+
+      Ember.run.next =>
+        @set 'showReplyForm', false
+
+      false
+
+    deleteFromEditor: ->
+      @set 'showReplyForm', false
+
+      false
 
   showReplyForm: false
 
