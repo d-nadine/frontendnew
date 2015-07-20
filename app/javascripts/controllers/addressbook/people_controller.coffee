@@ -44,6 +44,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       @set 'showDrawer', true
 
+      @setRowMarker(contact)
+
       false
 
     showCompanyDrawer: (contact) ->
@@ -78,6 +80,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @set 'drawerParams', config
 
       @set 'showDrawer', true
+
+      @setRowMarker(contact)
 
       false
 
@@ -489,6 +493,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     return false if @get('isPotential')
 
     !!@get('noContacts')
+
+  setRowMarker: (contact) ->
+    ['.left-table', '.right-table'].forEach (t) ->
+      row = $("#{t} .variadic-table [data-model='#{contact.get('id')}']")
+
+      row.addClass 'selected'
 
   newCustomQueries: Ember.A()
   potentialQueries: Ember.A()

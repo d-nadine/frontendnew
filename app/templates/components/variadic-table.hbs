@@ -19,7 +19,7 @@
   </thead>
   <tbody>
     {{#each item in list itemController="variadicItem"}}
-    <tr {{bind-attr class="item.isChecked:is-checked item.read:read:unread"}}>
+    <tr {{bind-attr class="item.isChecked:is-checked item.read:read:unread" data-model="item.id"}}>
       {{#if check}}
         {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
       {{/if}}

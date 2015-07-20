@@ -10,7 +10,10 @@ Radium.LeadsFromCompanyRoute = Radium.Route.extend
     controller.set 'user', @get('currentUser')
     controller.set 'company', model
     controller.set 'model.companyName', model.get('name')
-    controller.set 'expandImmediately', true
+    controller.set 'model.user', @get('currentUser')
+    controller.set 'emailAddresses', controller.get('model.emailAddresses')
+    controller.set 'phoneNumbers', controller.get('model.phoneNumbers')
+    controller.set 'addresses', controller.get('model.addresses')
 
   renderTemplate: ->
     @render 'leads.single',
