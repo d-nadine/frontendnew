@@ -6,14 +6,53 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.SaveContactActions,
   actions:
     showContactDrawer: (contact) ->
-      @set 'modalContact', contact
+      @set 'drawerModel', contact
+
+      config = {
+        bindings: [{
+          name: "contact",
+          value: "drawerModel"
+        },
+        {
+          name: "tags",
+          value: "tags"
+        }
+        {
+          name: "closeDrawer",
+          value: "closeAddressbookDrawer",
+          static: true
+        },
+        {
+          name: "parent",
+          value: "this"
+        },
+        {
+          name: "addTag",
+          value: "addContactTag",
+          static: true
+        },
+        {
+          name: "customFields",
+          value: "customFields"
+        },
+        {
+          name: "files",
+          value: "files"
+        }]
+        component: 'x-contact'
+        }
+
+
+      @set 'drawerParams', config
+
       @set 'showContactDrawer', true
 
       false
 
-    closeContactDrawer: ->
+    closeAddressbookDrawer: ->
       @set 'showContactDrawer', false
-      @set 'modalContact', null
+      @set 'drawerModel', null
+      @set 'drawerParams', null
 
       false
 
@@ -418,7 +457,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   potentialQueries: Ember.A()
   actualQueries: []
   showContactDrawer: false
-  modalContact: null
+  drawerModel: null
+  drawerComponent: null
+  drawerParams: null
 
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
@@ -426,7 +467,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     @EventBus.subscribe "closeDrawers", this, @closeModals.bind(this)
 
   closeModals: ->
-    @set 'modalContact', null
+    @set 'drawerModel', null
     @set 'showContactDrawer', false
 
   combinedQueryFields: Ember.computed 'customFields.[]', ->

@@ -232,7 +232,8 @@
   {{/if}}
 </div>
 {{#if showContactDrawer}}
-  {{#x-drawer class="contact-drawer" closeDrawer="closeContactDrawer"}}
-    {{x-contact contact=modalContact tags=tags parent=this addTag="addContactTag" removeTag="removeContactTag" customFields=customFields files=files}}
+  {{#x-drawer class="contact-drawer" closeDrawer="closeAddressbookDrawer"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent drawerModel drawerParams}}
   {{/x-drawer}}
 {{/if}}
