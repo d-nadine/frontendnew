@@ -165,7 +165,7 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
     reference = @get('reference')
     !@get('isNew') && reference
 
-  isDisabled: Ember.computed.not('justAdded')
+  isDisabled: Ember.computed.bool('justAdded')
 
   isPrimaryInputDisabled: Ember.computed 'isDisabled', 'isExpanded', 'isNew', ->
     return false if @get('isNew')
