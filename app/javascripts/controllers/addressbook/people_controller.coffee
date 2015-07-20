@@ -6,6 +6,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.SaveContactActions,
   actions:
     showContactDrawer: (contact) ->
+      @closeDrawer()
+
       @set 'drawerModel', contact
 
       config = {
@@ -40,17 +42,60 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           value: "files"
         }]
         component: 'x-contact'
-        }
-
+      }
 
       @set 'drawerParams', config
 
-      @set 'showContactDrawer', true
+      @set 'showDrawer', true
+
+      false
+
+    showCompanyDrawer: (contact) ->
+      return unless company = contact.get('company')
+
+      @closeDrawer()
+
+      @set "drawerModel", company
+
+      config = {
+        bindings: [{
+          name: "company",
+          value: "drawerModel"
+        },
+        {
+          name: "closeDrawer",
+          value: "closeAddressbookDrawer",
+          static: true
+        },
+        {
+          name: "confirmDeletion",
+          value: "confirmCompanyDeletion",
+          static: true
+        },
+        {
+          name: "parent",
+          value: "this"
+        },
+        {
+          name: "files",
+          value: "files"
+        }]
+        component: 'x-company'
+      }
+
+      @set 'drawerParams', config
+
+      @set 'showDrawer', true
+
+      false
+
+    confirmCompanyDeletion: ->
+      p "confirm delete company"
 
       false
 
     closeAddressbookDrawer: ->
-      @set 'showContactDrawer', false
+      @set 'showDrawer', false
       @set 'drawerModel', null
       @set 'drawerParams', null
 
@@ -456,7 +501,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   newCustomQueries: Ember.A()
   potentialQueries: Ember.A()
   actualQueries: []
-  showContactDrawer: false
+  showDrawer: false
   drawerModel: null
   drawerComponent: null
   drawerParams: null
@@ -464,11 +509,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
 
-    @EventBus.subscribe "closeDrawers", this, @closeModals.bind(this)
+    @EventBus.subscribe "closeDrawers", this, @closeDrawer.bind(this)
 
-  closeModals: ->
+  closeDrawer: ->
+    @set 'showDrawer', false
     @set 'drawerModel', null
-    @set 'showContactDrawer', false
+    @set 'drawerParams', null
 
   combinedQueryFields: Ember.computed 'customFields.[]', ->
     queryFields = @queryFields

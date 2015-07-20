@@ -103,6 +103,11 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         name: 'scopes'
         value: 'company'
         static: true
+      },
+      {
+        name: "routeAction",
+        value: "showCompanyDrawer",
+        static: true
       }],
       actions: [
         {

@@ -21,10 +21,14 @@ Radium.CompanySidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
   model: Ember.computed.oneWay 'company'
 
   membersText: Ember.computed 'company.contacts.[]', ->
-    "View all #{@get('company.contacts.length')} contacts."
+    return unless contacts = @get('company.contacts')
+
+    "View all #{contacts.get('length')} contacts."
 
   truncatedContacts: Ember.computed 'company.contacts.[]', 'model', ->
-    @get('company.contacts').toArray().sort((left, right) ->
+    return unless contacts = @get('company.contacts')
+
+    contacts.toArray().sort((left, right) ->
       Ember.compare(left.get('name'), right.get('name'))).slice(0, 3)
 
   hasMoreContacts: Ember.computed 'company.contacts.[]', 'truncatedContacts', ->

@@ -7,7 +7,7 @@
       {{toggle-switch checked=contact.isPublic action="switchShared" dataOn="Shared" dataOff="Private" dontPropagate=true}}
     </div>
     {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name" parent=targetObject}}
-    {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" alternativeRoute="company" parent=targetObject saveAction="saveCompany"}}
+    {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" alternativeRoute="company" parent=targetObject saveAction="saveCompany" parent=parent}}
     {{social-medialist person=contact}}
   </div>
 </div>
@@ -50,7 +50,7 @@
   </div>
 
   {{#each field in customFields }}
-    {{customfield-editor field=field resource=contact parent=targetObject}}
+    {{customfield-editor field=field resource=contact parent=parent}}
   {{/each}}
 
   {{sidebar-attachments files=targetObject.files model=contact}}
