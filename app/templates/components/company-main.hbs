@@ -1,0 +1,24 @@
+{{#unless hideDeals}}
+  <div class="sticky-banner company-banner">
+    <div class="sticky-banner-collapsed">
+      <div>
+        <ul class="inline">
+          {{#each group in groupedDeals}}
+            <li>
+              <a href="#">
+                {{group.count}} {{group.name}} ({{currency group.value}})
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+{{/unless}}
+<div class="tasks-content">
+  {{render "form_box" formBox}}
+  {{render "task_list" company.currentTasks}}
+</div>
+{{#unless isUpdating}}
+  {{render "feed" company.activities}}
+{{/unless}}

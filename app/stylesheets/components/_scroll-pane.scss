@@ -23,6 +23,7 @@
     @include border-radius(8px);
     opacity: 0;
     @include transition(opacity 0.25s);
+    z-index: 10;
   }
 
   &:hover .jspDrag {

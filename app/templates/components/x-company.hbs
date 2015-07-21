@@ -1,27 +1,4 @@
-<div class="two-column-layout">
-  <div class="sidebar">
-    {{company-sidebar company=company parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields confirmDeletion="confirmDeletion" files=files}}
-  </div>
-  <div class="main-content">
-    <div class="sticky-banner company-banner">
-      <div class="sticky-banner-collapsed">
-        <div>
-          <ul class="inline">
-            {{#each group in groupedDeals}}
-              <li>
-                <a href="#">
-                  {{group.count}} {{group.name}} ({{currency group.value}})
-                </a>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-
-    </div>
-    <div class="tasks-content">
-      {{!TODO Add form/tasks list}}
-    </div>
-    {{render "feed" company.activities}}
-  </div>
+<div class="sidebar">
+  {{company-sidebar company=company parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields confirmDeletion="confirmDeletion" files=files}}
 </div>
+{{company-main company=company parent=parent confirmDeletion="confirmCompanyDeletion" noscroll=mainnoscroll hideDeals=hideDeals}}

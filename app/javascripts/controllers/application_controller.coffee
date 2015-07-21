@@ -1,6 +1,8 @@
 Radium.ApplicationController = Radium.ObjectController.extend
   actions:
     transitionToTag: (tag) ->
+      @EventBus.publish 'closeDrawers'
+
       @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), hidesidebar: true
 
       false

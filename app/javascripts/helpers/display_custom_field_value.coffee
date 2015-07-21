@@ -1,5 +1,5 @@
 Ember.Handlebars.registerBoundHelper 'displayCustomFieldValue', (customFieldValue, options) ->
-  value = customFieldValue.get('value') || ''
+  value = customFieldValue?.get('value') || ''
 
   return unless value.length
 

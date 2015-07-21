@@ -25,16 +25,6 @@
   }
 }
 
-.sticky-banner-content {
-  max-width: 1500px;
-  padding: 20px;
-  @include box-sizing(border-box);
-
-  .is-scrolled & {
-    display: none;
-  }
-}
-
 .sticky-banner-collapsed {
   height: 55px;
   padding: 12px 10px;
@@ -66,13 +56,4 @@
   li {
     line-height: 30px;
   }
-}
-
-.sticky-banner-collapsed-aside {
-  margin-left: 5px;
-}
-
-.sticky-banner-small-title {
-  margin: 0 40px 0 0;
-  line-height: 28px;
 }

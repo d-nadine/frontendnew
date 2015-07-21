@@ -232,13 +232,8 @@
 }
 
 .xcompany-component {
-
   .sticky-banner {
     height: 40px;
-
-    .sticky-banner-content {
-      display: none;
-    }
 
     .sticky-banner-collapsed {
       display: block;
@@ -248,6 +243,7 @@
       }
     }
   }
+
   .sidebar {
     top: 135px;
     left: 22px;
@@ -270,4 +266,8 @@
       }
     }
   }
+}
+
+.xdrawer-component .xcompany-component .main-content {
+  margin-top: auto;
 }

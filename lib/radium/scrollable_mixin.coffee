@@ -34,7 +34,7 @@ Radium.ScrollableMixin = Em.Mixin.create
   getDimensions: ->
     $this = @$()
     return unless $this
-    offset = parseFloat($this.parent().css('top'))
+    offset = parseFloat($this.parent().offset().top)
     height = $(window).height() - offset
     width = $this.innerWidth()
     dimensions =

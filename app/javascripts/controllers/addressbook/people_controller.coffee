@@ -73,6 +73,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         {
           name: "parent",
           value: "this"
+        },
+        {
+          name: "hideDeals",
+          value: true,
+          static: true
         }]
         component: 'x-company'
       }

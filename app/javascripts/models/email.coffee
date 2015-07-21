@@ -75,7 +75,7 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
   formattedEmailBody: Ember.computed 'message', ->
     return "loading....." if @get('isLoading')
 
-    body = @get('message') || ''
+    body = @get('message')
 
     return '' unless body.length
 
