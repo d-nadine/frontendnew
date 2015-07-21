@@ -6,7 +6,7 @@ Radium.TextExpanderComponent = Ember.Component.extend
       false
 
   current: 0
-  step: 10
+  step: 5
   hasMore: false
 
   truncatedText: Ember.computed 'text', 'current', ->

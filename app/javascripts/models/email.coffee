@@ -79,7 +79,10 @@ Radium.Email = Radium.Model.extend Radium.CommentsMixin,
 
     return '' unless body.length
 
-    body.replace /\n/g, '<br/>'
+    body.replace(/\\n/g, '<br/>')
+        .replace(/\\n\\n/g, '<br/><br/>')
+        .replace("\n", '<br/>')
+        .replace(/\n/g, '<br/>')
 
   clearRelationships: ->
     activities = []

@@ -44,7 +44,7 @@ Radium.XDrawerComponent = Ember.Component.extend
 
       classNames = e.target.className.split(' ')
 
-      drawerIcons = ['notifications-link', 'ss-notifications', 'email-folders', 'ss-inbox', 'ss-clock', 'as-result-item', 'ss-delete']
+      drawerIcons = ['notifications-link', 'ss-notifications', 'email-folders', 'ss-inbox', 'ss-clock', 'as-result-item', 'ss-delete', 'more-text']
 
       if Ember.EnumerableUtils.intersection(classNames, drawerIcons).length
         return false
