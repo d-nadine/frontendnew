@@ -371,17 +371,25 @@
   overflow: visible;
   white-space: normal;
   padding-right: 10px;
+  position: relative;
 
   div.dropdown {
     display: inline-block;
     float: left;
     margin-left: 4px;
+    position: static;
   }
 
   ul.dropdown-menu {
     position: absolute;
-    left: -100px;
+    left: auto;
+    right: 0;
+    width: auto;
   }
+}
+
+.conversations-view .conversations-table tbody tr:last-of-type td.choose {
+  position: static;
 }
 
 td.email-sender {
