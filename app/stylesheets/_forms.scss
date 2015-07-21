@@ -818,7 +818,7 @@ input[type="radio"]:checked + label {
   .forms-todo-view {
 
     .todo-form {
-      width: calc(100% - 30px);
+      width: calc(100% - 30px) !important;
 
       .primary {
         width: calc(100% - 35px);
@@ -827,6 +827,29 @@ input[type="radio"]:checked + label {
       .btn-options {
         float: right;
         margin-top: 17px;
+      }
+    }
+    .expanded-fields {
+      margin-top: 15px;
+
+      .form-row {
+        display: inline-block;
+
+        .field-group {
+          margin-top: 0;
+        }
+      }
+      .form-buttons {
+        float: right;
+        display: inline-block;
+
+        .btn-none {
+          margin-right: 10px;
+
+          i.ss-trash {
+            font-size: 15px;
+          }
+        }
       }
     }
   }

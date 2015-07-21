@@ -2,8 +2,6 @@ $comment-bg: #e7e7e7;
 $comment-border: #cfcfcf;
 
 .comments {
-  border: solid 1px $comment-border;
-  background-color: $comment-bg;
   margin-top: 20px;
 
   &:after {
@@ -12,6 +10,9 @@ $comment-border: #cfcfcf;
 
   &:before {
     border-bottom-color: $comment-border;
+  }
+  &.block {
+    padding: 15px 0 0;
   }
 }
 
@@ -55,7 +56,6 @@ $comment-border: #cfcfcf;
 .new-comment {
   width: 100%;
   box-sizing: border-box;
-  margin: 10px 0 0;
   resize: none;
   display: inline-block;
 

@@ -42,7 +42,7 @@
       {{/if}}
       <div class="pull-right">
         {{#if showAddAction}}
-          <button class="btn btn-link" {{action "deleteTask" model}}>Delete todo</button>
+          <button class="btn btn-link btn-none" {{action "deleteTask" model}}><i class="ss-standard ss-trash"></i></button>
         {{/if}}
         <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
       </div>
