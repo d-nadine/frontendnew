@@ -1,6 +1,27 @@
 .sidebar {
   &:not(.contact-drawer) {
     width: 310px;
+
+    .form-inline {
+      
+      input {
+        border: 1px solid $border;
+        border-radius: 0px;
+        width: calc(100% - 12px);
+        margin-right: 0px;
+        height: 40px;
+
+        &:focus {
+          outline: 0;
+          box-shadow: none;
+        }
+      }
+      button {
+        width: 100%;
+        margin-top: 10px;
+        color: $text;
+      }
+    }
   }
   position: fixed;
   top: $navbar-height;
@@ -254,26 +275,6 @@
 
   .form {
     margin-bottom: 0;
-  }
-  .form-inline {
-    
-    input {
-      border: 1px solid $border;
-      border-radius: 0px;
-      width: calc(100% - 12px);
-      margin-right: 0px;
-      height: 40px;
-
-      &:focus {
-        outline: 0;
-        box-shadow: none;
-      }
-    }
-    button {
-      width: 100%;
-      margin-top: 10px;
-      color: $text;
-    }
   }
 
   .not-editing .empty-name {

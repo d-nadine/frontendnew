@@ -215,8 +215,13 @@
   .sidebar {
 
     .form {
-      padding-left: 22px;
+      padding-left: 22px !important;
       margin-right: 20px;
+      width: auto !important;
+
+      .jspPane {
+        padding-left: 0 !important;
+      }
     }
   }
   .main-content {
