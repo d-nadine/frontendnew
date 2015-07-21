@@ -6,9 +6,11 @@
     </a>
   </div>
   {{#if showReplyForm}}
-    {{#x-modal close="closeReplyForm"}}
-      {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
-    {{/x-modal}}
+    <div class="email-reply-modal">
+      {{#x-modal close="closeReplyForm"}}
+        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
+      {{/x-modal}}
+    </div>
   {{/if}}
   {{resource-link-to contact}} emailed {{resource-link-to user}}
   <br>

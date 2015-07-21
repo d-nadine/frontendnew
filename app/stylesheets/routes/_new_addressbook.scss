@@ -1072,6 +1072,29 @@
     }
   }
 
+  .email-reply-modal {
+
+    .modal {
+      width: 65%;
+      border: none;
+
+      .close {
+        padding: 10px 10px 0 0;
+      }
+      .modal-header {
+        display: none;
+      }
+      .modal-body {
+        width: 100%;
+
+        .email-form-body {
+          padding: 15px 25px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
   .left-table th {
     height: 56px !important;
   }
