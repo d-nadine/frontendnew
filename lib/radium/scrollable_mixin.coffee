@@ -9,11 +9,11 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
+    p @constructor.toString()
     return if @get('noscroll')
 
-    @_super.apply this, arguments
     $(window).on 'resize.jscrollpane', @_resize.bind(this)
-    dimensions = @getDimensions()
+    dimensions = @getDimensions.bind(this)()
 
     @$()
       .height(dimensions.height)
@@ -36,7 +36,13 @@ Radium.ScrollableMixin = Em.Mixin.create
   getDimensions: ->
     $this = @$()
     return unless $this
-    offset = parseFloat($this.parent().offset().top)
+    parent = $this.parent()
+
+    top = if parent.css('top') == 'auto'
+            $('.sidebar').css('top')
+          else
+            $('.xdrawer-component').css('top')
+    offset = parseFloat(top)
     height = $(window).height() - offset
     width = $this.innerWidth()
     dimensions =
