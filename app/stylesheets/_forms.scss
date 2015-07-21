@@ -817,8 +817,17 @@ input[type="radio"]:checked + label {
 
   .forms-todo-view {
 
-    .primary {
-      width: calc(100% - 35px);
+    .todo-form {
+      width: calc(100% - 30px);
+
+      .primary {
+        width: calc(100% - 35px);
+        float: left;
+      }
+      .btn-options {
+        float: right;
+        margin-top: 17px;
+      }
     }
   }
   .meeting-form-container {
