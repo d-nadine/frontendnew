@@ -570,6 +570,10 @@
         background: $calendar-active-bg;
       }
     }
+
+    .email-body, .send-reply {
+      display: none;
+    }
   }
 
   .variadic-table .check {
