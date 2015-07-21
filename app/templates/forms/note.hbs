@@ -1,12 +1,14 @@
-<div {{bind-attr class="isExpandable isExpanded justAdded :form :form-inline :note-form"}}>
-  <div {{bind-attr class="isFinished view.isFocused :primary :note"}}>
-    <i class="ss-notepad inline-form-icon"></i>
+<div class="forms-note-view">
+  <div {{bind-attr class="isExpandable isExpanded justAdded :form :form-inline :note-form"}}>
+    <div {{bind-attr class="isFinished view.isFocused :primary :note"}}>
+      <i class="ss-notepad inline-form-icon"></i>
 
-    {{#if showSuccess}}
-      <span class="success-message green pull-right">Todo saved</span>
-    {{/if}}
+      {{#if showSuccess}}
+        <span class="success-message green pull-right">Todo saved</span>
+      {{/if}}
 
-    {{rd-conversation-input value=body focus=true}}
+      {{rd-conversation-input value=body focus=true}}
 
+    </div>
   </div>
 </div>

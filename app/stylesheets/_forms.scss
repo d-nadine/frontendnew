@@ -609,17 +609,29 @@ input[type="radio"]:checked + label {
     }
   }
   
-  .note-form {
-    width: calc(100% - 160px);
+  .forms-note-view {
+    display: inline-block;
     float: left;
-    padding-left: 0;
+    width: 80%;
 
-    ~ .form-box-controls {
-      float: right;
-      line-height: 52px;
+    .note-form {
+      width: calc(100% - 40px);
+      float: left;
+      padding-left: 0;
+
+      ~ .form-box-controls {
+        float: right;
+        line-height: 52px;
+      }
+      .primary {
+        min-width: 470px;
+      }
     }
   }
 
+  .form-box-controls {
+    float: right;
+  }
 }
 
 .task-reference-component {
