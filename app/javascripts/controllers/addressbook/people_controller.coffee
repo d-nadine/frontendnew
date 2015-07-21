@@ -8,6 +8,10 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     showContactDrawer: (contact) ->
       @closeDrawer()
 
+      customFieldMap = contact.getCustomFieldMap(@get('customFields'))
+
+      contact.set 'customFieldMap', customFieldMap
+
       @set 'drawerModel', contact
 
       config = {
