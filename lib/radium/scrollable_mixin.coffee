@@ -10,7 +10,9 @@ Radium.ScrollableMixin = Em.Mixin.create
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     return if @get('noscroll')
-    $(window).on('resize.jscrollpane', @_resize.bind(this))
+
+    @_super.apply this, arguments
+    $(window).on 'resize.jscrollpane', @_resize.bind(this)
     dimensions = @getDimensions()
 
     @$()
