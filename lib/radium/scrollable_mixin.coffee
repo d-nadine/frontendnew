@@ -50,5 +50,6 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   _resize: ->
     return unless @$()
-    dimensions = @getDimensions()
-    @$().height(dimensions.height)
+    Ember.run.next =>
+      dimensions = @getDimensions()
+      @$().height(dimensions.height)

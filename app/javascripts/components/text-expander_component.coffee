@@ -18,7 +18,7 @@ Radium.TextExpanderComponent = Ember.Component.extend
 
     next = @current + @step
 
-    if next >= parts.length
+    if next >= parts.length || @current > 0
       @set 'hasMore', false
       return parts.join('<br/>')
 
