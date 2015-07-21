@@ -224,6 +224,27 @@
       .jspContainer {
         width: 310px !important;
       }
+
+      &.custom-field {
+        padding: 0;
+
+        .custom-field-name {
+          width: 100%;
+          padding-bottom: 5px;
+          display: inline-block;
+        }
+        .custom-field-value {
+          display: inline-block;
+          float: left;
+          clear: both;
+          width: 100%;
+          text-align: left;
+          padding-bottom: 10px;
+        }
+        .customfield-textinput {
+          width: calc(100% - 20px);
+        }
+      }
     }
   }
   .main-content {
