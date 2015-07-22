@@ -63,3 +63,29 @@
     }
   }
 }
+
+.email-reply-modal {
+
+  .modal {
+    width: 65%;
+    border: none;
+    max-width: 770px;
+    margin-left: -385px;
+
+    button.close {
+      padding: 10px 10px 0 0;
+    }
+    .modal-header {
+      display: none;
+    }
+    .modal-body {
+      width: 100%;
+      display: inline;
+
+      .email-form-body {
+        padding: 15px 25px;
+        display: inline-block;
+      }
+    }
+  }
+}

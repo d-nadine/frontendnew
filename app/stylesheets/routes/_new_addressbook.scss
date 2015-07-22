@@ -1082,21 +1082,10 @@
 
     .modal {
       width: 65%;
-      border: none;
+      top: 10%;
 
-      .close {
-        padding: 10px 10px 0 0;
-      }
-      .modal-header {
-        display: none;
-      }
       .modal-body {
         width: 100%;
-
-        .email-form-body {
-          padding: 15px 25px;
-          display: inline-block;
-        }
       }
     }
   }
