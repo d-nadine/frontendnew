@@ -44,7 +44,7 @@ Radium.EmailsThreadRoute = Radium.ShowRouteBase.extend
       controller: controller
 
   setupController: (controller, model) ->
-    unless model.get('isRead')
+    unless model && model.get && model.get('isRead')
       model.set('isRead', true)
       model.save()
 
