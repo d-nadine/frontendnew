@@ -1,6 +1,6 @@
 Radium.SettingsRemindersAlertsRoute = Radium.Route.extend Radium.ModelDeactivateMixin,
   model: ->
-    @controllerFor('currentUser').get('model.settings')
+    @get('currentUser.settings')
 
   deactivate: ->
     @_super.apply this, arguments

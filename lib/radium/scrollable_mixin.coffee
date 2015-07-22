@@ -9,7 +9,7 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
-    p @constructor.toString()
+
     return if @get('noscroll')
 
     $(window).on 'resize.jscrollpane', @_resize.bind(this)
@@ -38,16 +38,17 @@ Radium.ScrollableMixin = Em.Mixin.create
     return unless $this
     parent = $this.parent()
 
-    top = if parent.css('top') == 'auto'
-            $('.sidebar').css('top')
-          else
-            $('.xdrawer-component').css('top')
+    if parent.parents('.xdrawer-component').length
+      top = $('.xdrawer-component').css('top')
+    else
+      top = $('.sidebar').css('top')
+
     offset = parseFloat(top)
     height = $(window).height() - offset
     width = $this.innerWidth()
     dimensions =
       width: width
-      height: height
+      height: height - 20
 
   # Event handler for scrolling on Y axis, dispatches to public hooks
   didScrollHandler: (event, scrollPositionY, isAtTop, isAtBottom) ->

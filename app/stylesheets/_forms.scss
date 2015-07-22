@@ -599,6 +599,8 @@ input[type="radio"]:checked + label {
       float: left;
       margin-left: 20px;
       line-height: 47px;
+      cursor: pointer;
+      outline: none;
     }
 
     &.is-expanded {
@@ -827,6 +829,8 @@ input[type="radio"]:checked + label {
       .btn-options {
         float: right;
         margin-top: 17px;
+        cursor: pointer;
+        outline: none;
       }
     }
     .expanded-fields {
