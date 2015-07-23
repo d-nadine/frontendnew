@@ -84,6 +84,8 @@ Radium.CompanyMainComponent = Ember.Component.extend Radium.ScrollableMixin,
     finishBy: null
     user: @get('currentUser')
 
+  noteForm: Radium.computed.newForm 'note'
+
   noteFormDefaults: Ember.computed 'company', ->
     reference: @get('company')
     user: @get('currentUser')
