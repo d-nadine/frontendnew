@@ -546,7 +546,7 @@ input[type="radio"]:checked + label {
     display: inline-block;
     float: left;
     line-height: 1;
-    width: 80%;
+    width: calc(100% - 160px);
 
     .todo {
       margin: 0 0 0 20px;
@@ -591,14 +591,13 @@ input[type="radio"]:checked + label {
     padding-left: 0;
 
     .primary {
-      width: 77%;
-      min-width: 470px;
+      width: calc(100% - 36px);
       float: left;
     }
     .btn-options {
       float: left;
       margin-left: 20px;
-      line-height: 47px;
+      line-height: 51px;
       cursor: pointer;
       outline: none;
     }
@@ -614,10 +613,10 @@ input[type="radio"]:checked + label {
   .forms-note-view {
     display: inline-block;
     float: left;
-    width: 80%;
+    width: calc(100% - 160px);
 
     .note-form {
-      width: calc(100% - 40px);
+      width: 100%;
       float: left;
       padding-left: 0;
 
@@ -626,7 +625,7 @@ input[type="radio"]:checked + label {
         line-height: 52px;
       }
       .primary {
-        min-width: 470px;
+        width: 100%;
       }
     }
   }
@@ -706,6 +705,7 @@ input[type="radio"]:checked + label {
     }
     .expanded-fields {
       margin-top: 10px;
+      width: 100%;
 
       .form-row {
         display: inline-block;
@@ -718,6 +718,9 @@ input[type="radio"]:checked + label {
           position: relative;
 
           label {
+            position: absolute;
+          }
+          .attendee-form {
             position: absolute;
           }
         }
@@ -854,6 +857,10 @@ input[type="radio"]:checked + label {
             font-size: 15px;
           }
         }
+      }
+      .comments-view {
+        width: 100%;
+        float: left;
       }
     }
   }

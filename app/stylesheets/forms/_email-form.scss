@@ -143,6 +143,7 @@
   }
 
   .subject-wrap {
+    width: calc(100% - 110px);
     position: relative;
     display: inline-block;
     // IF YOU USE FLOAT: LEFT HERE THE RICH TEXT EDITOR IN THE EMAIL FORM SCREWS UP
@@ -150,6 +151,10 @@
     .combobox {
       line-height: 50px;
       height: 50px;
+    }
+    .add-on {
+      position: absolute;
+      right: 0;
     }
   }
 
@@ -184,11 +189,11 @@
   }
 
   .subject-wrap .autocomplete-textbox-component.autocomplete-textbox.field{
-    width: 500px !IMPORTANT;
+    width: 100% !IMPORTANT;
   }
 
   input[type=text].subject, input[type=text].combobox {
-    width: 420px;
+    width: calc(100% - 30px);
   }
 
   .message .more-options .btn-group {

@@ -78,7 +78,7 @@
             <label class="icon-label">
               <i class="ss-standard ss-user"></i>
             </label>
-            <div>
+            <div class="attendee-form">
               {{async-autosuggest destination=participants placeholder="Enter attendees name" queryParameters=queryParameters filterResults=filterResults addSelection="addAttendee" removeSelection="removeAttendee" class="field" deleteOnBackSpace=false}}
             </div>
           {{/unless}}
