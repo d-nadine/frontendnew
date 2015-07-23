@@ -24,6 +24,7 @@ Radium.ScrollableMixin = Em.Mixin.create
         contentWidth: dimensions.width
         verticalGutter: 0
         horizontalGutter: 0
+        hideFocus: true
       )
       .on('jsp-scroll-y', @didScrollHandler.bind(this))
 
