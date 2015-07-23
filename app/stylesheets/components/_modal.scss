@@ -28,9 +28,11 @@
     .form {
       padding-left: 0;
       float: left;
+      width: 100%;
 
       .primary {
         width: calc(100% - 50px);
+        float: left;
 
         .events-list-item-button {
           margin-top: 18px;
@@ -44,6 +46,10 @@
             line-height: 40px;
           }
         }
+      }
+      .btn-options {
+        float: right;
+        line-height: 52px;
       }
     }
     .expanded-fields {
