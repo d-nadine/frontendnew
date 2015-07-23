@@ -40,10 +40,10 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
       heading: "Assigned To"
       component: "assignto-picker"
       bindings: [
-        {name: "assignedTo", value: "assignedTo"},
+        {name: "assignedTo", value: "model.user"},
         {name: "assignees", value: "assignees"},
         {name: "model", value: "model"},
-        {name: "parent", value: "parentController.targetObject"}
+        {name: "parent", value: "table.targetObject"}
       ]
     }]
   )

@@ -167,7 +167,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: "toggle-switch"
       bindings: [
         {name: "checked", value: "model.isPublic"}
-        {name: "parentContext", value: "parentController.targetObject"}
+        {name: "parentContext", value: "table.targetObject"}
         {name: "model", value: "model"}
         {name: "dataOn", value: "Shared", static: true}
         {name: "dataOff", value: "Private", static: true}
@@ -187,10 +187,10 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       heading: "Assigned To"
       component: "assignto-picker"
       bindings: [
-        {name: "assignedTo", value: "assignedTo"},
+        {name: "assignedTo", value: "model.user"},
         {name: "assignees", value: "assignees"},
         {name: "model", value: "model"},
-        {name: "parent", value: "parentController.targetObject"}
+        {name: "parent", value: "table.targetObject"}
       ]
     }
     {

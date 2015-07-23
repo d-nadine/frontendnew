@@ -64,7 +64,7 @@ Radium.UntrackedColumnsConfig = Ember.Mixin.create
       component: "toggle-switch"
       bindings: [
         {name: "checked", value: "model.isPublic"}
-        {name: "parentContext", value: "parentController.targetObject"}
+        {name: "parentContext", value: "table.targetObject"}
         {name: "model", value: "model"}
         {name: "dataOn", value: "Shared", static: true}
         {name: "dataOff", value: "Private", static: true}

@@ -6,4 +6,4 @@ Radium.UntrackedActionsComponent = Ember.Component.extend
     destroyContact: (contact) ->
       @get('containingController').send "destroyContact", contact
 
-  containingController: Ember.computed.oneWay 'targetObject.parentController.targetObject'
+  containingController: Ember.computed.oneWay 'targetObject.table.targetObject'

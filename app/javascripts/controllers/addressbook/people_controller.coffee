@@ -461,8 +461,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         bindings: [
           {name: "field", value: field, static: true}
           {name: "resource", value: "model"}
-          {name: "parent", value: "parentController.targetObject"}
-          {name: "customFields", value: "parentController.targetObject.customFields"}
+          {name: "parent", value: "table.targetObject"}
+          {name: "customFields", value: "table.targetObject.customFields"}
           {name: "isEditing", value: true, static: true}
           {name: "tableCell", value: true, static: true}
         ]

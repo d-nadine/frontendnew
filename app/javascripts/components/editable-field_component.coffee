@@ -105,7 +105,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     if parent = @get('parent')
       parent
     else
-      @get('targetObject.parentController.targetObject')
+      @get('targetObject.table.targetObject')
 
   classNames: ['editable']
   classNameBindings: ['isSaving', 'isInvalid']

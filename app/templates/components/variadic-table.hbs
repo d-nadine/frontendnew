@@ -18,32 +18,32 @@
     </tr>
   </thead>
   <tbody>
-    {{#each item in list itemController="variadicItem"}}
-    <tr {{bind-attr class="item.isChecked:is-checked item.read:read:unread" data-model="item.id"}}>
-      {{#if check}}
-        {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
-      {{/if}}
-      {{#each column in columns}}
-        {{#with item}}
-          <td {{bind-attr class="column.classNames"}}>
-            {{#if column.avatar}}
-              {{dynamicAvatar item column}}
-            {{/if}}
-            {{#if column.component}}
-              {{renderComponent item column}}
-            {{else}}
-              {{getProperty item column}}
-            {{/if}}
-          </td>
-        {{/with}}
+    {{#with this}}
+      {{#each item in list}}
+        {{#variadic-row item=item check=check columns=columns customFields=customFields table=this}}
+          {{#if check}}
+            {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
+          {{/if}}
+          {{#each column in columns}}
+            <td {{bind-attr class="column.classNames"}}>
+              {{#if column.avatar}}
+                {{dynamicAvatar item column}}
+              {{/if}}
+              {{#if column.component}}
+                {{renderComponent item column}}
+              {{else}}
+                {{getProperty item column}}
+              {{/if}}
+            </td>
+          {{/each}}
+        {{/variadic-row}}
+      {{else}}
+        {{#unless list.content.isLoading}}
+          <tr>
+            <td {{bind-attr colspan="colSpan"}} class="table-no-results">No Results</td>
+          </tr>
+        {{/unless}}
       {{/each}}
-    </tr>
-  {{else}}
-    {{#unless list.content.isLoading}}
-      <tr>
-        <td {{bind-attr colspan="colSpan"}} class="table-no-results">No Results</td>
-      </tr>
-    {{/unless}}
-    {{/each}}
+    {{/with}}
   </tbody>
 </table>
