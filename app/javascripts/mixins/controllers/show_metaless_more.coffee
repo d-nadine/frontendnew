@@ -16,7 +16,7 @@ Radium.ShowMetalessMoreMixin = Ember.Mixin.create
           @set('allPagesLoaded', true)
           return
 
-        content = @get('content')
+        return unless content = @get('content')
 
         ids = content.map (record) -> record.get('id')
 
