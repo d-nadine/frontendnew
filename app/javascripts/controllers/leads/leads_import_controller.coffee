@@ -224,18 +224,19 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
       result = Ember.A()
 
-      dataHeaders = self.get('headerData').mapProperty('name')
-
       headers.forEach (header) ->
         headerInfoProp = self.get("headerInfo.#{header}")
 
         unless Ember.isArray(headerInfoProp)
           fileColumn = headerInfoProp.get('name')
+          index = headerInfoProp.get('index')
+
+          Ember.assert "A valid index has been selected for prop", index > - 1
 
           hash =
             name: header.replace(/([A-Z])/g, ' $1').replace(/^./, (str) -> str.toUpperCase())
             marker: fileColumn
-            index: dataHeaders.indexOf(fileColumn)
+            index: index
 
           return result.push(hash)
 
@@ -244,10 +245,14 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
         headerInfoProp.forEach (prop) ->
           fileColumn = headerInfoProp.objectAt(counter).get('value.name')
+          index = prop.get('value.index')
+
+          Ember.assert "A valid index has been selected for prop", index > - 1
+
           hash =
             name: "#{singlular} #{counter + 1}"
             marker: fileColumn
-            index: dataHeaders.indexOf(fileColumn)
+            index: index
 
           result.push(hash)
           counter++
@@ -257,15 +262,17 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
 
         if f.get('mapping')
           headers.push fieldName
-          headerInfoProp = self.get("headerInfo.#{f.get('mapping.name')}")
           fileColumn = f.get('mapping.name')
+          index = f.get('mapping.index')
+
+          Ember.assert "A valid index has been selected for customField headerInfoProp", index > - 1
 
           hash =
             name: fieldName
             marker: fileColumn
-            index: dataHeaders.indexOf(fileColumn)
+            index: index
 
-          f.set('index', (headers.length - 1))
+          f.set('index', index)
 
           result.push(hash)
         else

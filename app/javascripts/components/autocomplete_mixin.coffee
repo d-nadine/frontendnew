@@ -20,12 +20,12 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     return unless selected
     value?.toLowerCase() == selected?.toLowerCase()
 
-  setValue: (object) ->
+  setValue: (object, index) ->
     self = this
     el = self.autocompleteElement()
 
     finish = (value) ->
-      self.send 'setBindingValue', object
+      self.send 'setBindingValue', object, index
 
       # FIXME: find a less hacky way than type checking
       return if self instanceof Radium.AutocompleteTextboxComponent ||
@@ -217,9 +217,11 @@ Radium.AutocompleteMixin = Ember.Mixin.create
     typeahead.show = @showTypeahead.bind(typeahead)
 
     typeahead.select = ->
-      val = @$menu.find('.active').data('typeahead-value')
-      @updater val
+      active = @$menu.find('.active')
+      val = active.data('typeahead-value')
+      index = @$menu.find('li').index active
+      @updater val, index
       @hide()
 
-    typeahead.updater = (item) =>
-      @setValue item
+    typeahead.updater = (item, index) =>
+      @setValue item, index

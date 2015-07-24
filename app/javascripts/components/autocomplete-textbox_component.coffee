@@ -10,7 +10,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
   Radium.SaveModelKeyDownMixn,
 
   actions:
-    setBindingValue: (object) ->
+    setBindingValue: (object, index) ->
       value = if typeof object == "string"
                 object
               else
@@ -26,6 +26,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
           @set('value', value.get(@queryKey))
         else
           @set 'value', value
+
+      if @get('setindex') && value.set
+        value.set 'index', index
 
       @set 'backup', value
 
