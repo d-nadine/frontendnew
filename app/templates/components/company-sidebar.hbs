@@ -47,7 +47,7 @@
             {{/each}}
           </div>
           {{#if hasMoreContacts}}
-            {{#link-to "people.index" "notasks" (query-params company=id contactimportjob="" user="" tag="" customquery="" hidesidebar=false)}}...{{/link-to}}
+            {{#link-to "people.index" "notasks" (query-params company=company.id contactimportjob="" user="" tag="" customquery="" hidesidebar=false)}}...{{/link-to}}
           {{/if}}
         {{else}}
           <label> No Members</label>
