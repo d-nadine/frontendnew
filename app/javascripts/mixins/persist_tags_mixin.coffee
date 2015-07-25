@@ -18,17 +18,24 @@ Radium.PersistTagsMixin = Ember.Mixin.create
 
       tagName = tag.get('name')
 
-      tag.save(this).then ->
+      tag.save(this).then =>
+        @get('people').send 'updateTotals'
+
         Radium.Tag.find({}).then (tags) ->
           if tag = tags.find((tag) -> tag.get('name') == tagName)
             addressbook.pushObject tag
+
+      false
 
     removeTag: (model, tag) ->
       return unless model.get('tagNames').mapProperty('name').contains(tag.get('name'))
 
       model.get('tagNames').removeObject(tag)
 
-      model.save()
+      model.save().then =>
+        @get('people').send 'updateTotals'
+
+      false
 
   # UPGRADE: replace with inject
   tags: Ember.computed ->
@@ -36,4 +43,7 @@ Radium.PersistTagsMixin = Ember.Mixin.create
 
   addressbook: Ember.computed ->
     @container.lookup('controller:addressbook')
+
+  people: Ember.computed ->
+    @container.lookup('controller:peopleIndex')
 

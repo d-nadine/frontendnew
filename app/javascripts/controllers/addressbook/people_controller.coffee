@@ -431,6 +431,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       return Ember.merge params, user: @get('user')
 
     if tag = @get('tag') && @get('isTagged')
+      delete params.public
+      delete params.private
+
       return Ember.merge params, tag: @get('tag')
 
     if @get('isQuery')
