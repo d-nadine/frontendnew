@@ -77,27 +77,18 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @discardBufferedChanges()
       @set 'showBillingForm', false
 
-    createTrialPlan: (subscriptionPlan) ->
-      @set 'isPersisting', true
-
-      billing = @get('model')
-      currentUser = @get('currentUser')
-
-      trial = Radium.CreateTrialPlan.createRecord
-                user: currentUser
-                account: currentUser.get('account')
-                subscriptionPlan: subscriptionPlan
-
-      trial.save().then =>
-        @set 'isPersisting', false
-
-        @send "flashSuccess", "The trial #{subscriptionPlan.get('name')} has been created."
-        currentUser.reload()
-        billing.reload()
-
     updateSubscription: (subscriptionPlan, yearly, yearOption) ->
+      isTrial = @get('isTrial')
+      isBasic = @get('isBasic')
+      trialDaysLeft = @get('account.trialDaysLeft')
+      currentPlan = @get('account.billing.subscriptionPlan')
+      isDifferentPlan = currentPlan.get('id').toString() != subscriptionPlan.get('id').toString()
+
       if @get('isBasic') && subscriptionPlan.get('totalUsers') > 1
-        return @send 'createTrialPlan', subscriptionPlan
+        return @changeTrialPlan(subscriptionPlan, Radium.CreateTrialPlan)
+
+      if isTrial && trialDaysLeft > 0 && isDifferentPlan
+        return @changeTrialPlan(subscriptionPlan, Radium.UpdateTrialPlan)
 
       unless activeCard = @get('activeCard')
         @set 'showBillingForm', true
@@ -152,6 +143,24 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       model.transitionTo("loaded.saved")
       @trigger 'cardError'
 
+  changeTrialPlan: (subscriptionPlan, planType) ->
+    @set 'isPersisting', true
+
+    billing = @get('model')
+    currentUser = @get('currentUser')
+
+    trial = planType.createRecord
+              user: currentUser
+              account: currentUser.get('account')
+              subscriptionPlan: subscriptionPlan
+
+    trial.save().then =>
+      @set 'isPersisting', false
+
+      @send "flashSuccess", "The trial #{subscriptionPlan.get('name')} has been set."
+      currentUser.reload()
+      billing.reload()
+
   isValid: Ember.computed 'organisation', 'billingEmail', 'organisation.length', 'billingEmail.length', 'isSubmitted', ->
     return true unless @get('isSubmitted')
     return if Ember.isEmpty(@get('organisation'))
@@ -169,7 +178,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
   trialUnit: Ember.computed 'account.trialDaysLeft', ->
     unless daysLeft = @get("account.trialDaysLeft")
-      return
+      return 'days'
 
     if daysLeft < 2 then "day" else "days"
 
@@ -181,5 +190,3 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         @get('controllers.countries.firstObject')
       else
         @get('model.country')
-
-

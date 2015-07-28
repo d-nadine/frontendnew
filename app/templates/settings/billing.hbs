@@ -63,6 +63,7 @@
         </td>
         {{#if isAdmin}}
           <td class="cta-button">
+            {{log exceededUsers}}
             {{#unless exceededUsers}}
               <button
                 {{bind-attr class=":btn isCurrent::btn-success" disabled="notViable"}}

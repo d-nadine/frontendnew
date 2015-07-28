@@ -20,6 +20,7 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
 
       complete = ->
         Ember.run.next ->
+          return if self.isDestroyed || self.isDestroying
           self.set('isDeleting', false)
           self.start()
 

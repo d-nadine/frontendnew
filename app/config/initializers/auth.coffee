@@ -61,13 +61,14 @@ Ember.Application.initializer
         Ember.assert "you need a store in the container of the auth initializer", store
 
         apiUrl = store.get('_adapter.url')
-        Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
-      else
-        Ember.$('[class^=ball]').hide()
-        Radium.advanceReadiness()
+        return Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
 
-        return if Ember.ENV.environment != "production" || location.pathname != "/"
 
-        Ember.run.next ->
-          router = container.lookup('router:main')
-          router.replaceWith "people.contacts"
+      Ember.$('[class^=ball]').hide()
+      Radium.advanceReadiness()
+
+      return if Ember.ENV.environment != "production" || location.pathname != "/"
+
+      Ember.run.next ->
+        router = container.lookup('router:main')
+        router.replaceWith "people.contacts"
