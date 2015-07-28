@@ -837,6 +837,30 @@
         }
       }
     }
+    td.custom-field {
+
+      .control-group {
+
+        .customfield-dateinput-component {
+          display: inline-block;
+          position: relative;
+          top: 2px;
+
+          .datepicker-control-box {
+            height: auto;
+
+            .prepend-group {
+              float: none;
+            }
+
+            input.date-picker {
+              height: auto;
+              float: none;
+            }
+          }
+        }
+      }
+    }
 
     .deals-closed-total, .deals-total, .events-seven, .events-thirty, .events {
       text-align: center;
@@ -1107,12 +1131,15 @@
 
     .customfield-textinput-component, .customfield-urlinput-component {
       position: relative;
-      top: 8px;
+      top: 7px;
+      box-shadow: none;
       border: transparent;
       outline: none;
 
       &::-webkit-input-placeholder {
         font-style: italic;
+        color: $muted;
+        font-size: 13px;
       }
     }
 
