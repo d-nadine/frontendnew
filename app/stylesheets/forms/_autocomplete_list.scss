@@ -62,9 +62,10 @@
     li.as-original input {
       line-height: 10px;
       height: auto;
-      font-size: 13px;
+      font-size: 14px;
       width: auto;
       background-color: transparent;
+      font-family: 'Lato', 'Helvetica';
 
       &::-webkit-input-placeholder {
         font-style: italic;

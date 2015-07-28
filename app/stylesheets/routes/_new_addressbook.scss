@@ -1135,11 +1135,12 @@
       box-shadow: none;
       border: transparent;
       outline: none;
+      font-family: 'Lato', 'Helvetica';
 
       &::-webkit-input-placeholder {
         font-style: italic;
         color: $muted;
-        font-size: 13px;
+        font-size: 14px;
       }
     }
 
