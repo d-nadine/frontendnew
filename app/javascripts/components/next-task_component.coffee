@@ -8,7 +8,7 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
       now = Ember.DateTime.create()
 
       switch period
-        when "tomorrow" then date = @get('tomorrow')
+        when "tomorrow" then date = now.atEndOfTomorrow()
         when "nextweek" then date = now.atEndOfWeek().advance(day: 1).atEndOfWeek().advance(day: 1)
         when "nextmonth" then date = now.nextMonth()
 
