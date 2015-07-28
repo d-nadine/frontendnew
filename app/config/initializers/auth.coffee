@@ -16,8 +16,10 @@ Ember.Application.initializer
       Radium.Form.reopen
         currentUser: user
 
+      # UPGRADE: replace with instance initializer
       initImportPoller = Radium.InitialImportPoller.create
         currentUser: container.lookup('current:user')
+        container: container
 
       application.register('importpoller-service:current', initImportPoller, instantiate: false)
       application.inject('route', 'initialImportPoller', 'importpoller-service:current')

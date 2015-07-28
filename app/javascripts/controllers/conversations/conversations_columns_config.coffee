@@ -67,10 +67,9 @@ Radium.ConversationsColumnsConfig = Ember.Mixin.create
       id: "actions"
       heading: "Actions"
       classNames: "choose text-center"
-      bindings: [{
-        name: "model",
-        value: "model"
-      }]
+      bindings: [
+        {name: "model", value: "model"}
+        {name: "parent", value: "table.targetObject"}]
       component: 'conversation-actions'
     }
   ])

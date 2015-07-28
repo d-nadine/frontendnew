@@ -3940,7 +3940,13 @@ var RootState = {
     unloadRecord: function(record) {
       record.clearRelationships();
       record.transitionTo('deleted.saved');
-    }
+    },
+
+    becameError: function(record) {
+      record.transitionTo('loaded.saved');
+
+      record.trigger('becameError', record);
+    },
   }
 };
 

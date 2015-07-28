@@ -1,15 +1,13 @@
 Radium.ConversationActionsComponent = Ember.Component.extend
   actions:
     updateConversation: (action, contact) ->
-      actionTarget = @get('actionTarget')
+      parent = @get('parent')
 
-      actionTarget.send "updateConversation", action, this, contact
+      parent.send "updateConversation", action, this, contact
 
       false
 
     ignoreDomain: (contact) ->
-      @get('actionTarget').send "ignoreDomain", contact
+      @get('parent').send "ignoreDomain", contact
 
       false
-
-  actionTarget: Ember.computed.oneWay 'targetObject.parentController.targetObject'

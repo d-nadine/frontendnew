@@ -64,7 +64,7 @@ Radium.MeetingForm = Radium.Form.extend Radium.FormsAttachmentMixin,
 
       # FIXME: client side hack.  The server should return the meeting
       # with the relationships set
-      currentUser = @get('currentUser.model')
+      currentUser = @get('currentUser')
 
       array = Ember.A()
 
