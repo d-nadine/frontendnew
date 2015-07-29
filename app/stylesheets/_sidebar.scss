@@ -680,6 +680,7 @@
 }
 
 .sidebar-attachment {
+  position: relative;
 
   .upload-item {
     position: relative;
@@ -714,6 +715,9 @@
     }
   }
   .upload-file-btn {
+    position: absolute;
+    top: 18px;
+    right: 0;
 
     a {
       font-size: 14px;
@@ -725,6 +729,9 @@
   }
   .muted {
     float: left;
+  }
+  .sidebar-panel-content {
+    position: static !important;
   }
 }
 .sidebar-delete {
