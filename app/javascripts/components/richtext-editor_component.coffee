@@ -21,7 +21,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   files: Ember.computed.alias 'targetObject.files'
 
   _initialize: Ember.on 'init', ->
-    @EventBus.subscribe('reset', this, 'onFormReset')
+    @EventBus.subscribe('email:reset', this, 'onFormReset')
     @EventBus.subscribe('placeholderInsered', this, 'onPlaceholderInserted')
     @EventBus.subscribe('customFieldInserted', this, 'onCustomFieldInserted')
     @EventBus.subscribe('insertTemplate', this, 'onTemplateInserted')
@@ -170,7 +170,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     false
 
   teardown: Ember.on 'willDestroyElement', ->
-    @EventBus.unsubscribe('reset')
+    @EventBus.unsubscribe('email:reset')
     @EventBus.unsubscribe('placeholderInsered')
     @EventBus.unsubscribe('customFieldInserted')
     @EventBus.unsubscribe('insertTemplate')

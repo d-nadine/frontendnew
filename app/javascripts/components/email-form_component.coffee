@@ -21,7 +21,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       @sendAction 'saveEmail', form
 
       Ember.run.next =>
-        @EventBus.publish 'reset'
         @set 'signatureAdded', false
 
       false

@@ -52,13 +52,17 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.AttachedFilesMixin,
 
   model: Ember.computed.oneWay 'contact'
 
-  formBox: Ember.computed 'todoForm', ->
-    Radium.FormBox.create
+  formBox: Ember.computed 'todoForm', 'contact.email', ->
+    formBox = Radium.FormBox.create
       todoForm: @get('todoForm')
       noteForm: @get('noteForm')
       meetingForm: @get('meetingForm')
-      emailForm: @get('emailForm')
       about: @get('contact')
+
+    if email = @get('contact.email')
+      formBox.emailForm = @get('emailForm')
+
+    formBox
 
   todoForm: Radium.computed.newForm('todo')
 

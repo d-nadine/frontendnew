@@ -11,7 +11,11 @@ Radium.SaveContactActions = Ember.Mixin.create
         unless company = model.get('company')
           return
 
-        @get('controllers.addressbook').send 'updateTotals'
+        @get('addressbook').send 'updateTotals'
         company.reload()
 
       false
+
+  # UPGRADE: replace with inject
+  addressbook: Ember.computed ->
+    @container.lookup 'controller:addressbook'

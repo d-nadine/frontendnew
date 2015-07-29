@@ -35,6 +35,8 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       if template = @get('template')
         queryParams['template_id'] = template.get('id')
 
+      self = this
+
       email.one 'didCreate', (result) =>
         Ember.run.next =>
           delete result.files
@@ -43,6 +45,10 @@ Radium.SaveEmailMixin = Ember.Mixin.create
           form.set 'isSending', false
           Ember.run.next ->
             form?.reset(false)
+
+            Ember.run.next ->
+              if eventBus = self.EventBus
+                self.EventBus.publish 'email:reset'
 
           messagesController = @getController('messages')
 
