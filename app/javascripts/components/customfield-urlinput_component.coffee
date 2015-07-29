@@ -11,3 +11,9 @@ Radium.CustomfieldUrlinputComponent = Radium.RegexInputComponent.extend Radium.C
 
     Ember.run.next =>
       @set 'customFieldValue.value', @$().val()
+
+  placeholder: Ember.computed 'customFieldValue.field', ->
+    return unless customField = @get('customFieldValue.field')
+
+    p customField.get('name')
+    "Add #{customField.get('name')}"

@@ -17,6 +17,5 @@ Ember.Handlebars.registerHelper 'renderCustomField', (customFieldPath, resourceP
   field = customFieldMap.get(customField)
 
   options.hash['customFieldValue'] = field
-  options.hash['currencySymbol'] = @get('targetObject.currencySymbol')
 
   helper.call this, options

@@ -1,7 +1,9 @@
 Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.EmailDealMixin,
   needs: ['messages', 'emailsThread']
-  selectedContent: Ember.computed.alias('controllers.messages.selectedContent')
-  isSelectable: Ember.computed.alias('controllers.messages.canSelectItems')
+  selectedContent: Ember.computed.oneWay('controllers.messages.selectedContent')
+  isSelectable: Ember.computed.oneWay('controllers.messages.canSelectItems')
+
+  folder: Ember.computed.oneWay 'controllers.messages.folder'
 
   isSelected: Ember.computed 'selectedContent', ->
     @get('model') == @get('selectedContent')
@@ -25,3 +27,8 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.Ema
     @get('controllers.messages.folder') != 'archive'
 
   threadIsLoading: Ember.computed.bool 'model.isTransitioning'
+
+  showSubject: Ember.computed 'folder', 'model.subject', ->
+    return false unless folder = @get('folder')
+
+    ['drafts', 'archive', 'sent', 'scheduled'].contains folder

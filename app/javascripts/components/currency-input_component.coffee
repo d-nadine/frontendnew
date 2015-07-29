@@ -22,10 +22,14 @@ Radium.CurrencyInputComponent = Ember.TextField.extend
   focusOut: ->
     @formatValue()
 
+  # UPGRADE: replace with inject
+  accountController: Ember.computed ->
+    @container.lookup('controller:account')
+
   formatValue: ->
     return if @isDestroyed || @isDestroying
 
-    accountCurrency = accountController = @get('container').lookup('controller:account').get('accountCurrency')
+    accountCurrency =  @get('accountController').get('accountCurrency')
 
     settings =
       precision: accountCurrency.precision

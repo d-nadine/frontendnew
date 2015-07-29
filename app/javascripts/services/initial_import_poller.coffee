@@ -17,12 +17,6 @@ Radium.InitialImportPoller = Ember.Object.extend Radium.PollerMixin,
     @container.lookup('controller:application')
 
   onPoll: ->
-    p "============="
-    p "initialContactsImported = #{@get('currentUser.initialContactsImported')}"
-    p "initialMailImported = #{@get('currentUser.initialMailImported')}"
-    p "isPolling = #{@get('isPolling')}"
-    p "============ "
-
     return unless @get('isPolling')
     currentUser = @get('currentUser')
     Ember.assert "You need to pass set currentUser on the InitialImportPoller", currentUser

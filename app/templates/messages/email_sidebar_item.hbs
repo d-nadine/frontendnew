@@ -13,6 +13,11 @@
   <h5 class="message-item-title">
     <a href="#">{{sender.displayName}}</a>
   </h5>
+  {{#if showSubject}}
+    <p class="message-item-subject">
+      {{subject}}
+    </p>
+  {{/if}}
   {{#if contact.isPersonal}}
     <span class="label">
       Not a Radium Contact

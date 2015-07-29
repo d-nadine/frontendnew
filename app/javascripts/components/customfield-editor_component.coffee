@@ -91,6 +91,8 @@ Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsM
     false
 
   cancel: ->
+    return if @isDestroying || @isDestroyed
+
     @set 'isSaving', false
 
     return if @get('tableCell')
