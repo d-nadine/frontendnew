@@ -953,7 +953,7 @@
       .caret {
         float: right;
         margin-left: 10px;
-        margin-top: 6px;
+        margin-top: 9px;
       }
 
       ul > li:not(.edit) > a {
@@ -1146,11 +1146,19 @@
 
     .customfield-currencyinput-component {
       position: relative;
-      top: 8px;
+      top: 1px;
 
       .ember-text-field.span2 {
         width: 150px;
         margin-right: 10px;
+        border: 0;
+        margin-bottom: 0;
+        box-shadow: none;
+      }
+      .currency-symbol {
+        top: 1px;
+        position: relative;
+        margin-left: 3px;
       }
     }
   }
