@@ -15,6 +15,54 @@ $calendar-off: #d8d9d9;
       .sidebar {
         @include translateX(0);
       }
+
+      .forms-todo-view {
+        width: 70%;
+
+        .has-reference {
+          padding-left: 0;
+          width: 100%;
+
+          .primary {
+            width: calc(100% - 40px);
+            float: left;
+
+            .finish-todo {
+              height: 74px;
+              margin-top: 0;
+              margin-left: 20px; 
+            }
+            .todo {
+              margin-left: 60px;
+            }
+            .reference-meta {
+              margin-left: 60px;
+            }
+            .overdue-alert {
+              margin-right: 20px;
+
+              i {
+                top: 13px;
+              }
+            }
+          }
+          .btn-options {
+
+            i {
+              top: 26px;
+            }
+            &:focus {
+              outline: 0;
+            }
+          }
+        }
+        .expanded-fields {
+
+          .new-comment {
+            padding-top: 20px;
+          }
+        }
+      }
     }
 
     @include breakpoint(landscape) {
