@@ -1,4 +1,4 @@
-// Last commit: 6a7468c (2015-07-20 16:11:06 +0100)
+// Last commit: 0cceb51 (2015-07-31 05:32:34 +0100)
 
 
 (function() {
@@ -3446,6 +3446,9 @@ var DirtyState = {
 
     rollback: Ember.K,
 
+    willSetProperty: willSetProperty,
+    didSetProperty: didSetProperty,
+
     unloadRecord: function(record) {
       record.clearRelationships();
       record.transitionTo('deleted.saved');
@@ -3486,7 +3489,9 @@ var DirtyState = {
       didSetProperty(record, context);
     },
 
-    becomeDirty: Ember.K,
+    becomeDirty: function(record) {
+      record.transitionTo('updated.uncommitted');
+    },
 
     rollback: function(record) {
       record.send('becameValid');
@@ -3689,7 +3694,9 @@ var RootState = {
         // FLAGS
         isLoaded: false,
 
-        becomeDirty: Ember.K,
+        becomeDirty: function(record) {
+          record.transitionTo('updated.uncommitted');
+        },
 
         exit: function(record) {
           once(function() {
@@ -3706,6 +3713,9 @@ var RootState = {
       // FLAGS
       isReloading: true,
 
+      willSetProperty: willSetProperty,
+
+      didSetProperty: didSetProperty,
       // TRANSITIONS
       enter: function(record) {
         var store = get(record, 'store');
@@ -3728,6 +3738,11 @@ var RootState = {
       becameError: function(record) {
         record.transitionTo('error');
         record.send('invokeLifecycleCallbacks');
+      },
+
+
+      becomeDirty: function(record) {
+        record.transitionTo('updated.uncommitted');
       }
     },
 
@@ -3832,7 +3847,9 @@ var RootState = {
         record.rollback();
       },
 
-      becomeDirty: Ember.K,
+      becomeDirty: function(record) {
+        record.transitionTo('updated.uncommitted');
+      },
 
       becameClean: function(record) {
         record.withTransaction(function(t) {
