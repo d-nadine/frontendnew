@@ -19,16 +19,11 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
     switchShared: (contact) ->
       Ember.run.next =>
-        return if @get('isSaving')
-
-        @set 'isSaving', true
-
         contact.toggleProperty('isPublic')
 
-        contact.save().finally =>
-          @set 'isSaving', false
-
+        contact.save().then =>
           @send 'updateTotals'
+          contact.reload()
 
       false
 
