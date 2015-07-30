@@ -14,17 +14,18 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
       false
 
     switchShared: ->
-      return if @get('isSaving')
+      Ember.run.next =>
+        return if @get('isSaving')
 
-      @set 'isSaving', true
+        @set 'isSaving', true
 
-      contact = @get('contact')
-      contact.toggleProperty('isPublic')
+        contact = @get('contact')
+        contact.toggleProperty('isPublic')
 
-      contact.save().finally =>
-        @set 'isSaving', false
+        contact.save().finally =>
+          @set 'isSaving', false
 
-        @get('peopleController').send 'updateTotals'
+          @get('peopleController').send 'updateTotals'
 
       false
 
