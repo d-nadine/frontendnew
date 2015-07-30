@@ -1,10 +1,28 @@
 Radium.SettingsMailComponent = Ember.Component.extend
   actions:
     setOpenTracking: ->
-      return false if @get('isSaving')
+      @setMailFlag('enableOpenTracking')
 
-      Ember.run.next =>
-        @set 'isSaving', true
+      false
+
+    setClickTracking: ->
+      @setMailFlag('enableClickTracking')
+
+      false
+
+  setMailFlag: (prop) ->
+    return false if @get('isSaving')
+
+    Ember.run.next =>
+      @set 'isSaving', true
+
+      settings = @get('settings')
+
+      settings.set prop, @get(prop)
+
+      settings.save()
+      .then().finally =>
+        @set "isSaving", false
 
   isSaving: false
 
@@ -14,8 +32,6 @@ Radium.SettingsMailComponent = Ember.Component.extend
     @_super.apply this, arguments
 
     settings = @get('settings')
-
-    p settings
 
     @set 'enableOpenTracking', settings.get('enableOpenTracking')
     @set 'enableClickTracking', settings.get('enableClickTracking')
