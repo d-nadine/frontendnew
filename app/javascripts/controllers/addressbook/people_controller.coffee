@@ -422,6 +422,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       page_size: @get('pageSize')
 
     if company = @get('company')
+      delete params.public
+      delete params.private
+
       params = Ember.merge params, company: @get('company')
 
     if contactimportjob = @get('contactimportjob')
