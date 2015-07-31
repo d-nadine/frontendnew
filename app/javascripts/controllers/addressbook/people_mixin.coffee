@@ -23,7 +23,6 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
         contact.save().then =>
           @send 'updateTotals'
-          contact.reload()
 
       false
 
