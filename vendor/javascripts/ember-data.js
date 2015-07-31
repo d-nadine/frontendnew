@@ -3489,9 +3489,7 @@ var DirtyState = {
       didSetProperty(record, context);
     },
 
-    becomeDirty: function(record) {
-      record.transitionTo('updated.uncommitted');
-    },
+    becomeDirty: Ember.K,
 
     rollback: function(record) {
       record.send('becameValid');
@@ -3694,9 +3692,7 @@ var RootState = {
         // FLAGS
         isLoaded: false,
 
-        becomeDirty: function(record) {
-          record.transitionTo('updated.uncommitted');
-        },
+        becomeDirty: Ember.K,
 
         exit: function(record) {
           once(function() {
@@ -3743,7 +3739,8 @@ var RootState = {
 
       becomeDirty: function(record) {
         record.transitionTo('updated.uncommitted');
-      }
+      },
+
     },
 
     // If there are no local changes to a record, it remains
@@ -3847,9 +3844,7 @@ var RootState = {
         record.rollback();
       },
 
-      becomeDirty: function(record) {
-        record.transitionTo('updated.uncommitted');
-      },
+      becomeDirty: Ember.K,
 
       becameClean: function(record) {
         record.withTransaction(function(t) {
