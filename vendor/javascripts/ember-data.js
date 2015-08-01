@@ -1,4 +1,4 @@
-// Last commit: 0cceb51 (2015-07-31 05:32:34 +0100)
+// Last commit: 07ce0f0 (2015-08-01 09:57:25 +0100)
 
 
 (function() {
@@ -3959,6 +3959,14 @@ var RootState = {
 
       record.trigger('becameError', record);
     },
+
+    didCommit: function(record) {
+      record.withTransaction(function(t) {
+        t.remove(record);
+      });
+
+      record.send('invokeLifecycleCallbacks', get(record, 'lastDirtyType'));
+    }
   }
 };
 
