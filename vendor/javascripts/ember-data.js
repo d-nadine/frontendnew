@@ -3393,7 +3393,9 @@ var DirtyState = {
     unloadRecord: function(record) {
       record.clearRelationships();
       record.transitionTo('deleted.saved');
-    }
+    },
+
+    loadedData: didChangeData
   },
 
   // Once a record has been handed off to the adapter to be
@@ -3699,9 +3701,7 @@ var RootState = {
             record.trigger('didLoad');
           });
         },
-        loadedData: function(record) {
-          record.transitionTo('loaded.created.uncommitted');
-        }
+        loadedData: didChangeData
       }
     },
 
@@ -3853,8 +3853,7 @@ var RootState = {
         record.transitionTo('loaded.materializing');
       },
 
-      // FIXME:  REMEMBER TO READD THIS IF EVER UPDATING EMBER-DATA
-      loadedData: Ember.K,
+      loadedData: didChangeData,
 
       unloadRecord: function(record) {
         record.clearRelationships();
