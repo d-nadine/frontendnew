@@ -48,6 +48,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   isSentEmail: Ember.computed.is 'event', 'sent_email'
   isInfoChange: Ember.computed.is 'event', 'contact_info_change'
   isOpen: Ember.computed.is 'event', 'open'
+  isClick: Ember.computed.is 'event', 'click'
   isTodoCreated: Ember.computed.is 'event', 'todo_created'
   isCardReaderAdded: Ember.computed.is 'event', 'cardreader_add'
 

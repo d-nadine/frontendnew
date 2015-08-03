@@ -9,6 +9,7 @@ Radium.Notification = Radium.Model.extend
   checkForResponse: DS.belongsTo('Radium.CheckForResponse')
   source: DS.attr('string')
   external: DS.attr('boolean')
+  externalLink: DS.attr('string')
 
   timeFormatted: Ember.computed 'time', ->
     time.toHumanFormatWithTime() if time = @get('time')

@@ -16,6 +16,7 @@ Radium.Activity = Radium.Model.extend Radium.CommentsMixin,
   time: DS.attr('datetime')
   source: DS.attr('string')
   external: DS.attr('boolean')
+  externalLink: DS.attr('string')
 
   todo: DS.belongsTo('Radium.Todo')
 

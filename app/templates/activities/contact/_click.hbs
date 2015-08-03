@@ -1,0 +1,8 @@
+<p>
+  {{resource-link-to contact}}
+  clicked the link <a href='{{unbound externalLink}}' target='_blank'>{{externalLink}}</a> in the email
+  {{#link-to 'emails.show' "inbox" email}}{{email.displayName}} {{/link-to}}
+  from
+  {{resource-link-to user}}
+   on {{formatDateTime time format="full"}}.
+</p>

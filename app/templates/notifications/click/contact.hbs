@@ -1,0 +1,7 @@
+<h4>The link <a href='{{unbound externalLink}}' target='_blank'>{{externalLink}}</a> in the email <a href="#" {{action "showEmail" email}}>'{{email.displayName}}'</a> has been clicked by
+  {{#if reference.isLoaded}}
+    {{resource-link-to reference}}
+  {{else}}
+    {{partial 'is_loading'}}
+  {{/if}} on {{formatDateTime time format="full"}}.
+</h4>

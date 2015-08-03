@@ -20,6 +20,7 @@ Radium.NotificationsUnsubscribeExternalController = Radium.NotificationItemContr
   unsubscribed: Ember.computed.equal 'event', 'unsubscribe'
 Radium.NotificationsCardreaderAddContactController = Radium.NotificationItemController.extend()
 Radium.NotificationsOpenedContactController = Radium.NotificationItemController.extend()
+Radium.NotificationsClickContactController = Radium.NotificationItemController.extend()
 
 Radium.NotificationsNewInvitationController = Radium.NotificationsAssignController.extend
   actions:
