@@ -28,7 +28,9 @@ Radium.PersistTagsMixin = Ember.Mixin.create
       false
 
     removeTag: (model, tag) ->
-      return unless model.get('tagNames').mapProperty('name').contains(tag.get('name'))
+      return unless tagNames = model.get('tagNames')
+
+      return unless tagNames.mapProperty('name').contains(tag.get('name'))
 
       model.get('tagNames').removeObject(tag)
 
