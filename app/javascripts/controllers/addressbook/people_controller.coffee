@@ -70,11 +70,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           static: true
         },
         {
-          name: "confirmDeletion",
-          value: "confirmCompanyDeletion",
-          static: true
-        },
-        {
           name: "parent",
           value: "this"
         },
@@ -82,7 +77,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           name: "hideDeals",
           value: true,
           static: true
-        }]
+        }],
         component: 'x-company'
       }
 
@@ -94,8 +89,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
-    confirmCompanyDeletion: ->
-      p "confirm delete company"
+    confirmCompanyDeletion: (company) ->
+      @closeDrawer()
+
+      company.delete().then =>
+        @send 'updateTotals'
 
       false
 
@@ -355,7 +353,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     Ember.run.next =>
       @get('model').removeObject contact
 
-  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex']
+  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex', 'company']
 
   noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'
 

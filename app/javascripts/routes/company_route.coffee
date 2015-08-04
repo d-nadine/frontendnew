@@ -1,6 +1,6 @@
 Radium.CompanyRoute = Radium.Route.extend
   actions:
-    confirmDeletion: ->
+    confirmCompanyDeletion: ->
       @render 'company/deletion_confirmation',
         into: 'application'
         outlet: 'modal'
