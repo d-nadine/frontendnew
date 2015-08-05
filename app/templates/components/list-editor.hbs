@@ -1,14 +1,15 @@
 <h1>{{listLabel}} List</h1>
 <div class="form">
   <div class="item">
-    {{input type="text" value=list.name placeholder="List Name" class="field"}}
+    {{validation-input type="text" value=list.name placeholder="List Name" class="field" validator=this validations=nameValidations validationField="list.name"}}
   </div>
   <div class="item">
-    {{input type="text" value=list.itemName placeholder="List Item Name" class="field"}}
+    {{validation-input type="text" value=list.itemName placeholder="List Item Name" class="field" validator=this validations=itemNameValidations validationField="list.itemName"}}
   </div>
   {{x-radio name="type" selection=list.type leader="Accounts/Companies List" value="companies"}}
   {{x-radio name="type" selection=list.type leader="Contacts List" value="contacts"}}
   <div class="actions">
-    <button class="btn btn-primary">Submit</button>
+    <button {{action "submit"}} class="btn btn-primary">Submit</button>
+    <button {{action "cancel"}} class="btn">Cancel</submit>
   </div>
 </div>
