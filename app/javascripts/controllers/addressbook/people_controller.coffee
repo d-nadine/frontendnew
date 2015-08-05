@@ -108,6 +108,42 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
+    createList: (list) ->
+      @closeModal()
+
+      unless list
+        list = Ember.Object.create
+                 isNew: true
+                 name: ''
+                 itemName: ''
+                 type: 'contacts'
+
+      @set 'modalModel', list
+
+      config = {
+        bindings: [{
+          name: "list",
+          value: "modalModel"
+          close: "closeModal"
+          },
+          {
+            name: "parent",
+            value: "this"
+        }],
+        component: 'list-editor'
+      }
+
+      @set 'modalParams', config
+
+      @set 'showModal', true
+
+      false
+
+    closeModal: ->
+      @closeModal()
+
+      false
+
     confirmCompanyDeletion: (company) ->
       @closeDrawer()
 
@@ -226,11 +262,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         Radium.Tag.find({})
 
         @send 'updateTotals'
-
-      false
-
-    createTag: ->
-      @get('newTags').pushObject Ember.Object.create name: ''
 
       false
 
@@ -539,7 +570,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   actualQueries: []
   showDrawer: false
   drawerModel: null
-  drawerComponent: null
   drawerParams: null
 
 
@@ -559,6 +589,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     @set 'showDrawer', false
     @set 'drawerModel', null
     @set 'drawerParams', null
+
+  closeModal: ->
+    @set 'showModal', false
+    @set 'modalModel', false
+    @set 'modalParams', false
 
   combinedQueryFields: Ember.computed 'customFields.[]', ->
     queryFields = @queryFields

@@ -1,0 +1,14 @@
+<h1>{{listLabel}} List</h1>
+<div class="form">
+  <div class="item">
+    {{input type="text" value=list.name placeholder="List Name" class="field"}}
+  </div>
+  <div class="item">
+    {{input type="text" value=list.itemName placeholder="List Item Name" class="field"}}
+  </div>
+  {{x-radio name="type" selection=list.type leader="Accounts/Companies List" value="companies"}}
+  {{x-radio name="type" selection=list.type leader="Contacts List" value="contacts"}}
+  <div class="actions">
+    <button class="btn btn-primary">Submit</button>
+  </div>
+</div>
