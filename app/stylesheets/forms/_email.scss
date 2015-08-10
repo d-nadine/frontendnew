@@ -339,7 +339,11 @@
 }
 
 .email-confirmation-view {
-  margin-top: 67px;
+  margin-top: 5px;
+  width: 90%;
+}
+.related-task-prompt {
+  width: 90%;
 }
 
 .new-message-block {
@@ -666,6 +670,17 @@
   float: left;
   position: relative;
   top: 65px;
+
+  .upload-item {
+    width: 100%;
+
+    .uploaded-file {
+      width: calc(100% - 50px);
+    }
+    .uploaded-by {
+      margin-left: 25px;
+    }
+  }
 }
 
 .empty-emails, .email-history {
