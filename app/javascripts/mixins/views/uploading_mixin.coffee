@@ -9,6 +9,8 @@ Radium.UploadingMixin = Ember.Mixin.create
     uploader = @get('uploader')
     uploadToFiles = @get('files')
 
+    Ember.assert "You have not set the files array for UploadingMixin in #{@constructor.toString()}", uploadToFiles
+
     for i in [0...files.length]
       file = files[i]
       wrappedFile = Ember.Object.create(file, file: file, isUploading: true)

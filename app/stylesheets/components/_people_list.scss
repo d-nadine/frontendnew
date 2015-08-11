@@ -1,0 +1,5 @@
+.people-list-component {
+  a:after { content: ","; }
+
+  a:last-of-type:after{ content: ""; }
+}

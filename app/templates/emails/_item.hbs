@@ -6,9 +6,9 @@
         <div class="span6 pull-left">
           <div class="email-sender">{{resource-link-to sender}}</div>
           <div class="email-info">
-            <div class="email-to">To: <b>{{list "toList"}}</b></div>
+            <div class="email-to">To: <b>{{people-list people=toList}}</b></div>
             {{#if ccList.length}}
-              <div class="email-cc">Copy: {{list "ccList"}}</div>
+              <div class="email-cc">Copy: {{people-list people=ccList}}</div>
             {{/if}}
           </div>
         </div>
@@ -57,12 +57,12 @@
             <table>
               <tr>
                 <td>To</td>
-                <td>{{list "toList"}}</td>
+                <td>{{people-list people=toList}}</td>
               </tr>
               {{#if ccList.length}}
               <tr>
                 <td>CC</td>
-                <td>{{list "ccList"}}</td>
+                <td>{{people-list people=ccList}}</td>
               </tr>
               {{/if}}
               <tr>
