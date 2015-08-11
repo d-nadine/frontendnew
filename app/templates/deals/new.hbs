@@ -17,7 +17,7 @@
       <div class="control-group">
         <label class="control-label">Contact</label>
         <div class="controls required">
-          {{autocomplete-textbox scopes="contact" tracked_only=true value=controller.contact queryKey="displayName" validations=contactValidations validator=controller validationField="contact" isValid=isValid}}
+          {{autocomplete-textbox scopes="contact" value=controller.contact queryKey="displayName" validations=contactValidations validator=controller validationField="contact" isValid=isValid}}
           {{#if contactInvalid}}
             <div class="contact-picker-error">
               <span class="error">

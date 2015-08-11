@@ -14,10 +14,5 @@ Radium.EmailsSentController = Radium.ObjectController.extend Radium.EmailDealMix
     finishBy: null
     user: @get('currentUser')
 
-  showTasksButton: Ember.computed 'isSaving', 'isPersonal', ->
-    return if @get('isSaving') || @get('isPersonal')
-
-    true
-
   to: Ember.computed 'toList.[]', 'toList.@each.isLoaded', ->
     return @get('toList')
