@@ -10,7 +10,7 @@ Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
 
         list.save().then =>
           @flashMessenger.success "List #{list.get('name')} created."
-
+          @get('parent').send 'closeModal'
       false
 
     cancel: ->

@@ -1,10 +1,10 @@
 <h1>{{listLabel}} List</h1>
 <div class="form">
   <div class="item">
-    {{validation-input type="text" value=list.name placeholder="List Name" class="field" validator=this validations=nameValidations validationField="list.name"}}
+    {{validation-input type="text" value=list.name placeholder="List Name" class="field" validator=this validations=nameValidations validationField="list.name" enter="submit"}}
   </div>
   <div class="item">
-    {{validation-input type="text" value=list.itemName placeholder="List Item Name" class="field" validator=this validations=itemNameValidations validationField="list.itemName"}}
+    {{validation-input type="text" value=list.itemName placeholder="List Item Name" class="field" validator=this validations=itemNameValidations validationField="list.itemName" enter="submit"}}
   </div>
   {{x-radio name="type" selection=list.type leader="Accounts/Companies List" value="companies"}}
   {{x-radio name="type" selection=list.type leader="Contacts List" value="contacts"}}
