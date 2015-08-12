@@ -17,7 +17,7 @@ Radium.NewListitemComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     , 1500
 
   saveOnEnter: (e) ->
-    return unless e.keyCode == @ENTER
+    return unless [@ENTER, @TAB].contains e.keyCode
 
     editable = @$('.editableList')
 
