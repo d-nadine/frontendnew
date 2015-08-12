@@ -503,7 +503,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
 
   displayNoContacts: Ember.computed 'noContacts', 'isPotential', 'potential', 'filter', ->
-    return false if @get('isPotential')
+    return false if @get('isPotential') || @get('isTagged')
 
     !!@get('noContacts')
 
