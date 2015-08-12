@@ -1,4 +1,25 @@
 #addressbook, .conversations-table {
+
+  .message {
+    background-color: white;
+    display: inline-block;
+    position: absolute;
+    left: calc(50% - 320px);
+    right: 50%;
+    width: 640px;
+    text-align: center;
+    border: 1px solid $border;
+    padding: 50px 30px;
+    top: 260px;
+
+    .ss-user {
+      font-size: 30px;
+    }
+    h1 {
+      margin-bottom: 35px;
+    }
+  }
+
   .hide-sidebar {
     .contacts-sidebar {
       display: none;
