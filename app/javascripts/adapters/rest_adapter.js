@@ -278,6 +278,7 @@ Radium.RESTAdapter.configure('plurals',{
   contacts_totals: 'contacts_totals',
   track_all_contacts: 'track_all_contacts',
   contact_status: 'contact_statuses',
+  list_status: 'list_statuses',
   untracked_contacts_totals: 'untracked_contacts_totals'
 });
 
@@ -340,6 +341,10 @@ Radium.RESTAdapter.map('Radium.Account', {
 
 Radium.RESTAdapter.map('Radium.Activity', {
   note: {embedded: 'load'}
+});
+
+Radium.RESTAdapter.map('Radium.List', {
+  listStatuses: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.Workflow', {

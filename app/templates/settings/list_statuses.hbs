@@ -1,0 +1,7 @@
+<div class="pipeline-states-list">
+  <h3>List Statuses</h3>
+  {{#each list in model}}
+    <h4>{{list.name}}</h4>
+    {{liststatuses-editor listStatuses=list.listStatuses parent=this}}
+  {{/each}}
+</div>
