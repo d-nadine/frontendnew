@@ -1,7 +1,12 @@
-<div class="pipeline-states-list">
+<div class="pipeline-states-list list-statuses">
   <h3>List Statuses</h3>
   {{#each list in model}}
-    <h4>{{list.name}}</h4>
+    <h4 class="edit-list-name">{{list.name}}<i class="ss-standard ss-write pull-right" {{action "editList" list bubbles=false}}></i></h4>
     {{liststatuses-editor listStatuses=list.listStatuses parent=this}}
   {{/each}}
 </div>
+{{#if showListModal}}
+  {{#x-modal close="closeListModal"}}
+    {{list-editor list=currentList parent=this}}
+  {{/x-modal}}
+{{/if}}

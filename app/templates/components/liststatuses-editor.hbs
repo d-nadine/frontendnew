@@ -1,3 +1,10 @@
 {{#each listStatus in listStatuses}}
   {{liststatus-editor listStatus=listStatus tagName="li" parent=this}}
 {{/each}}
+<div class="span5 pipeline-state-create">
+  {{#if currentUser.isAdmin}}
+    <button class="btn btn-large btn-success" {{action "addNewListStatus" bubbles=false}}>
+      Add List Status
+    </button>
+  {{/if}}
+</div>
