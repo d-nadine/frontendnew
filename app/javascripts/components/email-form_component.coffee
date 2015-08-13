@@ -202,7 +202,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       @EventBus.publish('removePlaceHolder')
 
-      @set 'signatureAdded', true
+      @$('.prompt').hide()
       false
 
     expandList: (section) ->
