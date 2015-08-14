@@ -4,3 +4,7 @@ Radium.List = Radium.Model.extend
   type: DS.attr('string')
 
   listStatuses: DS.hasMany('Radium.ListStatus')
+
+  clearRelationships: ->
+    @get('listStatuses').compact().forEach (status) ->
+      status.unloadRecord()

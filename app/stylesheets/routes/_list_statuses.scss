@@ -9,11 +9,35 @@
       cursor: pointer;
     }
   }
+
+  .liststatuses-editor-component {
+    list-style: none;
+    li {
+      position: relative;
+      padding: 2px 0;
+      line-height: 50px;
+      display: inline-block;
+    }
+
+    li .inline-editor-component {
+      border-bottom: 1px solid $control-border-color;
+    }
+  }
 }
 
 .list-statuses h4 {
   .ss-trash {
     font-size: 17.5px;
     margin-left: 5px;
+  }
+}
+
+.list-statuses .liststatus-editor-component .btn-remove-field{
+  position: absolute;
+  top: 17px;
+  margin-left: 12px;
+
+  i {
+    font-size: 15px;
   }
 }
