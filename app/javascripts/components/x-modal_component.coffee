@@ -29,6 +29,8 @@ Radium.XModalComponent = Ember.Component.extend
     $('body').off 'click.xmodal'
 
   destroy: ->
+    @_super()
+
     if @get('_state') isnt 'inDOM' then @_super()
 
     unless modal = @$('.modal')
