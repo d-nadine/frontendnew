@@ -101,12 +101,12 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
       @notifyPropertyChange 'data'
 
   shallowCopy: ->
-    type = @constructor
     self = this
     hash = {}
 
-    type.eachAttribute (key, meta) ->
-      hash[key] = self.get(key)
+    @eachAttribute (key, meta) ->
+      if val = self.get(key)
+        hash[key] = val
 
     hash
 

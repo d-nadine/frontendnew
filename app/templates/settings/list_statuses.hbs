@@ -1,12 +1,26 @@
 <div class="pipeline-states-list list-statuses">
-  <h3>List Statuses</h3>
+  <h3>
+    List Statuses
+    <a href="#" {{action "showListModal"}} class="btn btn-primary btn-icon btn-large pull-right">
+      <i class="ss-standard ss-list"></i>
+      New List
+    </a>
+  </h3>
   {{#each list in model}}
-    <h4 class="edit-list-name">{{list.name}}<i class="ss-standard ss-write pull-right" {{action "editList" list bubbles=false}}></i></h4>
+    <h4 class="edit-list-name">{{list.name}}
+      <a {{action "confirmDeleteList" list}} href="#" class="btn btn-link btn-remove-field btn-none pull-right">
+        <i class="ss-symbolicons-block ss-trash cancel"></i>
+      </a>
+      <i class="ss-standard ss-write pull-right" {{action "showListModal" list bubbles=false}}></i>
+    </h4>
     {{liststatuses-editor listStatuses=list.listStatuses parent=this}}
   {{/each}}
 </div>
 {{#if showListModal}}
   {{#x-modal close="closeListModal"}}
-    {{list-editor list=currentList parent=this}}
+    {{list-editor list=currentList parent=this closeModal="closeListModal"}}
   {{/x-modal}}
 {{/if}}
+{{#delete-confirmation deleteAction="deleteList" showDeleteConfirmation=showDeleteListConfirmation}}
+  <p>This action cannot be undone! Deleting <strong>{{currentList.name}}</strong> will be permanent.</p>
+{{/delete-confirmation}}

@@ -6,11 +6,20 @@ Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
       Ember.run.next =>
         return unless @get('formValid')
 
-        list = Radium.List.createRecord @get('list').getProperties('name', 'itemName', 'type')
+        return unless list = @get('list')
 
-        list.save().then =>
+        props = list.getProperties('name', 'itemName', 'type')
+
+        if list.get('isNew')
+          record = Radium.List.createRecord props
+        else
+          record = Radium.List.all().find (l) -> l.get('id') == list.get('id')
+          record.setProperties(props)
+
+        record.save().then =>
           @flashMessenger.success "List #{list.get('name')} created."
-          @get('parent').send 'closeModal'
+          @sendAction 'closeModal'
+
       false
 
     cancel: ->

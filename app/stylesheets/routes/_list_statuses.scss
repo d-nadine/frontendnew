@@ -1,9 +1,19 @@
 .list-statuses {
+  h3 {
+    width: 75%;
+  }
   .edit-list-name {
     width: 400px;
 
     .ss-write {
       cursor: pointer;
     }
+  }
+}
+
+.list-statuses h4 {
+  .ss-trash {
+    font-size: 17.5px;
+    margin-left: 5px;
   }
 }
