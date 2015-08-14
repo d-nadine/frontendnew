@@ -34,6 +34,8 @@ Radium.PersistTagsMixin = Ember.Mixin.create
 
       model.get('tagNames').removeObject(tag)
 
+      return unless model instanceof Radium.Model
+
       model.save().then =>
         @get('people').send 'updateTotals'
 
