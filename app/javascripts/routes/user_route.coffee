@@ -1,15 +1,5 @@
 Radium.UserRoute = Radium.Route.extend
   actions:
-    confirmDeletion: ->
-      @render 'user/deletion_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
-    close: ->
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
-
     deleteRecord: ->
       user = @modelFor 'user'
 

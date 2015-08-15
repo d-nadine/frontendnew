@@ -1,7 +1,14 @@
 Radium.UserController = Radium.ObjectController.extend
+  actions:
+    confirmDeletion: ->
+      @set "showDeleteConfirmation", true
+
+      false
+
   needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'contactStatuses']
   loadedPages: [1]
 
+  showDeleteConfirmation: false
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   isEditing: false
 

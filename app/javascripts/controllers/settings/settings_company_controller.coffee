@@ -2,6 +2,11 @@ require 'controllers/settings/subscriptions_mixin'
 
 Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.SubscriptionMixin,
   actions:
+    confirmDestroyAccount: ->
+      @set "showDeleteConfirmation", true
+
+      false
+
     resendInvite: (invite) ->
       invitation = Radium.UserInvitationDelivery.createRecord
                     userInvitation: invite
@@ -68,6 +73,8 @@ Radium.SettingsCompanyController = Radium.ObjectController.extend Radium.Subscri
   unlimited: Ember.computed.alias 'currentUser.account.unlimited'
   isSaving: false
   isEditingAvatar: false
+  showDeleteConfirmation: false
+  beingDestroyed: false
 
   pendingUsers: Ember.computed 'users.[]', 'controllers.usersInvites.[]', 'controllers.usersInvites.@each.isNew', ->
     existing = @get('users').mapProperty('email').map (email) -> email.toLowerCase()

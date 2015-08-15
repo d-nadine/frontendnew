@@ -3,3 +3,6 @@
   {{render "task_list" currentTasks}}
 </div>
 {{render "feed" activities}}
+{{#delete-confirmation deleteAction="deleteRecord" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting <strong>{{name}}</strong> will be permanent.</p>
+{{/delete-confirmation}}

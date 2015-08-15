@@ -1,23 +1,10 @@
 Radium.SettingsCompanyRoute = Radium.Route.extend
   actions:
-    confirmDestroyAccount: ->
-      controller = @controllerFor('settingsDestroyAccountConfirmation')
-
-      controller.set('model', @controllerFor('account').get('model'))
-      @render 'settings/destroy_account_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
-    close: ->
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
-
     destroyAccount: ->
-      controller = @controllerFor('settingsDestroyAccountConfirmation')
+      controller = @controllerFor('settingsCompany')
       controller.set('beingDestroyed', true)
 
-      account = controller.get('model')
+      account = @controllerFor('account').get('model')
 
       account.deleteRecord()
 
