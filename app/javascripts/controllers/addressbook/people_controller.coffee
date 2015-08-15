@@ -24,6 +24,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
+    confirmDeletion: ->
+      unless @get('allChecked') || @get('checkedContent.length')
+        return @flashMessenger.error "You have not selected any items."
+
+      @set "showDeleteConfirmation", true
+
+      false
+
     showContactDrawer: (contact) ->
       @closeDrawer()
 
@@ -602,6 +610,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   showDrawer: false
   drawerModel: null
   drawerParams: null
+  showDeleteConfirmation: false
 
 
   filterSearchResults: (item) ->

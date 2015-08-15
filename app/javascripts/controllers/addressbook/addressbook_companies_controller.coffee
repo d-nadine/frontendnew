@@ -24,13 +24,30 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
         modelType: Radium.Company
 
       @send "executeActions", "delete", detail
+
+      # need to call a better update companies
+      Ember.run.next =>
+        @container.lookup('route:addressbookCompanies').refresh()
+
       false
 
     updateTotals: ->
       @get('addressBookController').send 'updateTotals'
+
+      false
+
+    confirmDeletion: ->
+      unless @get('allChecked') || @get('checkedContent.length')
+        return @send 'flashError', "You have not selected any items."
+
+      @set "showDeleteConfirmation", true
+
+      false
 
   needs: ['addressbook', 'users', 'tags']
 
   addressBookController: Ember.computed.oneWay 'controllers.addressbook'
 
   public: true
+
+  showDeleteConfirmation: false

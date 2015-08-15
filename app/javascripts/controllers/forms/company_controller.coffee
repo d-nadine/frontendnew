@@ -14,9 +14,12 @@ Radium.FormsCompanyController = Radium.ObjectController.extend Ember.Evented,
         addressbookController = @get('controllers.addressbook')
         addressbookController.send('updateTotals') if addressbookController
 
-        dataset = @get('controllers.addressbookCompanies.model')
+        addressbookCompaniesController = @get('controllers.addressbookCompanies')
+        dataset = addressbookCompaniesController.get('model')
 
         dataset.insertAt 0, result
+
+        addressbookCompaniesController.incrementProperty "totalRecords"
 
         @send 'flashSuccess', "#{@get('companyName')} created."
         @trigger('formReset')

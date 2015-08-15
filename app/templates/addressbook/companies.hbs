@@ -70,3 +70,6 @@
   </div>
   {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
 </div>
+{{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting these <strong>{{checkedTotal}}</strong> item(s) will be permanent.</p>
+{{/delete-confirmation}}
