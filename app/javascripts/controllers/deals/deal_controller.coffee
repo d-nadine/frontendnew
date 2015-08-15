@@ -11,6 +11,11 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
   Radium.ChangeDealStatusMixin, Radium.AttachedFilesMixin,
 
   actions:
+    confirmDeletion: ->
+      @set "showDeleteConfirmation", true
+
+      false
+
     save: ->
       @get('store').commit()
       false
@@ -42,6 +47,8 @@ Radium.DealController = Radium.DealBaseController.extend Radium.ChecklistMixin, 
 
   needs: ['accountSettings', 'users', 'contacts', 'pipeline']
   statuses: Ember.computed.alias('controllers.pipeline.dealStates')
+
+  showDeleteConfirmation: false
 
   users: Ember.computed.oneWay 'controllers.users'
 

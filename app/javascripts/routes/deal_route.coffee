@@ -3,18 +3,6 @@ require 'routes/mixins/checklist_mixins'
 
 Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatusChangeMixin,
   actions:
-    confirmDeletion: ->
-      @render 'deal/deletion_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
-    close: ->
-      @controller.discardBufferedChanges() if @controller.discardBufferedChanges
-
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
-
     deleteRecord: ->
       deal = @modelFor 'deal'
 

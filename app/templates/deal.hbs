@@ -3,3 +3,15 @@
 {{render "task_list" currentTasks}}
 
 {{render "feed" activities}}
+{{#delete-confirmation deleteAction="deleteRecord" showDeleteConfirmation=showDeleteConfirmation}}
+  <p>This action cannot be undone! Deleting <strong>{{model.name}}</strong>
+  will delete the following items: </p>
+
+  <ul>
+    <li>Any Todos</li>
+    <li>Any Attachments</li>
+    <li>Any Discussions</li>
+    <li>Any Comments</li>
+    <li>Anything in the feed</li>
+  </ul>
+{{/delete-confirmation}}
