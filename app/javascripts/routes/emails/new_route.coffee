@@ -89,7 +89,5 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     @controllerFor('emailsNew').setProperties
       mode: 'single'
       bulkForm: null
-
-    @controllerFor('emailsConfirmBulkEmail').setProperties
       form: null
       bulkParams: null

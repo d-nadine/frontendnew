@@ -59,7 +59,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       if searchText.length
         bulkParams.like = searchText
 
-      @get('targetObject').send('confirmBulkEmail', form, bulkParams)
+      @sendAction('confirmBulkEmail', form, bulkParams)
 
       false
 

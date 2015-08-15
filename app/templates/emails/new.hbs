@@ -1,1 +1,4 @@
-{{email-form form=model parent=this signature=signature addSignature="addSignature" mode=mode fromPeople=from_people changeViewMode="changeViewMode" saveEmail="saveEmail" createBulkEmail="createBulkEmail" isValid=isValid saveTemplate="saveTemplate" customFields=customFields templates=templates deleteFromEditor="deleteFromEditor"}}
+{{email-form form=model parent=this signature=signature addSignature="addSignature" mode=mode fromPeople=from_people changeViewMode="changeViewMode" saveEmail="saveEmail" createBulkEmail="createBulkEmail" isValid=isValid saveTemplate="saveTemplate" customFields=customFields templates=templates deleteFromEditor="deleteFromEditor" confirmBulkEmail="confirmBulkEmail"}}
+{{#delete-confirmation deleteAction="submitCreateBulkEmail" showDeleteConfirmation=showDeleteConfirmation submitMessage="Confirm"}}
+<p>You are sending a mail merge message to <strong>{{checkedTotal}}</strong> recipients.</p>
+{{/delete-confirmation}}
