@@ -1,25 +1,16 @@
 Radium.LeadsImportRoute = Radium.Route.extend
   actions:
-    confirmDeleteJob: (job) ->
-      controller = @controllerFor 'contactImportJobConfirmation'
-      controller.set 'model', job
-
-      @render 'contact_import_job/deletion_confirmation',
-        into: 'application'
-        outlet: 'modal'
-        controller: controller
-
     close: ->
       @render 'nothing',
         into: 'application'
         outlet: 'modal'
 
     deleteRecord: ->
-      job = @controllerFor('contactImportJobConfirmation').get('model')
+      controller = @controllerFor('leadsImport')
+
+      job = controller.get('deleteJob')
 
       job.delete().then (result) =>
-        @send 'closeModal'
-
         @send 'flashSuccess', "The job has been deleted"
 
         Ember.run.later ->

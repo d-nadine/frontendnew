@@ -14,6 +14,13 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   Radium.PersistTagsMixin,
 
   actions:
+    confirmDeleteJob: (job) ->
+      @set "deleteJob", job
+
+      @set "showDeleteConfirmation", true
+
+      false
+
     importContacts: ->
       selectedHeaders = @get('selectedHeaders')
 
@@ -373,6 +380,8 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   _teardown: ->
     if progressTick = @get('progressTick')
       Ember.run.cancel progressTick
+
+  deleteJob: null
 
   progress: ->
     unless @get('isSubmitted')

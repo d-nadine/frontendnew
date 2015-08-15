@@ -236,3 +236,7 @@
     {{/if}}
   </div>
 </div>
+{{#delete-confirmation deleteAction="deleteRecord" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting this import will be permanent.</p>
+<p>Deleting this import will delete any associated contacts that were uploaded in this import.</p>
+{{/delete-confirmation}}
