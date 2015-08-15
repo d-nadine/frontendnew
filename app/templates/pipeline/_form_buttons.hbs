@@ -17,3 +17,6 @@
     </ul>
   {{/if}}
 </div>
+{{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting these <strong>{{checkedContent.length}}</strong> item(s) will be permanent.</p>
+{{/delete-confirmation}}

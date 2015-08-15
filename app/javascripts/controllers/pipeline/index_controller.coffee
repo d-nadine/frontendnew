@@ -5,6 +5,12 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   Radium.BulkActionControllerMixin,
   Radium.UserComboboxProps,
 
+  actions:
+    confirmDeletion: ->
+      @set "showDeleteConfirmation", true
+
+      false
+
   needs: ['workflowGroupItem', "pipeline", "pipelineWorkflowDeals"]
   filteredDeals: null
   searchText: Ember.computed.alias 'controllers.pipeline.searchText'
@@ -12,6 +18,8 @@ Radium.PipelineIndexController = Radium.ObjectController.extend Radium.BulkActio
   filterEndDate: Ember.computed.alias 'controllers.pipeline.filterEndDate'
   showPastDateRange: Ember.computed.alias 'controllers.pipeline.showPastDateRange'
   showFutureDateRange: Ember.computed.alias 'controllers.pipeline.showFutureDateRange'
+
+  showDeleteConfirmation: false
 
   arrangedDealsLength: 0
 

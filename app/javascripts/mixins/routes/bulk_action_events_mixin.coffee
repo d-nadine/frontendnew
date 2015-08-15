@@ -58,13 +58,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
         into: 'application'
         outlet: 'modal'
 
-    confirmSingleDelete: (record) ->
-      @controllerFor('bulkActionsSingleDeleteConfirmation').set('model', record)
-
-      @render 'bulk_actions/single_delete_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
     deleteRecord: (record) ->
       record.deleteRecord()
 
@@ -80,15 +73,9 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
       @send 'close'
 
     confirmDeletion: ->
-      @controllerFor('bulkActionsDeletionConfirmation').set('model', @getController().get('checkedContent'))
-      @render 'bulk_actions/deletion_confirmation',
-        into: 'application'
-        outlet: 'modal'
+      @set "showDeleteConfirmation", true
 
-    close: ->
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
+      false
 
     deleteAll: ->
       @getController().get('checkedContent').toArray().forEach (record) ->
@@ -112,3 +99,5 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
 
   resetForm: ->
     @getController().set 'activeForm', null
+
+  showDeleteConfirmation: true

@@ -9,16 +9,6 @@ Radium.MessagesBulkActionsRoute = Radium.Route.extend
       Ember.run.next =>
         @controllerFor('messagesSidebar').send 'checkMessageItem'
 
-    confirmDeletion: ->
-      @render 'messages/bulk_deletion_confirmation',
-        into: 'application',
-        outlet: 'modal'
-
-    close: ->
-      @render 'nothing',
-        into: 'application',
-        outlet: 'modal'
-
     delete: ->
       Ember.run.once this, 'batchRemoves', 'delete'
 

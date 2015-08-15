@@ -1,6 +1,12 @@
 require 'forms/form_box'
 
 Radium.MessagesBulkActionsController = Radium.ArrayController.extend
+  actions:
+    confirmDeletion: ->
+      @set "showDeleteConfirmation", true
+
+      false
+
   needs: ['users', 'messages']
 
   model: Ember.computed.oneWay 'controllers.messages.checkedContent'
@@ -21,3 +27,5 @@ Radium.MessagesBulkActionsController = Radium.ArrayController.extend
     finishBy: null
     user: @get('currentUser')
     reference: @get('model')
+
+    showDeleteConfirmation: false
