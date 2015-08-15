@@ -1,6 +1,6 @@
 <div class="sidebar">
-  {{contact-sidebar contact=contact parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields confirmDeletion="confirmDeletion" condense=condenseSidebar startPolling="startPolling"}}
+  {{contact-sidebar contact=contact parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields confirmDeletion="confirmDeletion" condense=condenseSidebar startPolling="startPolling" showDeleteConfirmation="showDeleteConfirmation" parent=parent}}
 </div>
 <div class="main-content">
-  {{contact-main contact=contact customFields=customFields form=form files=files noscroll=mainnoscroll}}
+  {{contact-main contact=contact customFields=customFields form=form files=files noscroll=mainnoscroll showDeleteConfirmation=showDeleteConfirmation parent=parent deleteContact="deleteContact"}}
 </div>

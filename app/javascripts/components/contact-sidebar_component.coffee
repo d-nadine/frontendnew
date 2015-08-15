@@ -29,7 +29,7 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
       false
 
     confirmDeletion: ->
-      @sendAction "confirmDeletion"
+      @set "showDeleteConfirmation", true
 
       false
 

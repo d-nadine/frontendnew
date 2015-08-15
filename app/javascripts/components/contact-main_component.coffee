@@ -12,6 +12,11 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   Radium.ScrollableMixin,
   Ember.Evented,
   actions:
+    deleteContact: ->
+      @sendAction "deleteContact", @get('contact')
+
+      false
+
     removeMultiple: (relationship, item) ->
       @get(relationship).removeObject item
 

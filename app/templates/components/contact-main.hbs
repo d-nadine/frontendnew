@@ -12,3 +12,27 @@
 {{#unless contact.isUpdating}}
   {{render "feed" contact.activities}}
 {{/unless}}
+{{#delete-confirmation deleteAction="deleteContact" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting <strong>{{contact.displayName}}</strong> will be permanent.</p>
+{{#if contact.deals.length}}
+  <strong>{{contact.displayName}} is the primary contact in the following deals.</strong>
+  <table class="table sidebar-table">
+    <tbody>
+      {{#each deal in deals}}
+        <tr>
+          <td>{{#link-to "deal" this}}{{deal.name}}{{/link-to}}
+          <td class="text-right">
+            <strong>{{currency deal.value}} ({{deal.status}})</strong>
+          </td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td>Closed deals totals</td>
+        <td class="text-right">
+          <strong>{{currency contact.dealsTotal}}</strong>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{{/if}}
+{{/delete-confirmation}}

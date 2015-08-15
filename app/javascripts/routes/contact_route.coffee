@@ -2,19 +2,7 @@ require 'mixins/controllers/save_email_mixin'
 
 Radium.ContactRoute = Radium.Route.extend Radium.SaveEmailMixin,
   actions:
-    confirmDeletion: ->
-      @render 'contact/deletion_confirmation',
-        into: 'application'
-        outlet: 'modal'
-
-    close: ->
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
-
-    deleteRecord: ->
-      contact = @modelFor 'contact'
-
+    deleteRecord: (contact) ->
       name = contact.get('displayName')
 
       @send 'closeModal'

@@ -2,6 +2,11 @@ require "mixins/controllers/attached_files_mixin"
 
 Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   actions:
+    deleteContact: (contact) ->
+      @sendAction "deleteContact", contact
+
+      false
+
     addTag: (tag) ->
       @sendAction "addTag", @get('contact'), tag
 
@@ -32,3 +37,5 @@ Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
     @set 'updateContactPoller', Radium.UpdateContactPoller.create()
 
     @send('startPolling') if @contact.get('isUpdating')
+
+  showDeleteConfirmation: false
