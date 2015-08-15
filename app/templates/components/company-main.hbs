@@ -15,6 +15,9 @@
     </div>
   </div>
 {{/unless}}
+{{#delete-confirmation deleteAction="deleteCompany" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting <strong>{{company.name}}</strong> will be permanent.</p>
+{{/delete-confirmation}}
 <div class="tasks-content company">
   {{render "form_box" formBox}}
   {{render "task_list" company.currentTasks}}

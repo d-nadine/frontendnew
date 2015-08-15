@@ -10,8 +10,8 @@ Radium.CompanyMainComponent = Ember.Component.extend Radium.ScrollableMixin,
 
       false
 
-     confirmDeletion: ->
-      @sendAction "confirmDeletion"
+    deleteCompany: ->
+      @sendAction "deleteCompany", @get('company')
 
       false
 

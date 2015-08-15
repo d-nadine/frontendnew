@@ -60,9 +60,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           name: "customFields",
           value: "customFields"
         },
+        {
           name: "deleteContact",
           value: "deleteContact",
           static: true
+        }
         ]
         component: 'x-contact'
       }
@@ -78,6 +80,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     deleteContact: (contact) ->
       contactRoute = @get('contactRoute')
       contactRoute._actions['deleteRecord'].call contactRoute, contact
+
+      false
+
+    deleteCompany: (company) ->
+      companyRoute = @get('companyRoute')
+      companyRoute._actions['deleteRecord'].call companyRoute, company
 
       false
 
@@ -106,7 +114,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           name: "hideDeals",
           value: true,
           static: true
-        }],
+        },
+        {
+          name: "deleteCompany",
+          value: "deleteCompany",
+          static: true
+        }
+        ],
         component: 'x-company'
       }
 
@@ -453,6 +467,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   # UPGRADE: replace with inject
   contactRoute: Ember.computed ->
     @container.lookup('route:contact')
+
+  companyRoute: Ember.computed ->
+    @container.lookup('route:company')
 
   isCurrentUser: Ember.computed 'currentUser', 'isAssignedTo', 'user', ->
     return unless @get('isAssignedTo') && @get('user')

@@ -1,4 +1,4 @@
 <div class="sidebar">
-  {{company-sidebar company=company parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields files=files}}
+  {{company-sidebar company=company parent=parent addTag="addTag" removeTag="removeTag" customFields=customFields files=files showDeleteConfirmation=showDeleteConfirmation}}
 </div>
-{{company-main company=company parent=parent confirmDeletion="confirmCompanyDeletion" noscroll=mainnoscroll hideDeals=hideDeals}}
+{{company-main company=company parent=parent confirmDeletion="confirmCompanyDeletion" noscroll=mainnoscroll hideDeals=hideDeals showDeleteConfirmation=showDeleteConfirmation deleteCompany="deleteCompany"}}

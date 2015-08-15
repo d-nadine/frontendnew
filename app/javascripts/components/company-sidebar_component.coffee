@@ -14,7 +14,7 @@ Radium.CompanySidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
       false
 
     confirmDeletion: ->
-      @get('parent').send "confirmCompanyDeletion", @get('company')
+      @set "showDeleteConfirmation", true
 
       false
 
