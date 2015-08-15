@@ -4,6 +4,11 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   Radium.SubscriptionMixin,
   Ember.Evented,
   actions:
+    confirmCancelSubscription: ->
+      @set "showDeleteConfirmation", true
+
+      false
+
     updateBilling: ->
       return if @get('gatewaySet')
 
@@ -50,8 +55,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       @applyBufferedChanges()
 
       @get('store').commit()
-
-      @send 'close'
 
     update: ->
       @set 'isPersisting', true

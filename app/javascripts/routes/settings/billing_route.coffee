@@ -1,16 +1,4 @@
 Radium.SettingsBillingRoute = Radium.Route.extend
-  actions:
-    confirmCancelSubscription: ->
-      @render 'billing/cancellation_confirmation',
-        into: 'application'
-        outlet: 'modal'
-        controller: @controllerFor 'settingsBilling'
-
-    close: ->
-      @render 'nothing',
-        into: 'application'
-        outlet: 'modal'
-
   model: ->
     accountController = @controllerFor('account')
 
