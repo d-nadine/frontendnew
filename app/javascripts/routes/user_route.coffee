@@ -15,7 +15,7 @@ Radium.UserRoute = Radium.Route.extend
 
       name = user.get('name')
 
-      user.save().then =>
+      user.delete().then =>
         @send 'flashSuccess', "User #{name} has been deleted"
         @transitionTo 'settings.company'
 
