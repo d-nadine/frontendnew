@@ -5,6 +5,7 @@ Radium.SettingsListStatusesController = Radium.Controller.extend
 
       list.delete().then =>
         @flashMessenger.success "List Deleted."
+        @set "showDeleteListConfirmation", false
 
       false
 
