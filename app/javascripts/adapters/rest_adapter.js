@@ -343,10 +343,6 @@ Radium.RESTAdapter.map('Radium.Activity', {
   note: {embedded: 'load'}
 });
 
-Radium.RESTAdapter.map('Radium.List', {
-  listStatuses: {embedded: 'load'}
-});
-
 Radium.RESTAdapter.map('Radium.Workflow', {
   checklist: {key: 'check_list', embedded: 'always'}
 });

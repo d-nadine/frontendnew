@@ -46,7 +46,7 @@ Radium.ValidationMixin = Ember.Mixin.create
 
     return unless errorMessages.get('length')
 
-    regex = new RegExp(errorMessagePart, 'gi')
+    regex = new RegExp("#{@get('validationField')} #{errorMessagePart}", 'gi')
     errorMessages = errorMessages.reject (m) -> regex.test(m)
 
     @set('validator.errorMessages', errorMessages)
