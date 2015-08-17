@@ -70,6 +70,11 @@
   }
 }
 
+.form .item.multi .pull-left .xradio-component {
+  position: relative;
+  top: 17px;
+}
+
 .form .item input.single::-webkit-input-placeholder {
   font-size: 14px;
 }

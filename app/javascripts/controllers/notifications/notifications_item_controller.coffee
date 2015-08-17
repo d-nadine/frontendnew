@@ -1,6 +1,10 @@
 Radium.NotificationsItemController = Radium.ObjectController.extend
   actions:
     deleteNotification: ->
-      @get('model').deleteRecord()
-      @get('store').commit()
-      @get('parentController').send 'showMore'
+      model = if @get('model') instanceof Radium.ObjectController
+                @get('model.model')
+              else
+                @get('model')
+
+      model.delete().then =>
+        @get('parentController').send 'showMore'
