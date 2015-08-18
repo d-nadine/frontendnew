@@ -29,4 +29,3 @@ Radium.CalendarDayItemController = Radium.ArrayController.extend Radium.ShowMore
 
   day: Ember.computed 'date', ->
     @get('content.date.day')
-  

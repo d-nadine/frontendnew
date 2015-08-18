@@ -10,4 +10,6 @@ Radium.AttachedFilesMixin = Ember.Mixin.create
 
     Ember.assert "You need to have an attachments property", attachments
 
+    return unless attachments
+
     attachments.uniq().map (attachment) -> Ember.Object.create(attachment: attachment)

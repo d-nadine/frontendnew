@@ -12,6 +12,8 @@ Radium.CalendarTaskRoute = Radium.Route.extend
     task_id: model.get('id')
 
   model: (params) ->
+    return unless params.task_type
+
     type = params.task_type.constantize()
     type.find params.task_id
 
@@ -27,7 +29,10 @@ Radium.CalendarTaskRoute = Radium.Route.extend
 
     calendarIndexController = @controllerFor('calendarIndex')
 
-    unless calendarIndexController.get('model')
+    if !task.get('time')
+      return calendarIndexController.set('model', null)
+
+    if !calendarIndexController.get('model')
       calendarIndexController.set 'model', task.get('time')
       return
 

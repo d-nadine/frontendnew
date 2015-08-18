@@ -42,6 +42,10 @@ Radium.TodoForm = Radium.Form.extend
         if self.get('modal')
           self.get('closeFunc')()
 
+        Ember.run.next ->
+          if user = created?.get('user')
+            user.reload()
+
         resolve(result)
 
       record.one 'becameInvalid', (result) ->

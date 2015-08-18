@@ -3965,6 +3965,10 @@ var RootState = {
       });
 
       record.send('invokeLifecycleCallbacks', get(record, 'lastDirtyType'));
+    },
+
+    loadedData: function(record) {
+      record.transitionTo('loaded.created.uncommitted');
     }
   }
 };
