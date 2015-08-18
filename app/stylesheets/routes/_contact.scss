@@ -234,6 +234,15 @@
     }
   }
 
+  .multiple-address-component .address-body .country-picker{
+    width: 95%;
+  }
+
+  .multiple-address-component .address-body .country-picker .dropdown-menu:not(.typeahead){
+    top: auto;
+    left: auto;
+  }
+
   .meta{
     line-height: 26px;
     .company, .type{
