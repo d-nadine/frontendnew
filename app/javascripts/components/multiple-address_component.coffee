@@ -12,7 +12,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
 
     changeCountry: (country) ->
       @set 'current.country', country.key
-      @send 'stopEditing'
+      @sendAction 'stopEditing'
 
   autocomplete: null
 
