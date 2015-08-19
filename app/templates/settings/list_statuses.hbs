@@ -13,7 +13,7 @@
       </a>
       <i class="ss-standard ss-write pull-right" {{action "showListModal" list bubbles=false}}></i>
     </h4>
-    {{liststatuses-editor listStatuses=list.listStatuses parent=this}}
+    {{liststatuses-editor list=list listStatuses=list.listStatuses parent=this}}
   {{/each}}
 </div>
 {{#if showListModal}}

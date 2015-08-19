@@ -8,3 +8,20 @@
     </button>
   {{/if}}
 </div>
+{{#if showListStatusModal}}
+  {{#x-modal close="closeListStatusModal"}}
+    <h1>New List Status</h1>
+    <div class="form">
+      <div class="item">
+        {{validation-input type="text" value=newStatus.name placeholder="New List Status" class="field" validator=this validations=newStatusNameValidations validationField="name" class="new-list-status-name field" enter="createNewStatus"}}
+      </div>
+      <div class="item">
+        {{toggle-switch class="inline" checked=newStatus.isActive dataOn="active" dataOff="inactive"}}
+      </div>
+      <div class="actions">
+        <button {{action "createNewStatus"}} class="btn btn-primary">Submit</button>
+        <button {{action "closeListStatusModal"}} class="btn">Cancel</button>
+      </div>
+    </div>
+  {{/x-modal}}
+{{/if}}
