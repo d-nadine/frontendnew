@@ -97,7 +97,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         @set 'isSaving', false
 
     setPlaceholder: ->
-      @$().html("<em class='placeholder'>#{@get('placeholder')}</em>")
+      return unless el = @$()
+
+      el.html("<em class='placeholder'>#{@get('placeholder')}</em>")
       false
 
   # hacky need to use controller of the table component for certain functions
