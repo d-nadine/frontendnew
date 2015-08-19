@@ -2,6 +2,13 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   Radium.SaveEmailMixin,
   actions:
     showReplyForm: ->
+      replyForm = Radium.ReplyForm.create
+        currentUser: @get('currentUser')
+
+      replyForm.set('repliedTo', @get('email'))
+
+      @set 'replyEmail', replyForm
+
       @set 'showReplyForm', true
 
       false
@@ -30,13 +37,7 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
 
   showReplyForm: false
 
-  replyEmail: Ember.computed 'model', 'email', ->
-    replyForm = Radium.ReplyForm.create
-      currentUser: @get('currentUser')
-
-    replyForm.set('repliedTo', @get('email'))
-
-    replyForm
+  replyEmail: null
 
   isCreate: Ember.computed.is 'event', 'create'
   isUpdate: Ember.computed.is 'event', 'update'
