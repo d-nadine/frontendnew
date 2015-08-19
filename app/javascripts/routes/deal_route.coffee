@@ -51,4 +51,5 @@ Radium.DealRoute = Radium.Route.extend Radium.ChecklistEvents, Radium.DealStatus
     controller.set('model', model)
 
   deactivate: ->
-    @controller.get('model').reset()
+    model = @controller.get('model')
+    model.reset() unless model.get('isDeleted')
