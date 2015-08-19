@@ -430,7 +430,10 @@
 .sidebar .editable.is-editing, .inline-editor-component.is-editing {
   border: 1px solid #cacaca;
   background: white;
-  line-height: 24px;
+
+  &:not(.list-status) {
+    line-height: 24px;
+  }
 
   .ss-write {
     top: 2px;

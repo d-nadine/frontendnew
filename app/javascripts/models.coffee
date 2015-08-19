@@ -28,6 +28,15 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
       self.one 'becameError', ->
         route.send 'flashError', 'An error has occured and the deletion could not be completed.'
 
+        self.reset()
+
+        reject.call self
+
+      self.one 'becameInvalid', ->
+        route.send 'flashError', self
+
+        self.reset()
+
         reject.call self
 
       self.get('store').commit()
