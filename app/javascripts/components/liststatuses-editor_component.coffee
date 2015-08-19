@@ -46,6 +46,6 @@ Radium.ListstatusesEditorComponent = Ember.Component.extend
 
   newStatus: null
   tagName: 'ul'
-  classNames: ['span7']
+  classNames: ['span5']
   newStatusNameValidations: ['required']
   errorMessages: []

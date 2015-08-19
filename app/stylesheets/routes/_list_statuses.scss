@@ -16,11 +16,22 @@
       position: relative;
       padding: 2px 0;
       line-height: 50px;
-      display: inline-block;
     }
 
     li .inline-editor-component {
       border-bottom: 1px solid $control-border-color;
+      width: 74%;
+    }
+
+    li .list-status-actions {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    li .list-status-actions .toggle-switch-component {
+      position: relative;
+      top: 9px;
     }
   }
 
@@ -36,12 +47,15 @@
   }
 }
 
-.list-statuses .liststatus-editor-component .btn-remove-field{
-  position: absolute;
-  top: 17px;
-  margin-left: 12px;
+.list-editor-component {
+  margin-top: 0;
+  width: 100%;
+}
 
-  i {
-    font-size: 15px;
-  }
+.modal .list-editor-component .from .actions {
+  display: block;
+}
+
+.list-status-item {
+
 }
