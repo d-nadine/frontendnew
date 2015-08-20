@@ -1,0 +1,6 @@
+<button class="btn btn-mini"
+  {{bind-attr disabled="isFirstItem"}}
+  {{action "move" model "up"}}>▲</button>
+  <button class="btn btn-mini"
+    {{bind-attr disabled="isLastItem"}}
+    {{action "move" model "down"}}>▼</button>

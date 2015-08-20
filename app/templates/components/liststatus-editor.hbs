@@ -4,12 +4,5 @@
     <i class="ss-symbolicons-block ss-trash cancel"></i>
   </a>
   {{toggle-switch class="inline" checked=isActive dataOn="active" dataOff="inactive" action="switchStatus" disabled=isSaving}}
-  <div class="btn-group">
-    <button class="btn btn-mini"
-      {{bind-attr disabled="isFirstItem"}}
-      {{action "moveLeadStatusStateUp" this}}>▲</button>
-    <button class="btn btn-mini"
-      {{bind-attr disabled="isLastItem"}}
-      {{action "moveLeadStatusStateDown" this}}>▼</button>
-  </div>
+  {{up-down model=listStatus move="moveListStatus"}}
 <div>

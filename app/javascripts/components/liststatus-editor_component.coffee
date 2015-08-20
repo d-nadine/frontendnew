@@ -1,6 +1,13 @@
 Radium.ListstatusEditorComponent = Ember.Component.extend
   actions:
+    moveListStatus: (listStatus, direction) ->
+      @sendAction "moveListStatus", listStatus, direction
+
+      false
+
     switchStatus: ->
+      return if @get('isSaving')
+
       @set "isSaving", true
 
       listStatus = @get('listStatus')

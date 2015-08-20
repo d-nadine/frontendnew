@@ -279,6 +279,7 @@ Radium.RESTAdapter.configure('plurals',{
   track_all_contacts: 'track_all_contacts',
   contact_status: 'contact_statuses',
   list_status: 'list_statuses',
+  move_list_status: 'move_list_statuses',
   untracked_contacts_totals: 'untracked_contacts_totals'
 });
 

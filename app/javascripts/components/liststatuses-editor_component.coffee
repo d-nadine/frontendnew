@@ -1,5 +1,39 @@
 Radium.ListstatusesEditorComponent = Ember.Component.extend
   actions:
+    moveListStatus: (listStatus, direction) ->
+      return if @get('isSaving')
+
+      currentPosition = listStatus.get('position')
+
+
+      nextPosition = if direction == "up"
+                       currentPosition - 1
+                     else
+                       currentPosition + 1
+
+      if nextPosition < 1 || nextPosition > @get('listStatuses.length')
+        return
+
+      @set 'isSaving', true
+
+      current = @get('listStatuses').find (l) -> l.get('position') == nextPosition
+
+      current.updateLocalProperty "position", currentPosition
+
+      listStatus.updateLocalProperty "position", nextPosition
+
+      Ember.run.next =>
+        @notifyPropertyChange "sortedListStatuses"
+
+      move = Radium.MoveListStatus.createRecord
+               direction: direction
+               listStatus: listStatus
+
+      move.save().finally =>
+        @set "isSaving", false
+
+      false
+
     createNewStatus: ->
       name = @get('newStatus.name') || ''
 
@@ -43,6 +77,12 @@ Radium.ListstatusesEditorComponent = Ember.Component.extend
       @set "showListStatusModal", false
 
       false
+
+  sortedListStatuses: Ember.computed 'listStatuses.@each.position', (a, b) ->
+    @get('listStatuses').toArray().sort (a, b) ->
+      Ember.compare a.get('position'), b.get('position')
+
+  isSaving: false
 
   newStatus: null
   tagName: 'ul'

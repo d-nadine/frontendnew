@@ -1,5 +1,5 @@
-{{#each listStatus in listStatuses}}
-  {{liststatus-editor listStatus=listStatus tagName="li" parent=this}}
+{{#each listStatus in sortedListStatuses}}
+  {{liststatus-editor listStatus=listStatus tagName="li" moveListStatus="moveListStatus" parent=this}}
 {{/each}}
 <div class="span5 pipeline-state-create">
   {{#if currentUser.isAdmin}}

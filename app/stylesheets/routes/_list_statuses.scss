@@ -26,7 +26,7 @@
     li .list-status-actions {
       position: absolute;
       top: 0;
-      right: -33%;
+      right: -50px;
     }
 
     li .list-status-actions .ss-trash {
@@ -60,6 +60,6 @@
   display: block;
 }
 
-.list-status-item {
-
+.liststatus-editor-component .up-down-component .btn-mini {
+  padding: 5px;
 }
