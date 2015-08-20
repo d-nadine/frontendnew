@@ -3,7 +3,7 @@
   <a {{action "deleteListStatus" listStatus}} href="#" class="btn btn-link btn-remove-field btn-none">
     <i class="ss-symbolicons-block ss-trash cancel"></i>
   </a>
-  {{toggle-switch class="inline" checked=isActive dataOn="active" dataOff="inactive"}}
+  {{toggle-switch class="inline" checked=isActive dataOn="active" dataOff="inactive" action="switchStatus" disabled=isSaving}}
   <div class="btn-group">
     <button class="btn btn-mini"
       {{bind-attr disabled="isFirstItem"}}

@@ -26,7 +26,11 @@
     li .list-status-actions {
       position: absolute;
       top: 0;
-      right: 0;
+      right: -33%;
+    }
+
+    li .list-status-actions .ss-trash {
+      font-size: 15px;
     }
 
     li .list-status-actions .toggle-switch-component {
