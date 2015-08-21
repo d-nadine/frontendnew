@@ -2,6 +2,8 @@ Radium.AttachedFilesMixin = Ember.Mixin.create
   files: Ember.computed 'model.attachments.[]', 'attachments.[]', 'model.files.[]', ->
     return unless model = @get('model')
 
+    return if model.toArray
+
     files = model.get('files')
 
     return files if files
