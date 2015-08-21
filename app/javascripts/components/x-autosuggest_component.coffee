@@ -183,7 +183,7 @@ Radium.XAutosuggestComponent = Ember.Component.extend
     mapSearchResult: (result) ->
       currentUser = @get('currentUser')
 
-      email= result.get('email')
+      email = result.get('email')
       name = result.get('name')
 
       name = if name && email
@@ -204,6 +204,7 @@ Radium.XAutosuggestComponent = Ember.Component.extend
                     "/images/default_avatars/small.png"
 
       result =
+        id: result.get('id')
         value: "#{result.constructor}-#{result.get('id')}"
         name: name
         avatar: avatarUrl

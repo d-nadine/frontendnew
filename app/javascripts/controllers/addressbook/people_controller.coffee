@@ -351,6 +351,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         private: false
 
       @send "executeActions", "delete", detail
+
+      @set "showDeleteConfirmation", false
+
       false
 
     updateTotals: ->
