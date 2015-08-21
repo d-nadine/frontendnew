@@ -19,7 +19,7 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
         contact.toggleProperty('isPublic')
 
         contact.save().then =>
-          @get('peopleController').send 'updateTotals'
+          @get('peopleController')?.send 'updateTotals'
 
       false
 
