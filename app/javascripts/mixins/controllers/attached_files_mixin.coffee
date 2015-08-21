@@ -15,3 +15,4 @@ Radium.AttachedFilesMixin = Ember.Mixin.create
     return unless attachments
 
     attachments.uniq().map (attachment) -> Ember.Object.create(attachment: attachment)
+
