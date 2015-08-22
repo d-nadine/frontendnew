@@ -1,15 +1,15 @@
-require "mixins/persist_tags_mixin"
+require "mixins/lists_persistence_mixin"
 
 Radium.CompanySidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
-  Radium.PersistTagsMixin,
+  Radium.ListsPersistenceMixin,
   actions:
-    addTag: (tag) ->
-      @_super @get('company'), tag
+    addList: (list) ->
+      @_super @get('company'), list
 
       false
 
-    removeTag: (tag) ->
-      @_super @get('company'), tag
+    removeList: (list) ->
+      @_super @get('company'), list
 
       false
 
