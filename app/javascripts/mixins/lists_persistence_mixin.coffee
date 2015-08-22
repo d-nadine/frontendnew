@@ -4,7 +4,7 @@ Radium.ListsPersistenceMixin = Ember.Mixin.create
       return if resource.get('lists').toArray().contains list
 
       record = Radium.AddList.createRecord
-                 contact: resource
+                 reference: resource
                  list: list
 
         record.save()
@@ -16,7 +16,7 @@ Radium.ListsPersistenceMixin = Ember.Mixin.create
 
 
       record = Radium.RemoveList.createRecord
-                 contact: resource
+                 reference: resource
                  list: list
 
       record.save()
