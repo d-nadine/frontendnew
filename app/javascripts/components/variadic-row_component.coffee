@@ -1,15 +1,15 @@
-require "mixins/persist_tags_mixin"
+require "mixins/lists_persistence_mixin"
 
-Radium.VariadicRowComponent = Ember.Component.extend Radium.PersistTagsMixin,
+Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixin,
   Radium.ComponentContextHackMixin,
   actions:
-    addTag: (tag) ->
-      @_super @get('model'), tag
+    addList: (list) ->
+      @_super @get('model'), list
 
       false
 
-    removeTag: (tag) ->
-      @_super @get('model'), tag
+    removeList: (list) ->
+      @_super @get('model'), list
 
       false
 
@@ -31,6 +31,10 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.PersistTagsMixin,
 
   leadSources: Ember.computed ->
     @container.lookup('controller:accountSettings').get('leadSources')
+
+  # UPGRADE: replace with inject
+  lists: Ember.computed ->
+    @container.lookup('controller:lists').get('sortedLists')
 
   tags: Ember.computed ->
     @container.lookup('controller:tags')

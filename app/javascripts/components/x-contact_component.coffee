@@ -7,16 +7,6 @@ Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
 
       false
 
-    addTag: (tag) ->
-      @sendAction "addTag", @get('contact'), tag
-
-      false
-
-    removeTag: (tag) ->
-      @sendAction "removeTag", @get('contact'), tag
-
-      false
-
     confirmDeletion: ->
       @sendAction "confirmDeletion"
 

@@ -293,18 +293,18 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       sortOn: "deals_closed_total_value"
     }
     {
-      id: "tags"
+      id: "lists"
       classNames: "tags"
       heading: "Lists"
       bindings: [
         {name: "model", value: "model"}
-        {name: "destination", value: "model.tagNames"}
-        {name: "source", value: "tags"}
+        {name: "destination", value: "model.lists"}
+        {name: "source", value: "lists"}
         {name: "abortResize", value: true, static: true}
-        {name: "addTag", value: "addTag", static: true}
-        {name: "removeTag", value: "removeTag", static: true}
+        {name: "addList", value: "addList", static: true}
+        {name: "removeList", value: "removeList", static: true}
       ]
-      component: "tag-autosuggest"
+      component: "list-autosuggest"
     }
     {
       id: "status"
