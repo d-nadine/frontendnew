@@ -1,20 +1,25 @@
 Radium.ListsPersistenceMixin = Ember.Mixin.create
   actions:
-    addList: (contact, list) ->
-      return if contact.get('lists').toArray().contains list
+    addList: (resource, list) ->
+      return if resource.get('lists').toArray().contains list
 
-      record = Radium.ContactList.createRecord
-                 contact: contact
+      record = Radium.AddList.createRecord
+                 contact: resource
                  list: list
 
-      record.save().then ->
-        p "saved it bro"
+        record.save()
 
       false
 
-    removeList: (contact, list) ->
-      return unless contact.get('lists').toArray().contains list
+    removeList: (resource, list) ->
+      return unless resource.get('lists').toArray().contains list
 
+
+      record = Radium.RemoveList.createRecord
+                 contact: resource
+                 list: list
+
+      record.save()
 
       false
 
