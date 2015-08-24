@@ -1,6 +1,1 @@
-{{#if model.isLoading}}
-  <div class="block email-card message-card is-sending">
-    {{partial 'is_loading'}}
-  </div>
-{{/if}}
 <a class="btn btn-large btn-block btn-load-more" {{action "showMore"}} {{bind-attr disabled=model.isLoading}}><i class="ss-standard ss-navigatedown"></i></a>
