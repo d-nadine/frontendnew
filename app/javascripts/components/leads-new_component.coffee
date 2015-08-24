@@ -2,13 +2,25 @@ require 'mixins/user_combobox_props'
 
 Radium.LeadsNewComponent = Ember.Component.extend Radium.UserComboboxProps,
   actions:
-    addTag: (tag) ->
-      @sendAction "addTag", @get('model'), tag
+    addList: (list) ->
+      model = @get('model')
+
+      if model.get('isNew')
+        model.get('lists').pushObject(list)
+        return false
+
+      @sendAction "addList", model, list
 
       false
 
-    removeTag: (tag) ->
-      @sendAction "removeTag", @get('model'), tag
+    removeList: (list) ->
+      model = @get('model')
+
+      if model.get('isNew')
+        model.get('lists').removeObject(list)
+        return false
+
+      @sendAction "removeList", model, list
 
       false
 

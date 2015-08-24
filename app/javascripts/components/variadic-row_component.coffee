@@ -32,7 +32,6 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
   leadSources: Ember.computed ->
     @container.lookup('controller:accountSettings').get('leadSources')
 
-  # UPGRADE: replace with inject
   lists: Ember.computed ->
     @container.lookup('controller:lists').get('sortedLists')
 

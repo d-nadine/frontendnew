@@ -1,0 +1,4 @@
+* Pipeline lists [0%]
+** [ ] Bulk email work with lists
+** [ ] Bulk contact actions with lists
+** [ ] Addressbook queries with lists

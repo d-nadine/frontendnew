@@ -14,7 +14,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     phoneNumbers: Ember.A()
     emailAddresses: Ember.A()
     addresses: Ember.A()
-    tagNames: Ember.A()
+    lists: Ember.A()
     website: @get('website')
     gender: @get('gender')
     fax: @get('fax')
@@ -58,8 +58,8 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
       if @addressHasValue(address)
         contact.get('addresses').push address.getProperties('name', 'primary', 'street', 'state', 'city', 'country', 'zipcode')
 
-    @get('tagNames').forEach (tag) ->
-      contact.get('tagNames').push tag.get('name')
+    @get('lists').forEach (list) ->
+      contact.get('lists').push list.get('id')
 
     unless customFieldMap = @get('customFieldMap')
       return contact
@@ -88,7 +88,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
     @set 'companyName', null
     @set 'company', ''
     @set 'dealState', @get('initialDealState')
-    @set 'tagNames', Ember.A()
+    @set 'lists', Ember.A()
     @set 'isPublic', true
     @set 'emailAddresses', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
     @set 'phoneNumbers', Ember.A([Ember.Object.create(name: 'work', value: '', isPrimary: true)])
