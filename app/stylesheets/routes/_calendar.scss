@@ -16,19 +16,20 @@ $calendar-off: #d8d9d9;
         @include translateX(0);
       }
 
-      .forms-todo-view {
+      .forms-todo-view[data-model="Radium.Todo"] {
         width: 70%;
 
-        .has-reference {
+        .todo-form {
           padding-left: 0;
           width: 100%;
 
           .primary {
             width: calc(100% - 40px);
             float: left;
+            padding-left: 10px;
 
             .finish-todo {
-              height: 74px;
+              height: 57px;
               margin-top: 0;
               margin-left: 20px; 
             }
@@ -45,6 +46,9 @@ $calendar-off: #d8d9d9;
                 top: 13px;
               }
             }
+            textarea {
+              overflow-y: hidden;
+            }
           }
           .btn-options {
 
@@ -55,11 +59,11 @@ $calendar-off: #d8d9d9;
               outline: 0;
             }
           }
-        }
-        .expanded-fields {
+          .expanded-fields {
 
-          .new-comment {
-            padding-top: 20px;
+            .new-comment {
+              padding-top: 20px;
+            }
           }
         }
       }
