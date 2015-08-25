@@ -161,7 +161,6 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('contactStatuses').set 'model', Radium.ContactStatus.find({})
 
     contactsController = @controllerFor('contacts')
-    @controllerFor('tags').set 'model', Radium.Tag.find()
     @controllerFor('lists').set 'lists', Radium.List.find()
     @controllerFor('companies').set 'model', Radium.Company.find()
     @controllerFor('deals').set 'model', Radium.Deal.find()

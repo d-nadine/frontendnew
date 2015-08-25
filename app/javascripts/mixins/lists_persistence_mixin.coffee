@@ -22,7 +22,3 @@ Radium.ListsPersistenceMixin = Ember.Mixin.create
       record.save()
 
       false
-
-  # UPGRADE: replace with inject
-  lists: Ember.computed ->
-    @container.lookup('controller:lists').get('sortedLists')

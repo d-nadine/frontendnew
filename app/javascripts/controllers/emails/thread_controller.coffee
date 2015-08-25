@@ -1,5 +1,4 @@
 require "mixins/save_contact_actions"
-require "mixins/persist_tags_mixin"
 
 Radium.EmailsThreadController = Radium.ArrayController.extend Radium.SaveContactActions,
   Radium.AttachedFilesMixin,

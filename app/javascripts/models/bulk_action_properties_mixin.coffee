@@ -1,7 +1,7 @@
 Radium.BulkActionProperties = Ember.Mixin.create
   ids: DS.attr('array')
   user: DS.belongsTo('Radium.User')
-  tag: DS.belongsTo('Radium.Tag')
+  list: DS.belongsTo('Radium.List')
   public: DS.attr('boolean')
   private: DS.attr('boolean')
   newTags: DS.attr('array')

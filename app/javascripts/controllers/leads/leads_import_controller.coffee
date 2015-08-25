@@ -1,5 +1,4 @@
 require 'mixins/user_combobox_props'
-require "mixins/persist_tags_mixin"
 
 rejectEmpty = (headerInfo, key) ->
         info = headerInfo.get(key)
@@ -9,11 +8,23 @@ rejectEmpty = (headerInfo, key) ->
         else
           Ember.isEmpty(info)
 
-Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
-  Radium.UserComboboxProps,
-  Radium.PersistTagsMixin,
+Radium.LeadsImportController = Radium.Controller.extend Radium.UserComboboxProps,
 
   actions:
+    addList: (list) ->
+      return if @get('lists').contains list
+
+      @get('lists').addObject list
+
+      false
+
+    removeList: (list) ->
+      return unless @get('lists').contains list
+
+      @get('lists').removeObject list
+
+      false
+
     confirmDeleteJob: (job) ->
       @set "deleteJob", job
 
@@ -54,7 +65,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
                     contactStatus: @get('contactStatus')
                     public: true
                     assignedTo: assignedTo
-                    tagNames: @get('tagNames').mapProperty('name')
+                    lists: @get('lists').mapProperty('id')
 
       hasCollectionMarker = (label, item) ->
         new RegExp("^#{label} \\d+$", 'i').test(item.name)
@@ -132,8 +143,8 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
       @set('firstDataRow', Ember.A())
       @get('importedData').clear()
       @set('importedData', Ember.A())
-      @get('tagNames').clear()
-      @set('tagNames', Ember.A())
+      @get('lists').clear()
+      @set('lists', Ember.A())
 
       @get('customFieldMappings').forEach (f) ->
         f.set('mapping', null)
@@ -176,12 +187,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
       @set 'showInstructions', false
       false
 
-    addTag: (tag) ->
-      return if @get('tagNames').mapProperty('name').contains tag
-
-      @get('tagNames').addObject Ember.Object.create name: tag
-
-  needs: ['tags', 'contactStatuses', 'users']
+  needs: ['lists', 'contactStatuses', 'users']
 
   user: Ember.computed.oneWay 'controllers.users'
 
@@ -199,7 +205,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
   importFile: null
   firstRowIsHeader: true
   importedData: Ember.A()
-  tagNames: Ember.A()
+  lists: Ember.A()
   contactStatus: null
   pollImportJob: null
   headerInfo: null
@@ -360,7 +366,6 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
         @send 'reset'
         @set 'importFile', null
         Radium.Contact.find({})
-        Radium.Tag.find({})
         @get('container').lookup('route:leadsImport').refresh()
         return
 
@@ -382,6 +387,10 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.PollerMixin,
       Ember.run.cancel progressTick
 
   deleteJob: null
+
+  # UPGRADE: replace with inject
+  sourceLists: Ember.computed ->
+    @container.lookup('controller:lists').get('sortedLists')
 
   progress: ->
     unless @get('isSubmitted')

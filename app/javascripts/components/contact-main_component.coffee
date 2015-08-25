@@ -1,5 +1,4 @@
 require "mixins/save_contact_actions"
-require "mixins/controllers/update_contact_poller"
 require "mixins/save_contact_actions"
 require "mixins/controllers/track_contact_mixin"
 require "mixins/controllers/attached_files_mixin"
@@ -48,7 +47,7 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   customFields: Ember.A()
 
   loadedPages: [1]
-  
+
   dealsTotal: Ember.computed 'deals.[]', ->
     @get('deals').reduce((preVal, item) ->
       value = if item.get('status') == 'closed' then item.get('value') else 0
