@@ -1,5 +1,4 @@
 Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContactStatusMixin,
-  Radium.UpdateContactPoller,
   Radium.TrackContactMixin,
   actions:
     changeStatus: (email, newStatus) ->
@@ -25,6 +24,8 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
   activeDeal: Ember.computed.alias('contact.deals.firstObject')
   nextTask: Ember.computed.alias('contact.nextTask')
 
+  updateContactPoller: null
+
   showExtensionCTA: Ember.computed.not 'currentUser.settings.alerts.extensionSeen'
 
   contact: Ember.computed 'sender', ->
@@ -39,3 +40,8 @@ Radium.EmailsShowController = Radium.ObjectController.extend Radium.ChangeContac
     return false unless @get('contact')
 
     @get('contact.isUpdating')
+
+  initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+
+    @set 'updateContactPoller', Radium.UpdateContactPoller.create()

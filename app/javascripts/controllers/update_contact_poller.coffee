@@ -1,14 +1,18 @@
-Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
-  isUpdatingDidChange: Ember.observer 'contact.isUpdating', 'isUpdating', ->
-    return unless @get('isUpdating')
+Radium.UpdateContactPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
+  startPolling: ->
+    contact = @get('contact')
 
-    return unless @get('contact.isPublic')
+    Ember.assert "You must have a contct to poll against.", contact
+
     return if @get('isPolling')
+    return unless contact.get('isUpdating')
+
+    return unless contact.get('isPublic')
 
     @start()
 
   onPoll: ->
-    return @stop() unless @get('isUpdating')
+    return @stop() unless @get('contact.isUpdating')
 
     contact = @get('contact')
 
@@ -24,7 +28,7 @@ Radium.UpdateContactPoller = Ember.Mixin.create Radium.TimeoutPollerMixin,
   finishSync: ->
     @stop()
 
-    return unless @get('isUpdating')
+    return unless @get('contact.isUpdating')
 
     contact = @get('contact')
 

@@ -25,7 +25,7 @@ Radium.RefreshPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
 
     currentUser = @get('controller.currentUser')
 
-    observer = =>
+    observer = ->
       return unless currentUser.get('inCleanState')
 
       currentUser.removeObserver 'currentState.stateName', observer

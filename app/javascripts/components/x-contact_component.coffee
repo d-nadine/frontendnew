@@ -17,6 +17,16 @@ Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
 
       false
 
+    startPolling: ->
+      updateContactPoller = @get('updateContactPoller')
+      updateContactPoller.set 'contact', @get('contact')
+      updateContactPoller.startPolling()
+
   classNames: ['two-column-layout']
 
   model: Ember.computed.oneWay 'contact'
+
+  initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+
+    @set 'updateContactPoller', Radium.UpdateContactPoller.create()

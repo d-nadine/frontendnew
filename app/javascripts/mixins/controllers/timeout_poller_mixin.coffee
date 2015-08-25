@@ -1,6 +1,9 @@
+require 'mixins/controllers/poller_mixin'
+require 'mixins/controllers/timeout_poller_mixin'
+
 Radium.TimeoutPollerMixin = Ember.Mixin.create Radium.PollerMixin,
   interval: 1000
-  timeOutInterval: 10000
+  timeOutInterval: 5000
   _timeout: null
 
   start: ->

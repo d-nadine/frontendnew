@@ -1,6 +1,6 @@
 <div {{bind-attr class=":tasks-content :contacts contact.isPersonal"}}>
   {{render "form_box" formBox}}
-  {{#if isUpdating}}
+  {{#if contact.isUpdating}}
     <div class="well">
       <h4>Updating details....</h4>
     </div>
@@ -9,6 +9,6 @@
   {{/if}}
 </div>
 
-{{#unless isUpdating}}
+{{#unless contact.isUpdating}}
   {{render "feed" contact.activities}}
 {{/unless}}
