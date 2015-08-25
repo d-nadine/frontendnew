@@ -19,7 +19,7 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">
       <div class="pull-right company-members-link">
-        {{#link-to "people.index" "all" (query-params company=company.id user="" tag="" contactimportjob="" customquery="" hidesidebar=false)}}{{membersText}}{{/link-to}}
+        {{#link-to "people.index" "all" (query-params company=company.id user="" list="" contactimportjob="" customquery="" hidesidebar=false)}}{{membersText}}{{/link-to}}
       </div>
       <h6 class="sidebar-panel-title">
         Contacts
@@ -47,7 +47,7 @@
             {{/each}}
           </div>
           {{#if hasMoreContacts}}
-            {{#link-to "people.index" "notasks" (query-params company=company.id contactimportjob="" user="" tag="" customquery="" hidesidebar=false)}}...{{/link-to}}
+            {{#link-to "people.index" "notasks" (query-params company=company.id contactimportjob="" user="" list="" customquery="" hidesidebar=false)}}...{{/link-to}}
           {{/if}}
         {{else}}
           <label> No Members</label>

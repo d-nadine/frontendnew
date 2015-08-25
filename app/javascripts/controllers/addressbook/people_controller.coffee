@@ -47,8 +47,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           value: "drawerModel"
         },
         {
-          name: "tags",
-          value: "tags"
+          name: "lists",
+          value: "lists"
         }
         {
           name: "closeDrawer",
@@ -60,8 +60,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           value: "this"
         },
         {
-          name: "addTag",
-          value: "addContactTag",
+          name: "addList",
+          value: "addContactList",
           static: true
         },
         {
@@ -277,26 +277,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @send "executeActions", "make_private", detail
       false
 
-    saveTag: (newTag) ->
-      tagNames = @get('tags').mapProperty('name').map((name) -> name.toLowerCase()).toArray()
-
-      if tagNames.contains(newTag.get('name').toLowerCase())
-        @send 'flashError', 'A list with this name already exists.'
-        return
-
-      tag = Radium.Tag.createRecord(name: newTag.get('name'), account: @get('currentUser.account'))
-
-      tag.save().then (tag) =>
-        @get('newTags').removeObject newTag
-
-        @send 'flashSuccess', "New list successfully created."
-
-        Radium.Tag.find({})
-
-        @send 'updateTotals'
-
-      false
-
     saveCity: (context) ->
       unless context.get('model.city')
         city = context.get('bufferedProxy.city')
@@ -317,13 +297,13 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
                          value: phone
                          isPrimary: true
 
-    addTag: (tag) ->
+    addList: (list) ->
       detail =
-        tag: tag
+        list: list
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
 
-      @send "executeActions", "tag", detail
+      @send "executeActions", "list", detail
       false
 
     assignAll: (user) ->
@@ -366,7 +346,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         @set 'inactive', totals.get('inactive')
         @set 'noList', totals.get('noList')
         @set 'usersTotals', totals.get('usersTotals')
-        @set 'tagsTotals', totals.get('tagsTotals')
+        @set 'listsTotals', totals.get('listsTotals')
 
       false
 
@@ -374,8 +354,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @transitionToRoute 'people.index', 'assigned_to', queryParams: user: user.get('id'), customquery: '', hidesidebar: false
       false
 
-    showTagsContacts: (tag) ->
-      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), customquery: '', hidesidebar: false
+    showListsContacts: (list) ->
+      @transitionToRoute 'people.index', 'listed', queryParams: list: list.get('id'), customquery: '', hidesidebar: false
       false
 
     showCustomQueryContacts: (query) ->
@@ -400,29 +380,29 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         @transitionToRoute 'people.index', 'all', queryParams: customquery: '', hidesidebar: false
       false
 
-    deleteTag: (tag) ->
-      tagName = tag.get('name')
-      tagId = tag.get('id')
+    deleteList: (list) ->
+      listName = list.get('name')
+      listId = list.get('id')
 
-      return unless confirm("Are you sure you want to delete the #{tagName} list?")
+      return unless confirm("Are you sure you want to delete the #{listName} list?")
 
-      tag.delete().then =>
-        @send 'flashSuccess', "The tag #{tagName} has been deleted."
+      list.delete().then =>
+        @send 'flashSuccess', "The list #{listName} has been deleted."
 
-        @transitionToRoute "people.index", "all", queryParams: customquery: '', hidesidebar: false if @tag == tagId
+        @transitionToRoute "people.index", "all", queryParams: customquery: '', hidesidebar: false if @list == listId
 
-        @get('controllers.application').notifyPropertyChange 'tags'
+        @get('controllers.application').notifyPropertyChange 'lists'
 
       false
 
-    makeTagConfigurable: (tag) ->
-      tag.toggleProperty('configurable')
+    makeListConfigurable: (list) ->
+      list.toggleProperty('configurable')
 
-      tag.save().then (result) ->
-        return unless tag.get('configurable')
+      list.save().then (result) ->
+        return unless list.get('configurable')
 
         Ember.run.next ->
-          ele = $(".nav [data-tag-id=#{tag.get('id')}]")
+          ele = $(".nav [data-list-id=#{list.get('id')}]")
           ele.addClass 'highlight'
 
           cancel = Ember.run.later ->
@@ -440,18 +420,21 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   dummy: Ember.A()
 
-  needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex', 'company']
+  needs: ['addressbook', 'users', 'lists', 'contactStatuses', 'company', 'untrackedIndex', 'company']
 
   noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'
 
+  # UPGRADE: replace with inject
+  lists: Ember.computed ->
+    @container.lookup('controller:lists').get('sortedLists')
+
   users: Ember.computed.oneWay 'controllers.users'
-  tags: Ember.computed.oneWay 'controllers.tags'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   contactsTotal: Ember.computed.oneWay 'controllers.addressbook.contactsTotal'
   untrackedIndex: Ember.computed.oneWay 'controllers.untrackedIndex'
   companiesTotal: Ember.computed.oneWay 'controllers.addressbook.companiesTotal'
 
-  queryParams: ['user', 'tag', 'company', 'contactimportjob', 'customquery', 'hidesidebar']
+  queryParams: ['user', 'list', 'company', 'contactimportjob', 'customquery', 'hidesidebar']
   user: null
   company: null
   contactimportjob: null
@@ -466,11 +449,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   isNoTasks: Ember.computed.equal 'filter', 'notasks'
   isLosing: Ember.computed.equal 'filter', 'losing'
   isNoList: Ember.computed.equal 'filter', 'no_list'
-  isTagged: Ember.computed.equal 'filter', 'tagged'
+  isListed: Ember.computed.equal 'filter', 'listed'
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
   isQuery: Ember.computed.equal 'filter', 'dynamicquery'
-
-  newTags: Ember.A()
 
   public: true
   private: false
@@ -506,7 +487,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
     @get('users').reject (user) -> user == currentUser
 
-  filterParams: Ember.computed 'filter', 'user', 'tag', 'company', 'contactimportjob', 'customquery', ->
+  filterParams: Ember.computed 'filter', 'user', 'list', 'company', 'contactimportjob', 'customquery', ->
     params =
       public: true
       private: false
@@ -525,11 +506,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     if user = @get('user') && @get('isAssignedTo')
       return Ember.merge params, user: @get('user')
 
-    if tag = @get('tag') && @get('isTagged')
+    if list = @get('list') && @get('isListed')
       delete params.public
       delete params.private
 
-      return Ember.merge params, tag: @get('tag')
+      return Ember.merge params, list: @get('list')
 
     if @get('isQuery')
       customquery = @get('customquery')
@@ -597,7 +578,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
 
   displayNoContacts: Ember.computed 'noContacts', 'isPotential', 'potential', 'filter', ->
-    return false if @get('isPotential') || @get('isTagged')
+    return false if @get('isPotential') || @get('isListed')
 
     !!@get('noContacts')
 

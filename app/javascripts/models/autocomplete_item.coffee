@@ -18,7 +18,7 @@ Radium.AutocompleteItem = Radium.Model.extend
   _personUser: DS.belongsTo('Radium.User')
   _personCompany: DS.belongsTo('Radium.Company')
 
-  resourceTag: DS.belongsTo('Radium.Tag')
+  resourceList: DS.belongsTo('Radium.List')
 
   key: Ember.computed 'email', 'type', ->
     type: @get('type')
@@ -28,5 +28,5 @@ Radium.AutocompleteItem = Radium.Model.extend
   isExternal: Ember.computed 'person', ->
     Ember.isEmpty(@get('person'))
 
-  isTag: Ember.computed 'type', ->
-    @get('type') == 'tag'
+  isList: Ember.computed 'type', ->
+    @get('type') == 'list'

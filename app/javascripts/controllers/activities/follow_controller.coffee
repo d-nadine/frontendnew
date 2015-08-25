@@ -3,6 +3,6 @@ Radium.ActivitiesFollowController = Radium.ActivityBaseController.extend
   following: Ember.computed.alias('meta.following')
 
   useQuotes: Ember.computed 'following', ->
-    (@get('following') instanceof Radium.Tag) || (@get('following') instanceof Radium.Deal)
+    (@get('following') instanceof Radium.List) || (@get('following') instanceof Radium.Deal)
 
   icon: 'twitter'

@@ -14,7 +14,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
   queryParams:
     user:
       refreshModel: true
-    tag:
+    list:
       refreshModel: true
     company:
       refreshModel: true
@@ -49,7 +49,7 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
     controller.set('user', params.user) if params.user
 
-    controller.set('tag', params.tag) if params.tag
+    controller.set('list', params.list) if params.list
 
     controller.set('customquery', params.customquery) if params.customquery
 
@@ -110,7 +110,6 @@ Radium.PeopleIndexRoute = Radium.Route.extend
 
   deactivate: ->
     @_super.apply this, arguments
-    @controller.set 'newTags', Ember.A()
     @controller.set 'potentialQueries', Ember.A()
     @controller.set 'actualQueries', Ember.A()
     @controller.set 'hidesidebar', false

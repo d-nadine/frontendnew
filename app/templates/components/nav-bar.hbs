@@ -42,9 +42,9 @@
             {{/link-to}}
           </li>
 
-          {{#each tag in configurableTags}}
+          {{#each list in configurableLists}}
             <li>
-              {{tag-link tag=tag transitionToTag="transitionToTag"}}
+              {{list-link list=list transitionToList="transitionToList"}}
             </li>
           {{/each}}
         </ul>

@@ -1,9 +1,9 @@
-<a class="tag" href="#" {{action "showTagsContacts" tag}}>
+<a class="list" href="#" {{action "showListsContacts" list}}>
   <div class="nav-pills-left">
     <i>&nbsp;</i>
-    <span>{{tag.name}}</span>
+    <span>{{list.name}}</span>
   </div>
-  <span class="nav-tag" {{action "makeTagConfigurable" tag bubbles=false}}>
+  <span class="nav-list" {{action "makeTagConfigurable" list bubbles=false}}>
     <i class="ss-standard ss-star"></i>
   </span>
   <div class="nav-pills-right total">
@@ -11,7 +11,7 @@
   </div>
   <div class="nav-pills-right delete">
     <span>
-      <i class="ss-standard ss-trash" {{action "deleteTag" tag bubbles=false}}></i>
+      <i class="ss-standard ss-trash" {{action "deleteList" list bubbles=false}}></i>
     </span>
   </div>
 </a>

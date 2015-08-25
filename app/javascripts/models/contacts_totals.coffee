@@ -6,4 +6,4 @@ Radium.ContactsTotals = Radium.Model.extend
   inactive: DS.attr('number')
   noList: DS.attr('number')
   usersTotals: DS.attr('array')
-  tagsTotals: DS.attr('array')
+  listsTotals: DS.attr('array')

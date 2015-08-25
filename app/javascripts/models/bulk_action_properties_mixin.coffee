@@ -4,7 +4,7 @@ Radium.BulkActionProperties = Ember.Mixin.create
   list: DS.belongsTo('Radium.List')
   public: DS.attr('boolean')
   private: DS.attr('boolean')
-  newTags: DS.attr('array')
+  newLists: DS.attr('array')
   filter: DS.attr('string')
   like: DS.attr('string')
   customquery: DS.attr('string')

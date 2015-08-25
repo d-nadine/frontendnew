@@ -4,9 +4,7 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   contacts: DS.hasMany('Radium.Contact')
   activities: DS.hasMany('Radium.Activity', inverse: 'companies')
 
-  tags: DS.hasMany('Radium.Tag')
   lists: DS.hasMany('Radium.List')
-  tagNames: DS.hasMany('Radium.TagName')
   addresses: DS.hasMany('Radium.Address')
 
   primaryContact: DS.belongsTo('Radium.Contact', inverse: 'company')

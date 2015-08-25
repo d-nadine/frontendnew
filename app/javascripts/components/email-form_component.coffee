@@ -32,14 +32,14 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       bulkParams = controller.get('content.params')
 
-      bulkParams.returnParameters = user: bulkParams.user, tag: bulkParams.tag
+      bulkParams.returnParameters = user: bulkParams.user, list: bulkParams.list
 
       findRecord = (type, id) ->
         type.all().find (r) -> r.get('id') == id
 
       unless controller.get('allChecked')
         bulkParams.ids = controller.get('checkedContent').mapProperty('id')
-        delete bulkParams.tag
+        delete bulkParams.list
         delete bulkParams.user
         bulkParams.filter = null
       else
@@ -49,8 +49,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
         if controller.get('isQuery')
           bulkParams.customquery = controller.get('customquery')
 
-        if controller.get('tag') && controller.get('isTagged')
-          bulkParams.tag = findRecord(Radium.Tag, bulkParams.tag)
+        if controller.get('list') && controller.get('isListged')
+          bulkParams.list = findRecord(Radium.List, bulkParams.list)
         else if controller.get('isAssignedTo') && user_id = controller.get('user')
           bulkParams.user = findRecord(Radium.User, bulkParams.user)
 
@@ -68,18 +68,18 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       contactIds = to.filter((item) -> item.get('_personContact')).mapProperty('_personContact.id')
 
-      tagIds = to.filter((item) -> item.get('resourceTag')).mapProperty('resourceTag.id')
+      listIds = to.filter((item) -> item.get('resourceList')).mapProperty('resourceList.id')
 
-      Ember.assert 'You need a valid selection', contactIds.length || tagIds.elgnth
+      Ember.assert 'You need a valid selection', contactIds.length || listIds.elgnth
 
       bulkParams =
         filter: null
         ids: contactIds || []
-        tags: tagIds || []
+        lists: listIds || []
         private: false
         public: true
         returnParameters:
-          tag: undefined
+          list: undefined
           user: undefined
 
       @sendAction 'createBulkEmail', form, bulkParams
@@ -342,7 +342,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     @get('form.to.length') > 0
 
   bulkQueryParameters: (query) ->
-    scopes: ['user', 'contact', 'tag']
+    scopes: ['user', 'contact', 'list']
     term: query
     email_only: true
 

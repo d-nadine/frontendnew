@@ -10,7 +10,7 @@ Radium.BulkEmailJob = Radium.Model.extend Radium.BulkActionProperties,
 
   checkForResponse: DS.attr('datetime')
 
-  tags: DS.attr('array')
+  lists: DS.attr('array')
 
   isScheduled: Ember.computed 'isDraft', 'sendTime', ->
     @get('isDraft') && @get('sendTime')

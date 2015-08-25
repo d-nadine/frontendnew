@@ -1,13 +1,13 @@
 Radium.ApplicationController = Radium.ObjectController.extend
   actions:
-    transitionToTag: (tag) ->
+    transitionToList: (list) ->
       @EventBus.publish 'closeDrawers'
 
-      @transitionToRoute 'people.index', 'tagged', queryParams: tag: tag.get('id'), hidesidebar: true
+      @transitionToRoute 'people.index', 'listed', queryParams: list: list.get('id'), hidesidebar: true
 
       false
 
-  needs: ['notifications', 'tags']
+  needs: ['notifications', 'lists']
   isSidebarVisible: false
   today: Ember.DateTime.create()
   notificationCount: 0
@@ -28,5 +28,5 @@ Radium.ApplicationController = Radium.ObjectController.extend
     , 200
 
   notifications: Ember.computed.oneWay 'controllers.notifications'
-  tags: Ember.computed.oneWay 'controllers.tags'
-  configurableTags: Ember.computed.oneWay 'tags.configurableTags'
+  lists: Ember.computed.oneWay 'controllers.lists'
+  configurableLists: Ember.computed.oneWay 'lists.configurableLists'

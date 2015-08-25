@@ -4,7 +4,7 @@
       {{#link-to "addressbook.companies"}}
         <span class="count-companies">{{companiesTotal}} companies ></span>
       {{/link-to}}
-      {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" hidesidebar=false) currentWhen="people.index"}}
+      {{#link-to "people.index" "all" (query-params user="" list="" company="" contactimportjob="" hidesidebar=false) currentWhen="people.index"}}
         <span class="count-people">{{contactsTotal}} people</span>
       {{/link-to}}
     </span>
@@ -15,7 +15,7 @@
       </div>
       <ul class="nav nav-pills">
         <li {{bind-attr class="isPotential:active"}}>
-          {{#link-to "people.index" "potential" (query-params user="" tag="" company="" contactimportjob="" customquery="" hidesidebar=false)}}
+          {{#link-to "people.index" "potential" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false)}}
           <div class="nav-pills-left">
             <span>Private Contacts</span>
           </div>
@@ -25,7 +25,7 @@
           {{/link-to}}
         </li>
         <li {{bind-attr class="isAll:active"}}>
-          {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" hidesidebar=false)}}
+          {{#link-to "people.index" "all" (query-params user="" list="" company="" contactimportjob="" hidesidebar=false)}}
             <div class="nav-pills-left">
               <span>Shared Contacts</span>
             </div>
@@ -34,11 +34,8 @@
             </div>
           {{/link-to}}
         </li>
-        {{#each tag in tags}}
-          {{tag-item tag=tag parent=this tagName="li" class="tag-item"}}
-        {{/each}}
-        {{#each newTag in newTags}}
-          {{new-listitem listItem=newTag  action="saveTag" deleteAction="deleteTag"  tagName="li" newItemPlaceholder="New List"}}
+        {{#each list in lists}}
+          {{list-item list=list parent=this tagName="li" class="list-item"}}
         {{/each}}
         <li class="new-list"><a href="#" {{action "createTag"}} class="btn-text btn-black"><i class="ss-standard ss-plus"></i> New List</a></li>
       </ul>
@@ -69,9 +66,9 @@
                 <li class="dropdown-submenu">
                   <a tabindex="-1" href="#">Add to List</a>
                   <ul class="dropdown-menu">
-                    {{#each tag in tags}}
+                    {{#each list in lists}}
                       <li>
-                        <a href="#" {{action "addTag" tag}}>{{tag.name}}</a>
+                        <a href="#" {{action "addList" list}}>{{list.name}}</a>
                       </li>
                     {{else}}
                       <li><a href="#">(none)</a></li>

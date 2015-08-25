@@ -35,9 +35,6 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
   lists: Ember.computed ->
     @container.lookup('controller:lists').get('sortedLists')
 
-  tags: Ember.computed ->
-    @container.lookup('controller:tags')
-
   availableStatuses: Ember.computed 'contactStatuses.[]', 'contactStatus', ->
     return unless contactStatuses = @get('contactStatuses')
 

@@ -39,8 +39,8 @@ Radium.CompanySidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
     count > @get('truncatedContacts.length')
 
   # UPGRADE: replace with inject
-  tags: Ember.computed ->
-    @container.lookup('controller:tags')
+  lists: Ember.computed ->
+    @container.lookup('controller:lists').get('sortedLists')
 
   users: Ember.computed ->
     @container.lookup('controller:users')

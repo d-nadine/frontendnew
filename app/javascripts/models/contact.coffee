@@ -5,8 +5,6 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
   todos: DS.hasMany('Radium.Todo', inverse: '_referenceContact')
   meetings: DS.hasMany('Radium.Meeting', inverse: '_referenceContact')
   deals: DS.hasMany('Radium.Deal', inverse: 'contact')
-  tags: DS.hasMany('Radium.Tag')
-  tagNames: DS.hasMany('Radium.TagName')
   lists: DS.hasMany('Radium.List')
   activities: DS.hasMany('Radium.Activity', inverse: 'contacts')
   phoneNumbers: DS.hasMany('Radium.PhoneNumber')

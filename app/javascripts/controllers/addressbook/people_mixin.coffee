@@ -86,8 +86,8 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
       if searchText.length
         job.set 'like', searchText
 
-      if action == "tag"
-        job.set('newTags', Ember.A([detail.tag.id]))
+      if action == "list"
+        job.set('newLists', Ember.A([detail.list.id]))
       else if action == "assign"
         job.set('assignedTo', detail.user)
       else if action == "status"
@@ -97,9 +97,9 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
         Ember.assert "you must have a customquery for an isQuery", @get('customquery')
         job.set 'customquery', @get('customquery')
 
-      if @get('tag') && @get('isTagged')
-        tag = Radium.Tag.all().find (t) => t.get('id') == @get('tag')
-        job.set('tag', tag)
+      if @get('list') && @get('isListed')
+        list = Radium.List.all().find (t) => t.get('id') == @get('list')
+        job.set('list', list)
 
       if @get('user') && @get('isAssignedTo')
         user = Radium.User.all().find (u) => u.get('id') == @get('user')
@@ -153,30 +153,25 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
   localStatus: (model, job) ->
     model.updateLocalBelongsTo 'contactStatus', job.get('status')
 
-  localTag: (model, job) ->
+  localList: (model, job) ->
     data = model.get('_data')
     store = @get('store')
     serializer = @get('store._adapter.serializer')
     loader = DS.loaderFor(store)
 
-    references = data.tags.map((tag) -> {id: tag.id, type: Radium.Tag})
+    references = data.lists.map((list) -> {id: list.id, type: Radium.List})
 
-    newTagId = job.get('newTags.firstObject')
+    newListId = job.get('newLists.firstObject')
 
-    Ember.assert "No newTagId found to update localTag", newTagId
+    Ember.assert "No newListId found to update localList", newListId
 
-    tag = Radium.Tag.all().find (t) -> t.get('id') == newTagId
+    list = Radium.List.all().find (t) -> t.get('id') == newListId
 
-    unless references.any((tag) -> tag.id == newTagId)
-      references.push id: newTagId, type: Radium.Tag
-
-    tagName = serializer.extractRecordRepresentation(loader, Radium.TagName, {name: tag.get('name')})
-
-    tagName.parent = model.get('_reference')
-    data.tagNames.push tagName
+    unless references.any((list) -> list.id == newListId)
+      references.push id: newListId, type: Radium.List
 
     references = model._convertTuplesToReferences(references)
-    data['tags'] = references
+    data['lists'] = references
 
     model.set('_data', data)
 

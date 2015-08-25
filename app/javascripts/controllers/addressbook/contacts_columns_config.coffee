@@ -294,7 +294,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "lists"
-      classNames: "tags"
+      classNames: "lists"
       heading: "Lists"
       bindings: [
         {name: "model", value: "model"}

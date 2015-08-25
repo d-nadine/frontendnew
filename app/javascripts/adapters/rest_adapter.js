@@ -354,7 +354,6 @@ var contactsMapping = {
   phoneNumbers: {embedded: 'always'},
   emailAddresses: {embedded: 'always'},
   addresses: {embedded: 'always'},
-  tagNames: {embedded: 'always'},
   comments: {embedded: 'load'},
   contactInfo: {embedded: 'always'},
   customFieldValues: {embedded: 'always'}
@@ -384,8 +383,7 @@ Radium.RESTAdapter.map('Radium.ChecklistItem', {
 
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' },
-  addresses: {key: 'offices', embedded: 'always'},
-  tagNames: {embedded: 'always'}
+  addresses: {key: 'offices', embedded: 'always'}
 });
 
 Radium.RESTAdapter.map('Radium.PhoneNumber', {
