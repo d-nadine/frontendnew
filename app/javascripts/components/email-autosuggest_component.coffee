@@ -7,6 +7,6 @@ Radium.EmailAutosuggestComponent = Radium.AsyncAutosuggestComponent.extend
 
   filterResults: (item) ->
     return false if @get('destination').mapProperty('id').contains(item.get('id'))
-    return false if item.get('type') != 'tag' && !item.get('email')
+    return false if item.get('type') != 'list' && !item.get('email')
 
     true

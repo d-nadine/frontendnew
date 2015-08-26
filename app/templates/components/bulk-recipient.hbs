@@ -1,8 +1,10 @@
-{{#if isTag}}
+{{#if isList}}
   <div class="list">
     <div class="name">
-      <b>{{recipient.resourceTag.name}}</b>
-      <span class="count">{{recipient.count}}</span>
+      <b>{{recipient.resourceList.name}}</b>
+      {{#if recipient.count}}
+        <span class="count">{{recipient.count}}</span>
+      {{/if}}
     </div>
   </div>
   {{#if recipient.count}}
