@@ -30,10 +30,13 @@
             {{/link-to}}
           </li>
 
-          <li>
-            {{#link-to "people.contacts" title="Contacts"}}
+          <li class="addressbook-top-nav">
+            {{#link-to "people.index" "all" class="dropdown-toggle contacts-nav"}}
               Contacts
             {{/link-to}}
+            <ul class="dropdown-menu">
+              <li>{{#link-to "addressbook.companies"}}Companies{{/link-to}}</li>
+            </ul>
           </li>
 
           <li>

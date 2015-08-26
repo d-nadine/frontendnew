@@ -25,6 +25,15 @@
 
   .nav {
 
+    .addressbook-top-nav {
+      position: relative;
+
+      .dropdown-menu {
+        position: absolute;
+        top: 40px;
+      }
+    }
+
     > li {
       margin: 0 9px;
 
