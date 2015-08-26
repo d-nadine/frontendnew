@@ -31,6 +31,14 @@
       .dropdown-menu {
         position: absolute;
         top: 40px;
+
+        &:before,
+        &:after {
+          display: none;
+        }
+        li a {
+          padding: 10px;
+        }
       }
     }
 

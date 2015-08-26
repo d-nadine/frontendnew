@@ -249,9 +249,15 @@
         color: #555;
       }
     }
-    .btn-filter i {
-      position: relative;
-      top: 2px;
+    .btn-filter {
+      &.btn-filter {
+        text-decoration: none;
+      }
+
+      i {
+        position: relative;
+        top: 2px;
+      }
     }
     .btn-group {
       margin-top: 3px;
@@ -272,6 +278,32 @@
   .subhead .nav-wrap .tools .filter-dropdown {
     display: inline-block;
     position: relative;
+
+    ul.dropdown-menu {
+
+      li a {
+        padding: 0;
+        width: 100%;
+
+        .nav-pills-left {
+          width: calc(100% - 36px); 
+
+          i {
+            margin-left: 6px;
+            position: relative;
+            top: 5px;
+          }
+          span {
+            margin-left: 0;
+            width: calc(100% - 25px);
+            font-size: 13px;
+          }
+        }
+        .nav-pills-right {
+          width: auto;
+        }
+      }
+    }
   }
 
   .subhead .nav-wrap .tools .filter-dropdown .ss-dropdown {
