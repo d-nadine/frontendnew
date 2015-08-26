@@ -243,7 +243,7 @@
 
     > a {
       margin-right: 41px;
-      
+
       &.btn-text,
       &.btn-filter {
         color: #555;
@@ -267,6 +267,25 @@
 
   .subhead .nav-wrap .tools .caret {
     margin-top: 16px;
+  }
+
+  .subhead .nav-wrap .tools .filter-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+  .subhead .nav-wrap .tools .filter-dropdown .ss-dropdown {
+    position: absolute;
+    left: -45px;
+    top: -12px;
+    color: #aaa;
+    font-size: 12px;
+    margin-left: 8px;
+  }
+
+  .subhead .nav-wrap .tools .filter-dropdown .dropdown-menu {
+    left: -45px;
+    top: 12px;
   }
 
   .subhead .col-selector {
@@ -505,6 +524,10 @@
   .nav-pills .rename[placeholder]:empty:before {
     content: attr(placeholder);
     color: #ccc;
+  }
+
+  .nav-pills li:nth-child(-n+2) .nav-pills-left span{
+    margin-left: 18px;
   }
 
   .nav-pills i {
