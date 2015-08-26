@@ -1,4 +1,3 @@
 * Pipeline lists [0%]
-** [ ] Bulk email work with lists
-** [ ] Bulk contact actions with lists
-** [ ] Addressbook queries with lists
+** [ ] navigate to list from contact sidebar in full view
+** [ ] create add deal modal
