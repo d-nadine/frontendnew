@@ -29,4 +29,3 @@ Radium.ApplicationController = Radium.ObjectController.extend
 
   notifications: Ember.computed.oneWay 'controllers.notifications'
   lists: Ember.computed.oneWay 'controllers.lists'
-  configurableLists: Ember.computed.oneWay 'lists.configurableLists'

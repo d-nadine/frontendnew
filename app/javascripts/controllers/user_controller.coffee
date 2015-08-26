@@ -5,7 +5,7 @@ Radium.UserController = Radium.ObjectController.extend
 
       false
 
-  needs: ['users', 'contacts','tags', 'companies', 'countries', 'accountSettings', 'contactStatuses']
+  needs: ['users', 'contacts', 'companies', 'countries', 'accountSettings', 'contactStatuses']
   loadedPages: [1]
 
   showDeleteConfirmation: false

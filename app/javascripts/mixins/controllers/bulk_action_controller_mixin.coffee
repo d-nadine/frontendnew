@@ -68,7 +68,7 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
         @trigger 'formReset'
       ), 1200)
 
-  needs: ['users', 'accountSettings', 'tags', 'pipelineOpendeals']
+  needs: ['users', 'accountSettings', 'pipelineOpendeals']
   users: Ember.computed.alias 'controllers.users'
   statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   assignToUser: null

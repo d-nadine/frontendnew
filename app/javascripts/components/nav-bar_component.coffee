@@ -10,11 +10,6 @@ Radium.NavBarComponent = Ember.Component.extend
 
       false
 
-    transitionToTag: (tag) ->
-      @sendAction "transitionToTag", tag
-
-      false
-
   attributeBindings: ['role']
   classNames: ['topbar', 'navbar navbar-inverse navbar-fixed-top']
   role: "header"

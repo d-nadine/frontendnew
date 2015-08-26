@@ -44,7 +44,7 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
 
       false
 
-  needs: ['addressbook', 'users', 'tags']
+  needs: ['addressbook', 'users']
 
   addressBookController: Ember.computed.oneWay 'controllers.addressbook'
 

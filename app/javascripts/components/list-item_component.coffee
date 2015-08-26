@@ -10,10 +10,6 @@ Radium.ListItemComponent = Ember.Component.extend
 
       false
 
-    makeListConfigurable: ->
-      @get('parent').send 'makeListConfigurable', @get('list')
-      false
-
   classNameBindings: ['isCurrent:active', 'list.configurable:is-configured']
   isListed: Ember.computed.oneWay 'parent.isListed'
   listsTotals: Ember.computed.oneWay 'parent.listsTotals'
