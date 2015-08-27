@@ -1,12 +1,7 @@
 Radium.CompanyMainComponent = Ember.Component.extend Radium.ScrollableMixin,
   actions:
     displayDeals: ->
-      deals = Ember.A()
-      @get('groupedDeals').forEach (group) -> deals.pushObjects group.get('deals')
-
-      @get('controllers.pipelineOpendeals').set('filteredDeals', deals)
-
-      @transitionToRoute 'pipeline.opendeals'
+      # FIXME: display company deals
 
       false
 

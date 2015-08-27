@@ -9,7 +9,6 @@ Radium.UserController = Radium.ObjectController.extend
   loadedPages: [1]
 
   showDeleteConfirmation: false
-  statuses: Ember.computed.alias('controllers.accountSettings.dealStates')
   isEditing: false
 
   users: Ember.computed.oneWay 'controllers.users'
@@ -17,24 +16,8 @@ Radium.UserController = Radium.ObjectController.extend
   userIsCurrentUser: Ember.computed 'model', 'currentUser', ->
     @get('model') == @get('currentUser')
 
-  closedDealsTotal: Ember.computed 'deals.[]', ->
-    deals = @get('deals')
-
-    return unless deals
-
-    deals.filter (deal) ->
-      deal.get('status') == 'closed'
-
   currentMonth: Ember.computed ->
     Ember.DateTime.create().toFormattedString('%B')
-
-  salesGoalPercentage: Ember.computed 'salesGoal', 'closedDealsTotal', ->
-    salesGoal = @get('salesGoal')
-    closedDealsTotal = @get('closedDealsTotal')
-
-    return 0 if !salesGoal || !closedDealsTotal
-
-    Math.floor(closedDealsTotal / salesGoal)
 
   canDelete: Ember.computed 'userIsCurrentUser', 'currentUser.isAdmin', ->
     !@get('userIsCurrentUser') && @get('currentUser.isAdmin')

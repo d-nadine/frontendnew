@@ -1,6 +1,5 @@
 require 'forms/meeting_form'
 require 'forms/todo_form'
-require 'forms/deal_form'
 require 'forms/contact_form'
 
 a_slice = Array.prototype.slice

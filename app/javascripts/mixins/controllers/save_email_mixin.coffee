@@ -116,7 +116,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
       settings.save().then =>
         @send 'flashSuccess', 'Signature updated'
 
-  needs: ['contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar', 'templatesNew']
+  needs: ['contacts', 'users', 'userSettings', 'peopleIndex', 'messages', 'messagesSidebar', 'templatesNew']
 
   settings: Ember.computed.alias 'controllers.userSettings.model'
   signature: Ember.computed.alias 'settings.signature'

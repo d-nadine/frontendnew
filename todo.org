@@ -1,3 +1,8 @@
 * Pipeline lists [0%]
+** [ ] delete old pipeline code
+** [ ] delete old workflow code
+** [ ] create list route
+** [ ] create list home page
+** [ ] put opportunities in nav bar
 ** [ ] navigate to list from contact sidebar in full view
 ** [ ] create add deal modal

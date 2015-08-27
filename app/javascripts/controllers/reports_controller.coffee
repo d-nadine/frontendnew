@@ -27,7 +27,7 @@ reduceByStatus = (crossfilterGroups, context) ->
   )
 
 Radium.ReportsController = Ember.ArrayController.extend
-  needs: ['application', 'account', 'accountSettings', 'pipeline']
+  needs: ['application', 'account', 'accountSettings']
 
   dealStates: Ember.computed.oneWay 'controllers.accountSettings.dealStates'
   account: Ember.computed.oneWay 'controllers.account'

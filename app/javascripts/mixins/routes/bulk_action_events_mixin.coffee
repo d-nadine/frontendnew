@@ -2,22 +2,6 @@ require 'routes/mixins/send_email_mixin'
 
 Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
   actions:
-    toggleChecked: ->
-      controller = if @controller.constructor is Radium.PipelineWorkflowController
-                     @controllerFor 'pipelineWorkflowDeals'
-                   else
-                     this.controller
-
-      allChecked = controller.get('checkedContent.length') == controller.get('visibleContent.length')
-
-      content = if controller.hasOwnProperty('visibleContent')
-                  @get('visibleContent')
-                else
-                  @get('content')
-
-      content.forEach (item) ->
-        item.set 'isChecked', !allChecked
-
     sendEmail: (form) ->
       @_super.apply this, arguments
 
@@ -26,13 +10,6 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
         outlet: 'confirmation'
 
       false
-
-    closeEmailConfirmation: ->
-      template = if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'
-
-      @render 'nothing',
-        into: @getTemplate()
-        outlet: 'confirmation'
 
     reassign: (form) ->
       controller = @getController()
@@ -89,13 +66,11 @@ Radium.BulkActionEmailEventsMixin = Ember.Mixin.create Radium.SendEmailMixin,
   getController: ->
     if /addressbook/.test @controllerFor('application').get('currentPath')
       @controllerFor "addressbook"
-    else if @controller instanceof Radium.PipelineWorkflowController
-      @controllerFor "pipelineWorkflowDeals"
     else
       this.controller
 
   getTemplate: ->
-    if this.constructor == Radium.PipelineLeadsRoute then 'pipeline' else 'addressbook'
+    'addressbook'
 
   resetForm: ->
     @getController().set 'activeForm', null

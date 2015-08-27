@@ -134,7 +134,7 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
     replyForm
 
-  needs: ['contacts', 'users', 'userSettings', 'deals', 'peopleIndex', 'messages', 'messagesSidebar']
+  needs: ['contacts', 'users', 'userSettings', 'peopleIndex', 'messages', 'messagesSidebar']
 
   settings: Ember.computed.alias 'controllers.userSettings.model'
   signature: Ember.computed.alias 'settings.signature'

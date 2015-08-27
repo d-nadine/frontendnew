@@ -28,15 +28,6 @@ Radium.Router.map ->
 
   @resource 'conversations', path: '/conversations/:type'
 
-  @resource 'pipeline', ->
-    @route 'index'
-    @route 'workflow', path: '/:pipeline_state'
-    @route 'closed'
-    @route 'lost'
-    @route 'opendeals'
-    @route 'unpublished'
-    @route 'resourceDeals', path: '/:resource_type/:resource_id/deals'
-
   @resource 'leads', ->
     @route 'new'
     @route 'single'
@@ -82,7 +73,6 @@ Radium.Router.map ->
     @route 'api'
     @route 'customFields', path: 'custom-fields'
     @route 'leadSources', path: 'lead-sources'
-    @route 'pipelineStates', path: 'pipeline-states'
     @route 'contactStatuses', path: 'contact-statuses'
     @route 'listStatuses', path: 'list-statuses'
     @route 'remindersAlerts', path: 'reminders-alerts'

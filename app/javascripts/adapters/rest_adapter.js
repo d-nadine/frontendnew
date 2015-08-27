@@ -72,8 +72,6 @@ Radium.RESTSerializer = DS.RESTSerializer.extend({
 
   printFriendlyName: function(key) {
     var map = {};
-    map["workflow.check_list"] = "checklist item";
-    map["workflow.check_list.weight"] = "checklist item weight";
     map["email_addresses"] = "email address";
 
     return map[key] || key.humanize();
@@ -336,16 +334,8 @@ Radium.RESTAdapter.registerTransform('datetime',  {
  }
 });
 
-Radium.RESTAdapter.map('Radium.Account', {
-  workflow: {embedded: 'always'}
-});
-
 Radium.RESTAdapter.map('Radium.Activity', {
   note: {embedded: 'load'}
-});
-
-Radium.RESTAdapter.map('Radium.Workflow', {
-  checklist: {key: 'check_list', embedded: 'always'}
 });
 
 var contactsMapping = {
@@ -375,10 +365,6 @@ Radium.RESTAdapter.map('Radium.Deal', {
   user: { key: 'assigned_to_id' },
   checklist: { key: 'check_list' ,embedded: 'always' },
   contactRefs: {embedded: 'always'}
-});
-
-Radium.RESTAdapter.map('Radium.ChecklistItem', {
-  isFinished: {key: 'finished'}
 });
 
 Radium.RESTAdapter.map('Radium.Company', {
