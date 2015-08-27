@@ -153,15 +153,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @set 'modalModel', list
 
       config = {
-        bindings: [{
-          name: "list",
-          value: "modalModel"
-          close: "closeModal"
-          },
-          {
-            name: "parent",
-            value: "this"
-        }],
+        bindings: [
+          {name: "list", value: "modalModel"},
+          {name: "parent",value: "this"}
+        ],
+        actions: [
+          {name: "closeModal", value: "closeModal"},
+          {name: "updateTotals", value: "updateTotals"}
+        ]
         component: 'list-editor'
       }
 
