@@ -1,9 +1,13 @@
 Radium.UntrackedActionsComponent = Ember.Component.extend
   actions:
-    track: (contact) ->
-      @get('containingController').send "track", contact
+    makePublic: (contact) ->
+      @get('containingController').send "switchShared", contact
+
+      false
 
     destroyContact: (contact) ->
       @get('containingController').send "destroyContact", contact
+
+      false
 
   containingController: Ember.computed.oneWay 'targetObject.table.targetObject'

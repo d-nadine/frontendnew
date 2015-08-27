@@ -18,10 +18,14 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
         contact = @get('contact')
         contact.toggleProperty('isPublic')
 
+        unless contact.get('isPublic')
+          contact.set "potentialShare", true
+
         contact.save().then =>
           @get('peopleController')?.send 'updateTotals'
 
           @sendAction("startPolling") if contact.get('isPublic')
+
       false
 
     confirmDeletion: ->

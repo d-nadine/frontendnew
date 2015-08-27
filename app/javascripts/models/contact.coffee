@@ -128,7 +128,7 @@ Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
 
   isUpdating: Ember.computed.equal 'updateStatus', 'updating'
 
-  track: ->
+  makePublic: ->
     @set('isPublic', true)
 
   getCustomFieldMap: (fields) ->

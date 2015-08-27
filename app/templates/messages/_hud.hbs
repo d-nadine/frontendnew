@@ -4,7 +4,7 @@
     {{#unless isSaving}}
       {{#if contact.isPersonal}}
         <div class="btn-group btn-add-to-radium">
-          <button class="btn btn-main btn-primary" {{action "track" contact}}>Share Contact</button>
+          <button class="btn btn-main btn-primary" {{action "makePublic" contact}}>Make Contact Public</button>
         </div>
       {{else}}
         {{#if contact.nextTask}}

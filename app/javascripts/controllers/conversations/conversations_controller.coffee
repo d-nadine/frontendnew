@@ -42,8 +42,8 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
       false
 
     updateConversation: (action, controller, contact) ->
-      if action == "track"
-        return @send "track", contact
+      if action == "makePublic"
+        return @send "makePublic", contact
       else if action == "ignore"
         property = "ignored"
         value = true
@@ -68,19 +68,20 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
 
       false
 
-    trackAll: ->
+    makePublicAll: ->
       self = this
       ignored = not @get('isIgnored')
 
       bulkActionDetail =
         actionFunc: (item) ->
           contact = item.get('contact')
-          self.send "track", contact
+          self.send "makePublic", contact
           return contact
+
         endFunc: (item) ->
           contact = item.get('contact')
           contact.updateLocalProperty('isPublic', true)
-          self.send 'flashSuccess', "The selected contacts are now tracked."
+          self.send 'flashSuccess', "The selected contacts are now public."
 
       @completeAction(bulkActionDetail)
       false

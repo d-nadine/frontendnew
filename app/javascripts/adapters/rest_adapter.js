@@ -100,9 +100,6 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
           case "Todo::PersonalEmailForbidden":
             errors.message = "You cannot create a todo from a personal email";
             break;
-          case "Deal::PersonalContactForbidden":
-            errors.message = "You cannot create a deal with an untracked contact.";
-            break;
           default:
             errors.error = json.error;
         }

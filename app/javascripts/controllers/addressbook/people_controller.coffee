@@ -180,14 +180,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
-    unTrackAll: ->
+    makePrivateAll: ->
       detail =
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
         public: false
         private: true
 
-      @send "executeActions", "untrack", detail
+      @send "executeActions", "make_private", detail
       false
 
     saveTag: (newTag) ->
@@ -348,7 +348,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       false
 
-  localUntrack: (contact, dataset) ->
+  localMakePrivate: (contact, dataset) ->
     contact.set 'isChecked', false
     Ember.run.next =>
       @get('model').removeObject contact

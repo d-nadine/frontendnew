@@ -99,7 +99,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
 
         unless model.get('isPublic')
           Ember.run.next =>
-            @send 'track', model
+            @send 'makePublic', model
 
         false
       ).then (error) =>

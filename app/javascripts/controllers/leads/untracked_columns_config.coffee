@@ -82,14 +82,13 @@ Radium.UntrackedColumnsConfig = Ember.Mixin.create
       id: "untracked-actions"
       classNames: "untracked-actions"
       component: "untracked-actions"
-      bindings: [{
-        name: "model"
-        value: "model"
-      }]
+      bindings: [
+        {name: "model", value: "model"}
+      ]
       actions: [
         {
-          name: "track"
-          value: "track"
+          name: "makePublic"
+          value: "makePublic"
         }
       ]
     }

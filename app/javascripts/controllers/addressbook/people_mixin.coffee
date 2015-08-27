@@ -1,14 +1,14 @@
 Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
   Radium.CheckableMixin,
   actions:
-    trackAll: ->
+    makePublicAll: ->
       detail =
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
         public: false
         private: true
 
-      @send "executeActions", "track", detail
+      @send "executeActions", "make_public", detail
       false
 
     showMore: ->
@@ -20,6 +20,9 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
     switchShared: (contact) ->
       Ember.run.next =>
         contact.toggleProperty('isPublic')
+
+        unless contact.get('isPublic')
+          contact.set "potentialShare", true
 
         contact.save().then =>
           @send 'updateTotals'
@@ -124,6 +127,10 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
           local = "localDelete"
           args = [model, dataset]
         else
+          if action.indexOf('_') > 1
+            parts = action.split('_')
+            action = "#{parts[0]}#{parts[1].capitalize()}"
+
           local = "local#{action.capitalize()}"
           args = [model, job]
 
@@ -131,7 +138,7 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
     @get('controllers.addressbook').send 'updateTotals'
 
-  localTrack: (contact, dataset) ->
+  localMakePublic: (contact, dataset) ->
     contact.set 'isChecked', false
     Ember.run.next =>
       @get('model').removeObject contact
