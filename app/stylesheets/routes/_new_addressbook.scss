@@ -286,7 +286,7 @@
         width: 100%;
 
         .nav-pills-left {
-          width: calc(100% - 36px); 
+          width: calc(100% - 50px); 
 
           i {
             margin-left: 6px;
@@ -301,6 +301,11 @@
         }
         .nav-pills-right {
           width: auto;
+          float: right;
+
+          span {
+            margin-right: 7px;
+          }
         }
       }
     }
@@ -316,7 +321,7 @@
   }
 
   .subhead .nav-wrap .tools .filter-dropdown .dropdown-menu {
-    left: -45px;
+    left: -125px;
     top: 12px;
   }
 
