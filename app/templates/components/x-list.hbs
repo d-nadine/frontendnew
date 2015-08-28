@@ -12,7 +12,7 @@
           <div class="left">
             <div class="nav-wrap">
               <div class="tools">
-                <a href="#" class="btn btn-primary btn-icon btn-large">
+                <a {{action "showNewDealModal" href="#" class="btn btn-primary btn-icon btn-large">
                   <i class="ss-standard ss-plus"></i>Add {{list.itemName}}
                 </a>
                 <div class="btn-group vanilla">
@@ -38,9 +38,13 @@
         <div class="left-table">
         </div>
         <div class="right-table">
-          
         </div>
       </div>
     </div>
   </div>
 </div>
+{{#if showDealModal}}
+  {{#x-modal close="closeDealModal"}}
+    {{deal-editor list=list deal=deal closeModal="closeDealModal"}}
+  {{/x-modal}}
+{{/if}}
