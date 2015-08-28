@@ -40,6 +40,9 @@ Radium.Router.map ->
   @resource 'contacts'
   @resource 'contact', path: '/contacts/:contact_id'
 
+  @resource 'lists'
+  @resource 'list', path: '/lists/:list_id'
+
   @resource 'company', path: '/companies/:company_id'
 
   @resource 'user', path: '/users/:user_id', ->

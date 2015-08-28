@@ -1,0 +1,46 @@
+<div class="main-content">
+  <div class="list-table">
+    <div class="page-header row-fluid">
+      <div class="pipeline-total">
+        <span class="count">
+          <span class="count-companies">0 companies &gt;</span>
+          <span class="count-people">0 people</span>
+        </span>
+      </div>
+      <div class="table-container">
+        <div class="subhead">
+          <div class="left">
+            <div class="nav-wrap">
+              <div class="tools">
+                <a href="#" class="btn btn-primary btn-icon btn-large">
+                  <i class="ss-standard ss-plus"></i>Add {{list.itemName}}
+                </a>
+                <div class="btn-group vanilla">
+                  <a href="#" data-toggle="dropdown" class="btn-text btn-black dropdown-toggle">
+                    <i class="ss-standard ss-action"></i> Actions
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li>Action One</li>
+                  </ul>
+                </div>
+                <a {{action "toggleFilter"}} href="#" class="btn-filter">
+                  <i class="ss-standard ss-filter"></i>
+                  <span>Filter</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-selector">
+            {{rd-daterangepicker startDate=filterStartDate endDate=filterEndDate past=false future=true}}
+            {{input type="text" value=searchText class="search-text" placeholder="search"}}
+          </div>
+        </div>
+        <div class="left-table">
+        </div>
+        <div class="right-table">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

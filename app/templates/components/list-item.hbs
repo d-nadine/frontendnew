@@ -1,4 +1,4 @@
-<a class="list" href="#" {{action "showListsContacts" list}}>
+{{#link-to "list" list class="list"}}
   <div class="nav-pills-left">
     <i>&nbsp;</i>
     <span>{{list.name}}</span>
@@ -14,4 +14,4 @@
       <i class="ss-standard ss-trash" {{action "deleteList" list bubbles=false}}></i>
     </span>
   </div>
-</a>
+{{/link-to}}

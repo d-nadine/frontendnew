@@ -18,8 +18,6 @@
 @import "layouts/two_column";
 @import "layouts/sub_nav";
 
-@import "layout/tabbar";
-
 @import "sidebar";
 @import "right_column";
 @import "layout/drawer";
@@ -57,6 +55,7 @@
 @import "components/pipeline-breadcrumb";
 @import "components/country_picker";
 @import "components/switch";
+@import "components/x-list";
 
 @import "forms";
 @import "forms/dropdown_menu";
