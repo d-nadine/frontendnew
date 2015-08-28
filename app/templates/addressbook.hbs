@@ -1,21 +1,3 @@
-<div class="tabbar">
-  <div class="tabbar-inner">
-    <ul class="nav nav-tabs">
-      <li>
-        {{#link-to "people.index" "all" (query-params user="" tag="" company="" contactimportjob="" customquery="" hidesidebar=false) currentWhen="people.index"}}
-          <i class="custom-icon-radium"></i> People
-          <span class="badge">{{contactsTotal}}</span>
-        {{/link-to}}
-      </li>
-      <li>
-        {{#link-to "addressbook.companies"}}
-          Companies
-          <span class="badge">{{companiesTotal}}</span>
-        {{/link-to}}
-      </li>
-    </ul>
-  </div>
-</div>
 <div id="addressbook">
   {{outlet}}
 </div>
