@@ -1,19 +1,17 @@
-<h1>Add to {{list.itemName}}</h1>
+<h2>Add to {{list.itemName}}</h2>
 <div class="form">
   <div class="item">
     <input type="text" placeholder="Company/Account name"/>
   </div>
-  <div class="item">
-   or
-  </div>
+  <br/> or
   <div class="item">
     <input type="text" placeholder="Contact Name"/>
   </div>
-  <div claass="item">
-    <input type="text" placeholder="List Name"/>
+  <div class="item">
+    <input type="text" placeholder="Item Name"/>
   </div>
   <div class="actions">
     <button {{action "submit"}} class="btn btn-primary">Submit</button>
-    <button {{action "cancel"}} class="btn">Cancel</submit>
+    <button {{action "cancel"}} class="btn">Cancel</button>
   </div>
 </div>

@@ -1,6 +1,7 @@
 Radium.XListComponent = Ember.Component.extend
   actions:
     showNewDealModal: ->
+      @set "showDealModal", true
 
       false
 
