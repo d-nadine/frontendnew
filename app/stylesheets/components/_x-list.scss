@@ -30,7 +30,11 @@
 }
 
 .deal-editor-component {
-  .item input[type=text] {
+  .item input[type=text]:not(.combobox) {
     width: 100%;
+  }
+
+  .typeahead.dropdown-menu .auto-icon img {
+    margin-right: 10px;
   }
 }

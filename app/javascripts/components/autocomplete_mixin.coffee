@@ -149,6 +149,17 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
   showTypeahaedWhenEmpty: true
 
+  renderItems: (items) ->
+    that = this
+    items = $(items).map((i, item) ->
+      i = $(that.options.item).data('typeahead-value', item)
+      i.find('a').html that.highlighter(item)
+      i[0]
+    )
+    items.first().addClass 'active'
+    @$menu.html items
+    this
+
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
@@ -210,6 +221,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
         @render(items.slice(0, @options.items)).show()
 
+    typeahead.render = @renderItems.bind(typeahead)
     typeahead.matcher = @matcher.bind(this)
     typeahead.sorter = @sorter.bind(this)
     typeahead.highlighter = @highlighter.bind(this)

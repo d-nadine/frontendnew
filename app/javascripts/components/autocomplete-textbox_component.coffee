@@ -1,4 +1,5 @@
 require 'components/autocomplete_mixin'
+require 'components/key_constants_mixin'
 require 'mixins/auto_fill_hack'
 require 'mixins/validation_mixin'
 require 'mixins/save_model_key_down'
@@ -33,6 +34,8 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       @set 'backup', value
 
       @getTypeahead().hide()
+
+      @setValueText()
 
       return unless @get('action')
 
@@ -89,9 +92,6 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
     if @writeableValue
       @set 'value', text
-
-  valueDidChange: Ember.observer 'value', ->
-    @setValueText()
 
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments

@@ -1,0 +1,73 @@
+.side-tabs {
+  display: inline-block;
+  float: left;
+
+  clear: both;
+  background: white;
+  width: 214px;
+  border: 1px solid #dedede;
+  margin-right: 20px;
+
+  .side-tabs-title {
+    padding: 16px 15px 18px;
+
+    i {
+      margin-right: 9px;
+    }
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .nav-tabs {
+    border-bottom: none;
+    margin-bottom: 0;
+
+    > li {
+      float: left;
+      display: inline-block;
+      clear: both;
+      padding-left: 2px;
+      width: calc(100% - 2px);
+
+      > a {
+        color: $text;
+
+        &:hover {
+          border-color: transparent;
+        }
+
+        i {
+          float: right;
+          font-size: 12px;
+          margin-right: 5px;
+          margin-top: 1px;
+          display: none;
+        }
+      }
+
+      &.active {
+        background: $blue;
+
+        > a {
+          background-color: transparent;
+          border: none;
+          color: white;
+
+          &:hover {
+            color: $text;
+            cursor: pointer;
+          }
+
+          i {
+            display: block;
+          }
+        }
+      }
+      &:hover {
+        background: $lightblue;
+        color: white;
+      }
+    }
+  }
+}

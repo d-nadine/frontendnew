@@ -1,7 +1,7 @@
 <h2>Add to {{list.itemName}}</h2>
 <div class="form">
   <div class="item">
-    <input type="text" placeholder="Company/Account name"/>
+    {{api-autocomplete value=company url="https://autocomplete.clearbit.com/v1/companies/suggest" queryKey="name"}}
   </div>
   <br/> or
   <div class="item">
