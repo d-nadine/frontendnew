@@ -27,14 +27,20 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       Ember.assert "There is no active subscription to canel", activeSubscription
 
       billing.save().then =>
-        activeSubscription.reload()
+        billing.reload()
 
-        activeSubscription.one 'didReload', =>
+        finish = =>
           @set 'isPersisting', false
 
           @send 'flashSuccess', "Your subscription has been cancelled and will expire on the #{@get('activeSubscription.subscriptionEndDate').toHumanFormat()}"
 
-        billing.reload()
+        unless activeSubscription
+          return finish()
+
+        activeSubscription.reload()
+
+        activeSubscription.one 'didReload', ->
+          return finish()
 
       @addErrorEvents(billing)
 
