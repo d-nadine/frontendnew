@@ -50,15 +50,31 @@ Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
       external: external
       internal: internal
     ).then((hash) ->
-      externalResults = if r = hash.external?.query?.results
-                          r.json.json.map((e) ->
-                           {id: null, name: e.name, website: e.domain, logo: e?.logo})
+      internalResults = if hash.internal.get('length')
+                          internal.map (i) ->
+                            Ember.Object.create(id: i.get('id'), name: i.get('name'), website: i.get('website'), logo: null)
                         else
                           []
 
-      internalResults = if hash.internal.get('length')
-                          internal.map (i) ->
-                            {id: i.get('id'), name: i.get('name'), website: i.get('website'), logo: null}
+
+      stripDomain = (url) ->
+        url.replace(/.*?:\/\//g, "").replace(/\/$/, '').toLowerCase()
+
+      domains = internalResults.map((r) ->
+        if url = r.get('website')
+          stripDomain(url)
+        else
+          null
+      ).compact()
+
+      externalResults = if r = hash.external?.query?.results
+                          r.json.json.map((e) ->
+                           Ember.Object.create(id: null, name: e.name, website: e.domain, logo: e?.logo)).reject((r) ->
+                               unless url = r.get('website')
+                                 false
+
+                               domains.contains stripDomain(url)
+                             )
                         else
                           []
 

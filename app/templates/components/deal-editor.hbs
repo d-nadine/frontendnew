@@ -1,11 +1,11 @@
 <h2>Add {{list.itemName}}</h2>
 <div class="form">
   <div class="item">
-    {{company-autocomplete value=company queryKey="name"}}
+    {{company-autocomplete value=newDeal.company queryKey="name" writeableValue=true}}
   </div>
   <br/> or
   <div class="item">
-    <input type="text" placeholder="Contact Name"/>
+    {{autocomplete-textbox scopes="contact" value=newDeal.contact placeholder="Name" queryKey="displayName"}}
   </div>
   <div class="item">
     <input type="text" placeholder="Item Name"/>
