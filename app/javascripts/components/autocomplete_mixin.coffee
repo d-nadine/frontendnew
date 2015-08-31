@@ -210,16 +210,15 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       (if items then @process(items) else this)
 
     typeahead.process = (items) ->
-      Ember.RSVP.Promise.resolve(items).then =>
-        items = items.filter (item) =>
-          @matcher(item)
+      items = items.filter (item) =>
+        @matcher(item)
 
-        items = @sorter(items)
+      items = @sorter(items)
 
-        if !items.get('length')
-          return if @shown then @hide() else this
+      if !items.get('length')
+        return if @shown then @hide() else this
 
-        @render(items.slice(0, @options.items)).show()
+      @render(items.slice(0, @options.items)).show()
 
     typeahead.render = @renderItems.bind(typeahead)
     typeahead.matcher = @matcher.bind(this)
