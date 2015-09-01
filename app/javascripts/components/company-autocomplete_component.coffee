@@ -13,6 +13,8 @@ Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
 
       @getTypeahead().hide()
 
+      @sendAction("action", object)
+
       @set 'value', object.get('name')
 
       @setValueText()

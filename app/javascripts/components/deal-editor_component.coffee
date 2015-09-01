@@ -7,6 +7,30 @@ Radium.DealEditorComponent = Ember.Component.extend
 
       false
 
+    companyNameSelected: (company) ->
+      return if @get('dealForm.name.length')
+
+      companyName = company.get('name')
+
+      dealName = @getDealName(companyName)
+
+      @$('.validation-input-component').val(dealName)
+      @set 'dealForm.name', dealName
+
+      false
+
+    contactSet: (contact) ->
+      return if @get('dealForm.name.length')
+
+      contactName = contact.get('displayName')
+
+      dealName = @getDealName(contactName)
+
+      @$('.validation-input-component').val(dealName)
+      @set 'dealForm.name', dealName
+
+      false
+
     submit: ->
       @set 'isSubmitted', true
 
@@ -39,10 +63,21 @@ Radium.DealEditorComponent = Ember.Component.extend
 
         deal = Radium.CreateDeal.createRecord request
 
-        deal.save().then ->
+        deal.save().then =>
+          @send 'cancel'
           p "success"
 
       false
+
+  getDealName: (name) ->
+    existing = Radium.Deal.all().filter (d) -> d.get('name') == name
+
+    dealName = if existing.length
+                 "#{name} ##{(existing.length + 1)}"
+               else
+                 name
+
+    name
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
@@ -74,10 +109,10 @@ Radium.DealEditorComponent = Ember.Component.extend
   dealNamePlaceholder: Ember.computed 'dealForm.contact', 'dealForm.company', ->
     "New #{@get('list.itemName')}"
 
-  orFields: ['dealForm.company', 'dealForm.contact']
+  orFields: ['dealForm.companyName', 'dealForm.contact']
   orValidations: ['or']
   nameValidations: ['required']
   isSubmitted: false
 
-  companySet: Ember.computed.bool 'dealForm.company'
-  contactSet: Ember.computed.bool 'dealForm.contact'
+  companyIsSet: Ember.computed.bool 'dealForm.companyName'
+  contactIsSet: Ember.computed.bool 'dealForm.contact'

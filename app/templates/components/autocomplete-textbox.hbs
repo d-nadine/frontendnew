@@ -2,7 +2,7 @@
   <i {{bind-attr class=icon}}></i>
 {{/if}}
 <span class="text">{{leader}}</span>
-<input type="text" autocomplete="off" {{bind-attr placeholder=placeholder tabindex=tabindex}} class="combobox" {{bind-attr disabled=disabled}}/>
+<input type="text" autocomplete="off" {{bind-attr placeholder=placeholder tabindex=tabindex disabled=disabled}} class="combobox"/>
 {{#unless value}}
   <span {{action "showAll" bubbles=false}} class="add-on dropdown-toggle dropdown-on" data-dropdown="dropdown">
     {{#unless disabled}}
