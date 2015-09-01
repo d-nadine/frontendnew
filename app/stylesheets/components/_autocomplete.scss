@@ -5,6 +5,10 @@
   line-height: 48px;
   background-color: $input;
 
+  &.is-invalid {
+    border: 1px solid $red !IMPORTANT;
+  }
+
   .add-on {
     height: 48px;
     display: inline-block;

@@ -1,14 +1,14 @@
 <h2>Add {{list.itemName}}</h2>
 <div class="form">
   <div class="item">
-    {{company-autocomplete value=newDeal.company queryKey="name" writeableValue=true}}
+    {{company-autocomplete value=dealForm.company queryKey="name" writeableValue=true placeholder="Company/Account Name" validator=this validations=orValidations validationField="company" saveModel="submit" class="field"}}
   </div>
   <br/> or
   <div class="item">
-    {{autocomplete-textbox scopes="contact" value=newDeal.contact placeholder="Name" queryKey="displayName"}}
+    {{autocomplete-textbox scopes="contact" value=dealForm.contact queryKey="displayName" writeableValue=true placeholder="Contact" validator=this validations=orValidations validationField="contact" saveModel="submit" class="field"}}
   </div>
   <div class="item">
-    <input type="text" placeholder="Item Name"/>
+    {{validation-input type="text" value=dealForm.name placeholder=dealNamePlaceholder validator=this validations=nameValidations validationField="Name" saveModel="submit" class="field"}}
   </div>
   <div class="actions">
     <button {{action "submit"}} class="btn btn-primary">Submit</button>

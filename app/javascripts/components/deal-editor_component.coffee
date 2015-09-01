@@ -8,7 +8,7 @@ Radium.DealEditorComponent = Ember.Component.extend
       false
 
     submit: ->
-      p @get('newDeal')
+      @set 'isSubmitted', true
 
       false
 
@@ -16,19 +16,32 @@ Radium.DealEditorComponent = Ember.Component.extend
     @_super.apply this, arguments
 
     @set 'modal', @nearestOfType(Radium.XModalComponent)
-    @$('input[type=text]:first').focus()
 
     dealForm =
       company: null
       contact: null
       name: null
 
-    @set 'newDeal', dealForm
+    @set 'dealForm', dealForm
+
+    Ember.run.scheduleOnce 'afterRender', this, '_afterRender'
+
+  _afterRender: ->
+    @_super.apply this, arguments
+    @$('input[type=text]:first').focus()
 
   reset: ->
     @set 'isSubmitted', false
-    @set 'newDeal', null
+    @set 'dealForm', null
 
   errorMessages: Ember.A()
 
   formValid: Ember.computed.equal 'errorMessages.length', 0
+
+  dealNamePlaceholder: Ember.computed 'dealForm.contact', 'dealForm.company', ->
+    "New #{@get('list.itemName')}"
+
+  orFields: ['dealForm.company', 'dealForm.contact']
+  orValidations: ['or']
+  nameValidations: ['required']
+  isSubmitted: false

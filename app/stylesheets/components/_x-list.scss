@@ -32,6 +32,7 @@
 .deal-editor-component {
   .item input[type=text]:not(.combobox) {
     width: 100%;
+    padding-right: 0;
   }
 
   .typeahead.dropdown-menu .auto-icon img {

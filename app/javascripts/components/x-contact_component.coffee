@@ -5,10 +5,7 @@ Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
     deleteContact: (contact) ->
       @sendAction "deleteContact", contact
 
-      false
-
-    confirmDeletion: ->
-      @sendAction "confirmDeletion"
+      @EventBus.publish 'closeDrawers'
 
       false
 

@@ -13,7 +13,7 @@
     <h1>New List Status</h1>
     <div class="form">
       <div class="item">
-        {{validation-input type="text" value=newStatus.name placeholder="New List Status" class="field" validator=this validations=newStatusNameValidations validationField="name" class="new-list-status-name field" enter="createNewStatus"}}
+        {{validation-input type="text" value=newStatus.name placeholder="New List Status" validator=this validations=newStatusNameValidations validationField="name" class="new-list-status-name field" enter="createNewStatus"}}
       </div>
       <div class="item">
         {{toggle-switch class="inline" checked=newStatus.isActive dataOn="active" dataOff="inactive"}}

@@ -7,7 +7,9 @@ Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
     items = $(items).map((i, item) ->
       html = that.highlighter(item)
 
-      if logo = item.logo
+      logo = item.logo
+
+      if logo && logo != "null"
         logo = item.logo + '?size=25x25'
         img = "<span class='auto-icon'><img  src='#{logo}'/></span>"
       else
@@ -67,8 +69,8 @@ Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
           null
       ).compact()
 
-      externalResults = if r = hash.external?.query?.results
-                          r.json.json.map((e) ->
+      externalResults = if r = hash.external?.query?.results?.json?.json
+                          r.map((e) ->
                            Ember.Object.create(id: null, name: e.name, website: e.domain, logo: e?.logo)).reject((r) ->
                                unless url = r.get('website')
                                  false
@@ -80,6 +82,8 @@ Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
 
       combined = externalResults
                    .concat(internalResults)
+
+      return unless combined.length
 
       process(combined)
     ).catch((error) ->

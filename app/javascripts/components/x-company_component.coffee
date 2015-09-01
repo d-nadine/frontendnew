@@ -4,6 +4,8 @@ Radium.XCompanyComponent = Ember.Component.extend Radium.AttachedFilesMixin,
     deleteCompany: ->
       @sendAction "deleteCompany", @get('company')
 
+      @EventBus.publish 'closeDrawers'
+
       false
 
   classNames: ['two-column-layout']

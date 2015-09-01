@@ -31,6 +31,38 @@ Radium.Validations =
 
     result
 
+  or: ->
+    validator = @get('validator')
+    orFields = validator.get('orFields')
+
+    Ember.assert "You must declare orFields on the #{@get('validator').constructor.toString()} instance", orFields
+
+    errorMessagePart = "should at least be chosen"
+
+    result = orFields.every (f) -> Ember.isEmpty(validator.get(f))
+
+    otherValidators = @get('validator.orValidators').reject (v) => v == this
+
+    otherValidators.forEach (v) ->
+      v.set 'mainValidatorSyncing', true
+      v.set 'mainValidatorIsInvalid', result
+      v.notifyPropertyChange('isInvalid')
+
+    Ember.run.next ->
+      otherValidators.forEach (v) ->
+        v.set 'mainValidatorSyncing', false
+
+    if result
+      @addErrorMessage(errorMessagePart)
+      return result
+
+    errorMessages = @get('validator.errorMessages').reject (m) ->
+      m.indexOf(errorMessagePart) > -1
+
+    @set('validator.errorMessages', errorMessages)
+
+    result
+
 Radium.ValidationMixin = Ember.Mixin.create
   classNameBindings: ['isInvalid']
 
@@ -57,14 +89,26 @@ Radium.ValidationMixin = Ember.Mixin.create
     unless validations = @get('validations')
       return
 
-    Ember.assert 'You must spcecify a validator with validations.', @get('validator')
+    validator = @get('validator')
+
+    if validations.contains('or')
+      unless orValidators = validator.get('orValidators')
+        validator.set('orValidators', [])
+
+      unless validator.get('orValidators').contains(this)
+        validator.get('orValidators').push this
+
+    Ember.assert 'You must spcecify a validator with validations.', validator
     Ember.assert "You must specify a validation field to build error messages.", @get('validationField')
-    Ember.assert "You need to initialize an errorMessages array for the ValidationMixin.", @get('validator.errorMessages')
+    Ember.assert "You need to initialize an errorMessages array for the ValidationMixin.", validator.get('errorMessages')
 
   validationsLength: Ember.computed.oneWay 'validations.length'
 
-  isInvalid: Ember.computed 'validator.isSubmitted', 'validator.isSubmitted', 'validator.isValid', 'value', 'errorMessages.[]', ->
+  isInvalid: Ember.computed 'validator.isSubmitted', 'validator.isValid', 'value', 'errorMessages.[]', ->
     return false unless @get('validationsLength')
+
+    if @get('mainValidatorSyncing')
+      return @get('mainValidatorIsInvalid')
 
     validator = @get('validator')
 
