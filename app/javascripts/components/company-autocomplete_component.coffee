@@ -1,6 +1,30 @@
 require 'components/autocomplete-textbox_component'
 
 Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
+  actions:
+    setBindingValue: (object, index) ->
+      if id = object.get('id')
+        @set('company.id', id)
+        @set('company.name', object.get('name'))
+      else
+        @set('company.logo', object.get('logo'))
+        @set('company.name', object.get('name'))
+        @set('company.website', object.get('website'))
+
+      @getTypeahead().hide()
+
+      @set 'value', object.get('name')
+
+      @setValueText()
+
+      false
+
+    removeValue: ->
+      @set 'company', {}
+      @_super.apply this, arguments
+
+      false
+
   renderItems: (items) ->
     that = this
 

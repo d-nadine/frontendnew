@@ -13,6 +13,35 @@ Radium.DealEditorComponent = Ember.Component.extend
       Ember.run.next =>
         return unless @get('formValid')
 
+        dealForm = @get('dealForm')
+
+        request = {}
+
+        companyName = @get('dealForm.companyName')
+
+        company = if $.isEmptyObject(@get('dealForm.company'))
+                    null
+                  else
+                    @get('dealForm.company')
+
+        if companyName || company
+          if !company || companyName != company.name
+            request.companyName = companyName
+          else
+            if id = company.id
+              request.company = Radium.Company.all().find (c) -> c.get('id') == id
+            else
+              request.companyName = company.name
+              request.companyLogo = company.logo
+              request.companyWebsite = company.website
+
+        request.name = @get('dealForm.name')
+
+        deal = Radium.CreateDeal.createRecord request
+
+        deal.save().then ->
+          p "success"
+
       false
 
   _setup: Ember.on 'didInsertElement', ->
@@ -21,7 +50,8 @@ Radium.DealEditorComponent = Ember.Component.extend
     @set 'modal', @nearestOfType(Radium.XModalComponent)
 
     dealForm =
-      company: null
+      companyName: null
+      company: {}
       contact: null
       name: null
 
@@ -48,3 +78,6 @@ Radium.DealEditorComponent = Ember.Component.extend
   orValidations: ['or']
   nameValidations: ['required']
   isSubmitted: false
+
+  companySet: Ember.computed.bool 'dealForm.company'
+  contactSet: Ember.computed.bool 'dealForm.contact'
