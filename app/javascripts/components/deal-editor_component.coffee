@@ -10,6 +10,9 @@ Radium.DealEditorComponent = Ember.Component.extend
     submit: ->
       @set 'isSubmitted', true
 
+      Ember.run.next =>
+        return unless @get('formValid')
+
       false
 
   _setup: Ember.on 'didInsertElement', ->

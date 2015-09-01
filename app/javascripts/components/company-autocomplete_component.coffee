@@ -17,6 +17,9 @@ Radium.CompanyAutocompleteComponent = Radium.AutocompleteTextboxComponent.extend
 
       html = img + html
 
+      if item.id
+        html += "<i class=\"ss-standard ss-buildings muted pull-right\"></i>"
+
       i = $(that.options.item).data('typeahead-value', item)
       i.find('a').html html
       i[0]
