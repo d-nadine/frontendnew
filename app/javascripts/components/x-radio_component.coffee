@@ -13,7 +13,7 @@ Radium.XRadioComponent = Ember.Component.extend
     Ember.run.next =>
       el = @$('input[type=radio]')
 
-      return unless el.length
+      return unless el && el.length
 
       el.prop('checked', @get('value') == @get('selection'))
 

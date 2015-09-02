@@ -9,6 +9,10 @@
   }
 }
 
+.drawer-overlay {
+  width: 25%;
+  z-index: 91;
+}
 
 
 .todo-modal {
@@ -39,8 +43,8 @@
           margin-left: 10px;
         }
         .todo {
-          margin-right: 0;  
-  
+          margin-right: 0;
+
           textarea {
             overflow-y: hidden;
             line-height: 40px;
