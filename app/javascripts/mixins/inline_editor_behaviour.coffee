@@ -19,6 +19,9 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
       if ['x-check', 'new-comment'].any((c) -> target.hasClass(c))
         return
 
+      if tagName == "input" && ['radio', 'checkbox'].contains(target.attr('type'))
+        return
+
       if (!['input', 'button',  'select', 'i', 'a'].contains(tagName)) || target.hasClass('resource-name')
         @send 'stopEditing'
         return
@@ -28,6 +31,10 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
       e.preventDefault()
       e.stopPropagation()
       false
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    $('body').off 'click.inline'
 
   stopPropagation: (e) ->
     e.stopPropagation()
