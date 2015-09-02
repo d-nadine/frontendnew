@@ -25,10 +25,12 @@ Radium.XDrawerComponent = Ember.Component.extend
 
     el = @$()
 
-    overlay = $("<div class='drawer-overlay'></div>")
+    self = this
 
     addOverlay = ->
       rect = el.get(0).getBoundingClientRect()
+
+      overlay = $("<div class='drawer-overlay'></div>")
 
       overlay.css(
         position: "absolute"
@@ -37,11 +39,11 @@ Radium.XDrawerComponent = Ember.Component.extend
         height: rect.height + "px"
         ).appendTo('body')
 
-    overlay.on 'click', (e) =>
-      @send "closeDrawer"
+      overlay.one 'click', (e) ->
+        self.send "closeDrawer"
 
-      e.stopPropagation()
-      e.preventDefault()
+        e.stopPropagation()
+        e.preventDefault()
 
     el.one $.support.transition.end, addOverlay
 
@@ -54,7 +56,5 @@ Radium.XDrawerComponent = Ember.Component.extend
 
     unless overlay = $('.drawer-overlay')
       return
-
-    overlay.off('click')
 
     overlay.remove()
