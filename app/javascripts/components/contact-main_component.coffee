@@ -24,6 +24,10 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.AttachedFilesMixin,
 
       false
 
+    deleteTask: (task) ->
+      task.delete().then =>
+        @flashMessenger.success 'task deleted!'
+
   # UPGRADE: replace with inject
   contactStatuses: Ember.computed ->
     @container.lookup('controller:contactStatuses')

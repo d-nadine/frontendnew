@@ -7,18 +7,19 @@ Radium.XModalComponent = Ember.Component.extend
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
-    @$('.modal').addClass('in')
+    modal = @$('.modal')
+
+    modal.addClass('in')
 
     self = this
 
     Ember.run.next ->
-      $('body').on 'click.xmodal', (e) ->
-        target = $(e.target)
+      overlay = $('.modal-backdrop')
 
-        if target.parents('.xmodal-component').length
-          return true
-
+      overlay.one 'click', (e) ->
         self.send "closeModal"
+
+        self.set 'overlay', overlay
 
         e.stopPropagation()
         e.preventDefault()
@@ -26,7 +27,9 @@ Radium.XModalComponent = Ember.Component.extend
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
 
-    $('body').off 'click.xmodal'
+    return unless overlay = @get('overlay')
+
+    overlay.off 'click'
 
   destroy: ->
     @_super()

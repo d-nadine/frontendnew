@@ -1,9 +1,11 @@
-<div class="modal fade">
-  <button type="button" class="close pull-right" {{action "closeModal"}} aria-hidden="true">×</button>
-  <div class="modal-header">
-    <h3>{{header}}</h3>
-  </div>
-  <div class="modal-body">
-    {{yield}}
+<div class="modal-backdrop">
+  <div class="modal fade">
+    <button type="button" class="close pull-right" {{action "closeModal"}} aria-hidden="true">×</button>
+    <div class="modal-header">
+      <h3>{{header}}</h3>
+    </div>
+    <div class="modal-body">
+      {{yield}}
+    </div>
   </div>
 </div>

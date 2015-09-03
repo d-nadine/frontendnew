@@ -47,8 +47,14 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
     @get 'description'
 
   clearRelationships: ->
-    @get('activities').compact().forEach (activity) ->
-      activity.unloadRecord()
+    Radium.Activity.all()
+      .compact()
+      .filter((activity) =>
+        activity.get('_referenceTodo') == this || activity.get('todo') == this
+      )
+      .compact()
+      .forEach (activity) ->
+        activity.unloadRecord()
 
     @get('tasks').compact().forEach (task) ->
       task.unloadRecord()
