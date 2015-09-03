@@ -21,6 +21,11 @@
 
 }
 
+.drawer-overlay {
+  width: 25%;
+  z-index: 91;
+}
+
 .contact-drawer.drawer-view {
   max-width: 75%;
   width: auto;
