@@ -79,8 +79,6 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
           return contact
 
         endFunc: (item) ->
-          contact = item.get('contact')
-          contact.updateLocalProperty('isPublic', true)
           self.send 'flashSuccess', "The selected contacts are now public."
 
       @completeAction(bulkActionDetail)

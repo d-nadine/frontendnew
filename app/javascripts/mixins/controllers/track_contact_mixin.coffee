@@ -1,11 +1,12 @@
 Radium.TrackContactMixin = Ember.Mixin.create
   actions:
     makePublic: (contact) ->
-      controller = @get('untrackedIndex')
+      return if contact.get('isPublic')
 
-      contact.updateLocalProperty('isPublic', true)
+      contact.set('isPublic', true)
 
-      controller.send 'makePublic', contact, true
+      contact.save().then ->
+        contact.updateLocalProperty('isPublic', true)
 
       false
 

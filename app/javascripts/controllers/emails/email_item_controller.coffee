@@ -36,10 +36,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       @toggleProperty 'showReplyForm'
       return
 
-    makePublic: ->
-      @set('model.isPersonal', false)
-      @get('store').commit()
-
     archiveEmail: (item) ->
       @removeSidebarItem(item, 'archive')
 
