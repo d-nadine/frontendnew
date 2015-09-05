@@ -1,7 +1,12 @@
-* Pipeline lists [0%]
-** [ ] create add deal modal
-** [ ] validate deal form
-** [ ] post add deal form
-** [ ] clear contact/company on selection
-** [ ] post new deal with new contact/company
-** [ ] put company autocomplete in new company form
+* Pipeline lists [40%]
+  - [X] create add deal modal
+  - [X] validate deal form
+  - [X] post add deal form
+  - [X] post new deal with new company
+  - [ ] put company autocomplete in new company form
+  - [ ] post new deal with new contact
+  - [ ] post new deal with existing company
+  - [ ] post new deal with existing contact
+  - [ ] deals table
+  - [ ] What happens to open deals?
+

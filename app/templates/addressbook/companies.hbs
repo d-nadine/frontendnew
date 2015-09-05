@@ -54,7 +54,8 @@
       {{input type="text" value=searchText class="searchbox" placeholder="search"}}
     </div>
   </div>
-  {{render 'forms/company'}}
+  {{add-company}}
+  {{!render 'forms/company'}}
   <div class="table-container companies">
     <div class="left-table">
       {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}

@@ -64,6 +64,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
       if value = @get('value')
         @set 'backup', value
 
+      if resetAction = @get('resetAction')
+        @sendAction "resetAction", resetAction
+
       @set('value', null)
       @autocompleteElement().val('').focus()
       @send 'showAll'

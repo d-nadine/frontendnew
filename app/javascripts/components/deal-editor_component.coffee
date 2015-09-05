@@ -65,7 +65,6 @@ Radium.DealEditorComponent = Ember.Component.extend
 
         deal.save().then =>
           @send 'cancel'
-          p "success"
 
       false
 

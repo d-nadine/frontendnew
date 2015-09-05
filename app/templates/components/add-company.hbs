@@ -1,8 +1,8 @@
 <div class="company-form">
   <div class="form-search pipeline-search">
-    {{autocomplete-textbox scopes="company" value=controller.companyName queryKey="displayName" validations=companyValidations validator=controller validationField="company" isValid=isValid writeableValue=true saveModel="createCompany" action="modelChanged" disabled=isDisabled}}
+    {{company-autocomplete value=companyForm.companyName company=companyForm.company queryKey="name" writeableValue=true placeholder="Add Company" validator=this validations=companyValidations validationField="company" saveModel="submit" class="field" dontReset=true disabled=existingChosen action="companyNameSelected" resetAction="resetForm"}}
   </div>
-  <a href="#" {{action "createCompany"}}  {{bind-attr disabled=isDisabled}} class="btn btn-main btn-primary">
+  <a href="#" {{action "createCompany"}} {{bind-attr disabled=isDisabled}} class="btn btn-main btn-primary">
     {{#if isSaving}}
       <img src="/images/loading/ajax-loader.gif"/> <span class="muted">Saving</span>
     {{else}}
@@ -14,8 +14,8 @@
   </a>
 </div>
 <div class="existing-company hide">
-  {{#if company}}
+  {{#if existingChosen}}
     {{resource-link-to company}} already exists, click {{#resource-link-to company}}here{{/resource-link-to}} to update their details.<br/>
-    Click <a {{action "resetCompany" target="view"}} href="#">here</a> to add a new company.
+    Click <a {{action "resetForm"}} href="#">here</a> to add a new company.
   {{/if}}
 </div>
