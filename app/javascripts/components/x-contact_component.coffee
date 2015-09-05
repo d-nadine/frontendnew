@@ -30,3 +30,5 @@ Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
     @_super.apply this, arguments
 
     @set 'updateContactPoller', Radium.UpdateContactPoller.create()
+
+    @send('startPolling') if @contact.get('isUpdating')

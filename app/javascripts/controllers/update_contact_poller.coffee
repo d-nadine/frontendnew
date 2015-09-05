@@ -12,12 +12,13 @@ Radium.UpdateContactPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
     @start()
 
   onPoll: ->
-    return @stop() unless @get('contact.isUpdating')
+    unless contact = @get('contact')
+      return @stop()
 
-    contact = @get('contact')
+    return @finishSync() unless contact.get('isUpdating')
 
     contact.one 'didReload', =>
-      return @stop unless @get('isUpdating')
+      return @finishSync() unless contact.get('isUpdating')
 
     contact.reload()
 
@@ -28,21 +29,27 @@ Radium.UpdateContactPoller = Ember.Object.extend Radium.TimeoutPollerMixin,
   finishSync: ->
     @stop()
 
-    return unless @get('contact.isUpdating')
-
-    contact = @get('contact')
+    return unless contact = @get('contact')
 
     observer = ->
       return unless contact.get('inCleanState')
 
       contact.removeObserver 'currentState.stateName', observer
 
-      contact.set 'updateStatus', 'updated'
-
-      contact.save().then ->
+      notify = ->
         contact.one 'didReload', ->
+          contact.notifyPropertyChange('isUpdating')
           contact.notifyPropertyChange('avatarKey')
+
         contact.reload()
+
+      if contact.get('isUpdating')
+        contact.set 'updateStatus', 'updated'
+
+        contact.save().then ->
+          notify()
+      else
+        notify()
 
     unless contact.get('inCleanState')
       contact.addObserver 'currentState.stateName', observer

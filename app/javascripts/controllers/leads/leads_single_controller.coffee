@@ -128,7 +128,7 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
           contact = createContact.get('contact')
           addressBook.pushObject(contact)
           @transitionToRoute 'contact', createContact.get('contact')
-        ).catch (error) =>
+        ).finally (error) =>
           @set 'isSaving', false
 
   hashifyRelationships: ->
