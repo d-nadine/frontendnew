@@ -1,4 +1,6 @@
-Radium.AddCompanyComponent = Ember.Component.extend
+require 'components/key_constants_mixin'
+
+Radium.AddCompanyComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   actions:
     createCompany: ->
       @set 'isSubmitted', true
@@ -76,6 +78,13 @@ Radium.AddCompanyComponent = Ember.Component.extend
 
     Ember.run.next ->
       el.focus()
+
+  keyDown: (e) ->
+    return if e.keyCode != @ENTER
+
+    return if e.target != @$('.company-autocomplete').get(0)
+
+    @send 'createCompany'
 
   # UPGRADE: use inject after upgrade
   addressbookController: Ember.computed ->

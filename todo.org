@@ -1,9 +1,9 @@
-* Pipeline lists [40%]
+* Pipeline lists [50%]
   - [X] create add deal modal
   - [X] validate deal form
   - [X] post add deal form
   - [X] post new deal with new company
-  - [ ] put company autocomplete in new company form
+  - [X] put company autocomplete in new company form
   - [ ] post new deal with new contact
   - [ ] post new deal with existing company
   - [ ] post new deal with existing contact
