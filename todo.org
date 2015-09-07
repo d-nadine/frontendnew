@@ -1,13 +1,15 @@
-* Pipeline lists [50%]
+* Pipeline lists [69%]
   - [X] create add deal modal
   - [X] validate deal form
   - [X] post add deal form
   - [X] post new deal with new company
   - [X] put company autocomplete in new company form
-  - [ ] post new deal with new contact
-  - [ ] post new deal with existing company
-  - [ ] post new deal with existing contact
+  - [X] create deal with no name selected
+  - [X] post new deal with new contact
+  - [X] post new deal with existing company
+  - [X] post new deal with existing contact
   - [ ] deals table
+  - [ ] deals detail view/drawer
   - [ ] What happens to open deals?
   - [ ] flesh out company view with new details
   - [ ] make company table use drawer for company view
