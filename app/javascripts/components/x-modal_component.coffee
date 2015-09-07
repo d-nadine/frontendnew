@@ -17,6 +17,9 @@ Radium.XModalComponent = Ember.Component.extend
       overlay = $('.modal-backdrop')
 
       overlay.one 'click', (e) ->
+        if $(e.target).parents('.modal.fade').length
+          return false
+
         self.send "closeModal"
 
         self.set 'overlay', overlay
