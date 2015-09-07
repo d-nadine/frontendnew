@@ -18,7 +18,7 @@ Radium.XModalComponent = Ember.Component.extend
 
       overlay.one 'click', (e) ->
         if $(e.target).parents('.modal.fade').length
-          return false
+          return true
 
         self.send "closeModal"
 
