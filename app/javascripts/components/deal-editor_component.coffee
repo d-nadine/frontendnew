@@ -20,6 +20,14 @@ Radium.DealEditorComponent = Ember.Component.extend
       false
 
     contactSet: (contact) ->
+      dealForm = @get('dealForm')
+
+      dealForm.setProperties
+        companyName: null
+        company: null
+        contactName: null
+        contact: contact
+
       return if @get('dealForm.name.length')
 
       contactName = contact.get('displayName')
@@ -59,12 +67,23 @@ Radium.DealEditorComponent = Ember.Component.extend
               request.companyLogo = company.logo
               request.companyWebsite = company.website
 
+        if contact = dealForm.contact
+          if typeof contact == "string"
+            request.contactName = contact
+          else
+            request.contact = contact
+
         request.name = @get('dealForm.name')
+
+        request.list = @get('list')
 
         deal = Radium.CreateDeal.createRecord request
 
-        deal.save().then =>
+        deal.save().then( =>
+          @flashMessenger.success "The new #{@get('list.itemName')} has been created."
           @send 'cancel'
+        ).finally =>
+          @set 'isSubmitted', false
 
       false
 
@@ -82,6 +101,8 @@ Radium.DealEditorComponent = Ember.Component.extend
     @_super.apply this, arguments
 
     @set 'modal', @nearestOfType(Radium.XModalComponent)
+
+    Ember.assert "You must supply a list to the deal editor component.", @get('list')
 
     dealForm =
       companyName: null

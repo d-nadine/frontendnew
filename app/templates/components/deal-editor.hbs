@@ -8,7 +8,7 @@
     {{autocomplete-textbox scopes="contact" value=dealForm.contact queryKey="displayName" writeableValue=true placeholder="Contact" validator=this validations=orValidations validationField="contact" saveModel="submit" class="field" dontReset=true disabled=companyIsSet action="contactSet"}}
   </div>
   <div class="item">
-    {{validation-input type="text" value=dealForm.name placeholder=dealNamePlaceholder validator=this validations=nameValidations validationField="Name" saveModel="submit" class="field"}}
+    {{validation-input type="text" value=dealForm.name placeholder=dealNamePlaceholder validator=this validations=nameValidations validationField="Name" saveModel="submit" class="field" enter="submit"}}
   </div>
   <div class="actions">
     <button {{action "submit"}} class="btn btn-primary">Submit</button>
