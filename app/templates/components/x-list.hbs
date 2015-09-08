@@ -36,6 +36,7 @@
           </div>
         </div>
         <div class="left-table">
+          {{variadic-table list=deals columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
         </div>
         <div class="right-table">
         </div>
@@ -47,4 +48,10 @@
   {{#x-modal close="closeDealModal"}}
     {{deal-editor list=list deal=deal closeModal="closeDealModal"}}
   {{/x-modal}}
+{{/if}}
+{{#if showDrawer}}
+  {{#x-drawer class="contact-drawer" closeDrawer="closeListDrawer"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent drawerModel drawerParams}}
+  {{/x-drawer}}
 {{/if}}

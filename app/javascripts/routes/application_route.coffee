@@ -147,14 +147,11 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('notifications').stop()
     @controllerFor('messages').stop()
 
-  model: ->
-    Radium.Deal.find({})
-
   afterModel: ->
     if @get('currentUser').get('subscriptionInvalid')
       @replaceWith 'settings.billing'
 
-  setupController: (controller, deals) ->
+  setupController: (controller) ->
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()

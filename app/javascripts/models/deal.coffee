@@ -51,12 +51,6 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
   payBy: DS.attr('datetime')
   value: DS.attr('number')
 
-  lostDuring: DS.attr('string')
-  lostBecause: DS.attr('string')
-  status: DS.attr('string')
-
-  isPastPayment: Radium.computed.isPast("payBy")
-
   tasks: Radium.computed.tasks('todos', 'meetings')
 
   company: Ember.computed.alias('contact.company')
@@ -87,6 +81,8 @@ Radium.Deal = Radium.Model.extend Radium.FollowableMixin,
 
   clearRelationships: ->
     @get('contact.deals').removeObject(this) if @get('contact')
+
+    @get('company.deals').removeObject(this) if @get('company')
 
     @get('tasks').compact().forEach (task) ->
       task.deleteRecord()

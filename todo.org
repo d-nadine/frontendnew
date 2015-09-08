@@ -14,3 +14,6 @@
   - [ ] flesh out company view with new details
   - [ ] make company table use drawer for company view
 
+* Clean up [%]
+  - [ ] remove clock
+  - [ ] replace render with components

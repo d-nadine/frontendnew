@@ -29,30 +29,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
       @toggleProperty('isThumbnailsVisible')
       false
 
-    changeStatus: ->
-      @set 'isSubmitted', true
-      if @get('isLost')
-        @set 'changeStatusForm.lostBecause', @get('lostBecause')
-
-      diff = @get('checkedContent').reject (deal) =>
-        deal.get('status') == @get('changedStatus')
-
-      unless diff.length
-        @send 'flashError', 'You need to specity a different deal status'
-        return
-
-      return unless @get('changeStatusForm.isValid')
-      @set 'changeStatusForm.todo', @get('statusTodo')
-      @get('changeStatusForm').commit().then =>
-        @send 'flashSuccess', "Deal's status succesfully changed"
-        @set('statusTodo', '')
-        @set 'isSubmitted', false
-        @get('changeStatusForm').reset()
-        @set 'lostBecause', ''
-        @trigger 'formReset'
-        , (error) =>
-          @send 'flashError', error
-
     submit: (form) ->
       return unless form
       return unless form.get('isValid')
@@ -84,7 +60,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
 
   showTodoForm: Ember.computed.equal('activeForm', 'todo')
   showAssignForm: Ember.computed.equal('activeForm', 'assign')
-  showChangeStatusForm: Ember.computed.equal('activeForm', 'status')
   showEmailForm: Ember.computed.equal('activeForm', 'email')
   hasCheckedContent: Ember.computed.bool 'checkedContent.length'
 
@@ -104,16 +79,6 @@ Radium.BulkActionControllerMixin = Ember.Mixin.create Ember.Evented,
   clearChecked: ->
     @get('checkedContent').forEach (item) ->
       item.set('isChecked', false)
-
-  changeStatusForm: Radium.computed.newForm('changeStatus')
-
-  changeStatusFormDefaults: Ember.computed 'currentUser', 'checkedContent', 'statusTodo', 'tomorrow', 'status', 'lostBecause', ->
-    finishBy: @get('tomorrow')
-    user: @get('currentUser')
-    deals: @get('checkedContent')
-    status: @get('changedStatus')
-    todo: @get('statusTodo')
-    lostBecause: @get('lostBecause')
 
   reassignForm: Radium.computed.newForm('reassign')
 
