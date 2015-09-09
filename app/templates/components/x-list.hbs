@@ -36,9 +36,10 @@
           </div>
         </div>
         <div class="left-table">
-          {{variadic-table list=deals columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
+          {{variadic-table list=deals columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" dynamicHeading=list.itemName}}
         </div>
         <div class="right-table">
+          {{variadic-table list=deals columns=columns sort="sort" classNames="variable"}}
         </div>
       </div>
     </div>

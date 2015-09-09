@@ -9,7 +9,12 @@
       {{#each column in columns}}
         {{#if column.sortOn}}
           <th {{bind-attr class="column.classNames"}}>
-            {{table-sorter heading=column.heading sortOn=column.sortOn sort="sortTable" initialDesc=column.initialDesc}}
+            <!-- UPGRADE: NEED A BETTER FIX ONCE WE HAVE PROPER SUB-EXPRESSIONS FROM LATEST EMBER-->
+            {{#unless column.dynamicHeading}}
+              {{table-sorter heading=column.heading sortOn=column.sortOn sort="sortTable" initialDesc=column.initialDesc}}
+            {{else}}
+              {{table-sorter heading=dynamicHeading sortOn=column.sortOn sort="sortTable" initialDesc=column.initialDesc}}
+            {{/unless}}
           </th>
         {{else}}
           <th {{bind-attr class="column.classNames"}}>{{column.heading}}</th>

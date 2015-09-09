@@ -7,7 +7,6 @@ Radium.Router.reopen
     numberOfContacts =  Radium.Contact.all().filter((contact) -> not contact.get('isPersonal')).get('length')
     window.Intercom('update', number_of_contacts: numberOfContacts)
     window.Intercom('reattach_activator')
-    @get('eventBus').publish('closeDrawers')
 
   eventBus: Ember.computed ->
     @container.lookup('event-bus:current')

@@ -1,8 +1,9 @@
 Radium.DealColumnsConfig = Ember.Mixin.create
   fixedColumns: Ember.A([
     {
-      classNames: "name"
+      classNames: "list-name"
       heading: "Name"
+      dynamicHeading: true
       route: "deal"
       bindings: [{
         name: "model",
@@ -27,5 +28,20 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       sortOn: "name"
       context: "model"
       component: 'editable-field'
+    }
+  ])
+
+  columns: Ember.A([
+    {
+      id: "assign"
+      classNames: "assign"
+      heading: "Assigned To"
+      component: "assignto-picker"
+      bindings: [
+        {name: "assignedTo", value: "model.user"},
+        {name: "assignees", value: "assignees"},
+        {name: "model", value: "model"},
+        {name: "parent", value: "table.targetObject"}
+      ]
     }
   ])
