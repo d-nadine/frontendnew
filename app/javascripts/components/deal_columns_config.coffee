@@ -44,4 +44,40 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         {name: "parent", value: "table.targetObject"}
       ]
     }
+    {
+      id: "last-activity"
+      classNames: "last-activity"
+      heading: "Last Activity"
+      component: "render-activity"
+      bindings: [
+        {name: "model", value: "model.activities.firstObject"}
+      ]
+    }
+    {
+      id: "next-task"
+      classNames: "next-task"
+      heading: "Next Task"
+      route: "calendar.task"
+      context: "nextTask"
+      bindings: [{
+        name: "model"
+        value: "model"
+      }
+      {
+        name: "currentUser"
+        value: "currentUser"
+      }
+      {
+        name: "tomorrow"
+        value: "tomorrow"
+      }]
+      component: "next-task"
+    }
+    {
+      id: "next-task-date"
+      classNames: "next-task-date"
+      heading: "Next Task Date"
+      binding: "nextTaskDateDisplay"
+      sortOn: "next_task_date"
+    }
   ])

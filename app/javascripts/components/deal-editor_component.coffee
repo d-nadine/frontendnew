@@ -79,7 +79,8 @@ Radium.DealEditorComponent = Ember.Component.extend
 
         deal = Radium.CreateDeal.createRecord request
 
-        deal.save().then( =>
+        deal.save().then( (result) =>
+          @get('listController.deals').insertAt(0, result.get('deal'))
           @flashMessenger.success "The new #{@get('list.itemName')} has been created."
           @send 'cancel'
         ).finally =>
@@ -136,3 +137,7 @@ Radium.DealEditorComponent = Ember.Component.extend
 
   companyIsSet: Ember.computed.bool 'dealForm.companyName'
   contactIsSet: Ember.computed.bool 'dealForm.contact'
+
+  # UPGRADE: replace with inject
+  listController: Ember.computed ->
+    @container.lookup('controller:list')

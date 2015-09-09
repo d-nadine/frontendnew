@@ -7,3 +7,4 @@ Radium.CreateDeal = Radium.Model.extend
   contact: DS.belongsTo('Radium.Contact')
   name: DS.attr('string')
   list: DS.belongsTo('Radium.List')
+  deal: DS.belongsTo('Radium.Deal')
