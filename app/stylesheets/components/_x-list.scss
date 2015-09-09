@@ -10,12 +10,16 @@
 
   .pipeline-total .count {
     display: inline-block;
-    line-height: 47px;
     padding-left: 4px;
+    font-size: 14px;
   }
 
   .table-container {
-    width: calc(100% - 250px);
+    width: 100%;
+  }
+
+  .table-container .left-table {
+    margin-left: 10px;
   }
 
   .table-container .subhead .col-selector .rd-daterangepicker-component {
