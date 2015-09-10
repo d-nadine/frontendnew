@@ -8,15 +8,6 @@ Radium.ActivityBaseController = Radium.ObjectController.extend
 
     reference
 
-  isFollowing: Ember.computed 'user', ->
-    return if @get('controllers.application.currentPath') != 'user.index'
-
-    currentUser = @get('currentUser')
-
-    return unless @get('controllers.user.model') == currentUser
-
-    @get('user') != currentUser
-
   referenceDidChange: ( ->
     unless reference = @get('reference')
       return

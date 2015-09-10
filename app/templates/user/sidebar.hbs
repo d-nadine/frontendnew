@@ -82,29 +82,6 @@
   </div>
 
   <div class="sidebar-panel">
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        Following
-      </h6>
-    </div>
-    <div class="sidebar-panel-content following">
-      <ul class="unstyled">
-        {{#each following itemController="followingItem"}}
-          <li>
-            {{#if isCompany}}
-              <i class="ss-standard ss-buildings"></i>
-            {{else}}
-              {{avatar this}}
-            {{/if}}
-            {{resource-link-to this}}</br>
-          </li>
-        {{else}}
-          <li>Not following anybody yet!</li>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-  <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       {{#if canDelete}}
         <button class="btn btn-danger btn-large btn-block" {{action "confirmDeletion"}}>Delete</button>

@@ -1,5 +1,4 @@
-Radium.Contact = Radium.Model.extend Radium.FollowableMixin,
-  Radium.HasTasksMixin,
+Radium.Contact = Radium.Model.extend Radium.HasTasksMixin,
   Radium.AttachmentsMixin,
 
   todos: DS.hasMany('Radium.Todo', inverse: '_referenceContact')

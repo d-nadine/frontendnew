@@ -1,5 +1,4 @@
-Radium.User = Radium.Model.extend Radium.FollowableMixin,
-  Radium.HasTasksMixin,
+Radium.User = Radium.Model.extend Radium.HasTasksMixin,
 
   settings: DS.belongsTo('Radium.UserSettings')
   account: DS.belongsTo('Radium.Account')
@@ -28,11 +27,6 @@ Radium.User = Radium.Model.extend Radium.FollowableMixin,
 
   contactInfo: DS.belongsTo('Radium.ContactInfo')
   subscriptionInvalid: DS.attr('boolean')
-
-  contactsFollowed: DS.hasMany('Radium.Contact')
-  companiesFollowed: DS.hasMany('Radium.Company')
-  usersFollowed: DS.hasMany('Radium.User')
-  following: Radium.computed.aggregate('companiesFollowed', 'contactsFollowed', 'usersFollowed')
 
   email: DS.attr('string')
   phone: DS.attr('string')
