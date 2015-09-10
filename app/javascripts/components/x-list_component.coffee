@@ -2,6 +2,13 @@ require 'components/deal_columns_config'
 
 Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   actions:
+    saveDealValue: (deal, value) ->
+      deal.set 'value', value
+
+      deal.save()
+
+      false
+
     showNewDealModal: ->
       @set "showDealModal", true
 

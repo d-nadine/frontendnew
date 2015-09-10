@@ -1,4 +1,4 @@
-Radium.CustomfieldEditorComponent = Ember.Component.extend  Radium.KeyConstantsMixin,
+Radium.CustomfieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   classNameBindings: [':sidebar-panel-content', ':custom-field', ':form', ':inline-editor']
   actions:
     save: ->

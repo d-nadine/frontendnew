@@ -19,6 +19,12 @@ Radium.CurrencyInputComponent = Ember.TextField.extend
 
     @set 'timeoutReference', timeoutReference
 
+  focusIn: ->
+    return unless value = @get('value')
+
+    if value == "0.00"
+      @set('value', null)
+
   focusOut: ->
     @formatValue()
 

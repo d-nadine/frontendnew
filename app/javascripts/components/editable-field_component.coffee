@@ -1,9 +1,11 @@
 require 'lib/radium/buffered_proxy'
 require 'components/key_constants_mixin'
 require 'mixins/content_editable_behaviour'
+require 'mixins/containing_controller_mixin'
 
 Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   Radium.ContentEditableBehaviour,
+  Radium.ContainingControllerMixin,
   actions:
     activateLink: ->
       target = @get('containingController')
@@ -108,13 +110,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       el.html("<em class='placeholder'>#{@get('placeholder')}</em>")
       false
-
-  # hacky need to use controller of the table component for certain functions
-  containingController: Ember.computed ->
-    if parent = @get('parent')
-      parent
-    else
-      @get('targetObject.table.targetObject')
 
   classNames: ['editable']
   classNameBindings: ['isSaving', 'isInvalid']

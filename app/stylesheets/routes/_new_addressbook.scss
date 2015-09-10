@@ -729,10 +729,6 @@
     border: 1px solid transparent;
   }
 
-  .variadic-table tbody tr:not(.is-checked) td.name {
-
-  }
-
   .variadic-table .assign {
     position: static;
     overflow: visible;
@@ -757,7 +753,7 @@
   }
 
   .variadic-table thead tr {
-    .name, .email, ,.company {
+    .name, .email, ,.company, .list-name {
       min-width: 220px;
     }
 
@@ -1046,7 +1042,7 @@
       max-width: 200px;
     }
 
-    .company, .name, .email {
+    .company, .name, .email, .list-name {
       max-width: 220px;
     }
 

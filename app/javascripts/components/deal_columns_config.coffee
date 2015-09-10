@@ -80,4 +80,24 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       binding: "nextTaskDateDisplay"
       sortOn: "next_task_date"
     }
+    {
+      id: "value"
+      classNames: "deal-value"
+      heading: "Value"
+      bindings: [{
+        name: "value"
+        value: "model.value"
+      },
+      {
+        name: "model"
+        value: "model"
+      },
+      {
+        name: "saveAction",
+        value: "saveDealValue",
+        static: true
+      }
+      ]
+      component: "currency-control"
+    }
   ])

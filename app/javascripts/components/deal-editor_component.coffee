@@ -20,9 +20,9 @@ Radium.DealEditorComponent = Ember.Component.extend
       false
 
     contactSet: (contact) ->
-      return unless dealForm = @get('dealForm')
+      return unless @get('dealForm')
 
-      dealForm.setProperties
+      @set 'dealForm',
         companyName: null
         company: null
         contactName: null
