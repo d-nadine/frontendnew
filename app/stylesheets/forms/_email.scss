@@ -167,6 +167,13 @@
       width: 100%;
     }
   }
+  
+  &.loading-red {
+
+    .meter {
+      background-color: #C52134;
+    }
+  }
 }
 .sidebar {
   .loading-bar {

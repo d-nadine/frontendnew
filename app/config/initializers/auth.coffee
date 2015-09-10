@@ -64,7 +64,7 @@ Ember.Application.initializer
         return Radium.get('authManager').logOut(apiUrl, "#{apiUrl}/sessions/new")
 
 
-      Ember.$('[class^=ball]').hide()
+      Ember.$('[class^=main-loading]').hide()
       Radium.advanceReadiness()
 
       return if Ember.ENV.environment != "production" || location.pathname != "/"

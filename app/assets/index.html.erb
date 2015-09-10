@@ -26,8 +26,12 @@
   </head>
 
   <body>
-    <div class="ball"></div>
-    <div class="ball1"></div>
+    <div class="main-loading">
+      <div class="loading-bar loading-red">
+        <div class="meter"></div>
+      </div>
+      <img src="/images/logo_loading.png" class="logo-loading">
+    </div>
     <div id="application"></div>
     <script>
       window.API_HOST = "<%= ENV['API_HOST'].to_s %>";
