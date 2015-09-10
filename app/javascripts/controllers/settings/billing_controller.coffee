@@ -32,7 +32,10 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         finish = =>
           @set 'isPersisting', false
 
-          @send 'flashSuccess', "Your subscription has been cancelled and will expire on the #{@get('activeSubscription.subscriptionEndDate').toHumanFormat()}"
+          if endDate = @get('activeSubscription.subscriptionEndDate')?.toHumanFormat()
+            @flashMessenger.success "Your subscription has been cancelled and will expire on the #{endDate}."
+          else
+            @flashMessenger.success "Your subscription has been cancelled."
 
         unless activeSubscription
           return finish()
