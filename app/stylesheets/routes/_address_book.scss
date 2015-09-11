@@ -69,6 +69,12 @@ $body: #6e6e6e;
     top: 25px;
   }
 
+  td.next-task .next-task-component:not(.open) {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   td {
     background-color: white;
     margin: 0 !important;
