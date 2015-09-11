@@ -317,4 +317,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     el.parents('td:first').removeClass('active')
     el.parent().css('text-overflow','ellipsis')
 
+    @send "updateModel"
+
   isRequired: false

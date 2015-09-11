@@ -20,6 +20,7 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
       false
 
   classNameBindings: ['isEditing']
+
   getField: ->
     @get('queryKey')
 
