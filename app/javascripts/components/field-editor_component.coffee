@@ -37,6 +37,9 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
         self.set 'isSaving', false
         self.set 'isEditing', false
+
+        if self.get('afterSave')
+          self.sendAction "afterSave", model
       ).catch (result) =>
         self.set 'isSaving', false
         @$('input[type=text]').focus()
@@ -87,8 +90,12 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       parent = @get('parent')
 
+      self = this
+
       model.delete().then (result) ->
         parent.send 'flashSuccess', 'The field has been deleted.'
+        if afterSave = self.get('afterSave')
+          parent.send afterSave, model
 
       false
 

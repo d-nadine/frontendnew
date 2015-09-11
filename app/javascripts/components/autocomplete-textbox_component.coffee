@@ -47,7 +47,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
 
       $('.typeahead.dropdown-menu').hide()
 
-      typeahead = @getTypeahead()
+      return unless typeahead = @getTypeahead()
 
       return typeahead.hide() if typeahead.shown
 

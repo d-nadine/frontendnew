@@ -2,8 +2,8 @@
   <h3>Contact Statuses</h3>
 
   <ol class="lead-sources">
-    {{#each contactStatus in controller}}
-      {{field-editor model=contactStatus tagName="li" parent=this placeholderText="Add Contact Status"}}
+    {{#each contactStatus in model}}
+      {{field-editor model=contactStatus tagName="li" parent=this placeholderText="Add Contact Status" afterSave="refreshContactStatuses"}}
     {{/each}}
   </ol>
 
