@@ -1,10 +1,16 @@
-.logo-loading {
-  width: 300px;
-  display: block;
-  position: absolute;
-  top: -48px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
+.main-loading {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+
+  .logo-loading {
+    width: 300px;
+    display: block;
+    position: absolute;
+    top: -48px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 }
