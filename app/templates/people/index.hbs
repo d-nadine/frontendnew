@@ -40,6 +40,7 @@
         {{#each newTag in newTags}}
           {{new-listitem listItem=newTag  action="saveTag" deleteAction="deleteTag"  tagName="li" newItemPlaceholder="New List"}}
         {{/each}}
+        <li class="new-list"><a href="#" {{action "createTag"}} class="btn-text btn-black"><i class="ss-standard ss-plus"></i> New List</a></li>
       </ul>
       <ul class="nav nav-pills more">
         {{#each user in team}}
