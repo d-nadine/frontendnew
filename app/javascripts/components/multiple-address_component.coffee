@@ -14,6 +14,8 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
       @set 'current.country', country.key
       @sendAction 'stopEditing'
 
+      false
+
   autocomplete: null
 
   setup: Ember.on 'didInsertElement', ->
@@ -28,7 +30,10 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
     else
       @onModelChanged(model)
 
-    @$('#autocomplete').on 'focus', @showAddressFields.bind(this)
+    showAddressFields = @showAddressFields.bind(this)
+
+    @$('#autocomplete').on 'focus', showAddressFields
+    @$('#autocomplete').on 'paste', showAddressFields
 
     return @initializeGoogleGeo()
 
