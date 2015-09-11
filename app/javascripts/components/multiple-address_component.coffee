@@ -34,8 +34,21 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
 
     @$('#autocomplete').on 'focus', showAddressFields
     @$('#autocomplete').on 'paste', showAddressFields
+    @$('.route').on 'focus', showAddressFields
+    @$('.route').on 'paste', showAddressFields
 
-    return @initializeGoogleGeo()
+    Ember.run.scheduleOnce 'afterRender', this, '_afterRender'
+
+  _afterRender: ->
+    return @initializeGoogleGeo([@$('#autocomplete'), @$('.street')])
+
+  teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    @$('#autocomplete').off 'focus'
+    @$('#autocomplete').off 'paste'
+    @$('.route').off 'focus'
+    @$('.route').off 'paste'
 
   showAddressFields: ->
     return unless addressField = @$('.address-body')

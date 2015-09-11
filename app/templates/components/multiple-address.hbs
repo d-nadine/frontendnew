@@ -4,11 +4,11 @@
 {{/if}}
 </div>
 <div id="locationField">
-  <input class="single address-autocomplete" id="autocomplete" placeholder="Address" type="text" autocomplete="off" class="">
+  <input class="single address-autocomplete" id="autocomplete" placeholder="Address" type="text" autocomplete="off" class="main-auto">
 </div>
 <div id="addressField" class="address-body">
-  {{input value=current.street class="single route" type="text" placeholder="Street"}}<br/>
-  {{input value=current.city class="single postal_town" type="text" placeholder="City"}}<br/>
+  {{input value=current.street class="single route street" type="text" placeholder="Street"}}<br/>
+  {{input value=current.city class="single locality" type="text" placeholder="City"}}<br/>
   {{input value=current.state class="single administrative_area_level_1" type="text" placeholder="State / Province"}}<br/>
   {{input value=current.zipcode class="single postal_code" type="text" placeholder="Zip / Postal Code"}}<br/>
   {{country-picker changeCountry="changeCountry" current=current.country countryList=Radium.Countries}}

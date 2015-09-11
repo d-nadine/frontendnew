@@ -11,8 +11,6 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
 
       return unless @get('open')
 
-      @positionDropdown() if @positionDropdown
-
   setValue: (country) ->
     @send "changeCountry", country
 

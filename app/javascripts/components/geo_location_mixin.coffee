@@ -2,26 +2,36 @@ Radium.GeoLocationMixin = Ember.Mixin.create
   componentForm:
     "street_number": 'short_name',
     "route": 'long_name',
-    "postal_town": 'long_name',
+    "locality": 'long_name',
     "administrative_area_level_1": 'short_name',
     "country": 'short_name',
     "postal_code": 'short_name'
 
   modelMap:
     "route": "street"
-    "postal_town": "city"
+    "locality": "city"
     "postal_code": "zipcode"
+    "administrative_area_level_1": 'state',
     "country": "country"
 
-  initializeGoogleGeo: ->
+  autocompletes: []
+
+  initializeGoogleGeo: (elements)->
     # Create the autocomplete object, restricting the search
     # to geographical location types.
-    @autocomplete = new (google.maps.places.Autocomplete)(document.getElementById('autocomplete'), types: [ 'geocode' ])
-    google.maps.event.addListener @autocomplete, 'place_changed', =>
-      @fillInAddress()
+    self = this
 
-  fillInAddress: ->
-    place = @autocomplete.getPlace()
+    @autocompletes.clear()
+    elements.forEach (el) ->
+      autocomplete = new (google.maps.places.Autocomplete)(document.getElementById(el.attr('id')), types: [ 'geocode' ])
+
+      self.autocompletes.push(autocomplete)
+
+      google.maps.event.addListener autocomplete, 'place_changed', ->
+        self.fillInAddress(autocomplete)
+
+  fillInAddress: (autocomplete) ->
+    place = autocomplete.getPlace()
 
     for component of @componentForm
       input = $(component)
@@ -43,13 +53,18 @@ Radium.GeoLocationMixin = Ember.Mixin.create
           @set("current.#{@modelMap[addressType]}", val)
       i++
 
+    $('#autocomplete').val('')
+
   # Bias the autocomplete object to the user's geographical location,
   # as supplied by the browser's 'navigator.geolocation' object.
   geolocate: ->
+    self = this
+
     if navigator.geolocation
       navigator.geolocation.getCurrentPosition (position) =>
         geolocation = new (google.maps.LatLng)(position.coords.latitude, position.coords.longitude)
         circle = new (google.maps.Circle)(
           center: geolocation
           radius: position.coords.accuracy)
-        @autocomplete.setBounds circle.getBounds()
+        self.autocompletes.forEach (autocomplete) ->
+          autocomplete.setBounds circle.getBounds()
