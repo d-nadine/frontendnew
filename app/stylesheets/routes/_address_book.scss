@@ -59,12 +59,25 @@ $body: #6e6e6e;
     }
   }
 
+  td.next-task .next-task-component,
+  td.assign .assignto-picker-component,
+  td.stat .status-picker-component {
+    position: relative;
+  }
+
+  td.next-task .dropdown-menu {
+    top: 25px;
+  }
 
   td {
     background-color: white;
     margin: 0 !important;
     text-overflow: ellipsis;
-    overflow: hidden;
+
+    &:not(.next-task):not(.assign) {
+      overflow: hidden;
+    }
+
     white-space: nowrap;
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;

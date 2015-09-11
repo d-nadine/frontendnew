@@ -11,7 +11,7 @@
   {{input value=current.city class="single postal_town" type="text" placeholder="City"}}<br/>
   {{input value=current.state class="single administrative_area_level_1" type="text" placeholder="State / Province"}}<br/>
   {{input value=current.zipcode class="single postal_code" type="text" placeholder="Zip / Postal Code"}}<br/>
-  {{country-picker changeCountry="changeCountry" current=current.country countryList=Radium.Countries positionDropdown=positionDropdown}}
+  {{country-picker changeCountry="changeCountry" current=current.country countryList=Radium.Countries}}
   <div id="addressType">
     {{#each address in addresses}}
       <div>

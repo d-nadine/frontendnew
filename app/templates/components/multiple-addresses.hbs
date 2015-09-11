@@ -3,7 +3,8 @@
   <dd>
     {{#if isEditing}}
       <div>
-        {{multiple-address addresses=addresses parent=this hasEmail=hasEmail positionDropdown=positionDropdown stopEditing="stopEditing"}}
+        {{log positionDropdown}}
+        {{multiple-address addresses=addresses parent=this hasEmail=hasEmail stopEditing="stopEditing"}}
       </div>
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
