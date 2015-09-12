@@ -8,7 +8,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     selectContact: (item) ->
       if typeof item == "string"
         @set 'searchText', item
-        @EventBus.publish "hideAutosuggest"
+        $('.as-results').html('').hide()
         return false
 
       return unless person = item.get('person')

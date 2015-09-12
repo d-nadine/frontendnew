@@ -58,15 +58,9 @@ Radium.XAutosuggestComponent = Ember.Component.extend
     @_super.apply this, arguments
     @$('input[type=text]').addClass('field')
     @resizeInputBox()
-    @EventBus.subscribe('hideAutosuggest', this, 'onHideAutosuggest')
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
-    @EventBus.unsubscribe('hideAutosuggest')
-
-  onHideAutosuggest: ->
-    @$('.as-results').html('').hide()
-    false
 
   destinationDidChange: Ember.observer 'destination.[]', ->
     Ember.run.scheduleOnce 'afterRender', this, "resizeInputBox"
