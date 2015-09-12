@@ -148,7 +148,11 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       if @get('route')
         "<a class='route' href='#{@get('route')}'>#{value}</a>"
       else if @get('externalUrl')
-        "<a href='#{value}' target='_blank'>#{value}</a>"
+        url = if /([A-Za-z]{3,9}:(?:\/\/)?)/.test(value)
+                value
+              else
+                "//#{value}"
+        "<a href='#{url}' target='_blank'>#{value}</a>"
       else
         value
 

@@ -4,6 +4,14 @@ require 'mixins/inline_editor_behaviour'
 Radium.MultipleBaseComponent = Ember.Component.extend Radium.FormArrayBehaviour,
   Radium.InlineEditoBehaviour,
   actions:
+    toggleEditor: ->
+      if @get('isEditing')
+        return @send('stopEditing')
+      else
+        return @send('startEditing')
+
+      false
+
     startEditing: ->
       return if @get('isSaving')
 

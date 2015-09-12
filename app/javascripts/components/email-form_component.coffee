@@ -343,6 +343,11 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       @get('value').length == 0
 
+    focusOut: ->
+      return unless @get('value') == value
+
+      @send "createSignature"
+
   singleMode: Ember.computed.equal 'mode', 'single'
   bulkMode: Ember.computed.equal 'mode', 'bulk'
   replyMode: Ember.computed.equal 'mode', 'reply'

@@ -41,6 +41,8 @@ window.Radium = Radium
 Radium.deferReadiness()
 
 Ember.RSVP.configure 'onerror', (e) ->
+  return unless e
+
   return if e.message == "TransitionAborted"
 
   if e.hasOwnProperty 'responseText'

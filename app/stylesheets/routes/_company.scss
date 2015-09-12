@@ -106,6 +106,10 @@
 }
 
 .company-sidebar-component {
+  .multiple-address-component .country-picker-component .dropdown-menu {
+    top: auto;
+  }
+
   .control-label{
     font-weight: bold;
   }
