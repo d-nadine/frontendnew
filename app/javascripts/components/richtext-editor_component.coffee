@@ -70,7 +70,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   removePlaceHolder: (clearHtml = true) ->
     return if @get('placeholderShown')
-    return unless editable = @$('.note-editable')
+    editable = @$('.note-editable')
+    return unless editable.length
+    return unless editable.hasClass('placeholder')
     editable.removeClass('placeholder')
     editable.html('') if clearHtml
     @set 'placeholderShown', true

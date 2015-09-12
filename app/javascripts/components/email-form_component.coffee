@@ -21,9 +21,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
       @sendAction 'saveEmail', form
 
-      Ember.run.next =>
-        @set 'signatureAdded', false
-
       false
 
     toggleOptions: ->
@@ -230,6 +227,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     @_super.apply this, arguments
     @$('.info').tooltip(html: true)
 
+    @EventBus.subscribe('email:reset', this, 'onFormReset')
+
     Ember.run.scheduleOnce 'afterRender', this, '_afterSetup'
 
     @$('.drop').on 'click', (e) =>
@@ -257,8 +256,18 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       e.stopPropagation()
       false
 
+  onFormReset: ->
+    if @get('signature')
+      Ember.run.next =>
+        Ember.run.next =>
+          @send "appendSignature"
+
   _afterSetup: ->
     @$('.autocomplete.email input[type=text]').focus()
+
+    if @get('signature')
+      Ember.run.next =>
+        @send "appendSignature"
 
     return unless @get('fromPeople')
 
@@ -284,6 +293,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
+    @EventBus.unsubscribe('email:reset')
+
     el = @$('.info')
 
     if el.data('tooltip')
@@ -344,7 +355,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       @get('value').length == 0
 
     focusOut: ->
-      return unless @get('value') == value
+      return unless value = @get('value')
 
       @send "createSignature"
 
