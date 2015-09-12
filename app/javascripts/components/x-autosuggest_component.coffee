@@ -3,6 +3,9 @@ require 'components/key_constants_mixin'
 Radium.XAutosuggestComponent = Ember.Component.extend
   actions:
     addSelection: (item) ->
+      if @get('searchOnlyAction')
+        @sendAction "searchOnlyAction", item
+
       if @get('addSelection')
         return @sendAction "addSelection", item
 
@@ -51,10 +54,19 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
     input.width inputWidth
 
-  didInsertElement: ->
+  _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     @$('input[type=text]').addClass('field')
     @resizeInputBox()
+    @EventBus.subscribe('hideAutosuggest', this, 'onHideAutosuggest')
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    @EventBus.unsubscribe('hideAutosuggest')
+
+  onHideAutosuggest: ->
+    @$('.as-results').html('').hide()
+    false
 
   destinationDidChange: Ember.observer 'destination.[]', ->
     Ember.run.scheduleOnce 'afterRender', this, "resizeInputBox"
@@ -105,8 +117,14 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       value = @get('value') || ''
 
-      if e.keyCode == @SPACE && @get('targetObject.allowSpaces')
+      targetObject = @get('targetObject')
+
+      if e.keyCode == @SPACE && targetObject.get('allowSpaces')
         return callSuper()
+
+      if e.keyCode == @ENTER && targetObject.get('searchOnlyAction')
+        targetObject.sendAction "searchOnlyAction", value
+        return false
 
       if [@SPACE, @ENTER].contains e.keyCode
         unless @get('targetObject').newItemCriteria(value)

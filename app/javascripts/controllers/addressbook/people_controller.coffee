@@ -5,6 +5,18 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   Radium.SaveContactActions,
   actions:
+    selectContact: (item) ->
+      if typeof item == "string"
+        @set 'searchText', item
+        @EventBus.publish "hideAutosuggest"
+        return false
+
+      return unless person = item.get('person')
+
+      @send 'showContactDrawer', person
+
+      false
+
     showContactDrawer: (contact) ->
       @closeDrawer()
 
@@ -353,6 +365,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     Ember.run.next =>
       @get('model').removeObject contact
 
+  dummy: Ember.A()
+
   needs: ['addressbook', 'users', 'tags', 'contactStatuses', 'company', 'untrackedIndex', 'company']
 
   noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'
@@ -520,6 +534,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   drawerModel: null
   drawerComponent: null
   drawerParams: null
+
+
+  filterSearchResults: (item) ->
+    true
+
+  searchQueryParameters: (query) ->
+    scopes: ['contact']
+    term: query
 
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments

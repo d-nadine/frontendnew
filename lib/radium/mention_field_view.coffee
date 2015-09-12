@@ -17,7 +17,6 @@ Radium.MentionFieldView = Ember.View.extend
     keyDown: (event) ->
       return unless event.keyCode is 13
 
-      event.preventDefault()
-
-    insertNewline: (event) ->
       @get('parentView.controller').send 'submit'
+
+      event.preventDefault()

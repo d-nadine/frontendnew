@@ -62,15 +62,11 @@
   -webkit-user-select: none;
 }
 
-::-webkit-scrollbar {
-  width: 12px;
-}
-
 ::-webkit-scrollbar-track {
   background-color: #ebebeb;
   outline: 1px solid #e3e3e3;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fff; 
+  background: #fff;
 }

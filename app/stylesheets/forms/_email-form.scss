@@ -334,10 +334,6 @@
     font-size: 12px;
   }
 
-  .bulk ul.as-selections li.as-selection-item {
-    display: none;
-  }
-
   .follow-up {
     display: inline-block;
     line-height: 30px;
@@ -505,4 +501,9 @@
 
 .template-editor-component .actions .cancel {
   float: none;
+}
+
+.addressbook-view .subhead ul.as-selections li.as-selection-item,
+.email-form-component  .bulk ul.as-selections li.as-selection-item {
+  display: none;
 }

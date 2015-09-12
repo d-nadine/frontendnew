@@ -202,7 +202,7 @@
             {{x-check leader=column.heading checked=column.checked}}
           {{/each}}
         </ul>
-        {{input type="text" value=searchText class="searchbox" placeholder="search"}}
+        {{email-autosuggest destination=dummy placeholder="search" showAvatar=false class="search" deleteOnBackSpace=false searchOnlyAction="selectContact" queryParameters=searchQueryParameters filterResults=filterSearchResults}}
       </div>
       <div class="filters">
         {{query-builder potentialQueries=potentialQueries actualQueries=actualQueries fields=combinedQueryFields parent=this users=users isSaved=isQuery}}

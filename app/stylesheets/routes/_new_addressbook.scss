@@ -338,6 +338,22 @@
     margin-top: 8px;
     background: transparent;
     border: 0;
+    display: inline-block;
+  }
+
+  .subhead .col-selector .email-autosuggest-component {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    height: 34px !important;
+    margin-bottom: 0px !important;
+    width: 250px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+  }
+
+  .subhead .col-selector .email-autosuggest-component input {
+    padding: 10px;
   }
 
   .subhead .col-selector button i:nth-of-type(1) {
@@ -1166,7 +1182,7 @@
     font-size: 13px;
   }
 
-  .loading {
+  .loading:not(.as-selections) {
     text-align: center;
     vertical-align: center;
     height: 52px;
