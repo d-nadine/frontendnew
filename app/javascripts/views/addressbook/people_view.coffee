@@ -38,7 +38,16 @@ Radium.PeopleIndexView = Radium.View.extend Radium.ScrollTopMixin,
 
     tableContainer.width(availableWidth)
 
-  teardown: Ember.on 'willDestroyElement', ->
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+    tick = Ember.run.later ->
+      el = $('.col-selector input[type=text]')
+      el.val('').focus()
+      Ember.run.cancel tick
+    , 3000
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
     @$('ul.col-menu').off 'click.col-menu'
     $(window).off 'resize.table-container-resize'
     @$('.col-selector .dropdown-toggle').off 'click-col-selector'
