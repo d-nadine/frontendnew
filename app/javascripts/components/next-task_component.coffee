@@ -1,4 +1,6 @@
-Radium.NextTaskComponent = Ember.Component.extend
+require 'mixins/position_dropdown_mixin'
+
+Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
   actions:
     addTodo: (period) ->
       user = @get('currentUser')

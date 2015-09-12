@@ -59,12 +59,6 @@ $body: #6e6e6e;
     }
   }
 
-  td.next-task .next-task-component,
-  td.assign .assignto-picker-component,
-  td.stat .status-picker-component {
-    position: relative;
-  }
-
   td.next-task .dropdown-menu {
     top: 25px;
   }

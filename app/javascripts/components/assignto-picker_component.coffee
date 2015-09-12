@@ -1,4 +1,6 @@
-Radium.AssigntoPickerComponent = Ember.Component.extend
+require 'mixins/position_dropdown_mixin'
+
+Radium.AssigntoPickerComponent = Ember.Component.extend Radium.PositionDropdownMixin,
   actions:
     assign: (model, user) ->
       model.set 'user', user
