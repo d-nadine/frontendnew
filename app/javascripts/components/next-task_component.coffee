@@ -31,6 +31,16 @@ Radium.NextTaskComponent = Ember.Component.extend Radium.PositionDropdownMixin,
     showTodoModal: ->
       @$('.modal').modal(backdrop: false)
 
+      Ember.run.next ->
+        modal = @$('.todo-modal')
+
+        finished = ->
+          textarea = @$('.todo-modal.fade.in textarea:first')
+
+          textarea.focus()
+
+        Radium.Common.wait modal.hasClass('in'), finished
+
   needs: ['users']
 
   setupCustom: ->
