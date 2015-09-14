@@ -11,6 +11,49 @@ Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   colSpan: Ember.computed 'columns.length', ->
     @get('columns.length') + 1
 
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+
+    selector = ".next-task-component .dropdown-toggle, .assignto-picker-component .dropdown-toggle, .status-picker-component .dropdown-toggle"
+
+    clearMenus = ->
+      $(selector).each ->
+        $(this).parent().removeClass('open')
+
+    @$().on "click.dropown.variadic", selector, (e) ->
+      target = $(e.target)
+
+      a = if target.hasClass('dropdown-toggle')
+            target
+          else
+            target.parents('.dropdown-toggle:first')
+
+      parent = target.parents('div:first')
+
+      isActive = parent.hasClass('open')
+
+      clearMenus()
+
+      if !isActive
+        parent.toggleClass('open')
+
+      menu = parent.find('.dropdown-menu')
+
+      return unless position = a.position()
+
+      menu.css({top: position.top + 20, left: position.left})
+
+      false
+
+    $('html').on 'click.variadic.html.close.menus', clearMenus
+    $('.right-table').on 'scroll.right', clearMenus
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    @$().off "click.dropown.variadic"
+    $('html').off 'click.variadic.html.close.menus'
+    $('.right-table').off 'scroll.right'
+
   atStartOrEnd: (el) ->
     atStart = false
     atEnd = false

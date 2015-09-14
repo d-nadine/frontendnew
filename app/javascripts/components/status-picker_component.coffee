@@ -1,6 +1,4 @@
-require 'mixins/position_dropdown_mixin'
-
-Radium.StatusPickerComponent = Ember.Component.extend Radium.PositionDropdownMixin,
+Radium.StatusPickerComponent = Ember.Component.extend
   actions:
     changeStatus: (contact, status) ->
       contact.set 'contactStatus', status
