@@ -360,6 +360,10 @@ requires jQuery 1.7+
 	function _closeHandler(e)
 	{
 		var target = $(e.target);
+
+    if(target.hasClass('scroll-pane')) {
+      return;
+    }
 		var input = target.closest('.ui-timepicker-input');
 		if (input.length === 0 && target.closest('.ui-timepicker-list').length === 0) {
 			methods.hide();

@@ -120,7 +120,6 @@ Radium.DatePickerComponent = Ember.Component.extend
     showDatePicker: ->
       return if @isDestroyed
 
-
     willDestroyElement: ->
       @_super.apply this, arguments
       @removeObserver 'value', this, 'valueDidChange'

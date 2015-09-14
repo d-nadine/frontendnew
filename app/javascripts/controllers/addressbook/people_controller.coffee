@@ -11,9 +11,16 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         $('.as-results').html('').hide()
         return false
 
-      return unless person = item.get('person')
+      return unless contact = item.get('person')
 
-      @send 'showContactDrawer', person
+      if !contact.get('isPublic') && !contact.get('potentialShare')
+        contact.set('potentialShare', true)
+
+        contact.save().then =>
+          @send 'updateTotals'
+
+
+      @send 'showContactDrawer', contact
 
       false
 
