@@ -5,14 +5,10 @@ Radium.SaveContactActions = Ember.Mixin.create
         context.set('bufferedProxy.removeCompany', true)
         context.set('bufferedProxy.company', null)
 
-      model = context.get('model')
+      false
 
-      model.one 'didReload', (result) =>
-        unless company = model.get('company')
-          return
-
-        @get('addressbook').send 'updateTotals'
-        company.reload()
+    afterSaveCompany: ->
+      @get('addressbook').send 'updateTotals'
 
       false
 

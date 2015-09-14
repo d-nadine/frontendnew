@@ -114,6 +114,10 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
           name: "saveAction"
           value: "saveCompany"
         }
+        {
+          name: "afterSave"
+          value: "afterSaveCompany"
+        }
       ]
       context: "company"
       sortOn: "company"

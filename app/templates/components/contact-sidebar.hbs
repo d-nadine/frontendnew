@@ -8,7 +8,7 @@
         {{toggle-switch checked=contact.isPublic action="switchShared" dataOn="Shared" dataOff="Private" dontPropagate=true}}
       </div>
       {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name" parent=targetObject}}
-      {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" alternativeRoute="company" parent=targetObject saveAction="saveCompany" parent=parent}}
+      {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" alternativeRoute="company" parent=targetObject saveAction="saveCompany" afterSave="afterSaveCompany" parent=parent}}
       {{social-medialist person=contact}}
     </div>
   </div>

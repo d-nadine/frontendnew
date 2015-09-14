@@ -81,16 +81,23 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         Ember.run.next ->
           model.trigger 'modelUpdated', self, model
 
+        if afterSave = @get('afterSave')
+          @get('containingController').send afterSave, this
+
         unless value?.length
           return @send 'setPlaceholder'
 
-        if @get('alternativeRoute')
-          model.one 'didReload', ->
-            self.notifyPropertyChange 'model'
-            self.$().html self.get('markUp')
-            self.setEndOfContentEditble()
+        observer = =>
+          return unless model.currentState.stateName == "root.loaded.saved"
+          model.removeObserver "currentState.stateName", observer
+          if @get('alternativeRoute')
+            @notifyPropertyChange 'model'
+            @$().html self.get('markUp')
 
-          model.reload()
+        if model.currentState.stateName == "root.loaded.saved"
+          observer()
+        else
+          model.addObserver "currentState.stateName", observer
       ).catch((error) ->
         resetModel()
       ).finally =>
@@ -218,7 +225,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     return if @isDestroyed || @isDestroying
     return if raiser == this
 
-    @setMarkup()
+    @setMarkup(true)
 
   teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
@@ -229,7 +236,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     model.off 'modelUpdated'
 
-  setMarkup: ->
+  setMarkup: (dont = false) ->
     markUp = @get('markUp')
 
     return unless el = @$()
@@ -239,7 +246,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     else
       el.html markUp
 
-    @setEndOfContentEditble()
+    @setEndOfContentEditble() unless dont
 
   input: (e) ->
     text =  if @get('multiline')
