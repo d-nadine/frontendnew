@@ -9,7 +9,9 @@ Radium.ScrollableMixin = Em.Mixin.create
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
+    Ember.run.scheduleOnce 'afterRender', this, '_afterRender'
 
+  _afterRender: ->
     return if @get('noscroll')
 
     $(window).on 'resize.jscrollpane', @_resize.bind(this)
@@ -39,7 +41,7 @@ Radium.ScrollableMixin = Em.Mixin.create
     return unless $this
     parent = $this.parent()
 
-    if parent.parents('.xdrawer-component').length
+    if parent.hasClass('xdrawer-component') || parent.parents('.xdrawer-component').length
       top = $('.xdrawer-component').css('top')
     else
       top = $('.sidebar').css('top')

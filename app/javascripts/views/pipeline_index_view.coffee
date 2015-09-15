@@ -10,7 +10,6 @@ Radium.PipelineIndexView = Radium.PipelineViewBase.extend Radium.ScrollTopMixin,
     @_super.apply this, arguments
     tick = Ember.run.later ->
       el = $('.pipeline-search input[type=text]')
-      p el
       el.val('').focus()
       Ember.run.cancel tick
     , 1000
