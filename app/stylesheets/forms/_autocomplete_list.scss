@@ -5,7 +5,6 @@
     border: none;
     overflow: hidden;
     @include box-shadow(none);
-    width: 220px;
     background: transparent;
 
     li {
@@ -37,7 +36,7 @@
       @include border-radius(4px);
       @include box-shadow(none);
       font-size: inherit;
-      padding: 4px 6px;
+      padding: 0px 7px;
       margin: 0 10px 10px 0;
       height: 28px;
       line-height: 28px;

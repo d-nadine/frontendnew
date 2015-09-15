@@ -919,8 +919,7 @@
 
       div:first-of-type {
         min-width: 350px;
-        max-width: 350px;
-        max-height: 50px;
+        max-height: 40px;
         overflow: hidden;
       }
 
@@ -929,21 +928,19 @@
       }
 
       .as-selections {
-        height: 40px;
         width: auto;
+        margin-top: 6px;
         
         .as-selection-item {
-          margin-top: 4px;
-          padding-top: 2px;
-          padding-bottom: 2px;
+
         }
         .as-original {
           line-height: 36px;
           height: 36px;
 
           input {
-            line-height: 34px;
             width: 110px !important;
+            margin-bottom: 0;
           }
         }
       }
