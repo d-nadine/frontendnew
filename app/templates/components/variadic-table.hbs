@@ -43,7 +43,7 @@
           {{/each}}
         {{/variadic-row}}
       {{else}}
-        {{#unless list.content.isLoading}}
+        {{#unless list.isLoading}}
           <tr>
             <td {{bind-attr colspan="colSpan"}} class="table-no-results">No Results</td>
           </tr>

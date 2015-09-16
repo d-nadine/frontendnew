@@ -8,7 +8,7 @@
               <span class="count-companies">Active Pipeline Total &gt;</span>
               <span class="count-people">0</span>
             </span>
-        </div>
+          </div>
           <div class="left">
             <div class="nav-wrap">
               <div class="tools">
@@ -23,10 +23,6 @@
                     <li>Action One</li>
                   </ul>
                 </div>
-                <a {{action "toggleFilter"}} href="#" class="btn-filter">
-                  <i class="ss-standard ss-filter"></i>
-                  <span>Filter</span>
-                </a>
               </div>
             </div>
           </div>
@@ -41,6 +37,12 @@
         <div class="right-table">
           {{variadic-table list=deals columns=columns sort="sort" classNames="variable"}}
         </div>
+        {{#if deals.isLoading}}
+          <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
+            <span class="muted">Loading...</span>
+          </div>
+        {{/if}}
+        {{regular-infinitescroller getMore="loadMoreDeals" allLoaded=false isLoading=false}}
       </div>
     </div>
   </div>

@@ -2,6 +2,21 @@ require 'components/deal_columns_config'
 
 Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   actions:
+    loadMoreDeals: ->
+      deals = @get('deals')
+
+      observer = ->
+        return if deals.get('isLoading')
+        deals.removeObserver 'isLoading', observer
+        deals.expand()
+
+      unless deals.get('isLoading')
+        observer()
+      else
+        deals.addObserver 'isLoading', observer
+
+      false
+
     saveDealValue: (deal, value) ->
       deal.set 'value', value
 
@@ -74,6 +89,10 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
     @_super.apply this, arguments
 
     @EventBus.subscribe "closeDrawers", this, @closeDrawer.bind(this)
+
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+    @send 'loadMoreDeals'
 
   closeDrawer: ->
     @set 'showDrawer', false

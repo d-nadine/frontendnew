@@ -4,10 +4,13 @@ Radium.ListRoute = Ember.Route.extend
 
     listId = transition.params['list'].list_id
 
-    new Ember.RSVP.Promise (resolve, reject) ->
-      Radium.Deal.find(list: listId).then((results) ->
-        controller.set 'deals', results
-        resolve results
-      ).catch (error) ->
-        Ember.Logger.error(error)
-        reject error
+    controller = @controllerFor 'list'
+
+    # UPGRADE: use handlebars subexpression to create dataset
+    controller.set 'deals', Radium.InfiniteDataset.create
+      type: Radium.Deal
+      params: @filterParams(listId)
+
+  filterParams: (listId) ->
+    list: listId
+    page_size: 10

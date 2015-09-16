@@ -74,6 +74,16 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       component: "next-task"
     }
     {
+      id: "change-status"
+      classNames: "change-status"
+      heading: "Change Status"
+      bindings: [
+        {name: "deal", value: "model"},
+        {name: "parent", value: "table.targetObject"}
+      ]
+      component: "change-liststatus"
+    }
+    {
       id: "next-task-date"
       classNames: "next-task-date"
       heading: "Next Task Date"

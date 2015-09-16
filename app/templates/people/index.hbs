@@ -37,7 +37,6 @@
         {{#each list in lists}}
           {{list-item list=list parent=this tagName="li" class="list-item"}}
         {{/each}}
-        <li class="new-list"><a href="#" {{action "createTag"}} class="btn-text btn-black"><i class="ss-standard ss-plus"></i> New List</a></li>
       </ul>
       <ul class="nav nav-pills more">
         {{#each user in team}}
@@ -205,10 +204,10 @@
       </div>
     </div>
     <div class="left-table">
-      {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields}}
+      {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields}}
     </div>
     <div class="right-table">
-      {{variadic-table list=controller columns=checkedColumns sort="sort" classNames="variable"}}
+      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable"}}
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
