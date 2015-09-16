@@ -12,6 +12,9 @@
       height: 26px;
       line-height: 26px;
       overflow: visible;
+      display: inline-block;
+      white-space: nowrap;
+      float: none;
     }
 
     li.as-selection-item,
@@ -59,7 +62,7 @@
     }
 
     li.as-original input {
-      line-height: 10px;
+      line-height: 16px;
       height: auto;
       font-size: 14px;
       width: auto;
@@ -114,3 +117,4 @@ div.autocomplete:not(.tags) {
 div.autocomplete:not(.tags):not(.search) {
   top: 52px !important;
 }
+
