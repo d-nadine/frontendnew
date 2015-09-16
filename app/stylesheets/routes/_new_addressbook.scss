@@ -643,8 +643,6 @@
 
     .variadic-table {
       background: #ebebeb;
-      border-bottom: 1px solid #e3e3e3;
-      margin-bottom: 10px;
 
       a {
         color: $text;
@@ -1355,3 +1353,92 @@
   display: none;
 }
 
+
+#application {
+  height: 100%;
+
+  .application-view {
+    height: 100%;
+
+    .addressbook-view {
+      height: 100%;
+
+      .single-column-container {
+        height: 100%;
+
+        #addressbook {
+          height: 100%;
+
+          .people-index-view {
+            height: 100%;
+
+            .page-header {
+              height: 100%;
+              margin-bottom: 0;
+              padding: 0;
+
+              .table-container {
+                height: 100%;
+
+                .table-wrap {
+                  display: inline-block;
+                  width: 100%;
+                  height: calc(100% - 80px);
+                  position: absolute;
+                  bottom: 0;
+                  top: 80px;
+                  overflow-x: scroll;
+
+                  .variadic-table tr:last-of-type td {
+                    border-bottom: 1px solid $border;
+                  }
+
+                  .left-table {
+                    display: inline-block;
+                    position: absolute;
+                    z-index: 3;
+                  }
+                  .right-table {
+                    width: calc(100% - 274px);
+                    padding-left: 274px;
+                    height: 100%;
+                    z-index: 2;
+                  }
+
+                  .under-table {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    z-index: -1;
+
+                    table {
+                      height: 100%;
+
+                      thead {
+
+                        th {
+                          background-color: white;
+                          height: 56px;
+                          border: 1px solid #ccc;
+                        }
+                      }
+                      tbody {
+
+                        td {
+                          height: 100%;
+                          background-color: #f1f1f1;
+                          border: 1px solid $border;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

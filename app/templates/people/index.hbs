@@ -207,11 +207,23 @@
         {{query-builder potentialQueries=potentialQueries actualQueries=actualQueries fields=combinedQueryFields parent=this users=users isSaved=isQuery}}
       </div>
     </div>
-    <div class="left-table">
-      {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields}}
-    </div>
-    <div class="right-table">
-      {{variadic-table list=controller columns=checkedColumns sort="sort" classNames="variable"}}
+    <div class="table-wrap">
+      <div class="left-table">
+        {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields}}
+      </div>
+      <div class="right-table">
+        {{variadic-table list=controller columns=checkedColumns sort="sort" classNames="variable"}}
+      </div>
+      <div class="under-table">
+        <table>
+          <thead>
+            <th></th>
+          </thead>
+          <tbody>
+            <td></td>
+          </tbody>
+        </table>
+      </div>
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
