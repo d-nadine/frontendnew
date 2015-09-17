@@ -9,6 +9,9 @@
   - [X] post new deal with existing company
   - [X] post new deal with existing contact
   - [ ] deals table
+  - [ ] status change
+  - [ ] last status change
+  - [ ] selectable columns
   - [ ] deals detail view/drawer
   - [ ] What happens to open deals?
   - [ ] flesh out company view with new details

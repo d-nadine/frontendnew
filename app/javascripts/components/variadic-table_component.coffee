@@ -15,7 +15,7 @@ Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
-    selector = ".next-task-component .dropdown-toggle, .assignto-picker-component .dropdown-toggle, .status-picker-component .dropdown-toggle"
+    selector = ".next-task-component .dropdown-toggle, .assignto-picker-component .dropdown-toggle, .status-picker-component .dropdown-toggle, .change-liststatus-component .dropdown-toggle"
 
     clearMenus = ->
       $(selector).each ->

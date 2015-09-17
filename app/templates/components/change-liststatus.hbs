@@ -1,5 +1,5 @@
 <a href="#" class="dropdown-toggle">
-  <span>{{currentListStatus}}</span>
+  <span>{{deal.currentStatus.name}}</span>
   <span class="caret"></span>
 </a>
 <ul class="dropdown-menu" role="menu">
@@ -9,3 +9,17 @@
     </li>
   {{/each}}
 </ul>
+{{#if showInactiveReasonModal}}
+  {{#x-modal close="closeInactiveReasonModal"}}
+  <h1>Inactive Reason</h1>
+  <div class="form">
+    <div class="item">
+      {{textarea rows="3" cols="15" value=inactiveReason placeholder="Inactive Reason" class="single field"}}
+    </div>
+     <div class="actions">
+       <button {{action "createInactiveStatusChange"}} class="btn btn-primary">Submit</button>
+       <button {{action "closeInactiveReasonModal"}} class="btn">Cancel</button>
+      </div>
+  </div>
+  {{/x-modal}}
+{{/if}}

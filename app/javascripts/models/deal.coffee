@@ -1,8 +1,44 @@
-require 'lib/radium/checklist_total_mixin'
-
 Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
   Radium.HasTasksMixin,
-  Radium.ChecklistTotalMixin,
+
+  currentStatus: DS.belongsTo('Radium.ListStatus')
+  list: DS.belongsTo('Radium.List')
+
+  statusLastChangedAt: DS.attr('datetime')
+  expectedCloseDate: DS.attr('datetime')
+  user: DS.belongsTo('Radium.User')
+  todos: DS.hasMany('Radium.Todo')
+  meetings: DS.hasMany('Radium.Meeting')
+
+  activities: DS.hasMany('Radium.Activity')
+
+  contact: DS.belongsTo('Radium.Contact', inverse: 'deals')
+  contacts: DS.hasMany('Radium.Contact')
+
+  contactRefs: DS.hasMany('Radium.ContactRef')
+
+  name: DS.attr('string')
+  description: DS.attr('string')
+  payBy: DS.attr('datetime')
+  value: DS.attr('number')
+
+  tasks: Radium.computed.tasks('todos', 'meetings')
+
+  company: Ember.computed.alias('contact.company')
+
+  displayName: Ember.computed.alias 'name'
+
+  about: Ember.computed.alias 'description'
+
+  reference: Ember.computed  '_reference',  (key, value) ->
+    if arguments.length == 2 && value != undefined
+      property = value.constructor.toString().split('.')[1]
+      associationName = "_reference#{property}"
+      @set associationName, value
+    else
+      @get('_referenceEmail')
+
+  _referenceEmail: DS.belongsTo('Radium.Email')
 
   daysInCurrentState: Ember.computed 'statusLastChangedAt', ->
     unless lastChange = @get('statusLastChangedAt')
@@ -20,49 +56,6 @@ Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
       return "#{Math.floor(timeDiff / 60)} hour(s)"
     else
       return "#{Math.floor(timeDiff / (24 * 60))} day(s)"
-
-  statusLastChangedAt: DS.attr('datetime')
-  expectedCloseDate: DS.attr('datetime')
-  user: DS.belongsTo('Radium.User')
-  todos: DS.hasMany('Radium.Todo')
-  meetings: DS.hasMany('Radium.Meeting')
-
-  activities: DS.hasMany('Radium.Activity')
-
-  contact: DS.belongsTo('Radium.Contact', inverse: 'deals')
-
-  contacts: DS.hasMany('Radium.Contact')
-
-  contactRefs: DS.hasMany('Radium.ContactRef')
-
-  reference: Ember.computed  '_reference',  (key, value) ->
-    if arguments.length == 2 && value != undefined
-      property = value.constructor.toString().split('.')[1]
-      associationName = "_reference#{property}"
-      @set associationName, value
-    else
-      @get('_referenceEmail')
-
-  _referenceEmail: DS.belongsTo('Radium.Email')
-
-  name: DS.attr('string')
-  description: DS.attr('string')
-  payBy: DS.attr('datetime')
-  value: DS.attr('number')
-
-  tasks: Radium.computed.tasks('todos', 'meetings')
-
-  company: Ember.computed.alias('contact.company')
-
-  displayName: Ember.computed.alias 'name'
-
-  about: Ember.computed.alias 'description'
-
-  isOpen: Ember.computed 'status', ->
-    not ['lost', 'closed'].contains(@get('status'))
-
-  isUnpublished: Ember.computed 'status', ->
-    @get('status') == 'unpublished'
 
   longName: Ember.computed 'name', 'contact', ->
     name = @get('name')

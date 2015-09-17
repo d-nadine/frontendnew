@@ -1,0 +1,36 @@
+.list-table {
+  .table-container {
+    .change-status {
+      min-width: 130px;
+    }
+  }
+}
+
+.change-liststatus-component .xmodal-component {
+  .modal.fade.in {
+    padding-bottom: 12px;
+  }
+
+  .modal-body {
+    padding-top: 0;
+  }
+
+  .actions {
+    float: left;
+  }
+
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    text-shadow: none;
+    padding-right: 0;
+    padding-left: 0;
+    resize: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    margin: 0;
+    border: solid 1px #cacaca;
+  }
+}
+
