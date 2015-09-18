@@ -20,6 +20,9 @@
           <th {{bind-attr class="column.classNames"}}>{{column.heading}}</th>
         {{/if}}
       {{/each}}
+      {{#if addColumnSelector}}
+        {{column-selector columns=columns tagName="th" class="column-selector"}}
+      {{/if}}
     </tr>
   </thead>
   <tbody>
@@ -41,6 +44,10 @@
               {{/if}}
             </td>
           {{/each}}
+          {{#if table.addColumnSelector}}
+            <td class="column-selector">
+            </td>
+          {{/if}}
         {{/variadic-row}}
       {{else}}
         {{#unless list.isLoading}}

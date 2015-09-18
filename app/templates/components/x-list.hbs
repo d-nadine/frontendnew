@@ -46,7 +46,7 @@
           {{variadic-table list=deals columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" dynamicHeading=list.itemName}}
         </div>
         <div class="right-table">
-          {{variadic-table list=deals columns=combinedColumns sort="sort" classNames="variable"}}
+          {{variadic-table list=deals columns=combinedColumns sort="sort" classNames="variable" addColumnSelector=true}}
         </div>
         {{#if deals.isLoading}}
           <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">

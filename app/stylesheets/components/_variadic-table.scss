@@ -1,0 +1,11 @@
+.variadic-table-component {
+  th.column-selector {
+    text-align: center;
+  }
+  th.column-selector, td.column-selector {
+    min-width: 50px;
+  }
+  td.column-selector.viewed {
+    background-color: transparent;
+  }
+}

@@ -1,11 +1,3 @@
-<button class="dropdown-toggle">
-  <span>
-    <i class="ss-standard ss-columns"></i>
-    <i class="ss-standard ss-dropdown"></i>
-  </span>
-</button>
-<ul class="col-menu dropdown-menu">
-  {{#each column in combinedColumns}}
-    {{x-check leader=column.heading checked=column.checked}}
-  {{/each}}
-</ul>
+<a href="#" {{action "showColumnSelectorModal"}}>
+  <i class="ss-standard ss-plus"></i>
+</a>
