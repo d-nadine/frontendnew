@@ -194,7 +194,7 @@
         </button>
         <ul class="col-menu dropdown-menu">
           {{#each column in combinedColumns}}
-            {{x-check leader=column.heading checked=column.checked}}
+            {{x-check leader=column.heading checked=column.checked action="toggleColumnVisibility"}}
           {{/each}}
         </ul>
         {{email-autosuggest destination=dummy placeholder="search" showAvatar=false class="search" deleteOnBackSpace=false searchOnlyAction="selectContact" queryParameters=searchQueryParameters filterResults=filterSearchResults}}
@@ -204,7 +204,7 @@
       </div>
     </div>
     <div class="left-table">
-      {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields}}
+      {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields toggleColumnVisibility="toggleColumnVisibility"}}
     </div>
     <div class="right-table">
       {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable"}}

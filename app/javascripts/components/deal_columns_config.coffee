@@ -1,4 +1,6 @@
 Radium.DealColumnsConfig = Ember.Mixin.create
+  SAVED_COLUMNS: "deal_saved_checked_columns"
+  initialColumns: ['assign', "change-status", "status-change-date", "next-task", "next-task-date"]
   fixedColumns: Ember.A([
     {
       classNames: "list-name"

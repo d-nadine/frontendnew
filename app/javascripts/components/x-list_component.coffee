@@ -1,6 +1,8 @@
 require 'components/deal_columns_config'
+require "mixins/table_column_selections"
 
 Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
+  Radium.TableColumnSelectionsMixin,
   actions:
     loadMoreDeals: ->
       deals = @get('deals')
@@ -75,7 +77,18 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
       false
 
   combinedColumns: Ember.computed 'columns.[]', ->
-    @get('columns')
+    savedColumns = JSON.parse(localStorage.getItem(@get('localStorageKey')))
+
+    cols = @columns.filter((c) -> savedColumns.contains(c.id))
+
+    unless cols.length
+      cols = cols.filter((c) => @initialColumns.contains(c.id))
+
+    cols.setEach 'checked', true
+
+    cols
+
+  checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
 
   classNames: ['single-column-container']
 
@@ -88,10 +101,18 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   drawerModel: null
   drawerParams: null
 
+  localStorageKey: Ember.computed 'listType', ->
+    "#{@SAVED_COLUMNS}_#{@get('listType')}"
+
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
 
     @EventBus.subscribe "closeDrawers", this, @closeDrawer.bind(this)
+
+    localStorageKey = @get('localStorageKey')
+
+    unless savedColumns = JSON.parse(localStorage.getItem(localStorageKey))
+      localStorage.setItem localStorageKey, JSON.stringify(@initialColumns)
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments

@@ -1,9 +1,11 @@
 require "controllers/addressbook/people_mixin"
 require "mixins/save_contact_actions"
+require "mixins/table_column_selections"
 
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   Radium.SaveContactActions,
+  Radium.TableColumnSelectionsMixin,
   actions:
     selectContact: (item) ->
       if typeof item == "string"
@@ -568,13 +570,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     @EventBus.publish "showQuery"
 
   checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
-
-  checkedColumnsDidChange: Ember.observer 'checkedColumns.length', ->
-    checked = @get('checkedColumns').filter((c) -> c.checked).mapProperty 'id'
-
-    return unless checked.length
-
-    localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
 
   displayNoContacts: Ember.computed 'noContacts', 'isPotential', 'potential', 'filter', ->
     return false if @get('isPotential') || @get('isListed')

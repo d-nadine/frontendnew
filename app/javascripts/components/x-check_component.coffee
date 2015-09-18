@@ -7,6 +7,8 @@ Radium.XCheckComponent = Ember.Component.extend
   sendNotification: ->
     @sendAction('action')
 
+    false
+
   init: ->
     @_super.apply this, arguments
     @on "change", this, this._updateElementValue
@@ -19,6 +21,7 @@ Radium.XCheckComponent = Ember.Component.extend
 
   _updateElementValue: ->
     @set 'checked', this.$('input').prop('checked')
+    false
 
   checkBoxId: Ember.computed ->
     "checker-#{@get('elementId')}"
