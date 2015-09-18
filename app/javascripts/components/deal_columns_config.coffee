@@ -64,6 +64,13 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       component: "change-liststatus"
     }
     {
+      id: "status-change-date"
+      classNames: "status-change-date"
+      heading: "Last Status Change"
+      binding: "daysInCurrentState"
+      sortOn: "status_last_changed"
+    }
+    {
       id: "next-task"
       classNames: "next-task"
       heading: "Next Task"

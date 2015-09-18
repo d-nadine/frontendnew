@@ -42,8 +42,8 @@ Radium.ChangeListstatusComponent = Ember.Component.extend
                      listStatus: listStatus
                      inactiveReason: @inactiveReason
 
-    statusChange.save().then ->
-      p "it is saved"
+    deal.updateLocalProperty('statusLastChangedAt', Ember.DateTime.create())
+    statusChange.save()
 
   focusInactiveTextbox: ->
     Radium.Common.wait (@$('textarea').length > 0), -> @$('textarea').focus()
