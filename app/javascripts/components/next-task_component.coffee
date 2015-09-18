@@ -21,10 +21,18 @@ Radium.NextTaskComponent = Ember.Component.extend
       todo.save().then (result) ->
         self.send 'todoAdded', result
 
-    todoAdded: (todo) ->
-      contact = @get('model')
+      false
 
-      contact.reload()
+    todoAdded: (todo) ->
+      model = @get('model')
+
+      next = ->
+        model.updateLocalBelongsTo('nextTodo', todo)
+        model.updateLocalProperty('nextTaskDate', todo.get('time'))
+
+      model.executeWhenInCleanState next
+
+      false
 
     showTodoModal: ->
       @$('.modal').modal(backdrop: false)

@@ -74,6 +74,9 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
       false
 
+  combinedColumns: Ember.computed 'columns.[]', ->
+    @get('columns')
+
   classNames: ['single-column-container']
 
   filterStartDate: null

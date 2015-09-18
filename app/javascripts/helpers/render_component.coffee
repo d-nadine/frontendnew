@@ -7,6 +7,9 @@ Ember.Handlebars.registerHelper 'renderComponent', (contextPath, propertyPath, o
   options.contexts = []
   options.types = []
 
+  #get a reference to the row component
+  options.hash['tableRow'] = this
+
   property.bindings.forEach (binding) ->
     options.hash[binding.name] = binding.value
     options.hashTypes[binding.name] = if binding.static then "STRING" else "ID"

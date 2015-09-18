@@ -10,6 +10,7 @@
   - [X] post new deal with existing contact
   - [ ] deals table
   - [ ] status change
+  - [ ] Deals closed total???
   - [ ] last status change
   - [ ] selectable columns
   - [ ] deals detail view/drawer

@@ -160,4 +160,17 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
     @addObserver 'currentState.stateName', observer
 
+  executeWhenInCleanState: (func) ->
+    observer = =>
+      return unless @get('inCleanState')
+
+      @removeObserver 'currentState.stateName', observer
+
+      func()
+
+    if @get('inCleanState')
+      observer()
+    else
+      @addObserver 'currentState.stateName', observer
+
 requireAll /models/
