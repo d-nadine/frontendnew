@@ -22,6 +22,16 @@ Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
   payBy: DS.attr('datetime')
   value: DS.attr('number')
 
+  nextTodo: DS.belongsTo('Radium.Todo', inverse: null)
+  nextTask: Ember.computed 'nextTodo', ->
+    @get('nextTodo')
+
+  nextTaskDate: DS.attr('datetime')
+
+  nextTaskDateDisplay: Ember.computed 'nextTaskDate', ->
+    if nextDate = @get('nextTaskDate')
+      nextDate.readableTimeAgo()
+
   tasks: Radium.computed.tasks('todos', 'meetings')
 
   company: Ember.computed.alias('contact.company')

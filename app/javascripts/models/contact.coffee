@@ -11,7 +11,6 @@ Radium.Contact = Radium.Model.extend Radium.HasTasksMixin,
   addresses: DS.hasMany('Radium.Address')
   notes: DS.hasMany('Radium.Note', inverse: '_referenceContact')
 
-  nextTodo: DS.belongsTo('Radium.Todo', inverse: null)
   nextMeeting: DS.belongsTo('Radium.Meeting', inverse: null)
   user: DS.belongsTo('Radium.User')
   company: DS.belongsTo('Radium.Company', inverse: 'contacts')
@@ -38,6 +37,7 @@ Radium.Contact = Radium.Model.extend Radium.HasTasksMixin,
   fax: DS.attr('string')
   gender: DS.attr('string')
 
+  nextTodo: DS.belongsTo('Radium.Todo', inverse: null)
   nextTask: Ember.computed 'nextTodo', 'nextMeeting', ->
     @get('nextTodo') || @get('nextMeeting')
 
