@@ -2,6 +2,36 @@
 .right-table .variadic-table-component .variadic-table th.column-selector {
   text-align: center;
   min-width: 50px;
+  cursor: pointer;
+
+  .column-selector-dialog {
+    position: relative;
+
+    ul.dropdown-menu {
+      width: 600px;
+    }
+
+    ul.dropdown-menu li h4 {
+      text-align: left;
+      margin-left: 10px;
+    }
+
+    ul.list-inline {
+      text-align: left;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    ul.list-inline li {
+      display: inline-block;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    ul.list-inline li label span {
+      margin-right: 5px;
+    }
+  }
 }
 
 #addressbook .right-table .variadic-table-component .variadic-table td.column-selector,

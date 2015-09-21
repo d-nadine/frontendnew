@@ -1,3 +1,21 @@
-<a href="#" {{action "showColumnSelectorModal"}}>
+<a href="#" {{action "showColumnSelectorDialog"}}>
   <i class="ss-standard ss-plus"></i>
 </a>
+<div class="column-selector-dialog">
+  <ul class="dropdown-menu">
+    <li>
+      {{#each group in groups}}
+        <li>
+          <h4 class="group-heading">{{capitalize group.group.group}}</h4>
+        </li>
+        <li>
+          <ul class="list-inline">
+            {{#each column in group.columns}}
+              {{x-check leader=column.heading checked=column.checked action="toggleColumnVisibility" tagName="li"}}
+            {{/each}}
+          </ul>
+        </li>
+      {{/each}}
+    </li>
+  </ul>
+</div>

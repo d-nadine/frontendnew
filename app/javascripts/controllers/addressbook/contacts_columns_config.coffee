@@ -36,6 +36,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
   columns: Ember.A([
     {
       id: "email"
+      group: "details"
       classNames: "email"
       heading: "Email"
       route: "contact"
@@ -72,6 +73,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "company"
+      group: "company"
       classNames: "company"
       heading: "Company"
       route: "company"
@@ -125,6 +127,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "events"
+      group: "activity"
       classNames: "events"
       heading: "Events"
       binding: "activityTotal"
@@ -132,6 +135,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "inactive"
+      group: "activity"
       classNames: "inactive"
       heading: "Inactive"
       binding: "daysInactive"
@@ -139,6 +143,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "next-task"
+      group: "actions"
       classNames: "next-task"
       heading: "Next Task"
       route: "calendar.task"
@@ -158,6 +163,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: "next-task"
     }
     {
+      group: "activity"
       id: "next-task-date"
       classNames: "next-task-date"
       heading: "Next Task Date"
@@ -166,6 +172,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "sharing"
+      group: "actions"
       classNames: "sharing"
       heading: "Sharing"
       component: "toggle-switch"
@@ -187,6 +194,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "assign"
+      group: "details"
       classNames: "assign"
       heading: "Assigned To"
       component: "assignto-picker"
@@ -199,6 +207,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "last-activity"
+      group: "activity"
       classNames: "last-activity"
       heading: "Last Activity"
       component: "render-activity"
@@ -208,6 +217,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "city"
+      group: "details"
       classNames: "city"
       heading: "City"
       bindings: [{
@@ -237,6 +247,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "phone"
+      group: "details"
       classNames: "phone"
       heading: "Phone"
       bindings: [{
@@ -265,6 +276,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
+      group: "details"
       id: "source"
       classNames: "source"
       heading: "Source"
@@ -273,6 +285,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "added"
+      group: "activity"
       classNames: "added"
       heading: "Added"
       binding: "added"
@@ -280,6 +293,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "deals-closed-total"
+      group: "deals"
       classNames: "deals-closed-total"
       heading: "Deals Closed"
       binding: "dealsClosedTotal"
@@ -287,6 +301,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "deals-total"
+      group: "deals"
       classNames: "deals-total"
       heading: "Deals Total"
       binding: "dealsTotal"
@@ -294,6 +309,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "lists"
+      group: "actions"
       classNames: "lists"
       heading: "Lists"
       bindings: [
@@ -308,6 +324,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "status"
+      group: "actions"
       classNames: "assign stat"
       heading: "Status"
       sortOn: "status"
@@ -320,6 +337,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "events-seven"
+      group: "activity"
       classNames: "events-seven"
       heading: "Events in last 7 days"
       binding: "activitySevenDaysTotal"
@@ -327,6 +345,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     }
     {
       id: "events-thirty"
+      group: "activity"
       classNames: "events-thirty"
       heading: "Events in last 30 days"
       binding: "activityThirtyDaysTotal"
