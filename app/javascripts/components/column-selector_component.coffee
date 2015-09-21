@@ -22,9 +22,13 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
+    columnSelection = @get('columnSelection')
+
+    Ember.assert "you need to specify a columnSection for the ColumnSelectorComponent", columnSelection
+
     grouped = []
 
-    @get('columnSelection').forEach (c) ->
+    columnSelection.forEach (c) ->
       group = if g = grouped.find((el) -> el.group == c.group)
                  g
               else
