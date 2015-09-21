@@ -3,11 +3,18 @@ Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   actions:
     showMore: ->
       @sendAction 'showMore'
-      return false
+
+      false
 
     sortTable: (prop, ascending) ->
       @sendAction 'sort', prop, ascending
-      return false
+
+      false
+
+    toggleColumnSelection: ->
+      @sendAction "toggleColumnSelection"
+
+      false
 
   colSpan: Ember.computed 'columns.length', ->
     @get('columns.length') + 1

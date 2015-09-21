@@ -1,4 +1,10 @@
 Radium.ColumnSelectorComponent = Ember.Component.extend
+  actions:
+    toggleColumnSelection: ->
+      @sendAction "toggleColumnSelection"
+
+      false
+
   click: (e) ->
     el = @$('.column-selector-dialog')
 

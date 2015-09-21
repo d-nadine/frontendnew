@@ -11,7 +11,7 @@
         <li>
           <ul class="list-inline">
             {{#each column in group.columns}}
-              {{x-check leader=column.heading checked=column.checked action="toggleColumnVisibility" tagName="li"}}
+              {{x-check leader=column.heading checked=column.checked action="toggleColumnSelection" tagName="li"}}
             {{/each}}
           </ul>
         </li>

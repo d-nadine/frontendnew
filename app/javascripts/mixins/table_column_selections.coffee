@@ -7,3 +7,5 @@ Radium.TableColumnSelectionsMixin = Ember.Mixin.create
         return unless checked.length
 
         localStorage.setItem @SAVED_COLUMNS, JSON.stringify(checked)
+
+      false

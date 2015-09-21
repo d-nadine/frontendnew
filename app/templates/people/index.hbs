@@ -34,6 +34,9 @@
             </div>
           {{/link-to}}
         </li>
+        <li class="new-list">
+          <a href="#" {{action "createList"}} class="btn-text btn-black"><i class="ss-standard ss-plus"></i> New List</a>
+        </li>
         {{#each list in lists}}
           {{list-item list=list parent=this tagName="li" class="list-item"}}
         {{/each}}
@@ -186,17 +189,6 @@
         {{/if}}
       </div>
       <div class="col-selector">
-        <button class="dropdown-toggle">
-          <span>
-            <i class="ss-standard ss-columns"></i>
-            <i class="ss-standard ss-dropdown"></i>
-          </span>
-        </button>
-        <ul class="col-menu dropdown-menu">
-          {{#each column in combinedColumns}}
-            {{x-check leader=column.heading checked=column.checked action="toggleColumnVisibility"}}
-          {{/each}}
-        </ul>
         {{email-autosuggest destination=dummy placeholder="search" showAvatar=false class="search" deleteOnBackSpace=false searchOnlyAction="selectContact" queryParameters=searchQueryParameters filterResults=filterSearchResults}}
       </div>
       <div class="filters">
@@ -207,7 +199,7 @@
       {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields toggleColumnVisibility="toggleColumnVisibility"}}
     </div>
     <div class="right-table">
-      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable" addColumnSelector=true columnSelection=columns}}
+      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable" addColumnSelector=true columnSelection=columns toggleColumnSelection="toggleColumnVisibility"}}
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
