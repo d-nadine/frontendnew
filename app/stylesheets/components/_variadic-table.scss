@@ -1,11 +1,12 @@
-.variadic-table-component {
-  th.column-selector {
-    text-align: center;
-  }
-  th.column-selector, td.column-selector {
-    min-width: 50px;
-  }
-  td.column-selector.viewed {
+#addressbook .right-table .variadic-table-component .variadic-table th.column-selector,
+.right-table .variadic-table-component .variadic-table th.column-selector {
+  text-align: center;
+  min-width: 50px;
+}
+
+#addressbook .right-table .variadic-table-component .variadic-table td.column-selector,
+.right-table .variadic-table-component .variadic-table td.column-selector {
+  &.viewed {
     background-color: transparent;
   }
 }
