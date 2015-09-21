@@ -602,6 +602,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     @_super.apply this, arguments
 
     @EventBus.subscribe "closeDrawers", this, @closeDrawer.bind(this)
+    @columnSelectionKey = @SAVED_COLUMNS
 
   closeDrawer: ->
     @set 'showDrawer', false
