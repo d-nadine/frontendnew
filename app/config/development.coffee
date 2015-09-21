@@ -44,6 +44,3 @@ Ember.RSVP.configure 'onerror', (e) ->
     return Ember.Logger.error(text)
 
   Ember.Logger.error e
-
-Ember.onerror = (e) ->
-  Ember.Logger.error e
