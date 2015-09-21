@@ -11,7 +11,20 @@ FastClick.attach(document.body)
 
 window.number_of_clicks = 0
 
-document.addEventListener  'click', ->
+Raygun.init('ZCfpkrJEWIcnlZGDb8aYPw==',
+  allowInsecureSubmissions: true
+  ignoreAjaxAbort: true
+  ignoreAjaxError: true
+  debugMode: true
+  ignore3rdPartyErrors: false
+  wrapAsynchronousCallbacks: true
+  excludedUserAgents: ['PhantomJS']
+  excludedHostnames: [
+    'localhost'
+    '.dev'
+  ]).attach()
+
+document.addEventListener 'click', ->
           window.Intercom "update",
             increments:
               number_of_clicks: 1
@@ -39,33 +52,6 @@ Radium = Em.Application.createWithMixins
 window.Radium = Radium
 
 Radium.deferReadiness()
-
-Ember.RSVP.configure 'onerror', (e) ->
-  return unless e
-
-  return if e.message == "TransitionAborted"
-
-  if e.hasOwnProperty 'responseText'
-    text = """
-      ================================
-      Request failed with: #{e.status}
-      status: #{e.statusText}
-      response: #{e.responseText}
-      ================================
-      """
-
-    return Ember.Logger.error(text)
-
-  Ember.Logger.error e
-
-logError = Ember.Logger.error.bind(Ember.Logger)
-
-Ember.Logger.error = (error) ->
-  logError error
-
-  return unless window.ENV.environment == "production"
-
-  Raven.captureException(error)
 
 require /lib\/radium\/base/
 

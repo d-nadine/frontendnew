@@ -26,3 +26,24 @@ Ember.Application.initializer
   initialize: (container, application) ->
     # require 'instrumentation/view_rendering'
     Stripe.setPublishableKey('pk_test_fcvBFet4q62tftqiRZntwafx')
+
+Ember.RSVP.configure 'onerror', (e) ->
+  return unless e
+
+  return if e.message == "TransitionAborted"
+
+  if e.hasOwnProperty 'responseText'
+    text = """
+      ================================
+      Request failed with: #{e.status}
+      status: #{e.statusText}
+      response: #{e.responseText}
+      ================================
+      """
+
+    return Ember.Logger.error(text)
+
+  Ember.Logger.error e
+
+Ember.onerror = (e) ->
+  Ember.Logger.error e

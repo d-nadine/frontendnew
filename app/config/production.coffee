@@ -21,7 +21,15 @@ Ember.Application.initializer
   initialize: (container, application) ->
     Stripe.setPublishableKey('pk_live_RX5MutadKEj3S5VKOYsSSncC')
 
-Ember.onerror = (e) ->
-  return if e.message == "TransitionAborted"
+Ember.RSVP.configure 'onerror', (e) ->
+  Raygun.send e
 
-  Ember.Logger.error e
+Ember.onerror = (e) ->
+  Raygun.send e
+
+Ember.Logger.error = (message, cause, stack) ->
+  if typeof message == "string"
+    Raygun.send(new Error(message), null, { cause: cause, stack: stack })
+  else
+    console.error(message)
+    Raygun.send message
