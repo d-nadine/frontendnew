@@ -22,7 +22,22 @@ Ember.Application.initializer
     Stripe.setPublishableKey('pk_live_RX5MutadKEj3S5VKOYsSSncC')
 
 Ember.RSVP.configure 'onerror', (e) ->
-  Raygun.send e
+  return unless e
+
+  return if e.message == "TransitionAborted"
+
+  if e.hasOwnProperty 'responseText'
+    text = """
+      ================================
+      Request failed with: #{e.status}
+      status: #{e.statusText}
+      response: #{e.responseText}
+      ================================
+      """
+
+    return Ember.Logger.error(text)
+
+  Ember.Logger.error e
 
 Ember.onerror = (e) ->
   Raygun.send e
