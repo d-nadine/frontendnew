@@ -43,6 +43,45 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
       false
 
+    showCompanyDrawer: (company) ->
+      @closeDrawer()
+
+      @set "drawerModel", company
+
+      config = {
+        bindings: [{
+          name: "company",
+          value: "drawerModel"
+        },
+        {
+          name: "closeDrawer",
+          value: "closeAddressbookDrawer",
+          static: true
+        },
+        {
+          name: "parent",
+          value: "this"
+        },
+        {
+          name: "hideDeals",
+          value: true,
+          static: true
+        },
+        {
+          name: "deleteCompany",
+          value: "deleteCompany",
+          static: true
+        }
+        ],
+        component: 'x-company'
+      }
+
+      @set 'drawerParams', config
+
+      @set 'showDrawer', true
+
+      false
+
     showDealDrawer: (deal) ->
       @closeDrawer()
 

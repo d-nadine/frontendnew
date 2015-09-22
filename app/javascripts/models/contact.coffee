@@ -96,8 +96,9 @@ Radium.Contact = Radium.Model.extend Radium.HasTasksMixin,
 
     "@#{primaryEmail.split('@').pop()}"
 
-  email: Ember.computed.alias 'primaryEmail.value'
-  phone: Ember.computed.alias 'primaryPhone.value'
+  email: Radium.computed.primaryAccessor 'emailAddresses', 'primaryEmail'
+  phone: Radium.computed.primaryAccessor 'phoneNumbers', 'primaryPhone'
+
   city: Ember.computed.alias 'primaryAddress.city'
 
   added: Ember.computed 'createdAt', ->

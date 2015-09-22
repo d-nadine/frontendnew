@@ -64,10 +64,6 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         value: "showContactDrawer",
         static: true
       }],
-      actions: [
-        name: "saveAction"
-        value: "saveEmail"
-      ]
       sortOn: "email"
       component: 'editable-field'
     }
@@ -263,15 +259,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         name: "bufferKey",
         value: "phone"
         static: true
-      }
-      ],
-      actions: [
-        {
-          name: 'saveAction'
-          value: 'savePhone'
-          static: true
-        }
-      ]
+      }]
       sortOn: "phone"
       component: 'editable-field'
     }

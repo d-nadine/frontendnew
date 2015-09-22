@@ -65,7 +65,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       if @get('isInvalid')
         @get('containingController').send 'flashError', 'Field is not valid.'
-        resetModel()
+        if model
+          return resetModel()
+        else
+          return
 
       @set 'isSaving', true
 
@@ -193,7 +196,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     modelDep = "model.#{bufferKey}"
 
-    model = @get('model')
+    unless model = @get('model')
+      return @setMarkup()
 
     model.on 'modelUpdated', @modelUpdated.bind(this)
 

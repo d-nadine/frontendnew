@@ -288,16 +288,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
           isPrimary: true
           city: city
 
-    savePhone: (context) ->
-      unless context.get('model.phone')
-        phone = context.get('bufferedProxy.phone')
-        context.get('bufferedProxy').discardBufferedChanges()
-
-        context.get('model.phoneNumbers').createRecord
-                         name: 'work'
-                         value: phone
-                         isPrimary: true
-
     addList: (list) ->
       detail =
         list: list

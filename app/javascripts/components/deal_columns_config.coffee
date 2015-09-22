@@ -1,6 +1,6 @@
 Radium.DealColumnsConfig = Ember.Mixin.create
   SAVED_COLUMNS: "deal_saved_checked_columns"
-  initialContactsColumns: ['assign', "change-status", "status-change-date", "next-task", "next-task-date"]
+  initialContactsColumns: ["assign", "change-status", "status-change-date", "next-task", "next-task-date"]
   initialCompaniesColumns: ['company-name', 'assign', "change-status", "status-change-date", "next-task", "next-task-date"]
   fixedColumns: Ember.A([
     {
@@ -34,6 +34,72 @@ Radium.DealColumnsConfig = Ember.Mixin.create
   ])
 
   contactsColumns: Ember.A([
+    {
+      id: "contact-name"
+      group: "details"
+      classNames: "name"
+      heading: "Contact"
+      route: "contact"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "No Contact",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "name"
+        static: true
+      },
+      {
+        name: "routeAction",
+        value: "showContactDrawer",
+        static: true
+      }]
+      avatar: true
+      checked: true
+      context: "model"
+      component: 'editable-field'
+    }
+    {
+      id: "contact-email"
+      group: "details"
+      classNames: "email"
+      heading: "Contact Email"
+      route: "contact"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "No Contact",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "email"
+        static: true
+      },
+      {
+        name: 'validator',
+        value: Radium.EMAIL_REGEX,
+        static: true
+      },
+      {
+        name: "routeAction",
+        value: "showContactDrawer",
+        static: true
+      }],
+      actions: [
+        name: "saveAction"
+        value: "saveEmail"
+      ]
+      component: 'editable-field'
+    }
     {
       id: "assign"
       group: "actions"

@@ -29,16 +29,6 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
       false
 
-    saveEmail: (context) ->
-      unless context.get('model.email')
-        email = context.get('bufferedProxy.email')
-        context.get('bufferedProxy').discardBufferedChanges()
-
-        context.get('model.emailAddresses').createRecord
-                         name: 'work'
-                         value: email
-                         isPrimary: true
-
     sort: (prop, ascending) ->
       model = @get("model")
       params = model.get("params")
