@@ -1,8 +1,10 @@
 Radium.ListRoute = Ember.Route.extend
-  beforeModel: (transition) ->
+  afterModel: (model, transition) ->
     controller = @controllerFor('list')
 
-    listId = transition.params['list'].list_id
+    listId = model.get('id')
+
+    Ember.assert "No list id in ListRoute", listId
 
     controller = @controllerFor 'list'
 

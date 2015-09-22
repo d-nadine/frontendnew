@@ -121,9 +121,14 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
     @columnSelectionKey = localStorageKey
 
-    localStorage.getItem(localStorageKey)
+    storageData = localStorage.getItem(localStorageKey)
 
-    unless savedColumns = JSON.parse(localStorage.getItem(localStorageKey))
+    existingData = if !storageData || storageData == "undefined" || storageData == "[]"
+                     []
+                   else
+                     JSON.parse(storageData)
+
+    unless existingData.length
       localStorage.setItem localStorageKey, JSON.stringify(@get("initialColumns"))
 
   _setup: Ember.on 'didInsertElement', ->

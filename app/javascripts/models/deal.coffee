@@ -13,6 +13,8 @@ Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
   activities: DS.hasMany('Radium.Activity')
 
   contact: DS.belongsTo('Radium.Contact', inverse: 'deals')
+  company: DS.belongsTo('Radium.Company', inverse: 'deals')
+
   contacts: DS.hasMany('Radium.Contact')
 
   contactRefs: DS.hasMany('Radium.ContactRef')
@@ -33,8 +35,6 @@ Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
       nextDate.readableTimeAgo()
 
   tasks: Radium.computed.tasks('todos', 'meetings')
-
-  company: Ember.computed.alias('contact.company')
 
   displayName: Ember.computed.alias 'name'
 
