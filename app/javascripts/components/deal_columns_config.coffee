@@ -1,6 +1,6 @@
 Radium.DealColumnsConfig = Ember.Mixin.create
   SAVED_COLUMNS: "deal_saved_checked_columns"
-  initialColumns: ['assign', "change-status", "status-change-date", "next-task", "next-task-date"]
+  initialContactsColumns: ['assign', "change-status", "status-change-date", "next-task", "next-task-date"]
   fixedColumns: Ember.A([
     {
       classNames: "list-name"
@@ -33,9 +33,10 @@ Radium.DealColumnsConfig = Ember.Mixin.create
     }
   ])
 
-  columns: Ember.A([
+  contactsColumns: Ember.A([
     {
       id: "assign"
+      group: "actions"
       classNames: "assign"
       heading: "Assigned To"
       component: "assignto-picker"
@@ -48,15 +49,17 @@ Radium.DealColumnsConfig = Ember.Mixin.create
     }
     {
       id: "last-activity"
+      group: "activity"
       classNames: "last-activity"
       heading: "Last Activity"
-      component: "render-activity"
       bindings: [
         {name: "model", value: "model.activities.firstObject"}
       ]
+      component: "render-activity"
     }
     {
       id: "change-status"
+      group: "actions"
       classNames: "change-status"
       heading: "Change Status"
       bindings: [
@@ -67,6 +70,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
     }
     {
       id: "status-change-date"
+      group: "activity"
       classNames: "status-change-date"
       heading: "Last Status Change"
       binding: "daysInCurrentState"
@@ -74,6 +78,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
     }
     {
       id: "next-task"
+      group: "actions"
       classNames: "next-task"
       heading: "Next Task"
       route: "calendar.task"
@@ -94,28 +99,21 @@ Radium.DealColumnsConfig = Ember.Mixin.create
     }
     {
       id: "next-task-date"
+      group: "activity"
       classNames: "next-task-date"
       heading: "Next Task Date"
       binding: "nextTaskDateDisplay"
       sortOn: "next_task_date"
     }
     {
-      id: "value"
+      id: "deal-value"
+      group: "details"
       classNames: "deal-value"
-      heading: "Value"
-      bindings: [{
-        name: "value"
-        value: "model.value"
-      },
-      {
-        name: "model"
-        value: "model"
-      },
-      {
-        name: "saveAction",
-        value: "saveDealValue",
-        static: true
-      }
+      heading: "value"
+      bindings: [
+        {name: "value", value: "model.value"}
+        {name: "model", value: "model"}
+        {name: "saveAction", value: "saveDealValue", static: true}
       ]
       component: "currency-control"
     }

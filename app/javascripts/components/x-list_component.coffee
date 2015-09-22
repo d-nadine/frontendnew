@@ -76,17 +76,19 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
       false
 
-  combinedColumns: Ember.computed 'columns.[]', ->
+  combinedColumns: Ember.computed 'availableColumns.[]', ->
     savedColumns = JSON.parse(localStorage.getItem(@get('localStorageKey')))
 
-    cols = @columns.filter((c) -> savedColumns.contains(c.id))
+    availableColumns = @get('availableColumns')
+
+    cols = availableColumns.filter((c) -> savedColumns.contains(c.id))
 
     unless cols.length
-      cols = cols.filter((c) => @initialColumns.contains(c.id))
+      cols = cols.filter((c) => @get('initialColumns').contains(c.id))
 
     cols.setEach 'checked', true
 
-    cols
+    availableColumns
 
   checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
 
@@ -104,6 +106,12 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   localStorageKey: Ember.computed 'listType', ->
     "#{@SAVED_COLUMNS}_#{@get('listType')}"
 
+  availableColumns: Ember.computed 'listType', ->
+    @["#{@get('listType')}Columns"]
+
+  initialColumns: Ember.computed 'listType', ->
+    @["initial#{@get('listType').capitalize()}Columns"]
+
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
 
@@ -111,8 +119,12 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
     localStorageKey = @get('localStorageKey')
 
+    @columnSelectionKey = localStorageKey
+
+    localStorage.getItem(localStorageKey)
+
     unless savedColumns = JSON.parse(localStorage.getItem(localStorageKey))
-      localStorage.setItem localStorageKey, JSON.stringify(@initialColumns)
+      localStorage.setItem localStorageKey, JSON.stringify(@get("initialColumns"))
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
