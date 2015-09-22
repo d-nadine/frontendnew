@@ -8,4 +8,15 @@ Radium.Common = do ->
     else
       setTimeout wait.bind(null, condition, func, (counter + 1)), 30
 
-  wait: wait
+  addOverlay = (callback) ->
+    overlay = $('<div class="modal-backdrop"/>').appendTo(document.body)
+
+    overlay.one 'click', callback
+
+  removeOverlay = ->
+    if overlay = $('.modal-backdrop')
+      overlay.remove()
+
+  wait: wait,
+  addOverlay: addOverlay,
+  removeOverlay: removeOverlay

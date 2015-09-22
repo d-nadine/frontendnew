@@ -23,23 +23,11 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
       top: rect.top
       left: rect.right - dropdown.width() - th.width()
 
-    addOverlay = ->
-      overlay = $('<div class="modal-backdrop"/>').appendTo(document.body)
-
-      overlay.one 'click', ->
-        overlay.remove()
-        el.removeClass('open')
-
-    Ember.run.next ->
-      addOverlay()
+    Radium.Common.addOverlay ->
+      Radium.Common.removeOverlay()
+      el.removeClass('open')
 
     false
-
-  _tearDown: Ember.on 'willDestroyElement', ->
-    @_super.apply this, arguments
-
-    if overlay = $('.modal-backdrop')
-      overlay.remove()
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
@@ -60,6 +48,12 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
       g.columns.push c
 
     @set 'groups', grouped
+
+
+  _tearDown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    Radium.Common.removeOverlay()
 
   classNames: ['viewed']
 
