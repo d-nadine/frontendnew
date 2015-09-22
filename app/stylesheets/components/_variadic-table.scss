@@ -6,6 +6,7 @@
 
   .column-selector-dialog {
     position: relative;
+    z-index: 1050;
 
     ul.dropdown-menu {
       width: 600px;
