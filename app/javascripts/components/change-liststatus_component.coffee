@@ -56,7 +56,7 @@ Radium.ChangeListstatusComponent = Ember.Component.extend
     deal.get('currentStatus')
 
   remainingStatuses: Ember.computed 'deal.list.listStatuses.[]', 'currentListStatus', ->
-    listStatuses = @get('deal.list.listStatuses').toArray()
+    listStatuses = @get('deal.list.listStatuses')?.toArray()
 
     return unless (listStatuses && listStatuses.get('length')) && currentStatus = @get('currentListStatus')
 

@@ -108,7 +108,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       @set 'form.sendTime', date
       @send 'saveAsDraft', form, 'scheduled'
       #Hack to close menu
-      $(window).trigger('click.date-send-menu')
+      $(document).trigger('click.date-send-menu')
 
     showSendLater: ->
       @$('.send-later').css(display: 'inline-block')
@@ -118,7 +118,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       @set 'form.checkForResponse', date
       @set('checkForResponseSet', true)
       @$('.check-response-opener').removeClass 'open'
-      $(window).trigger('click.date-send-menu')
+      $(document).trigger('click.date-send-menu')
       false
 
     cancelCheckForResponse: ->
@@ -237,7 +237,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       e.stopPropagation()
 
 
-    $(window).on 'click.date-send-menu', (e) =>
+    $(document).on 'click.date-send-menu', (e) =>
       return unless e.target.hasOwnProperty('tagName')
 
       return true if e.target?.type == 'file'
@@ -301,7 +301,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       el.tooltip('destroy')
 
     @$('.drop').off 'click'
-    $(window).off 'click.date-send-menu'
+    $(document).off 'click.date-send-menu'
 
   signatureAdded: false
   showSignatureModal: false

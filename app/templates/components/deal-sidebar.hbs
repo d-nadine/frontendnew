@@ -1,0 +1,39 @@
+<div class="sidebar-panel">
+  <div class="sidebar-panel-content">
+    <h2 class="deal-title">
+      <i class="ss-standard ss-briefcase"></i>
+      {{inline-editor model=deal bufferKey="name" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
+    </h2>
+  </div>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-list"></i></dt>
+        <dd>{{deal.list.name}}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-target"></i></dt>
+        <dd>{{deal.daysInCurrentState}} Current Status</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt><i class="ss-standard ss-like"></i></dt>
+        <dd>
+          {{change-liststatus deal=deal parent=this}}
+        </dd>
+      </dl>
+      {{inline-money model=deal key="value" class="sidebar-panel" currencySymbol=currencySymbol}}
+    </div>
+  </div>
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        Additional Contacts
+      </h6>
+    </div>
+    <div class="sidebar-panel-content">
+      <div class="contacts-picker">
+        {{add-contacts parent=deal contacts=deal.contacts }}
+      </div>
+    </div>
+  </div>
+</div>

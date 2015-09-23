@@ -147,7 +147,7 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     @_super.apply this, arguments
 
     stopEditing = @stopEditing.bind(this)
-    $('body').on 'click.field-input', stopEditing
+    $(document).on 'click.field-input', stopEditing
 
     return unless @get('model.isNew')
 
@@ -163,7 +163,7 @@ Radium.FieldEditorComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     @send 'save'
 
   teardown: Ember.on 'willDestroyElement', ->
-    $('body').off 'click.field-input'
+    $(document).off 'click.field-input'
 
   triggerEdit: ->
     @send 'edit'

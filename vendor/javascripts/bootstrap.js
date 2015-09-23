@@ -649,7 +649,7 @@
 
     constructor: Dropdown
 
-  , toggle: function (e) {
+    , toggle: function (e) {
       var $this = $(this)
         , $parent
         , isActive

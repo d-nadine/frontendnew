@@ -1,0 +1,52 @@
+.xdeal-component {
+  .form > .sidebar-panel:first-of-type .sidebar-panel-content {
+    margin-top: auto;
+  }
+
+  h2 {
+    font-size: 12px;
+    line-height: 30px;
+  }
+  .deal-title {
+    display: inline-block;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .deal-title i {
+    float: left;
+    margin-right: 10px;
+    font-size: 22px;
+    position: relative;
+    top: 2px;
+  }
+
+  .deal-title .inline-editor-component {
+    float: left;
+    display: inline-block;
+    width: calc(100% - 38px);
+    font-size: 22px;
+  }
+
+  .deal-title .ss-write {
+    float: right;
+  }
+
+  .change-liststatus-component {
+    position: relative;
+  }
+
+  .change-liststatus-component a{
+    min-width: 150px;
+  }
+
+  .change-liststatus-component .caret {
+    float: right;
+    /* position: relative; */
+    /* top: 20px; */
+  }
+
+  .amount {
+    font-size: 22px;
+  }
+}

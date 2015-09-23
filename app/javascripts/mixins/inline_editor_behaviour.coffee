@@ -10,7 +10,7 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
-    $('body').on 'click.inline', (e) =>
+    $(document).on 'click.inline', (e) =>
       return unless @get('isEditing')
 
       target = $(e.target)
@@ -34,7 +34,7 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
-    $('body').off 'click.inline'
+    $(document).off 'click.inline'
 
   stopPropagation: (e) ->
     e.stopPropagation()

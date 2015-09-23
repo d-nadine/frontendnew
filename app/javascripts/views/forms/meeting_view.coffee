@@ -12,8 +12,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
 
       event.stopPropagation()
 
-      $('html').on 'click.cancel-meeting', ->
-        $('html').off 'click.cancel-meeting'
+      $(document).on 'click.cancel-meeting', ->
+        $(document).off 'click.cancel-meeting'
         dialogue.hide()
 
       false
@@ -26,10 +26,10 @@ Radium.FormsMeetingView = Radium.FormView.extend
   readableStartsAt: Ember.computed 'startsAt', ->
     @get('controller.startsAt').toHumanFormatWithTime()
 
-  willDestroyElement: ->
+  _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     @get('controller').EventBus.unsubscribe "meeting:formSubmitted"
-    $('html').off 'click.cancel-meeting'
+    $(document).off 'click.cancel-meeting'
 
   cancelMeetingDialogue: Radium.View.extend
     actions:

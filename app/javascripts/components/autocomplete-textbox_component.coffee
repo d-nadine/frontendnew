@@ -107,7 +107,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     @autocompleteElement().off 'blur'
     typeahead = @getTypeahead()
 
-    $('body').on 'click.autocomplete.txt.component', (e) =>
+    $(document).on 'click.autocomplete.txt.component', (e) =>
       return unless el = @autocompleteElement()
 
       text = el.val() || ''
@@ -120,7 +120,7 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
         typeahead.hide() if typeahead.shown
 
   autocompleteOver: Ember.on 'willDestroyElement', ->
-    $('body').off 'click.autocomplete.txt.component'
+    $(document).off 'click.autocomplete.txt.component'
 
   reset: ->
     return unless backup = @get('backup')

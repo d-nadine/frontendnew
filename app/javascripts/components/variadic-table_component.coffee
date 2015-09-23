@@ -53,13 +53,13 @@ Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       false
 
-    $('html').on 'click.variadic.html.close.menus', clearMenus
+    $(document).on 'click.variadic.html.close.menus', clearMenus
     $('.right-table').on 'scroll.right', clearMenus
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     @$().off "click.dropown.variadic"
-    $('html').off 'click.variadic.html.close.menus'
+    $(document).off 'click.variadic.html.close.menus'
     $('.right-table').off 'scroll.right'
 
   atStartOrEnd: (el) ->
