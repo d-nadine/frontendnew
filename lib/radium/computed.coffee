@@ -173,9 +173,10 @@ Radium.computed.primaryAccessor = (collection, prop, dependentKey) ->
       hash = name: 'work', isPrimary: true
       hash[prop] = value
       @get(collection).createRecord(hash)
-      @notifyPropertyChange dependentKey
     else
       @set accessKey, value
+
+    @notifyPropertyChange dependentKey
 
     value
 

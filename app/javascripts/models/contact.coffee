@@ -99,6 +99,9 @@ Radium.Contact = Radium.Model.extend Radium.HasTasksMixin,
   email: Radium.computed.primaryAccessor 'emailAddresses', 'value', 'primaryEmail'
   phone: Radium.computed.primaryAccessor 'phoneNumbers', 'value', 'primaryPhone'
   city: Radium.computed.primaryAccessor 'addresses', 'city', 'primaryAddress'
+  street: Radium.computed.primaryAccessor 'addresses', 'street', 'primaryAddress'
+  state: Radium.computed.primaryAccessor 'addresses', 'state', 'primaryAddress'
+  zipcode: Radium.computed.primaryAccessor 'addresses', 'zipcode', 'primaryAddress'
 
   added: Ember.computed 'createdAt', ->
     @get('createdAt').toFormattedString("%B %d, %Y")

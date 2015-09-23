@@ -94,10 +94,94 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         value: "showContactDrawer",
         static: true
       }],
-      actions: [
-        name: "saveAction"
-        value: "saveEmail"
-      ]
+      component: 'editable-field'
+    }
+    {
+      id: "street"
+      group: "address"
+      classNames: "street"
+      heading: "street"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "Add street",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "street"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    }
+    {
+      id: "state"
+      group: "address"
+      classNames: "state"
+      heading: "state"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "Add state",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "state"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    }
+    {
+      id: "city"
+      group: "address"
+      classNames: "city"
+      heading: "City"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "Add city",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "city"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    }
+    {
+      id: "zipcode"
+      group: "address"
+      classNames: "zipcode"
+      heading: "Zipcode"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "Add zipcode",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "zipcode"
+        static: true
+      }
+      ],
       component: 'editable-field'
     }
     {
