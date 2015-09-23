@@ -160,8 +160,8 @@ Radium.computed.primary = (collection) ->
     @get(collection).find (item) ->
       item.get('isPrimary')
 
-Radium.computed.primaryAccessor = (collection, dependentKey) ->
-  accessKey = "#{dependentKey}.value"
+Radium.computed.primaryAccessor = (collection, prop, dependentKey) ->
+  accessKey = "#{dependentKey}.#{prop}"
 
   Ember.computed accessKey, (key, value) ->
     if arguments.length == 1
@@ -170,7 +170,9 @@ Radium.computed.primaryAccessor = (collection, dependentKey) ->
     return unless value
 
     unless @get(dependentKey)
-      @get(collection).createRecord(name: 'work', isPrimary: true, value: value)
+      hash = name: 'work', isPrimary: true
+      hash[prop] = value
+      @get(collection).createRecord(hash)
       @notifyPropertyChange dependentKey
     else
       @set accessKey, value

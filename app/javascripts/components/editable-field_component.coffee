@@ -50,6 +50,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       model = @get('model')
 
+      unless model
+        return @flashMessenger.error "No model is associated with this record"
+
       return unless bufferedProxy.hasBufferedChanges
 
       backup = model.get(bufferKey)

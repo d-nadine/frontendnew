@@ -278,16 +278,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @send "executeActions", "make_private", detail
       false
 
-    saveCity: (context) ->
-      unless context.get('model.city')
-        city = context.get('bufferedProxy.city')
-        context.get('bufferedProxy').discardBufferedChanges()
-
-        context.get('model.addresses').createRecord
-          name: 'work'
-          isPrimary: true
-          city: city
-
     addList: (list) ->
       detail =
         list: list

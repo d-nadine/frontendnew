@@ -231,13 +231,6 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
         static: true
       }
       ],
-      actions: [
-        {
-          name: 'saveAction'
-          value: 'saveCity'
-          static: true
-        }
-      ]
       sortOn: "city"
       component: 'editable-field'
     }
