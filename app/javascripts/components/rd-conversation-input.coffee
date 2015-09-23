@@ -24,12 +24,6 @@ Radium.RdConversationInputComponent = Ember.Component.extend Radium.KeyConstants
   focusOut: ->
     @set 'focus', false
 
-  keyDown: (e) ->
-    if e.keyCode == @ENTER
-      e.preventDefault()
-      @insertLineBreak()
-      false
-
   _setup: Ember.on 'didInsertElement', ->
     @get('targetObject').on('formReset', this, 'onFormReset')
     value = @get('value') || ''
