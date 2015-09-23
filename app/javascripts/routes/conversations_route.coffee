@@ -29,7 +29,7 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
   model: (params) ->
     args =
       name: params.type
-      pageSize: 15
+      pageSize: 5
 
     if user = params.user
       args.user = user
@@ -44,7 +44,7 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
 
     return if controller.get 'allPagesLoaded'
 
-    for i in [0...2]
+    for i in [0...4]
       controller.send 'showMore'
 
   deactivate: ->

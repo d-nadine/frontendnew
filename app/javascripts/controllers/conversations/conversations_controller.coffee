@@ -256,7 +256,7 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   isContentLoaded: false
 
   page: 1
-  pageSize: 10
+  pageSize: 7
   user: null
   allPagesLoaded: false
 
