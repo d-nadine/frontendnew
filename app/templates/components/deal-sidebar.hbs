@@ -25,14 +25,27 @@
     </div>
   </div>
   <div class="sidebar-panel">
+    <div class="sidebar-panel-content contacts">
+      {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" class="company" alternativeRoute="company" saveAction="setPrimaryContact" afterSave="afterSaveDeal" parent=parent}}
+    </div>
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
         Additional Contacts
       </h6>
     </div>
-    <div class="sidebar-panel-content">
+    <div class="sidebar-panel-content contacts">
       <div class="contacts-picker">
         {{add-contacts parent=deal contacts=deal.contacts }}
+      </div>
+    </div>
+
+    {{assign-to model=deal users=users user=deal.user validator=targetObject}}
+
+    {{sidebar-attachments files=targetObject.files model=contact}}
+
+    <div class="sidebar-panel sidebar-delete">
+      <div class="sidebar-panel-content">
+        <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Contact</button>
       </div>
     </div>
   </div>

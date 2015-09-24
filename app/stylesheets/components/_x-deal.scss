@@ -1,6 +1,11 @@
 .xdeal-component {
   .form > .sidebar-panel:first-of-type .sidebar-panel-content {
-    margin-top: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .sidebar-panel-content.contacts {
+    padding-top: 5px;
   }
 
   h2 {
@@ -37,13 +42,13 @@
   }
 
   .change-liststatus-component a{
-    min-width: 150px;
+    min-width: 70px;
   }
 
   .change-liststatus-component .caret {
     float: right;
-    /* position: relative; */
-    /* top: 20px; */
+    position: relative;
+    top: 8px;
   }
 
   .amount {

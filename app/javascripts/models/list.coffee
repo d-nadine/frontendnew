@@ -5,6 +5,8 @@ Radium.List = Radium.Model.extend
 
   listStatuses: DS.hasMany('Radium.ListStatus')
 
+  contactList: Ember.computed.equal 'type', 
+
   clearRelationships: ->
     @get('listStatuses').compact().forEach (status) ->
       status.unloadRecord()
