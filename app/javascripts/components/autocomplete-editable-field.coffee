@@ -7,7 +7,12 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
 
   actions:
     setBindingValue: (object) ->
-      @set "bufferedProxy.#{@get('bufferKey')}", object.get(@field)
+      unless @get('actionOnly')
+        @set "bufferedProxy.#{@get('bufferKey')}", object.get(@field)
+      else
+        saveAction = @get('saveAction')
+        Ember.assert "You must have a saveAction specified", saveAction
+        @get('containingController').send saveAction, object
 
       cancel = Ember.run.later =>
         @setEndOfContentEditble()

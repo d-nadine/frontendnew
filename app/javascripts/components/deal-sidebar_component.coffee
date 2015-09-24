@@ -5,15 +5,21 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
         @send 'flashError', 'You have not selected a contact'
         return false
 
-      @set('deal.contact', contact)
+      return unless [Radium.Contact, Radium.AutocompleteItem].contains(contact.constructor)
 
-      @get('deal').save().then (result) =>
+      contact = if contact.constructor == Radium.AutocompleteItem
+                  contact.get('person')
+                else
+                  contact
+
+      deal = @get('deal')
+
+      deal.set('contact', contact)
+
+      deal.save().then (result) =>
         @send 'flashSuccess', "#{contact.get('displayName')} is now the primary contact."
 
-      false
-
-    afterSaveDeal: ->
-      p arguments
+        @EventBus.publishModelUpdate deal
 
       false
 

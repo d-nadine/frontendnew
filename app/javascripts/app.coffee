@@ -19,10 +19,7 @@ Raygun.init('ZCfpkrJEWIcnlZGDb8aYPw==',
   ignore3rdPartyErrors: false
   wrapAsynchronousCallbacks: true
   excludedUserAgents: ['PhantomJS']
-  excludedHostnames: [
-    'localhost'
-    '.dev'
-  ]).attach()
+).attach()
 
 document.addEventListener 'click', ->
           window.Intercom "update",

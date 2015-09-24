@@ -7,3 +7,8 @@ Radium.EventBus = Ember.Object.extend Ember.Evented,
 
   unsubscribe: ->
     @off.apply this, arguments
+
+  publishModelUpdate: (model) ->
+    return unless model
+
+    @publish model.updatedEventKey(), model

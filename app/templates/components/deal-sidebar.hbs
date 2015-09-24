@@ -26,7 +26,7 @@
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-content contacts">
-      {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" class="company" alternativeRoute="company" saveAction="setPrimaryContact" afterSave="afterSaveDeal" parent=parent}}
+      {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true}}
     </div>
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">

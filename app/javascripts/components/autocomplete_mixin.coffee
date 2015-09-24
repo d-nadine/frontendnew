@@ -70,6 +70,14 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       field = @field
       item[@field] || item.get(field)
 
+  resolveQuery: (query) ->
+    return unless query
+
+    if query instanceof DS.Model
+      return query.get(@queryKey)
+
+    query
+
   queryParameters: (query) ->
     scopes = @get('scopes')
     Ember.assert "You need to define a scopes binding for autocomplete", scopes
@@ -85,21 +93,24 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
   matcher: (item) ->
     string = @getValue item
-    return unless @query
+    query = @resolveQuery(@query)
+    return unless query
     return unless string
-    ~string.toLowerCase().indexOf(@query.toLowerCase())
+    ~string.toLowerCase().indexOf(query.toLowerCase())
 
   sorter: (items) ->
     beginswith = []
     caseSensitive = []
     caseInsensitive = []
 
+    query = @resolveQuery(@query)
+
     items.forEach (item) =>
       string = @getValue item
 
-      if !string.toLowerCase().indexOf(@query.toLowerCase())
+      if !string.toLowerCase().indexOf(query.toLowerCase())
         beginswith.push(item)
-      else if (~string.indexOf(@query))
+      else if (~string.indexOf(query))
         caseSensitive.push(item)
       else
         caseInsensitive.push(item)
@@ -110,8 +121,9 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
   highlighter: (item) ->
     string = @getValue item
+    query = @resolveQuery(@query)
 
-    query = @query.replace(/[\-\[\]()*+?.,\\\^$|#\s]/g, '\\$&')
+    query = query.replace(/[\-\[\]()*+?.,\\\^$|#\s]/g, '\\$&')
     string.replace new RegExp('(' + query + ')', 'ig'), ($1, match) ->
       "<strong>#{match}</strong>"
 

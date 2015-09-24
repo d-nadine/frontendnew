@@ -44,3 +44,25 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
   assignees: Ember.computed 'users.[]', 'item.user', ->
     @get('users').reject (user) =>
       user == @get('user')
+
+  modelUpdated: (model) ->
+    Ember.run.scheduleOnce('render', this, 'rerender')
+
+  modelIdentifier: null
+
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+    return unless @get('model.id')
+
+    model = @get('model')
+
+    @modelIdentifier = model.updatedEventKey()
+
+    @EventBus.subscribe @modelIdentifier, this, "modelUpdated"
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    p @modelIdentifier
+    return unless modelIdentifier = @modelIdentifier
+
+    @EventBus.unsubscribe modelIdentifier

@@ -77,6 +77,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       if saveAction = @get("saveAction")
         @get('containingController').send saveAction, this
+        return if @get('actionOnly')
 
       bufferedProxy.applyBufferedChanges()
 
@@ -149,7 +150,14 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     bufferDep = "bufferedProxy.#{bufferKey}"
 
     Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', 'alternativeRoute', modelDep, ->
-      value = @get('bufferedProxy').get(@get('bufferKey'))
+      value = ((o) =>
+        return unless potential = @get('bufferedProxy').get(@get('bufferKey'))
+
+        if potential instanceof DS.Model
+          # FIXME: need to configure other keys
+          return potential.get('displayName')
+
+        potential)()
 
       return '' unless value
 
@@ -163,7 +171,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         "<a href='#{url}' target='_blank'>#{value}</a>"
       else
         value
-
 
     return unless @get('validator') || @get('isRequired')
 

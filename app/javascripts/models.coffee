@@ -148,6 +148,9 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
     @send('deleteRecord')
 
+  updatedEventKey: ->
+    "#{@constructor.toString()}:#{@get('id')}:update}"
+
   reloadAfterUpdateEvent: (event = 'didCreate') ->
     @one event, (result) ->
       @reloadAfterUpdate.call result
