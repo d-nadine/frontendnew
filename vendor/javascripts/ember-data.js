@@ -1,4 +1,4 @@
-// Last commit: 07ce0f0 (2015-08-01 09:57:25 +0100)
+// Last commit: 7fc3604 (2015-09-18 11:30:48 +0100)
 
 
 (function() {
@@ -3664,7 +3664,9 @@ var RootState = {
 
     reloadRecord: function(model) {
       model.store.reloadRecord(model);
-    }
+    },
+
+    willSetProperty: willSetProperty
   },
 
   // A record enters this state when its data is populated.
@@ -3736,11 +3738,13 @@ var RootState = {
         record.send('invokeLifecycleCallbacks');
       },
 
-
       becomeDirty: function(record) {
         record.transitionTo('updated.uncommitted');
       },
 
+      finishedMaterializing: function(record) {
+        record.transitionTo('loaded.saved');
+      }
     },
 
     // If there are no local changes to a record, it remains
@@ -3797,6 +3801,12 @@ var RootState = {
 
       finishedMaterializing: function(record) {
         record.transitionTo('loaded.saved');
+      },
+
+      becameError: function(record) {
+        record.transitionTo('loaded.saved');
+
+        record.trigger('becameError', record);
       }
     },
 

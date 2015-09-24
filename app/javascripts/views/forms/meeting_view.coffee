@@ -27,6 +27,8 @@ Radium.FormsMeetingView = Radium.FormView.extend
     @get('controller.startsAt').toHumanFormatWithTime()
 
   willDestroyElement: ->
+    @_super.apply this, arguments
+    @get('controller').EventBus.unsubscribe "meeting:formSubmitted"
     $('html').off 'click.cancel-meeting'
 
   cancelMeetingDialogue: Radium.View.extend

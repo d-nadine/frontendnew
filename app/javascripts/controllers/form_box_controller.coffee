@@ -13,7 +13,7 @@ Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
 
     submitForm: ->
       activeForm = @get("#{@get('activeForm')}Form")
-      activeForm.set('submitForm', true)
+      @EventBus.publish "#{@activeForm}:formSubmitted"
       @trigger 'focusTopic'
 
     saveEmail: (form) ->

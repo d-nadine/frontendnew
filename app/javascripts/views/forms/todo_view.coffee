@@ -21,6 +21,7 @@ Radium.FormsTodoView = Radium.FormView.extend Radium.ContentIdentificationMixin,
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
 
+    @controller.EventBus.unsubscribe "todo:formSubmitted"
     if alert = @$('.overdue-alert')
       alert.tooltip('destroy')
 

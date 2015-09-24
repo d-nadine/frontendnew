@@ -31,4 +31,4 @@ Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.Ema
   showSubject: Ember.computed 'folder', 'model.subject', ->
     return false unless folder = @get('folder')
 
-    ['drafts', 'archive', 'sent', 'scheduled'].contains folder
+    ['inbox', 'drafts', 'archive', 'sent', 'scheduled'].contains folder

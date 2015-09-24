@@ -14,11 +14,6 @@ Radium.FormController = Radium.ObjectController.extend Ember.Evented,
   isExpandable: Ember.computed 'isNew', 'isFinished', 'justAdded', ->
     return not !!@get('justAdded')
 
-  submitFormDidChange: Ember.observer('model.submitForm', ->
-    return unless @get('model.submitForm')
-    @send 'submit'
-  ).on('init')
-
   isPrimaryInputDisabled: Ember.computed 'isDisabled', 'isExpanded', 'isNew', ->
     return false if @get('isNew')
     return true unless @get('isExpanded')

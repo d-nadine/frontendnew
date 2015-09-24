@@ -171,3 +171,10 @@ Radium.FormsTodoController = Radium.FormController.extend BufferedProxy,
     return false if @get('isNew')
     return true unless @get('isExpanded')
     @get 'isDisabled'
+
+  formSubmitted: ->
+    @send 'submit'
+
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+    @EventBus.subscribe "todo:formSubmitted", this, 'formSubmitted'

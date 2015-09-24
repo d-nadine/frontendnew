@@ -26,3 +26,10 @@ Radium.FormsNoteController = Radium.FormController.extend
 
       @get('model').reset()
       @trigger('formReset')
+
+  formSubmitted: ->
+    @send 'submit'
+
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+    @EventBus.subscribe "note:formSubmitted", this, 'formSubmitted'
