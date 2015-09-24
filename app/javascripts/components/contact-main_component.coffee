@@ -1,10 +1,8 @@
 require "mixins/save_contact_actions"
 require "mixins/save_contact_actions"
 require "mixins/controllers/track_contact_mixin"
-require "mixins/controllers/attached_files_mixin"
 
-Radium.ContactMainComponent = Ember.Component.extend Radium.AttachedFilesMixin,
-  Radium.TrackContactMixin,
+Radium.ContactMainComponent = Ember.Component.extend Radium.TrackContactMixin,
   Radium.SaveContactActions,
   Radium.SaveEmailMixin,
   Radium.ScrollableMixin,

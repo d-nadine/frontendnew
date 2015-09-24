@@ -46,7 +46,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       }
       {
         name: "placeholder",
-        value: "No Contact",
+        value: "contact name",
         static: true
       },
       {
@@ -76,7 +76,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       }
       {
         name: "placeholder",
-        value: "No Contact",
+        value: "contact's email'",
         static: true
       },
       {

@@ -62,7 +62,6 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
-    p @modelIdentifier
     return unless modelIdentifier = @modelIdentifier
 
     @EventBus.unsubscribe modelIdentifier
