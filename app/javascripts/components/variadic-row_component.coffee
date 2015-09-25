@@ -56,6 +56,8 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
 
     model = @get('model')
 
+    return unless model.updatedEventKey
+
     @modelIdentifier = model.updatedEventKey()
 
     @EventBus.subscribe @modelIdentifier, this, "modelUpdated"

@@ -1,7 +1,9 @@
 require "mixins/lists_persistence_mixin"
+require "mixins/common_drawer_actions"
 
 Radium.CompanySidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
   Radium.ListsPersistenceMixin,
+  Radium.CommonDrawerActions,
   actions:
     addList: (list) ->
       @_super @get('company'), list
