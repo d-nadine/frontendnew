@@ -7,9 +7,7 @@
   </div>
   {{#if showReplyForm}}
     <div class="email-reply-modal">
-      {{#x-modal close="closeReplyForm"}}
-        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
-      {{/x-modal}}
+      {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
     </div>
   {{/if}}
   {{resource-link-to contact}} emailed {{resource-link-to user}}
