@@ -18,9 +18,9 @@
 
   .email-form .email-form-header {
     border-bottom: 0px;
-    padding-bottom: 4px;
-    padding-left: 16px;
-    margin-bottom: -15px;
+    display: inline-block;
+    width: 100%;
+    padding: 20px 0 0;
 
     h3 {
       display: inline-block;
@@ -32,8 +32,6 @@
     .type-toggle {
       display: inline-block;
       float: right;
-      position: relative;
-      top: 23px;
 
       a {
         color: $blue;
@@ -48,8 +46,6 @@
 
     .info {
       float: right;
-      position: relative;
-      top: 25px;
       margin-right: 10px;
       margin-left: 10px;
       color: #999;
@@ -59,7 +55,7 @@
   .email-form-body {
     max-height: none;
     position: static;
-    padding: 15px;
+    padding: 10px 15px;
 
     .addresses {
 
