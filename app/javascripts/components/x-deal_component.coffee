@@ -9,9 +9,13 @@ Radium.XDealComponent = Ember.Component.extend Radium.AttachedFilesMixin,
       @sendAction "showCompanyDrawer", company, true
 
     deleteDeal: (deal) ->
-      p "in delete"
+      if deals = @get('targetObject.deals')
+        deals.removeObject(deal)
 
-      @EventBus.publish 'closeDrawers'
+      @EventBus.publish 'closeListDrawers'
+
+      deal.delete().then =>
+        @flashMessenger.success "Deal deleted!"
 
       false
 

@@ -87,10 +87,13 @@ Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
     @get('company.deals').removeObject(this) if @get('company')
 
     @get('tasks').compact().forEach (task) ->
-      task.deleteRecord()
+      task.unloadRecord()
 
     @get('activities').compact().forEach (activity) ->
       activity.unloadRecord()
+
+    @get('attachments').compact().forEach (attachment) ->
+      attachment.unloadRecord()
 
     Radium.Notification.all().compact().forEach (notification) ->
       if notification.get('_referenceDeal') == this

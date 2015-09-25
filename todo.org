@@ -1,4 +1,4 @@
-* Pipeline lists [53%]
+* Pipeline lists [66%]
   - [X] create add deal modal
   - [X] validate deal form
   - [X] post add deal form
@@ -13,15 +13,16 @@
   - [X] last status change
   - [X] selectable columns
   - [X] deal sidebar with contact
-  - [ ] deal sidebar with company
+  - [X] deal sidebar with company
+  - [X] add contacts company to deal columns config
+  - [X] contact and company drawers
+  - [X] deals detail view/drawer
+  - [ ] delete deal
   - [ ] deal main view
-  - [ ] contact and company drawers
-  - [ ] add contacts company to deal columns config
-  - [ ] deal closed date to contacts columns config
   - [ ] value total
   - [ ] search
   - [ ] bulk actions
-  - [ ] deals detail view/drawer
+  - [ ] deal closed date to contacts columns config
   - [ ] What happens to open deals?
   - [ ] flesh out company view with new details
   - [ ] make company table use drawer for company view

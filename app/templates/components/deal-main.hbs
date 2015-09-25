@@ -1,0 +1,10 @@
+{{#delete-confirmation deleteAction="deleteDeal" showDeleteConfirmation=showDeleteConfirmation}}
+<p>This action cannot be undone! Deleting <strong>{{deal.name}}</strong> will be permanent.</p>
+{{/delete-confirmation}}
+<div class="tasks-content deal">
+  {{render "form_box" formBox}}
+  {{render "task_list" deal.currentTasks}}
+</div>
+{{#unless isUpdating}}
+  {{render "feed" deal.activities}}
+{{/unless}}
