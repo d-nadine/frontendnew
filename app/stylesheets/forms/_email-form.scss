@@ -69,11 +69,23 @@
       min-height: 50px;
 
       li {
+        float: left;
 
         input {
           height: 50px !important;
           line-height: 50px !important;
         }
+        &.as-selection-item {
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .control-box {
+
+      .autocomplete {
+        padding: 0;
       }
     }
 
