@@ -19,6 +19,11 @@ Radium.AddContactsComponent = Ember.Component.extend
 
       false
 
+    itemAction: (contact) ->
+      @sendAction "itemAction", contact
+
+      false
+
   queryParameters: (query) ->
     term: query
     email_only: false

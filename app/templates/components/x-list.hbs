@@ -52,9 +52,21 @@
     {{deal-editor list=list deal=deal closeModal="closeDealModal"}}
   {{/x-modal}}
 {{/if}}
-{{#if showDrawer}}
-  {{#x-drawer class="contact-drawer" closeDrawer="closeListDrawer"}}
+{{#if showDealDrawer}}
+  {{#x-drawer class="contact-drawer deal-drawer" closeDrawer="closeDealDrawer"}}
     {{! UPGRADE: use component helper when we upgrade}}
-    {{renderComponent drawerModel drawerParams}}
+    {{renderComponent dealModel dealParams}}
+  {{/x-drawer}}
+{{/if}}
+{{#if showContactDrawer}}
+  {{#x-drawer class="contact-drawer" closeDrawer="closeContactDrawer"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent contactModel contactParams}}
+  {{/x-drawer}}
+{{/if}}
+{{#if showCompanyDrawer}}
+  {{#x-drawer class="contact-drawer deal-drawer" closeDrawer="closeCompanyDrawer"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent companyModel companyParams}}
   {{/x-drawer}}
 {{/if}}

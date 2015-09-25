@@ -5,7 +5,8 @@ Radium.List = Radium.Model.extend
 
   listStatuses: DS.hasMany('Radium.ListStatus')
 
-  contactList: Ember.computed.equal 'type', 
+  contactList: Ember.computed.equal 'type', 'contacts'
+  companiesList: Ember.computed.equal 'type', 'companies'
 
   clearRelationships: ->
     @get('listStatuses').compact().forEach (status) ->

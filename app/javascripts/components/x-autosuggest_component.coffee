@@ -17,6 +17,13 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       @get('destination').removeObject item
 
+    itemAction: (item) ->
+      return unless @get('itemAction')
+
+      @sendAction "itemAction", item
+
+      false
+
   classNameBindings: [
     'isInvalid'
     'isValid'

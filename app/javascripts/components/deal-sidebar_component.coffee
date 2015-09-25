@@ -1,5 +1,20 @@
 Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
   actions:
+    showContactDrawer: (resource) ->
+      contact = if resource.constructor == Radium.Contact
+                  resource
+                else
+                  resource.get('contact')
+
+        @sendAction "showContactDrawer", contact
+
+      false
+
+    showCompanyDrawer: (deal) ->
+      @sendAction "showCompanyDrawer", deal.get('company')
+
+      false
+
     setPrimaryContact: (contact) ->
       unless contact
         @send 'flashError', 'You have not selected a contact'

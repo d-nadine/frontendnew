@@ -26,7 +26,11 @@
   </div>
   <div class="sidebar-panel">
     <div class="sidebar-panel-content contacts">
-      {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true}}
+      {{#if deal.list.contactList}}
+        {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true routeAction="showContactDrawer"}}
+      {{else}}
+        {{inline-autocomplete model=deal bufferKey="company" scopes="company" queryKey="name" placeholder="Add Company" saveAction="setCompany" parent=this actionOnly=true routeAction="showCompanyDrawer"}}
+      {{/if}}
     </div>
     <div class="sidebar-panel-header">
       <h6 class="sidebar-panel-title">
@@ -35,7 +39,7 @@
     </div>
     <div class="sidebar-panel-content contacts">
       <div class="contacts-picker">
-        {{add-contacts parent=deal contacts=deal.contacts }}
+        {{add-contacts parent=deal contacts=deal.contacts itemAction="showContactDrawer"}}
       </div>
     </div>
 
@@ -45,7 +49,7 @@
 
     <div class="sidebar-panel sidebar-delete">
       <div class="sidebar-panel-content">
-        <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Contact</button>
+        <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Deal</button>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <ul class="as-selections">
   {{#each selection in destination}}
-    <li {{bind-attr class=":as-selection-item :blur"}}>
-        <a class="as-close" {{action "removeSelection" selection target="view" bubbles=false}}>×</a>
+    <li {{action "itemAction" selection}} {{bind-attr class=":as-selection-item :blur"}}>
+        <a class="as-close" {{action "removeSelection" selection bubbles=false}}>×</a>
       {{#if showAvatar}}
         {{avatar selection}}
       {{/if}}

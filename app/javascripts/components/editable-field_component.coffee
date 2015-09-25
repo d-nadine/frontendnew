@@ -24,6 +24,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         target.transitionToRoute routable.humanize(), routable
 
     updateModel: ->
+      return if @get('actionOnly')
+
       unless bufferedProxy = @get('bufferedProxy')
         return
 

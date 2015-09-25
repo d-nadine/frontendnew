@@ -29,7 +29,12 @@
 .contact-drawer.drawer-view {
   max-width: 75%;
   width: auto;
-  z-index: 1010;
+  &:not(.deal-drawer) {
+    z-index: 1010;
+  }
+  &.deal-drawer {
+    z-index: 1009;
+  }
   background: $background;
   border-right: 1px solid $border;
   padding-right: 20px;

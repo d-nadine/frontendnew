@@ -38,15 +38,120 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
       false
 
-    closeListDrawer: ->
-      @closeDrawer()
+    closeContactDrawer: ->
+      @closeContactDrawer()
 
       false
 
-    showCompanyDrawer: (company) ->
-      @closeDrawer()
+    closeDealDrawer: ->
+      @closeDealDrawer()
 
-      @set "drawerModel", company
+      false
+
+    closeCompanyDrawer: ->
+      @closeCompanyDrawer()
+
+      false
+
+    showDealDrawer: (deal) ->
+      @closeDealDrawer()
+
+      @set 'dealModel', deal
+
+      config = {
+        bindings: [{
+          name: "deal",
+          value: "dealModel"
+        },
+        {
+          name: "lists",
+          value: "lists"
+        }
+        {
+          name: "closeDrawer",
+          value: "closeContactDrawer",
+          static: true
+        },
+        {
+          name: "parent",
+          value: "this"
+        },
+        {
+          name: "showContactDrawer",
+          value: "showContactDrawer",
+          static: true
+        },
+        {
+          name: "showCompanyDrawer",
+          value: "showCompanyDrawer",
+          static: true
+        }
+        ]
+        component: 'x-deal'
+      }
+
+      @set 'dealParams', config
+
+      @set 'showDealDrawer', true
+
+      false
+
+    showContactDrawer: (contact, hideMain) ->
+      @closeContactDrawer()
+
+      @set 'contactModel', contact
+
+      config = {
+        bindings: [{
+          name: "contact",
+          value: "contactModel"
+        },
+        {
+          name: "lists",
+          value: "lists"
+        }
+        {
+          name: "closeDrawer",
+          value: "closeContactDrawer",
+          static: true
+        },
+        {
+          name: "parent",
+          value: "this"
+        },
+        {
+          name: "addList",
+          value: "addContactList",
+          static: true
+        },
+        {
+          name: "customFields",
+          value: "customFields"
+        },
+        {
+          name: "deleteContact",
+          value: "deleteContact",
+          static: true
+        },
+        {
+          name: "hideMain",
+          value: hideMain,
+          static: true
+        }
+        ]
+        component: 'x-contact'
+      }
+
+      @set 'contactParams', config
+
+      @set 'showContactDrawer', true
+
+      false
+
+    showCompanyDrawer: (company, hideMain) ->
+      @closeCompanyDrawer()
+
+      @set "companyModel", company
 
       config = {
         bindings: [{
@@ -55,7 +160,7 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
         },
         {
           name: "closeDrawer",
-          value: "closeAddressbookDrawer",
+          value: "closeDrawer",
           static: true
         },
         {
@@ -71,47 +176,19 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
           name: "deleteCompany",
           value: "deleteCompany",
           static: true
+        },
+        {
+          name: "hideMain",
+          value: hideMain,
+          static: true
         }
         ],
         component: 'x-company'
       }
 
-      @set 'drawerParams', config
+      @set 'companyParams', config
 
-      @set 'showDrawer', true
-
-      false
-
-    showDealDrawer: (deal) ->
-      @closeDrawer()
-
-      @set 'drawerModel', deal
-
-      config = {
-        bindings: [{
-          name: "deal",
-          value: "drawerModel"
-        },
-        {
-          name: "lists",
-          value: "lists"
-        }
-        {
-          name: "closeDrawer",
-          value: "closeListDrawer",
-          static: true
-        },
-        {
-          name: "parent",
-          value: "this"
-        }
-        ]
-        component: 'x-deal'
-      }
-
-      @set 'drawerParams', config
-
-      @set 'showDrawer', true
+      @set 'showCompanyDrawer', true
 
       false
 
@@ -138,9 +215,18 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
   showDealModal: false
   deal: null
-  showDrawer: false
-  drawerModel: null
-  drawerParams: null
+
+  showDealDrawer: false
+  dealModel: null
+  dealParams: null
+
+  showContactDrawer: false
+  contactModel: null
+  contactParams: null
+
+  showCompanyDrawer: false
+  companyModel: null
+  companyParams: null
 
   localStorageKey: Ember.computed 'listType', ->
     "#{@SAVED_COLUMNS}_#{@get('listType')}"
@@ -154,7 +240,7 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
 
-    @EventBus.subscribe "closeDrawers", this, @closeDrawer.bind(this)
+    @EventBus.subscribe "closeDrawers", this, @closeAllDrawers.bind(this)
 
     localStorageKey = @get('localStorageKey')
 
@@ -174,7 +260,22 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
     @_super.apply this, arguments
     @send 'loadMoreDeals'
 
-  closeDrawer: ->
-    @set 'showDrawer', false
-    @set 'drawerModel', null
-    @set 'drawerParams', null
+  closeAllDrawers: ->
+    @closeDealDrawer()
+    @closeContactDrawer()
+    @closeCompanyDrawer()
+
+  closeDealDrawer: ->
+    @set 'showDealDrawer', false
+    @set 'dealModel', null
+    @set 'dealParams', null
+
+  closeContactDrawer: ->
+    @set 'showContactDrawer', false
+    @set 'contactModel', null
+    @set 'contactParams', null
+
+  closeCompanyDrawer: ->
+    @set 'showCompanyDrawer', false
+    @set 'companyModel', null
+    @set 'companyParams', null

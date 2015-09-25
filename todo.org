@@ -1,4 +1,4 @@
-* Pipeline lists [72%]
+* Pipeline lists [53%]
   - [X] create add deal modal
   - [X] validate deal form
   - [X] post add deal form
@@ -12,7 +12,8 @@
   - [X] status change
   - [X] last status change
   - [X] selectable columns
-  - [ ] deal sidebar
+  - [X] deal sidebar with contact
+  - [ ] deal sidebar with company
   - [ ] deal main view
   - [ ] contact and company drawers
   - [ ] add contacts company to deal columns config
