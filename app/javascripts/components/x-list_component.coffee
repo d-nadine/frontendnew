@@ -156,7 +156,7 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
       config = {
         bindings: [{
           name: "company",
-          value: "drawerModel"
+          value: "companyModel"
         },
         {
           name: "closeDrawer",

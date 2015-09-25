@@ -39,7 +39,7 @@ Radium.XDrawerComponent = Ember.Component.extend
         height: rect.height + 50 +"px"
         ).appendTo('body')
 
-      overlay.one 'click', (e) ->
+      overlay.on 'click', (e) ->
         self.send "closeDrawer"
 
         e.stopPropagation()

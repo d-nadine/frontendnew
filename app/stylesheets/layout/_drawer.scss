@@ -23,17 +23,20 @@
 
 .drawer-overlay {
   width: 100%;
-  z-index: 1000;
+  z-index: 1020;
 }
 
 .contact-drawer.drawer-view {
   max-width: 75%;
   width: auto;
-  &:not(.deal-drawer) {
+  &:not(.deal-drawer):not(.company-drawer) {
     z-index: 1010;
   }
   &.deal-drawer {
     z-index: 1009;
+  }
+  &.company-drawer {
+    z-index: 1011;
   }
   background: $background;
   border-right: 1px solid $border;
