@@ -216,6 +216,11 @@
           background-color: transparent;
         }
       }
+
+      // FIXME: remove when reports refactored to use lists
+      a[title="Reports"] {
+        display: none;
+      }
     }
   }
 }

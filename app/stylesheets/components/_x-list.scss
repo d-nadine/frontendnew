@@ -26,6 +26,11 @@
     display: inline-block;
   }
 
+  // FIXME: remove when date search is in place
+  .table-container .subhead .col-selector .rd-daterangepicker-component {
+    display: none;
+  }
+
   .table-container .subhead .col-selector input[type=text] {
     border-radius: 0px !important;
     height: 48px;
