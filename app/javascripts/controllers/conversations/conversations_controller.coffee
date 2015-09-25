@@ -1,7 +1,10 @@
+require "mixins/common_drawer_actions"
+
 Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableMixin,
   Radium.ShowMetalessMoreMixin,
   Radium.ConversationsColumnsConfig,
   Radium.TrackContactMixin,
+  Radium.CommonDrawerActions,
   actions:
     completeAssignTo: (model, user) ->
       changed = @filter (m) =>

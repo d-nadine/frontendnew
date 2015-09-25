@@ -6,7 +6,13 @@ Radium.ConversationsColumnsConfig = Ember.Mixin.create
       bindings: [{
         name: "contact",
         value: "model.contact"
-      }]
+      },
+      {
+        name: "linkAction",
+        value: "showContactDrawer",
+        static: true
+      }
+      ]
       component: 'contact-link'
     }
   ])

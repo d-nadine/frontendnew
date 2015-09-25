@@ -17,6 +17,11 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         name: "bufferKey",
         value: "name"
         static: true
+      },
+      {
+        name: "routeAction",
+        value: "showCompanyDrawer",
+        static: true
       }]
       avatar: true
       checked: true

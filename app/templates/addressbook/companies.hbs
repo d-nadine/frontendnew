@@ -74,3 +74,9 @@
 {{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteConfirmation}}
 <p>This action cannot be undone! Deleting these <strong>{{checkedTotal}}</strong> item(s) will be permanent.</p>
 {{/delete-confirmation}}
+{{#if showCompanyDrawer}}
+  {{#x-drawer class="contact-drawer deal-drawer" closeDrawer="closeCompanyDrawer"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent companyModel companyParams}}
+  {{/x-drawer}}
+{{/if}}

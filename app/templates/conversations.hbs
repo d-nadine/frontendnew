@@ -129,3 +129,9 @@
     {{regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
   </div>
 </div>
+{{#if showContactDrawer}}
+  {{#x-drawer class="contact-drawer" closeDrawer="closeContactDrawer"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent contactModel contactParams}}
+  {{/x-drawer}}
+{{/if}}

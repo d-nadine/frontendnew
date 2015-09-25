@@ -1,4 +1,8 @@
 {{avatar contact}}
-{{#link-to "contact" contact}}
-  {{truncate contact.displayName length="100"}}
-{{/link-to}}
+{{#unless linkAction}}
+  {{#link-to "contact" contact}}
+    {{truncate contact.displayName length="100"}}
+  {{/link-to}}
+{{else}}
+  <a href="#" {{action "linkAction" contact}}>{{truncate contact.displayName length="100"}}</a>
+{{/unless}}

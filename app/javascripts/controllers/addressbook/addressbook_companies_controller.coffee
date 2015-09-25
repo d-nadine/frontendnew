@@ -1,8 +1,10 @@
 require "controllers/addressbook/people_mixin"
 require "controllers/addressbook/companies_columns_config"
+require "mixins/common_drawer_actions"
 
 Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.CompaniesColumnConfig,
+  Radium.CommonDrawerActions,
   actions:
     showAddCompany: ->
       $('.new-company').slideToggle('medium', ->
