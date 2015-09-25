@@ -1,23 +1,25 @@
-<p>
+<div class="email-reply-activity">
+  <p>
+    {{resource-link-to contact}} emailed {{resource-link-to user}}
+  </p>
   <div class="pull-right">
     <a href="#" class="send-reply" {{action "showReplyForm"}}>
       <i class="ss-standard ss-reply"></i>
       Reply
     </a>
   </div>
-  {{#if showReplyForm}}
-    <div class="email-reply-modal">
-      {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
-    </div>
+</div>
+{{#if showReplyForm}}
+  <div class="email-reply-modal">
+    {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
+  </div>
+{{/if}}
+<br>
+<div class="email-subject">
+  {{#if email.isLoaded}}
+    {{resource-link-to email}}
   {{/if}}
-  {{resource-link-to contact}} emailed {{resource-link-to user}}
-  <br>
-  <div class="email-subject">
-    {{#if email.isLoaded}}
-      {{resource-link-to email}}
-    {{/if}}
-  </div>
-  <div class="email-body">
-    {{text-expander text=email.formattedEmailBody}}
-  </div>
-</p>
+</div>
+<div class="email-body">
+  {{text-expander text=email.formattedEmailBody}}
+</div>

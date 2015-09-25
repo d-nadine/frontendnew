@@ -1202,7 +1202,20 @@
     }
   }
 
+  .email-reply-activity {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+
+    p {
+      float: left;
+    }
+  }
+
   .email-reply-modal {
+    width: calc(100% + 114px);
+    position: relative;
+    left: -114px;
 
     .modal {
       width: 65%;

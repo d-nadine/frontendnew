@@ -70,6 +70,14 @@
 
 .email-reply-modal {
 
+  .email-form-component {
+    border: none;
+
+    .email-form-body {
+      padding: 0;
+    }
+  }
+
   .modal {
     width: 65%;
     border: none;
