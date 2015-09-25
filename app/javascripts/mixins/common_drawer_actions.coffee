@@ -97,6 +97,59 @@ Radium.CommonDrawerActions = Ember.Mixin.create
 
       false
 
+    showDealDrawer: (deal, hideMain) ->
+      @closeDealDrawer()
+
+      @set 'dealModel', deal
+
+      config = {
+        bindings: [{
+          name: "deal",
+          value: "dealModel"
+        },
+        {
+          name: "lists",
+          value: "lists"
+        }
+        {
+          name: "closeDrawer",
+          value: "closeContactDrawer",
+          static: true
+        },
+        {
+          name: "parent",
+          value: "this"
+        },
+        {
+          name: "showContactDrawer",
+          value: "showContactDrawer",
+          static: true
+        },
+        {
+          name: "showCompanyDrawer",
+          value: "showCompanyDrawer",
+          static: true
+        },
+        {
+          name: "hideMain",
+          value: hideMain,
+          static: true
+        }
+        ]
+        component: 'x-deal'
+      }
+
+      @set 'dealParams', config
+
+      @set 'showDealDrawer', true
+
+      false
+
+    closeDealDrawer: ->
+      @closeDealDrawer()
+
+      false
+
     closeContactDrawer: ->
       @closeContactDrawer()
 
@@ -115,6 +168,10 @@ Radium.CommonDrawerActions = Ember.Mixin.create
   companyModel: null
   companyParams: null
 
+  showDealDrawer: false
+  dealModel: null
+  dealParams: null
+
   closeContactDrawer: ->
     @set 'showContactDrawer', false
     @set 'contactModel', null
@@ -124,3 +181,8 @@ Radium.CommonDrawerActions = Ember.Mixin.create
     @set 'showCompanyDrawer', false
     @set 'companyModel', null
     @set 'companyParams', null
+
+  closeDealDrawer: ->
+    @set 'showDealDrawer', false
+    @set 'dealModel', null
+    @set 'dealParams', null
