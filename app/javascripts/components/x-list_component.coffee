@@ -1,10 +1,13 @@
 require 'components/deal_columns_config'
 require "mixins/table_column_selections"
 require "mixins/common_drawer_actions"
+require "controllers/addressbook/people_mixin"
 
 Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   Radium.TableColumnSelectionsMixin,
   Radium.CommonDrawerActions,
+  Radium.PeopleMixin,
+
   actions:
     loadMoreDeals: ->
       deals = @get('deals')
@@ -40,6 +43,32 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
       false
 
+    assignAll: (user) ->
+      detail =
+        user: user
+        jobType: Radium.DealsBulkAction
+        modelType: Radium.Deal
+
+      @send "executeActions", "assign", detail
+      false
+
+    confirmDeletion: ->
+      unless @get('allChecked') || @get('checkedContent.length')
+        return @send 'flashError', "You have not selected any items."
+
+      @set "showDeleteAllConfirmation", true
+
+      false
+
+    deleteAll: ->
+      detail =
+        jobType: Radium.DealsBulkAction
+        modelType: Radium.Deal
+
+      @send "executeActions", "delete", detail
+
+      false
+
   combinedColumns: Ember.computed 'availableColumns.[]', ->
     savedColumns = JSON.parse(localStorage.getItem(@get('localStorageKey')))
 
@@ -63,6 +92,13 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
   showDealModal: false
   deal: null
+
+  showDeleteAllConfirmation: false
+
+  arrangedContent: Ember.computed.oneWay 'deals'
+
+  users: Ember.computed ->
+    @container.lookup('controller:users')
 
   localStorageKey: Ember.computed 'listType', ->
     "#{@SAVED_COLUMNS}_#{@get('listType')}"

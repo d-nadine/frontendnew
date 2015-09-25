@@ -50,8 +50,6 @@ window.Radium = Radium
 
 Radium.deferReadiness()
 
-require /lib\/radium\/base/
-
 require 'lib/radium/computed'
 
 requireAll /services/
@@ -67,10 +65,11 @@ requireAll /routes/
 
 require 'views'
 
-requireAll /components/
-
 require 'lib/radium/checkable_mixin'
 require 'lib/radium/selectable_mixin'
+require 'lib/radium/buffered_proxy'
+
+requireAll /components/
 
 require 'controllers'
 

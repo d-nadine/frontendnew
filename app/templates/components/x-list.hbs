@@ -20,7 +20,19 @@
                     <i class="ss-standard ss-action"></i> Actions
                   </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li>Action One</li>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#">Assign To</a>
+                      <ul class="dropdown-menu">
+                        {{#each user in users}}
+                          <li>
+                            <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
+                          </li>
+                        {{/each}}
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#" {{action "confirmDeletion"}}>Delete</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -70,3 +82,6 @@
     {{renderComponent companyModel companyParams}}
   {{/x-drawer}}
 {{/if}}
+{{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteAllConfirmation}}
+<p>This action cannot be undone! Deleting these <strong>{{checkedTotal}}</strong> item(s) will be permanent.</p>
+{{/delete-confirmation}}
