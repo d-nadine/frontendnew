@@ -3,3 +3,7 @@ Radium.AddressbookCompaniesRoute = Radium.Route.extend
     Radium.InfiniteDataset.create
       type: Radium.Company
       params: {}
+
+  deactivate: ->
+    @_super.apply this, arguments
+    @controllerFor('addressbookCompanies').closeAllDrawers()

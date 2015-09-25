@@ -96,7 +96,6 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
     @_super.apply this, arguments
     @send 'loadMoreDeals'
 
-  closeAllDrawers: ->
-    @closeDealDrawer()
-    @closeContactDrawer()
-    @closeCompanyDrawer()
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+    @closeAllDrawers()

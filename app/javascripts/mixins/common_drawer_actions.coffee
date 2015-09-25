@@ -186,3 +186,8 @@ Radium.CommonDrawerActions = Ember.Mixin.create
     @set 'showDealDrawer', false
     @set 'dealModel', null
     @set 'dealParams', null
+
+  closeAllDrawers: ->
+    @closeDealDrawer()
+    @closeContactDrawer()
+    @closeCompanyDrawer()

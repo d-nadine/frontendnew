@@ -52,5 +52,7 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
     controller = @controllerFor 'conversations'
     return unless controller.get('hasCheckedContent')
 
+    controller.closeAllDrawers()
+
     controller.get('checkedContent').forEach (email) ->
       email.set 'isChecked', false
