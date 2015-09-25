@@ -3,8 +3,12 @@ require "controllers/addressbook/companies_columns_config"
 
 Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.CompaniesColumnConfig,
-
   actions:
+    showAddCompany: ->
+      $('.new-company').slideToggle('medium', ->
+        Ember.$('.new-company input[type=text]').focus()
+      )
+
     assignAll: (user) ->
       detail =
         user: user

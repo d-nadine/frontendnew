@@ -1,4 +1,4 @@
-Radium.AddressbookCompaniesView = Radium.View.extend
+Radium.bAddressbookCompaniesView = Radium.View.extend
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
     tick = Ember.run.later ->
