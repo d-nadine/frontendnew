@@ -6,9 +6,6 @@
     <li>
       {{#each group in groups}}
         <li>
-          <h4 class="group-heading">{{capitalize group.group.group}}</h4>
-        </li>
-        <li>
           <ul class="list-inline">
             {{#each column in group.columns}}
               {{x-check leader=column.heading checked=column.checked action="toggleColumnSelection" tagName="li"}}
