@@ -2,6 +2,10 @@ Radium.ActivitiesContactController = Radium.ActivityBaseController.extend Radium
   Radium.SaveEmailMixin,
   actions:
     showReplyForm: ->
+      if @get('showReplyForm')
+        @set 'showReplyForm', false
+        return false
+
       replyForm = Radium.ReplyForm.create
         currentUser: @get('currentUser')
 
