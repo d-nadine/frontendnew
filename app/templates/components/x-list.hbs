@@ -6,7 +6,7 @@
           <div class="pipeline-total">
             <span class="count">
               <span class="count-companies">Active Pipeline Total &gt;</span>
-              <span class="count-people">0</span>
+              <span class="count-people">{{currency listTotalValue}}</span>
             </span>
           </div>
           <div class="left">
@@ -82,6 +82,6 @@
     {{renderComponent companyModel companyParams}}
   {{/x-drawer}}
 {{/if}}
-{{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteAllConfirmation}}
+{{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteConfirmation}}
 <p>This action cannot be undone! Deleting these <strong>{{checkedTotal}}</strong> item(s) will be permanent.</p>
 {{/delete-confirmation}}

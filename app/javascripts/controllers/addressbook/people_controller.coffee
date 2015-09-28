@@ -570,7 +570,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   drawerParams: null
   showDeleteConfirmation: false
 
-
   filterSearchResults: (item) ->
     true
 

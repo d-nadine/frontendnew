@@ -9,6 +9,15 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   Radium.PeopleMixin,
 
   actions:
+    updateTotals: ->
+      @set "showDeleteConfirmation", false
+
+      Radium.DealTotal.find(list: @get('list.id')).then (results) =>
+        totals = results.get('firstObject')
+        @set 'listTotalValue', totals.get('value')
+
+      false
+
     loadMoreDeals: ->
       deals = @get('deals')
 
@@ -56,7 +65,7 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
       unless @get('allChecked') || @get('checkedContent.length')
         return @send 'flashError', "You have not selected any items."
 
-      @set "showDeleteAllConfirmation", true
+      @set "showDeleteConfirmation", true
 
       false
 
@@ -93,9 +102,10 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   showDealModal: false
   deal: null
 
-  showDeleteAllConfirmation: false
+  showDeleteConfirmation: false
 
   arrangedContent: Ember.computed.oneWay 'deals'
+  model: Ember.computed.oneWay 'deals'
 
   users: Ember.computed ->
     @container.lookup('controller:users')
@@ -132,8 +142,18 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
     @_super.apply this, arguments
     @send 'loadMoreDeals'
     @EventBus.subscribe 'closeListDrawers', this, 'closeAllDrawers'
+    @send 'updateTotals'
 
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     @EventBus.unsubscribe 'closeListDrawers'
     @closeAllDrawers()
+
+  likeNessQuery: ->
+    searchText = @get('searchText')
+
+    filterParams = @get('filterParams') || {}
+
+    params = Ember.merge filterParams, like: searchText, page_size: @get('pageSize')
+
+    @get("deals").set("params", Ember.copy(params))

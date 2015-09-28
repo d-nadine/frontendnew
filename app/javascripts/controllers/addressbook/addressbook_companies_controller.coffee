@@ -18,6 +18,7 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
         modelType: Radium.Company
 
       @send "executeActions", "assign", detail
+
       false
 
     deleteAll: ->

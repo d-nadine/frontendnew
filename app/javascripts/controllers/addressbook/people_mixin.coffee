@@ -50,7 +50,7 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
                       @get('allChecked') && !!!@get('potentialQueries.length')
 
       unless allChecked || checkedContent.length
-        return @send 'flashError', "You have not selected any items."
+        return @flashMessenger.error "You have not selected any items."
 
       if action == "compose"
         return @transitionToRoute 'emails.new', "inbox", queryParams: mode: 'bulk', from_people: true
@@ -97,11 +97,11 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
       job.save().then( (result) =>
         @set 'working', false
-        @send 'flashSuccess', 'The records have been updated.'
+        @flashMessenger.success 'The records have been updated.'
         Ember.run.once this, 'updateLocalRecords', job, detail
         @send 'updateTotals'
         @get('currentUser').reload()
-      ).catch =>
+      ).finally =>
         @set 'working', false
 
   updateLocalRecords: (job, detail) ->
@@ -126,7 +126,8 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
 
         this[local].apply this, args
 
-    @get('controllers.addressbook').send 'updateTotals'
+    if addressBookController = @get('controllers.addressbook')
+      addressBookController.send 'updateTotals'
 
   localMakePublic: (contact, dataset) ->
     contact.set 'isChecked', false
