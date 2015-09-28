@@ -78,7 +78,7 @@
               {{/unless}}
             {{/unless}}
             {{#if showYearOption}}
-              {{input type="checkbox" checked=yearly}} <label for="yearly" class="yearly-label">Bill Yearly</label>
+              {{x-check checked=yearly leader="Bill Yearly" class="yearly-option"}}
             {{/if}}
             {{#if showCancel}}
               <button class="btn btn-danger" {{action "confirmCancelSubscription"}}>Cancel Subscription</button>

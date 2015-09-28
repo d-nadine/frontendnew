@@ -1,4 +1,4 @@
-* Pipeline lists [78%]
+* Pipeline lists [74%]
   - [X] create add deal modal
   - [X] validate deal form
   - [X] post add deal form
@@ -21,8 +21,8 @@
   - [X] deal main view
   - [X] bulk actions
   - [X] value total
+  - [X] toggle inline email reply
   - [ ] make sure updating does not happen for contact_status
-  - [ ] toggle inline email reply
   - [ ] don't create activity for every contact from upload
   - [ ] search
   - [ ] deal closed date to contacts columns config
