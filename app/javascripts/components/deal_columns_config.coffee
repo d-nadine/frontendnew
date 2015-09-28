@@ -1,6 +1,6 @@
 Radium.DealColumnsConfig = Ember.Mixin.create
   SAVED_COLUMNS: "deal_saved_checked_columns"
-  initialContactsColumns: ["assign", "change-status", "status-change-date", "next-task", "next-task-date"]
+  initialContactsColumns: ["contact-email", "assign", "change-status", "status-change-date"]
   initialCompaniesColumns: ['company-name', 'assign', "change-status", "status-change-date", "next-task", "next-task-date"]
   fixedColumns: Ember.A([
     {
@@ -38,7 +38,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       id: "contact-name"
       group: "details"
       classNames: "name"
-      heading: "Contact"
+      heading: "Contact Name"
       route: "contact"
       bindings: [{
         name: "model",
