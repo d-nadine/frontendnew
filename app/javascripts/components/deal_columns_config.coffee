@@ -100,7 +100,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       id: "street"
       group: "address"
       classNames: "street"
-      heading: "street"
+      heading: "Street"
       bindings: [{
         name: "model",
         value: "model.contact"
@@ -122,7 +122,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       id: "state"
       group: "address"
       classNames: "state"
-      heading: "state"
+      heading: "State"
       bindings: [{
         name: "model",
         value: "model.contact"
@@ -166,7 +166,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       id: "zipcode"
       group: "address"
       classNames: "zipcode"
-      heading: "Zipcode"
+      heading: "Zip Code"
       bindings: [{
         name: "model",
         value: "model.contact"
@@ -257,7 +257,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       id: "deal-value"
       group: "details"
       classNames: "deal-value"
-      heading: "value"
+      heading: "Value"
       bindings: [
         {name: "value", value: "model.value"}
         {name: "model", value: "model"}
