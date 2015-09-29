@@ -94,10 +94,21 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
         typeaheadHide.apply typeahead, arguments
 
-      typeahead.process = =>
-        return if @inEditingState()
+      inEditingState = =>
+        @inEditingState()
 
-        typeaheadProcess.apply typeahead, arguments
+      typeahead.process = (items) ->
+        return if inEditingState()
+
+        items = items.filter (item) =>
+          @matcher(item)
+
+        items = @sorter(items)
+
+        if !items.get('length')
+          return if @shown then @hide() else this
+
+        @render(items).show()
 
       typeaheadKeydown = typeahead.keydown.bind(typeahead)
 

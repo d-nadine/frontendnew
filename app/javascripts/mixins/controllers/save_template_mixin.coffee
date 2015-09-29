@@ -14,5 +14,6 @@ Radium.SaveTemplateMixin = Ember.Mixin.create
       template.save().then (result) =>
         @send 'flashSuccess', "Template Saved"
         @set 'template', result
+        @templatesService.pushObject(result)
 
       false
