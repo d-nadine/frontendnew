@@ -315,6 +315,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
                else
                  current
 
+    lastNode = lastNode || range.endContainer
+
     $.summernote.core.dom.insertAfter(@$menu.get(0), lastNode)
 
     positioning = if editor.is(':empty')
