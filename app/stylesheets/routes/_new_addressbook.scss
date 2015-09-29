@@ -998,6 +998,14 @@
       }
     }
 
+    .change-status {
+
+      .caret {
+        position: relative;
+        top: 8px;
+      }
+    }
+
     .next-task, .next-task-date {
       max-width: 100px;
     }
