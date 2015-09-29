@@ -147,11 +147,17 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('notifications').stop()
     @controllerFor('messages').stop()
 
+  model: ->
+    Ember.RSVP.hash
+      templates: Radium.Template.find({})
+
   afterModel: ->
     if @get('currentUser').get('subscriptionInvalid')
       @replaceWith 'settings.billing'
 
-  setupController: (controller) ->
+  setupController: (controller, lookups) ->
+    @container.lookup('templates:service').set 'templates', lookups.templates
+
     @controllerFor('subscriptionPlans').set 'model', Radium.SubscriptionPlan.find()
     @controllerFor('notifications').set 'model', Radium.Notification.all()
     @controllerFor('users').set 'model', Radium.User.find()

@@ -1,5 +1,6 @@
 Radium.FormBoxController = Radium.ObjectController.extend Ember.Evented,
   Radium.SaveTemplateMixin,
+  Radium.SaveEmailMixin,
   actions:
     showForm: (form) ->
       @get("#{form}Form").reset()

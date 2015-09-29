@@ -116,7 +116,7 @@
 
     <div>
       {{#if showReplyForm}}
-        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate"}}
+        {{email-form form=replyEmail parent=this signature=signature addSignature="addSignature" mode="reply" saveEmail="saveEmail" deleteFromEditor="deleteFromEditor" saveTemplate="saveTemplate" templates=templates}}
       {{/if}}
 
       {{#if showFormBox}}

@@ -43,3 +43,10 @@ Ember.Application.initializer
 
     application.inject('component', 'flashMessenger', 'flash:messenger')
     application.inject('controller', 'flashMessenger', 'flash:messenger')
+
+    templatesService = Radium.TemplatesService.create()
+
+    application.register('templates:service', templatesService, instantiate: false)
+    application.inject('controller', 'templatesService', 'templates:service')
+    application.inject('component', 'templatesService', 'templates:service')
+    application.inject('route', 'templatesService', 'templates:service')

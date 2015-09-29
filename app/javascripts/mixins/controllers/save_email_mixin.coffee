@@ -130,3 +130,6 @@ Radium.SaveEmailMixin = Ember.Mixin.create
   # UPGRADE: use inject
   getController: (controller) ->
     @container.lookup("controller:#{controller}")
+
+  templates: Ember.computed 'templatesService.templates.[]', ->
+    @get('templatesService.templates')
