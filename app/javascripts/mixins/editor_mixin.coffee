@@ -7,6 +7,15 @@ Radium.TemplatePlaceholderMap =
 
 Radium.EditorMixin = Ember.Mixin.create
   actions:
+    insertTemplate: (template) ->
+      @EventBus.publish "insertTemplate", template
+
+      if template.get('attachments.length')
+        template.get('attachments').forEach (attachment) =>
+          @get('form.files').pushObject Ember.Object.create(attachment: attachment)
+
+      false
+
     insertPlaceholder: (placeholder) ->
       @EventBus.publish('placeholderInsered', placeholder)
 
@@ -32,6 +41,16 @@ Radium.EditorMixin = Ember.Mixin.create
         display = placeholderMap[i]
         item = Ember.Object.create(name: i, display: "{#{display}}", curlyless: display)
         ret.pushObject item
+
+    templates = @get('templates').toArray()
+
+    return ret unless templates.get('length')
+
+    templateOptions = templates.map (template) ->
+      display = template.get('subject')
+      Ember.Object.create(name: display, display: "{#{display}}", curlyless: display, template: template)
+
+    ret.pushObjects(templateOptions)
 
     ret
 

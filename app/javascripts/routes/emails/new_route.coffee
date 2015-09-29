@@ -1,8 +1,10 @@
 require 'mixins/controllers/save_email_mixin'
 require 'routes/mixins/send_email_mixin'
+require 'mixins/templates_fields_promise'
 
 Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
   Radium.SendEmailMixin,
+  Radium.TemplatesFieldsPromise,
   queryParams:
     mode:
       refreshModel: true
@@ -32,18 +34,7 @@ Radium.EmailsNewRoute = Ember.Route.extend Radium.SaveEmailMixin,
     if qps.from_people && !@controllerFor('peopleIndex').get('hasCheckedContent')
         return @replaceWith 'people.index', 'all'
 
-    self = this
-    new Ember.RSVP.Promise (resolve, reject) ->
-      Ember.RSVP.hash(
-        customFields: Radium.CustomField.find({})
-        templates: Radium.Template.find({})
-      ).then((hash) ->
-        controller = self.controllerFor('emailsNew')
-        controller.set('customFields', hash.customFields)
-        controller.set('templates', hash.templates)
-        resolve()
-      ).catch (error) ->
-        reject(error)
+    @templatesFiledsPromise("emailsNew")
 
   model: (params) ->
     if bulkForm = @controllerFor('emailsNew').get('bulkForm')

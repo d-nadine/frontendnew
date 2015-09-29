@@ -1,6 +1,11 @@
 Radium.ContentEditableBehaviour = Ember.Mixin.create
-  setEndOfContentEditble: ->
-    @$().setEndOfContentEditble()
+  setEndOfContentEditble: (node) ->
+    ele = if node
+            node
+          else
+            @$()
+
+    ele.setEndOfContentEditble()
 
   insertLineBreak: ->
     selection = window.getSelection()

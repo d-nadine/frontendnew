@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="textbox-wrap">
-        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="2" parent=this source=allPlaceholders}}
+        {{richtext-editor files=files queryKey="display" content=form.html header="New Template" isInvalid=messageIsInvalid tabindex="2" parent=this source=allPlaceholders insertTemplate="insertTemplate"}}
       </div>
       {{#if form.files.length}}
         {{upload-filelist files=form.files hideUploadedBy=true}}

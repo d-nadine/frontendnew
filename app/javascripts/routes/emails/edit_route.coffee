@@ -1,8 +1,10 @@
 require 'mixins/controllers/save_email_mixin'
 require 'mixins/controllers/save_template_mixin'
+require 'mixins/templates_fields_promise'
 
 Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
   Radium.SaveTemplateMixin,
+  Radium.TemplatesFieldsPromise,
 
   actions:
     deleteFromEditor: ->
@@ -24,17 +26,7 @@ Radium.EmailsEditRoute = Radium.Route.extend Radium.SaveEmailMixin,
   beforeModel: (transition) ->
     self = this
 
-    new Ember.RSVP.Promise (resolve, reject) ->
-      Ember.RSVP.hash(
-        customFields: Radium.CustomField.find({})
-        templates: Radium.Template.find({})
-      ).then((hash) ->
-        controller = self.controllerFor('emailsEdit')
-        controller.set('customFields', hash.customFields)
-        controller.set('templates', hash.templates)
-        resolve()
-      ).catch (error) ->
-        reject(error)
+    @templatesFiledsPromise("emailsEdit")
 
   afterModel: (model, transition) ->
     queryParams = transition.queryParams

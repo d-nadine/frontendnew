@@ -7,6 +7,8 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     setBindingValue: (placeholder) ->
       if field = placeholder.get('field')
         @onCustomFieldInserted(field)
+      else if template = placeholder.get('template')
+        @sendAction "insertTemplate", template
       else
         @onPlaceholderInserted(placeholder)
 
@@ -234,17 +236,6 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
       content = @$('.note-editable').html()
       @set('content', content)
 
-  onTemplateInserted: (template) ->
-    editable = @$('.note-editable')
-
-    editable.focus()
-
-    @removePlaceHolder() unless @get('placeholderShown')
-
-    editable.html(template.get('html'))
-
-    Ember.run.next =>
-      @doUpdate()
 
   onRemovePlaceHolder: ->
     @removePlaceHolder(false)
@@ -298,6 +289,18 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @doUpdate()
 
     false
+
+  onTemplateInserted: (template) ->
+    editable = @$('.note-editable')
+
+    editable.focus()
+
+    editable.append(template.get('html'))
+
+    @setEndOfContentEditble(editable)
+
+    Ember.run.next =>
+      @doUpdate()
 
   placeholderShown: false
 
