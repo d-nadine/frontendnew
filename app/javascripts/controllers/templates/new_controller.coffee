@@ -18,7 +18,8 @@ Radium.TemplatesNewController = Radium.Controller.extend
         @get('messagesSidebar').send('showMore')
 
         @transitionToRoute "templates.edit", result
-        @templatesService.pushObject(result)
+        @templatesService.get('templates').pushObject(result)
+        @templatesService.notifyPropertyChange 'templates'
 
   needs: ['messagesSidebar']
 

@@ -143,15 +143,18 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
       typeahead.$element.off 'blur'
 
-      blurHandler = (e) =>
-        @transitionToEditing()
-        false
+      # blurHandler = (e) =>
+      #   @transitionToEditing()
+      #   false
 
       typeahead.blur = null
 
-      typeahead.$element.on 'blur', blurHandler.bind(typeahead)
+      # typeahead.$element.on 'blur', blurHandler.bind(typeahead)
 
       typeahead.blur = typeaheadBlur.bind(typeahead)
+
+      typeahead.matcher = (item) ->
+        true
 
     editable = @$('.note-editable')
 

@@ -131,6 +131,10 @@ Radium.MessagesRoute = Radium.Route.extend
     @send 'animateDelete', item, callback, '.messages-list'
 
   recalculateModel: (item, action, fromSidebar) ->
+    if action == "delete" && item.constructor == Radium.Template
+      @templatesService.get('templates').removeObject(item)
+      @templatesService.notifyPropertyChange 'templates'
+
     messagesController = @controllerFor 'messages'
     sidebarController = @controllerFor 'messagesSidebar'
 
