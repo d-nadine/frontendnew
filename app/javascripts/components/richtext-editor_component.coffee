@@ -94,21 +94,10 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
         typeaheadHide.apply typeahead, arguments
 
-      inEditingState = =>
-        @inEditingState()
+      typeahead.process = =>
+        return if @inEditingState()
 
-      typeahead.process = (items) ->
-        return if inEditingState()
-
-        items = items.filter (item) =>
-          @matcher(item)
-
-        items = @sorter(items)
-
-        if !items.get('length')
-          return if @shown then @hide() else this
-
-        @render(items).show()
+        typeaheadProcess.apply typeahead, arguments
 
       typeaheadKeydown = typeahead.keydown.bind(typeahead)
 
@@ -143,18 +132,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
       typeahead.$element.off 'blur'
 
-      # blurHandler = (e) =>
-      #   @transitionToEditing()
-      #   false
+      typeahead.inEditingState = @inEditingState.bind(this)
 
       typeahead.blur = null
-
-      # typeahead.$element.on 'blur', blurHandler.bind(typeahead)
-
-      typeahead.blur = typeaheadBlur.bind(typeahead)
-
-      typeahead.matcher = (item) ->
-        true
 
     editable = @$('.note-editable')
 
@@ -309,9 +289,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
     editable.focus()
 
-    editable.append(template.get('html'))
-
-    @setEndOfContentEditble(editable)
+    @insertHtml(template.get('html'))
 
     Ember.run.next =>
       @doUpdate()
@@ -330,7 +308,12 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     range = selection.getRangeAt(0).cloneRange()
     editor = $('.note-editable')
 
-    lastNode = range.endContainer
+    current = document.getSelection().anchorNode
+
+    lastNode = if current == editor.get(0)
+                 editor.get(0).firstChild
+               else
+                 current
 
     $.summernote.core.dom.insertAfter(@$menu.get(0), lastNode)
 
