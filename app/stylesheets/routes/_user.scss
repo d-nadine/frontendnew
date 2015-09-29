@@ -203,6 +203,7 @@
 .user-view,
 .xcontact-component,
 .xcompany-component,
+.xdeal-component,
 .calendar-view,
 .deal-view {
 
@@ -246,7 +247,7 @@
     }
   }
   .main-content {
-    width: 100%;
+    width: 100% !important;
   }
   .tasks-content,
   .form-box-view,

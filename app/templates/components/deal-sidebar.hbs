@@ -1,55 +1,57 @@
-<div class="sidebar-panel">
-  <div class="sidebar-panel-content">
-    <h2 class="deal-title">
-      <i class="ss-standard ss-briefcase"></i>
-      {{inline-editor model=deal bufferKey="name" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
-    </h2>
-  </div>
+<div class="form">
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <dl class="dl-horizontal">
-        <dt><i class="ss-standard ss-list"></i></dt>
-        <dd>{{deal.list.name}}</dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt><i class="ss-standard ss-target"></i></dt>
-        <dd>{{deal.daysInCurrentState}} Current Status</dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt><i class="ss-standard ss-like"></i></dt>
-        <dd>
-          {{change-liststatus deal=deal parent=this}}
-        </dd>
-      </dl>
-      {{inline-money model=deal key="value" class="sidebar-panel" currencySymbol=currencySymbol}}
+      <h2 class="deal-title">
+        <i class="ss-standard ss-briefcase"></i>
+        {{inline-editor model=deal bufferKey="name" notRoutable=true placeholder="Add Name" parent=this isRequired=true}}
+      </h2>
     </div>
-  </div>
-  <div class="sidebar-panel">
-    <div class="sidebar-panel-content contacts">
-      {{#if deal.list.contactList}}
-        {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true routeAction="showContactDrawer"}}
-      {{else}}
-        {{inline-autocomplete model=deal bufferKey="company" scopes="company" queryKey="name" placeholder="Add Company" saveAction="setCompany" parent=this actionOnly=true routeAction="showCompanyDrawer"}}
-      {{/if}}
-    </div>
-    <div class="sidebar-panel-header">
-      <h6 class="sidebar-panel-title">
-        Additional Contacts
-      </h6>
-    </div>
-    <div class="sidebar-panel-content contacts">
-      <div class="contacts-picker">
-        {{add-contacts parent=deal contacts=deal.contacts itemAction="showContactDrawer"}}
+    <div class="sidebar-panel">
+      <div class="sidebar-panel-content">
+        <dl class="dl-horizontal">
+          <dt><i class="ss-standard ss-list"></i></dt>
+          <dd>{{deal.list.name}}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt><i class="ss-standard ss-target"></i></dt>
+          <dd>{{deal.daysInCurrentState}} Current Status</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt><i class="ss-standard ss-like"></i></dt>
+          <dd>
+            {{change-liststatus deal=deal parent=this}}
+          </dd>
+        </dl>
+        {{inline-money model=deal key="value" class="sidebar-panel" currencySymbol=currencySymbol}}
       </div>
     </div>
+    <div class="sidebar-panel">
+      <div class="sidebar-panel-content contacts">
+        {{#if deal.list.contactList}}
+          {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true routeAction="showContactDrawer"}}
+        {{else}}
+          {{inline-autocomplete model=deal bufferKey="company" scopes="company" queryKey="name" placeholder="Add Company" saveAction="setCompany" parent=this actionOnly=true routeAction="showCompanyDrawer"}}
+        {{/if}}
+      </div>
+      <div class="sidebar-panel-header">
+        <h6 class="sidebar-panel-title">
+          Additional Contacts
+        </h6>
+      </div>
+      <div class="sidebar-panel-content contacts">
+        <div class="contacts-picker">
+          {{add-contacts parent=deal contacts=deal.contacts itemAction="showContactDrawer"}}
+        </div>
+      </div>
 
-    {{assign-to model=deal users=users user=deal.user validator=targetObject}}
+      {{assign-to model=deal users=users user=deal.user validator=targetObject}}
 
-    {{sidebar-attachments files=targetObject.files model=deal}}
+      {{sidebar-attachments files=targetObject.files model=deal}}
 
-    <div class="sidebar-panel sidebar-delete">
-      <div class="sidebar-panel-content">
-        <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Deal</button>
+      <div class="sidebar-panel sidebar-delete">
+        <div class="sidebar-panel-content">
+          <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Deal</button>
+        </div>
       </div>
     </div>
   </div>
