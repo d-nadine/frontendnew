@@ -27,8 +27,8 @@
 }
 
 .contact-drawer.drawer-view {
-  max-width: 75%;
-  width: auto;
+  width: 70%;
+  
   &:not(.deal-drawer):not(.company-drawer) {
     z-index: 1010;
   }
