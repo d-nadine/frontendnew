@@ -44,7 +44,7 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
     showCompany: (contact) ->
       company = contact.get('company')
 
-      @send "showCompanyDrawer", company, true
+      @send "showCompanyDrawer", company
 
       false
 

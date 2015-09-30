@@ -1,12 +1,12 @@
 Radium.XDealComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   actions:
     showContactDrawer: (contact) ->
-      @sendAction "showContactDrawer", contact, true
+      @sendAction "showContactDrawer", contact
 
       false
 
     showCompanyDrawer: (company) ->
-      @sendAction "showCompanyDrawer", company, true
+      @sendAction "showCompanyDrawer", company
 
     deleteDeal: (deal) ->
       if deals = @get('targetObject.deals')

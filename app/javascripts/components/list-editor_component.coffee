@@ -23,7 +23,7 @@ Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
         record.save().then =>
           @flashMessenger.success "List #{list.get('name')} created."
           @sendAction 'closeModal'
-          @sendAction 'updateTotals'
+          @get('peopleController').send 'updateTotals'
 
           if parentModel = @get('parentModel')
             @send 'addList', parentModel, record
@@ -58,3 +58,7 @@ Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
 
   reset: ->
     @set 'isSubmitted', false
+
+  # UPGRADE: Replace with inject
+  peopleController: Ember.computed ->
+    @container.lookup('controller:peopleIndex')
