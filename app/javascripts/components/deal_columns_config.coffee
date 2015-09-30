@@ -119,28 +119,6 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
-      id: "state"
-      group: "address"
-      classNames: "state"
-      heading: "State"
-      bindings: [{
-        name: "model",
-        value: "model.contact"
-      }
-      {
-        name: "placeholder",
-        value: "Add state",
-        static: true
-      },
-      {
-        name: "bufferKey",
-        value: "state"
-        static: true
-      }
-      ],
-      component: 'editable-field'
-    }
-    {
       id: "city"
       group: "address"
       classNames: "city"
@@ -157,6 +135,28 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       {
         name: "bufferKey",
         value: "city"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    }
+    {
+      id: "state"
+      group: "address"
+      classNames: "state"
+      heading: "State"
+      bindings: [{
+        name: "model",
+        value: "model.contact"
+      }
+      {
+        name: "placeholder",
+        value: "Add state",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "state"
         static: true
       }
       ],
