@@ -74,3 +74,6 @@ Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
     @_super.apply this, arguments
 
     @set 'shared', @get('contact.isLoaded')
+
+  lists: Ember.computed ->
+    @container.lookup('controller:lists').get('sortedLists')
