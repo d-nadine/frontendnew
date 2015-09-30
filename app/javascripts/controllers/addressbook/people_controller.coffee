@@ -1,11 +1,16 @@
 require "controllers/addressbook/people_mixin"
 require "mixins/save_contact_actions"
 require "mixins/table_column_selections"
+require "mixins/lists_persistence_mixin"
+require "mixins/common_modals"
 
 Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.ContactColumnsConfig,
   Radium.SaveContactActions,
   Radium.TableColumnSelectionsMixin,
+  Radium.ListsPersistenceMixin,
+  Radium.CommonModals,
+
   actions:
     selectContact: (item) ->
       if typeof item == "string"
@@ -139,36 +144,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       @set 'showDrawer', true
 
       @setRowMarker(contact)
-
-      false
-
-    createList: (list) ->
-      @closeModal()
-
-      unless list
-        list = Ember.Object.create
-                 isNew: true
-                 name: ''
-                 itemName: ''
-                 type: 'contacts'
-
-      @set 'modalModel', list
-
-      config = {
-        bindings: [
-          {name: "list", value: "modalModel"},
-          {name: "parent",value: "this"}
-        ],
-        actions: [
-          {name: "closeModal", value: "closeModal"},
-          {name: "updateTotals", value: "updateTotals"}
-        ]
-        component: 'list-editor'
-      }
-
-      @set 'modalParams', config
-
-      @set 'showModal', true
 
       false
 
@@ -587,11 +562,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     @set 'showDrawer', false
     @set 'drawerModel', null
     @set 'drawerParams', null
-
-  closeModal: ->
-    @set 'showModal', false
-    @set 'modalModel', false
-    @set 'modalParams', false
 
   combinedQueryFields: Ember.computed 'customFields.[]', ->
     queryFields = @queryFields

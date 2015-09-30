@@ -1,4 +1,8 @@
+require "mixins/lists_persistence_mixin"
+
 Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
+  Radium.ListsPersistenceMixin,
+
   actions:
     submit: ->
       @set 'isSubmitted', true
@@ -20,6 +24,9 @@ Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
           @flashMessenger.success "List #{list.get('name')} created."
           @sendAction 'closeModal'
           @sendAction 'updateTotals'
+
+          if parentModel = @get('parentModel')
+            @send 'addList', parentModel, record
 
         false
 

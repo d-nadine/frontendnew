@@ -20,6 +20,11 @@ Radium.CompanySidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
 
       false
 
+    createList: (list) ->
+      @sendAction "createList", list, @get('company')
+
+      false
+
   model: Ember.computed.oneWay 'company'
 
   membersText: Ember.computed 'company.contacts.[]', ->

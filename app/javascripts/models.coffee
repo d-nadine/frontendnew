@@ -96,6 +96,32 @@ Radium.Model = DS.Model.extend Radium.TimestampsMixin,
 
     this.updateRecordArrays()
 
+  updateHasMany: (key, newItemId, klass) ->
+    Ember.assert "No newListId found to update local hasMany", newItemId
+
+    data = @get('_data')
+    store = @get('store')
+    serializer = @get('store._adapter.serializer')
+    loader = DS.loaderFor(store)
+
+    references = data[key].map((item) -> {id: item.id, type: klass})
+
+    item = Radium.List.all().find (t) -> t.get('id') == newItemId
+
+    unless references.any((item) -> item.id == newItemId)
+      references.push id: newItemId, type: klass
+
+    references = @_convertTuplesToReferences(references)
+
+    data[key] = references
+
+    @set('_data', data)
+
+    @suspendRelationshipObservers ->
+      @notifyPropertyChange 'data'
+
+    @updateRecordArrays()
+
   updateLocalProperty: (property, value, notify = true) ->
     data = this.get('data')
 

@@ -1,5 +1,8 @@
+require "mixins/common_modals"
 
 Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
+  Radium.CommonModals,
+
   actions:
     showMore: ->
       @sendAction 'showMore'

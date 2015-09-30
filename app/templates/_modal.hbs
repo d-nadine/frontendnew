@@ -1,0 +1,6 @@
+{{#if showModal}}
+  {{#x-modal close="closeModal"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent modalModel modalParams}}
+  {{/x-modal}}
+{{/if}}

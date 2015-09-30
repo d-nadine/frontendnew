@@ -226,12 +226,7 @@
     {{renderComponent drawerModel drawerParams}}
   {{/x-drawer}}
 {{/if}}
-{{#if showModal}}
-  {{#x-modal close="closeModal"}}
-    {{! UPGRADE: use component helper when we upgrade}}
-    {{renderComponent modalModel modalParams}}
-  {{/x-modal}}
-{{/if}}
+{{partial 'modal'}}
 {{#delete-confirmation deleteAction="deleteAll" showDeleteConfirmation=showDeleteConfirmation}}
 <p>This action cannot be undone! Deleting these <strong>{{checkedTotal}}</strong> item(s) will be permanent.</p>
 {{/delete-confirmation}}

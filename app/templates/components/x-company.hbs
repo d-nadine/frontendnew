@@ -1,6 +1,7 @@
 <div class="sidebar">
-  {{company-sidebar company=company parent=parent addList="addList" removeList="removeList" customFields=customFields files=files showDeleteConfirmation=showDeleteConfirmation}}
+  {{company-sidebar company=company parent=parent addList="addList" removeList="removeList" customFields=customFields files=files showDeleteConfirmation=showDeleteConfirmation createList="createList"}}
 </div>
 {{#unless hideMain}}
   {{company-main company=company parent=parent confirmDeletion="confirmCompanyDeletion" noscroll=mainnoscroll hideDeals=hideDeals showDeleteConfirmation=showDeleteConfirmation deleteCompany="deleteCompany"}}
 {{/unless}}
+{{partial 'modal'}}

@@ -2,6 +2,7 @@ require "mixins/lists_persistence_mixin"
 
 Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixin,
   Radium.ComponentContextHackMixin,
+
   actions:
     addList: (list) ->
       @_super @get('model'), list
@@ -10,6 +11,11 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
 
     removeList: (list) ->
       @_super @get('model'), list
+
+      false
+
+    createList: (list) ->
+      @sendAction "createList", list, @get('model')
 
       false
 

@@ -145,31 +145,7 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
     model.updateLocalBelongsTo 'contactStatus', job.get('status')
 
   localList: (model, job) ->
-    data = model.get('_data')
-    store = @get('store')
-    serializer = @get('store._adapter.serializer')
-    loader = DS.loaderFor(store)
-
-    references = data.lists.map((list) -> {id: list.id, type: Radium.List})
-
-    newListId = job.get('newLists.firstObject')
-
-    Ember.assert "No newListId found to update localList", newListId
-
-    list = Radium.List.all().find (t) -> t.get('id') == newListId
-
-    unless references.any((list) -> list.id == newListId)
-      references.push id: newListId, type: Radium.List
-
-    references = model._convertTuplesToReferences(references)
-    data['lists'] = references
-
-    model.set('_data', data)
-
-    model.suspendRelationshipObservers ->
-      model.notifyPropertyChange 'data'
-
-    model.updateRecordArrays()
+    model.updateHasMany('lists', job.get('newLists.firstObject'), Radium.List)
 
   users: Ember.computed.oneWay 'controllers.users'
 

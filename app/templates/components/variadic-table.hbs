@@ -28,7 +28,7 @@
   <tbody>
     {{#with this}}
       {{#each item in list}}
-        {{#variadic-row item=item check=check columns=columns customFields=customFields table=this}}
+        {{#variadic-row item=item check=check columns=columns customFields=customFields table=this createList="createList"}}
           {{#if check}}
             {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
           {{/if}}
@@ -60,3 +60,4 @@
     {{/with}}
   </tbody>
 </table>
+{{partial 'modal'}}

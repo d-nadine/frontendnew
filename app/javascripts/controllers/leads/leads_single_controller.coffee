@@ -156,6 +156,10 @@ Radium.LeadsSingleController = Radium.Controller.extend Radium.FormArrayBehaviou
   isSubmitted: false
   errorMessages: Ember.A()
 
+  # UPGRADE: replace with inject
+  lists: Ember.computed ->
+    @container.lookup('controller:lists').get('sortedLists')
+
   isValid: Ember.computed 'isSubmitted', 'model.name', 'emailAddresses.@each.value', 'model.user', ->
     return true unless @get('isSubmitted')
 

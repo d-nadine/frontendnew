@@ -1,6 +1,9 @@
 require "mixins/controllers/attached_files_mixin"
+require "mixins/common_modals"
 
 Radium.XContactComponent = Ember.Component.extend Radium.AttachedFilesMixin,
+  Radium.CommonModals,
+
   actions:
     deleteContact: (contact) ->
       @sendAction "deleteContact", contact
