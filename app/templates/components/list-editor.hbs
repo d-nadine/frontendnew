@@ -6,8 +6,10 @@
   <div class="item">
     {{validation-input type="text" value=list.itemName placeholder="List Item Name" class="field" validator=this validations=itemNameValidations validationField="list.itemName" enter="submit"}}
   </div>
-  {{x-radio name="type" selection=list.type leader="Accounts/Companies List" value="companies"}}
-  {{x-radio name="type" selection=list.type leader="Contacts List" value="contacts"}}
+  <div class="list-editor-radio">
+    {{x-radio name="type" selection=list.type leader="Accounts/Companies List" value="companies"}}
+    {{x-radio name="type" selection=list.type leader="Contacts List" value="contacts"}}
+  </div>
   <div class="actions">
     <button {{action "submit"}} class="btn btn-primary">Submit</button>
     <button {{action "cancel"}} class="btn">Cancel</submit>

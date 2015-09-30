@@ -54,6 +54,47 @@
 .list-editor-component {
   margin-top: 0;
   width: 100%;
+
+  h1 {
+    margin-left: 25px;
+  }
+
+  .form {
+    padding-left: 0;
+    display: inline-block;
+    width: 100%;
+    margin-left: 25px;
+
+    .item {
+      min-height: 0;
+
+      input {
+        width: calc(100% - 14px);
+        margin-bottom: 0;
+        height: 30px;
+      }
+    }
+    .list-editor-radio {
+      margin-top: 15px;
+      display: inline-block;
+      float: left;
+
+      .xradio-component {
+        display: inline-block;
+        float: left;
+        clear: both;
+        margin-left: 10px;
+        margin-bottom: 6px;
+      }
+    }
+    .actions {
+      display: inline-block;
+      float: left;
+      clear: both;
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
+  }
 }
 
 .modal .list-editor-component .from .actions {
