@@ -4,6 +4,11 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   Radium.SubscriptionMixin,
   Ember.Evented,
   actions:
+    changeCountry: (country) ->
+      @set 'country', country.key
+
+      false
+
     confirmCancelSubscription: ->
       @set "showDeleteConfirmation", true
 
@@ -197,8 +202,9 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   country: Ember.computed 'model.country', (key, value) ->
     if arguments.length == 2 && value != undefined
       @set 'model.country', value
+      return value
     else
       unless @get('model.country')
-        @get('controllers.countries.firstObject')
+        "USA"
       else
         @get('model.country')

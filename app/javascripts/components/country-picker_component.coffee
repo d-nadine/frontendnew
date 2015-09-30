@@ -7,9 +7,19 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
       @sendAction "changeCountry", country
 
     toggleDropdown: ->
-      @toggleProperty 'open'
+      typeahead = @getTypeahead()
 
-      return unless @get('open')
+      if typeahead.shown
+        typeahead.hide()
+        return false
+      else
+        # FIXME: Do we move this into automcomplete mixin?
+        # so we can show typeahead on click?
+        typeahead.options.minLength = 0
+        typeahead.options.items = Radium.Countries.length
+        typeahead.show()
+        typeahead.lookup()
+        return true
 
   setValue: (country) ->
     @send "changeCountry", country
@@ -47,6 +57,22 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
     event.stopPropagation()
 
   sync: true
+
+  matcher: (item) ->
+    query = @resolveQuery(@query) || ""
+
+    unless query.length
+      return true
+
+    @_super.apply this, arguments
+
+  sorter: (items) ->
+    query = @resolveQuery(@query) || ""
+
+    unless query.length
+      return items
+
+    @_super.apply this, arguments
 
   source: Ember.computed 'countryList.[]', ->
     source = @get('countryList').map (c) -> Ember.Object.create(c)

@@ -73,14 +73,14 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     model = @get('model')
     yearOption = @get('yearOption')
 
-    ret = if @get('isCurrent')
-      "#{accounting.formatMoney(currentPlan.get('amount'))}/#{currentPlan.get('interval')}"
-    else
-      if @get('yearly')
-        "#{accounting.formatMoney(yearOption.get('amount'))}/#{yearOption.get('interval')}"
-      else
-        "#{accounting.formatMoney(model.get('amount'))}/#{model.get('interval')}"
+    if @get('isCurrent')
+      amount = currentPlan.get('amount')
 
-    ret
+    if @get('yearly')
+      amount = yearOption.get('amount')
+    else
+      amount = model.get('amount')
+
+    "#{accounting.formatMoney(amount)}/#{currentPlan.get('interval')} per user"
 
   yearly: false
