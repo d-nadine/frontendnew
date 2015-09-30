@@ -208,3 +208,12 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         "USA"
       else
         @get('model.country')
+
+  phone: Ember.computed 'model.phone', 'currentUser.phone', (key, value) ->
+    if arguments.length == 2 && value != undefined
+      @set 'model.phone', value
+    else
+      unless @get('model.phone')
+        @get('currentUser.phone')
+      else
+        @get('model.phone')

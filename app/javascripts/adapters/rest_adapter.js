@@ -83,8 +83,10 @@ Radium.RESTAdapter = DS.RESTAdapter.extend({
 
   didError: function(store, type, record, xhr){
     if ([400, 402, 403, 409, 412].contains(xhr.status) ){
-      var json = JSON.parse(xhr.responseText),
+      var json,
           errors = {};
+
+      json = xhr.responseText.length ? JSON.parse(xhr.responseText) : {errors: {message: "An unknown error has occurred."}}
 
       if(!json.hasOwnProperty('error')){
         this._super.apply(this, arguments);
