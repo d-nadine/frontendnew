@@ -5,6 +5,11 @@ Radium.UserController = Radium.ObjectController.extend   Radium.SaveEmailMixin,
 
       false
 
+    saveEmail: (form) ->
+      @_super.call this, form, dontTransition: true
+
+      false
+
   needs: ['users', 'contacts', 'companies', 'countries', 'accountSettings', 'contactStatuses']
   loadedPages: [1]
 

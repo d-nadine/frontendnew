@@ -60,7 +60,7 @@ Radium.SaveEmailMixin = Ember.Mixin.create
 
           if result.get('isDraft')
             folder = if result.get('isScheduled') then 'scheduled' else 'drafts'
-            @send 'flashSuccess', "Email has been saved to the #{folder} folder"
+            @flashMessenger.success "Email has been saved to the #{folder} folder"
             @getController('messagesSidebar').send 'reset'
             @getController('messages').set('selectedContent', result)
 
