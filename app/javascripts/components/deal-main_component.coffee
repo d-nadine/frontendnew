@@ -4,7 +4,6 @@ Radium.DealMainComponent = Ember.Component.extend Radium.ScrollableMixin,
       @sendAction "deleteDeal", @get('deal')
 
       false
-      
 
   formBox: Ember.computed 'todoForm', ->
     Radium.FormBox.create

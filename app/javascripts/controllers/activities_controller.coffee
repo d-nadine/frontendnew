@@ -19,5 +19,6 @@ Radium.ActivityItemController = Radium.ObjectController.extend
 
     deleteNote: (note)->
       note.delete().then =>
-        @send 'flashSuccess', 'Note deleted'
-        @get('reference').reload()
+        @flashMessenger.success 'Note deleted'
+        if activity = Radium.Activity.all().find((a) -> a.get('note') == note)
+          activity.unloadRecord()

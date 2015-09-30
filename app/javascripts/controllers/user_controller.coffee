@@ -1,4 +1,4 @@
-Radium.UserController = Radium.ObjectController.extend
+Radium.UserController = Radium.ObjectController.extend   Radium.SaveEmailMixin,
   actions:
     confirmDeletion: ->
       @set "showDeleteConfirmation", true
@@ -26,12 +26,20 @@ Radium.UserController = Radium.ObjectController.extend
     Radium.FormBox.create
       todoForm: @get('todoForm')
       meetingForm: @get('meetingForm')
+      noteForm: @get('noteForm')
+      emailForm: @get('emailForm')
 
   todoForm: Radium.computed.newForm('todo')
 
   todoFormDefaults: Ember.computed 'model', 'tomorrow', ->
     reference: @get('model') unless @get('model') == @get('currentUser')
     user: @get('currentUser')
+
+  noteForm: Radium.computed.newForm 'note'
+
+  noteFormDefaults: Ember.computed 'deal', ->
+    user: @get('currentUser')
+    reference: @get('currentUser')
 
   meetingForm: Radium.computed.newForm('meeting')
 
@@ -45,3 +53,8 @@ Radium.UserController = Radium.ObjectController.extend
     startsAt: @get('now').advance(hour: 1)
     endsAt: @get('now').advance(hour: 2)
     invitations: Ember.A()
+
+  emailForm: Radium.computed.newForm 'email'
+
+  emailFormDefaults: Ember.computed 'contact', ->
+    to: Ember.A()
