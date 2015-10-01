@@ -243,9 +243,10 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   onPlaceholderInserted: (placeholder) ->
     text = Radium.TemplatePlaceholderMap[placeholder.name]
+    fallback = Radium.FallbackMap[placeholder.name] || ""
 
     node = """
-      <span data-place-holder="#{placeholder.name}" class="badge badge-info template-item">#{text} | "fall back"&nbsp;<span class="remove-template-item" href="#">x</span></span>
+      <span data-place-holder="#{placeholder.name}" class="badge badge-info template-item">#{text} | "#{fallback}"&nbsp;<span class="remove-template-item" href="#">x</span></span>
     """
 
     @insertPlaceholder(node)

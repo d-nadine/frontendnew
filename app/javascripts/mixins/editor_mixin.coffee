@@ -5,6 +5,13 @@ Radium.TemplatePlaceholderMap =
   "company_name": "company"
   "signature": "signature"
 
+Radium.FallbackMap =
+  "name": "Hi there"
+  "first_name": ""
+  "last_name": ""
+  "company_name": "your company"
+  "signature": "Best Regards"
+
 Radium.EditorMixin = Ember.Mixin.create
   actions:
     insertTemplate: (template) ->
