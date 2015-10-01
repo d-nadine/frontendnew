@@ -71,7 +71,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create
       item[@field] || item.get(field)
 
   resolveQuery: (query) ->
-    return unless query
+    return "" unless query
 
     if query instanceof DS.Model
       return query.get(@queryKey)
