@@ -8,6 +8,9 @@ Radium.ListsPersistenceMixin = Ember.Mixin.create
 
         return @send 'createList', list
 
+      unless resource instanceof Radium.Model
+        return resource.get('lists').pushObject list
+
       record = Radium.AddList.createRecord
                  reference: resource
                  list: list

@@ -1,9 +1,18 @@
 require 'mixins/user_combobox_props'
+require "mixins/common_modals"
 
 Radium.LeadsNewComponent = Ember.Component.extend Radium.UserComboboxProps,
+  Radium.CommonModals,
+
   actions:
     addList: (list) ->
       model = @get('model')
+
+      unless list.constructor is Radium.List
+        Ember.assert "You must include the Radium.CommonModals mixin to create a new list", @_actions['createList']
+
+        return @send 'createList', list, model
+
 
       if model.get('isNew')
         model.get('lists').pushObject(list)
