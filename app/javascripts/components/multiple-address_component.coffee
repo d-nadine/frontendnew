@@ -8,6 +8,7 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
         address.set 'isCurrent', true
         @set 'current', address
 
+
       false
 
     changeCountry: (country) ->

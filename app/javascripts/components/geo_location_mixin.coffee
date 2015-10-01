@@ -15,6 +15,7 @@ Radium.GeoLocationMixin = Ember.Mixin.create
     "country": "country"
 
   autocompletes: []
+  listenerHandles: []
 
   initializeGoogleGeo: (elements)->
     # Create the autocomplete object, restricting the search
@@ -22,13 +23,17 @@ Radium.GeoLocationMixin = Ember.Mixin.create
     self = this
 
     @autocompletes.clear()
+    @listenerHandles.clear()
     elements.forEach (el) ->
       autocomplete = new (google.maps.places.Autocomplete)(document.getElementById(el.attr('id')), types: [ 'geocode' ])
 
       self.autocompletes.push(autocomplete)
 
-      google.maps.event.addListener autocomplete, 'place_changed', ->
-        self.fillInAddress(autocomplete)
+      handle = google.maps.event.addListener(autocomplete, 'place_changed', ->
+        self.fillInAddress(autocomplete))
+
+      p handle
+      self.listenerHandles.pushObject handle
 
   fillInAddress: (autocomplete) ->
     place = autocomplete.getPlace()
@@ -68,3 +73,9 @@ Radium.GeoLocationMixin = Ember.Mixin.create
           radius: position.coords.accuracy)
         self.autocompletes.forEach (autocomplete) ->
           autocomplete.setBounds circle.getBounds()
+
+  _teardown: Ember.on 'willDestroyElement', ->
+    @_super.apply this, arguments
+
+    @get('listenerHandles').forEach (handle) ->
+      google.maps.event.removeListener handle
