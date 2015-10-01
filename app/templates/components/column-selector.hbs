@@ -2,17 +2,16 @@
   <i class="ss-standard ss-plus"></i>
 </a>
 <div class="column-selector-dialog">
-  <ul class="dropdown-menu">
-    <li>
-      {{#each group in groups}}
-        <li>
-          <ul class="list-inline">
-            {{#each column in group.columns}}
-              {{x-check leader=column.heading checked=column.checked action="toggleColumnSelection" tagName="li"}}
-            {{/each}}
-          </ul>
-        </li>
-      {{/each}}
-    </li>
-  </ul>
+  <div class="dropdown-menu">
+    {{#each group in groups}}
+      <div class="group-heading-column">
+        <h4 class="group-heading">{{capitalize group.group.group}}</h4>   
+        <ul class="list-inline">
+          {{#each column in group.columns}}
+            {{x-check leader=column.heading checked=column.checked action="toggleColumnSelection" tagName="li"}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/each}}
+  </div>
 </div>

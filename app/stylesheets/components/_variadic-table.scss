@@ -8,13 +8,25 @@
     position: relative;
     z-index: 1050;
 
-    ul.dropdown-menu {
+    .dropdown-menu {
       padding-bottom: 10px;
     }
 
-    ul.dropdown-menu li h4 {
-      text-align: left;
-      margin-left: 10px;
+    &.open {
+
+      .dropdown-menu {
+        left: 50% !important;
+      }
+    }
+
+    .group-heading-column {
+      display: inline-block;
+      float: left;
+
+      h4 {
+        text-align: left;
+        padding-left: 20px;
+      }
     }
 
     ul.list-inline {
