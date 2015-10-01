@@ -13,7 +13,6 @@ Radium.LeadsNewComponent = Ember.Component.extend Radium.UserComboboxProps,
 
         return @send 'createList', list, model
 
-
       if model.get('isNew')
         model.get('lists').pushObject(list)
         return false
