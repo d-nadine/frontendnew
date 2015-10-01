@@ -12,8 +12,8 @@ Radium.FormsNoteController = Radium.FormController.extend
         @flashMessenger.success("Note Added!") if confirmation
       ,
       (error) =>
-        @send 'flashError', error
-        error.deleteRecord()
+        @flashMessenger.error error
+        error.deleteRecord() if error.deleteRecord
 
       Ember.run.later =>
         @set 'isSubmitted', false
