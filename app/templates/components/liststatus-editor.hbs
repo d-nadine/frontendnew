@@ -5,4 +5,22 @@
   </a>
   {{toggle-switch class="inline" checked=isActive dataOn="active" dataOff="inactive" action="switchStatus" disabled=isSaving}}
   {{up-down model=listStatus move="moveListStatus"}}
-<div>
+  <div class="btn-group vanilla">
+    <a href="#" data-toggle="dropdown" class="btn-text btn-black dropdown-toggle">
+      <span class="list-action-text">{{listActionText}}</span>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li>
+        <a href="#" {{action "setMoveAction" "move"}}>Move To</a>
+      </li>
+      <li>
+        <a href="#" {{action "setMoveAction" "copy"}}>Copy To</a></li>
+      </li>
+    </ul>
+  </div>
+  {{#if showListAction}}
+    {{list-autosuggest source=lists destination=actions addList="addList" removeList="removeList" placeholder="List to move to"}}
+  {{/if}}
+</div>
+{{partial 'modal'}}

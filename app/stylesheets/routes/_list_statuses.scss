@@ -26,7 +26,23 @@
     li .list-status-actions {
       position: absolute;
       top: 0;
-      right: -50px;
+      right: -200px;
+      left: 360px;
+
+      .caret {
+        position: relative;
+        top: 20px;
+      }
+
+      .btn-group .dropdown-menu {
+        top: 33px;
+      }
+
+      .autocomplete {
+        position: absolute;
+        left: 315px;
+        top: 5px;
+      }
     }
 
     li .list-status-actions .ss-trash {
