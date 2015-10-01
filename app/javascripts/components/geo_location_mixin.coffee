@@ -32,7 +32,6 @@ Radium.GeoLocationMixin = Ember.Mixin.create
       handle = google.maps.event.addListener(autocomplete, 'place_changed', ->
         self.fillInAddress(autocomplete))
 
-      p handle
       self.listenerHandles.pushObject handle
 
   fillInAddress: (autocomplete) ->
@@ -66,7 +65,7 @@ Radium.GeoLocationMixin = Ember.Mixin.create
     self = this
 
     if navigator.geolocation
-      navigator.geolocation.getCurrentPosition (position) =>
+      navigator.geolocation.getCurrentPosition (position) ->
         geolocation = new (google.maps.LatLng)(position.coords.latitude, position.coords.longitude)
         circle = new (google.maps.Circle)(
           center: geolocation
