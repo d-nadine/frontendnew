@@ -96,6 +96,9 @@ Radium.AutocompleteTextboxComponent = Ember.Component.extend Radium.Autocomplete
     if @writeableValue
       @set 'value', text
 
+  valueDidChange: Ember.observer 'value', ->
+    @setValueText()
+
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
