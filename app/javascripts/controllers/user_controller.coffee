@@ -10,7 +10,7 @@ Radium.UserController = Radium.ObjectController.extend   Radium.SaveEmailMixin,
 
       false
 
-  needs: ['users', 'contacts', 'companies', 'countries', 'accountSettings', 'contactStatuses']
+  needs: ['users', 'contacts', 'companies', 'accountSettings', 'contactStatuses']
   loadedPages: [1]
 
   showDeleteConfirmation: false

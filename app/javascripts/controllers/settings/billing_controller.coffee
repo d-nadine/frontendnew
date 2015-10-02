@@ -138,7 +138,7 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       @get('store').commit()
 
-  needs: ['users', 'account', 'countries']
+  needs: ['users', 'account']
   account: Ember.computed.oneWay 'controllers.account.model'
   unlimited: Ember.computed.oneWay 'account.unlimited'
   isNewCard: false
