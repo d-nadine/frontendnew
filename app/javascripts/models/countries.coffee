@@ -1,4 +1,6 @@
 Radium.Countries = [
+  {key: 'US', 'label':'United States','currencyflag':''}
+  {key: 'GB', 'label':'United Kingdom','currencyflag':''},
   {key: 'AF', 'label':'Afghanistan','currencyflag':''},
   {key: 'AL', 'label':'Albania','currencyflag':''},
   {key: 'DZ', 'label':'Algeria','currencyflag':''},
@@ -226,8 +228,6 @@ Radium.Countries = [
   {key: 'UG', 'label':'Uganda','currencyflag':''},
   {key: 'UA', 'label':'Ukraine','currencyflag':''},
   {key: 'AE', 'label':'United Arab Emirates','currencyflag':''},
-  {key: 'GB', 'label':'United Kingdom','currencyflag':''},
-  {key: 'US', 'label':'United States','currencyflag':''}
   {key: 'UM', 'label':'United States Minor Outlying Islands','currencyflag':''},
   {key: 'UY', 'label':'Uruguay','currencyflag':''},
   {key: 'UZ', 'label':'Uzbekistan','currencyflag':''},

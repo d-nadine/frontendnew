@@ -19,6 +19,7 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
         typeahead.options.items = Radium.Countries.length
         typeahead.show()
         typeahead.lookup()
+        typeahead.$element.focus()
         return true
 
   setValue: (country) ->
@@ -75,10 +76,7 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
     @_super.apply this, arguments
 
   source: Ember.computed 'countryList.[]', ->
-    source = @get('countryList').map (c) -> Ember.Object.create(c)
-
-    source.sort (a, b) ->
-      Ember.compare a.get('label'), b.get('label')
+    @get('countryList').map (c) -> Ember.Object.create(c)
 
   highlighter: (item) ->
     string = item.get @field
@@ -99,10 +97,14 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
 
   showTypeahead: ->
     pos = $.extend({}, @$element.position(), height: @$element[0].offsetHeight)
-    left = pos.left - 33
+    left = pos.left - 13
 
     @$menu.insertAfter(@$element).css(
       top: pos.top + pos.height
       left: left).show()
     @shown = true
     this
+
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+    

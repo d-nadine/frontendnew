@@ -3,6 +3,7 @@
   width: 40%;
 
   .selected-container {
+    cursor: pointer;
     display: inline-block;
     font-size: 14px;
     color: #555;
@@ -18,7 +19,7 @@
     .glyphicon {
       float: left;
       position: relative;
-      top: 11px;
+      top: 3px;
     }
 
     b {
