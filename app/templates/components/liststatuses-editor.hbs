@@ -1,6 +1,38 @@
 {{#each listStatus in sortedListStatuses}}
   {{liststatus-editor listStatus=listStatus tagName="li" moveListStatus="moveListStatus" parent=this}}
 {{/each}}
+<div class="lists-action-selector">
+  <span class="action-label">Upon selecting&nbsp;</span>
+  {{liststatus-picker currentStatus=actionListStatus listStatuses=sortedListStatuses changeStatus="setActionListStatus"}}
+  {{#if actionListStatus}}
+    <div class="btn-group vanilla">
+      <a href="#" data-toggle="dropdown" class="btn-text btn-black dropdown-toggle">
+        <span class="list-action-text">{{listActionText}}</span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+        <li>
+          <a href="#" {{action "setMoveAction" "move"}}>Move To</a>
+        </li>
+        <li>
+          <a href="#" {{action "setMoveAction" "copy"}}>Copy To</a></li>
+          </li>
+      </ul>
+    </div>
+  {{/if}}
+  {{#if showListSelector}}
+    {{list-autosuggest source=remainingLists destination=listActions addList="setActionList" removeList="removeActionList" placeholder="List to move to"}}
+  {{/if}}
+  {{#if actionList}}
+    <ul class="action-list">
+      <li class="">
+        <a class="as-close" {{action "removeActionList" selection bubbles=false}}>×</a>
+        {{actionList.name}}
+      </li>
+    </ul>
+    {{liststatus-picker currentStatus=initialStatus listStatuses=actionList.listStatuses changeStatus="setInitialStatus" noItemText="Choose initial status"}}
+  {{/if}}
+</div>
 <div class="span5 pipeline-state-create">
   {{#if currentUser.isAdmin}}
     <button class="btn btn-large btn-success" {{action "addNewListStatus" bubbles=false}}>
@@ -25,3 +57,4 @@
     </div>
   {{/x-modal}}
 {{/if}}
+{{partial 'modal'}}

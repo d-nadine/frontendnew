@@ -33,3 +33,7 @@ Radium.ListAutosuggestComponent = Radium.XAutosuggestComponent.extend
     @selectionAdded(text)
     input.val('').focus()
     false
+
+  _setup: Ember.on 'didInsertElement', ->
+    @_super.apply this, arguments
+    Ember.assert "You must set a destination in the ListAutosuggestComponent", @get('destination')

@@ -1,0 +1,11 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <span>{{currentStatusName}}</span>
+  <span class="caret"></span>
+</a>
+<ul class="dropdown-menu" role="menu">
+  {{#each status in listStatuses}}
+    <li>
+      <a href="#" {{action "changeListStatus" status}}>{{status.name}}</a>
+    </li>
+  {{/each}}
+</ul>

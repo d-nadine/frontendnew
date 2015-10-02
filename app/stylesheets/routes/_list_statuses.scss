@@ -10,6 +10,98 @@
     }
   }
 
+  .lists-action-selector {
+    margin-top: 20px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .lists-action-selector .action-label {
+    margin-right: 5px;
+  }
+
+  .liststatus-picker-component {
+    position: relative;
+    margin-right: 8px;
+  }
+
+  .liststatus-picker-component a{
+    color: #2d2d30;
+  }
+
+  .liststatus-picker-component a .caret {
+    position: relative;
+    top: 8px;
+    left: 4px;
+  }
+
+  .lists-action-selector ul.as-list {
+    position: relative !IMPORTANT;
+    top: 0 !IMPORTANT;
+  }
+
+  .lists-action-selector ul.as-list .as-result-item {
+    padding-left: 10px;
+  }
+
+  .lists-action-selector .action-list {
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    box-shadow: none;
+    background: transparent;
+    list-style-type: none;
+    margin-left: 10px;
+    position: relative;
+    top: -1px;
+  }
+
+  .lists-action-selector .action-list li {
+    background: #ddd;
+    border: 0px;
+    color: inherit;
+    display: inline-block;
+    box-shadow: none;
+    font-size: inherit;
+    padding: 0px 7px;
+    height: 28px;
+    line-height: 28px;
+    font-family: inherit;
+    text-shadow: none;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+
+  .lists-action-selector .action-list li .as-close {
+    float: right;
+    margin: 1px 0 0 7px;
+    padding: 0 2px;
+    cursor: pointer;
+    text-shadow: none;
+    color: #b4b4b4;
+  }
+
+  .lists-action-selector .btn-group .caret {
+    top: 8px;
+    left: 5px;
+    position: relative;
+  }
+
+  .lists-action-selector .btn-text.btn-black {
+    font-size: 14px;
+  }
+
+  .list-autosuggest-component {
+    margin-left: 15px;
+  }
+
+  .span5 pipeline-state-create {
+    margin-top: 15px;
+  }
+
   .liststatuses-editor-component {
     list-style: none;
     li {
@@ -32,16 +124,6 @@
       .caret {
         position: relative;
         top: 20px;
-      }
-
-      .btn-group .dropdown-menu {
-        top: 33px;
-      }
-
-      .autocomplete {
-        position: absolute;
-        left: 315px;
-        top: 5px;
       }
     }
 
