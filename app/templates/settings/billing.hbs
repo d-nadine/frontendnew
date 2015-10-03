@@ -16,9 +16,7 @@
 {{/if}}
 {{#if isAdmin}}
 <div class="upgrade-plan">
-  {{#unless unlimited}}
-    <h4><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
-  {{/unless}}
+  <h4 class="update-billing"><i class="ss-symbolicons-block ss-medal blue"></i> Upgrade Account</h4>
 
   {{#if isTrial}}
     <p><strong>You are currently on a trial {{currentPlan.name}} account, you have {{controllers.users.length}}/{{controller.totalUsers}} users.</strong></p>
@@ -105,9 +103,7 @@
       <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
     </a>
 
-    {{#if showBillingForm}}
-      {{view Radium.BillingFormView}}
-    {{/if}}
+    {{view Radium.BillingFormView}}
   </div>
 {{/if}}
 </div>

@@ -2,41 +2,41 @@
   <div class="settings-group">
     <div class="control-group">
       <label for="organizationName" class="control-label">Organization Name</label>
-      <div class="controls">
+      <div class="controls control-box control-box">
         {{view view.organisationView class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name."}}
       </div>
     </div>
     <div class="control-group">
       <label for="billingEmail" class="control-label">Billing Email</label>
-      <div class="controls">
+      <div class="controls control-box">
         {{view view.billingEmailView class="input-block-level" placeholder="Email address where the receipts are sent to"}}
       </div>
     </div>
 
     <div class="control-group">
       <label for="yourReference" class="control-label">Your Reference</label>
-      <div class="controls">
+      <div class="controls control-box">
         {{input type="text" value=reference class="input-block-level" placeholder="Your internal reference shown on the receipts."}}
       </div>
     </div>
 
     <div class="control-group">
       <label for="phoneNumber" class="control-label">Phone Number</label>
-      <div class="controls">
+      <div class="controls control-box">
         {{input type="text" value=phone class="input-label"}}
       </div>
     </div>
 
     <div class="control-group">
       <label for="country" class="control-label">Country</label>
-      <div class="controls">
+      <div class="controls control-box">
         {{country-picker changeCountry="changeCountry" current=country countryList=Radium.Countries}}
       </div>
     </div>
 
     <div class="control-group">
       <label for="billingEmail" class="control-label">VAT ID</label>
-      <div class="controls">
+      <div class="controls control-box">
         {{input type="text" value=vat class="input-block-level" placeholder="If you're a company in a European Union country, enter your VAT ID"}}
       </div>
     </div>
@@ -47,13 +47,13 @@
       <form id="card-form" method="POST">
         <div class="control-group">
           <label class="control-label">Card Number</label>
-          <div class="controls">
+          <div class="controls control-box">
             <input id="card-number" type="text" size="20"/>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label">CVC</label>
-          <div class="controls">
+          <div class="controls control-box">
             <input id="card-cvc" type="password" size="4" maxlength="4" class="input-mini"/>
           </div>
         </div>
@@ -61,7 +61,7 @@
           <label class="control-label">
             <span>Expiration (MM/YYYY)</span>
           </label>
-          <div class="controls">
+          <div class="controls control-box">
             <input id="card-expiry-month" type="text" size="2" maxlength="2"  class="input-mini" />
             <span> / </span>
             <input id="card-expiry-year" type="text" size="4" maxlength="4" class="input-mini" />
