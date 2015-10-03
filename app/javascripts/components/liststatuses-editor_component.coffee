@@ -40,13 +40,13 @@ Radium.ListstatusesEditorComponent = Ember.Component.extend Radium.CommonModals,
 
       list = @get('list')
 
-      # list.setProperties
-      #   actionListStatus: null
-      #   listAction: null
-      #   actionList: null
-      #   initialStatus: null
+      list.setProperties
+        actionListStatus: null
+        listAction: null
+        actionList: null
+        initialStatus: null
 
-      # list.save()
+      list.save()
 
       false
 
