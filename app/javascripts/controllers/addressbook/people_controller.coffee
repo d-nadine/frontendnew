@@ -491,7 +491,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       col =
         id: identifier
         classNames: "custom-field"
-        group: "Custom Field"
+        group: "Custom Fields"
         isCustomField: true
         heading: field.get('name')
         bindings: [

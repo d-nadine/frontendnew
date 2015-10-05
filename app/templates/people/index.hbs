@@ -199,7 +199,7 @@
       {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields toggleColumnVisibility="toggleColumnVisibility"}}
     </div>
     <div class="right-table">
-      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable" addColumnSelector=true columnSelection=columns toggleColumnSelection="toggleColumnVisibility"}}
+      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable" addColumnSelector=true columnSelection=combinedColumns toggleColumnSelection="toggleColumnVisibility"}}
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">
