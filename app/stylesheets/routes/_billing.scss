@@ -4,28 +4,31 @@
 .update-billing {
   color: $blue;
 }
-.control-box {
-  margin-left: 0 !important;
-  width: calc(100% - 180px);
+.settings-view {
+  
+  .control-box {
+    margin-left: 0 !important;
+    width: calc(100% - 180px);
 
-  .selected-container {
-    height: 50px;
-    line-height: 50px;
+    .selected-container {
+      height: 50px;
+      line-height: 50px;
+    }
+
+    input {
+      border: 1px solid $border !important;
+      background: white !important;
+      border-radius: 0px !important;
+      width: 350px;
+    }
   }
 
-  input {
-    border: 1px solid $border !important;
-    background: white !important;
-    border-radius: 0px !important;
-    width: 350px;
+  .control-box input,
+  .control-box span {
+    float: left;
+    clear: right;
+    margin-right: 10px;
   }
-}
-
-.control-box input,
-.control-box span {
-  float: left;
-  clear: right;
-  margin-right: 10px;
 }
 
 #card-expiry-month,
