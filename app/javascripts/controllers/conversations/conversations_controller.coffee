@@ -259,9 +259,11 @@ Radium.ConversationsController = Radium.ArrayController.extend Radium.CheckableM
   isContentLoaded: false
 
   page: 1
-  pageSize: 7
+  pageSize: 5
   user: null
   allPagesLoaded: false
+
+  minimumPageLoaded: 5
 
   users: Ember.computed.alias 'controllers.users'
 

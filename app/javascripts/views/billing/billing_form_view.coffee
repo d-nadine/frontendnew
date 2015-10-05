@@ -37,28 +37,9 @@ Radium.BillingFormView = Radium.View.extend
 
     scrollToCard: ->
       Ember.$.scrollTo('.settings-group', 800, {offset: - 100})
+      false
 
-  setup: Ember.on 'didInsertElement', ->
-    @get('controller').on('cardError', this, 'onCardError') if @get('controller').on
-
-    Ember.run.scheduleOnce 'afterRender', 'this', =>
-      @$().slideDown 'slow', =>
-        unless organizationName = @get("organizationName")?.$()
-          return
-
-        organizationName.focus()
-        @send 'scrollToCard'
-
-  onCardError: ->
-    @send 'scrollToCard'
-
-  teardown: Ember.on 'willDestroyElement', ->
-    clone = this.$().clone()
-    @$().parent().prepend(clone)
-    clone.slideUp 'slow', ->
-      clone.remove()
-
-  classNameBindings: [':form-horizontal', ':hide']
+  classNameBindings: [':form-horizontal']
   templateName: 'billing/billing_form'
 
   organisationView: Ember.TextField.extend Radium.ValueValidationMixin,

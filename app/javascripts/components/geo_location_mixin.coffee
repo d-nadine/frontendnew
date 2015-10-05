@@ -25,7 +25,9 @@ Radium.GeoLocationMixin = Ember.Mixin.create
     @autocompletes.clear()
     @listenerHandles.clear()
     elements.forEach (el) ->
-      autocomplete = new (google.maps.places.Autocomplete)(document.getElementById(el.attr('id')), types: [ 'geocode' ])
+      el = document.getElementById(el.attr('id'))
+
+      autocomplete = new google.maps.places.Autocomplete(el, types: [ 'geocode' ])
 
       self.autocompletes.push(autocomplete)
 

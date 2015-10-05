@@ -14,17 +14,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       false
 
-    updateBilling: ->
-      return if @get('gatewaySet')
-
-      @set 'showBillingForm', true
-
-    changeBilling: ->
-      @toggleProperty('showBillingForm')
-      false
-
     cancelSubscription: ->
-      @set 'showBillingForm', false
+      @set "showDeleteConfirmation", false
 
       @set 'isPersisting', true
 
@@ -34,7 +25,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
       activeSubscription = @get('activeSubscription')
 
-      Ember.assert "There is no active subscription to canel", activeSubscription
+      unless activeSubscription
+        return @flashMessenger "There is no active subscription please contact support."
 
       billing.save().then =>
         billing.reload()
@@ -92,7 +84,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
 
     cancel: ->
       @discardBufferedChanges()
-      @set 'showBillingForm', false
 
     updateSubscription: (subscriptionPlan, yearly, yearOption) ->
       isTrial = @get('isTrial')
@@ -108,13 +99,12 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         return @changeTrialPlan(subscriptionPlan, Radium.UpdateTrialPlan)
 
       unless activeCard = @get('activeCard')
-        @set 'showBillingForm', true
+        @flashMessenger.error "Please enter your cred card details."
         return
 
       if yearly
         subscriptionPlan = yearOption
 
-      @set 'showBillingForm', false
       @set 'isPersisting', true
 
       unless @get('activeCard')
@@ -142,7 +132,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
   account: Ember.computed.oneWay 'controllers.account.model'
   unlimited: Ember.computed.oneWay 'account.unlimited'
   isNewCard: false
-  showBillingForm: false
   activeCard: null
   isPersisting: false
 
@@ -158,7 +147,6 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
       model = @get('model')
       model.get("transaction").rollback()
       model.transitionTo("loaded.saved")
-      @trigger 'cardError'
 
   changeTrialPlan: (subscriptionPlan, planType) ->
     @set 'isPersisting', true

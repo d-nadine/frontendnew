@@ -76,7 +76,7 @@
               {{/unless}}
             {{/unless}}
             {{#if showYearOption}}
-              {{x-check checked=yearly leader="Bill Yearly" class="yearly-option"}}
+              {{toggle-switch class="inline" checked=yearly dataOn="Yearly" dataOff="Monthly"}}
             {{/if}}
             {{#if showCancel}}
               <button class="btn btn-danger" {{action "confirmCancelSubscription"}}>Cancel Subscription</button>
@@ -94,11 +94,6 @@
     </table>
   </div>
   <div class="settings-group">
-    {{#unless showBillingForm}}
-      <div class="pull-right">
-        <a href="#" class="btn btn-small" {{action "changeBilling"}}>Edit</a>
-      </div>
-    {{/unless}}
     <a href="#" {{action "changeBilling"}}>
       <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
     </a>

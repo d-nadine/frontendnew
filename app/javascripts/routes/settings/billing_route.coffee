@@ -33,7 +33,3 @@ Radium.SettingsBillingRoute = Radium.Route.extend
 
     if model.hasOwnProperty('subscription') && !model?.subscription?.get('inErrorState')
       controller.set 'activeSubscription', model.subscription
-
-  deactivate: ->
-    @_super.apply this, arguments
-    @controller.set('showBillingForm', false)

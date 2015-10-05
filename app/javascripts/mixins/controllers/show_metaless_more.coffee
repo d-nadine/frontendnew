@@ -2,6 +2,7 @@ Radium.ShowMetalessMoreMixin = Ember.Mixin.create
   actions:
     showMore: ->
       return if @get('allPagesLoaded')
+      return if @get('isContentLoading')
 
       @set 'isContentLoading', true
 
@@ -25,6 +26,11 @@ Radium.ShowMetalessMoreMixin = Ember.Mixin.create
           ids.push record.get('id')
 
         @set 'isContentLoading', false
+
+        return if @get('allPagesLoaded') || !minimumPageLoaded = @get('minimumPageLoaded')
+
+        if minimumPageLoaded && page < minimumPageLoaded
+          @send "showMore"
 
     reset: ->
       @set('page', 1)

@@ -84,6 +84,8 @@ Radium.SubscriptionPlanItemController = Radium.ObjectController.extend
     else
       amount = model.get('amount')
 
+    return unless currentPlan
+
     "#{accounting.formatMoney(amount)}/#{currentPlan.get('interval')} per user"
 
   yearly: false

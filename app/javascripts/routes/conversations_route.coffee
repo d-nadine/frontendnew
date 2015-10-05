@@ -34,18 +34,21 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
     if user = params.user
       args.user = user
 
-    Radium.Email.find(args)
+    controller = @controllerFor 'conversations'
+
+    new Em.RSVP.Promise (resolve, reject) ->
+      Radium.Email.find(args).then((results) ->
+        resolve(results)
+        controller.send "showMore"
+      ).catch (error) ->
+        Ember.Logger.error error
+        reject error
 
   setupController: (controller, model) ->
     @_super.apply this, arguments
     controller.set 'model', model.toArray()
     controller.set 'isLoading', false
     controller.send 'updateTotals'
-
-    return if controller.get 'allPagesLoaded'
-
-    for i in [0...4]
-      controller.send 'showMore'
 
   deactivate: ->
     @_super.apply this, arguments

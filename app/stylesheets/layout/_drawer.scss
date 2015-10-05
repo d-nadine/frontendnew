@@ -28,16 +28,7 @@
 
 .contact-drawer.drawer-view {
   width: 70%;
-  
-  &:not(.deal-drawer):not(.company-drawer) {
-    z-index: 1010;
-  }
-  &.deal-drawer {
-    z-index: 1009;
-  }
-  &.company-drawer {
-    z-index: 1011;
-  }
+
   background: $background;
   border-right: 1px solid $border;
   padding-right: 20px;
