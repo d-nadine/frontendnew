@@ -15,6 +15,36 @@
     </div>
   </div>
 
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-header">
+      <h6 class="sidebar-panel-title">
+        Description
+      </h6>
+    </div>
+    {{inline-editor model=company bufferKey="description" notRoutable=true placeholder="Add Description" parent=this}}
+  </div>
+
+  <div class="sidebar-panel">
+    <div class="sidebar-panel-content">
+      <div class="industry-row">
+        <div class="industry-label">Sector</div>
+        {{inline-editor model=company bufferKey="sector" notRoutable=true placeholder="Add Sector" parent=this}}
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">Industry</div>
+        {{inline-editor model=company bufferKey="industry" notRoutable=true placeholder="Add Industry" parent=this}}
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">Sector</div>
+        {{inline-editor model=company bufferKey="industryGroup" notRoutable=true placeholder="Add IndustryGroup" parent=this}}
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">Subindustry</div>
+        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add Subindustry" parent=this}}
+      </div>
+    </div>
+  </div>
+
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-header">

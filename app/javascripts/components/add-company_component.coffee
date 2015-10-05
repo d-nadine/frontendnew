@@ -28,7 +28,7 @@ Radium.AddCompanyComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
           addressbookCompaniesController.incrementProperty "totalRecords"
 
-          @flashMessenger.success "#{@get('company.name')} created."
+          @flashMessenger.success "#{result.get('name')} created."
           @reset()
         ).finally =>
           @set('isSaving', false)

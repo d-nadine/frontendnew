@@ -15,6 +15,12 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   website: DS.attr('string')
   about: DS.attr('string')
 
+  description: DS.attr('string')
+  sector: DS.attr('string')
+  industry: DS.attr('string')
+  industryGroup: DS.attr('string')
+  subindustry: DS.attr('string')
+
   displayName: Ember.computed.alias 'name'
 
   primaryAddress: Radium.computed.primary 'addresses'

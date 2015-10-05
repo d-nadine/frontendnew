@@ -106,6 +106,17 @@
 }
 
 .company-sidebar-component {
+  .industry-row {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .industry-row .industry-label {
+    margin-right: 10px;
+  }
+
   .multiple-address-component .country-picker-component .dropdown-menu {
     top: auto;
   }
