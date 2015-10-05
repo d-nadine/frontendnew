@@ -2,20 +2,20 @@
   {{liststatus-editor listStatus=listStatus tagName="li" moveListStatus="moveListStatus" parent=this}}
 {{/each}}
 <div class="lists-action-selector">
-  <span class="action-label">Upon selecting&nbsp;</span>
+  <span class="action-label">After selecting&nbsp;</span>
   {{liststatus-picker currentStatus=actionListStatus listStatuses=sortedListStatuses changeStatus="setActionListStatus"}}
   {{#if actionListStatus}}
-    <div class="btn-group vanilla">
+    <div class="btn-group vanilla move-action">
       <a href="#" data-toggle="dropdown" class="btn-text btn-black dropdown-toggle">
         <span class="list-action-text">{{listActionText}}</span>
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
         <li>
-          <a href="#" {{action "setMoveAction" "move"}}>Move To</a>
+          <a href="#" {{action "setMoveAction" "move" bubbles=false}}>Move To</a>
         </li>
         <li>
-          <a href="#" {{action "setMoveAction" "copy"}}>Copy To</a></li>
+          <a href="#" {{action "setMoveAction" "copy" bubbles=false}}>Copy To</a></li>
           </li>
       </ul>
     </div>
@@ -51,8 +51,8 @@
         {{toggle-switch class="inline" checked=newStatus.isActive dataOn="active" dataOff="inactive"}}
       </div>
       <div class="actions">
-        <button {{action "createNewStatus"}} class="btn btn-primary">Submit</button>
-        <button {{action "closeListStatusModal"}} class="btn">Cancel</button>
+        <button {{action "createNewStatus" bubbles=false}} class="btn btn-primary">Submit</button>
+        <button {{action "closeListStatusModal" bubbles=false}} class="btn">Cancel</button>
       </div>
     </div>
   {{/x-modal}}

@@ -56,6 +56,8 @@ Radium.ListstatusesEditorComponent = Ember.Component.extend Radium.CommonModals,
       false
 
     setMoveAction: (action) ->
+      @$('.move-action').removeClass "open"
+
       @set "listAction", action
 
       Ember.run.next =>
