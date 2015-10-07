@@ -18,7 +18,14 @@ Radium.SocialMediaComponent = Ember.Component.extend
   href: Ember.computed 'personsMedia', 'hasMedia', ->
     return "#" unless @get('hasMedia')
 
-    @get('personsMedia.url')
+    mediaUrl = @get('personsMedia.url')
+
+    url = if /([A-Za-z]{3,9}:(?:\/\/)?)/.test(mediaUrl)
+            mediaUrl
+          else
+            "//#{mediaUrl}"
+
+    url
 
   badge: Ember.computed 'socialMedia', ->
     "ss-#{@get('socialMedia')}"
