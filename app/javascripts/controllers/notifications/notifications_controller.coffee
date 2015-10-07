@@ -47,13 +47,13 @@ Radium.NotificationsController = Radium.ArrayController.extend Radium.ShowMetale
   page: 1
   allPagesLoaded: false
   modelQuery: (page, pageSize) ->
-    Radium.Notification.find(page: page, page_size: pageSize)
+    Radium.Notification.find(page: page, page_size: pageSize, shallow: true)
 
   onPoll: ->
     existing = Radium.Notification.all().slice()
     applicationController = @get('applicationController')
 
-    Radium.Notification.find({page:1, page_size: 20}).then (records) ->
+    Radium.Notification.find({page:1, page_size: 20, shallow: true}).then (records) ->
       return unless records.get('length')
 
       delta = records.toArray().reject (record) ->
