@@ -4,10 +4,10 @@ Radium.SocialMediaComponent = Ember.Component.extend
 
   classNameBindings: ['hasMedia:active']
 
-  personsMedia: Ember.computed 'person.contactInfo.socialProfiles.[]', 'socialMedia', ->
+  personsMedia: Ember.computed 'person.contactInfo.socialProfiles.[]', 'person.socialProfiles.[]', 'socialMedia', ->
     socialMedia = @get('socialMedia')
 
-    return unless socialProfiles = @get('person.contactInfo.socialProfiles')
+    return unless socialProfiles = @get('person.contactInfo.socialProfiles') || @get('person.socialProfiles.[]')
 
     socialProfiles.find (p) ->
       p.get('type') == socialMedia

@@ -280,7 +280,9 @@ Radium.RESTAdapter.configure('plurals',{
   contact_status: 'contact_statuses',
   list_status: 'list_statuses',
   move_list_status: 'move_list_statuses',
-  untracked_contacts_totals: 'untracked_contacts_totals'
+  untracked_contacts_totals: 'untracked_contacts_totals',
+  market_category: 'market_categories',
+  technology: 'technologies'
 });
 
 Radium.RESTAdapter.registerTransform('object', {
@@ -371,7 +373,11 @@ Radium.RESTAdapter.map('Radium.Deal', {
 
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' },
-  addresses: {key: 'offices', embedded: 'always'}
+  addresses: {key: 'offices', embedded: 'always'},
+  phoneNumbers: {embedded: 'always'},
+  socialProfiles: {embedded: 'load'},
+  technologies: {embedded: 'load'},
+  marketCategories: {embedded: 'load'}
 });
 
 Radium.RESTAdapter.map('Radium.PhoneNumber', {

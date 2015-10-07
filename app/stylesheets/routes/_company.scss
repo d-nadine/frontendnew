@@ -117,6 +117,14 @@
     margin-right: 10px;
   }
 
+  .industry-row span:after {
+    content: ", ";
+  }
+
+  .industry-row span:last-child:after {
+    content: ""
+  }
+
   .multiple-address-component .country-picker-component .dropdown-menu {
     top: auto;
   }

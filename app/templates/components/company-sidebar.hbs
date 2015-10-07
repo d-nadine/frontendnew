@@ -1,4 +1,7 @@
 <div class="form">
+  <div class="user-avatar">
+    {{avatar-picker person=company class="control-group"}}
+  </div>
   <h2 class="deal-title">
     {{inline-editor model=company bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
   </h2>
@@ -11,7 +14,9 @@
           {{inline-editor model=company bufferKey="website" notRoutable=true placeholder="Add Website" parent=this externalUrl=true}}
         </dd>
       </dl>
+      {{phone-numbers model=company parent=parent}}
       {{multiple-addresses model=company parent=this hasEmail=true}}
+      {{social-medialist person=company}}
     </div>
   </div>
 
@@ -27,6 +32,14 @@
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
       <div class="industry-row">
+        <div class="industry-label">Company Type</div>
+        {{inline-editor model=company bufferKey="companyType" notRoutable=true placeholder="Add company type" parent=this}}
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">Employees</div>
+        {{inline-editor model=company bufferKey="employees" notRoutable=true placeholder="Add employees" parent=this}}
+      </div>
+      <div class="industry-row">
         <div class="industry-label">Sector</div>
         {{inline-editor model=company bufferKey="sector" notRoutable=true placeholder="Add Sector" parent=this}}
       </div>
@@ -41,6 +54,16 @@
       <div class="industry-row">
         <div class="industry-label">Subindustry</div>
         {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add Subindustry" parent=this}}
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">Subindustry</div>
+        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add Subindustry" parent=this}}
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">Technologies</div>
+        {{#each technology in company.technologies}}
+          <span class="technology">{{technology.name}}</span>
+        {{/each}}
       </div>
     </div>
   </div>
