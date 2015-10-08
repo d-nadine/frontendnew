@@ -42,83 +42,94 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       return @send 'setPlaceholder'
 
     saveField: (item) ->
-      return if @get('isSaving')
+      unless @get('isSaving')
+        return @completeSave()
 
-      bufferedProxy = @get('bufferedProxy')
+      observer = =>
+        return if @get('isSaving')
 
-      return unless bufferedProxy
+        @removeObserver "isSaving", observer
 
-      bufferKey = @get('bufferKey')
+        @completeSave()
 
-      model = @get('model')
-
-      unless model
-        return @flashMessenger.error "No model is associated with this record"
-
-      return unless bufferedProxy.hasBufferedChanges
-
-      backup = model.get(bufferKey)
-
-      resetModel = =>
-        bufferedProxy.discardBufferedChanges()
-        bufferedProxy.set bufferKey, backup
-        model.set bufferKey, backup
-        model.reset()
-        markUp = @get('markUp')
-
-        return @setMarkup()
-
-      if @get('isInvalid')
-        @get('containingController').send 'flashError', 'Field is not valid.'
-        if model
-          return resetModel()
-        else
-          return
-
-      @set 'isSaving', true
-
-      if saveAction = @get("saveAction")
-        @get('containingController').send saveAction, this
-        return if @get('actionOnly')
-
-      bufferedProxy.applyBufferedChanges()
-
-      self = this
-
-      model.save().then( =>
-        @set 'isSaving', false
-        value = @get('model').get(@get('bufferKey'))
-
-        Ember.run.next ->
-          model.trigger 'modelUpdated', self, model
-
-        if afterSave = @get('afterSave')
-          @get('containingController').send afterSave, this
-
-        unless value?.length
-          return @send 'setPlaceholder'
-
-        observer = =>
-          return unless model.currentState.stateName == "root.loaded.saved"
-          model.removeObserver "currentState.stateName", observer
-          if @get('alternativeRoute')
-            @notifyPropertyChange 'model'
-            @$().html self.get('markUp')
-
-        if model.currentState.stateName == "root.loaded.saved"
-          observer()
-        else
-          model.addObserver "currentState.stateName", observer
-      ).catch((error) ->
-        resetModel()
-      ).finally =>
-        @set 'isSaving', false
+      @addObserver 'isSaving', observer
 
     setPlaceholder: ->
       return unless el = @$()
 
       el.html("<em class='placeholder'>#{@get('placeholder')}</em>")
       false
+
+  completeSave: (item) ->
+    bufferedProxy = @get('bufferedProxy')
+
+    return unless bufferedProxy
+
+    bufferKey = @get('bufferKey')
+
+    model = @get('model')
+
+    unless model
+      return @flashMessenger.error "No model is associated with this record"
+
+    return unless bufferedProxy.hasBufferedChanges
+
+    backup = model.get(bufferKey)
+
+    resetModel = =>
+      bufferedProxy.discardBufferedChanges()
+      bufferedProxy.set bufferKey, backup
+      model.set bufferKey, backup
+      model.reset()
+      markUp = @get('markUp')
+
+      return @setMarkup()
+
+    if @get('isInvalid')
+      @get('containingController').send 'flashError', 'Field is not valid.'
+      if model
+        return resetModel()
+      else
+        return
+
+    @set 'isSaving', true
+
+    if saveAction = @get("saveAction")
+      @get('containingController').send saveAction, this
+      return if @get('actionOnly')
+
+    bufferedProxy.applyBufferedChanges()
+
+    self = this
+
+    model.save().then( =>
+      @set 'isSaving', false
+      value = @get('model').get(@get('bufferKey'))
+
+      Ember.run.next ->
+        model.trigger 'modelUpdated', self, model
+
+      if afterSave = @get('afterSave')
+        @get('containingController').send afterSave, this
+
+      unless value?.length
+        return @send 'setPlaceholder'
+
+      observer = =>
+        return unless model.currentState.stateName == "root.loaded.saved"
+        model.removeObserver "currentState.stateName", observer
+        if @get('alternativeRoute')
+          @notifyPropertyChange 'model'
+          @$().html self.get('markUp')
+
+      if model.currentState.stateName == "root.loaded.saved"
+        observer()
+      else
+        model.addObserver "currentState.stateName", observer
+    ).catch((error) ->
+      resetModel()
+    ).finally =>
+      @set 'isSaving', false
 
   classNames: ['editable']
   classNameBindings: ['isSaving', 'isInvalid']

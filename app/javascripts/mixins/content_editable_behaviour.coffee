@@ -47,3 +47,46 @@ Radium.ContentEditableBehaviour = Ember.Mixin.create
           sel.addRange range
     else if document.selection and document.selection.type != 'Control'
       document.selection.createRange().pasteHTML html
+
+  getCaretPosition: (range, node) ->
+    treeWalker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, ((n) ->
+      nodeRange = document.createRange()
+      nodeRange.selectNode n
+      if nodeRange.compareBoundaryPoints(Range.END_TO_END, range) < 1
+        NodeFilter.FILTER_ACCEPT
+      NodeFilter.FILTER_REJECT
+    ), false)
+    charCount = 0
+    while treeWalker.nextNode()
+      charCount += treeWalker.currentNode.length
+    if range.startContainer.nodeType == 3
+      charCount += range.startOffset
+    charCount
+
+  setCaretPos:(el, sPos) ->
+    charIndex = 0
+    range = document.createRange()
+    range.setStart el, 0
+    range.collapse true
+    nodeStack = [ el ]
+    node = undefined
+    foundStart = false
+    stop = false
+    while !stop and (node = nodeStack.pop())
+      if node.nodeType == 3
+        nextCharIndex = charIndex + node.length
+        if !foundStart and sPos >= charIndex and sPos <= nextCharIndex
+          range.setStart node, sPos - charIndex
+          foundStart = true
+        if foundStart and sPos >= charIndex and sPos <= nextCharIndex
+          range.setEnd node, sPos - charIndex
+          stop = true
+        charIndex = nextCharIndex
+      else
+        i = node.childNodes.length
+        while i--
+          nodeStack.push node.childNodes[i]
+    selection = window.getSelection()
+    selection.removeAllRanges()
+    selection.addRange range
+    return
