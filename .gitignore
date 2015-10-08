@@ -31,5 +31,3 @@ new-test/bower_components
 /libpeerconnection.log
 npm-debug.log
 testem.log
-
-/old_app
