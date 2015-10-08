@@ -1,0 +1,15 @@
+{{nav-bar currentUser=currentUser transitionToList="transitionToList" today=today toggleNotifications="toggleNotifications" logOut="logOut" notificationCount=notificationCount}}
+
+{{#if showNotifications}}
+  {{#x-drawer class="notifications" closeDrawer="toggleNotifications"}}
+    {{render 'notifications' notifications}}
+  {{/x-drawer}}
+{{/if}}
+
+{{outlet modal}}
+
+<div id="alerts">
+  {{outlet flash}}
+</div>
+
+{{outlet}}

@@ -1,20 +1,4 @@
-.DS_Store
-tmp/
-site/
-config/settings.yml
-!app/assets/images/icons
-!app/sprites/icons
-deploy.log
-.sass-cache
-vendor/ember.js
-vendor/data
-test_site/
-vendor/cache/*
-radium.sublime-project
-radium.sublime-workspace
-new-test/node_modules
-new-test/bower_components
-.\#*
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 /dist
@@ -31,3 +15,36 @@ new-test/bower_components
 /libpeerconnection.log
 npm-debug.log
 testem.log
+
+.DS_Store
+/old_app/tmp/
+/old_app/site/
+/old_app/config/settings.yml
+/old_app/vendor/bundle/
+!app/assets/images/icons
+!app/sprites/icons
+/old_app/deploy.log
+.sass-cache
+vendor/ember.js
+vendor/data
+test_site/
+/old_app/vendor/cache/*
+radium.sublime-project
+radium.sublime-workspace
+new-test/node_modules
+new-test/bower_components
+.\#*
+
+# compiled output
+/old_app/dist
+/old_app/tmp
+
+# dependencies
+/node_modules
+/bower_components
+
+# misc
+/old_app/.sass-cache
+/old_app/connect.lock
+/old_app/coverage/*
+/libpeerconnection.log
