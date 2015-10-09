@@ -24,7 +24,7 @@ Ember.Handlebars.registerBoundHelper 'avatar', (resource, options) ->
   avatar = if resource && resource.get('avatarKey')
              resource.get('avatarKey')
            else
-             if resource.constructor is Radium.Company
+             if resource && resource.constructor is Radium.Company
                "default_avatars/company"
              else
                "default_avatars/large"
