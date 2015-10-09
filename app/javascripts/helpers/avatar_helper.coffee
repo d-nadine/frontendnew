@@ -1,4 +1,4 @@
-Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
+Ember.Handlebars.registerBoundHelper 'avatar', (resource, options) ->
   style = options.hash.style || options.hash.size || 'small'
 
   props = if style == 'dashboard'
@@ -21,11 +21,16 @@ Ember.Handlebars.registerBoundHelper 'avatar', (person, options) ->
   props.crop = 'fill'
   props.gravity = 'face'
 
-  avatar = if person && person.get('avatarKey')
-             person.get('avatarKey')
+  avatar = if resource && resource.get('avatarKey')
+             resource.get('avatarKey')
            else
-             "default_avatars/large"
+             if resource.constructor is Radium.Company
+               "default_avatars/company"
+             else
+               "default_avatars/large"
 
   img = $.cloudinary.image("#{avatar}.jpg", props)
+
+  p img.get(0).outerHTML
 
   return new Handlebars.SafeString(img.get(0).outerHTML)
