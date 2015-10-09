@@ -1,4 +1,4 @@
-Radium.MessagesSidebarItemController = Radium.ObjectController.extend Radium.EmailDealMixin,
+Radium.MessagesSidebarItemController = Radium.ObjectController.extend
   needs: ['messages', 'emailsThread']
   selectedContent: Ember.computed.oneWay('controllers.messages.selectedContent')
   isSelectable: Ember.computed.oneWay('controllers.messages.canSelectItems')

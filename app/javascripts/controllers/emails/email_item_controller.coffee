@@ -1,7 +1,6 @@
 Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFilesMixin,
   Radium.SaveEmailMixin,
   Radium.SaveTemplateMixin,
-  Radium.EmailDealMixin,
   Radium.TrackContactMixin,
   actions:
     toggleFormBox: ->
@@ -10,7 +9,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
     deleteFromEditor: ->
       @set('showReplyForm', false)
-      @set('showingAddDeal', false)
 
       false
 
@@ -31,8 +29,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
       return
 
     toggleReplyForm: ->
-      @set('showingAddDeal', false)
-
       @toggleProperty 'showReplyForm'
       return
 
@@ -52,13 +48,6 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
 
     closeForms: ->
       @set('showReplyForm', false)
-      @set('showingAddDeal', false)
-
-    toggleAddDealForm: ->
-      @set('showReplyForm', false)
-      @toggleProperty 'showingAddDeal'
-
-      false
 
     hideForm: ->
       @set 'showFormBox', false
@@ -149,5 +138,4 @@ Radium.EmailsItemController = Radium.ObjectController.extend Radium.AttachedFile
     @get('controllers.messages.folder') != 'archive'
 
   _initialize: Ember.on 'init', ->
-    @set('showingAddDeal', false)
     @set('showReplyForm', false)
