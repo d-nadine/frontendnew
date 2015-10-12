@@ -5,7 +5,8 @@
     "-Promise",
     "$",
     "DS",
-    "module"
+    "module",
+    "FastClick"
   ],
   "browser": true,
   "boss": true,

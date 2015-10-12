@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'frontend',
+    modulePrefix: 'radium',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',

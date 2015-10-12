@@ -20,6 +20,9 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import("./bower_components/jquery.cookie/jquery.cookie.js");
+  app.import('./vendor/fastclick.js');
+  app.import('./vendor/ember-datetime.js');
+  app.import("./vendor/ember-data.js");
 
   return app.toTree();
 };
