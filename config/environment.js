@@ -30,6 +30,7 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.apiHost = 'http://localhost:9292';
+    ENV.cookieDomain = 'development';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -41,6 +42,7 @@ module.exports = function(environment) {
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
+    ENV.cookieDomain = 'test';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
@@ -51,6 +53,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.apiHost = 'http://api.radiumcrm.com';
+    ENV.cookieDomain = '.radiumcrm.com';
   }
 
   return ENV;

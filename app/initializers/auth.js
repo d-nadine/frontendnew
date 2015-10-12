@@ -1,10 +1,11 @@
+import User from "radium/models/user";
+
 export function initialize(container, application) {
-  const authManager = container.lookup('service:authManager'),
-        store = container.lookup('store:main');
+  const authManager = container.lookup('service:authManager');
 
   application.deferReadiness();
 
-  store.query("user", {name: 'me'}).then((results) =>{
+  User.find({name: 'me'}).then((records) => {
     debugger;
 
     application.advanceReadiness();

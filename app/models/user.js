@@ -1,9 +1,8 @@
 import DS from 'ember-data';
+import Account from 'radium/models/account';
 
-export default DS.Model.extend({
-  account: DS.belongsTo('account', {
-    async: false
-  }),
+const User = DS.Model.extend({
+  account: DS.belongsTo('Radium.Account'),
   firstName: DS.attr('string'),
   lastName: DS.attr('string'),
   title: DS.attr('string'),
@@ -11,3 +10,7 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   avatarKey: DS.attr('string')
 });
+
+User.toString = () => "Radium.User";
+
+export default User;

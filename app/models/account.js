@@ -1,7 +1,9 @@
 import DS from 'ember-data';
+import User from 'radium/models/user';
 
-export default DS.Model.extend({
+const Account = DS.Model.extend({
   name: DS.attr('string'),
+  users: DS.hasMany('Radium.User'),
   gatewaySetup: DS.attr('boolean'),
   subscriptionInvalid: DS.attr('boolean'),
   isTrial: DS.attr('boolean'),
@@ -10,3 +12,7 @@ export default DS.Model.extend({
   importedContactsGlobal: DS.attr('boolean'),
   currency: DS.attr('string')
 });
+
+export default Account;
+
+Account.toString = () => 'Radium.Account';

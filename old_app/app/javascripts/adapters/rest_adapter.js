@@ -431,12 +431,12 @@ Radium.RESTAdapter.map('Radium.UserInvitation', {
   email: {key: 'address'}
 });
 
-Radium.RESTAdapter.map('Radium.User', {
-  isAdmin: {key: 'admin'},
-  settings: {key: 'settings_id'},
-  contactInfo: {embedded: 'always'},
-  customQueries: {embedded: 'always'}
-});
+// Radium.RESTAdapter.map('Radium.User', {
+//   isAdmin: {key: 'admin'},
+//   settings: {key: 'settings_id'},
+//   contactInfo: {embedded: 'always'},
+//   customQueries: {embedded: 'always'}
+// });
 
 Radium.RESTAdapter.map('Radium.CustomQuery', {
   customQueryParts: {embedded: 'always'}

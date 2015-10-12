@@ -1969,7 +1969,7 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
       var adapter = this.adapterForType(type);
 
       Ember.assert("You tried to load many records but you have no adapter (for " + type + ")", adapter);
-      Ember.assert("You tried to load many records but your adapter does not implement `findMany`", adapter.findMany);
+      Ember.assert("You tried to load many records but your adapter does not implement `findMany`", typeof adapter.findMany === "function");
 
       adapter.findMany(this, type, ids, owner);
     }, this);
@@ -2110,7 +2110,7 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     var adapter = this.adapterForType(type);
 
     Ember.assert("You tried to load a query but you have no adapter (for " + type + ")", adapter);
-    Ember.assert("You tried to load a query but your adapter does not implement `findQuery`", adapter.findQuery);
+    Ember.assert("You tried to load a query but your adapter does not implement `findQuery`", typeof adapter.findQuery === "function");
 
     adapter.findQuery(this, type, query, array);
 
@@ -5564,7 +5564,7 @@ DS.Model.reopen({
   */
   didDefineProperty: function(proto, key, value) {
     // Check if the value being set is a computed property.
-    if (value instanceof Ember.Descriptor) {
+    if (value && value.isDescriptor) {
 
       // If it is, get the metadata for the relationship. This is
       // populated by the `DS.belongsTo` helper when it is creating
