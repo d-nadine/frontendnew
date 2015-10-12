@@ -31,6 +31,4 @@ Ember.Handlebars.registerBoundHelper 'avatar', (resource, options) ->
 
   img = $.cloudinary.image("#{avatar}.jpg", props)
 
-  p img.get(0).outerHTML
-
   return new Handlebars.SafeString(img.get(0).outerHTML)
