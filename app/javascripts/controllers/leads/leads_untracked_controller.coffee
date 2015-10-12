@@ -20,6 +20,17 @@ Radium.UntrackedIndexController = Radium.ArrayController.extend Radium.PeopleMix
         private: true
 
       @send "executeActions", "delete", detail
+
+      @set "showDeleteConfirmation", false
+
+      false
+
+    confirmDeletion: ->
+      unless @get('allChecked') || @get('checkedContent.length')
+        return @flashMessenger.error "You have not selected any items."
+
+      @set "showDeleteConfirmation", true
+
       false
 
     destroyContact: (contact)->

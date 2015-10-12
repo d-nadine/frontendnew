@@ -9,6 +9,22 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   Radium.PeopleMixin,
 
   actions:
+    afterContactSave: (component) ->
+      deal = component.get('deal')
+      contact = component.get('model')
+
+      func = ->
+        # deal.one 'didReload', (deal) ->
+        deal.set('contact', null)
+        deal.set('contact', contact)
+
+        deal.save().then ->
+          deal.updateLocalBelongsTo('contact', contact)
+
+      deal.executeWhenInCleanState func
+
+      false
+
     updateTotals: ->
       @set "showDeleteConfirmation", false
 

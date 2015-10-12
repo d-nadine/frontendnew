@@ -1,4 +1,4 @@
-// Last commit: 7fc3604 (2015-09-18 11:30:48 +0100)
+// Last commit: e678354 (2015-10-12 10:45:34 +0100)
 
 
 (function() {
@@ -3597,6 +3597,8 @@ updatedState.uncommitted.finishedMaterializing = function(record) {
 updatedState.uncommitted.reloadRecord = function(model) {
   model.store.reloadRecord(model);
 };
+
+updatedState.uncommitted.invokeLifecycleCallbacks = Ember.K;
 
 var RootState = {
   // FLAGS

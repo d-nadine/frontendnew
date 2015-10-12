@@ -69,6 +69,16 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     model = @get('model')
 
+    nullModelType = @get('nullModelType')
+
+    if !model && nullModelType
+      model = nullModelType.createRecord()
+      bufferedProxy.set('content', model)
+      @set 'model', model
+      @notifyPropertyChange 'model'
+      @notifyPropertyChange 'bufferedProxy'
+      @notifyPropertyChange "bufferedProxy.#{bufferKey}"
+
     unless model
       return @flashMessenger.error "No model is associated with this record"
 
@@ -99,6 +109,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       return if @get('actionOnly')
 
     bufferedProxy.applyBufferedChanges()
+
+    if beforeSave = @get('beforeSave')
+      @get('containingController').send beforeSave, this
 
     self = this
 

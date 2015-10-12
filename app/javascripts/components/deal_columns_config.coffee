@@ -58,7 +58,21 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         name: "routeAction",
         value: "showContactDrawer",
         static: true
-      }]
+      },
+      {
+        name: "nullModelType",
+        value: Radium.Contact,
+        static: true
+      },
+      {
+        name: "deal"
+        value: "model"
+      }],
+      actions: [{
+        name: "afterSave"
+        value: "afterContactSave"
+      }
+      ]
       avatar: true
       checked: true
       context: "model"
@@ -93,7 +107,25 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         name: "routeAction",
         value: "showContactDrawer",
         static: true
+      }
+      {
+        name: "nullModelType",
+        value: Radium.Contact,
+        static: true
+      },
+      {
+        name: "nullModelType",
+        value: Radium.Contact,
+        static: true
+      },
+      {
+        name: "deal"
+        value: "model"
       }],
+      actions: [{
+        name: "afterSave"
+        value: "afterContactSave"
+      }]
       component: 'editable-field'
     }
     {
