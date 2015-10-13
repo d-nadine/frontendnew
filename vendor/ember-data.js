@@ -135,7 +135,7 @@ DS.DebugAdapter = Ember.DataAdapter.extend({
 
   columnsForType: function(type) {
     var columns = [{ name: 'id', desc: 'Id' }], count = 0, self = this;
-    Ember.A(get(type, 'attributes')).forEach(function(name, meta) {
+    Ember.A(get(type, 'attributes')).forEach(function(meta, name) {
         if (count++ > self.attributeLimit) { return false; }
         var desc = capitalize(underscore(name).replace('_', ' '));
         columns.push({ name: name, desc: desc });
@@ -4283,7 +4283,7 @@ DS.Model = Ember.Object.extend(Ember.Evented, LoadPromise, {
   adapterDidCommit: function() {
     var attributes = get(this, 'data');
 
-    get(this.constructor, 'attributes').forEach(function(name, meta) {
+    get(this.constructor, 'attributes').forEach(function(meta, name) {
       attributes[name] = get(this, name);
     }, this);
 
@@ -4304,7 +4304,7 @@ DS.Model = Ember.Object.extend(Ember.Evented, LoadPromise, {
   reloadHasManys: function() {
     var relationships = get(this.constructor, 'relationshipsByName');
     this.updateRecordArraysLater();
-    relationships.forEach(function(name, relationship) {
+    relationships.forEach(function(relationship,  name) {
       if (relationship.kind === 'hasMany') {
         this.hasManyDidChange(relationship.key);
       }
@@ -4670,7 +4670,7 @@ DS.Model.reopenClass({
 
 DS.Model.reopen({
   eachAttribute: function(callback, binding) {
-    get(this.constructor, 'attributes').forEach(function(name, meta) {
+    get(this.constructor, 'attributes').forEach(function(meta, name) {
       callback.call(binding, name, meta);
     }, binding);
   },
@@ -5924,7 +5924,7 @@ DS.Model.reopenClass({
     @param {any} binding the value to which the callback's `this` should be bound
   */
   eachRelationship: function(callback, binding) {
-    get(this, 'relationshipsByName').forEach(function(name, relationship) {
+    get(this, 'relationshipsByName').forEach(function(relationship, name) {
       callback.call(binding, name, relationship);
     });
   },
@@ -7326,7 +7326,7 @@ DS.Serializer = Ember.Object.extend({
 
     // This map is only for backward compatibility with the `sideloadAs` option.
     if (sideloadMapping) {
-      sideloadMapping.forEach(function(key, type) {
+      sideloadMapping.forEach(function(type, key) {
         Ember.assert("The '" + key + "' alias has already been defined", !aliases.get(key) || (aliases.get(key)===type) );
         aliases.set(key, type);
       });
@@ -7364,7 +7364,7 @@ DS.Serializer = Ember.Object.extend({
     var mappings = this.mappings,
         reifiedMappings = Ember.Map.create();
 
-    mappings.forEach(function(key, mapping) {
+    mappings.forEach(function(mapping, key) {
       if (typeof key === 'string') {
         var type = Ember.get(Ember.lookup, key);
         Ember.assert("Could not find model at path " + key, type);
@@ -7386,7 +7386,7 @@ DS.Serializer = Ember.Object.extend({
     var configurations = this.configurations,
         reifiedConfigurations = Ember.Map.create();
 
-    configurations.forEach(function(key, mapping) {
+    configurations.forEach(function(mapping, key) {
       if (typeof key === 'string' && key !== 'plurals') {
         var type = Ember.get(Ember.lookup, key);
         Ember.assert("Could not find model at path " + key, type);
@@ -8883,14 +8883,17 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     }
 
     this.groupByType(commitDetails.created).forEach(function(type, set) {
+      debugger;
       this.createRecords(store, type, filter(set));
     }, this);
 
     this.groupByType(commitDetails.updated).forEach(function(type, set) {
+      debugger;
       this.updateRecords(store, type, filter(set));
     }, this);
 
     this.groupByType(commitDetails.deleted).forEach(function(type, set) {
+      debugger;
       this.deleteRecords(store, type, filter(set));
     }, this);
   },

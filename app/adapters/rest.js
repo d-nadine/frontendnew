@@ -88,7 +88,7 @@ var RESTAdapter = DS.RESTAdapter.extend({
       var json,
           errors = {};
 
-      json = xhr.responseText.length ? JSON.parse(xhr.responseText) : {errors: {message: "An unknown error has occurred."}};
+      json = xhr.responseText.length ? JSON.parse(xhr.responseText) : {errors: {message: "An unknown error has occurred."}}
 
       if(!json.hasOwnProperty('error')){
         this._super.apply(this, arguments);
@@ -247,7 +247,7 @@ var RESTAdapter = DS.RESTAdapter.extend({
           this.didFindQuery(store, type, json, recordArray);
         });
       }).catch(function(err){
-        $.removeCookie('token', get('cookieDomain'), {path: '/'});
+        $.removeCookie('token', Radium.get('cookieDomain'), {path: '/'});
         var message = null;
 
         if(err.message)
@@ -329,7 +329,7 @@ RESTAdapter.registerTransform('datetime',  {
  deserialize: function(serialized) {
    if(serialized){
       var date = Ember.DateTime.parse(serialized);
-      return date.adjust({timezone: timezone});
+      return date.adjust({timezone: Radium.timezone});
     }
  },
 
@@ -340,126 +340,126 @@ RESTAdapter.registerTransform('datetime',  {
  }
 });
 
-RESTAdapter.map('Radium.Activity', {
-  note: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.Activity', {
+//   note: {embedded: 'load'}
+// });
 
-var contactsMapping = {
-  isPublic: {key: 'public'},
-  user: { key: 'assigned_to_id' },
-  phoneNumbers: {embedded: 'always'},
-  emailAddresses: {embedded: 'always'},
-  addresses: {embedded: 'always'},
-  comments: {embedded: 'load'},
-  contactInfo: {embedded: 'always'},
-  customFieldValues: {embedded: 'always'}
-};
+// var contactsMapping = {
+//   isPublic: {key: 'public'},
+//   user: { key: 'assigned_to_id' },
+//   phoneNumbers: {embedded: 'always'},
+//   emailAddresses: {embedded: 'always'},
+//   addresses: {embedded: 'always'},
+//   comments: {embedded: 'load'},
+//   contactInfo: {embedded: 'always'},
+//   customFieldValues: {embedded: 'always'}
+// };
 
-RESTAdapter.map('Radium.Contact', contactsMapping);
-RESTAdapter.map('Radium.CreateContact', contactsMapping);
+// RESTAdapter.map('Radium.Contact', contactsMapping);
+// RESTAdapter.map('Radium.CreateContact', contactsMapping);
 
-RESTAdapter.map('Radium.ContactImportJob', {
-  importErrors: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.ContactImportJob', {
+//   importErrors: {embedded: 'load'}
+// });
 
-RESTAdapter.map('Radium.ContactInfo', {
-  socialProfiles: {embedded: 'always'}
-});
+// RESTAdapter.map('Radium.ContactInfo', {
+//   socialProfiles: {embedded: 'always'}
+// });
 
-RESTAdapter.map('Radium.Deal', {
-  isPublic: {key: 'public'},
-  user: { key: 'assigned_to_id' },
-  checklist: { key: 'check_list' ,embedded: 'always' },
-  contactRefs: {embedded: 'always'}
-});
+// RESTAdapter.map('Radium.Deal', {
+//   isPublic: {key: 'public'},
+//   user: { key: 'assigned_to_id' },
+//   checklist: { key: 'check_list' ,embedded: 'always' },
+//   contactRefs: {embedded: 'always'}
+// });
 
-RESTAdapter.map('Radium.Company', {
-  user: { key: 'assigned_to_id' },
-  addresses: {key: 'offices', embedded: 'always'},
-  phoneNumbers: {embedded: 'always'},
-  socialProfiles: {embedded: 'load'},
-  technologies: {embedded: 'load'},
-  marketCategories: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.Company', {
+//   user: { key: 'assigned_to_id' },
+//   addresses: {key: 'offices', embedded: 'always'},
+//   phoneNumbers: {embedded: 'always'},
+//   socialProfiles: {embedded: 'load'},
+//   technologies: {embedded: 'load'},
+//   marketCategories: {embedded: 'load'}
+// });
 
-RESTAdapter.map('Radium.PhoneNumber', {
-  value: { key: 'number' },
-  isPrimary: { key: 'primary'}
-});
+// RESTAdapter.map('Radium.PhoneNumber', {
+//   value: { key: 'number' },
+//   isPrimary: { key: 'primary'}
+// });
 
-RESTAdapter.map('Radium.Email', {
-  message: {key: 'body'},
-  isPublic: {key: 'public'},
-  isRead: {key: 'read'},
-  isPersonal: {key: 'personal'},
-  isDraft: {key: 'draft'},
-  comments: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.Email', {
+//   message: {key: 'body'},
+//   isPublic: {key: 'public'},
+//   isRead: {key: 'read'},
+//   isPersonal: {key: 'personal'},
+//   isDraft: {key: 'draft'},
+//   comments: {embedded: 'load'}
+// });
 
-RESTAdapter.map('Radium.BulkEmailJob', {
-  message: {key: 'body'},
-  isDraft: {key: 'draft'},
-});
+// RESTAdapter.map('Radium.BulkEmailJob', {
+//   message: {key: 'body'},
+//   isDraft: {key: 'draft'},
+// });
 
-RESTAdapter.map('Radium.EmailAddress', {
-  value: { key: 'address' },
-  isPrimary: { key: 'primary'}
-});
+// RESTAdapter.map('Radium.EmailAddress', {
+//   value: { key: 'address' },
+//   isPrimary: { key: 'primary'}
+// });
 
-RESTAdapter.map('Radium.Address', {
-  isPrimary: { key: 'primary'}
-});
+// RESTAdapter.map('Radium.Address', {
+//   isPrimary: { key: 'primary'}
+// });
 
-RESTAdapter.map('Radium.Todo', {
-  isFinished: {key: 'finished'},
-  finishBy: {key: 'time'},
-  user: { key: 'assigned_to_id' },
-  comments: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.Todo', {
+//   isFinished: {key: 'finished'},
+//   finishBy: {key: 'time'},
+//   user: { key: 'assigned_to_id' },
+//   comments: {embedded: 'load'}
+// });
 
-RESTAdapter.map('Radium.Note', {
-  comments: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.Note', {
+//   comments: {embedded: 'load'}
+// });
 
-RESTAdapter.map('Radium.Meeting', {
-  isFinished: {key: 'finished'},
-  finishBy: {key: 'time'},
-  user: { key: 'assigned_to_id' },
-  comments: {embedded: 'load'}
-});
+// RESTAdapter.map('Radium.Meeting', {
+//   isFinished: {key: 'finished'},
+//   finishBy: {key: 'time'},
+//   user: { key: 'assigned_to_id' },
+//   comments: {embedded: 'load'}
+// });
 
-RESTAdapter.map('Radium.UserInvitation', {
-  email: {key: 'address'}
-});
+// RESTAdapter.map('Radium.UserInvitation', {
+//   email: {key: 'address'}
+// });
 
-RESTAdapter.map('Radium.User', {
-  isAdmin: {key: 'admin'},
-  settings: {key: 'settings_id'},
-  contactInfo: {embedded: 'always'},
-  customQueries: {embedded: 'always'}
-});
+// // RESTAdapter.map('Radium.User', {
+// //   isAdmin: {key: 'admin'},
+// //   settings: {key: 'settings_id'},
+// //   contactInfo: {embedded: 'always'},
+// //   customQueries: {embedded: 'always'}
+// // });
 
-RESTAdapter.map('Radium.CustomQuery', {
-  customQueryParts: {embedded: 'always'}
-});
+// RESTAdapter.map('Radium.CustomQuery', {
+//   customQueryParts: {embedded: 'always'}
+// });
 
-RESTAdapter.map('Radium.UserSettings', {
-  notifications: {embedded: 'always'},
-  alerts: {embedded: 'always'}
-});
+// RESTAdapter.map('Radium.UserSettings', {
+//   notifications: {embedded: 'always'},
+//   alerts: {embedded: 'always'}
+// });
 
-RESTAdapter.map('Radium.NotificationSettings', {
-  overdueTasks: {embedded: 'always'},
-  createdOverdueTasks: {embedded: 'always'},
-  localMeetings: {embedded: 'always'},
-  remoteMeetings: {embedded: 'always'},
-  leadIgnored: {embedded: 'always'},
-  clientIgnored: {embedded: 'always'},
-  taskIgnored: {embedded: 'always'}
-});
+// RESTAdapter.map('Radium.NotificationSettings', {
+//   overdueTasks: {embedded: 'always'},
+//   createdOverdueTasks: {embedded: 'always'},
+//   localMeetings: {embedded: 'always'},
+//   remoteMeetings: {embedded: 'always'},
+//   leadIgnored: {embedded: 'always'},
+//   clientIgnored: {embedded: 'always'},
+//   taskIgnored: {embedded: 'always'}
+// });
 
-RESTAdapter.map('Radium.Comment', {
-  user: {key: 'author_id'}
-});
+// RESTAdapter.map('Radium.Comment', {
+//   user: {key: 'author_id'}
+// });
 
 export default RESTAdapter;
