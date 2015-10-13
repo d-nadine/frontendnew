@@ -362,9 +362,9 @@ RESTAdapter.registerTransform('datetime',  {
 //   importErrors: {embedded: 'load'}
 // });
 
-// RESTAdapter.map('Radium.ContactInfo', {
-//   socialProfiles: {embedded: 'always'}
-// });
+RESTAdapter.map('Radium.ContactInfo', {
+  socialProfiles: {embedded: 'always'}
+});
 
 // RESTAdapter.map('Radium.Deal', {
 //   isPublic: {key: 'public'},
@@ -432,31 +432,31 @@ RESTAdapter.registerTransform('datetime',  {
 //   email: {key: 'address'}
 // });
 
-// // RESTAdapter.map('Radium.User', {
-// //   isAdmin: {key: 'admin'},
-// //   settings: {key: 'settings_id'},
-// //   contactInfo: {embedded: 'always'},
-// //   customQueries: {embedded: 'always'}
-// // });
+RESTAdapter.map('Radium.User', {
+  isAdmin: {key: 'admin'},
+  settings: {key: 'settings_id'},
+  contactInfo: {embedded: 'always'},
+  //customQueries: {embedded: 'always'}
+});
 
 // RESTAdapter.map('Radium.CustomQuery', {
 //   customQueryParts: {embedded: 'always'}
 // });
 
-// RESTAdapter.map('Radium.UserSettings', {
-//   notifications: {embedded: 'always'},
-//   alerts: {embedded: 'always'}
-// });
+RESTAdapter.map('Radium.UserSettings', {
+  notifications: {embedded: 'always'},
+  alerts: {embedded: 'always'}
+});
 
-// RESTAdapter.map('Radium.NotificationSettings', {
-//   overdueTasks: {embedded: 'always'},
-//   createdOverdueTasks: {embedded: 'always'},
-//   localMeetings: {embedded: 'always'},
-//   remoteMeetings: {embedded: 'always'},
-//   leadIgnored: {embedded: 'always'},
-//   clientIgnored: {embedded: 'always'},
-//   taskIgnored: {embedded: 'always'}
-// });
+RESTAdapter.map('Radium.NotificationSettings', {
+  overdueTasks: {embedded: 'always'},
+  createdOverdueTasks: {embedded: 'always'},
+  localMeetings: {embedded: 'always'},
+  remoteMeetings: {embedded: 'always'},
+  leadIgnored: {embedded: 'always'},
+  clientIgnored: {embedded: 'always'},
+  taskIgnored: {embedded: 'always'}
+});
 
 // RESTAdapter.map('Radium.Comment', {
 //   user: {key: 'author_id'}

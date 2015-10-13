@@ -6,7 +6,7 @@ export function initialize(container, application) {
   application.deferReadiness();
 
   User.find({name: 'me'}).then((records) => {
-    debugger;
+    const user = records.get('firstObject')
 
     application.advanceReadiness();
   });
