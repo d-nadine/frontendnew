@@ -68,6 +68,7 @@ require 'views'
 require 'lib/radium/checkable_mixin'
 require 'lib/radium/selectable_mixin'
 require 'lib/radium/buffered_proxy'
+require 'lib/radium/progress_bar'
 
 requireAll /components/
 

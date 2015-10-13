@@ -9,8 +9,8 @@ rejectEmpty = (headerInfo, key) ->
         else
           Ember.isEmpty(info)
 
-Radium.LeadsImportController = Radium.Controller.extend Radium.UserComboboxProps,
-
+Radium.LeadsImportController = Radium.Controller.extend  Radium.PollerMixin,
+  Radium.UserComboboxProps,
   actions:
     addList: (list) ->
       return if @get('lists').contains list
@@ -124,6 +124,7 @@ Radium.LeadsImportController = Radium.Controller.extend Radium.UserComboboxProps
         @set 'pollImportJob', importJob
         @set('importing', false)
         @send 'reset'
+        throw error
       ).finally =>
         @set 'isSubmitted', false
 
