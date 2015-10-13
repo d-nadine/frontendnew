@@ -22,8 +22,6 @@ export function initialize(container, application) {
       }
     });
 
-    console.log(user.get('createdAt').toUnixTimestamp());
-
     application.advanceReadiness();
   });
 }
