@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import User from "radium/models/user";
 import d from "radium/utils/date-time";
+import ENV from 'radium/config/environment';
 
 export function initialize(container, application) {
   const authManager = container.lookup('service:authManager');
@@ -34,6 +35,15 @@ export function initialize(container, application) {
     }
 
     application.advanceReadiness();
+
+    if(ENV.environment !== "production" || location.pathname !== "/") {
+      return;
+    }
+
+    Ember.run.next(() => {
+      const router = container.lookup('router:main');
+      router.replaceWith('people.contacts');
+    });
   });
 }
 
