@@ -6,7 +6,7 @@
   background-color: $input;
 
   &.is-invalid {
-    border: 1px solid $red !IMPORTANT;
+    border: 1px solid $red !important;
   }
 
   .add-on {
@@ -75,5 +75,5 @@
 }
 
 .sync.is-invalid, is-async.is-invalid {
-  border: 1px solid $red !IMPORTANT;
+  border: 1px solid $red !important;
 }

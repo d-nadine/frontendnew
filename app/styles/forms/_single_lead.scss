@@ -298,7 +298,7 @@
   .item .field input[type=text].is-invalid,
   .item input[type=email].is-invalid,
   .item .combobox.is-invalid input[type=text] {
-    border: 1px solid $red !IMPORTANT;
+    border: 1px solid $red !important;
   }
 
   .combobox-container {
