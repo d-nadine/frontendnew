@@ -13,8 +13,8 @@ const Radium = Ember.Application.extend({
   Resolver: Resolver
 });
 
-loadInitializers(Radium, config.modulePrefix);
-
 window.Radium = Radium;
+
+loadInitializers(Radium, config.modulePrefix);
 
 export default Radium;

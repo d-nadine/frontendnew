@@ -11,6 +11,9 @@ const User = DS.Model.extend({
   avatarKey: DS.attr('string')
 });
 
-User.toString = () => "Radium.User";
+User.toString = function(){
+  return "Radium.User";
+};
+
 
 export default User;

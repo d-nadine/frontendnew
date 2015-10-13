@@ -15,4 +15,6 @@ const Account = DS.Model.extend({
 
 export default Account;
 
-Account.toString = () => 'Radium.Account';
+Account.toString = function() {
+  return 'Radium.Account';
+};
