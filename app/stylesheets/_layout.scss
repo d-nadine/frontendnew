@@ -17,7 +17,7 @@ body {
 }
 
 .page-view {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 }
 
 .main-content {

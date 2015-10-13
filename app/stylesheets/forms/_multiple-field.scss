@@ -1,6 +1,6 @@
 .multiple-field{
   padding: 5px;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 
   &.is-primary {
     background-color: $background;

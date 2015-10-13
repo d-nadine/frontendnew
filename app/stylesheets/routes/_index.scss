@@ -26,7 +26,7 @@
 }
 
 .dashboard-grid-item-profile {
-  @include border-radius(5px);
+  border-radius: 5px;
   text-shadow: 0 1px 3px rgba(black, 0.85);
 
   .dashboard-grid-link {
@@ -55,12 +55,9 @@
   }
   color: #787878;
   background: #e4e4e4;
-  @include border-radius(5px);
-  @include box-sizing(border-box);
-  @include box-shadow(
-    inset 0 1px 5px rgba(white, 0.25),
-    0 1px 1px rgba(black, 0.1)
-  );
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 5px rgba(white, 0.25), 0 1px 1px rgba(black, 0.1);
 
   &:hover {
     h4 {
@@ -70,7 +67,7 @@
 
     .dashboard-grid-icon {
       color: darken($link, 5%);
-      @include transform(scale(1.1), translateY(-10px));
+      transform: scale(1.1), translateY(-10px);
     }
   }
 }
@@ -80,8 +77,8 @@
   line-height: 75px;
   text-shadow: 0 -1px 0 darken($link, 20%);
   color: $link;
-  @include transition(transform 0.25s, color 0.35s);
-  @include transform(scale(1), translateY(0));
+  transition: transform 0.25s, color 0.35s;
+  transform: scale(1), translateY(0);
 
   i {
     font-size: 68px;

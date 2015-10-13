@@ -20,9 +20,9 @@
   .jspDrag {
     width: 8px;
     background: rgba(black, 0.5);
-    @include border-radius(8px);
+    border-radius: 8px;
     opacity: 0;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
     z-index: 10;
   }
 

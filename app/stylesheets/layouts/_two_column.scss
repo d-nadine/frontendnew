@@ -33,7 +33,7 @@
   text-shadow: 0 1px 0 rgba(black, 0.5);
   background: #797979;
   display: none;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 
   .is-scrolled & {
     display: block;

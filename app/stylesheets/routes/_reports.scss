@@ -64,15 +64,15 @@
 // Animation
 @include keyframes(iconBounce) {
   0% {
-    @include scale(0, 0);
+    transform: scale(0, 0);
   }
 
   90% {
-    @include scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
   }
 
   100% {
-    @include scale(1, 1);
+    transform: scale(1, 1);
   }
 }
 
@@ -81,7 +81,7 @@
     width: 25%;
     padding: 0 15px;
     float: left;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
   }
 
   .infographic {

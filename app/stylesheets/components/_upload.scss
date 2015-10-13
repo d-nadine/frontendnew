@@ -21,7 +21,7 @@ input[type=file]{
         cursor: pointer;
         background-color: #fff;
         color: #000;
-        @include user-select(none);
+        user-select: none;
 
         .sidebar-panel-header & {
           background-color: #e8e8e8;
@@ -39,7 +39,7 @@ input[type=file]{
         cursor: pointer;
         background-color: #fff;
         color: #000;
-        @include user-select(none);
+        user-select: none; 
 
         .sidebar-panel-header & {
           background-color: #e8e8e8;
@@ -57,7 +57,7 @@ input[type=file]{
         cursor: pointer;
         background-color: #fff;
         color: #000;
-        @include user-select(none);
+        user-select: none;
 
         .sidebar-panel-header & {
           background-color: #e8e8e8;
@@ -86,7 +86,7 @@ input[type=file]{
     top: 0;
     left: 0;
     position: absolute;
-    @include opacity(0);
+    opacity: 0;
   }
 }
 

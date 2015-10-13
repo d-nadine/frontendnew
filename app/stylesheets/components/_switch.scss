@@ -28,15 +28,15 @@ $switchTransition: .15s ease-out;
   font-weight: 600;
   background: #bdc3c7;
   border-radius: inherit;
-  @include transition($switchTransition);
-  @include transition-property(opacity background);
+  transition: .15s ease-out;
+  transition-property: opacity background;
 
   &:before, &:after {
     position: absolute;
     top: 50%;
     margin-top: -.40em;
     line-height: 1;
-    @include transition(inherit);
+    transition: inherit;
   }
 
   &:before {
@@ -72,7 +72,7 @@ $switchTransition: .15s ease-out;
   height: 20px;
   background: #f7f7f7;
   border-radius: 10px;
-  @include transition(left #{$switchTransition});
+  transition: left .15s ease-out;
 
   .switch-input:checked ~ & {
     left: 69px;

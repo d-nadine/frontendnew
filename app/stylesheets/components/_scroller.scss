@@ -27,10 +27,10 @@
   position: absolute;
   top: 0;
   right: -7px;
-  @include border-radius(5px);
-  @include background-clip(padding-box);
+  border-radius: 5px;
+  background-clip: padding-box;
   background-color: rgba(51,51,51, 0.5);
-  @include opacity(0);
+  opacity: 0;
   transition: opacity .2s linear;
   -o-transition:opacity .2s linear;
   -moz-transition:opacity .2s linear;
@@ -38,7 +38,7 @@
 }
 
 .scroller:hover .thumb {
-  @include opacity(1);
+  opacity: 1;
 }
 
 .scroller .viewport {
@@ -46,7 +46,7 @@
   height: 100%;
   -webkit-overflow-scrolling: touch;
   position: relative;
-  @include user-select(none);
+  user-select: none;
 }
 
 .scroller .overview{

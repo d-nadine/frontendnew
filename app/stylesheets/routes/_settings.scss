@@ -99,7 +99,7 @@
 
   .input-append input[type="number"] {
     border-right: none;
-    @include box-shadow(none);
+    box-shadow: none;
     float: left;
   }
 }
@@ -156,11 +156,11 @@
 input.inline-field {
   border: 1px solid transparent;
   background: transparent;
-  @include box-shadow(none);
+  box-shadow: none;
 
   &:hover,
   &:focus {
-    @include box-shadow(none);
+    box-shadow: none;
     background: #eee;
   }
 
@@ -293,7 +293,7 @@ input.api-field {
   .user-actions {
     margin-top: 6px;
     opacity: 0;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
 
     > .btn {
       vertical-align: middle;
@@ -332,7 +332,7 @@ input.api-field {
 
   .pipeline-delete-btn {
     opacity: 0;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
   }
 
   &:hover .pipeline-delete-btn {
@@ -348,7 +348,7 @@ input.api-field {
 
   .checklist-controls {
     opacity: 0;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
   }
 
   &:hover .checklist-controls,
@@ -405,7 +405,7 @@ input.api-field {
 // Break me into my own file
 .new {
   background-color: lightyellow;
-  @include transition(background-color 0.75s ease-out);
+  transition: background-color 0.75s ease-out;
 
   &.out {
     background-color: #fff;

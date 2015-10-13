@@ -36,7 +36,7 @@
       display: block;
 
       a {
-        @include border-radius(0);
+        border-radius: 0;
       }
     }
   }
@@ -323,7 +323,7 @@
   a.delete {
     color: #b6b6b6;
     opacity: 0;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
   }
 
   &:hover a.delete {

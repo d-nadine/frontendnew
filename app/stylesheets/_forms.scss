@@ -15,8 +15,8 @@
   }
 
   &.well {
-    @include box-shadow(none);
-    @include border-radius(0);
+    box-shadow: none;
+    border-radius: 0px;
   }
 
   .page-header{
@@ -115,7 +115,7 @@
   &.has-reference,
   &.is-expanded {
     .primary {
-      @include border-radius(3px 3px 0 0);
+      border-radius: 3px 3px 0 0;
     }
   }
 
@@ -145,7 +145,7 @@
   .ss-write {
     opacity: 0;
     font-size: 12px;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
     position: relative;
     top: 2px;
   }
@@ -187,9 +187,9 @@
   background: #f6f6f6;
   border: solid 1px $dark-background;
   border-top: none;
-  @include box-sizing(border-box);
-  @include border-radius(0 0 3px 3px);
-  @include box-shadow(0 2px 1px rgba(black, 0.1));
+  box-sizing: border-box;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
 
   p {
     margin: 0;
@@ -385,7 +385,7 @@
       bottom: none;
       left: none;
     }
-    @include border-radius(0 0 3px 3px);
+    border-radius: 0 0 3px 3px;
   }
 }
 

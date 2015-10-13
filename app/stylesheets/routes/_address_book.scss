@@ -6,7 +6,6 @@ $body: #6e6e6e;
   padding-left: 25px;
   font-weight: bold;
   line-height: 29px;
-  @include add-blinker;
 }
 
 .addressbook-view {
@@ -157,7 +156,7 @@ $body: #6e6e6e;
     left: 1px solid transparent;
   }
   color: $body;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 
   > div {
     float: left;
@@ -200,7 +199,7 @@ $body: #6e6e6e;
   .delete {
     margin: 25px 10px;
     opacity: 0;
-    @include transition(opacity 0.25s);
+    transition: opacity 0.25s;
   }
 
   &:hover .delete {

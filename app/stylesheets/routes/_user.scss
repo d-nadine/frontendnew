@@ -123,8 +123,8 @@
       height: 40px;
       overflow: visible;
       border: 1px solid #dedede;
-      @include background-image(linear-gradient(left, #dedede, #e1e1e1));
-      @include box-shadow(none);
+      background-image: linear-gradient(left, #dedede, #e1e1e1);
+      box-shadow: none;
     }
 
     .bar {
@@ -134,8 +134,8 @@
         color: $green;
         image: none;
       }
-      @include border-radius(4px 0 0 4px);
-      @include box-shadow(none);
+      border-radius: 4px 0 0 4px;
+      box-shadow: none;
 
       &.has-percentage:after {
         width: 0;

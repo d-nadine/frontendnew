@@ -8,7 +8,7 @@
   border: 1px solid #c3c3c3;
   background: #fff;
   cursor: pointer;
-  @include border-radius(3px);
+  border-radius: 3px;
 
   &.disabled {
     cursor: default;

@@ -15,7 +15,7 @@
     margin-left: 60px;
     padding-right: 15px;
     overflow: hidden;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
   }
 
   &.just-added {

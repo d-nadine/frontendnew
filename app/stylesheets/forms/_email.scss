@@ -415,7 +415,7 @@
         left: 15px;
       }
       border: none;
-      @include box-shadow(none);
+      box-shadow: none;
     }
   }
 
@@ -424,8 +424,8 @@
     background: $calendar-active-bg;
     border: none;
     border-top: 1px solid #ddd;
-    @include box-shadow(none);
-    @include border-radius(0);
+    box-shadow: none;
+    border-right: 0;
   }
 }
 
@@ -436,8 +436,8 @@
   right: 20px;
   left: 32%;
   z-index: 2000;
-  @include box-sizing(border-box);
-  @include box-shadow(0 2px 2px rgba(black, 0.25));
+  box-sizing: border-box;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 // Email HUD
@@ -502,7 +502,7 @@
   max-width: 60px;
   position: relative;
   padding-right: 20px;
-  @include border-radius(40px);
+  border-right: 40px;
 
   a {
     line-height: inherit !important;
@@ -524,7 +524,6 @@
 .updating-blinker {
   color: $red;
   font-weight: bold;
-  @include add-blinker;
 }
 
 

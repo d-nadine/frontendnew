@@ -38,7 +38,7 @@
   background: $regular-state;
   color: #2e2e31;
   vertical-align: middle;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 
   &:hover {
     color: inherit;

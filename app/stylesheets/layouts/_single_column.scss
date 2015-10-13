@@ -1,6 +1,6 @@
 .single-column-container {
   padding: 96px 3px;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 
   .main-content {
     max-width: none;

@@ -6,7 +6,7 @@
     padding: 0 !important;
     background: $navbar;
     border: none;
-    @include box-shadow(none);
+    box-shadow: none;
   }
 
   .brand {
@@ -202,7 +202,6 @@
 
   .nav-bar-tag.highlight {
     background-color: #fff;
-    @include add-blinker;
   }
 
   .nav-icons {

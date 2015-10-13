@@ -8,11 +8,11 @@
   z-index: 99;
   color: $text;
   background-color: $background;
-  @include translateX(-100%);
-  @include transition(transform 0.25s);
+  transform: translateX(-100%);
+  transition: transform 0.25s;
 
   &.open {
-    @include translateX(0);
+    transform:translateX(0);
   }
 
   .scroller .thumb {
