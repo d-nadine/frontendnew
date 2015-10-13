@@ -7316,7 +7316,7 @@ DS.Serializer = Ember.Object.extend({
         plural,
         self = this;
 
-    aliases.forEach(function(key, type) {
+    aliases.copy().forEach(function(type, key) {
       plural = self.pluralize(key);
       if(key !== plural){
         Ember.assert("The '" + key + "' alias has already been defined", !aliases.get(plural));
@@ -7343,7 +7343,7 @@ DS.Serializer = Ember.Object.extend({
         reifiedAliases = Ember.Map.create(),
         foundType;
 
-    aliases.forEach(function(key, type) {
+    aliases.forEach(function(type, key) {
       if (typeof type === 'string') {
         foundType = Ember.get(Ember.lookup, type);
         Ember.assert("Could not find model at path " + key, type);

@@ -7,13 +7,11 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 
 FastClick.attach(document.body);
 
-const Radium = Ember.Application.extend({
+let Radium = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver
 });
-
-window.Radium = Radium;
 
 loadInitializers(Radium, config.modulePrefix);
 

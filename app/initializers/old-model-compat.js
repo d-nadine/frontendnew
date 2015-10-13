@@ -3,6 +3,7 @@ import User from 'radium/models/user';
 import Account from 'radium/models/account';
 
 export function initialize(container, application) {
+  window.Radium = application;
   application.Account = Account;
   application.User = User;
 }
