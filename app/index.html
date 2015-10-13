@@ -16,6 +16,13 @@
   </head>
   <body>
     {{content-for 'body'}}
+    <div class="main-loading">
+      <div class="loading-bar loading-red">
+        <div class="meter"></div>
+      </div>
+      <img src="/images/logo_loading.png" class="logo-loading">
+    </div>
+    <div id="application"></div>
     <script src="assets/vendor.js"></script>
     <script src="assets/radium.js"></script>
     {{content-for 'body-footer'}}
