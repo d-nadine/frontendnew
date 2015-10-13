@@ -19,7 +19,7 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' https://maps.googleapis.com https://cdn.raygun.io https://widget.intercom.io",
+      'script-src': "'self' 'unsafe-inline' https://maps.googleapis.com https://cdn.raygun.io intercom.io https://js.intercomcdn.com https://widget.intercom.io",
       'font-src': "'self' https://maxcdn.bootstrapcdn.com http://fonts.googleapis.com",
       'connect-src': "'self' http://localhost:9292 http://api.radiumcrm.com",
       'img-src': "'self'  http://res.cloudinary.com",
@@ -31,6 +31,9 @@ module.exports = function(environment) {
   if (environment === 'development') {
     ENV.apiHost = 'http://localhost:9292';
     ENV.cookieDomain = 'development';
+    ENV.intercom = {
+      appId: "31e29cpv"
+    };
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -54,6 +57,9 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.apiHost = 'http://api.radiumcrm.com';
     ENV.cookieDomain = '.radiumcrm.com';
+    ENV.intercom = {
+      appId: "d5bd1654e902b81ba0f4161ea5b45bb597bfefdf"
+    };
   }
 
   return ENV;

@@ -27,7 +27,7 @@ document.addEventListener 'click', ->
               number_of_clicks: 1
           window.Intercom('reattach_activator')
         , false
-
+  
 Radium = Em.Application.createWithMixins
   rootElement: '#application'
   customEvents:

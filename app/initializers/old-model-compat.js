@@ -1,3 +1,5 @@
+import SubscriptionPlan from 'radium/models/subscription_plan';
+import Billing from 'radium/models/billing';
 import Account from 'radium/models/account';
 import Alerts from 'radium/models/alerts';
 import UserSettings from 'radium/models/user_settings';
@@ -12,6 +14,8 @@ export function initialize(container, application) {
   // instance for this version of ember-data
   window.Radium = application;
 
+  application.SubscriptionPlan = SubscriptionPlan;
+  application.Billing = Billing;
   application.Account = Account;
   application.Alerts = Alerts;
   application.NotificationSettings = NotificationSettings;

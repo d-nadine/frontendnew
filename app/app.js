@@ -13,6 +13,17 @@ let Radium = Ember.Application.extend({
   Resolver: Resolver
 });
 
+document.addEventListener('click', function() {
+  window.Intercom("update", {
+    increments: {
+      number_of_clicks: 1
+    }
+  });
+  return window.Intercom('reattach_activator');
+}, false);
+
+
+
 loadInitializers(Radium, config.modulePrefix);
 
 export default Radium;
