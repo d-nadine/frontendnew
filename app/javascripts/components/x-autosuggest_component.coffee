@@ -147,6 +147,18 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       false
 
+    focusOut: (e) ->
+      Ember.run.next =>
+        targetObject = @get('targetObject')
+
+        value = $.trim(@$().val() || '')
+
+        return unless targetObject.newItemCriteria(value)
+
+        targetObject.selectionAdded value
+
+        @$().val('')
+
     didInsertElement: ->
       @_super.apply this, arguments
       Ember.run.scheduleOnce 'afterRender', this, 'addAutocomplete'

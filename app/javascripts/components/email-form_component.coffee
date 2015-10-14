@@ -19,12 +19,6 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     submit: (form) ->
       @set 'form.isDraft', false
 
-      input = @$('.as-input')
-      value = $.trim(input.val() || '')
-
-      if !form.get('to').length && value.length && Radium.EMAIL_REGEX.test(value)
-        form.get('to').pushObject(Ember.Object.create(email: value))
-
       @sendAction 'saveEmail', form
 
       false
