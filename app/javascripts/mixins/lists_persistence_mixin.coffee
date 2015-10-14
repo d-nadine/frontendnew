@@ -15,7 +15,8 @@ Radium.ListsPersistenceMixin = Ember.Mixin.create
                  reference: resource
                  list: list
 
-        record.save()
+        record.save().then =>
+          @get('peopleController').send 'updateTotals'
 
       false
 
@@ -26,6 +27,11 @@ Radium.ListsPersistenceMixin = Ember.Mixin.create
                  reference: resource
                  list: list
 
-      record.save()
+      record.save().then =>
+        @get('peopleController').send 'updateTotals'
 
       false
+
+  # UPGRADE: use inject after upgrade
+  peopleController: Ember.computed ->
+    @container.lookup('controller:peopleIndex')

@@ -149,15 +149,19 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
     focusOut: (e) ->
       Ember.run.next =>
+        el = @$()
+
+        return unless el && el.length
+
         targetObject = @get('targetObject')
 
-        value = $.trim(@$().val() || '')
+        value = $.trim(el.val() || '')
 
         return unless targetObject.newItemCriteria(value)
 
         targetObject.selectionAdded value
 
-        @$().val('')
+        el.val('')
 
     didInsertElement: ->
       @_super.apply this, arguments
