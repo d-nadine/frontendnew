@@ -19,6 +19,12 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
     submit: (form) ->
       @set 'form.isDraft', false
 
+      input = @$('.as-input')
+      value = $.trim(input.val() || '')
+
+      if !form.get('to').length && value.length && Radium.EMAIL_REGEX.test(value)
+        form.get('to').pushObject(Ember.Object.create(email: value))
+
       @sendAction 'saveEmail', form
 
       false
@@ -333,7 +339,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
     @get('showOptions')
 
-  toIsInvalid: Ember.computed 'isSubmitted', 'form.to.[]', ->
+  toIsInvalid: Ember.computed 'isSubmitted', 'form.to.[]', 'form.to.@each.email', ->
     return unless @get('isSubmitted')
 
     !!!@get('form.to.length')
