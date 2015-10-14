@@ -20,10 +20,10 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' https://maps.googleapis.com https://cdn.raygun.io intercom.io https://js.intercomcdn.com https://widget.intercom.io",
-      'font-src': "'self' https://maxcdn.bootstrapcdn.com http://fonts.googleapis.com",
+      'font-src': "'self' http://fonts.gstatic.com",
       'connect-src': "'self' http://localhost:9292 http://api.radiumcrm.com",
       'img-src': "'self'  http://res.cloudinary.com",
-      'style-src': "'self' 'unsafe-inline'",
+      'style-src': "'self' 'unsafe-inline' http://maxcdn.bootstrapcdn.com http://fonts.googleapis.com",
       'media-src': "'self'"
     }
   };
