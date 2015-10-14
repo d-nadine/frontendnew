@@ -559,10 +559,10 @@ DS.FilteredRecordArray = DS.RecordArray.extend({
     throw new Error("The result of a client-side filter (on " + type + ") is immutable.");
   },
 
-  updateFilter: Ember.observer(function() {
+  updateFilter: Ember.observer('filterFunction', function() {
     var manager = get(this, 'manager');
     manager.updateFilter(this, get(this, 'type'), get(this, 'filterFunction'));
-  }, 'filterFunction')
+  })
 });
 
 })();
@@ -1332,7 +1332,7 @@ function getMappableMeta(obj) {
   if (!value) { meta[keyName] = {}; }
 
   if (!meta.hasOwnProperty(keyName)) {
-    meta[keyName] = Ember.create(meta[keyName]);
+    meta[keyName] = Object.create(meta[keyName]);
   }
 
   return meta[keyName];
@@ -3280,7 +3280,7 @@ var get = Ember.get, set = Ember.set,
 
 var hasDefinedProperties = function(object) {
   // Ignore internal property defined by simulated `Ember.create`.
-  var names = Ember.keys(object);
+  var names = Object.keys(object);
   var i, l, name;
   for (i = 0, l = names.length; i < l; i++ ) {
     name = names[i];
@@ -3991,7 +3991,7 @@ var hasOwnProp = {}.hasOwnProperty;
 function wireState(object, parent, name) {
   /*jshint proto:true*/
   // TODO: Use Object.create and copy instead
-  object = mixin(parent ? Ember.create(parent) : {}, object);
+  object = mixin(parent ? Object.create(parent) : {}, object);
   object.parentState = parent;
   object.stateName = name;
 
@@ -4024,7 +4024,7 @@ var get = Ember.get, set = Ember.set, map = Ember.EnumerableUtils.map, merge = E
 
 var arrayMap = Ember.ArrayPolyfills.map;
 
-var retrieveFromCurrentState = Ember.computed(function(key, value) {
+var retrieveFromCurrentState = Ember.computed(function(key) {
   return get(get(this, 'currentState'), key);
 }).property('currentState').readOnly();
 
@@ -4296,10 +4296,10 @@ DS.Model = Ember.Object.extend(Ember.Evented, LoadPromise, {
     this.updateRecordArraysLater();
   },
 
-  dataDidChange: Ember.observer(function() {
+  dataDidChange: Ember.observer('data', function() {
     this.reloadHasManys();
     this.send('finishedMaterializing');
-  }, 'data'),
+  }),
 
   reloadHasManys: function() {
     var relationships = get(this.constructor, 'relationshipsByName');
@@ -4711,7 +4711,7 @@ DS.attr = function(type, options) {
     options: options
   };
 
-  return Ember.computed(function(key, value, oldValue) {
+  return Ember.computed(function(key, value) {
     if (arguments.length > 1) {
       Ember.assert("You may not set `id` as an attribute on your model. Please remove any lines that look like: `id: DS.attr('<type>')` from " + this.constructor.toString(), key !== 'id');
     } else {
@@ -5216,8 +5216,8 @@ DS.RelationshipChange.prototype = {
   }
 };
 
-DS.RelationshipChangeAdd.prototype = Ember.create(DS.RelationshipChange.create({}));
-DS.RelationshipChangeRemove.prototype = Ember.create(DS.RelationshipChange.create({}));
+DS.RelationshipChangeAdd.prototype = Object.create(DS.RelationshipChange.create({}));
+DS.RelationshipChangeRemove.prototype = Object.create(DS.RelationshipChange.create({}));
 
 DS.RelationshipChangeAdd.prototype.changeType = "add";
 DS.RelationshipChangeAdd.prototype.sync = function() {
@@ -7282,7 +7282,7 @@ DS.Serializer = Ember.Object.extend({
       delete configuration.alias;
     }
 
-    config = Ember.create(this.globalConfigurations);
+    config = Object.create(this.globalConfigurations);
     Ember.merge(config, configuration);
 
     this.configurations.set(type, config);
@@ -8697,7 +8697,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
 
     @method find
   */
-  find: Ember.required(Function),
+  find: null,
 
   /**
     Optional
@@ -8882,17 +8882,17 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
       return filteredSet;
     }
 
-    this.groupByType(commitDetails.created).forEach(function(type, set) {
+    this.groupByType(commitDetails.created).forEach(function(set, type) {
       debugger;
       this.createRecords(store, type, filter(set));
     }, this);
 
-    this.groupByType(commitDetails.updated).forEach(function(type, set) {
+    this.groupByType(commitDetails.updated).forEach(function(set, type) {
       debugger;
       this.updateRecords(store, type, filter(set));
     }, this);
 
-    this.groupByType(commitDetails.deleted).forEach(function(type, set) {
+    this.groupByType(commitDetails.deleted).forEach(function(set, type) {
       debugger;
       this.deleteRecords(store, type, filter(set));
     }, this);
@@ -8924,7 +8924,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     @property {DS.Model} type   the DS.Model class of the record
     @property {DS.Model} record
   */
-  createRecord: Ember.required(Function),
+  createRecord: null,
 
   /**
     Creates multiple records at once.
@@ -8955,7 +8955,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     @property {DS.Model} type   the DS.Model class of the record
     @property {DS.Model} record
   */
-  updateRecord: Ember.required(Function),
+  updateRecord: null,
 
   /**
     Updates multiple records at once.
@@ -8986,7 +8986,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     @property {DS.Model} type   the DS.Model class of the record
     @property {DS.Model} record
   */
-  deleteRecord: Ember.required(Function),
+  deleteRecord: null,
 
   /**
     Delete multiple records at once.
@@ -10209,7 +10209,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       if (adapter.headers !== undefined) {
         var headers = adapter.headers;
         hash.beforeSend = function (xhr) {
-          Ember.keys(headers).forEach(function(key) {
+          Object.keys(headers).forEach(function(key) {
             xhr.setRequestHeader(key, headers[key]);
           });
         };
