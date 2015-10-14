@@ -34,6 +34,8 @@ export function initialize(container, application) {
       return authManager.logOut(apiUrl, `${apiUrl}/sessions/new`);
     }
 
+    Ember.$('.main-loading').hide();
+    
     application.advanceReadiness();
 
     if(ENV.environment !== "production" || location.pathname !== "/") {
