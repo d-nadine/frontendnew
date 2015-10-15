@@ -449,7 +449,6 @@
 
 .dl-horizontal {
   margin: 0 0 10px;
-  height: 20px;
 
   .btn-remove-field {
     padding-left: 0;
@@ -458,6 +457,7 @@
   dt {
     width: 40px;
     text-align: left;
+    float: left;
 
     i {
       position: relative;

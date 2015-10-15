@@ -7,9 +7,6 @@ Radium.InlineAutocompleteComponent = Ember.Component.extend
 
     @set 'isEditing', true
 
-    Ember.run.next =>
-      @$('.editable').selectText()
-
   focusOut: (e) ->
     @_super.apply this, arguments
 
