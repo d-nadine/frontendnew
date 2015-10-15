@@ -373,8 +373,9 @@ Radium.RESTAdapter.map('Radium.Deal', {
 
 Radium.RESTAdapter.map('Radium.Company', {
   user: { key: 'assigned_to_id' },
-  addresses: {key: 'offices', embedded: 'always'},
+  emailAddresses: {embedded: 'always'},
   phoneNumbers: {embedded: 'always'},
+  addresses: {embedded: 'always'},
   socialProfiles: {embedded: 'load'},
   technologies: {embedded: 'load'},
   marketCategories: {embedded: 'load'}

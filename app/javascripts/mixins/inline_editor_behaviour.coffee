@@ -16,7 +16,7 @@ Radium.InlineEditoBehaviour = Ember.Mixin.create
       target = $(e.target)
       tagName = e.target.tagName.toLowerCase()
 
-      if ['x-check', 'new-comment'].any((c) -> target.hasClass(c))
+      if ['x-check', 'new-comment', 'address-switcher'].any((c) -> target.hasClass(c))
         return
 
       if tagName == "input" && ['radio', 'checkbox'].contains(target.attr('type'))

@@ -2,14 +2,16 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   Radium.AttachmentsMixin,
   contacts: DS.hasMany('Radium.Contact')
   activities: DS.hasMany('Radium.Activity', inverse: 'companies')
+  emailAddresses: DS.hasMany('Radium.EmailAddress')
   phoneNumbers: DS.hasMany('Radium.PhoneNumber')
+  addresses: DS.hasMany('Radium.Address')
+
   marketCategories: DS.hasMany('Radium.MarketCategory')
   technologies: DS.hasMany('Radium.Technology')
   socialProfiles: DS.hasMany('Radium.SocialProfile')
 
   deals: DS.hasMany('Radium.Deal')
   lists: DS.hasMany('Radium.List')
-  addresses: DS.hasMany('Radium.Address')
 
   primaryContact: DS.belongsTo('Radium.Contact', inverse: 'company')
 
@@ -31,6 +33,7 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
 
   displayName: Ember.computed.alias 'name'
 
+  primaryEmail: Radium.computed.primary 'emailAddresses'
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
 

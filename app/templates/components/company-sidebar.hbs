@@ -14,8 +14,9 @@
           {{inline-editor model=company bufferKey="website" notRoutable=true placeholder="Add Website" parent=this externalUrl=true}}
         </dd>
       </dl>
+      {{email-addresses model=company parent=parent}}
       {{phone-numbers model=company parent=parent}}
-      {{multiple-addresses model=company parent=this hasEmail=true}}
+      {{multiple-addresses model=company parent=this}}
       {{social-medialist person=company}}
     </div>
   </div>

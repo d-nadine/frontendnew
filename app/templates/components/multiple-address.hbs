@@ -15,7 +15,7 @@
   <div id="addressType">
     {{#each address in addresses}}
       <div>
-        {{x-radio name="current" value=true selection=address.isCurrent action="changeAddress" item=address leader=address.name}}
+        {{x-radio name="current" value=true selection=address.isCurrent action="changeAddress" item=address leader=address.name labelClass="address-switcher"}}
       </div>
     {{/each}}
   </div>
