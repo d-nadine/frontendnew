@@ -7,7 +7,7 @@
         </div>
         {{toggle-switch checked=contact.isPublic action="switchShared" dataOn="Shared" dataOff="Private" dontPropagate=true}}
       </div>
-      {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add Name" parent=targetObject}}
+      {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add name" parent=targetObject}}
       {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" routeAction="showCompany"  parent=targetObject saveAction="saveCompany" afterSave="afterSaveCompany" parent=this}}
       {{social-medialist person=contact}}
     </div>
@@ -20,7 +20,7 @@
       <dl class="dl-horizontal contact-types-list">
         <dt><i class="ss-standard ss-earth muted"></i></dt>
         <dd>
-          {{inline-editor model=contact bufferKey="website" notRoutable=true placeholder="Add Website" parent=targetObject externalUrl=true}}
+          {{inline-editor model=contact bufferKey="website" notRoutable=true placeholder="Add website" parent=targetObject externalUrl=true}}
         </dd>
       </dl>
       {{multiple-addresses model=contact parent=parent}}

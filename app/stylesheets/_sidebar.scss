@@ -449,6 +449,7 @@
 
 .dl-horizontal {
   margin: 0 0 10px;
+  height: 20px;
 
   .btn-remove-field {
     padding-left: 0;
@@ -477,6 +478,9 @@
         display: block;
       }
     }
+    .empty {
+      color: #b4b4b4;
+    }
   }
   strong {
     font-weight: 200;
@@ -502,7 +506,11 @@
 }
 
 .user-avatar {
-  margin-right: 20px;
+  margin-top: 20px;
+
+  img {
+    margin-right: 20px;
+  }
 }
 
 /* Attachments */
@@ -753,6 +761,9 @@
         width: 100%;
         line-height: 35px;
       }
+      a {
+        width: calc(100% - 14px);
+      }
     }
   }
 }
@@ -774,9 +785,43 @@ em.placeholder {
 }
 
 .sidebar-panel-content {
+  display: inline-block;
+
+  .sidebar-row {
+    display: inline-block;
+    width: 100%;
+    float: left;
+    margin-bottom: 12px;
+  }
 
   .inline-editor-component {
-    float: left;
+    display: inline-block;
     width: 100%;
+    float: left;
+  }
+
+  .inline-editor-open, .inline-editor {
+    input{
+      margin-bottom: 0;
+      border-radius: 0px;
+      box-shadow: none;
+      height: 40px;
+      padding: 0 8px;
+      margin-bottom: 6px;
+    }
+    .control-box {
+      height: 40px !important;
+      margin-bottom: 10px;
+
+      .add-on {
+        line-height: 40px;
+      }
+    }
+    .extra-field a,
+    .extra-delete a {
+      height: 35px;
+      line-height: 35px;
+    }
   }
 }
+

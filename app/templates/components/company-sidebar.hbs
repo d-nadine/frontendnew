@@ -3,7 +3,7 @@
     {{avatar-picker person=company class="control-group"}}
   </div>
   <h2 class="deal-title">
-    {{inline-editor model=company bufferKey="name" notRoutable=true placeholder="Add Name" parent=this class="resource-name" isRequired=true}}
+    {{inline-editor model=company bufferKey="name" notRoutable=true placeholder="Add name" parent=this class="resource-name" isRequired=true}}
   </h2>
 
   <div class="sidebar-panel">
@@ -11,7 +11,7 @@
       <dl class="dl-horizontal contact-types-list">
         <dt><i class="ss-standard ss-earth muted"></i></dt>
         <dd>
-          {{inline-editor model=company bufferKey="website" notRoutable=true placeholder="Add Website" parent=this externalUrl=true}}
+          {{inline-editor model=company bufferKey="website" notRoutable=true placeholder="Add website" parent=this externalUrl=true}}
         </dd>
       </dl>
       {{email-addresses model=company parent=parent}}
@@ -27,41 +27,41 @@
         Description
       </h6>
     </div>
-    {{inline-editor model=company bufferKey="description" notRoutable=true placeholder="Add Description" parent=this}}
+    {{inline-editor model=company bufferKey="description" notRoutable=true placeholder="Add description" parent=this}}
   </div>
 
   <div class="sidebar-panel">
     <div class="sidebar-panel-content">
-      <div class="industry-row">
-        <div class="industry-label">Company Type</div>
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Company Type</div>
         {{inline-editor model=company bufferKey="companyType" notRoutable=true placeholder="Add company type" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Employees</div>
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Employees</div>
         {{inline-editor model=company bufferKey="employees" notRoutable=true placeholder="Add employees" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Sector</div>
-        {{inline-editor model=company bufferKey="sector" notRoutable=true placeholder="Add Sector" parent=this}}
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Sector</div>
+        {{inline-editor model=company bufferKey="sector" notRoutable=true placeholder="Add sector" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Industry</div>
-        {{inline-editor model=company bufferKey="industry" notRoutable=true placeholder="Add Industry" parent=this}}
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Industry</div>
+        {{inline-editor model=company bufferKey="industry" notRoutable=true placeholder="Add industry" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Industry Group</div>
-        {{inline-editor model=company bufferKey="industryGroup" notRoutable=true placeholder="Add IndustryGroup" parent=this}}
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Industry Group</div>
+        {{inline-editor model=company bufferKey="industryGroup" notRoutable=true placeholder="Add industry group" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Subindustry</div>
-        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add Subindustry" parent=this}}
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Subindustry</div>
+        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add subindustry" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Subindustry</div>
-        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add Subindustry" parent=this}}
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Subindustry</div>
+        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add subindustry" parent=this}}
       </div>
-      <div class="industry-row">
-        <div class="industry-label">Technologies</div>
+      <div class="industry-row sidebar-row">
+        <div class="industry-label sidebar-label">Technologies</div>
         {{#each technology in company.technologies}}
           <span class="technology">{{technology.name}}</span>
         {{/each}}
