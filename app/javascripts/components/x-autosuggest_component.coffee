@@ -208,6 +208,7 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       email = result.get('email')
       name = result.get('name')
+      type = result.get('type')
 
       name = if name && email
                 "#{name} (#{email})"
@@ -223,6 +224,8 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       avatarUrl = if result.get('avatarKey')
                     "http://res.cloudinary.com/radium/image/upload/c_fit,h_32,w_32/#{result.get('avatarKey')}.jpg"
+                  else if result.get('type') == 'list'
+                    "/images/list.png"
                   else
                     "/images/default_avatars/small.png"
 
