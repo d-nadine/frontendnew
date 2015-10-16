@@ -22,11 +22,10 @@ Radium.DealEditorComponent = Ember.Component.extend
     contactSet: (contact) ->
       return unless @get('dealForm')
 
-      @set 'dealForm',
-        companyName: null
-        company: null
-        contactName: null
-        contact: contact
+      @set 'dealForm.contact', contact
+
+      if companyName = contact.get('company.name')
+        @set 'dealForm.companyName', companyName
 
       return if @get('dealForm.name.length')
 
@@ -117,7 +116,7 @@ Radium.DealEditorComponent = Ember.Component.extend
 
   _afterRender: ->
     @_super.apply this, arguments
-    @$('input[type=text]:first').focus()
+    @$(".field.#{@get('list.type')} input[type=text]").focus()
 
   reset: ->
     @set 'isSubmitted', false
@@ -130,13 +129,28 @@ Radium.DealEditorComponent = Ember.Component.extend
   dealNamePlaceholder: Ember.computed 'dealForm.contact', 'dealForm.company', ->
     "New #{@get('list.itemName')}"
 
-  orFields: ['dealForm.companyName', 'dealForm.contact']
-  orValidations: ['or']
-  nameValidations: ['required']
-  isSubmitted: false
+  companyValidation: ->
+    list = @get('list')
+    dealForm = @get('dealForm')
+    unless list.get('companiesList')
+      return false
 
-  companyIsSet: Ember.computed.bool 'dealForm.companyName'
-  contactIsSet: Ember.computed.bool 'dealForm.contact'
+    return !!!dealForm.companyName && !!!dealForm.company.id
+
+  contactValidation: ->
+    list = @get('list')
+    dealForm = @get('dealForm')
+    unless list.get('contactList')
+      return false
+
+    return false if !!dealForm.contact?.id
+
+    return !!!dealForm.contact?.length
+
+  companyValidations: ['custom']
+  contactValidations: ['custom']
+
+  isSubmitted: false
 
   # UPGRADE: replace with inject
   listController: Ember.computed ->

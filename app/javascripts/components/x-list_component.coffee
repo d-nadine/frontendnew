@@ -110,6 +110,8 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
   checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
 
+  content: Ember.computed.oneWay 'deals'
+
   classNames: ['single-column-container']
 
   filterStartDate: null

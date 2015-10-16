@@ -16,9 +16,13 @@ Radium.CheckableMixin = Ember.Mixin.create
     !Ember.isEmpty(@get('checkedContent'))
 
   toggleChecked: ->
-    allChecked = @get('checkedContent.length') == @get('length')
+    content = @get('content')
 
-    @get('content').forEach (item) ->
+    allChecked = @get('checkedContent.length') == content.get('length')
+
+    Ember.assert "You musst specify a content property", content
+
+    content.forEach (item) ->
       item.set 'isChecked', !allChecked
 
   allCheckedDidChange: Ember.observer 'allChecked', ->

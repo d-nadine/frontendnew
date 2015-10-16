@@ -63,6 +63,20 @@ Radium.Validations =
 
     result
 
+  custom: ->
+    validationFunc = @get('validationFunc')
+
+    Ember.assert "You must supply a validationFunc for a custom validation", validationFunc
+
+    result = validationFunc.call(@get('validator'))
+
+    if result
+      @addErrorMessage(@validationField)
+    else
+      @removeErrorMessage(@validationField)
+
+    result
+
 Radium.ValidationMixin = Ember.Mixin.create
   classNameBindings: ['isInvalid']
 
@@ -119,6 +133,6 @@ Radium.ValidationMixin = Ember.Mixin.create
     validations = @get('validations')
 
     isInvalid = validations.any (v) =>
-         Radium.Validations[v].call this
+      Radium.Validations[v].call this
 
     isInvalid

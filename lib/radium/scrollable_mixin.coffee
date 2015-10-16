@@ -33,7 +33,7 @@ Radium.ScrollableMixin = Em.Mixin.create
   _teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     return if @get('noscroll')
-    @$().data('jsp').destroy()
+    @$().data('jsp')?.destroy()
     $(window).off 'resize.jscrollpane'
 
   getDimensions: ->
