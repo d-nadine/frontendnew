@@ -238,6 +238,11 @@
     width: 95%;
   }
 
+  .multiple-address-component .address-body .save-address {
+    position: relative;
+    top: -50px;
+    left: 93px;
+  }
   .multiple-address-component .address-body .country-picker .dropdown-menu:not(.typeahead){
     top: auto;
     left: auto;

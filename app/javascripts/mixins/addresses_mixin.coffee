@@ -1,6 +1,7 @@
 Radium.AddressesMixin = Ember.Mixin.create
   defaultAddresses: (hasEmail) ->
-    address = Ember.Object.create(name: 'work', isPrimary: true, street: '', city: '', state: '', zipcode: '', country: 'US', isCurrent: true)
+    address = Ember.Object.create(name: 'work', isPrimary: true, street: '', line2: '', city: '', state: '', zipcode: '', country: 'US', isCurrent: true
+                                        )
 
     if hasEmail
       address['email'] = ''

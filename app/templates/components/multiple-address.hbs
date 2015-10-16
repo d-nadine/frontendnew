@@ -3,11 +3,9 @@
   {{input value=current.email class="single route" type="text" placeholder="email address"}}<br/>
 {{/if}}
 </div>
-<div id="locationField">
-  <input class="single address-autocomplete" id="autocomplete" placeholder="Address" type="text" autocomplete="off" class="main-auto">
-</div>
 <div id="addressField" class="address-body">
   {{input value=current.street class="single route street" type="text" placeholder="Street"}}<br/>
+  {{input value=current.line2 class="single street" type="text" placeholder="Line 2"}}<br/>
   {{input value=current.city class="single locality" type="text" placeholder="City"}}<br/>
   {{input value=current.state class="single administrative_area_level_1" type="text" placeholder="State / Province"}}<br/>
   {{input value=current.zipcode class="single postal_code" type="text" placeholder="Zip / Postal Code"}}<br/>
@@ -18,5 +16,6 @@
         {{x-radio name="current" value=true selection=address.isCurrent action="changeAddress" item=address leader=address.name labelClass="address-switcher"}}
       </div>
     {{/each}}
+    <button class="btn btn-primary save-address" {{action "save"}}>Save</button>
   </div>
 </div>

@@ -2,6 +2,7 @@ Radium.Address = Radium.Model.extend
   name: DS.attr('string')
   isPrimary: DS.attr('boolean')
   street: DS.attr('string')
+  line2: DS.attr('string')
   state: DS.attr('string')
   city: DS.attr('string')
   country: DS.attr('string')
@@ -10,15 +11,16 @@ Radium.Address = Radium.Model.extend
   formatted: Ember.computed 'street', 'state', 'city', 'country', 'zipcode', ->
     [@get('state'), @get('city'), @get('zipcode')].join(' ')
 
-  value: Ember.computed 'isNew', 'street', 'state', 'city', 'country', 'zipcode', ->
+  value: Ember.computed 'isNew', 'street', 'line2', 'state', 'city', 'country', 'zipcode', ->
     return if @get('isNew')
 
-    !Ember.isEmpty(@get('street')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode'))
+    !Ember.isEmpty(@get('street')) ||!Ember.isEmpty(@get('line2')) || !Ember.isEmpty(@get('state')) || !Ember.isEmpty(@get('city')) || !Ember.isEmpty(@get('zipcode'))
 
   getAddressHash: ->
     isPrimary: @get('isPrimary')
     name: @get('name')
     street: @get('street')
+    line2: @get('line2')
     city: @get('city')
     state: @get('state')
     zipcode: @get('zipcode')
@@ -29,6 +31,7 @@ Radium.Address = Radium.Model.extend
     parts = [
       @get('street')
       @get('state')
+      @get('line2')
       @get('city')
       @get('country')
       @get('zipcode')

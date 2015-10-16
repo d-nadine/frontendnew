@@ -1,6 +1,11 @@
 Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin,
   Radium.AddressesMixin,
   actions:
+    save: ->
+      @sendAction "stopEditing"
+
+      false
+
     changeAddress: (address) ->
       @$('#autocomplete').val('')
       Ember.run.next =>
@@ -33,21 +38,17 @@ Radium.MultipleAddressComponent = Ember.Component.extend Radium.GeoLocationMixin
 
     showAddressFields = @showAddressFields.bind(this)
 
-    @$('#autocomplete').on 'focus', showAddressFields
-    @$('#autocomplete').on 'paste', showAddressFields
     @$('.route').on 'focus', showAddressFields
     @$('.route').on 'paste', showAddressFields
 
     Ember.run.scheduleOnce 'afterRender', this, '_afterRender'
 
   _afterRender: ->
-    return @initializeGoogleGeo([@$('#autocomplete'), @$('.street')])
+    return @initializeGoogleGeo([@$('.street')])
 
   teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
 
-    @$('#autocomplete').off 'focus'
-    @$('#autocomplete').off 'paste'
     @$('.route').off 'focus'
     @$('.route').off 'paste'
 

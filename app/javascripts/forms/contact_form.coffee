@@ -56,7 +56,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
 
     @get('addresses').forEach (address) =>
       if @addressHasValue(address)
-        contact.get('addresses').push address.getProperties('name', 'primary', 'street', 'state', 'city', 'country', 'zipcode')
+        contact.get('addresses').push address.getProperties('name', 'primary', 'street', 'line2', 'state', 'city', 'country', 'zipcode')
 
     @get('lists').forEach (list) ->
       contact.get('lists').push list.get('id')
@@ -74,6 +74,7 @@ Radium.ContactForm = Radium.Form.extend Radium.AddressesMixin,
 
   addressHasValue: (address) ->
     return true if address.get('street.length')
+    return true if address.get('line2.length')
     return true if address.get('state.length')
     return true if address.get('city.length')
     return true if address.get('zipcode.length')
