@@ -1,6 +1,6 @@
 <div class="company-form">
   <div class="form-search pipeline-search">
-    {{company-autocomplete value=companyForm.companyName company=companyForm.company queryKey="name" writeableValue=true placeholder="Add Company" validator=this validations=companyValidations validationField="company" saveModel="submit" class="field" dontReset=true disabled=existingChosen action="companyNameSelected" resetAction="resetForm"}}
+    {{company-autocomplete value=companyForm.companyName company=companyForm.company queryKey="name" writeableValue=true placeholder="Add Company" validator=this validations=companyValidations validationField="company" saveModel="submit" class="field" dontReset=true disabled=existingChosen resetAction="resetForm"}}
   </div>
   <a href="#" {{action "createCompany"}} {{bind-attr disabled=isDisabled}} class="btn btn-main btn-primary">
     {{#if isSaving}}

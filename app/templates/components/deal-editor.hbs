@@ -1,7 +1,7 @@
 <h2>Add {{list.itemName}}</h2>
 <div class="form">
   <div class="item">
-    {{company-autocomplete value=dealForm.companyName company=dealForm.company queryKey="name" writeableValue=true placeholder="Company/Account Name" validator=this validations=companyValidations validationFunc=companyValidation validationField="company" saveModel="submit" class="field companies" dontReset=true}}
+    {{company-autocomplete value=dealForm.companyName bufferKey="companyName" company=dealForm.company queryKey="name" writeableValue=true placeholder="Company/Account Name" validator=this validations=companyValidations validationFunc=companyValidation validationField="company" saveModel="submit" class="field companies" dontReset=true}}
   </div>
   <br/>
   <div class="item">

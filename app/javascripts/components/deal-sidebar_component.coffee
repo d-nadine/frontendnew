@@ -1,5 +1,43 @@
 Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
   actions:
+    saveCompany: (company) ->
+      deal = @get('deal')
+      eventBus = @EventBus
+
+      saveDeal = (company) ->
+        finish = ->
+          eventBus.publishModelUpdate deal
+
+        if deal.get('list.companiesList')
+          deal.set('company', company)
+
+          deal.save().then finish
+        else
+          return unless contact = deal.get('contact')
+
+          contact.set 'companyName', company.get('name')
+
+          contact.save().then finish
+
+      if company.get('id')
+        deal.reset()
+        company = Radium.Company.all().find (c) -> c.get('id') == company.id
+
+        saveDeal(company)
+        return false
+
+      company = Radium.Company.createRecord
+                 name: company.name
+                 logo: company.logo
+                 website: company.website
+
+      company.save().then (result) ->
+        saveDeal(result)
+
+        return
+
+      false
+
     showContactDrawer: (resource) ->
       contact = if resource.constructor == Radium.Contact
                   resource
@@ -42,6 +80,12 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
       @set "showDeleteConfirmation", true
 
       false
+
+  company: Ember.computed 'deal.list.type', 'deal.company', 'deal.contact.company', ->
+    if @get('deal.list.companiesList')
+      @get('deal.company')
+    else
+      @get('deal.contact.company')
 
   classNameBindings: [':form']
 

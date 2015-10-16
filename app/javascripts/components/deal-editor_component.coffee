@@ -7,18 +7,6 @@ Radium.DealEditorComponent = Ember.Component.extend
 
       false
 
-    companyNameSelected: (company) ->
-      return if @get('dealForm.name.length')
-
-      companyName = company.get('name')
-
-      dealName = @getDealName(companyName)
-
-      @$('.validation-input-component').val(dealName)
-      @set 'dealForm.name', dealName
-
-      false
-
     contactSet: (contact) ->
       return unless @get('dealForm')
 
@@ -26,17 +14,6 @@ Radium.DealEditorComponent = Ember.Component.extend
 
       if companyName = contact.get('company.name')
         @set 'dealForm.companyName', companyName
-
-      return if @get('dealForm.name.length')
-
-      contactName = contact.get('displayName')
-
-      dealName = @getDealName(contactName)
-
-      @$('.validation-input-component').val(dealName)
-      @set 'dealForm.name', dealName
-
-      false
 
     submit: ->
       @set 'isSubmitted', true

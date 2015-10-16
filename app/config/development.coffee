@@ -45,9 +45,9 @@ Ember.RSVP.configure 'onerror', (e) ->
 
   Ember.Logger.error e
 
-Raygun.onBeforeSend (payload) ->
-  if window.location.hostname.indexOf('localhost') == 0
-    # or location.host if you wish to check the port too
-    console.log payload
-    return false
-  payload
+# Raygun.onBeforeSend (payload) ->
+#   if window.location.hostname.indexOf('localhost') == 0
+#     # or location.host if you wish to check the port too
+#     console.log payload
+#     return false
+#   payload

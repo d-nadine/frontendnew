@@ -9,6 +9,10 @@
     <div class="sidebar-panel">
       <div class="sidebar-panel-content">
         <dl class="dl-horizontal">
+          <dt><i class="ss-standard ss-buildings"></i></dt>
+          <dd>{{inline-companyautocomplete model=company writeableValue=true placeholder="Company/Account Name" saveModel="saveCompany" class="companies" dontReset=true action="saveCompany"}}</dd>
+        </dl>
+        <dl class="dl-horizontal">
           <dt><i class="ss-standard ss-list"></i></dt>
           <dd>{{deal.list.name}}</dd>
         </dl>
@@ -29,8 +33,6 @@
       <div class="sidebar-panel-content contacts">
         {{#if deal.list.contactList}}
           {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true routeAction="showContactDrawer"}}
-        {{else}}
-          {{inline-autocomplete model=deal bufferKey="company" scopes="company" queryKey="name" placeholder="Add Company" saveAction="setCompany" parent=this actionOnly=true routeAction="showCompanyDrawer"}}
         {{/if}}
       </div>
       <div class="sidebar-panel-header">

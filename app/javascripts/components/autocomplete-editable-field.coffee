@@ -1,9 +1,11 @@
 require 'components/editable-field_component'
 require 'components/autocomplete_mixin'
 require 'components/key_constants_mixin'
+require 'mixins/containing_controller_mixin'
 
 Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend Radium.AutocompleteMixin,
   Radium.KeyConstantsMixin,
+  Radium.ContainingControllerMixin,
 
   actions:
     setBindingValue: (object) ->

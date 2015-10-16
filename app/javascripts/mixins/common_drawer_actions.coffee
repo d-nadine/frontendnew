@@ -3,6 +3,8 @@ Radium.CommonDrawerActions = Ember.Mixin.create
     showContactDrawer: (contact, hideMain) ->
       @closeContactDrawer()
 
+      Ember.assert "You have passed a non contact instance to showContactDrawer", contact.constructor == Radium.Contact
+
       @set 'contactModel', contact
 
       config = {
@@ -54,6 +56,13 @@ Radium.CommonDrawerActions = Ember.Mixin.create
         false
 
     showCompanyDrawer: (company, hideMain) ->
+      company = if company.constructor == Radium.Company
+                  company
+                else
+                  company.get('company')
+
+      Ember.assert "You have passed a non company instance to showCompanyDrawer", company
+
       @closeCompanyDrawer()
 
       @set "companyModel", company
@@ -99,6 +108,8 @@ Radium.CommonDrawerActions = Ember.Mixin.create
 
     showDealDrawer: (deal, hideMain) ->
       @closeDealDrawer()
+
+      Ember.assert "You have passed a non deal instance to showDealDrawer", deal.constructor == Radium.Deal
 
       @set 'dealModel', deal
 

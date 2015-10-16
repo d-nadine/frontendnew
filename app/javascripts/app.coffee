@@ -11,15 +11,15 @@ FastClick.attach(document.body)
 
 window.number_of_clicks = 0
 
-Raygun.init('ZCfpkrJEWIcnlZGDb8aYPw==',
-  allowInsecureSubmissions: true
-  ignoreAjaxAbort: true
-  ignoreAjaxError: true
-  debugMode: true
-  ignore3rdPartyErrors: false
-  wrapAsynchronousCallbacks: true
-  excludedUserAgents: ['PhantomJS']
-).attach()
+# Raygun.init('ZCfpkrJEWIcnlZGDb8aYPw==',
+#   allowInsecureSubmissions: true
+#   ignoreAjaxAbort: true
+#   ignoreAjaxError: true
+#   debugMode: true
+#   ignore3rdPartyErrors: false
+#   wrapAsynchronousCallbacks: true
+#   excludedUserAgents: ['PhantomJS']
+# ).attach()
 
 document.addEventListener 'click', ->
           window.Intercom "update",
