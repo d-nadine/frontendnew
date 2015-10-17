@@ -63,7 +63,7 @@ Radium.ContentEditableBehaviour = Ember.Mixin.create
       charCount += range.startOffset
     charCount
 
-  setCaretPos:(el, sPos) ->
+  setCaretPos:(el, pos) ->
     charIndex = 0
     range = document.createRange()
     range.setStart el, 0
@@ -75,11 +75,11 @@ Radium.ContentEditableBehaviour = Ember.Mixin.create
     while !stop and (node = nodeStack.pop())
       if node.nodeType == 3
         nextCharIndex = charIndex + node.length
-        if !foundStart and sPos >= charIndex and sPos <= nextCharIndex
-          range.setStart node, sPos - charIndex
+        if !foundStart and pos >= charIndex and pos <= nextCharIndex
+          range.setStart node, pos - charIndex
           foundStart = true
-        if foundStart and sPos >= charIndex and sPos <= nextCharIndex
-          range.setEnd node, sPos - charIndex
+        if foundStart and pos >= charIndex and pos <= nextCharIndex
+          range.setEnd node, pos - charIndex
           stop = true
         charIndex = nextCharIndex
       else

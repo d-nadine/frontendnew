@@ -141,6 +141,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         model.addObserver "currentState.stateName", observer
     ).catch((error) ->
       resetModel()
+      throw error
     ).finally =>
       @set 'isSaving', false
 
@@ -287,8 +288,17 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
               @$().text()
 
     @get('bufferedProxy').set(@get('bufferKey'), text)
-    @$().html @get('markUp')
-    @setEndOfContentEditble()
+
+    el = @$()
+
+    anchor = el.find('a')
+
+    updateEl = if anchor.length
+                 anchor
+               else
+                 el
+
+    updateEl.html @get('value')
 
   keyDown: (e) ->
     bufferedProxy = @get('bufferedProxy')

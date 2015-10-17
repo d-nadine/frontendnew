@@ -343,6 +343,7 @@ Radium.LeadsImportController = Radium.Controller.extend  Radium.PollerMixin,
       title: null
       website: null
       street: null
+      line2: null
       city: null
       state: null
       zip: null
