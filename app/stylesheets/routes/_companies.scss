@@ -5,28 +5,6 @@
     margin-left: 25px;
   }
 
-  .companies .left-table .variadic-table {
-    min-width: calc(100% - 430px);
-  }
-
-  .companies .right-table .variadic-table {
-    width: 100%;
-
-    .open-deals {
-      width: 40%;
-    }
-    .assign > div {
-      width: 100%;
-    }
-  }
-
-  .companies .variadic-table {
-
-    .column-sort {
-      width: calc(100% - 15px);
-    }
-  }
-
   .table-container.companies, .table-container.untracked, .company-form {
     margin-left: 15px;
   }
@@ -44,7 +22,6 @@
 }
 
 #addressbook .companies-view {
-
   .subhead {
     margin: 10px 15px 20px;
     width: calc(100% - 30px);
@@ -61,7 +38,6 @@
       }
     }
     .tools {
-      
       .btn-group {
         height: 36px;
         line-height: 36px;
@@ -73,9 +49,15 @@
       }
     }
   }
-  .companies {
-    width: calc(100% - 30px);
+
+  .table-container {
+    width: 100%;
   }
+
+  .table-container .left-table {
+    margin-left: 10px;
+  }
+
   .company-form {
     margin-bottom: 30px;
   }

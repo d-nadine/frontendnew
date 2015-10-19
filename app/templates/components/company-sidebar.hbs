@@ -57,10 +57,6 @@
         {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add subindustry" parent=this}}
       </div>
       <div class="industry-row sidebar-row">
-        <div class="industry-label sidebar-label">Subindustry</div>
-        {{inline-editor model=company bufferKey="subindustry" notRoutable=true placeholder="Add subindustry" parent=this}}
-      </div>
-      <div class="industry-row sidebar-row">
         <div class="industry-label sidebar-label">Technologies</div>
         {{#each technology in company.technologies}}
           <span class="technology">{{technology.name}}</span>

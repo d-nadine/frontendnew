@@ -37,6 +37,13 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
 
+  email: Radium.computed.primaryAccessor 'emailAddresses', 'value', 'primaryEmail'
+  phone: Radium.computed.primaryAccessor 'phoneNumbers', 'value', 'primaryPhone'
+  city: Radium.computed.primaryAccessor 'addresses', 'city', 'primaryAddress'
+  street: Radium.computed.primaryAccessor 'addresses', 'street', 'primaryAddress'
+  state: Radium.computed.primaryAccessor 'addresses', 'state', 'primaryAddress'
+  zipcode: Radium.computed.primaryAccessor 'addresses', 'zipcode', 'primaryAddress'
+
   todos: DS.hasMany('Radium.Todo')
   meetings: DS.hasMany('Radium.Meeting')
   tasks: Radium.computed.tasks('todos', 'calls', 'meetings')

@@ -34,7 +34,7 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
 
     columnSelection = @get('columnSelection')
 
-    Ember.assert "you need to specify a columnSection for the ColumnSelectorComponent", columnSelection
+    Ember.assert "you need to specify a columnSelection for the ColumnSelectorComponent", columnSelection
 
     grouped = []
 
