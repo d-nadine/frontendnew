@@ -62,8 +62,7 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.TrackContactMixin,
       meetingForm: @get('meetingForm')
       about: @get('contact')
 
-    if email = @get('contact.email')
-      formBox.emailForm = @get('emailForm')
+    formBox.emailForm = @get('emailForm')
 
     formBox
 

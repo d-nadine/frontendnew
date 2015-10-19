@@ -167,8 +167,6 @@ Radium.computed.primaryAccessor = (collection, prop, dependentKey) ->
     if arguments.length == 1
       return @get(accessKey)
 
-    return unless value
-
     unless @get(dependentKey)
       hash = name: 'work', isPrimary: true
       hash[prop] = value

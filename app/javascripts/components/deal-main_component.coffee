@@ -23,8 +23,7 @@ Radium.DealMainComponent = Ember.Component.extend Radium.ScrollableMixin,
       meetingForm: @get('meetingForm')
       about: @get('deal')
 
-    if email = @get('contact.email')
-      formBox.emailForm = @get('emailForm')
+    formBox.emailForm = @get('emailForm')
 
     formBox
 
