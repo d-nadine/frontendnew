@@ -46,13 +46,6 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.TrackContactMixin,
 
   loadedPages: [1]
 
-  dealsTotal: Ember.computed 'deals.[]', ->
-    @get('deals').reduce((preVal, item) ->
-      value = if item.get('status') == 'closed' then item.get('value') else 0
-
-      preVal + value
-    , 0, 'value')
-
   model: Ember.computed.oneWay 'contact'
 
   formBox: Ember.computed 'todoForm', 'contact.email', ->

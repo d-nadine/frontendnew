@@ -271,23 +271,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       heading: "Added"
       binding: "added"
       sortOn: "created_at"
-    }
-    {
-      id: "deals-closed-total"
-      group: "deals"
-      classNames: "deals-closed-total"
-      heading: "Deals Closed"
-      binding: "dealsClosedTotal"
-      sortOn: "deals_closed_total"
-    }
-    {
-      id: "deals-total"
-      group: "deals"
-      classNames: "deals-total"
-      heading: "Deals Total"
-      binding: "dealsTotal"
-      sortOn: "deals_closed_total_value"
-    }
+    },
     {
       id: "lists"
       group: "actions"

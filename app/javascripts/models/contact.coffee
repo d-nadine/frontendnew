@@ -67,14 +67,8 @@ Radium.Contact = Radium.Model.extend Radium.HasTasksMixin,
 
   businessCardUrl: DS.attr('string')
   vcardUrl: DS.attr('string')
-  dealsClosedTotalValue: DS.attr('number')
-  dealsClosedTotal: DS.attr('number')
   activitySevenDaysTotal: DS.attr('number')
   activityThirtyDaysTotal: DS.attr('number')
-
-  dealsTotal: Ember.computed 'dealsClosedTotalValue', ->
-    total = @get('dealsClosedTotalValue') || 0
-    accounting.formatMoney(total)
 
   isExpired: Radium.computed.daysOld('createdAt', 60)
 

@@ -631,11 +631,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       operatorType: "user"
     }
     {
-      field: "deals_closed"
-      displayName: "Deals Closed"
-      operatorType: "number"
-    }
-    {
       field: "next_task"
       displayName: "Next Task"
       operatorType: "boolean"
