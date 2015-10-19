@@ -28,9 +28,7 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
 
       @send "executeActions", "delete", detail
 
-      # need to call a better update companies
-      Ember.run.next =>
-        @container.lookup('route:addressbookCompanies').refresh()
+      @set "showDeleteConfirmation", false
 
       false
 
