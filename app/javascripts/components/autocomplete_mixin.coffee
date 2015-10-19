@@ -1,4 +1,6 @@
-Radium.AutocompleteMixin = Ember.Mixin.create
+require 'components/key_constants_mixin'
+
+Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
   actions:
     updateModel: ->
       return false if @get ('isLoading')
@@ -248,3 +250,31 @@ Radium.AutocompleteMixin = Ember.Mixin.create
 
     typeahead.updater = (item, index) =>
       @setValue item, index
+
+    ARROW_DOWN = @ARROW_DOWN
+    ARROW_UP = @ARROW_UP
+    ARROW_LEFT = @ARROW_LEFT
+    ARROW_RIGHT = @ARROW_RIGHT
+    ESCAPE = @ESCAPE
+    DELETE = @DELETE
+    TAB = @TAB
+    ENTER = @ENTER
+
+    typeahead.constructor.prototype.keyup = (e) ->
+      switch e.keyCode
+        when ARROW_DOWN, ARROW_UP, ARROW_LEFT, ARROW_RIGHT, DELETE
+          break
+        when TAB, ENTER
+          if !@shown
+            return
+          @select()
+        when ESCAPE
+          # escape
+          if !@shown
+            return
+          @hide()
+        else
+          @lookup()
+
+      e.stopPropagation()
+      e.preventDefault()

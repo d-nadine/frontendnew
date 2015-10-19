@@ -22,6 +22,8 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
 
       @set 'isEditing', false
 
+      @set 'isNewSelection', true
+
       @$().blur()
 
       false

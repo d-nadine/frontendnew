@@ -97,6 +97,7 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     if @get('isInvalid')
       @get('containingController').send 'flashError', 'Field is not valid.'
+      @set 'isNewSelection', false
       if model
         return resetModel()
       else
@@ -106,7 +107,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     if saveAction = @get("saveAction")
       @get('containingController').send saveAction, this
-      return if @get('actionOnly')
+      if @get('actionOnly')
+        @set 'isNewSelection', false
+        return
 
     bufferedProxy.applyBufferedChanges()
 
@@ -139,10 +142,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
         observer()
       else
         model.addObserver "currentState.stateName", observer
-    ).catch((error) ->
-      resetModel()
-      throw error
     ).finally =>
+      @set 'isNewSelection', false
       @set 'isSaving', false
 
   classNames: ['editable']
@@ -324,7 +325,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     true
 
   clickHandler: (e) ->
-    if $(e.target).hasClass 'route'
+    return if @contenteditable == "true"
+
+    if $(e.target).hasClass('route')
       @send 'activateLink'
       return false
 

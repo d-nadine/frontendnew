@@ -1,9 +1,11 @@
 require "mixins/lists_persistence_mixin"
 require "mixins/common_drawer_actions"
+require "mixins/save_contact_actions"
 
 Radium.ContactSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
   Radium.ListsPersistenceMixin,
   Radium.CommonDrawerActions,
+  Radium.SaveContactActions,
 
   actions:
     createList: (list) ->
