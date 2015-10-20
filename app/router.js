@@ -6,6 +6,15 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('conversations', {path: '/conversations/:type'});
+
+  this.route('addressbook', function(){
+    this.route('people', function() {
+      this.route('contacts');
+      this.route('index', {path: '/filter'});
+    });
+    this.route('companies');
+  });
 });
 
 export default Router;

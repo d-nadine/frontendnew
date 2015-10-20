@@ -22,17 +22,19 @@
           </li>
 
           <li class="dropdown">
-            {{!#link-to "conversations" "incoming"}}
+            {{#link-to "conversations" "incoming"}}
               Conversations
-            {{!/link-to}}
+            {{/link-to}}
           </li>
 
           <li class="addressbook-top-nav">
-            {{!#link-to "people.contacts" class="dropdown-toggle contacts-nav"}}
+            {{#link-to "addressbook.people.contacts" class="dropdown-toggle contacts-nav"}}
               Contacts
-            {{!/link-to}}
+            {{/link-to}}
             <ul class="dropdown-menu">
-              <li>{{!#link-to "addressbook.companies"}}Companies{{!/link-to}}</li>
+              <li>
+                {{#link-to "addressbook.companies"}}Companies{{/link-to}}
+              </li>
             </ul>
           </li>
 
