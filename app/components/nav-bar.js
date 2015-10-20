@@ -33,8 +33,7 @@ export default Ember.Component.extend({
     const collapse = this.$('.nav-collapse');
 
     collapse.on('click', 'a', () => {
-      console.log(collapse.collapse)
-      debugger;
+      collapse.collapse('hide');
     });
   }),
   _teardown: Ember.on('willDestroyElement', function() {

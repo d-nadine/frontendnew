@@ -21,12 +21,21 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import("./vendor/bootstrap.css");
+  app.import("./vendor/styles/bootstrap.css");
   app.import("./bower_components/moment/moment.js");
   app.import("./bower_components/jquery.cookie/jquery.cookie.js");
-  app.import('./vendor/fastclick.js');
-  app.import('./vendor/ember-datetime.js');
-  app.import("./vendor/ember-data.js");
+  app.import('./vendor/javascripts/fastclick.js');
+  app.import('./vendor/javascripts/ember-datetime.js');
+  app.import("./vendor/javascripts/ember-data.js");
+  app.import("./vendor/javascripts/bootstrap.js");
+  app.import("./vendor/javascripts/bootstrap-datepicker.js");
+  app.import("./vendor/javascripts/summernote.js");
+  app.import("./vendor/javascripts/jquery.autocomplete.js");
+  app.import("./vendor/javascripts/jquery.cloudinary.js");
+  app.import("./vendor/javascripts/jquery.jscrollpane.js");
+  app.import("./vendor/javascripts/jquery.scrollTo.js");
+  app.import("./vendor/javascripts/jquery-elastic.js");
+  app.import("./vendor/javascripts/jquery.timepicker.js");
 
   return app.toTree();
 };
