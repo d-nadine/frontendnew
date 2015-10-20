@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     const contactsNav = this.$('.addressbook-top-nav');
 
     contactsNav.on('mouseenter', () => {
-      if(this.get('application.currentPath') === 'addressbook.companies') {
+      if(this.get('currentPath') === 'addressbook.companies') {
         return;
       }
 
