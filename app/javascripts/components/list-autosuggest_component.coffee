@@ -25,14 +25,15 @@ Radium.ListAutosuggestComponent = Radium.XAutosuggestComponent.extend
     not @get('destination').mapProperty('name').contains(item.get('name'))
 
   focusOut: (e) ->
-    input = @$('input[type=text]')
-    text = input.val()
+    Ember.run.next =>
+      input = @$('input[type=text]')
+      text = input.val()
 
-    return unless @newItemCriteria(text)
+      return unless @newItemCriteria(text)
 
-    @selectionAdded(text)
-    input.val('').focus()
-    false
+      @selectionAdded(text)
+      input.val('').focus()
+      false
 
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
