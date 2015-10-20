@@ -88,7 +88,7 @@ Radium.ContactMainComponent = Ember.Component.extend Radium.TrackContactMixin,
   emailForm: Radium.computed.newForm 'email'
 
   emailFormDefaults: Ember.computed 'contact', ->
-    to: Ember.A([@get('contact')])
+    to: Ember.A([@get('contact')].compact())
 
   queryParams: ['form']
   form: null

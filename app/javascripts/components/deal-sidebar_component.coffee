@@ -48,8 +48,13 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
 
       false
 
-    showCompanyDrawer: (deal) ->
-      @sendAction "showCompanyDrawer", deal.get('company')
+    showCompanyDrawer: (resource) ->
+      company = if c = resource.get('company')
+                  c
+                else
+                  resource
+
+      @sendAction "showCompanyDrawer", company
 
       false
 

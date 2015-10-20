@@ -43,7 +43,7 @@ Radium.DealMainComponent = Ember.Component.extend Radium.ScrollableMixin,
   emailForm: Radium.computed.newForm 'email'
 
   emailFormDefaults: Ember.computed 'contact', ->
-    to: Ember.A([@get('contact')])
+    to: Ember.A([@get('contact')].compact())
 
   meetingForm: Radium.computed.newForm('meeting')
 
