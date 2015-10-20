@@ -1,0 +1,16 @@
+<div class="conversations-container row-fluid">
+  <div class="conversations-sidebar">
+
+    <div id="totals" class="group">
+      <p>My Inbox</p>
+      {{#link-to "conversations" "incoming" class="item"}}
+        Incoming
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{incoming}}</span>
+        {{/if}}
+      {{/link-to}}
+    </div>
+  </div>
+</div>

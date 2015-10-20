@@ -35,7 +35,7 @@ export function initialize(container, application) {
     }
 
     Ember.$('.main-loading').hide();
-    
+
     application.advanceReadiness();
 
     if(ENV.environment !== "production" || location.pathname !== "/") {
