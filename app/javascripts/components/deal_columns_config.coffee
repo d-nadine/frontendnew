@@ -465,5 +465,115 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         {name: "saveAction", value: "saveDealValue", static: true}
       ]
       component: "currency-control"
+    },
+    {
+      id: "street"
+      group: "details"
+      classNames: "city"
+      heading: "Street"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add street",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "street"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    },
+    {
+      id: "line2"
+      group: "details"
+      classNames: "city"
+      heading: "Line 2"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add line 2",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "line2"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    },
+    {
+      id: "city"
+      group: "details"
+      classNames: "city"
+      heading: "City"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add city",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "city"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    },
+    {
+      id: "state"
+      group: "details"
+      classNames: "city"
+      heading: "State"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add state",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "state"
+        static: true
+      }
+      ],
+      component: 'editable-field'
+    }
+    {
+      id: "zipcode"
+      group: "details"
+      classNames: "city"
+      heading: "Zipcode/Postcode"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add zipcode/postcode",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "zipcode"
+        static: true
+      }
+      ],
+      component: 'editable-field'
     }
   ])
