@@ -1,5 +1,4 @@
 import Model from 'radium/models/models';
-import Ember from 'ember';
 
 const ConversationsTotals = Model.extend({
   incoming: DS.attr('number'),
