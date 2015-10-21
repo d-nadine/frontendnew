@@ -1,6 +1,6 @@
 import Store from 'radium/store';
 
-export function initialize(container, application) {
+export function initialize(application) {
   application.Store = Store;
 }
 

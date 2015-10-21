@@ -2,16 +2,23 @@ import Ember from 'ember';
 import TimestampsMixin from 'radium/mixins/timestamps';
 import List from 'radium/models/list';
 
+const {
+  run,
+  computed,
+  RSVP,
+  assert
+} = Ember;
+
 const Model = DS.Model.extend(TimestampsMixin, {
   primaryKey: 'id',
-  route: Ember.computed(function() {
+  route: computed(function() {
     return this.store.container.lookup('route:application');
   }),
   "delete": function() {
     var route, self;
     self = this;
     route = this.get('route');
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new RSVP.Promise(function(resolve, reject) {
       self.deleteRecord();
       self.one('didDelete', function() {
         return resolve.call(self);
@@ -33,7 +40,7 @@ const Model = DS.Model.extend(TimestampsMixin, {
     var route, self;
     self = this;
     route = this.get('route');
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new RSVP.Promise(function(resolve, reject) {
       var success;
       success = function(result) {
         return resolve(result);
@@ -51,7 +58,7 @@ const Model = DS.Model.extend(TimestampsMixin, {
     this.one('becameInvalid', function(result) {
       route.send('flashError', result);
       reject(result);
-      return Ember.run.next(function() {
+      return run.next(function() {
         if (self.get('id')) {
           return self.reset();
         } else {
@@ -69,7 +76,8 @@ const Model = DS.Model.extend(TimestampsMixin, {
       if (result.get('id')) {
         return;
       }
-      return Ember.run.next(function() {
+
+      run.next(function() {
         result.reset();
         return result.unloadRecord();
       });
@@ -92,11 +100,12 @@ const Model = DS.Model.extend(TimestampsMixin, {
     this.suspendRelationshipObservers(function() {
       return this.notifyPropertyChange('data');
     });
-    return this.updateRecordArrays();
+
+    this.updateRecordArrays();
   },
   updateHasMany: function(key, newItemId, klass) {
     var data, item, loader, references, serializer, store;
-    Ember.assert("No newListId found to update local hasMany", newItemId);
+    assert("No newListId found to update local hasMany", newItemId);
     data = this.get('_data');
     store = this.get('store');
     serializer = this.get('store._adapter.serializer');
@@ -137,7 +146,8 @@ const Model = DS.Model.extend(TimestampsMixin, {
     if (!notify) {
       return;
     }
-    return this.suspendRelationshipObservers(function() {
+
+    this.suspendRelationshipObservers(function() {
       return this.notifyPropertyChange('data');
     });
   },
@@ -157,15 +167,16 @@ const Model = DS.Model.extend(TimestampsMixin, {
     if (!this.get('inCleanState')) {
       return;
     }
-    return this._super.apply(this, arguments);
+
+    this._super.apply(this, arguments);
   },
-  typeName: Ember.computed(function() {
+  typeName: computed(function() {
     return this.constructor.toString().underscore().split('.').pop().toLowerCase();
   }),
-  inErrorState: Ember.computed('currentState.stateName', function() {
+  inErrorState: computed('currentState.stateName', function() {
     return this.get('currentState.stateName') === 'root.error';
   }),
-  inCleanState: Ember.computed('currentState.stateName', function() {
+  inCleanState: computed('currentState.stateName', function() {
     return this.get('currentState.stateName') === "root.loaded.saved";
   }),
   reset: function() {

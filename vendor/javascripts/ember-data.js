@@ -260,40 +260,44 @@ var set = Ember.set;
 */
 
 Ember.onLoad('Ember.Application', function(Application) {
-  Application.initializer({
+  Application.instanceInitializer({
     name: "store",
 
-    initialize: function(container, application) {
+    initialize: function(application) {
       Ember.assert("You included Ember Data but didn't define "+application.toString()+".Store", application.Store);
 
-      application.register('store:main', application.Store);
-      application.register('serializer:_default', DS.NewJSONSerializer);
+      var registry = application.registry;
+
+      registry.register('store:main', application.Store);
+      registry.register('serializer:_default', DS.NewJSONSerializer);
 
       // Eagerly generate the store so defaultStore is populated.
       // TODO: Do this in a finisher hook
-      container.lookup('store:main');
+      application.container.lookup('store:main');
     }
   });
 
   // Keep ED compatible with previous versions of ember
   // TODO: Remove the if statement for Ember 1.0
   if (DS.DebugAdapter) {
-    Application.initializer({
+    Application.instanceInitializer({
       name: "dataAdapter",
 
-      initialize: function(container, application) {
-        application.register('dataAdapter:main', DS.DebugAdapter);
+      initialize: function(application) {
+        application.registry.register('dataAdapter:main', DS.DebugAdapter);
       }
     });
   }
 
-  Application.initializer({
+  Application.instanceInitializer({
     name: "injectStore",
 
-    initialize: function(container, application) {
-      application.inject('controller', 'store', 'store:main');
-      application.inject('route', 'store', 'store:main');
-      application.inject('dataAdapter', 'store', 'store:main');
+    initialize: function(application) {
+      var registry = application.registry;
+
+      registry.injection('controller', 'store', 'store:main');
+      registry.injection('route', 'store', 'store:main');
+      registry.injection('dataAdapter', 'store', 'store:main');
     }
   });
 

@@ -9,7 +9,7 @@ import SocialProfile from 'radium/models/social_profile';
 import ContactInfo from 'radium/models/contact_info';
 import User from 'radium/models/user';
 
-export function initialize(container, application) {
+export function initialize(application) {
   // we need to set this reference to the application
   // instance for this version of ember-data
   window.Radium = application;

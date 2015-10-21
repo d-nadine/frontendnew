@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const {
+  Route
+} = Ember;
+
+export default Route.extend({
   beforeModel (transition) {
     console.log(transition);
   }

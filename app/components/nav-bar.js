@@ -1,12 +1,19 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  actions: {
+    logOut() {
+      this.get('authManager').logOut();
+    }
+  },
   attributeBindings: ['role'],
   classNames: ['topbar', 'navbar navbar-inverse navbar-fixed-top'],
   role: 'header',
 
+  authManager: Ember.inject.service(),
+
   _setup: Ember.on('didInsertElement', function(){
-    this._super.apply(this, arguments);
+    this._super(...arguments);
 
     const contactsNav = this.$('.addressbook-top-nav');
 
@@ -37,7 +44,7 @@ export default Ember.Component.extend({
     });
   }),
   _teardown: Ember.on('willDestroyElement', function() {
-    this._super.apply(this, arguments);
+    this._super(...arguments);
     this.$('.nav-collapse').off('click');
     this.$('.addressbook-top-nav').off('mouseenter').off('mouseleave').off('click');
     this.$('.addressbook-top-nav .dropdown-menu').off('click');

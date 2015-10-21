@@ -1,5 +1,9 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const {
+  Controller
+} = Ember;
+
+export default Controller.extend({
   queryParams: ['user']
 });

@@ -1,3 +1,9 @@
 {{nav-bar currentUser=currentUser transitionToList="transitionToList" today=today toggleNotifications="toggleNotifications" logOut="logOut" notificationCount=notificationCount currentPath=currentPath}}
 
+{{#each flashMessenger.queue as |flashMessage|}}
+  <div id="alerts">
+    {{flash-message messagePart=flashMessage}}
+  </div>
+{{/each}}
+
 {{outlet}}

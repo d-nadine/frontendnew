@@ -1,6 +1,10 @@
 import Model from 'radium/models/models';
 import Ember from 'ember';
 
+const {
+  computed
+} = Ember;
+
 const Billing = Model.extend({
   gatewayIdentifier: DS.attr('string'),
   token: DS.attr('string'),
@@ -20,10 +24,10 @@ const Billing = Model.extend({
 
   subscriptionPlan: DS.belongsTo('Radium.SubscriptionPlan'),
 
-  isBasic: Ember.computed('subscriptionPlan.planId', function() {
+  isBasic: computed('subscriptionPlan.planId', function() {
     return this.get('subscriptionPlan.planId') === 'basic';
   }),
-  hasSubscription: Ember.computed('subscriptionPlan', 'gatewaySet', function() {
+  hasSubscription: computed('subscriptionPlan', 'gatewaySet', function() {
     if (this.get('subscriptionEnded')) {
       return false;
     }

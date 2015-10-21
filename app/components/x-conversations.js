@@ -1,8 +1,12 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+  Component
+} = Ember;
+
+export default Component.extend({
   _initialize: Ember.on('init', function() {
-    this._super.apply(this, arguments);
+    this._super(...arguments);
 
   })
 });

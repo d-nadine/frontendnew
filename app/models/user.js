@@ -3,6 +3,10 @@ import Model from 'radium/models/models';
 import Account from 'radium/models/account';
 import Ember from 'ember';
 
+const {
+  computed
+} = Ember;
+
 const User = Model.extend({
   firstName: DS.attr('string'),
   lastName: DS.attr('string'),
@@ -27,14 +31,14 @@ const User = Model.extend({
   settings: DS.belongsTo('Radium.UserSettings'),
   contactInfo: DS.belongsTo('Radium.ContactInfo'),
 
-  name: Ember.computed('firstName', 'lastName', function() {
+  name: computed('firstName', 'lastName', function() {
     return (this.get("firstName")) + " " + (this.get("lastName"));
   }),
-  isSyncing: Ember.computed('syncState', function() {
+  isSyncing: computed('syncState', function() {
     return this.get('syncState') !== "waiting";
   }),
-  displayName: Ember.computed.oneWay('name'),
-  companyName: Ember.computed.oneWay('account.name')
+  displayName: computed.oneWay('name'),
+  companyName: computed.oneWay('account.name')
 });
 
 User.toString = function(){

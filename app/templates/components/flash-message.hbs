@@ -1,0 +1,11 @@
+<button type="button" class="close" {{action "close" target="view"}}><i class="ss-standard ss-delete"></i></button>
+{{#if messagePart.message}}
+  {{messagePart.message}}
+{{else}}
+  <ul>
+    {{#each messagePart.errors as |error|}}
+      <li>{{error}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+

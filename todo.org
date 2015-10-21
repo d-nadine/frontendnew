@@ -1,35 +1,11 @@
-* Pipeline lists [74%]
-  - [X] create add deal modal
-  - [X] validate deal form
-  - [X] post add deal form
-  - [X] post new deal with new company
-  - [X] put company autocomplete in new company form
-  - [X] create deal with no name selected
-  - [X] post new deal with new contact
-  - [X] post new deal with existing company
-  - [X] post new deal with existing contact
-  - [X] deals table
-  - [X] status change
-  - [X] last status change
-  - [X] selectable columns
-  - [X] deal sidebar with contact
-  - [X] deal sidebar with company
-  - [X] add contacts company to deal columns config
-  - [X] contact and company drawers
-  - [X] deals detail view/drawer
-  - [X] delete deal
-  - [X] deal main view
-  - [X] bulk actions
-  - [X] value total
-  - [X] toggle inline email reply
-  - [ ] make sure updating does not happen for contact_status
-  - [ ] don't create activity for every contact from upload
-  - [ ] search
-  - [ ] deal closed date to contacts columns config
-  - [ ] What happens to open deals?
-  - [ ] flesh out company view with new details
-  - [ ] make company table use drawer for company view
-  - [ ] Deals closed total???
+* Refacttor to CLI [14%]
+  - [X] flash messenger
+  - [ ] write test for flash message
+  - [ ] wire up circle ci
+  - [ ] importing functionality
+  - [ ] conversations totals
+  - [ ] write test for conversations totals
+  - [ ] conversations table
 
 * Clean up [%]
   - [ ] remove clock
