@@ -8,6 +8,7 @@ import UserNotificationSetting from 'radium/models/notification_setting';
 import SocialProfile from 'radium/models/social_profile';
 import ContactInfo from 'radium/models/contact_info';
 import User from 'radium/models/user';
+import ConversationsTotals from 'radium/models/conversations_totals';
 
 export function initialize(application) {
   // we need to set this reference to the application
@@ -24,6 +25,7 @@ export function initialize(application) {
   application.SocialProfile = SocialProfile;
   application.ContactInfo = ContactInfo;
   application.User = User;
+  application.ConversationsTotals = ConversationsTotals;
 }
 
 export default {

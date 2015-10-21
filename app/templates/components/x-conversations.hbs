@@ -11,6 +11,31 @@
           <span class="badge">{{incoming}}</span>
         {{/if}}
       {{/link-to}}
+
+
+      {{#link-to "conversations" "waiting" class="item"}}
+        Waiting for Reply
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{waiting}}</span>
+        {{/if}}
+      {{/link-to}}
+
+      {{#link-to "conversations" "later" class="item"}}
+        Send Later
+        {{#if totalsLoading}}
+          <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
+        {{else}}
+          <span class="badge">{{later}}</span>
+        {{/if}}
+      {{/link-to}}
+
+      {{#link-to "conversations" "replied" class="item"}}Replied To{{/link-to}}
+
+      {{#link-to "conversations" "archived" class="item"}}Archived{{/link-to}}
+
+      {{#link-to "conversations" "ignored" class="item"}}Ignored{{/link-to}}
     </div>
   </div>
 </div>
