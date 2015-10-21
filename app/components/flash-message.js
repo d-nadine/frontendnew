@@ -8,7 +8,13 @@ const {
 export default Component.extend({
   actions: {
     close() {
-      this.$().one($.support.transition.end, () => {
+      const el = this.$();
+
+      if(!el) {
+        return;
+      }
+
+      el.one($.support.transition.end, () => {
         this.flashMessenger.removeMessage(this.get('messagePart'));
       }).removeClass('in');
     }

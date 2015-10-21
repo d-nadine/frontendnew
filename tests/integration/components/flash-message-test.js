@@ -5,22 +5,22 @@ moduleForComponent('flash-message', 'Integration | Component | flash message', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  assert.expect(2);
+test('renders a success message', function(assert) {
+  assert.expect(4);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.set('flashMessage', {
+    type: 'alert-success',
+    message: 'we did it!'
+  });
 
-  this.render(hbs`{{flash-message}}`);
+  this.render(hbs`{{flash-message messagePart=flashMessage}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'we did it!');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#flash-message}}
-      template block text
-    {{/flash-message}}
-  `);
+  const el = this.$('.alert');
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(el, 'there is an alert element');
+
+  assert.ok(el.is(':visible'), 'alert is visible');
+  assert.ok(el.hasClass('alert-success'), 'success class is set');
 });

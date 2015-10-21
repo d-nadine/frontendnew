@@ -8,4 +8,9 @@ resolver.namespace = {
   podModulePrefix: config.podModulePrefix
 };
 
+DS._setupContainer = function() {
+  // FIXME: stop test build-registry trying to
+  // register latest ember data transforms
+};
+
 export default resolver;
