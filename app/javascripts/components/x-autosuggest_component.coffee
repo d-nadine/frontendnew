@@ -98,6 +98,22 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
   allowSpaces: false
 
+  focusOutHandler: ->
+    Ember.run.next =>
+      el = @$()
+
+      return unless el && el.length
+
+      targetObject = @get('targetObject')
+
+      value = $.trim(el.val() || '')
+
+      return unless targetObject.newItemCriteria(value)
+
+      targetObject.selectionAdded value
+
+      el.val('')
+
   autocomplete: Ember.TextField.extend Radium.KeyConstantsMixin,
     classNameBindings: [':field']
     currentUser: Ember.computed.alias 'targetObject.currentUser'
@@ -147,24 +163,9 @@ Radium.XAutosuggestComponent = Ember.Component.extend
 
       false
 
-    focusOut: (e) ->
-      Ember.run.next =>
-        el = @$()
-
-        return unless el && el.length
-
-        targetObject = @get('targetObject')
-
-        value = $.trim(el.val() || '')
-
-        return unless targetObject.newItemCriteria(value)
-
-        targetObject.selectionAdded value
-
-        el.val('')
-
     didInsertElement: ->
       @_super.apply this, arguments
+      @focusOut = @get('targetObject').focusOutHandler.bind(this)
       Ember.run.scheduleOnce 'afterRender', this, 'addAutocomplete'
 
     addAutocomplete: ->

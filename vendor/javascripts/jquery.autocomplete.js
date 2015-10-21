@@ -167,9 +167,12 @@
                     $("li.as-selection-item", selections_holder).addClass("blur").removeClass("selected");
                 }
                 input.after(values_input);
-                selections_holder.click(function(){
-                    input_focus = true;
-                    input.focus();
+                selections_holder.click(function(e){
+                  if($(e.target).hasClass('as-close')) {
+                    return;
+                  }
+                  input_focus = true;
+                  input.focus();
                 }).mousedown(function(){ input_focus = false; }).after(results_holder);
 
                 var interval = null;
