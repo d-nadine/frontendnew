@@ -32,7 +32,7 @@ export default Route.extend({
     return this.get('session').setup();
   },
 
-  setupController(application) {
+  setupController() {
     if(ENV.environment !== "production" || window.location.pathname !== "/") {
       return;
     }

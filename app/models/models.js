@@ -155,7 +155,7 @@ const Model = DS.Model.extend(TimestampsMixin, {
     var hash, self;
     self = this;
     hash = {};
-    this.eachAttribute(function(key, meta) {
+    this.eachAttribute(function(key) {
       var val;
       if (val = self.get(key)) {
         return hash[key] = val;

@@ -7,7 +7,7 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 
 FastClick.attach(document.body);
 
-let Radium = Ember.Application.extend({
+const App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver
@@ -24,6 +24,6 @@ document.addEventListener('click', function() {
 
 
 
-loadInitializers(Radium, config.modulePrefix);
+loadInitializers(App, config.modulePrefix);
 
-export default Radium;
+export default App;

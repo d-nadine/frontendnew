@@ -22,7 +22,8 @@
     "currentURL",
     "currentPath",
     "currentRouteName",
-    "Radium"
+    "Radium",
+    "moment"
   ],
   "node": false,
   "browser": false,

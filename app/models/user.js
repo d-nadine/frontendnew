@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import Model from 'radium/models/models';
-import Account from 'radium/models/account';
 import Ember from 'ember';
 
 const {
@@ -44,6 +43,5 @@ const User = Model.extend({
 User.toString = function(){
   return "Radium.User";
 };
-
 
 export default User;
