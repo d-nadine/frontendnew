@@ -4,7 +4,7 @@ import Ember from 'ember';
    'use strict';
 }());
 
-var get = Ember.get, set = Ember.set, forEach = Ember.EnumerableUtils.forEach,
+var get = Ember.get, set = Ember.set,
   map = Ember.EnumerableUtils.map;
 
 var RESTSerializer = DS.RESTSerializer.extend({
@@ -88,7 +88,7 @@ var RESTAdapter = DS.RESTAdapter.extend({
       var json,
           errors = {};
 
-      json = xhr.responseText.length ? JSON.parse(xhr.responseText) : {errors: {message: "An unknown error has occurred."}}
+      json = xhr.responseText.length ? JSON.parse(xhr.responseText) : {errors: {message: "An unknown error has occurred."}};
 
       if(!json.hasOwnProperty('error')){
         this._super.apply(this, arguments);
@@ -207,15 +207,15 @@ var RESTAdapter = DS.RESTAdapter.extend({
     }
     else if(['incoming', 'replied', 'waiting', 'later', 'archived', 'ignored', 'team', 'shared'].contains(query.name)){
       root = this.rootForType(type);
-      adapter = this,
-      page = query.page || 1,
+      adapter = this;
+      page = query.page || 1;
       pageSize = query.pageSize;
 
-      var user = null;
+      var user = query.user;
 
       url = this.url + '/conversations/' + query.name + '?page=' + page +  '&page_size=' + pageSize;
 
-      if(user = query.user) {
+      if(user) {
         url += '&user=' + user;
         delete query.user;
       }
@@ -247,13 +247,15 @@ var RESTAdapter = DS.RESTAdapter.extend({
           this.didFindQuery(store, type, json, recordArray);
         });
       }).catch(function(err){
-        $.removeCookie('token', Radium.get('cookieDomain'), {path: '/'});
+        Ember.$.removeCookie('token', window.Radium.get('cookieDomain'), {path: '/'});
         var message = null;
 
-        if(err.message)
-          message = err.message
-        else
-          message = 'The "me" user was not found for some reason!'
+        if(err.message) {
+          message = err.message;
+        }
+        else{
+          message = 'The "me" user was not found for some reason!';
+        }
 
         throw new Error(message);
       });
@@ -329,7 +331,7 @@ RESTAdapter.registerTransform('datetime',  {
  deserialize: function(serialized) {
    if(serialized){
       var date = Ember.DateTime.parse(serialized);
-      return date.adjust({timezone: Radium.timezone});
+      return date.adjust({timezone: window.Radium.timezone});
     }
  },
 

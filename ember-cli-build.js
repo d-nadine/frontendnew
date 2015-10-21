@@ -22,6 +22,7 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import("./vendor/styles/bootstrap.css");
+
   app.import("./bower_components/moment/moment.js");
   app.import("./bower_components/jquery.cookie/jquery.cookie.js");
   app.import('./vendor/javascripts/fastclick.js');

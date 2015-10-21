@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import User from 'radium/models/user';
 
 const Account = DS.Model.extend({
   name: DS.attr('string'),

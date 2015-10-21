@@ -6,7 +6,8 @@
     "$",
     "DS",
     "module",
-    "FastClick"
+    "FastClick",
+    "Radium"
   ],
   "browser": true,
   "boss": true,

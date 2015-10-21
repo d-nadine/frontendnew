@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ENV from 'radium/config/environment';
-import d from "radium/utils/date-time";
+import "radium/utils/date-time";
 
 export function initialize(application) {
   application.set('cookieDomain', ENV.cookieDomain);

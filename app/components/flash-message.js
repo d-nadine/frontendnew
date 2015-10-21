@@ -20,7 +20,7 @@ export default Component.extend({
   _setup: on('didInsertElement', function(){
     this._super(...arguments);
 
-    this.$()[0].offsetWidth;
+    this.$()[0].offsetWidth; // jshint ignore:line
     this.$().addClass('in');
 
     const timer = setTimeout(() => {
