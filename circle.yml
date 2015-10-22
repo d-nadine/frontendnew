@@ -1,3 +1,8 @@
+general:
+  branches:
+    only:
+      - cli
+
 machine:
   ruby:
     version: '2.0'
