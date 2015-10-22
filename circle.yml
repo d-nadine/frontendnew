@@ -5,5 +5,8 @@ dependencies:
   pre:
     - npm install -g bower
   override:
-    - npm i
-    - bower i
+    - npm install
+    - bower install
+test:
+  override:
+    - ember test
