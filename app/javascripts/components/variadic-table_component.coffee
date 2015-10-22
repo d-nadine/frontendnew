@@ -139,11 +139,8 @@ Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       editable = row.find('td .editable').first()
       return focusElement(editable)
 
-    if isFixed && e.keyCode == @TAB
+    if isFixed && [@ARROW_RIGHT, @TAB].contains(e.keyCode)
       e.preventDefault()
-      return otherTableJump()
-
-    if navigatable.atEnd && isFixed && e.keyCode == @ARROW_RIGHT
       return otherTableJump()
 
     if navigatable.atStart && !isFixed && currentIndex == 0 && e.keyCode == @ARROW_LEFT
@@ -159,7 +156,8 @@ Radium.VariadicTableComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       focusElement(next)
 
-    if navigatable.atEnd && e.keyCode == @ARROW_RIGHT
+    if navigatable.atEnd && [@ARROW_RIGHT, @TAB].contains(e.keyCode)
+      e.preventDefault()
       return navigateHorizontally (x) -> x + 1
 
     if navigatable.atStart && e.keyCode == @ARROW_LEFT
