@@ -39,10 +39,62 @@
 
   .change-liststatus-component {
     position: relative;
-  }
 
-  .change-liststatus-component a{
-    min-width: 70px;
+    .modal {
+      margin-left: 0;
+      left: 281px;
+      top: 30%;
+
+      > button {
+        margin: 5px 10px 0 0;
+      }
+
+      .modal-header {
+        border-bottom: 0px;
+      }
+      .modal-body {
+        display: inline-block;
+        padding: 5px 40px;
+        width: calc(100% - 80px);
+
+        .form {
+          display: inline-block;
+          padding: 0px;
+          margin: 0px;
+          width: 100%;
+
+          textarea {
+            width: 100%;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .dropdown-toggle {
+
+      span {
+        margin-right: 7px;
+      }
+    }
+    .dropdown-menu {
+
+      li {
+        width: 100%;
+        display: inline-block;
+        float: left;
+
+        a {
+          min-width: 70px;
+          width: calc(100% - 30px);
+          margin-bottom: 0;
+
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
   }
 
   .change-liststatus-component .caret {
