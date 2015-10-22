@@ -1,6 +1,14 @@
+general:
+  branches:
+    only:
+      - master
+      - cli
 machine:
   node:
     version: 0.12.7
+  post:
+    - export PATH="./node_modules/.bin:$PATH"
+
 dependencies:
   pre:
     - npm install -g bower
@@ -9,4 +17,4 @@ dependencies:
     - bower install
 test:
   override:
-    - ember test
+    - e mber test
