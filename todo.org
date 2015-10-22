@@ -1,9 +1,10 @@
-* Refacttor to CLI [28%]
+* Refacttor to CLI [50%]
   - [X] flash messenger
   - [X] write test for flash message
-  - [ ] conversations totals
-  - [ ] write test for conversations totals
+  - [X] conversations totals
+  - [X] write test for conversations totals
   - [ ] wire up circle ci
+  - [ ] write user totals and shared totals test
   - [ ] importing functionality
   - [ ] conversations table
 

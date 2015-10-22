@@ -14,12 +14,17 @@ const App = Ember.Application.extend({
 });
 
 document.addEventListener('click', function() {
+  if(!window.Intercom) {
+    return;
+  }
+
   window.Intercom("update", {
     increments: {
       number_of_clicks: 1
     }
   });
-  return window.Intercom('reattach_activator');
+
+  window.Intercom('reattach_activator');
 }, false);
 
 
