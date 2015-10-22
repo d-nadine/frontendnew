@@ -470,6 +470,10 @@ $item-border: #dddddd;
 
   .sub-nav {
 
+    .main-content {
+      padding-top: 70px;
+    }
+
     .email-folders {
       padding: 20px 10px 16px;
       line-height: 44px;
@@ -557,19 +561,14 @@ $item-border: #dddddd;
       width: calc(100% - 340px);
       padding-left: 10px;
       padding-top: 20px;
-      margin-left: 327px;
-      margin-top: 131px;
 
       .email-menu {
-        margin-bottom: 19px;
-        position: fixed;
         z-index: 9;
         width: 100%;
         background: $background;
         height: 64px;
         top: 68px;
         margin-left: -13px;
-        padding-top: 21px;
         padding-left: 14px;
 
         a {
