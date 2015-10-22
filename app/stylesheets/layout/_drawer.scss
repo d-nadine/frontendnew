@@ -1,4 +1,8 @@
 .drawer-view {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+
   &:not(.contact-drawer) {
     max-width: 370px;
     width: 370px;
@@ -19,6 +23,13 @@
     background-color: rgba(0,0,0, 0.5);
   }
 
+  .main-content {
+    display: inline-block;
+    width: calc(100% - 350px);
+    margin-left: 40px;
+    float: left;
+  }
+
 }
 
 .drawer-overlay {
@@ -36,10 +47,6 @@
 
 .contact-drawer.drawer-view .sidebar {
   top: 0;
-}
-
-.contact-drawer.drawer-view .two-column-layout{
-  padding: 0px 10px 60px 340px;
 }
 
 .drawer-view .close-drawer {

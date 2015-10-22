@@ -209,10 +209,11 @@
 .deal-view {
 
   .sidebar {
-
-    .form {
-      padding-left: 22px;
-      margin-right: 20px;
+    > .form {
+      padding-left: 0;
+    }
+    .form > .form {
+      padding-left: 20px;
 
       &:focus {
         outline: 0;
@@ -246,9 +247,6 @@
         }
       }
     }
-  }
-  .main-content {
-    width: 100% !important;
   }
   .tasks-content,
   .form-box-view,

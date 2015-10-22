@@ -22,13 +22,13 @@
       }
     }
   }
-  position: fixed;
+  display: inline-block;
+  float: left;
   top: $navbar-height;
   left: 0;
   bottom: 0;
   z-index: 9;
   background: $background;
-
   transition: transform 0.25s;
   transform: translateX(0);
 
@@ -91,12 +91,18 @@
 
     .custom-field-name {
       float: left;
+      width: 100%;
     }
 
     .custom-field-value {
       text-align: right;
+      display: inline-block;
+      float: left;
+      clear: left;
+
       span {
         margin-right: 10px;
+        float: left;
       }
       cursor: pointer;
     }
@@ -506,7 +512,6 @@
 }
 
 .user-avatar {
-  margin-top: 20px;
 
   img {
     margin-right: 20px;
