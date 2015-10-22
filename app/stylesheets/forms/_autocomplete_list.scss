@@ -19,9 +19,10 @@
 
     li.as-selection-item,
     li.as-selection-item.blur {
-      background: #ddd;
+      background: #eee;
       border: 0px;
       color: inherit;
+      padding: 5px;
     }
 
     li.as-selection-item:hover,
@@ -105,12 +106,19 @@ li.as-result-item, li.as-message {
   border-radius: none !important;
 }
 
+li.as-result-item {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 div.autocomplete:not(.tags) {
   ul.as-list {
     left: 0px;
     box-shadow: none;
     border-radius: none;
     width: 100%;
+    position: static !important;
   }
 }
 
