@@ -1,13 +1,13 @@
 general:
   branches:
     only:
-      - master
       - cli
+
 machine:
+  environment:
+    PATH: "${HOME}/${CIRCLE_PROJECT_REPONAME}/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin:${PATH}"
   node:
     version: 0.12.7
-  post:
-    - export PATH="./node_modules/.bin:$PATH"
 
 dependencies:
   pre:
@@ -17,4 +17,4 @@ dependencies:
     - bower install
 test:
   override:
-    - e mber test
+    - ember test
