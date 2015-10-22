@@ -130,7 +130,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'editable-field'
+      component: 'geolocation-editablefield'
     },
     {
       id: "line2"
