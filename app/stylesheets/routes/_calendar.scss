@@ -7,6 +7,7 @@ $calendar-off: #d8d9d9;
 
     &.is-calendar-drawer-open {
       padding-left: 380px;
+      padding-right: 40px;
 
       @include breakpoint(landscape) {
         padding-left: 305px;
@@ -14,6 +15,11 @@ $calendar-off: #d8d9d9;
 
       .sidebar {
         transform: translateX(0);
+        position: fixed;
+      }
+
+      .main-content {
+        margin-top: 100px;
       }
 
       .forms-todo-view[data-model="Radium.Todo"] {
