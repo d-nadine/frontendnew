@@ -51,9 +51,7 @@ Radium.EmailsThreadController = Radium.ArrayController.extend Radium.SaveContact
 
   attachments: Ember.computed.oneWay 'firstSender.attachments'
 
-  # UPGRADE: use inject
-  lists: Ember.computed ->
-    @container.lookup('controller:lists').get('sortedLists')
+  lists: Ember.computed.oneWay 'listsService.sortedLists'
 
   setup: Ember.on 'init', ->
     @_super.apply this, arguments

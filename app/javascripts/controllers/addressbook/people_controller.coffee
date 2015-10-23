@@ -342,12 +342,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
       return unless confirm("Are you sure you want to delete the #{listName} list?")
 
+      @listsService.removeList(list)
+
       list.delete().then =>
         @send 'flashSuccess', "The list #{listName} has been deleted."
 
         @transitionToRoute "people.index", "all", queryParams: customquery: '', hidesidebar: false if @list == listId
-
-        @get('controllers.application').notifyPropertyChange 'lists'
 
       false
 
@@ -376,13 +376,11 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   dummy: Ember.A()
 
-  needs: ['addressbook', 'users', 'lists', 'contactStatuses', 'company', 'untrackedIndex', 'company']
+  needs: ['addressbook', 'users', 'contactStatuses', 'company', 'untrackedIndex', 'company']
 
   noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'
 
-  # UPGRADE: replace with inject
-  lists: Ember.computed ->
-    @container.lookup('controller:lists').get('sortedLists')
+  lists: Ember.computed.oneWay 'listsService.sortedLists'
 
   users: Ember.computed.oneWay 'controllers.users'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'

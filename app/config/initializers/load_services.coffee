@@ -50,3 +50,10 @@ Ember.Application.initializer
     application.inject('controller', 'templatesService', 'templates:service')
     application.inject('component', 'templatesService', 'templates:service')
     application.inject('route', 'templatesService', 'templates:service')
+
+    listsService = Radium.ListsService.create()
+
+    application.register('lists:service', listsService, instantiate: false)
+    application.inject('controller', 'listsService', 'lists:service')
+    application.inject('component', 'listsService', 'lists:service')
+    application.inject('route', 'listsService', 'lists:service')

@@ -172,9 +172,7 @@ Radium.ListstatusesEditorComponent = Ember.Component.extend Radium.CommonModals,
     @get('listStatuses').toArray().sort (a, b) ->
       Ember.compare a.get('position'), b.get('position')
 
-  # UPGRADE: replace with inject
-  lists: Ember.computed ->
-    @container.lookup('controller:lists').get('sortedLists')
+  lists: Ember.computed.oneWay 'listsService.sortedLists'
 
   remainingLists: Ember.computed 'lists.[]', 'list', ->
     @get('lists').reject (l) => l == @get('list')

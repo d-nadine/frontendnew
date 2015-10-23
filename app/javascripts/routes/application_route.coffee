@@ -164,7 +164,7 @@ Radium.ApplicationRoute = Radium.Route.extend
     @controllerFor('contactStatuses').set 'model', Radium.ContactStatus.find({})
 
     contactsController = @controllerFor('contacts')
-    @controllerFor('lists').set 'lists', Radium.List.find()
+    @listsService.refresh()
     @controllerFor('companies').set 'model', Radium.Company.find()
 
     @controllerFor('clock').set 'model', Ember.DateTime.create()

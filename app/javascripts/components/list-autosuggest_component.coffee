@@ -21,6 +21,8 @@ Radium.ListAutosuggestComponent = Radium.XAutosuggestComponent.extend
     re = /^(?=.*[^\W_])[\w\(\) ]{2,}$/
     re.test text
 
+  source: Ember.computed.oneWay 'listsService.sortedLists'
+
   filterResults: (item) ->
     not @get('destination').mapProperty('name').contains(item.get('name'))
 

@@ -25,6 +25,8 @@ Radium.ListEditorComponent = Ember.Component.extend Radium.ValidationMixin,
           @sendAction 'closeModal'
           @get('peopleController').send 'updateTotals'
 
+          @listsService.addList(record)
+
           if parentModel = @get('parentModel')
             if typeof parentModel == "function"
               return parentModel record

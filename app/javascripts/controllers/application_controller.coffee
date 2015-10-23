@@ -7,7 +7,7 @@ Radium.ApplicationController = Radium.ObjectController.extend
 
       false
 
-  needs: ['notifications', 'lists']
+  needs: ['notifications']
   isSidebarVisible: false
   today: Ember.DateTime.create()
   notificationCount: 0
@@ -28,4 +28,3 @@ Radium.ApplicationController = Radium.ObjectController.extend
     , 200
 
   notifications: Ember.computed.oneWay 'controllers.notifications'
-  lists: Ember.computed.oneWay 'controllers.lists'

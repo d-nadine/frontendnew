@@ -396,10 +396,6 @@ Radium.LeadsImportController = Radium.Controller.extend  Radium.PollerMixin,
 
   deleteJob: null
 
-  # UPGRADE: replace with inject
-  sourceLists: Ember.computed ->
-    @container.lookup('controller:lists').get('sortedLists')
-
   progress: ->
     unless @get('isSubmitted')
       @_teardown()

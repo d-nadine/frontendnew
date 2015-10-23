@@ -248,7 +248,6 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
       bindings: [
         {name: "model", value: "model"}
         {name: "destination", value: "model.lists"}
-        {name: "source", value: "lists"}
         {name: "abortResize", value: true, static: true}
         {name: "addList", value: "addList", static: true}
         {name: "removeList", value: "removeList", static: true}

@@ -38,8 +38,7 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
   leadSources: Ember.computed ->
     @container.lookup('controller:accountSettings').get('leadSources')
 
-  lists: Ember.computed ->
-    @container.lookup('controller:lists').get('sortedLists')
+  lists: Ember.computed.oneWay 'listsService.sortedLists'
 
   availableStatuses: Ember.computed 'contactStatuses.[]', 'contactStatus', ->
     return unless contactStatuses = @get('contactStatuses')
