@@ -10,9 +10,13 @@ Radium.ListsService = Ember.Object.extend
   sortedLists: Ember.computed.sort 'lists', (a, b) ->
     Ember.compare a.get('name'), b.get('name')
 
+  configurableLists: Ember.computed 'sortedLists.@each.configurable', ->
+    @get('lists').filter (list) -> list.get('configurable')
+
   notify: ->
     @notifyPropertyChange 'lists'
     @notifyPropertyChange 'sortedLists'
+    @notifyPropertyChange 'configurableLists'
 
   addList: (list) ->
     @get('lists').pushObject(list)

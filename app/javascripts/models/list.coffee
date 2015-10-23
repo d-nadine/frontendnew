@@ -13,6 +13,8 @@ Radium.List = Radium.Model.extend
   actionList: DS.belongsTo('Radium.List', inverse: null)
   initialStatus: DS.belongsTo('Radium.ListStatus', inverse: null)
 
+  configurable: DS.attr('boolean')
+
   clearRelationships: ->
     @get('listStatuses').compact().forEach (status) ->
       status.unloadRecord()

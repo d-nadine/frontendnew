@@ -354,6 +354,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
     makeListConfigurable: (list) ->
       list.toggleProperty('configurable')
 
+      @listsService.notify()
+
       list.save().then (result) ->
         return unless list.get('configurable')
 

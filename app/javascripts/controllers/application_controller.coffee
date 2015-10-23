@@ -3,7 +3,7 @@ Radium.ApplicationController = Radium.ObjectController.extend
     transitionToList: (list) ->
       @EventBus.publish 'closeDrawers'
 
-      @transitionToRoute 'people.index', 'listed', queryParams: list: list.get('id'), hidesidebar: true
+      @transitionToRoute 'list', list
 
       false
 

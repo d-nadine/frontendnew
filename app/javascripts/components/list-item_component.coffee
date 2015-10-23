@@ -1,5 +1,9 @@
 Radium.ListItemComponent = Ember.Component.extend
   actions:
+    makeListConfigurable: ->
+      @get('parent').send 'makeListConfigurable', @get('list')
+      false
+
     showListsContacts: ->
       @get('parent').send 'showListsContacts', @get('list')
 

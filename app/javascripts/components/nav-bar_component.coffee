@@ -1,5 +1,10 @@
 Radium.NavBarComponent = Ember.Component.extend
   actions:
+    transitionToList: (list) ->
+      @sendAction "transitionToList", list
+
+      false
+
     logOut: ->
       @sendAction "logOut"
 
