@@ -100,6 +100,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
     {
       id: "assign"
       classNames: "assign"
+      group: "actions"
       heading: "Assigned To"
       component: "assignto-picker"
       bindings: [
