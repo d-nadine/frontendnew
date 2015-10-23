@@ -1,6 +1,5 @@
 .drawer-view {
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
   position: fixed;
 
   &:not(.contact-drawer) {
@@ -23,11 +22,32 @@
     background-color: rgba(0,0,0, 0.5);
   }
 
-  .main-content {
-    display: inline-block;
-    width: calc(100% - 350px);
-    margin-left: 40px;
-    float: left;
+  .two-column-layout {
+    height: 100%;
+
+    .sidebar {
+      overflow-y: hidden;
+      overflow-x: hidden;
+      height: 100%;
+
+      &:hover {
+        overflow-y: scroll;
+      }
+    }
+
+    .main-content {
+      display: inline-block;
+      width: calc(100% - 380px);
+      padding-right: 20px;
+      margin-left: 40px;
+      float: left;
+      height: 100%;
+      overflow-y: hidden;
+
+      &:hover {
+        overflow-y: scroll;
+      }
+    }
   }
 
 }
@@ -39,10 +59,8 @@
 
 .contact-drawer.drawer-view {
   width: 70%;
-
   background: $background;
   border-right: 1px solid $border;
-  padding-right: 20px;
 }
 
 .contact-drawer.drawer-view .sidebar {
