@@ -10,6 +10,8 @@ import ContactInfo from 'radium/models/contact_info';
 import User from 'radium/models/user';
 import ConversationsTotals from 'radium/models/conversations_totals';
 import List from 'radium/models/list';
+import Email from 'radium/models/email';
+import Contact from 'radium/models/contact';
 
 export function initialize(application) {
   // we need to set this reference to the application
@@ -28,6 +30,8 @@ export function initialize(application) {
   application.User = User;
   application.ConversationsTotals = ConversationsTotals;
   application.List = List;
+  application.Email = Email;
+  application.Contact = Contact;
 }
 
 export default {

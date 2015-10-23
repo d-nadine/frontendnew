@@ -18,5 +18,9 @@ export default Route.extend({
       delete transition.params.conversations.user;
     }
     return type;
+  },
+
+  model(params) {
+    console.log(params);
   }
 });
