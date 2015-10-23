@@ -12,6 +12,8 @@ export default Ember.Component.extend({
 
   authManager: Ember.inject.service(),
 
+  listsService: Ember.inject.service(),
+
   _setup: Ember.on('didInsertElement', function(){
     this._super(...arguments);
 

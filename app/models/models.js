@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import TimestampsMixin from 'radium/mixins/timestamps';
-import List from 'radium/models/list';
 
 const {
   run,
@@ -116,7 +115,7 @@ const Model = DS.Model.extend(TimestampsMixin, {
         type: klass
       };
     });
-    item = List.all().find(function(t) {
+    item = Radium.List.all().find(function(t) {
       return t.get('id') === newItemId;
     });
     if (!references.any(function(item) {

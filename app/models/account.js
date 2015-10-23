@@ -1,6 +1,7 @@
 import DS from 'ember-data';
+import Model from 'radium/models/models';
 
-const Account = DS.Model.extend({
+const Account = Model.extend({
   name: DS.attr('string'),
   gatewaySetup: DS.attr('boolean'),
   subscriptionInvalid: DS.attr('boolean'),

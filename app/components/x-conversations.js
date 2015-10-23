@@ -38,7 +38,6 @@ export default Component.extend({
 
   team: computed('users.users.[]', function(){
     return this.get('users.users').toArray().reject((user) => {
-      console.log(this.get('currentUser'));
       return user === this.get('currentUser');
     });
   }),

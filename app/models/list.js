@@ -1,3 +1,18 @@
+import Model from 'radium/models/models';
+
+const List = Model.extend({
+  name: DS.attr('string'),
+  itemName: DS.attr('string'),
+  type: DS.attr('string'),
+  configurable: DS.attr('boolean')
+});
+
+export default List;
+
+List.toString = function() {
+  return "Radium.List";
+};
+
 // import Ember from 'ember';
 // import Model from 'radium/models/models';
 

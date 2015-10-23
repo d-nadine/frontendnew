@@ -8,32 +8,14 @@ const {
 } = Ember;
 
 export default Route.extend({
-  actions: {
-    flashMessage(options = {}) {
-      console.log(options);
-    },
-
-    flashSuccess(message) {
-      this.send('flashMessage', {
-        type: 'alert-success',
-        message: message
-      });
-    },
-
-    flashError(error) {
-      this.send('flashError', {
-        type: 'alert-error',
-        message: error
-      });
-    }
-  },
-
   beforeModel() {
     return this.get('session').setup();
   },
 
   setupController() {
     this.get('users').refresh();
+
+    this.get('listsService').refresh();
 
     if(ENV.environment !== "production" || window.location.pathname !== "/") {
       return;
@@ -45,5 +27,6 @@ export default Route.extend({
   },
 
   session: inject.service(),
-  users: inject.service()
+  users: inject.service(),
+  listsService: inject.service()
 });
