@@ -9,5 +9,14 @@ export default Route.extend({
     user: {
       refreshModel: true
     }
+  },
+
+  beforeModel(transition) {
+    const type = transition.params.conversations.type;
+
+    if (!['team', 'shared'].contains(transition.params.conversations.type)){
+      delete transition.params.conversations.user;
+    }
+    return type;
   }
 });

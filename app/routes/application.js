@@ -33,6 +33,8 @@ export default Route.extend({
   },
 
   setupController() {
+    this.get('users').refresh();
+
     if(ENV.environment !== "production" || window.location.pathname !== "/") {
       return;
     }
@@ -42,5 +44,6 @@ export default Route.extend({
     });
   },
 
-  session: inject.service()
+  session: inject.service(),
+  users: inject.service()
 });

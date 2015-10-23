@@ -37,5 +37,30 @@
 
       {{#link-to "conversations" "ignored" class="item"}}Ignored{{/link-to}}
     </div>
+    {{#if team.length}}
+      <div id="assigned" class="group">
+        <div class="group-name">
+          <p>Team</p>
+        </div>
+        <div class="item">
+          <div>
+            <span>
+              <i class="ss-standard ss-users"></i>
+            </span>
+            <span>All</span>
+            <span class="badge">{{allUsersTotals}}</span>
+          </div>
+        </div>
+        {{users-totals usersTotals=usersTotals query="team" showUserRecords=(action "showUserRecords") parent=this}}
+      </div>
+    {{/if}}
+    {{#if sharedTotals}}
+      <div id="assigned" class="group shared">
+        <div class="group-name">
+          <p>Shared Inboxes</p>
+        </div>
+        {{users-totals usersTotals=sharedTotals query="shared" action="showUserRecords" parent=this isShared=true}}
+      </div>
+    {{/if}}
   </div>
 </div>

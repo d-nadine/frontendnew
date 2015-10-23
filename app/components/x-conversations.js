@@ -1,11 +1,18 @@
 import Ember from 'ember';
 
 const {
-  Component
+  Component,
+  inject,
+  computed,
+  on
 } = Ember;
 
 export default Component.extend({
   actions: {
+    showUserRecords(user, query) {
+      this.transitionTo('conversations', query, {queryParams: {user: user.get('id')}});
+    },
+
     updateTotals() {
       Radium.ConversationsTotals.find({}).then((results) => {
         const totals = results.get('firstObject');
@@ -23,9 +30,18 @@ export default Component.extend({
 
   classNames: ['conversations-view'],
 
-  _initialize: Ember.on('init', function() {
+  _initialize: on('init', function() {
     this._super(...arguments);
 
     this.send('updateTotals');
-  })
+  }),
+
+  team: computed('users.users.[]', function(){
+    return this.get('users.users').toArray().reject((user) => {
+      console.log(this.get('currentUser'));
+      return user === this.get('currentUser');
+    });
+  }),
+
+  users: inject.service()
 });
