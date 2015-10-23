@@ -498,7 +498,7 @@
 .tab-content {
   border: 1px solid $border;
   background: white;
-  min-width: 836px;
+  width: 836px;
   padding: 10px 30px;
 
   .form {
@@ -557,9 +557,16 @@
           font-style: normal;
         }
       }
+      input {
+        line-height: 40px;
+        margin-bottom: 0;
+      }
     }
     li.as-selection-item {
       margin: 5px 0 5px 5px;
+      height: 36px;
+      line-height: 36px;
+      float: left;
     }
   }
 }
