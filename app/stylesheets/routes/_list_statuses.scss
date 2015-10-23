@@ -149,33 +149,40 @@
   }
 }
 
+
 .list-editor-component {
   margin-top: 0;
-  width: 100%;
-
-  h1 {
-    margin-left: 25px;
-  }
+  width: auto;
+  padding: 0 20px;
 
   .form {
     padding-left: 0;
     display: inline-block;
-    width: 100%;
-    margin-left: 25px;
+    width: auto;
 
     .item {
       min-height: 0;
+      width: auto;
 
       input {
         width: calc(100% - 14px);
+        border: 1px solid #cacaca;
+        width: calc(455px - 22px);
+        border-radius: 0px;
+        height: 48px;
+        line-height: 48px;
+        float: left;
+        background-color: #f7f7f7;
+        padding: 0 11px;
         margin-bottom: 0;
-        height: 30px;
+        box-shadow: none;
       }
     }
     .list-editor-radio {
       margin-top: 15px;
       display: inline-block;
       float: left;
+      clear: left;
 
       .xradio-component {
         display: inline-block;

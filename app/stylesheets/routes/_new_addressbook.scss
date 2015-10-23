@@ -1369,3 +1369,21 @@
   display: none;
 }
 
+
+.addressbook-view {
+
+  .xmodal-component {
+
+    .modal {
+      width: auto !important;
+
+      button {
+        padding: 10px 15px;
+      }
+      
+      .modal-body {
+        width: calc(100% - 30px) !important;
+      }
+    }
+  }
+}
