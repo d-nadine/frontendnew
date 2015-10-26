@@ -496,10 +496,6 @@
 
 
 .tab-content {
-  border: 1px solid $border;
-  background: white;
-  width: 836px;
-  padding: 10px 30px;
 
   .form {
     padding-left: 0;
@@ -522,6 +518,32 @@
         float: right;
       }
     }
+  }
+}
+
+.leads-view {
+
+  .tab-content {
+
+    .leads-new-component, 
+    .untracked-view {
+      border: 1px solid $border;
+      background: white;
+      padding: 10px 30px;
+    }
+
+    .leads-new-component {
+      min-width: 600px;
+      max-width: 836px;
+    }
+    #addressbook {
+
+      .nav li a .nav-pills-left span:nth-of-type(1) {
+        width: calc(100% - 20px);
+        margin-left: 0;
+      }
+    }
+
   }
 }
 
