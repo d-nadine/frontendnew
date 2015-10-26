@@ -3,7 +3,7 @@
 
     <div id="totals" class="group">
       <p>My Inbox</p>
-      {{#link-to "conversations" "incoming" class="item"}}
+      {{#link-to "conversations" "incoming" (query-params user=null) class="item"}}
         Incoming
         {{#if totalsLoading}}
           <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
@@ -13,7 +13,7 @@
       {{/link-to}}
 
 
-      {{#link-to "conversations" "waiting" class="item"}}
+      {{#link-to "conversations" "waiting" (query-params user=null) class="item"}}
         Waiting for Reply
         {{#if totalsLoading}}
           <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
@@ -22,7 +22,7 @@
         {{/if}}
       {{/link-to}}
 
-      {{#link-to "conversations" "later" class="item"}}
+      {{#link-to "conversations" "later" (query-params user=null) class="item"}}
         Send Later
         {{#if totalsLoading}}
           <span class="badge"><img src="/images/loading/ajax-loader.gif"/></span>
@@ -31,11 +31,11 @@
         {{/if}}
       {{/link-to}}
 
-      {{#link-to "conversations" "replied" class="item"}}Replied To{{/link-to}}
+      {{#link-to "conversations" "replied" (query-params user=null) class="item"}}Replied To{{/link-to}}
 
-      {{#link-to "conversations" "archived" class="item"}}Archived{{/link-to}}
+      {{#link-to "conversations" "archived" (query-params user=null) class="item"}}Archived{{/link-to}}
 
-      {{#link-to "conversations" "ignored" class="item"}}Ignored{{/link-to}}
+      {{#link-to "conversations" "ignored" (query-params user=null) class="item"}}Ignored{{/link-to}}
     </div>
     {{#if team.length}}
       <div id="assigned" class="group">

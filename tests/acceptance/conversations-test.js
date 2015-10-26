@@ -16,7 +16,8 @@ const page = PageObject.build({
     itemScope: '#assigned .user-total',
     item: {
       name: PageObject.text('.who'),
-      total: PageObject.text('.badge')
+      total: PageObject.text('.badge'),
+      route: PageObject.clickable('.who')
     }
   })
 });
@@ -28,7 +29,7 @@ module('Acceptance | conversations', {
     let billing = server.create('billing', {subscription_plan_id: subscriptionPlan.id});
     let account = server.create('account', {billing_id: billing.id});
     server.create('user', {account_id: account.id, first_name: 'Paul', last_name: 'Cowan', email: 'paul@radiumcrm.com'});
-    let other_user = server.create('user', {account_id: account.id});
+    let other_user = server.create('user', {account_id: account.id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'});
 
     server.create('conversations-totals',{
       incoming: 8,
@@ -47,8 +48,8 @@ module('Acceptance | conversations', {
   }
 });
 
-test('conversations totals are displayed', function(assert) {
-  assert.expect(7);
+test('conversations totals are displayed and can route to', function(assert) {
+  assert.expect(9);
 
   page.visit({type: 'incoming'});
 
@@ -58,9 +59,20 @@ test('conversations totals are displayed', function(assert) {
     assert.equal('8', page.incoming());
     assert.equal('9', page.waiting());
     assert.equal('10', page.later());
-
     assert.equal(1, page.usersTotals().count());
-    assert.notEqual('Paul Cowan', page.usersTotals(1).name());
-    assert.equal('2', page.usersTotals(1).total());
+
+    const userTotal = page.usersTotals(1);
+
+    assert.notEqual('Paul Cowan', userTotal.name());
+    assert.equal('2', userTotal.total());
+
+    userTotal.route().route();
+
+    andThen(function() {
+      const userId = server.db.users.filter(function(user) { return user.first_name === 'Sue';})[0].id;
+
+      assert.ok($(userTotal.scope).parent().hasClass('active'));
+      assert.equal(currentURL(), `/conversations/team?user=${userId}`);
+    });
   });
 });

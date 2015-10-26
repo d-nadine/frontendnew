@@ -16,9 +16,7 @@ Radium.ConversationsItemController = Radium.ObjectController.extend
 
     return contact if contact.get('isLoaded')
 
-    self = this
-
-    observer = ->
+    self = this    observer = ->
       return unless contact.get('isLoaded')
 
       contact.removeObserver "isLoaded", observer

@@ -11,5 +11,6 @@ export default Controller.extend(ColumnsConfig, {
       this.transitionTo('conversations', query, {queryParams: {user: user.get('id')}});
     }
   },
-  queryParams: ['user']
+  queryParams: ['user'],
+  user: null
 });
