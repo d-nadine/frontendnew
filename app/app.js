@@ -31,4 +31,6 @@ document.addEventListener('click', function() {
 
 loadInitializers(App, config.modulePrefix);
 
+$.cloudinary.config({ cloud_name: 'radium', api_key: '472523686765267'});
+
 export default App;

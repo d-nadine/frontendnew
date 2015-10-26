@@ -1,7 +1,6 @@
 <div class='user-total' {{action "showUserRecords"}}>
   <span>
-    {{! FIXME: IMPORT AVATAR}}
-    {{!avatar user}}
+    {{avatar user}}
   </span>
   <span class="who" data-toggle="tooltip" data-placement="right" data-original-title={{user.email}}>
     {{#if isShared}}
