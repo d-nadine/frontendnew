@@ -13,7 +13,7 @@ export default Component.extend({
     }
   },
 
-  classNameBindings: [':item', 'isCurrent:active'],
+  classNameBindings: [':item', ':user-item', 'isCurrent:active'],
 
   attributeBindings: ['userTotalId:user-data-id'],
 

@@ -51,7 +51,7 @@
             <span class="badge">{{allUsersTotals}}</span>
           </div>
         </div>
-        {{users-totals usersTotals=usersTotals query="team" showUserRecords=(action "showUserRecords") parent=this}}
+        {{users-totals usersTotals=usersTotals query="team" showUserRecords=attrs.showUserRecords parent=this}}
       </div>
     {{/if}}
     {{#if sharedTotals}}

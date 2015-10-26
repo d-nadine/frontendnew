@@ -9,10 +9,6 @@ const {
 
 export default Component.extend({
   actions: {
-    showUserRecords(user, query) {
-      this.transitionTo('conversations', query, {queryParams: {user: user.get('id')}});
-    },
-
     updateTotals() {
       Radium.ConversationsTotals.find({}).then((results) => {
         const totals = results.get('firstObject');
