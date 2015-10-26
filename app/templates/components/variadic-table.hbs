@@ -1,0 +1,27 @@
+<table class="variadic-table">
+  <thead>
+    <tr>
+      {{#if check}}
+      <th class="check">
+        {{x-check checked=allChecked}}
+      </th>
+      {{/if}}
+      {{#each columns as |column|}}
+        <td class={{column.classNames}}>
+          {{#if column.avatar}}
+            {{dynamicAvatar item column}}
+          {{/if}}
+
+          {{#if column.component}}
+            {{renderComponent item column}}
+          {{else}}
+            {{getProperty item column}}
+          {{/if}}
+        </td>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+{{partial 'modal'}}
