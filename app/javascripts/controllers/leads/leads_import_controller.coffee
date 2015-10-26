@@ -194,7 +194,7 @@ Radium.LeadsImportController = Radium.Controller.extend  Radium.PollerMixin,
       @set 'showInstructions', false
       false
 
-  needs: ['lists', 'contactStatuses', 'users']
+  needs: ['contactStatuses', 'users']
 
   user: Ember.computed.oneWay 'controllers.users'
 
