@@ -63,4 +63,67 @@
       </div>
     {{/if}}
   </div>
+  <div class="conversations-table">
+    <div class="toolbar">
+      <div class="left">
+        <a href="#" class="btn btn-primary btn-large" {{action "emailAll"}}>Compose</a>
+        <div class="btn-group">
+          <a href="#" data-toggle="dropdown" class="btn-text btn-black dropdown-toggle">
+            <i class="ss-standard ss-action"></i> Actions
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="#" {{action "emailAll"}}>Compose</a></li>
+            <li class="divider"></li>
+            {{#unless isIgnored}}
+              <li>
+                <a href="#" {{action "makePublicAll"}}>Share</a>
+              </li>
+            {{/unless}}
+            {{#unless isArchived}}
+              <li>
+                <a href="#" {{action "archiveAll"}}>Archive</a>
+              </li>
+            {{else}}
+              <li>
+                <a href="#" {{action "archiveAll"}}>Remove from archive</a>
+              </li>
+            {{/unless}}
+            {{#unless isIgnored}}
+              <li><a href="#" {{action "ignoreAll"}}>Ignore</a></li>
+            {{else}}
+              <li><a href="#" {{action "ignoreAll"}}>Stop Ignoring</a></li>
+            {{/unless}}
+            <li class="divider"></li>
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">Assign To</a>
+              <ul class="dropdown-menu">
+                {{#each users.users as |user|}}
+                  <li>
+                    <a href="#" {{action "assignAll" user}}>{{avatar user style="tiny"}}{{user.displayName}}</a>
+                  </li>
+                {{/each}}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="table-container companies">
+      {{#if isIgnored}}
+        {{!#link-to "settings.general" class="pull-left"}}Manage excluded domains{{!/link-to}}
+      {{/if}}
+      <div class="left-table">
+        {{!variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table convo" sort="sort" classNames="fixed" isLoading=isContentLoading}}
+      </div>
+      <div class="right-table">
+        {{!variadic-table list=controller columns=columns sort="sort" classNames="variable" isLoading=isContentLoading}}
+      </div>
+      {{#if isContentLoading}}
+        <div class="loading" class="text-center">
+          <span class="muted">Loading...</span>
+        </div>
+      {{/if}}
+    </div>
+    {{!regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
+  </div>
 </div>

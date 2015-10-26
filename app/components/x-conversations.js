@@ -32,6 +32,13 @@ export default Component.extend({
     this.send('updateTotals');
   }),
 
+  isIncoming: computed.equal("conversationType", "incoming"),
+  isWaiting: Ember.computed.equal("conversationType", "waiting"),
+  isLater: Ember.computed.equal("conversationType", "later"),
+  isReplied: Ember.computed.equal("conversationType", "replied"),
+  isArchived: Ember.computed.equal("conversationType", "archived"),
+  isIgnored: computed.equal("conversationType", "ignored"),
+
   team: computed('users.users.[]', function(){
     return this.get('users.users').toArray().reject((user) => {
       return user === this.get('currentUser');
