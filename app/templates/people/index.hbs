@@ -196,10 +196,10 @@
       </div>
     </div>
     <div class="left-table">
-      {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields toggleColumnVisibility="toggleColumnVisibility"}}
+      {{variadic-table list=model columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" customFields=customFields toggleColumnVisibility="toggleColumnVisibility" isLoading=content.isLoading}}
     </div>
     <div class="right-table">
-      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable" addColumnSelector=true columnSelection=combinedColumns toggleColumnSelection="toggleColumnVisibility"}}
+      {{variadic-table list=model columns=checkedColumns sort="sort" classNames="variable" addColumnSelector=true columnSelection=combinedColumns toggleColumnSelection="toggleColumnVisibility" isLoading=content.isLoading}}
     </div>
     {{#if content.isLoading}}
       <div class="loading" {{bind-attr colspan="colSpan"}} class="text-center">

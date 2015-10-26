@@ -88,10 +88,10 @@
         </div>
       {{/unless}}
       <div class="left-table">
-        {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed"}}
+        {{variadic-table list=controller columns=fixedColumns checkAllItems="checkAllItems" allChecked=allChecked check=true classNames="fixed-table" sort="sort" classNames="fixed" isLoading=content.isLoading}}
       </div>
       <div class="right-table">
-        {{variadic-table list=controller columns=columns sort="sort" classNames="variable"}}
+        {{variadic-table list=controller columns=columns sort="sort" classNames="variable" isLoading=content.isLoading}}
       </div>
       {{#if content.isLoading}}
         <div class="loading" class="text-center">
