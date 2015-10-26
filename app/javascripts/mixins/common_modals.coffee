@@ -8,14 +8,14 @@ Radium.CommonModals = Ember.Mixin.create
                  isNew: true
                  name: list.get('email')
                  itemName: ''
-                 type: 'contacts'
+                 type: 'companies'
 
       unless list
         list = Ember.Object.create
                  isNew: true
                  name: ''
                  itemName: ''
-                 type: 'contacts'
+                 type: 'companies'
 
       @set 'modalModel', list
       @set 'parentModel', parentModel
