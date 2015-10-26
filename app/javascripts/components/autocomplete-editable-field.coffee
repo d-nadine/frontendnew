@@ -16,10 +16,6 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
         Ember.assert "You must have a saveAction specified", saveAction
         @get('containingController').send saveAction, object
 
-      cancel = Ember.run.later =>
-        @setEndOfContentEditble()
-      , 50
-
       @set 'isEditing', false
 
       @set 'isNewSelection', true
@@ -43,6 +39,14 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
     @$()
 
   keyDown: (e) ->
+    if e.keyCode == @ENTER
+      unless this.getTypeahead().shown
+        obj = {}
+        obj[@bufferKey] = @get('bufferedProxy').get(@bufferKey)
+        @send 'setBindingValue', Ember.Object.create obj
+      else
+        @_super.apply this, arguments
+
     if e.keyCode != @ESCAPE
       return @_super.apply this, arguments
 

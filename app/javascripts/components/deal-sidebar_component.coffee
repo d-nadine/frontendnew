@@ -7,6 +7,7 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
       saveDeal = (company) ->
         finish = ->
           eventBus.publishModelUpdate deal
+          eventBus.publish 'rerender-company'
 
         if deal.get('list.companiesList')
           deal.set('company', company)

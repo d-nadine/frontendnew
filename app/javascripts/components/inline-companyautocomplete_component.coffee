@@ -2,10 +2,6 @@ require 'components/inline-autocomplete_component'
 require 'mixins/company_autocomplete_mixin'
 
 Radium.InlineCompanyautocompleteComponent = Ember.Component.extend Radium.CompanyAutocompleteMixin,
-  actions:
-    setBindingValue: (object, index) ->
-      @_super.apply this, arguments
-
   classNameBindings: ['isEditing']
   focusIn: (e) ->
     @_super.apply this, arguments
@@ -27,3 +23,8 @@ Radium.InlineCompanyautocompleteComponent = Ember.Component.extend Radium.Compan
 
     @set 'companyForm', companyForm
     @set 'company', companyForm.company
+
+    @EventBus.subscribe 'rerender-company', this, 'rerenderAll'
+
+  rerenderAll: ->
+    Ember.run.scheduleOnce('render', this, 'rerender')
