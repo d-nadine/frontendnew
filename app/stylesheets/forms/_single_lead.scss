@@ -525,7 +525,8 @@
 
   .tab-content {
 
-    .leads-new-component, 
+    .leads-new-component,
+    .leads-import-view,
     .untracked-view {
       border: 1px solid $border;
       background: white;
@@ -536,6 +537,14 @@
       min-width: 600px;
       max-width: 836px;
     }
+  
+    .leads-import-view {
+      display: inline-block;
+      width: calc(100% - 100px);
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
     #addressbook {
 
       .nav li a .nav-pills-left span:nth-of-type(1) {
