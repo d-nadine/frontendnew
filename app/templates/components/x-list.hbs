@@ -59,6 +59,18 @@
     </div>
   </div>
 </div>
+{{#if showCompanyModal}}
+  {{#x-modal class="chopped-modal" close="closeCompanyModal" anchor=".inline-companyautocomplete-component"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent companyModel companyParams}}
+  {{/x-modal}}
+{{/if}}
+{{#if showContactModal}}
+  {{#x-modal class="chopped-modal" close="closeContactModal" anchor=".contact-anchor"}}
+    {{! UPGRADE: use component helper when we upgrade}}
+    {{renderComponent contactModel contactParams}}
+  {{/x-modal}}
+{{/if}}
 {{#if showDealModal}}
   {{#x-modal close="closeDealModal"}}
     {{deal-editor list=list deal=deal closeModal="closeDealModal"}}

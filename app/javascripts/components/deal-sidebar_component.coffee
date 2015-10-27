@@ -39,23 +39,23 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
 
       false
 
-    showContactDrawer: (resource) ->
+    showContactModal: (resource) ->
       contact = if resource.constructor == Radium.Contact
                   resource
                 else
                   resource.get('contact')
 
-        @sendAction "showContactDrawer", contact
+        @sendAction "showContactModal", contact
 
       false
 
-    showCompanyDrawer: (resource) ->
+    showCompanyModal: (resource) ->
       company = if c = resource.get('company')
                   c
                 else
                   resource
 
-      @sendAction "showCompanyDrawer", company
+      @sendAction "showCompanyModal", company
 
       false
 

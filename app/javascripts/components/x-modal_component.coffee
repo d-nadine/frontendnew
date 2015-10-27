@@ -14,6 +14,21 @@ Radium.XModalComponent = Ember.Component.extend
     self = this
 
     Ember.run.next ->
+      if anchor = self.get('anchor')
+        anchorEl = $(anchor)
+
+        Ember.assert "You must set a proper anchor selector", anchorEl.length
+
+        modal = $('.modal.fade.in')
+
+        Ember.assert "We have not found the modal to anchor", modal.length
+
+        rect = anchorEl.get(0).getBoundingClientRect()
+
+        left = rect.left + modal.width()
+
+        modal.css({left: left, top: rect.top})
+
       overlay = $('.modal-backdrop')
 
       overlay.on 'click', (e) ->

@@ -10,11 +10,11 @@
       <div class="sidebar-panel-content contacts">
         <div class="primary-resource">
           {{avatar deal.company size="small"}}
-          {{inline-companyautocomplete model=company writeableValue=true placeholder="Company/Account Name" saveAction="saveCompany" class="companies" dontReset=true action="saveCompany" routeAction="showCompanyDrawer" parent=this}}
+          {{inline-companyautocomplete model=company writeableValue=true placeholder="Company/Account Name" saveAction="saveCompany" class="companies" dontReset=true action="saveCompany" routeAction="showCompanyModal" parent=this}}
         </div>
       </div>
     </div>
-    <div class="sidebar-panel">
+    <div class="sidebar-panel contact-anchor">
       <div class="sidebar-panel-content">
         <dl class="dl-horizontal">
           <dt><i class="ss-standard ss-list"></i></dt>
@@ -42,7 +42,7 @@
       <div class="sidebar-panel-content contacts">
         <div class="primary-resource">
           {{avatar deal.contact size="small"}}
-          {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true routeAction="showContactDrawer"}}
+          {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true routeAction="showContactModal"}}
         </div>
       </div>
 

@@ -66,6 +66,23 @@
   }
 }
 
+.chopped-modal {
+  .modal {
+    width: 360px;
+    left: 10%;
+  }
+
+  .modal-body {
+    max-height: none;
+    padding: 0;
+  }
+
+  .modal-body .form {
+    padding-left: 8px;
+    padding-right: 15px;
+  }
+}
+
 .email-reply-modal {
 
   .email-form-component {

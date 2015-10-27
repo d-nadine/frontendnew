@@ -30,37 +30,39 @@
      </div>
     </div>
 
-    {{assign-to model=contact users=users user=contact.user validator=targetObject}}
+    {{#unless chop}}
+      {{assign-to model=contact users=users user=contact.user validator=targetObject}}
 
-    <div class="sidebar-panel sidebar-about">
-      <div class="sidebar-panel-header">
-        <h6 class="sidebar-panel-title">
-          About
-        </h6>
-      </div>
-      <div class="sidebar-panel-content">
-        {{inline-editor model=contact bufferKey="about" notRoutable=true placeholder="Add about text" parent=targetObject class="about-text" multiline=true}}
-        <dl class="dl-horizontal">
-          <dt><i class="ss-standard ss-earth muted"></i></dt>
-          <dd class="source">{{inline-dropdown leader="From" model=contact value=contact.source key="source" source=leadSources}}</dd>
-        </dl>
-        <dl class="dl-horizontal">
-          <dt><i class="ss-standard ss-user muted"></i></dt>
-          <dd>Added on {{formatDateTime contact.createdAt format="date"}}</dd>
-      </div>
-    </div>
-
-    {{#each field in customFields }}
-      {{customfield-editor field=field resource=contact parent=parent}}
-    {{/each}}
-
-    {{sidebar-attachments files=targetObject.files model=contact}}
-    {{#unless condense}}
-      <div class="sidebar-panel sidebar-delete">
+      <div class="sidebar-panel sidebar-about">
+        <div class="sidebar-panel-header">
+          <h6 class="sidebar-panel-title">
+            About
+          </h6>
+        </div>
         <div class="sidebar-panel-content">
-          <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Contact</button>
+          {{inline-editor model=contact bufferKey="about" notRoutable=true placeholder="Add about text" parent=targetObject class="about-text" multiline=true}}
+          <dl class="dl-horizontal">
+            <dt><i class="ss-standard ss-earth muted"></i></dt>
+            <dd class="source">{{inline-dropdown leader="From" model=contact value=contact.source key="source" source=leadSources}}</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt><i class="ss-standard ss-user muted"></i></dt>
+            <dd>Added on {{formatDateTime contact.createdAt format="date"}}</dd>
         </div>
       </div>
+
+      {{#each field in customFields }}
+        {{customfield-editor field=field resource=contact parent=parent}}
+      {{/each}}
+
+      {{sidebar-attachments files=targetObject.files model=contact}}
+      {{#unless condense}}
+        <div class="sidebar-panel sidebar-delete">
+          <div class="sidebar-panel-content">
+            <button class="btn btn-danger btn-block" {{action "confirmDeletion"}}>Delete Contact</button>
+          </div>
+        </div>
+      {{/unless}}
     {{/unless}}
   </div>
 </div>

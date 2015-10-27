@@ -45,12 +45,13 @@
   }
 
   .sidebar-view {
-
     &:focus {
       outline: 0;
     }
   }
+}
 
+.sidebar, .modal-body {
   .sidebar-panel-content .contact-picker.field {
     width: 255px;
   }

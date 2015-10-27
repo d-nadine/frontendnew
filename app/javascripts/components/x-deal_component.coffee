@@ -1,5 +1,15 @@
 Radium.XDealComponent = Ember.Component.extend Radium.AttachedFilesMixin,
   actions:
+    showCompanyModal: (company) ->
+      @sendAction "showCompanyModal", company
+
+      false
+
+    showContactModal: (contact) ->
+      @sendAction "showContactModal", contact
+
+      false
+
     showContactDrawer: (contact) ->
       @sendAction "showContactDrawer", contact
 
