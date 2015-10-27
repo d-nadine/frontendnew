@@ -60,7 +60,7 @@
   </div>
 </div>
 {{#if showCompanyModal}}
-  {{#x-modal class="chopped-modal" close="closeCompanyModal" anchor=".inline-companyautocomplete-component"}}
+  {{#x-modal class="chopped-modal companies" close="closeCompanyModal" anchor=".inline-companyautocomplete-component"}}
     {{! UPGRADE: use component helper when we upgrade}}
     {{renderComponent companyModel companyParams}}
   {{/x-modal}}
