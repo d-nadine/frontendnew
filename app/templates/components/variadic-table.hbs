@@ -17,7 +17,11 @@
             {{/unless}}
           </th>
         {{else}}
-          <th {{bind-attr class="column.classNames"}}>{{column.heading}}</th>
+          {{#unless column.dynamicHeading}}
+            <th {{bind-attr class="column.classNames"}}>{{column.heading}}</th>
+          {{else}}
+            <th {{bind-attr class="column.classNames"}}>{{dynamicHeading}}</th>
+          {{/unless}}
         {{/if}}
       {{/each}}
       {{#if addColumnSelector}}
