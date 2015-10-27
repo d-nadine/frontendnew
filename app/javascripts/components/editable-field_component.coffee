@@ -122,8 +122,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
       @set 'isSaving', false
       value = @get('model').get(@get('bufferKey'))
 
-      Ember.run.next ->
-        model.trigger 'modelUpdated', self, model
+      Ember.run.next =>
+        @EventBus.publishModelUpdate(model)
 
       if afterSave = @get('afterSave')
         @get('containingController').send afterSave, this
@@ -221,6 +221,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
       isInvalid
 
+  modelIdentifier: null
+
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
@@ -235,8 +237,6 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     unless model = @get('model')
       return @setMarkup()
-
-    model.on 'modelUpdated', @modelUpdated.bind(this)
 
     observer = =>
       return unless model.get('isLoaded')
@@ -267,10 +267,13 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     else
       @setMarkup()
 
-  modelUpdated: (raiser, model) ->
-    return if @isDestroyed || @isDestroying
-    return if raiser == this
+    return unless model.updatedEventKey
 
+    @modelIdentifier = model.updatedEventKey()
+
+    @EventBus.subscribe @modelIdentifier, this, "rerenderModel"
+
+  rerenderModel: (model) ->
     @setMarkup(true)
 
   teardown: Ember.on 'willDestroyElement', ->
@@ -284,6 +287,10 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     return unless model = @get('model')
 
     model.off 'modelUpdated'
+
+    return unless modelIdentifier = @modelIdentifier
+
+    @EventBus.unsubscribe modelIdentifier
 
   setMarkup: (dont = false) ->
     markUp = @get('markUp')

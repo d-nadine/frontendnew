@@ -79,6 +79,7 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
         @send 'flashSuccess', "#{contact.get('displayName')} is now the primary contact."
 
         @EventBus.publishModelUpdate deal
+        @EventBus.publishModelUpdate deal.get('contact')
 
       false
 
