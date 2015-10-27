@@ -42,7 +42,7 @@
 </div>
 {{#if showListStatusModal}}
   {{#x-modal close="closeListStatusModal"}}
-    <h1>New List Status</h1>
+    <h2>New List Status</h2>
     <div class="form">
       <div class="item">
         {{validation-input type="text" value=newStatus.name placeholder="New List Status" validator=this validations=newStatusNameValidations validationField="name" class="new-list-status-name field" enter="createNewStatus"}}

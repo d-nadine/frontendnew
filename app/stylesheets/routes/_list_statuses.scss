@@ -140,6 +140,38 @@
   .new-list-status-name {
     width: 100%;
   }
+  .modal-body {
+
+    .form {
+      padding-left: 0;
+
+      .item {
+        width: 300px;
+        float: left;
+        clear: none;
+
+        .field {
+          width: calc(100% - 22px);
+          border-radius: 0px;
+          height: 40px;
+          padding: 4px 10px;
+          background: #F7F7F7;
+        }
+        &:nth-of-type(2) {
+          width: 100px;
+
+          label {
+            margin-top: 10px;
+            margin-left: 20px;
+          }
+        }
+      }
+      .actions {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .list-statuses h4 {

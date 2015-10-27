@@ -6,6 +6,9 @@
 .modal-body {
   overflow-y: visible;
 }
+.modal-header {
+  display: none;
+}
 
 .todo-modal {
   position: fixed;
@@ -15,9 +18,6 @@
   width: 720px;
   margin: auto;
 
-  .modal-header {
-    display: none;
-  }
   .modal-body {
     width: calc(100% - 30px) !important;
 
