@@ -27,7 +27,7 @@ Radium.XModalComponent = Ember.Component.extend
 
         left = rect.left + modal.width()
 
-        modal.css({left: left, top: rect.top})
+        modal.css({left: left, top: rect.top, visibility: 'visible' })
 
       overlay = $('.modal-backdrop')
 
