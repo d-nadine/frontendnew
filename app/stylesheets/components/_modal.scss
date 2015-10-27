@@ -74,6 +74,12 @@
     overflow-y: auto;
     transition: none;
     visibility: hidden;
+    overflow-x: hidden;
+    height: 70%;
+
+    .modal-header {
+      border-bottom: none;
+    }
   }
 
   &.companies {
