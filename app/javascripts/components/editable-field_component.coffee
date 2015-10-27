@@ -249,6 +249,16 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
 
     return unless model
 
+    if hoverAction = @get('hoverAction')
+      hoverSelector = @get('elementId')
+
+      @set 'hoverSelector', hoverSelector
+
+      target = @get('containingController')
+
+      @$().on "mouseenter.#{hoverSelector}", "a.route", =>
+        target.send hoverAction, @get('model')
+
     unless model.get('isLoaded')
       Ember.run.next =>
         @$().html("<em class='loading'>Loading....</em>")
@@ -267,6 +277,9 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     @_super.apply this, arguments
     @$()?.parent().off 'click'
     @$()?.off 'focus', @focusContent.bind(this)
+
+    if hoverSelector = @get('hoverSelector')
+      @$()?.off "mouseenter.#{hoverSelector}"
 
     return unless model = @get('model')
 
