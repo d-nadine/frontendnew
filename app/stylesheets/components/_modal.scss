@@ -80,6 +80,10 @@
     .modal-header {
       border-bottom: none;
     }
+    .contact-types-list a {
+      display: inline-block;
+      width: calc(100% - 30px);
+    }
   }
 
   &.companies {
