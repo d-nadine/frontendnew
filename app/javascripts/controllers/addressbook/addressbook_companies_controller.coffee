@@ -75,6 +75,7 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
   showDeleteConfirmation: false
 
   closeDrawer: ->
+    return if @isDestroyed || @isDestroying
     @set 'showDrawer', false
     @set 'drawerModel', null
     @set 'drawerParams', null

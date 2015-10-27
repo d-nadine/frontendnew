@@ -43,7 +43,7 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
   street: Radium.computed.primaryAccessor 'addresses', 'street', 'primaryAddress'
   line2: Radium.computed.primaryAccessor 'addresses', 'line2', 'primaryAddress'
   state: Radium.computed.primaryAccessor 'addresses', 'state', 'primaryAddress'
- 
+
   zipcode: Radium.computed.primaryAccessor 'addresses', 'zipcode', 'primaryAddress'
 
   todos: DS.hasMany('Radium.Todo')

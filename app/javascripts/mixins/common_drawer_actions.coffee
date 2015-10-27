@@ -184,21 +184,25 @@ Radium.CommonDrawerActions = Ember.Mixin.create
   dealParams: null
 
   closeContactDrawer: ->
+    return if @isDestroyed || @isDestroying
     @set 'showContactDrawer', false
     @set 'contactModel', null
     @set 'contactParams', null
 
   closeCompanyDrawer: ->
+    return if @isDestroyed || @isDestroying
     @set 'showCompanyDrawer', false
     @set 'companyModel', null
     @set 'companyParams', null
 
   closeDealDrawer: ->
+    return if @isDestroyed || @isDestroying
     @set 'showDealDrawer', false
     @set 'dealModel', null
     @set 'dealParams', null
 
   closeAllDrawers: ->
+    return if @isDestroyed || @isDestroying
     @closeDealDrawer()
     @closeContactDrawer()
     @closeCompanyDrawer()

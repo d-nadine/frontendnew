@@ -8,6 +8,19 @@
     padding-top: 5px;
   }
 
+  .sidebar-panel-content.contacts .primary-resource {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .sidebar-panel-content.contacts .primary-resource .inline-autocomplete-component,
+  .sidebar-panel-content.contacts .primary-resource .inline-companyautocomplete-component{
+    margin-left: 10px;
+    width: 100%;
+  }
+
   h2 {
     font-size: 12px;
     line-height: 30px;
