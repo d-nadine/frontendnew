@@ -5,7 +5,7 @@ Radium.ListsService = Ember.Object.extend
     Radium.List.find({}).then (results) =>
       @set 'lists', results.toArray().slice()
 
-    @notify()
+      @notify()
 
   sortedLists: Ember.computed.sort 'lists', (a, b) ->
     Ember.compare a.get('name'), b.get('name')
