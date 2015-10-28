@@ -106,6 +106,11 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
     cols.setEach 'checked', true
 
+    Ember.run.next =>
+      # annoying to have to do this but the component was not being re-renderd
+      # when switching between lists route selections from top nav
+      @EventBus.publish 'rerender-column-selector'
+
     availableColumns
 
   checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'

@@ -29,6 +29,13 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
 
     false
 
+  reapply: ->
+    Ember.run.scheduleOnce('render', this, 'rerender')
+
+  _initialize: Ember.on 'init', ->
+    @_super.apply this, arguments
+    @EventBus.subscribe 'rerender-column-selector', this, 'reapply'
+
   _setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
 
@@ -54,6 +61,8 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
     @_super.apply this, arguments
 
     Radium.Common.removeOverlay()
+
+    @EventBus.unsubscribe 'rerender-column-selector'
 
   classNames: ['viewed']
 
