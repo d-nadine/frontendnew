@@ -827,5 +827,28 @@ em.placeholder {
       line-height: 35px;
     }
   }
+  .date-picker-component {
+
+    .prepend-group {
+      height: 40px;
+      background-color: white;
+      padding: 0 10px;
+      margin-left: 0;
+      width: auto;
+      border: 1px solid $border;
+      border-right: 0px;
+
+      i.ss-calendar {
+        margin-right: 0;
+      }
+    }
+    .date-picker {
+        margin-bottom: 0;
+        height: 40px !important;
+        border-radius: 0px !important;
+        background-color: white;
+        width: calc(100% - 70px);
+    }
+  }
 }
 
