@@ -27,4 +27,5 @@ Radium.InlineCompanyautocompleteComponent = Ember.Component.extend Radium.Compan
     @EventBus.subscribe 'rerender-company', this, 'rerenderAll'
 
   rerenderAll: ->
+    return if @isDestoyed || @isDestoying
     Ember.run.scheduleOnce('render', this, 'rerender')
