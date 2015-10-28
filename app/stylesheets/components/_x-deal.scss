@@ -13,6 +13,16 @@
     display: flex;
     -webkit-flex-direction: row;
     flex-direction: row;
+
+    img {
+      height: 30px;
+    }
+    .companies {
+
+      .autocomplete-editable-field-component {
+        width: calc(100% - 20px);
+      }
+    }
   }
 
   .sidebar-panel-content.contacts .primary-resource .inline-autocomplete-component,
