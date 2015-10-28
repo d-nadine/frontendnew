@@ -20,5 +20,25 @@ Radium.GeolocationEditablefieldComponent = Radium.EditableTextboxComponent.exten
     BufferedObjectProxy.create content: @get('model')
 
   fillInAddress: (autocomplete) ->
-    p autocomplete
-    debugger
+    place = autocomplete.getPlace()
+
+    i = 0
+    l = place.address_components?.length || 0
+
+    bufferedProxy = @get('bufferedProxy')
+
+    while i < l
+      addressType = place.address_components[i].types[0]
+      if @componentForm[addressType]
+        val = place.address_components[i][@componentForm[addressType]]
+
+        if addressType == 'route'
+          street_number = place.address_components[0]['long_name']
+          bufferedProxy.set "street", "#{street_number} #{val}"
+
+        unless ["street_number", "route"].contains addressType
+          bufferedProxy.set(@modelMap[addressType], val)
+
+      i++
+
+    @send "updateModel"

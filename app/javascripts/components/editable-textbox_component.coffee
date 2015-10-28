@@ -11,5 +11,26 @@ Radium.EditableTextboxComponent = Ember.TextField.extend Radium.EditableMixin,
 
       potential)() || ''
 
-    p value
     @set('value', value)
+
+  keyDown: (e) ->
+    bufferedProxy = @get('bufferedProxy')
+
+    if e.keyCode == @ENTER
+      Ember.run.next =>
+        @send 'updateModel'
+      @$().blur()
+      return false
+
+    if e.keyCode == @ESCAPE
+      bufferedProxy.discardBufferedChanges()
+      markUp = @get('markUp')
+
+      @setMarkup()
+
+      return false
+
+    true
+
+  input: ->
+    true

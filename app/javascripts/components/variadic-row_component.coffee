@@ -51,7 +51,7 @@ Radium.VariadicRowComponent = Ember.Component.extend Radium.ListsPersistenceMixi
       user == @get('user')
 
   modelUpdated: (model) ->
-    return if @isDestoyed || @isDestroying
+    return if @isDestroyed || @isDestroying
     Ember.run.scheduleOnce('render', this, 'rerender')
 
   modelIdentifier: null
