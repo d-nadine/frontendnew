@@ -163,10 +163,12 @@
           </ul>
         </div>
       </div>
-      <div class="btn-group btn-send vanilla">
-        <a class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" href="#" tabindex="4">
+      <div class="btn-group btn-send vanilla with-caret">
+        <a {{action submitAction form}} class="btn btn-primary btn-large" href="#" tabindex="4">
           Send
-          <span class="caret"></span>
+          <a href="#" class="caret-wrap" data-toggle="dropdown" >
+            <span class="caret"></span>
+          </a>
         </a>
         <ul class="dropdown-menu">
           <li>
