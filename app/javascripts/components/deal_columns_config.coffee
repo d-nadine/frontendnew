@@ -508,7 +508,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'geolocation-editablefield'
+      component: 'editable-field'
     },
     {
       id: "city"
@@ -530,7 +530,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'geolocation-editablefield'
+      component: 'editable-field'
     },
     {
       id: "state"
@@ -552,7 +552,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'geolocation-editablefield'
+      component: 'editable-field'
     }
     {
       id: "zipcode"
@@ -574,6 +574,6 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'geolocation-editablefield'
+      component: 'editable-field'
     }
   ])

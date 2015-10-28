@@ -210,6 +210,50 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       bindings: [
         {name: "model", value: "model.activities.firstObject"}
       ]
+    },
+    {
+      id: "street"
+      group: "details"
+      classNames: "city"
+      heading: "Street"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add street",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "street"
+        static: true
+      }
+      ],
+      component: 'geolocation-editablefield'
+    },
+    {
+      id: "line2"
+      group: "details"
+      classNames: "city"
+      heading: "Line 2"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add line 2",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "line2"
+        static: true
+      }
+      ],
+      component: 'geolocation-editablefield'
     }
     {
       id: "city"
@@ -233,6 +277,50 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       ],
       sortOn: "city"
       component: 'editable-field'
+    },
+    {
+      id: "state"
+      group: "details"
+      classNames: "city"
+      heading: "State"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add state",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "state"
+        static: true
+      }
+      ],
+      component: 'geolocation-editablefield'
+    },
+    {
+      id: "zipcode"
+      group: "details"
+      classNames: "city"
+      heading: "Zipcode/Postcode"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add zipcode/postcode",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "zipcode"
+        static: true
+      }
+      ],
+      component: 'geolocation-editablefield'
     }
     {
       id: "phone"

@@ -34,3 +34,12 @@ Radium.EditableTextboxComponent = Ember.TextField.extend Radium.EditableMixin,
 
   input: ->
     true
+
+
+  focusOut: (e) ->
+    @_super.apply this, arguments
+    return unless @$().length
+
+    el = @$()
+
+    el.parents('td:first').removeClass('active')

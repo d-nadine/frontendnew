@@ -152,7 +152,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'editable-field'
+      component: 'geolocation-editablefield'
     },
     {
       id: "city"
@@ -174,7 +174,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'editable-field'
+      component: 'geolocation-editablefield'
     },
     {
       id: "state"
@@ -196,7 +196,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'editable-field'
+      component: 'geolocation-editablefield'
     }
     {
       id: "zipcode"
@@ -218,7 +218,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
         static: true
       }
       ],
-      component: 'editable-field'
+      component: 'geolocation-editablefield'
     }
     {
       id: "phone"
@@ -299,7 +299,7 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
     },
     {
       id: "industry"
-      group: "details"
+      goroup: "details"
       classNames: "phone"
       heading: "Industry"
       bindings: [{
