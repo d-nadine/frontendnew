@@ -45,7 +45,6 @@
           {{#each list in listsService.configurableLists}}
             <li>
               {{#link-to "list" list}}{{list.name}}{{/link-to}}
-              {{!list-link list=list transitionToList="transitionToList"}}
             </li>
           {{/each}}
         </ul>

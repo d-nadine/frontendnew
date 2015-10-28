@@ -99,8 +99,8 @@ Radium.EditableMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
       @set 'isSaving', false
       value = @get('model').get(@get('bufferKey'))
 
-      Ember.run.next ->
-        model.trigger 'modelUpdated', self, model
+      Ember.run.next =>
+        @EventBus.publishModelUpdate(model)
 
       if afterSave = @get('afterSave')
         @get('containingController').send afterSave, this
@@ -161,6 +161,7 @@ Radium.EditableMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
 
       isInvalid
 
+  modelIdentifier: null
 
   setup: Ember.on 'didInsertElement', ->
     @_super.apply this, arguments
@@ -175,8 +176,6 @@ Radium.EditableMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
     unless model = @get('model')
       return @setMarkup()
 
-    model.on 'modelUpdated', @modelUpdated.bind(this)
-
     observer = =>
       return unless model.get('isLoaded')
 
@@ -188,6 +187,16 @@ Radium.EditableMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
 
     return unless model
 
+    if hoverAction = @get('hoverAction')
+      hoverSelector = @get('elementId')
+
+      @set 'hoverSelector', hoverSelector
+
+      target = @get('containingController')
+
+      @$().on "mouseenter.#{hoverSelector}", "a.route", =>
+        target.send hoverAction, @get('model')
+
     unless model.get('isLoaded')
       Ember.run.next =>
         @isLoadingDisplay()
@@ -196,13 +205,27 @@ Radium.EditableMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
     else
       @setMarkup()
 
+    return unless model.updatedEventKey
+
+    @modelIdentifier = model.updatedEventKey()
+
+    @EventBus.subscribe @modelIdentifier, this, "rerenderModel"
+
+  rerenderModel: (model) ->
+    @setMarkup(true)
+
   teardown: Ember.on 'willDestroyElement', ->
     @_super.apply this, arguments
     @$()?.off 'focus', @focusContent.bind(this)
 
+    if hoverSelector = @get('hoverSelector')
+      @$()?.off "mouseenter.#{hoverSelector}"
+
     return unless model = @get('model')
 
-    model.off 'modelUpdated'
+    return unless modelIdentifier = @modelIdentifier
+
+     @EventBus.unsubscribe modelIdentifier
 
   modelUpdated: (raiser, model) ->
     return if @isDestroyed || @isDestroying
