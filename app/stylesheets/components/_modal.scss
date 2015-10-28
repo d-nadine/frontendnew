@@ -2,9 +2,15 @@
   opacity: 1;
   background-color: rgba(0,0,0,0.8);
 }
+.modal {
 
+  .close {
+    padding: 10px 15px;
+  }
+}
 .modal-body {
   overflow-y: visible;
+  padding: 15px 35px 35px;
 }
 .modal-header {
   display: none;
