@@ -59,13 +59,19 @@ Radium.ChangeListstatusComponent = Ember.Component.extend
     deal.get('currentStatus')
 
   remainingStatuses: Ember.computed 'deal.list.listStatuses.[]', 'currentListStatus', ->
-    listStatuses = @get('deal.list.listStatuses')?.toArray()
+    listStatuses = @get('deal.list.listStatuses') || Ember.A()
 
-    return unless (listStatuses && listStatuses.get('length')) && currentStatus = @get('currentListStatus')
+    return unless (listStatuses && listStatuses.get('length'))
+
+    currentStatus = @get('currentListStatus')
+
+    sortFunc = (a, b) ->
+      Ember.compare a.get('position'), b.get('position')
+
+    return listStatuses.toArray().sort(sortFunc)
 
     listStatuses.reject((status) -> status == currentStatus
-    ).sort (a, b) ->
-      Ember.compare a.get('position'), b.get('position')
+    ).sort(sortFunc)
 
   showInactiveReasonModal: false
   changeStatus: null
