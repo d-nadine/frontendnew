@@ -506,14 +506,18 @@
   }
 }
 
+.upload-avatar-component {
+  position: relative;
+  margin-right: 20px;
+}
 .user-avatar {
-  margin-top: 10px;
 
-  img {
-    margin-right: 20px;
-  }
   .avatar-upload {
     background-color: transparent;
+    display: none;
+  }
+  &:hover .avatar-upload {
+    display: block;
   }
 }
 

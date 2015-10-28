@@ -150,8 +150,8 @@ input[type=file]{
       &.upload-button, &.avatar-upload, &.csv-upload{
         &.avatar-upload {
           position: absolute;
-          right: 0px;
-          top: 0px;
+          right: 4px;
+          top: 3px;
           width: 18px;
           height: 14px;
           &:before {

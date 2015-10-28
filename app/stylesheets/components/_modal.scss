@@ -3,6 +3,7 @@
   background-color: rgba(0,0,0,0.8);
 }
 .modal {
+  border-radius: 0px;
 
   .close {
     padding: 10px 15px;
@@ -81,7 +82,7 @@
     transition: none;
     visibility: hidden;
     overflow-x: hidden;
-    height: 70%;
+    min-height: 500px;
 
     .modal-header {
       border-bottom: none;
@@ -101,11 +102,15 @@
   .modal-body {
     max-height: none;
     padding: 0;
-  }
 
-  .modal-body .form {
-    padding-left: 8px;
-    padding-right: 15px;
+    .form {
+      padding: 0 10px;
+      box-sizing: border-box;
+
+      .sidebar-panel-content {
+        padding-top: 0;
+      }
+    }
   }
 }
 
