@@ -10,7 +10,9 @@
     {{autocomplete-textbox scopes="contact" value=dealForm.contact queryKey="displayName" writeableValue=true placeholder="Contact" validator=this validations=contactValidations validationFunc=contactValidation saveModel="submit" class="field contacts" validationField="contact" dontReset=true action="contactSet"}}
   </div>
   <div class="item">
-    {{input type="text" value=dealForm.name placeholder=dealNamePlaceholder class="field" enter="submit"}}
+    <div class="control-box">
+      {{input type="text" value=dealForm.name placeholder=dealNamePlaceholder class="field" enter="submit"}}
+    </div>
   </div>
   <div class="actions">
     <button {{action "submit"}} class="btn btn-primary">Submit</button>

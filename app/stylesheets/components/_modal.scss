@@ -12,6 +12,33 @@
 .modal-body {
   overflow-y: visible;
   padding: 15px 35px 35px;
+
+  .form {
+    padding-left: 0;
+
+    .control-box {
+      width: 100% !important;
+
+      input {
+        box-sizing: border-box;
+      }
+      &:not(.autocomplete-textbox-component) {
+
+        input {
+          background: #F7F7F7;
+
+          &:focus {
+            border: 1px solid $border;
+          }
+        }
+      }
+    }
+
+    .actions {
+      display: inline-block;
+      margin-top: 10px;
+    }
+  }
 }
 .modal-header {
   display: none;
