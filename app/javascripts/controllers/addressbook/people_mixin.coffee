@@ -110,7 +110,7 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
     dataset = @get('model')
 
     for id in ids by -1
-      model = detail.modelType.all().find (c) -> c.get('id') + '' == id
+      model = detail.modelType.all().find (c) -> c.get('id') + '' == id + ''
 
       if model
         if action == "delete"

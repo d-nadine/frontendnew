@@ -308,7 +308,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       route: "company"
       bindings: [{
         name: "model",
-        value: "model"
+        value: "model.company"
       }
       {
         name: "placeholder",
@@ -317,7 +317,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       },
       {
         name: "bufferKey",
-        value: "company.name"
+        value: "name"
         static: true
       },
       {
@@ -336,6 +336,15 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         static: true
       },
       {
+        name: "nullModelType",
+        value: Radium.Company,
+        static: true
+      },
+      {
+        name: "deal"
+        value: "model"
+      }
+      {
         name: "routeAction",
         value: "showCompanyDrawer",
         static: true
@@ -347,7 +356,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
         }
         {
           name: "afterSave"
-          value: "afterSaveCompany"
+          value: "afterCompanySave"
         }
       ]
       context: "company"

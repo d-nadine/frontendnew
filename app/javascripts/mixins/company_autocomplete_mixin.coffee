@@ -84,7 +84,7 @@ Radium.CompanyAutocompleteMixin = Ember.Mixin.create
 
       externalResults = if r = hash.external?.query?.results?.json?.json
                           r.map((e) ->
-                           Ember.Object.create(id: null, name: e.name, website: e.domain, logo: e?.logo)).reject((r) ->
+                           Ember.Object.create(id: null, name: e.name, website: e.domain, logo: e?.logo, isNewCompany: true)).reject((r) ->
                                unless url = r.get('website')
                                  false
 

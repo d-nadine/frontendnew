@@ -10,18 +10,12 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
   actions:
     afterContactSave: (component) ->
-      deal = component.get('deal')
-      contact = component.get('model')
+      @saveReference(component, 'contact')
 
-      func = ->
-        # deal.one 'didReload', (deal) ->
-        deal.set('contact', null)
-        deal.set('contact', contact)
+      false
 
-        deal.save().then ->
-          deal.updateLocalBelongsTo('contact', contact)
-
-      deal.executeWhenInCleanState func
+    afterCompanySave: (component) ->
+      @saveReference(component, 'company')
 
       false
 
@@ -93,6 +87,21 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
       @send "executeActions", "delete", detail
 
       false
+
+  saveReference: (component, key) ->
+    deal = component.get('deal')
+    resource = component.get('model')
+
+    func = ->
+      deal.set(key, null)
+      deal.set(key, resource)
+
+      deal.save().then ->
+        deal.updateLocalBelongsTo(key, resource)
+
+    deal.executeWhenInCleanState func
+
+    false
 
   combinedColumns: Ember.computed 'availableColumns.[]', ->
     savedColumns = JSON.parse(localStorage.getItem(@get('localStorageKey')))

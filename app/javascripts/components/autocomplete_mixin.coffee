@@ -2,10 +2,6 @@ require 'components/key_constants_mixin'
 
 Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
   actions:
-    updateModel: ->
-      return false if @get ('isLoading')
-      @_super.apply this, arguments
-
     setBindingValue: ->
       throw new Error('subclasses need to override setBindingValue')
 

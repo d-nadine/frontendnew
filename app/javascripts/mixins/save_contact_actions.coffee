@@ -1,7 +1,7 @@
 Radium.SaveContactActions = Ember.Mixin.create
   actions:
     saveCompany: (context) ->
-      if (Ember.isEmpty(context.get('bufferedProxy.companyName')) && context.get('model.company')) || context.get('isNewSelection')
+      if (Ember.isEmpty(context.get('bufferedProxy.companyName')) && context.get('model.company'))
         context.set('bufferedProxy.removeCompany', true)
         context.set('bufferedProxy.company', null)
 

@@ -30,3 +30,7 @@ Radium.AutocompleteItem = Radium.Model.extend
 
   isList: Ember.computed 'type', ->
     @get('type') == 'list'
+
+  companyName: Ember.computed '_personCompany', ->
+    if company = @get('personCompany')
+      return company.get('name')

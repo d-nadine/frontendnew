@@ -22,20 +22,22 @@ Radium.DealSidebarComponent = Ember.Component.extend Radium.ScrollableMixin,
 
       if company.get('id')
         deal.reset()
+
         company = Radium.Company.all().find (c) -> c.get('id') == company.id
 
         saveDeal(company)
         return false
 
-      company = Radium.Company.createRecord
-                 name: company.name
-                 logo: company.logo
-                 website: company.website
+      if company.get('isNewCompany') || !deal.get('company')
+        company = Radium.Company.createRecord
+          name: company.name
+          logo: company.logo
+          website: company.website
 
-      company.save().then (result) ->
-        saveDeal(result)
+        company.save().then (result) ->
+          saveDeal(result)
 
-        return
+          return
 
       false
 
