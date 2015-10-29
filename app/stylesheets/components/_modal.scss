@@ -7,11 +7,19 @@
 
   .close {
     padding: 10px 15px;
+    position: absolute;
+    right: 0;
+    z-index: 9;
+
+    &:focus {
+      outline: 0;
+    }
   }
 }
 .modal-body {
   overflow-y: visible;
   padding: 15px 35px 35px;
+  z-index: 1;
 
   .form {
     padding-left: 0;
