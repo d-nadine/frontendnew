@@ -166,7 +166,6 @@ Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
       i.find('a').html that.highlighter(item)
       i[0]
     )
-    items.first().addClass 'active'
     @$menu.html items
     this
 

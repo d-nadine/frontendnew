@@ -34,7 +34,7 @@ Radium.CompanyAutocompleteMixin = Ember.Mixin.create
       i.find('a').html html
       i[0]
     )
-    items.first().addClass 'active'
+
     @$menu.html items
     this
 

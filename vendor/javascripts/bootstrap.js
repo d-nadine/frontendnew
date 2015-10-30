@@ -1865,7 +1865,6 @@
         return i[0]
       })
 
-      items.first().addClass('active')
       this.$menu.html(items)
       return this
     }
