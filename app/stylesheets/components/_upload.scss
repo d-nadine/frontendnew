@@ -143,9 +143,11 @@ input[type=file]{
   float: right;
 }
 
-.email-history, .contact-detail, .user-detail {
+.email-history, .contact-detail, .user-detail, .company-sidebar-component {
   .avatar-picker-component {
     position: relative;
+    display: inline-block;
+    
     input[type=file] {
       &.upload-button, &.avatar-upload, &.csv-upload{
         &.avatar-upload {
