@@ -219,10 +219,49 @@
     }
   }
 
-  .inline-editor-open, inline-editor{
+  .inline-money-component {
+
+    .money {
+      margin: 3px 0 13px;
+      display: inline-block;
+    }
+  }
+
+  .inline-editor-open, .inline-editor{
     .icon-cloud{
       position: relative;
       top: -3px;
+    }
+    .currency-input {
+      
+      .ss-write {
+        color: #6e6e6e;
+      }
+      
+      .control-group {
+        width: calc(100% - 40px);
+        margin-bottom: 8px;
+
+        .control-box {
+          width: 100%;
+          margin-bottom: 0;
+
+          input {
+            border: 1px solid $border;
+            background-color: #fff;
+            width: 100%;
+            box-sizing: border-box;
+          }
+        }
+        &.success,
+        &.error {
+
+          input:focus {
+            border-color: $border;
+            box-shadow: none;
+          }
+        }
+      }
     }
   }
 
