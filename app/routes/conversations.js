@@ -44,7 +44,5 @@ export default Route.extend({
     this._super(...arguments);
 
     controller.set('model', model.toArray());
-
-    console.log(controller.get('model').toArray());
   }
 });
