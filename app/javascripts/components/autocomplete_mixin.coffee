@@ -196,7 +196,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
 
     typeahead = el.data('typeahead')
 
-    isAsync = @get('isAsync')
+    if isAsync
+      typeahead.options.minLength = 1
 
     showTypeahaedWhenEmpty = @get('showTypeahaedWhenEmpty')
 
@@ -257,7 +258,7 @@ Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
 
     typeahead.constructor.prototype.keyup = (e) ->
       switch e.keyCode
-        when ARROW_DOWN, ARROW_UP, ARROW_LEFT, ARROW_RIGHT, DELETE
+        when ARROW_DOWN, ARROW_UP, ARROW_LEFT, ARROW_RIGHT
           break
         when TAB, ENTER
           if !@shown

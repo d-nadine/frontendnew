@@ -13,8 +13,6 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
         typeahead.hide()
         return false
       else
-        # FIXME: Do we move this into automcomplete mixin?
-        # so we can show typeahead on click?
         typeahead.options.minLength = 0
         typeahead.options.items = Radium.Countries.length
         typeahead.show()
@@ -104,7 +102,3 @@ Radium.CountryPickerComponent = Ember.Component.extend Radium.AutocompleteMixin,
       left: left).show()
     @shown = true
     this
-
-  _setup: Ember.on 'didInsertElement', ->
-    @_super.apply this, arguments
-    
