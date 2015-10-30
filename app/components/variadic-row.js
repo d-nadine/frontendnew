@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 const {
-  Component
+  Component,
+  computed,
+  run
 } = Ember;
 
 export default Component.extend({
@@ -10,9 +12,14 @@ export default Component.extend({
   classNameBindings: ['item.isChecked:is-checked', 'item.read:read:unread'],
   attributeBindings: ['dataModel:data-model'],
 
-  dataModel: Ember.computed.oneWay('item.id'),
+  dataModel: computed.oneWay('item.id'),
 
-  model: Ember.computed.oneWay('item'),
+  transposedColumns: computed('columns.[]', 'item', function() {
+    const item = this.get('item');
+    return this.get('columns');
+  }),
+
+  model: computed.oneWay('item'),
 
   modelIdentifier: null,
 
@@ -21,7 +28,7 @@ export default Component.extend({
       return;
     }
 
-    Ember.run.scheduleOnce('render', this, 'rerender');
+    run.scheduleOnce('render', this, 'rerender');
   },
 
   _initialize: Ember.on('init', function() {

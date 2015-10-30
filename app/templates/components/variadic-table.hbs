@@ -28,11 +28,16 @@
   </thead>
   <tbody>
     {{#each list as |item|}}
-      {{#variadic-row item=item check=check columns=columns table=this}}
-        {{#if check}}
-          {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
-        {{/if}}
-      {{/variadic-row}}
+    {{#variadic-row item=item check=check columns=columns table=this as |transposedColumns|}}
+      {{#if check}}
+        {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
+      {{/if}}
+      {{#each transposedColumns as |column|}}
+      <td class="{{column.classNames}}">
+        {{log column}}
+      </td>
+      {{/each}}
+    {{/variadic-row}}
     {{/each}}
   </tbody>
 </table>
