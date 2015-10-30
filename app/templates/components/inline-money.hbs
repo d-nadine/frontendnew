@@ -2,10 +2,6 @@
   <i class="ss-standard ss-write pull-right" {{action "startEditing" bubbles=false}}></i>
   {{#if isEditing}}
     <div {{bind-attr class="isValid:success:error :control-group"}}>
-{{!--       <div class="input-prepend">
-        <span class="add-on">{{currencySymbol}}</span>
-        {{currency-input value=form.value class="span2" submit="stopEditing"}}
-      </div> --}}
       <div class="control-box">
         {{currency-input value=form.value class="span2" submit="stopEditing"}}
       </div>
