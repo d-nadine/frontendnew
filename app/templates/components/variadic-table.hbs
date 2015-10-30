@@ -7,21 +7,34 @@
       </th>
       {{/if}}
       {{#each columns as |column|}}
-        <td class={{column.classNames}}>
-          {{#if column.avatar}}
-            {{dynamicAvatar item column}}
-          {{/if}}
-
-          {{#if column.component}}
-            {{renderComponent item column}}
+        {{#if column.sortOn}}
+          <th class={{column.classNames}}>
+            <!-- UPGRADE: NEED A BETTER FIX ONCE WE HAVE PROPER SUB-EXPRESSIONS FROM LATEST EMBER-->
+            {{#unless column.dynamicHeading}}
+              {{table-sorter heading=column.heading sortOn=column.sortOn sort="sortTable" initialDesc=column.initialDesc}}
+            {{else}}
+              {{table-sorter heading=dynamicHeading sortOn=column.sortOn sort="sortTable" initialDesc=column.initialDesc}}
+            {{/unless}}
+          </th>
+        {{else}}
+          {{#unless column.dynamicHeading}}
+            <th class={{column.classNames}}>{{column.heading}}</th>
           {{else}}
-            {{getProperty item column}}
-          {{/if}}
-        </td>
+            <th class={{column.classNames}}>{{dynamicHeading}}</th>
+          {{/unless}}
+        {{/if}}
       {{/each}}
     </tr>
   </thead>
   <tbody>
+    {{#each list as |item|}}
+      {{#variadic-row item=item check=check columns=columns table=this}}
+        {{#if check}}
+          {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
+        {{/if}}
+      {{/variadic-row}}
+    {{/each}}
   </tbody>
 </table>
-{{partial 'modal'}}
+{{! FIXME IMPORT MODAL}}
+{{!partial 'modal'}}

@@ -4,6 +4,8 @@ export function initialize(application) {
   registry.injection('component', 'flashMessenger', 'service:flash-messenger');
   registry.injection('controller', 'flashMessenger', 'service:flash-messenger');
   registry.injection('route', 'flashMessenger', 'service:flash-messenger');
+
+  registry.injection('component', 'EventBus', 'service:event-bus');
 }
 
 export default {

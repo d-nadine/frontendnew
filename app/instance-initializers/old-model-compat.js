@@ -12,6 +12,7 @@ import ConversationsTotals from 'radium/models/conversations_totals';
 import ListStatus from 'radium/models/list-status';
 import List from 'radium/models/list';
 import Email from 'radium/models/email';
+import EmailAddress from 'radium/models/email_address';
 import Contact from 'radium/models/contact';
 
 export function initialize(application) {
@@ -33,6 +34,7 @@ export function initialize(application) {
   application.ListStatus = ListStatus;
   application.List = List;
   application.Email = Email;
+  application.EmailAddress = EmailAddress;
   application.Contact = Contact;
 }
 

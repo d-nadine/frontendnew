@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ColumnsConfig from 'radium/mixins/conversations-columns-config';
 
 const {
   Component,
@@ -7,7 +8,7 @@ const {
   on
 } = Ember;
 
-export default Component.extend({
+export default Component.extend(ColumnsConfig, {
   actions: {
     updateTotals() {
       Radium.ConversationsTotals.find({}).then((results) => {

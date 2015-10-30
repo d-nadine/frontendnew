@@ -26,6 +26,25 @@ export default Route.extend({
   },
 
   model(params) {
-    console.log(params);
+    let user;
+
+    const args = {
+      name: params.type,
+      pageSize: 5
+    };
+
+    if((user = params.user)) {
+      args.user = user;
+    }
+
+    return Radium.Email.find(args);
+  },
+
+  setupController(controller, model) {
+    this._super(...arguments);
+
+    controller.set('model', model.toArray());
+
+    console.log(controller.get('model').toArray());
   }
 });
