@@ -482,8 +482,8 @@
 
 .sidebar-panel-header {
   i.ss-write {
-    margin: 5px 10px 0 0;
-    color: $link;
+    margin: 5px 0 0;
+    color: #6e6e6e;
   }
 }
 
@@ -891,6 +891,13 @@ em.placeholder {
         border-radius: 0px !important;
         background-color: white;
         width: calc(100% - 70px);
+    }
+  }
+  .contacts-picker {
+
+    .as-selection-item {
+      padding: 7px 6px 10px !important;
+      background-color: #eee !important;
     }
   }
 }

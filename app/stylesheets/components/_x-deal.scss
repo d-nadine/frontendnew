@@ -47,12 +47,17 @@
     font-size: 22px;
     position: relative;
     top: 2px;
+
+    &.ss-write {
+      font-size: 12px;
+      margin-right: 0;
+    }
   }
 
   .deal-title .inline-editor-component {
     float: left;
     display: inline-block;
-    width: calc(100% - 38px);
+    width: calc(100% - 32px);
     font-size: 22px;
   }
 
