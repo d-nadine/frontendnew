@@ -5,6 +5,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   actions:
     setBindingValue: (placeholder) ->
+      @$('ul.typeahead').remove()
       if field = placeholder.get('field')
         @onCustomFieldInserted(field)
       else if template = placeholder.get('template')
@@ -190,7 +191,9 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
   transitionToEditing: ->
     @set 'editorState', 'editing'
     @query = ""
-    @$('ul.typeahead').remove()
+    typeahead = @$('ul.typeahead')
+    if typeahead.length
+      typeahead.remove()
 
   keyDown: (e) ->
     return false if @inTemplateSelection()

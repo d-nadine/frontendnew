@@ -2,15 +2,6 @@ require 'mixins/editor_mixin'
 
 Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
   actions:
-    insertTemplate: (template) ->
-      @EventBus.publish "insertTemplate", template
-
-      if template.get('attachments.length')
-        template.get('attachments').forEach (attachment) =>
-          @get('form.files').pushObject Ember.Object.create(attachment: attachment)
-
-      false
-
     saveTemplate: (form) ->
       @sendAction "saveTemplate", form
 
