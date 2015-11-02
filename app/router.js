@@ -19,6 +19,10 @@ Router.map(function() {
     });
     this.route('companies');
   });
+
+  this.route('contact', {
+    path: '/contacts/:contact_id'
+  });
 });
 
 export default Router;

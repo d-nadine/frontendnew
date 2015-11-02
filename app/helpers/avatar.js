@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export function avatar(resource, options) {
+export function avatar(params, options) {
+  const resource = params[0];
+
   var resourceAvatar, img, props, style;
   options.hash = options.hash || {};
 
@@ -75,4 +77,4 @@ export function avatar(resource, options) {
   return Ember.String.htmlSafe(img.get(0).outerHTML);
 }
 
-export default Ember.Helper.helper(avatar);
+export default Ember.HTMLBars.makeBoundHelper(avatar);

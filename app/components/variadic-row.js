@@ -16,7 +16,22 @@ export default Component.extend({
 
   transposedColumns: computed('columns.[]', 'item', function() {
     const item = this.get('item');
-    return this.get('columns');
+
+    return this.get('columns').map((c) => {
+      let result = {
+        component: null,
+        attrs: []
+      },
+      component;
+
+      if((component = c.component)) {
+        result.component = component;
+      }
+
+      result.attrs = {contact: 'item'};
+
+      return result;
+    });
   }),
 
   model: computed.oneWay('item'),

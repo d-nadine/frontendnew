@@ -346,6 +346,9 @@ RESTAdapter.registerTransform('datetime',  {
 //   note: {embedded: 'load'}
 // });
 
+var contactsMapping = {
+  emailAddresses: {embedded: 'always'}
+};
 // var contactsMapping = {
 //   isPublic: {key: 'public'},
 //   user: { key: 'assigned_to_id' },
@@ -357,7 +360,7 @@ RESTAdapter.registerTransform('datetime',  {
 //   customFieldValues: {embedded: 'always'}
 // };
 
-// RESTAdapter.map('Radium.Contact', contactsMapping);
+RESTAdapter.map('Radium.Contact', contactsMapping);
 // RESTAdapter.map('Radium.CreateContact', contactsMapping);
 
 // RESTAdapter.map('Radium.ContactImportJob', {
@@ -403,10 +406,10 @@ RESTAdapter.map('Radium.ContactInfo', {
 //   isDraft: {key: 'draft'},
 // });
 
-// RESTAdapter.map('Radium.EmailAddress', {
-//   value: { key: 'address' },
-//   isPrimary: { key: 'primary'}
-// });
+RESTAdapter.map('Radium.EmailAddress', {
+  value: { key: 'address' },
+  isPrimary: { key: 'primary'}
+});
 
 // RESTAdapter.map('Radium.Address', {
 //   isPrimary: { key: 'primary'}

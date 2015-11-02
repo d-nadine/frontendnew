@@ -14,7 +14,8 @@ export default Mixin.create({
         {
           name: "contact",
           value: "model.contact"
-        }, {
+        },
+        {
           name: "linkAction",
           value: "showContactDrawer",
           "static": true
