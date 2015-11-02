@@ -24,7 +24,10 @@ Radium.EditorMixin = Ember.Mixin.create
       false
 
     insertPlaceholder: (placeholder) ->
-      @EventBus.publish('placeholderInsered', placeholder)
+      if placeholder.template
+        @send 'insertTemplate', placeholder.template
+      else
+        @EventBus.publish('placeholderInserted', placeholder)
 
       false
 
@@ -37,7 +40,7 @@ Radium.EditorMixin = Ember.Mixin.create
 
       false
 
-  insertActions: Ember.computed  ->
+  insertActions: Ember.computed ->
     placeholderMap = Radium.TemplatePlaceholderMap
     customFields = @get('customFields') || []
 

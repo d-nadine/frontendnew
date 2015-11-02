@@ -24,7 +24,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   _initialize: Ember.on 'init', ->
     @EventBus.subscribe('email:reset', this, 'onFormReset')
-    @EventBus.subscribe('placeholderInsered', this, 'onPlaceholderInserted')
+    @EventBus.subscribe('placeholderInserted', this, 'onPlaceholderInserted')
     @EventBus.subscribe('customFieldInserted', this, 'onCustomFieldInserted')
     @EventBus.subscribe('insertTemplate', this, 'onTemplateInserted')
     @EventBus.subscribe('removePlaceHolder', this, 'onRemovePlaceHolder')
@@ -169,7 +169,7 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
 
   teardown: Ember.on 'willDestroyElement', ->
     @EventBus.unsubscribe('email:reset')
-    @EventBus.unsubscribe('placeholderInsered')
+    @EventBus.unsubscribe('placeholderInserted')
     @EventBus.unsubscribe('customFieldInserted')
     @EventBus.unsubscribe('insertTemplate')
     @EventBus.unsubscribe('removePlaceHolder')
@@ -230,7 +230,6 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
       content = @$('.note-editable').html()
       @set('content', content)
 
-
   onRemovePlaceHolder: ->
     @removePlaceHolder(false)
 
@@ -242,7 +241,10 @@ Radium.RichtextEditorComponent = Ember.Component.extend Radium.UploadingMixin,
     @insertPlaceholder(node)
 
   onPlaceholderInserted: (placeholder) ->
-    text = Radium.TemplatePlaceholderMap[placeholder.name]
+    text = Radium.TemplatePlaceholderMap[placeholder.name] || ''
+
+    Ember.assert "Placeholder was not found for #{placeholder.name}", text.length
+
     fallback = Radium.FallbackMap[placeholder.name] || ""
 
     node = """
