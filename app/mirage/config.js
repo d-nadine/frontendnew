@@ -15,6 +15,10 @@ export default function() {
     return {lists: db.lists};
   });
 
+  this.get('/contacts/:id', function(db, fakeRequest) {
+    return {contact: db.contacts.where({id: fakeRequest.params.id})[0]};
+  });
+
   this.get('/conversations/:type', function(db, fakeRequest) {
     const type = fakeRequest.params.type;
 
@@ -22,7 +26,7 @@ export default function() {
 
     if(type === "incoming") {
       filter = (email) => {
-        return email.folder() === 'INBOX';
+        return email.folder === 'INBOX';
       };
     } else {
       filter = () => {

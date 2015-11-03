@@ -19,6 +19,12 @@ const page = PageObject.build({
       total: PageObject.text('.badge'),
       route: PageObject.clickable('.who')
     }
+  }),
+  conversations: PageObject.collection({
+    itemScope: '.variadic-table tbody tr',
+    item: {
+      contact: PageObject.text('td:nth-of-type(2) a')
+    }
   })
 });
 
@@ -28,8 +34,15 @@ module('Acceptance | conversations', {
     let subscriptionPlan = server.create('subscription-plan');
     let billing = server.create('billing', {subscription_plan_id: subscriptionPlan.id});
     let account = server.create('account', {billing_id: billing.id});
-    server.create('user', {account_id: account.id, first_name: 'Paul', last_name: 'Cowan', email: 'paul@radiumcrm.com'});
+    let current_user = server.create('user', {account_id: account.id, first_name: 'Paul', last_name: 'Cowan', email: 'paul@radiumcrm.com'});
     let other_user = server.create('user', {account_id: account.id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'});
+
+    let contact = server.create('contact', {name: 'Bob Hoskins', account_id: account.id});
+
+    server.create('email',
+                  {account_id: account.id,
+                   _sender_contact_id: contact.id,
+                   to_user_ids: [current_user.id]});
 
     server.create('conversations-totals',{
       incoming: 8,
@@ -74,5 +87,16 @@ test('conversations totals are displayed and can route to', function(assert) {
       assert.ok($(userTotal.scope).parent().hasClass('active'), 'active class is on user total');
       assert.equal(currentURL(), `/conversations/team?user=${userId}`, 'current url is team url');
     });
+  });
+});
+
+test('variadic table row is rendered for each email', function(assert) {
+  assert.expect(2);
+
+  page.visit({type: 'incoming'});
+
+  andThen(function() {
+    assert.equal(1, page.conversations().count());
+    assert.equal("Bob Hoskins", page.conversations(1).contact());
   });
 });

@@ -11,6 +11,7 @@ const {
 } = Ember;
 
 const Contact = Model.extend({
+  avatarKey: DS.attr('string'),
   name: DS.attr('string'),
   title: DS.attr('string'),
 
@@ -22,7 +23,9 @@ const Contact = Model.extend({
     return this.get('name') || this.get('primaryEmail.value');
   }),
 
-  lists: DS.hasMany('Radium.List')
+  lists: DS.hasMany('Radium.List'),
+
+  account: DS.belongsTo('Radium.Account')
 });
 
 export default Contact;
