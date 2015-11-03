@@ -1,1 +1,10 @@
-{{yield transposedColumns}}
+{{#if check}}
+  {{x-check checked=item.isChecked disabled=allChecked tagName="td" classNames="check"}}
+{{/if}}
+{{#each transposedColumns as |column|}}
+<td class="{{column.classNames}}">
+  {{#if column.component}}
+    {{component column.component spreadArgs=column}}
+  {{/if}}
+</td>
+{{/each}}

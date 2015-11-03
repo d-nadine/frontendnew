@@ -17,18 +17,23 @@ export default Component.extend({
   transposedColumns: computed('columns.[]', 'item', function() {
     const item = this.get('item');
 
-    return this.get('columns').map((c) => {
+    return this.get('columns').map((column) => {
       let result = {
         component: null,
-        attrs: []
+        attrs: [],
+        tableRow: this
       },
       component;
 
-      if((component = c.component)) {
+      if((component = column.component)) {
         result.component = component;
       }
 
-      result.attrs = {contact: 'item'};
+      result.bindings = column.bindings.map((binding) => {
+        binding.context = binding.context || item;
+
+        return binding;
+      });
 
       return result;
     });

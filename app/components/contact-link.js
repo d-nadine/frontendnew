@@ -16,5 +16,23 @@ export default Component.extend({
 
       return false;
     }
+  },
+
+  didInitAttrs(options) {
+    this._super(...arguments);
+
+    const spreadArgs = options.attrs.spreadArgs;
+
+    if(!spreadArgs) {
+      return;
+    }
+
+    spreadArgs.value.bindings.forEach((binding) => {
+      if(!binding.static) {
+        this.set(binding.name, binding.context.get(binding.value));
+      } else {
+        this.set(binding.name, binding.value);
+      }
+    });
   }
 });

@@ -13,7 +13,7 @@ export default Mixin.create({
       bindings: [
         {
           name: "contact",
-          value: "model.contact"
+          value: "contact"
         },
         {
           name: "linkAction",
