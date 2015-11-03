@@ -56,23 +56,23 @@ test('conversations totals are displayed and can route to', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/conversations/incoming');
 
-    assert.equal('8', page.incoming());
-    assert.equal('9', page.waiting());
-    assert.equal('10', page.later());
-    assert.equal(1, page.usersTotals().count());
+    assert.equal('8', page.incoming(), 'correct incoming total');
+    assert.equal('9', page.waiting(), 'correct waiting total');
+    assert.equal('10', page.later(), 'correct later total');
+    assert.equal(1, page.usersTotals().count(), 'correct users totals');
 
     const userTotal = page.usersTotals(1);
 
-    assert.notEqual('Paul Cowan', userTotal.name());
-    assert.equal('2', userTotal.total());
+    assert.notEqual('Paul Cowan', userTotal.name(), 'user total is not current user');
+    assert.equal('2', userTotal.total(), 'correct user total');
 
     userTotal.route().route();
 
     andThen(function() {
       const userId = server.db.users.filter(function(user) { return user.first_name === 'Sue';})[0].id;
 
-      assert.ok($(userTotal.scope).parent().hasClass('active'));
-      assert.equal(currentURL(), `/conversations/team?user=${userId}`);
+      assert.ok($(userTotal.scope).parent().hasClass('active'), 'active class is on user total');
+      assert.equal(currentURL(), `/conversations/team?user=${userId}`, 'current url is team url');
     });
   });
 });

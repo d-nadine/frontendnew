@@ -35,6 +35,8 @@ export default Route.extend({
 
     if((user = params.user)) {
       args.user = user;
+
+      this.controllerFor('conversations').set('user', user);
     }
 
     return Radium.Email.find(args);

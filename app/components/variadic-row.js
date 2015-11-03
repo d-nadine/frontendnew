@@ -30,7 +30,8 @@ export default Component.extend({
       }
 
       result.bindings = column.bindings.map((binding) => {
-        binding.context = binding.context || item;
+        // FIXME: how do we handle different contexts?
+        binding.context = item;
 
         return binding;
       });

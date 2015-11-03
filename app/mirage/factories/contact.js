@@ -6,7 +6,9 @@ export default Mirage.Factory.extend({
   email_addresses() {
     return [{
       name: 'work',
-      address: `${this.first_name()}.${this.last_name()}@gmail.com`,
+      address: function() {
+        return `${this.name()}@gmail.com`;
+      },
       primary: true
     }];
   }

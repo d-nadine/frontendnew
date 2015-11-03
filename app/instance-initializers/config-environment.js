@@ -2,14 +2,14 @@ import Ember from 'ember';
 import ENV from 'radium/config/environment';
 import "radium/utils/date-time";
 
-export function initialize(application) {
-  application.set('cookieDomain', ENV.cookieDomain);
+export function initialize(instance) {
+  instance.set('cookieDomain', ENV.cookieDomain);
 
   if(ENV.cookieDomain === "development") {
     Ember.$.cookie('token', 'development');
   }
 
-  const store = application.registry.lookup('store:main');
+  const store = instance.container.lookup('store:main');
 
   store.get('_adapter').reopen({
     url: ENV.apiHost

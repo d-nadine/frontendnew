@@ -6,7 +6,7 @@ const {
 
 export default Component.extend({
   actions: {
-    linkAction: function(contact) {
+    linkAction: function() {
       let linkAction;
       if (!(linkAction = this.get('linkAction'))) {
         return undefined;

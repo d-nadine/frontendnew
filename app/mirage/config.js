@@ -14,4 +14,24 @@ export default function() {
   this.get('/lists', function(db) {
     return {lists: db.lists};
   });
+
+  this.get('/conversations/:type', function(db, fakeRequest) {
+    const type = fakeRequest.params.type;
+
+    let filter;
+
+    if(type === "incoming") {
+      filter = (email) => {
+        return email.folder() === 'INBOX';
+      };
+    } else {
+      filter = () => {
+        return false;
+      };
+    }
+
+    const emails = db.emails.filter(filter);
+
+    return {emails: emails};
+  });
 }
