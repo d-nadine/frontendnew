@@ -31,10 +31,11 @@ Radium.ConversationsRoute = Radium.Route.extend Radium.TrackContactMixin,
       name: params.type
       pageSize: 5
 
+    controller = @controllerFor 'conversations'
+
     if user = params.user
       args.user = user
-
-    controller = @controllerFor 'conversations'
+      controller.set('user', user)
 
     new Em.RSVP.Promise (resolve, reject) ->
       Radium.Email.find(args).then((results) ->
