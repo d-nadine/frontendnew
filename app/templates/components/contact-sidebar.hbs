@@ -5,6 +5,7 @@
         <div class="user-avatar pull-left">
           {{avatar-picker person=contact class="control-group"}}
         </div>
+        {{toggle-switch checked=contact.isPublic action="switchShared" dataOn="Shared" dataOff="Private" dontPropagate=true}}
       </div>
     </div>
   </div>
@@ -12,6 +13,6 @@
 {{#if showCompanyDrawer}}
   {{#x-drawer class="contact-drawer company-drawer" closeDrawer="closeCompanyDrawer"}}
   {{! UPGRADE: use component helper when we upgrade}}
-  {{renderComponent companyModel companyParams}}
+  {{!renderComponent companyModel companyParams}}
   {{/x-drawer}}
 {{/if}}

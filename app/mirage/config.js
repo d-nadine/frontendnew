@@ -19,6 +19,16 @@ export default function() {
     return {contact: db.contacts.where({id: fakeRequest.params.id})[0]};
   });
 
+  this.put('/contacts/:id', function(db, fakeRequest) {
+    const id = fakeRequest.params.id,
+          attrs = JSON.parse(fakeRequest.requestBody).contact,
+          record = db.contacts.update(id, attrs);
+
+    return {
+      contact: record
+    };
+  });
+
   this.get('/conversations/:type', function(db, fakeRequest) {
     const type = fakeRequest.params.type;
 

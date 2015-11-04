@@ -12,6 +12,7 @@ const page = PageObject.build({
   incoming: PageObject.text('.conversations-sidebar #totals a:nth-of-type(1) span'),
   waiting: PageObject.text('.conversations-sidebar #totals a:nth-of-type(2) span'),
   later: PageObject.text('.conversations-sidebar #totals a:nth-of-type(3) span'),
+  drawerIsVisible: PageObject.isVisible('.drawer-view'),
   usersTotals: PageObject.collection({
     itemScope: '#assigned .user-total',
     item: {
@@ -24,8 +25,13 @@ const page = PageObject.build({
     itemScope: '.variadic-table tbody tr',
     item: {
       contact: PageObject.text('td:nth-of-type(2) a'),
-      link: PageObject.text('td:nth-of-type(2) a')
+      contactLink: PageObject.clickable('td:nth-of-type(2) a')
     }
+  }),
+
+  drawer: PageObject.component({
+    toggleIsVisible: PageObject.isVisible('.toggle-switch-component'),
+    togglePublic: PageObject.clickable('.toggle-switch-component input[type=checkbox]')
   })
 });
 
@@ -97,7 +103,35 @@ test('variadic table row is rendered for each email', function(assert) {
   page.visit({type: 'incoming'});
 
   andThen(function() {
+    assert.equal(1, page.conversations().count(), 'there are 1 conversations');
+    assert.equal("Bob Hoskins", page.conversations(1).contact(), 'the correct contact is conversation number 1');
+  });
+});
+
+test('can trigger drawer and perform actions', function(assert) {
+  assert.expect(4);
+
+  page.visit({type: 'incoming'});
+
+  const getContact = () => {
+    return server.db.contacts.where({name: 'Bob Hoskins'})[0];
+  };
+
+  andThen(function() {
     assert.equal(1, page.conversations().count());
-    assert.equal("Bob Hoskins", page.conversations(1).contact());
+
+    page.conversations(1).contactLink();
+
+    assert.notOk(getContact().public, 'precon - the contact is not public prior to clicking toggle switch');
+  });
+
+  andThen(function() {
+    assert.ok(page.drawerIsVisible());
+
+    page.drawer().togglePublic();
+  });
+
+  andThen(function() {
+    assert.ok(getContact().public, 'the contact is public after clicking switch');
   });
 });

@@ -347,18 +347,15 @@ RESTAdapter.registerTransform('datetime',  {
 // });
 
 var contactsMapping = {
-  emailAddresses: {embedded: 'always'}
+  isPublic: {key: 'public'},
+  user: { key: 'assigned_to_id' },
+  //phoneNumbers: {embedded: 'always'},
+  emailAddresses: {embedded: 'always'},
+  //addresses: {embedded: 'always'},
+  //comments: {embedded: 'load'},
+  //customFieldValues: {embedded: 'always'},
+  contactInfo: {embedded: 'always'}
 };
-// var contactsMapping = {
-//   isPublic: {key: 'public'},
-//   user: { key: 'assigned_to_id' },
-//   phoneNumbers: {embedded: 'always'},
-//   emailAddresses: {embedded: 'always'},
-//   addresses: {embedded: 'always'},
-//   comments: {embedded: 'load'},
-//   contactInfo: {embedded: 'always'},
-//   customFieldValues: {embedded: 'always'}
-// };
 
 RESTAdapter.map('Radium.Contact', contactsMapping);
 // RESTAdapter.map('Radium.CreateContact', contactsMapping);

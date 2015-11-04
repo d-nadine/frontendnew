@@ -10,25 +10,26 @@ const {
 
 const Model = DS.Model.extend(TimestampsMixin, {
   primaryKey: 'id',
-  route: computed(function() {
-    return this.store.container.lookup('route:application');
+  flashMessenger: computed(function() {
+    return this.store.container.lookup('service:flash-messenger');
   }),
   "delete": function() {
-    var route, self;
-    self = this;
-    route = this.get('route');
+    const self = this;
+
+    const flashMessenger =  this.get('flashMessenger');
     return new RSVP.Promise(function(resolve, reject) {
       self.deleteRecord();
       self.one('didDelete', function() {
         return resolve.call(self);
       });
       self.one('becameError', function() {
-        route.send('flashError', 'An error has occured and the deletion could not be completed.');
+        flashMessenger.error('An error has occured and the deletion could not be completed.');
+
         self.reset();
         return reject.call(self);
       });
       self.one('becameInvalid', function() {
-        route.send('flashError', self);
+        flashMessenger.error(self);
         self.reset();
         return reject.call(self);
       });
@@ -36,26 +37,30 @@ const Model = DS.Model.extend(TimestampsMixin, {
     });
   },
   save: function() {
-    var route, self;
-    self = this;
-    route = this.get('route');
+    const self = this;
+
     return new RSVP.Promise(function(resolve, reject) {
       var success;
       success = function(result) {
         return resolve(result);
       };
+
       self.one('didCreate', success);
       self.one('didUpdate', success);
+
       self.addErrorHandlers(reject);
+
       return self.get('store').commit();
     });
   },
   addErrorHandlers: function(reject) {
-    var route, self;
-    self = this;
-    route = this.get('route');
+    const self = this;
+
+    const flashMessenger = this.get('flashMessenger');
+
     this.one('becameInvalid', function(result) {
-      route.send('flashError', result);
+      flashMessenger.error(result);
+
       reject(result);
       return run.next(function() {
         if (self.get('id')) {
@@ -70,7 +75,9 @@ const Model = DS.Model.extend(TimestampsMixin, {
       if (self.get('id')) {
         self.reset();
       }
-      route.send('flashError', 'An error has occurred and the operation could not be completed.');
+
+      flashMessenger.error('An error has occurred and the operation could not be completed.');
+
       reject(result);
       if (result.get('id')) {
         return;
@@ -156,7 +163,7 @@ const Model = DS.Model.extend(TimestampsMixin, {
     hash = {};
     this.eachAttribute(function(key) {
       var val;
-      if (val = self.get(key)) {
+      if ((val = self.get(key))) {
         return hash[key] = val;
       }
     });
@@ -167,7 +174,7 @@ const Model = DS.Model.extend(TimestampsMixin, {
       return;
     }
 
-    this._super.apply(this, arguments);
+    this._super(...arguments);
   },
   typeName: computed(function() {
     return this.constructor.toString().underscore().split('.').pop().toLowerCase();
@@ -187,15 +194,18 @@ const Model = DS.Model.extend(TimestampsMixin, {
       return this.reload();
     }
   },
+
   deleteRecord: function() {
     if (!this.get('inCleanState')) {
       return;
     }
     return this.send('deleteRecord');
   },
+
   updatedEventKey: function() {
     return (this.constructor.toString()) + ":" + (this.get('id')) + ":update}";
   },
+
   reloadAfterUpdateEvent: function(event) {
     if (event == null) {
       event = 'didCreate';
@@ -205,26 +215,25 @@ const Model = DS.Model.extend(TimestampsMixin, {
     });
   },
   reloadAfterUpdate: function() {
-    var observer;
-    observer = function() {
+    const observer = function() {
       if (this.get('inCleanState')) {
         this.removeObserver('currentState.stateName', observer);
         return this.reload();
       }
     };
+
     return this.addObserver('currentState.stateName', observer);
   },
   executeWhenInCleanState: function(func) {
-    var observer;
-    observer = (function(_this) {
-      return function() {
-        if (!_this.get('inCleanState')) {
-          return;
-        }
-        _this.removeObserver('currentState.stateName', observer);
-        return func();
-      };
-    })(this);
+    const observer = () => {
+      if (!this.get('inCleanState')) {
+        return;
+      }
+
+      this.removeObserver('currentState.stateName', observer);
+      func();
+    };
+
     if (this.get('inCleanState')) {
       return observer();
     } else {

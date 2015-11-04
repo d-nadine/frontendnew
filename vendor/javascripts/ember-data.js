@@ -1026,9 +1026,9 @@ DS.Transaction = Ember.Object.extend({
     var commitDetails = get(this, 'commitDetails'),
         relationships = get(this, 'relationships');
 
-    forEach(commitDetails, function(adapter, commitDetails) {
+    forEach(commitDetails, function(commitDetails, adapter) {
       Ember.assert("You tried to commit records but you have no adapter", adapter);
-      Ember.assert("You tried to commit records but your adapter does not implement `commit`", adapter.commit);
+      Ember.assert("You tried to commit records but your adapter does not implement `commit`", typeof adapter.commit === "function");
 
       adapter.commit(store, commitDetails);
     });
@@ -8887,17 +8887,14 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     }
 
     this.groupByType(commitDetails.created).forEach(function(set, type) {
-      debugger;
       this.createRecords(store, type, filter(set));
     }, this);
 
     this.groupByType(commitDetails.updated).forEach(function(set, type) {
-      debugger;
       this.updateRecords(store, type, filter(set));
     }, this);
 
     this.groupByType(commitDetails.deleted).forEach(function(set, type) {
-      debugger;
       this.deleteRecords(store, type, filter(set));
     }, this);
   },
