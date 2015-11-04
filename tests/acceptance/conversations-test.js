@@ -23,7 +23,8 @@ const page = PageObject.build({
   conversations: PageObject.collection({
     itemScope: '.variadic-table tbody tr',
     item: {
-      contact: PageObject.text('td:nth-of-type(2) a')
+      contact: PageObject.text('td:nth-of-type(2) a'),
+      link: PageObject.text('td:nth-of-type(2) a')
     }
   })
 });
