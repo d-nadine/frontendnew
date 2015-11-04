@@ -21,7 +21,7 @@ Component.reopen({
 
     const result = constructor.split(':')[1].dasherize();
 
-    if(!result.startsWith('-')) {
+    if(result[0] !== '-') {
       return `${result}-component`;
     } else {
       return undefined;
