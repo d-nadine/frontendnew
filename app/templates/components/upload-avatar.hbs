@@ -1,6 +1,6 @@
 {{#unless isUploading}}
   {{avatar model size="sidebar"}}
-  {{view view.fileUploader}}
+  {{file-uploader class="avatar-upload" multiple="true" accept="image/*"}}
 {{else}}
   {{partial 'is_uploading'}}
 {{/unless}}

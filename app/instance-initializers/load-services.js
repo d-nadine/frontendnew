@@ -6,6 +6,10 @@ export function initialize(application) {
   registry.injection('route', 'flashMessenger', 'service:flash-messenger');
 
   registry.injection('component', 'EventBus', 'service:event-bus');
+
+  registry.injection('component', 'uploader', 'service:uploader');
+
+  registry.injection('component', 'store', 'store:main');
 }
 
 export default {

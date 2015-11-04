@@ -21,7 +21,8 @@ export default Component.extend({
       let result = {
         component: null,
         attrs: [],
-        tableRow: this
+        tableRow: this,
+        context: item
       },
       component;
 
@@ -31,7 +32,8 @@ export default Component.extend({
 
       result.bindings = column.bindings.map((binding) => {
         // FIXME: how do we handle different contexts?
-        binding.context = item;
+        // if (binding.context) ?
+        //
 
         return binding;
       });

@@ -127,3 +127,8 @@
     {{!regular-infinitescroller getMore="showMore" allLoaded=false isLoading=false}}
   </div>
 </div>
+{{#if displayContactDrawer}}
+  {{#x-drawer class="contact-drawer" closeDrawer="closeContactDrawer"}}
+    {{x-contact spreadArgs=contactParams}}
+  {{/x-drawer}}
+{{/if}}

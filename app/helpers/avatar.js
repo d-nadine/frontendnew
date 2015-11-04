@@ -4,9 +4,8 @@ export function avatar(params, options) {
   const resource = params[0];
 
   var resourceAvatar, img, props, style;
-  options.hash = options.hash || {};
 
-  style = options.hash.style || options.hash.size || 'small';
+  style = options.style || options.size || 'small';
 
   switch(style) {
   case 'dash':

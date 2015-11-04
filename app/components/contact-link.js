@@ -1,38 +1,21 @@
 import Ember from 'ember';
+import SpreadArgs from 'radium/mixins/spread-args-mixin';
+import ContainingParent from 'radium/mixins/containing-parent-mixin';
 
 const {
   Component
 } = Ember;
 
-export default Component.extend({
+export default Component.extend(SpreadArgs, ContainingParent, {
   actions: {
-    linkAction: function() {
+    linkAction: function(contact) {
       let linkAction;
+
       if (!(linkAction = this.get('linkAction'))) {
         return undefined;
       }
 
-      console.log('refactor containingController');
-
-      return false;
+      this.get('containingParent').send(linkAction, contact);
     }
-  },
-
-  didInitAttrs(options) {
-    this._super(...arguments);
-
-    const spreadArgs = options.attrs.spreadArgs;
-
-    if(!spreadArgs) {
-      return;
-    }
-
-    spreadArgs.value.bindings.forEach((binding) => {
-      if(!binding.static) {
-        this.set(binding.name, binding.context.get(binding.value));
-      } else {
-        this.set(binding.name, binding.value);
-      }
-    });
   }
 });

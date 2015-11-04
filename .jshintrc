@@ -9,7 +9,9 @@
     "module",
     "FastClick",
     "Radium",
-    "moment"
+    "moment",
+    "FormData",
+    "accounting"
   ],
   "browser": true,
   "boss": true,
