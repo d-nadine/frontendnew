@@ -170,8 +170,8 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   _initialize: Ember.on 'init', ->
     @_super.apply this, arguments
 
-    modelDep = "model.#{bufferKey}"
     bufferKey = @get('bufferKey')
+    modelDep = "model.#{bufferKey}"
     bufferDep = "bufferedProxy.#{bufferKey}"
 
     Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', 'alternativeRoute', modelDep, ->

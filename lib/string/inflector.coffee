@@ -38,3 +38,4 @@ String::reformatHtml = ->
   .replace(/<br\s*\/?>/ig,"\n")
   .replace(/&nbsp;/g,' ')
   .replace(/(<([^>]+)>)/ig,"");
+  
