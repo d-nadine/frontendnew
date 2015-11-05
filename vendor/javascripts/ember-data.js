@@ -5337,50 +5337,53 @@ DS.belongsTo = function(type, options) {
 
   var meta = { type: type, isRelationship: true, options: options, kind: 'belongsTo' };
 
-  return Ember.computed(function(key, value) {
-    var data = get(this, 'data'),
-        store = get(this, 'store'), belongsTo;
-
+  const resolveType = (type, store) => {
     if (typeof type === 'string') {
       if (type.indexOf(".") === -1) {
-        type = store.modelFor(type);
+        return store.modelFor(type);
       } else {
-        type = get(Ember.lookup, type);
+        return get(Ember.lookup, type);
       }
     }
 
-    if (arguments.length === 2) {
+    return undefined;
+  };
+
+  return Ember.computed({
+    get: function(key) {
+      var data = get(this, 'data'),
+          store = get(this, 'store'),
+          belongsTo,
+          type = resolveType(type, store);
+
+      belongsTo = data[key];
+
+      if (belongsTo instanceof DS.Model) {
+        return belongsTo;
+      }
+
+      if (isNone(belongsTo)) {
+        return null;
+      }
+
+      // The data has been normalized to a record reference, so
+      // just ask the store for the record for that reference,
+      // materializing it if necessary.
+      if (belongsTo.clientId) {
+        return store.recordForReference(belongsTo);
+      }
+
+      // The data has been normalized into a type/id pair by the
+      // serializer's polymorphism code.
+      return store.findById(belongsTo.type, belongsTo.id);
+    },
+    set: function(key, value) {
+      var store = get(this, 'store'),
+          type = resolveType(type, store);
+
       Ember.assert("You can only add a record of " + type.toString() + " to this relationship", !value || type.detectInstance(value));
       return value === undefined ? null : value;
     }
-
-    belongsTo = data[key];
-
-    if (belongsTo instanceof DS.Model) { return belongsTo; }
-
-    // TODO (tomdale) The value of the belongsTo in the data hash can be
-    // one of:
-    // 1. null/undefined
-    // 2. a record reference
-    // 3. a tuple returned by the serializer's polymorphism code
-    //
-    // We should really normalize #3 to be the same as #2 to reduce the
-    // complexity here.
-
-    if (isNone(belongsTo)) {
-      return null;
-    }
-
-    // The data has been normalized to a record reference, so
-    // just ask the store for the record for that reference,
-    // materializing it if necessary.
-    if (belongsTo.clientId) {
-      return store.recordForReference(belongsTo);
-    }
-
-    // The data has been normalized into a type/id pair by the
-    // serializer's polymorphism code.
-    return store.findById(belongsTo.type, belongsTo.id);
   }).property('data').meta(meta);
 };
 
@@ -5454,29 +5457,31 @@ var hasRelationship = function(type, options) {
 
   var meta = { type: type, isRelationship: true, options: options, kind: 'hasMany' };
 
-  return Ember.computed(function(key, value) {
-    var data = get(this, 'data'),
-        store = get(this, 'store'),
-        ids, relationship;
+  return Ember.computed({
+    get: function(key) {
+      var data = get(this, 'data'),
+          store = get(this, 'store'),
+          ids, relationship;
 
-    if (typeof type === 'string') {
-      if (type.indexOf(".") === -1) {
-        type = store.modelFor(type);
-      } else {
-        type = get(Ember.lookup, type);
+      if (typeof type === 'string') {
+        if (type.indexOf(".") === -1) {
+          type = store.modelFor(type);
+        } else {
+          type = get(Ember.lookup, type);
+        }
       }
+
+      //ids can be references or opaque token
+      //(e.g. `{url: '/relationship'}`) that will be passed to the adapter
+      ids = data[key];
+
+      relationship = store.findMany(type, ids, this, meta);
+      set(relationship, 'owner', this);
+      set(relationship, 'name', key);
+      set(relationship, 'isPolymorphic', options.polymorphic);
+
+      return relationship;
     }
-
-    //ids can be references or opaque token
-    //(e.g. `{url: '/relationship'}`) that will be passed to the adapter
-    ids = data[key];
-
-    relationship = store.findMany(type, ids, this, meta);
-    set(relationship, 'owner', this);
-    set(relationship, 'name', key);
-    set(relationship, 'isPolymorphic', options.polymorphic);
-
-    return relationship;
   }).property().meta(meta);
 };
 
