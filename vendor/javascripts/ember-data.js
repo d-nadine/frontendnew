@@ -5337,7 +5337,7 @@ DS.belongsTo = function(type, options) {
 
   var meta = { type: type, isRelationship: true, options: options, kind: 'belongsTo' };
 
-  var resolveType = (type, store) => {
+  var resolveType = function (type, store){
     if (typeof type === 'string') {
       if (type.indexOf(".") === -1) {
         return store.modelFor(type);
