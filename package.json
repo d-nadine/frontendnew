@@ -20,6 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",
+    "ember-buffered-proxy": "git+https://github.com/dagda1/ember-buffered-proxy.git#a03146fe34a8ee117c24c06b8076b79f33e7a434",
     "ember-cli": "^1.13.8",
     "ember-cli-app-version": "0.5.0",
     "ember-cli-babel": "^5.1.3",

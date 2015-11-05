@@ -1,54 +1,5 @@
 import Ember from 'ember';
 
-const {
-  Component,
-  computed
-} = Ember;
-
-Component.reopen({
-  classNameBindings: ['viewClassName'],
-
-  viewClassName: computed(function() {
-    const constructor = this.constructor.toString();
-
-    if(!constructor.match(/radium/)) {
-      return undefined;
-    }
-
-    if(!constructor.match(/@view/) && !constructor.match(/@component/)) {
-      return undefined;
-    }
-
-    const result = constructor.split(':')[1].dasherize();
-
-    if(result[0] !== '-') {
-      return `${result}-component`;
-    } else {
-      return undefined;
-    }
-  })
-});
-
-DS.Model.reopenClass({
-  humanize: function() {
-    return this.toString().humanize();
-  },
-  instanceFromHash: function(hash, key, type, store) {
-    const id = hash[key]["id"];
-    const adapter = store.adapterForType(type);
-
-    adapter.didFindRecord(store, type, hash, id);
-
-    return type.find(id);
-  }
-});
-
-DS.Model.reopen({
-  humanize: function() {
-    return this.constructor.humanize();
-  }
-});
-
 String.prototype.pluralize = function() {
   if (this.toString() === 'company') {
     return "companies";
@@ -100,4 +51,3 @@ String.prototype.reformatHtml = function() {
    /*jshint -W049*/
   return this.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '\n\n').replace(/\<\div\>\<br\>\<\/div\>/i, '\n').replace(/<br\s*\/?>/ig, "\n").replace(/&nbsp;/g, ' ').replace(/(<([^>]+)>)/ig, "");
 };
-
