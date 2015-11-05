@@ -204,14 +204,13 @@ var Scanner = Ember.Object.extend({
   is true, since they are technically the same position in time.
 
   @extends Ember.Object
-  @extends Ember.Freezable
   @extends Ember.Copyable
   @author Martin Ottenwaelter
   @author Jonathan Lewis
   @author Josh Holt
   @since Ember 1.0
 */
-Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
+Ember.DateTime = Ember.Object.extend(Ember.Copyable,
 /** @scope Ember.DateTime.prototype */ {
 
   /**
@@ -233,13 +232,6 @@ Ember.DateTime = Ember.Object.extend(Ember.Freezable, Ember.Copyable,
     @type Integer
   */
   timezone: 0,
-
-  /**
-    A `Ember.DateTime` instance is frozen by default for better performance.
-
-    @type Boolean
-  */
-  isFrozen: true,
 
   /**
     Returns a new `Ember.DateTime` object where one or more of the elements have

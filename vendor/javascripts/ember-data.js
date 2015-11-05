@@ -4715,17 +4715,16 @@ DS.attr = function(type, options) {
     options: options
   };
 
-  return Ember.computed(function(key, value) {
-    if (arguments.length > 1) {
-      Ember.assert("You may not set `id` as an attribute on your model. Please remove any lines that look like: `id: DS.attr('<type>')` from " + this.constructor.toString(), key !== 'id');
-    } else {
-      value = getAttr(this, options, key);
+  return Ember.computed( {
+    get: function(key) {
+      return getAttr(this, options, key);
+    },
+    set: function(_, value) {
+      return value;
     }
-
-    return value;
-  // `data` is never set directly. However, it may be
-  // invalidated from the state manager's setData
-  // event.
+    // `data` is never set directly. However, it may be
+    // invalidated from the state manager's setData
+    // event.
   }).property('data').meta(meta);
 };
 
