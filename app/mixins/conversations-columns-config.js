@@ -11,15 +11,10 @@ export default Mixin.create({
       heading: 'Contact',
       classNames: 'email-sender',
       bindings: [
-        {
-          name: "contact",
-          value: "contact"
-        },
-        {
-          name: "linkAction",
-          value: "showContactDrawer",
-          "static": true
-        }
+        { name: "contact", value: "contact" }
+      ],
+      actions: [
+        {name: "linkAction", value: "showContactDrawer"}
       ],
       component: 'contact-link'
     }

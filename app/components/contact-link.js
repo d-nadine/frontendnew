@@ -15,7 +15,7 @@ export default Component.extend(SpreadArgs, ContainingParent, {
         return undefined;
       }
 
-      this.get('containingParent').send(linkAction, contact);
+      return this.attrs.linkAction(contact);
     }
   }
 });

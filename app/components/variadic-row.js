@@ -20,7 +20,6 @@ export default Component.extend({
     return this.get('columns').map((column) => {
       let result = {
         component: null,
-        attrs: [],
         tableRow: this,
         context: item
       },
@@ -36,6 +35,15 @@ export default Component.extend({
         //
 
         return binding;
+      });
+
+      // FIXME: we need to supply further contexts
+      const actionContext = this.get('targetObject.targetObject');
+
+      result.actions = column.actions.map((action) => {
+        action.context = actionContext;
+
+        return action;
       });
 
       return result;

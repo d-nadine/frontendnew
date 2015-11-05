@@ -16,7 +16,10 @@ export default Mixin.create({
 
     const mainContext = spreadArgs.value.context;
 
-    spreadArgs.value.bindings.forEach((binding) => {
+    const bindings = spreadArgs.value.bindings || [],
+          actions = spreadArgs.value.actions || [];
+
+    bindings.forEach((binding) => {
       if(binding.static) {
         this.set(binding.name, binding.value);
       } else {
@@ -24,6 +27,12 @@ export default Mixin.create({
 
         this.set(binding.name, context.get(binding.value));
       }
+    });
+
+    actions.forEach((action) => {
+      const context = action.context;
+
+      this.attrs[action.name] = context._actions[action.value].bind(action.context);
     });
   }
 });
