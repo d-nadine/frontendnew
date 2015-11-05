@@ -1,12 +1,11 @@
 import Ember from 'ember';
 import SpreadArgs from 'radium/mixins/spread-args-mixin';
-import ContainingParent from 'radium/mixins/containing-parent-mixin';
 
 const {
   Component
 } = Ember;
 
-export default Component.extend(SpreadArgs, ContainingParent, {
+export default Component.extend(SpreadArgs, {
   actions: {
     linkAction: function(contact) {
       let linkAction;
