@@ -5337,7 +5337,7 @@ DS.belongsTo = function(type, options) {
 
   var meta = { type: type, isRelationship: true, options: options, kind: 'belongsTo' };
 
-  const resolveType = (type, store) => {
+  var resolveType = (type, store) => {
     if (typeof type === 'string') {
       if (type.indexOf(".") === -1) {
         return store.modelFor(type);
@@ -5808,7 +5808,7 @@ DS.Model.reopenClass({
         type = meta.type;
 
         if (typeof type === 'string') {
-          type = get(this, type, false) || get(Ember.lookup, type);
+          type = get(this, type) || get(Ember.lookup, type);
         }
 
         Ember.assert("You specified a hasMany (" + meta.type + ") on " + meta.parentType + " but " + meta.type + " was not found.",  type);
@@ -5862,7 +5862,7 @@ DS.Model.reopenClass({
           if (type.match(/^[^A-Z]/)) {
             type = this.store.modelFor(type);
           } else {
-            type = get(this, type, false) || get(Ember.lookup, type);
+            type = get(this, type) || get(Ember.lookup, type);
           }
 
           meta.type = type;
