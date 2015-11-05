@@ -15,4 +15,4 @@ export function truncate(params, options) {
   }
 }
 
-export default Ember.HTMLBars.makeBoundHelper(truncate);
+export default Ember.Helper.helper(truncate);

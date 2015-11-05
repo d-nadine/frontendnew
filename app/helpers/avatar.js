@@ -76,4 +76,4 @@ export function avatar(params, options) {
   return Ember.String.htmlSafe(img.get(0).outerHTML);
 }
 
-export default Ember.HTMLBars.makeBoundHelper(avatar);
+export default Ember.Helper.helper(avatar);
