@@ -2,6 +2,8 @@ import Ember from 'ember';
 import BufferedProxy from 'ember-buffered-proxy/proxy';
 import ContentEditableBehaviour from 'radium/mixins/contenteditable-behaviour';
 
+import {ENTER, ESCAPE} from "radium/utils/key-constants";
+
 const {
   Component
 } = Ember;
@@ -444,7 +446,7 @@ export default Component.extend(ContentEditableBehaviour, {
   keyDown: function(e) {
     var bufferedProxy, markUp;
     bufferedProxy = this.get('bufferedProxy');
-    if (e.keyCode === this.ENTER) {
+    if (e.keyCode === ENTER) {
       if (this.get('multiline')) {
         e.preventDefault();
         this.insertLineBreak();
@@ -455,10 +457,12 @@ export default Component.extend(ContentEditableBehaviour, {
         return this.send('updateModel');
       });
 
+      this.$().blur();
+
       return false;
     }
 
-    if (e.keyCode === this.ESCAPE) {
+    if (e.keyCode === ESCAPE) {
       bufferedProxy.discardBufferedChanges();
       markUp = this.get('markUp');
       this.setMarkup();

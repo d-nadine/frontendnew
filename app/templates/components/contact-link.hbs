@@ -1,4 +1,9 @@
-{{avatar contact}}
+{{#if contact.isLoaded}}
+  {{avatar contact}}
+{{else}}
+  {{avatar contact}}
+{{/if}}
+
 {{#unless linkAction}}
   {{#link-to "contact" contact}}
     {{truncate contact.displayName length="100"}}
