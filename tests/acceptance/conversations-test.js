@@ -31,7 +31,9 @@ const page = PageObject.build({
 
   drawer: PageObject.component({
     toggleIsVisible: PageObject.isVisible('.toggle-switch-component'),
-    togglePublic: PageObject.clickable('.toggle-switch-component input[type=checkbox]')
+    togglePublic: PageObject.clickable('.toggle-switch-component input[type=checkbox]'),
+    editableNameIcon: PageObject.clickable('.inline-editor-component.name-editor .ss-write'),
+    editableName:  PageObject.fillable('.inline-editor-component.name-editor .editable-field-component')
   })
 });
 
@@ -133,5 +135,39 @@ test('can trigger drawer and perform actions', function(assert) {
 
   andThen(function() {
     assert.ok(getContact().public, 'the contact is public after clicking switch');
+  });
+});
+
+test('can update company name from drawer', function(assert) {
+  assert.expect(4);
+
+  page.visit({type: 'incoming'});
+
+  const getContact = (name) => {
+    return server.db.contacts.where({name: name})[0];
+  };
+
+  andThen(function() {
+    assert.equal(1, page.conversations().count());
+
+    page.conversations(1).contactLink();
+
+    assert.notEqual('Updated Name', getContact('Bob Hoskins').name, 'precon - the contact is not public prior to clicking toggle switch');
+  });
+
+  andThen(function() {
+    assert.ok(page.drawerIsVisible());
+
+    page.drawer().editableNameIcon();
+  });
+
+  andThen(function() {
+    fillInContentEditable('.inline-editor-component.name-editor .editable-field-component', 'Updated Name');
+  });
+
+  andThen(function() {
+    const contact = getContact('Updated Name');
+
+    assert.ok(contact, "The contact was updated");
   });
 });

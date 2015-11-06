@@ -15,12 +15,11 @@ export default Component.extend(ContentEditableBehaviour, {
    activateLink: function() {
      const target = this.get('containingController');
 
-     let routeAction,
-         routable,
+     let routable,
          queryParams;
 
-     if ((routeAction = this.get("routeAction"))) {
-       return target.send(routeAction, this.get('model'));
+     if (this.attrs.routeAction) {
+       return this.attrs.hoverAction(this.get('model'));
      }
 
      const alternative = this.get('alternativeRoute');
@@ -147,7 +146,8 @@ export default Component.extend(ContentEditableBehaviour, {
     };
 
     if (this.get('isInvalid')) {
-      this.get('containingController').send('flashError', 'Field is not valid.');
+      this.flashMessenger.error('Field is not valid.');
+
       if (model) {
         return resetModel();
       } else {
@@ -157,11 +157,8 @@ export default Component.extend(ContentEditableBehaviour, {
 
     this.set('isSaving', true);
 
-    let saveAction,
-        beforeSave;
-
-    if ((saveAction = this.get("saveAction"))) {
-      this.get('containingController').send(saveAction, this);
+    if (this.get("saveAction")) {
+      this.attrs.saveAction(this);
 
       if (this.get('actionOnly')) {
         return null;
@@ -170,8 +167,8 @@ export default Component.extend(ContentEditableBehaviour, {
 
     bufferedProxy.applyBufferedChanges();
 
-    if ((beforeSave = this.get('beforeSave'))) {
-      this.get('containingController').send(beforeSave, this);
+    if (this.get('beforeSave')) {
+      this.attrs.beforeSave(this);
     }
 
     const self = this;
@@ -185,11 +182,8 @@ export default Component.extend(ContentEditableBehaviour, {
         this.EventBus.publishModelUpdate(model);
       });
 
-      let afterSave;
-
-      if ((afterSave = this.get('afterSave'))) {
-        Ember.assert("You have a containing controller", this.get('containingController'));
-        this.get('containingController').send(afterSave, this);
+      if (this.get('afterSave')) {
+        this.attrs.afterSave(this);
       }
 
       if(!value.length) {
@@ -351,10 +345,9 @@ export default Component.extend(ContentEditableBehaviour, {
     if ((hoverAction = this.get('hoverAction'))) {
       const hoverSelector = this.get('elementId');
       this.set('hoverSelector', hoverSelector);
-      const target = this.get('containingController');
 
       this.$().on("mouseenter." + hoverSelector, "a.route", () => {
-        target.send(hoverAction, this.get('model'));
+        this.attrs.hoverAction(this.get('model'));
       });
     }
 

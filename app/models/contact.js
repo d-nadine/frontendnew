@@ -1,8 +1,6 @@
 import Model from 'radium/models/models';
 
-import {
-  primary
-} from '../utils/computed';
+import { primary, primaryAccessor } from '../utils/computed';
 
 import Ember from 'ember';
 
@@ -30,8 +28,22 @@ const Contact = Model.extend({
   isPersonal: Ember.computed.not('isPublic'),
 
   emailAddresses: DS.hasMany('Radium.EmailAddress'),
+  phoneNumbers: DS.hasMany('Radium.PhoneNumber'),
+  addresses: DS.hasMany('Radium.Address'),
 
   primaryEmail: primary('emailAddresses'),
+  primaryPhone: primary('phoneNumbers'),
+  primaryAddress: primary('addresses'),
+  email: primaryAccessor('emailAddresses', 'value', 'primaryEmail'),
+
+  phone: primaryAccessor('phoneNumbers', 'value', 'primaryPhone'),
+  city: primaryAccessor('addresses', 'city', 'primaryAddress'),
+  street: primaryAccessor('addresses', 'street', 'primaryAddress'),
+  line2: primaryAccessor('addresses', 'line2', 'primaryAddress'),
+  state: primaryAccessor('addresses', 'state', 'primaryAddress'),
+  zipcode: primaryAccessor('addresses', 'zipcode', 'primaryAddress'),
+
+  company: DS.belongsTo('Radium.Company', {inverse: 'contacts'}),
 
   displayName: computed('name', 'primaryEmail', function() {
     return this.get('name') || this.get('primaryEmail.value');

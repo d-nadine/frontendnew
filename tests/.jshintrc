@@ -1,4 +1,3 @@
-
 {
   "predef": [
     "server",
@@ -27,7 +26,8 @@
     "Radium",
     "moment",
     "FormData",
-    "accounting"
+    "accounting",
+    "fillInContentEditable"
   ],
   "node": false,
   "browser": false,

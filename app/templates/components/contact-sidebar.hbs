@@ -7,9 +7,9 @@
         </div>
         {{toggle-switch checked=contact.isPublic action="switchShared" dataOn="Shared" dataOff="Private" dontPropagate=true}}
       </div>
-      {{inline-editor model=contact bufferKey="name" notRoutable=true placeholder="Add name" parent=targetObject}}
+      {{inline-editor class="name-editor" model=contact bufferKey="name" notRoutable=true placeholder="Add name" parent=targetObject}}
 
-      {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" routeAction="showCompany" parent=targetObject saveAction="saveCompany" afterSave="afterSaveCompany" parent=this}}
+      {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" routeAction="showCompany" parent=targetObject saveAction=(action "saveCompany") afterSave=(action "afterSaveCompany") parent=this}}
     </div>
   </div>
 </div>

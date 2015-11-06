@@ -48,7 +48,7 @@ export default Mixin.create({
 
     return (value.toLowerCase() === selected.toLowerCase());
   },
-  setValue: function(object, index) {
+  setValue(object, index) {
     const self = this;
     const el = self.autocompleteElement();
 
@@ -99,16 +99,18 @@ export default Mixin.create({
       return subject.addObserver('isLoaded', observer);
     }
   },
-  getValue: function(item) {
+
+  getValue(item) {
     if (typeof item === "string") {
       return item;
     } else {
       const field = this.field;
 
-      return item[field] || item.get(field);
+      return item.get(field) || item[field];
     }
   },
-  resolveQuery: function(query) {
+
+  resolveQuery(query) {
     if (!query) {
       return "";
     }
@@ -117,7 +119,8 @@ export default Mixin.create({
     }
     return query;
   },
-  queryParameters: function(query) {
+
+  queryParameters(query) {
     const scopes = this.get('scopes');
 
     Ember.assert("You need to define a scopes binding for autocomplete", scopes);
@@ -133,7 +136,8 @@ export default Mixin.create({
 
     return params;
   },
-  matcher: function(item) {
+
+  matcher(item) {
     var query, string;
     string = this.getValue(item);
     query = this.resolveQuery(this.query);
@@ -148,7 +152,8 @@ export default Mixin.create({
 
     return ~string.toLowerCase().indexOf(query.toLowerCase());
   },
-  sorter: function(items) {
+
+  sorter(items) {
     const beginswith = [];
     const caseSensitive = [];
     const caseInsensitive = [];
@@ -169,6 +174,7 @@ export default Mixin.create({
     return beginswith.concat(caseSensitive, caseInsensitive);
   },
   holder: "",
+
   highlighter: function(item) {
     const string = this.getValue(item);
     let query = this.resolveQuery(this.query);
@@ -179,6 +185,7 @@ export default Mixin.create({
       return "<strong>" + match + "</strong>";
     });
   },
+
   updater: function(item) {
     return this.set('value', item);
   },
@@ -208,7 +215,8 @@ export default Mixin.create({
 
     return;
   },
-  showTypeahead: function() {
+
+  showTypeahead() {
     const pos = $.extend({}, this.$element.position(), {
       height: this.$element[0].offsetHeight
     });
@@ -225,7 +233,7 @@ export default Mixin.create({
 
   showTypeahaedWhenEmpty: true,
 
-  renderItems: function(items) {
+  renderItems(items) {
     const that = this;
 
     items = $(items).map(function(i, item) {
@@ -340,7 +348,7 @@ export default Mixin.create({
       return this.hide();
     };
 
-    typeahead.update = (item, index) => {
+    typeahead.updater = (item, index) => {
       this.setValue(item, index);
     };
 

@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import CommonDrawerActions from 'radium/mixins/common-drawer-actions';
+import SaveContactActions from 'radium/mixins/save-contact-actions';
 
 const {
   Component,
   inject
 } = Ember;
 
-export default Component.extend(CommonDrawerActions, {
+export default Component.extend(SaveContactActions, CommonDrawerActions, {
   actions: {
     createList(list) {
       this.sendAction('createList', list, this.get('contact'));
