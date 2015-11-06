@@ -1,0 +1,18 @@
+{{#if icon}}
+  <i class={{icon}}></i>
+{{/if}}
+<span class="text">{{leader}}</span>
+<input type="text" autocomplete="off" placeholder={{placeholder}} tabindex={{tabindex}} disabled={{disabled}} class="combobox"/>
+{{#unless value}}
+  <span {{action "showAll" bubbles=false}} class="add-on dropdown-toggle dropdown-on" data-dropdown="dropdown">
+    {{#unless disabled}}
+      <i class="ss-standard ss-dropdown"></i>
+    {{else}}
+      <i class="ss-standard ss-lock"></i>
+    {{/unless}}
+  </span>
+{{else}}
+  <span {{action "removeValue" bubbles=false}} class="add-on dropdown-toggle dropdown-off" data-dropdown="dropdown">
+    <i class="ss-standard ss-delete"></i>
+  </span>
+{{/unless}}
