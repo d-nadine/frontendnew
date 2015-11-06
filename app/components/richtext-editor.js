@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
-import UploadingMixin from "radium/mixins/uploading-mixin";
 import AutocompleteMixin from "radium/mixins/autocomplete-mixin";
+
+import UploadingMixin from "radium/mixins/uploading-mixin";
 import ContentEditableBehaviour from "radium/mixins/contenteditable-behaviour";
 
 import {TAB, ENTER, ARROW_UP, ARROW_DOWN} from "radium/utils/key-constants";
@@ -37,6 +38,8 @@ export default Component.extend(AutocompleteMixin, UploadingMixin, ContentEditab
   btnSize: 'bth-xs',
   height: 120,
   files: Ember.computed.alias('targetObject.files'),
+
+  isRichTextEditor: true,
 
   _initialize: Ember.on('init', function() {
     this.EventBus.subscribe('email:reset', this, 'onFormReset');
@@ -366,7 +369,7 @@ export default Component.extend(AutocompleteMixin, UploadingMixin, ContentEditab
       return null;
     }
 
-    selection = Radium.rangy.getSelection();
+    selection = rangy.getSelection();
     range = selection.getRangeAt(0).cloneRange();
     editor = $('.note-editable');
     current = document.getSelection().anchorNode;

@@ -1,16 +1,15 @@
 import Ember from 'ember';
 
+import AutocompleteMixin from "radium/mixins/autocomplete-mixin";
 import AutoFillHackMixin from "radium/mixins/auto_fill_hack";
-
 import { ValidationMixin } from "radium/mixins/validation_mixin";
-
 import SaveModelOnKeyDown from 'radium/mixins/save_model_on_key_down';
 
 const {
   Component
 } = Ember;
 
-export default Component.extend(AutoFillHackMixin, ValidationMixin, SaveModelOnKeyDown, {
+export default Component.extend(AutocompleteMixin, AutoFillHackMixin, ValidationMixin, SaveModelOnKeyDown, {
   actions: {
     setBindingValue: function(object, index) {
       let value;
@@ -105,6 +104,8 @@ export default Component.extend(AutoFillHackMixin, ValidationMixin, SaveModelOnK
     }
   },
   backup: null,
+
+  isAutocompleteTextBox: true,
 
   sync: Ember.computed.not('isAsync'),
   classNameBindings: [':autocomplete-textbox', ':field', ':combobox', ':control-box', 'isInvalid', 'isAsync', 'sync'],

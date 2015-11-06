@@ -4,6 +4,8 @@ import ContentEditableBehaviour from 'radium/mixins/contenteditable-behaviour';
 
 import {ENTER, ESCAPE} from "radium/utils/key-constants";
 
+import Url from "radium/utils/url";
+
 const {
   Component
 } = Ember;
@@ -272,7 +274,7 @@ export default Component.extend(ContentEditableBehaviour, {
       } else if (this.get('routeAction')) {
         return "<a class='route' href='#'>" + value + "</a>";
       } else if (this.get('externalUrl')) {
-        const url = Radium.Url.resolve(value);
+        const url = Url.resolve(value);
         return "<a href='" + url + "' target='_blank'>" + value + "</a>";
       } else {
         return value;

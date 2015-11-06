@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 import EditableField from 'radium/components/editable-field';
 
-export default EditableField.extend({
+import AutocompleteMixin from "../mixins/autocomplete-mixin";
+
+export default EditableField.extend(AutocompleteMixin, {
   actions: {
     setBindingValue: function(object) {
       const key = this.bufferKey ? this.bufferKey : this.field;
@@ -17,6 +19,8 @@ export default EditableField.extend({
         const saveAction = this.get('saveAction');
 
         Ember.assert("You must have a saveAction specified", saveAction);
+
+        Ember.assert('we need to supply a containingController fix', this.get('containingController'));
 
         this.get('containingController').send(saveAction, object);
       }

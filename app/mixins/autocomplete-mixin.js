@@ -11,9 +11,6 @@ import {
 }
 from "radium/utils/key-constants";
 
-import AutocompleteTextboxComponent from "radium/components/autocomplete-textbox.";
-import RichtextEditorComponent from "radium/components/richtext-editor";
-
 const {
   Mixin
 } = Ember;
@@ -58,7 +55,7 @@ export default Mixin.create({
     const finish = function(value) {
       self.send('setBindingValue', object, index);
 
-      if (self instanceof AutocompleteTextboxComponent || self instanceof RichtextEditorComponent) {
+      if (self.isAutocompleteTextBox|| self.isRichTextEditor) {
         return;
       }
 
@@ -185,18 +182,21 @@ export default Mixin.create({
   updater: function(item) {
     return this.set('value', item);
   },
+
   autocompleteElement: function() {
     throw new Error('You must override autocompleteElement in subclass.');
   },
+
   autocompleteItemType: function() {
     return this.get('autocompleteType') || Radium.AutocompleteItem;
   },
+
   getTypeahead: function() {
     return this.autocompleteElement().data('typeahead');
   },
+
   asyncSource: function(query, process) {
-    var queryParameters;
-    queryParameters = this.queryParameters(query);
+    const queryParameters = this.queryParameters(query);
 
     this.set('isLoading', true);
 
@@ -290,9 +290,13 @@ export default Mixin.create({
         }
       }
 
-      const items = ($.isFunction(this.source) ?
-                     this.source(this.query, $.proxy(this.process, this)) :
-                     this.source);
+      let items;
+
+      if ($.isFunction(this.source)) {
+        items = this.source(this.query, $.proxy(this.process, this));
+      } else {
+        items = this.source;
+      }
 
       if (!isAsync && !this.query && items.get('length') && showTypeahaedWhenEmpty) {
         return this.render(items.slice(0, this.options.items)).show();
@@ -302,8 +306,7 @@ export default Mixin.create({
         return this.process(items);
       } else {
         return this;
-      }
-    };
+      }};
 
     typeahead.process = function(items) {
       items = items.filter((item) => {
