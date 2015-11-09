@@ -138,7 +138,7 @@ test('can trigger drawer and perform actions', function(assert) {
   });
 });
 
-test('can update company name from drawer', function(assert) {
+test('can update contact name from drawer', function(assert) {
   assert.expect(4);
 
   page.visit({type: 'incoming'});
@@ -171,3 +171,4 @@ test('can update company name from drawer', function(assert) {
     assert.ok(contact, "The contact was updated");
   });
 });
+
