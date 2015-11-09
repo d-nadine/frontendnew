@@ -20,11 +20,13 @@ function fillInContentEditable(app, selector, contextOrText, text) {
     run($el, "trigger", "input");
 
     run.next(() => {
-      const e = $.Event('keydown');
+      ['keydown'].forEach((keyEvt) => {
+        const e = $.Event(keyEvt);
 
-      e.keyCode = e.which = 13;
+        e.keyCode = e.which = 13;
 
-      $el.trigger(e);
+        $el.trigger(e);
+      });
     });
   });
 

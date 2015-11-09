@@ -33,7 +33,12 @@ const page = PageObject.build({
     toggleIsVisible: PageObject.isVisible('.toggle-switch-component'),
     togglePublic: PageObject.clickable('.toggle-switch-component input[type=checkbox]'),
     editableNameIcon: PageObject.clickable('.inline-editor-component.name-editor .ss-write'),
-    editableName:  PageObject.fillable('.inline-editor-component.name-editor .editable-field-component')
+    editableName:  PageObject.fillable('.inline-editor-component.name-editor .editable-field-component'),
+
+    emptyCompanyText: PageObject.text('.company.inline-autocomplete-component em', {scope: '.drawer-view'}),
+    editCompanyName: PageObject.clickable('.company .ss-write', {scope: '.drawer-view'}),
+    comapnyDropDownisVisible: PageObject.isVisible('.company .typeahead', {scope: '.drawer-view'}),
+    companyDropDownActive: PageObject.text('.company .typeahead', {scope: '.drawer-view'})
   })
 });
 
@@ -47,6 +52,8 @@ module('Acceptance | conversations', {
     let other_user = server.create('user', {account_id: account.id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'});
 
     let contact = server.create('contact', {name: 'Bob Hoskins', account_id: account.id});
+
+    server.create('company', {name: "Acme Ltd.", account_id: account.id});
 
     server.create('email',
                   {account_id: account.id,
@@ -172,3 +179,26 @@ test('can update contact name from drawer', function(assert) {
   });
 });
 
+test("can set contact's company from dropdown", function(assert) {
+  assert.expect(2);
+
+  page.visit({type: 'incoming'});
+
+  andThen(function() {
+    page.conversations(1).contactLink();
+  });
+
+  andThen(function() {
+    assert.ok(page.drawer().emptyCompanyText('Add Company'));
+
+    page.drawer().editCompanyName();
+  });
+
+  andThen(function() {
+    fillInWithInputEvent('.company .autocomplete-editable-field-component', 'Ac', 'keyup');
+  });
+
+  andThen(function() {
+    assert.ok(page.drawer().comapnyDropDownisVisible());
+  });
+});

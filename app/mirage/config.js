@@ -19,6 +19,37 @@ export default function() {
     return {contact: db.contacts.where({id: fakeRequest.params.id})[0]};
   });
 
+  this.get('/companies/:id', function(db, fakeRequest) {
+    return {company: db.companies.where({id: fakeRequest.params.id})[0]};
+  });
+
+  this.get('/autocomplete', function(db, fakeRequest) {
+    const query = getUrlParts(fakeRequest.url);
+    const scope = query[1].scopes;
+    const term = query[0].term.toLowerCase();
+
+    let results = [];
+
+    if(scope === "company") {
+      const companies = server.db.companies.filter((company) => {
+        return  ~term.indexOf(company.name.toLowerCase()) > -1;
+      });
+
+      results = companies.map((company) => {
+        return {
+          id: company.id + 8,
+          name: company.name,
+          displayName: company.name,
+          resource_id: company.id,
+          _person_company_id: company.id,
+          email: null
+        };
+      });
+    }
+
+    return {autocomplete: results};
+  });
+
   this.put('/contacts/:id', function(db, fakeRequest) {
     const id = fakeRequest.params.id,
           attrs = JSON.parse(fakeRequest.requestBody).contact,
@@ -48,4 +79,19 @@ export default function() {
 
     return {emails: emails};
   });
+}
+
+function getUrlParts(url) {
+  const vars = [];
+  const hashes = url.slice(url.indexOf('?') + 1).split('&');
+
+  for(var i = 0; i < hashes.length; i++) {
+    let values = hashes[i].split('=');
+
+    const part = {};
+
+    part[values[0]] = values[1];
+    vars.push(part);
+  }
+  return vars;
 }

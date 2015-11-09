@@ -34,10 +34,13 @@ var RESTSerializer = DS.RESTSerializer.extend({
     if(['attachment_ids'].indexOf(key) === -1){
       return this._super.apply(this, arguments);
     }
+
     var name = relationship.key,
         manyArray = get(record, name);
 
-    hash[key] = manyArray.map(function(item){ return item.get('id'); });
+    hash[key] = manyArray.map(function(item){
+      return item.get('id');
+    });
   },
 
   extractValidationErrors: function(type, json) {
@@ -324,7 +327,7 @@ RESTAdapter.registerTransform('array', {
   },
   deserialize: function(serialized){
     return serialized;
-  },
+  }
 });
 
 RESTAdapter.registerTransform('datetime',  {
@@ -332,13 +335,17 @@ RESTAdapter.registerTransform('datetime',  {
    if(serialized){
       var date = Ember.DateTime.parse(serialized);
       return date.adjust({timezone: window.Radium.timezone});
-    }
+   }
+
+   return null;
  },
 
  serialize: function(deserialized) {
    if(deserialized){
       return deserialized.toFullFormat();
-    }
+   }
+
+   return null;
  }
 });
 
@@ -368,35 +375,34 @@ RESTAdapter.map('Radium.ContactInfo', {
   socialProfiles: {embedded: 'always'}
 });
 
-// RESTAdapter.map('Radium.Deal', {
-//   isPublic: {key: 'public'},
-//   user: { key: 'assigned_to_id' },
-//   checklist: { key: 'check_list' ,embedded: 'always' },
-//   contactRefs: {embedded: 'always'}
-// });
+RESTAdapter.map('Radium.Deal', {
+  isPublic: {key: 'public'},
+  user: { key: 'assigned_to_id' },
+  contactRefs: {embedded: 'always'}
+});
 
-// RESTAdapter.map('Radium.Company', {
-//   user: { key: 'assigned_to_id' },
-//   addresses: {key: 'offices', embedded: 'always'},
-//   phoneNumbers: {embedded: 'always'},
-//   socialProfiles: {embedded: 'load'},
-//   technologies: {embedded: 'load'},
-//   marketCategories: {embedded: 'load'}
-// });
+RESTAdapter.map('Radium.Company', {
+  user: { key: 'assigned_to_id' },
+  addresses: {key: 'offices', embedded: 'always'},
+  phoneNumbers: {embedded: 'always'},
+  socialProfiles: {embedded: 'load'},
+  technologies: {embedded: 'load'},
+  marketCategories: {embedded: 'load'}
+});
 
-// RESTAdapter.map('Radium.PhoneNumber', {
-//   value: { key: 'number' },
-//   isPrimary: { key: 'primary'}
-// });
+RESTAdapter.map('Radium.PhoneNumber', {
+  value: { key: 'number' },
+  isPrimary: { key: 'primary'}
+});
 
-// RESTAdapter.map('Radium.Email', {
-//   message: {key: 'body'},
-//   isPublic: {key: 'public'},
-//   isRead: {key: 'read'},
-//   isPersonal: {key: 'personal'},
-//   isDraft: {key: 'draft'},
-//   comments: {embedded: 'load'}
-// });
+RESTAdapter.map('Radium.Email', {
+  message: {key: 'body'},
+  isPublic: {key: 'public'},
+  isRead: {key: 'read'},
+  isPersonal: {key: 'personal'},
+  isDraft: {key: 'draft'},
+  comments: {embedded: 'load'}
+});
 
 // RESTAdapter.map('Radium.BulkEmailJob', {
 //   message: {key: 'body'},
@@ -408,9 +414,9 @@ RESTAdapter.map('Radium.EmailAddress', {
   isPrimary: { key: 'primary'}
 });
 
-// RESTAdapter.map('Radium.Address', {
-//   isPrimary: { key: 'primary'}
-// });
+RESTAdapter.map('Radium.Address', {
+  isPrimary: { key: 'primary'}
+});
 
 // RESTAdapter.map('Radium.Todo', {
 //   isFinished: {key: 'finished'},
@@ -437,7 +443,7 @@ RESTAdapter.map('Radium.EmailAddress', {
 RESTAdapter.map('Radium.User', {
   isAdmin: {key: 'admin'},
   settings: {key: 'settings_id'},
-  contactInfo: {embedded: 'always'},
+  contactInfo: {embedded: 'always'}
   //customQueries: {embedded: 'always'}
 });
 

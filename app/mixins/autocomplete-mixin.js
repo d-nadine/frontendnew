@@ -314,7 +314,8 @@ export default Mixin.create({
         return this.process(items);
       } else {
         return this;
-      }};
+      }
+    };
 
     typeahead.process = function(items) {
       items = items.filter((item) => {

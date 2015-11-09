@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import InlineEditorBase from 'radium/mixins/inline-editor-base';
 
 const {
   Component
 } = Ember;
 
-export default Component.extend(InlineEditorBase, {
+export default Component.extend({
   classNameBindings: ['isEditing'],
 
   focusIn() {

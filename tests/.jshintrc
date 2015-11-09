@@ -27,7 +27,8 @@
     "moment",
     "FormData",
     "accounting",
-    "fillInContentEditable"
+    "fillInContentEditable",
+    "fillInWithInputEvent"
   ],
   "node": false,
   "browser": false,
