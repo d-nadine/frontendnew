@@ -10,6 +10,7 @@
       {{inline-editor class="name-editor" model=contact bufferKey="name" notRoutable=true placeholder="Add name" parent=targetObject}}
 
       {{inline-autocomplete model=contact bufferKey="companyName" scopes="company" queryKey="name" placeholder="Add Company" class="company" routeAction="showCompany" parent=targetObject saveAction=(action "saveCompany") afterSave=(action "afterSaveCompany") parent=this}}
+      {{social-medialist person=contact}}
     </div>
   </div>
 </div>

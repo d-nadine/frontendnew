@@ -40,7 +40,8 @@ const page = PageObject.build({
     editCompanyName: PageObject.clickable('.company .ss-write', {scope: '.drawer-view'}),
     comapnyDropDownisVisible: PageObject.isVisible('.company .typeahead', {scope: '.drawer-view'}),
     companyDropDownActive: PageObject.text('.company .typeahead', {scope: '.drawer-view'}),
-    selectCompany: PageObject.clickable('.company .typeahead li:first-of-type a')
+    selectCompany: PageObject.clickable('.company .typeahead li:first-of-type a'),
+    socialMediaIsVisible: PageObject.isVisible('.social-medialist-component .ss-twitter')
   })
 });
 
@@ -214,5 +215,19 @@ test("can set contact's company from dropdown", function(assert) {
     const company = fetchers.findModelByProperty(Radium.Company, "name", "Acme Ltd.");
 
     assert.equal(company, contact.get('company'));
+  });
+});
+
+test('static drawer elements are present', function(assert) {
+  assert.expect(1);
+
+  page.visit({type: 'incoming'});
+
+  andThen(function() {
+    page.conversations(1).contactLink();
+  });
+
+  andThen(function() {
+    assert.ok(page.drawer().socialMediaIsVisible());
   });
 });
