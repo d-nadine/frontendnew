@@ -55,6 +55,12 @@ export default function() {
           attrs = JSON.parse(fakeRequest.requestBody).contact,
           record = db.contacts.update(id, attrs);
 
+    if(attrs.company_name) {
+      const company = db.companies.where({name: attrs.company_name})[0];
+
+      record.company_id = company.id;
+    }
+
     return {
       contact: record
     };

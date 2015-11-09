@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from 'radium/tests/helpers/start-app';
+import fetchers from 'radium/tests/helpers/model-fetchers';
 import PageObject from '../page-object';
 
 const {
@@ -181,7 +182,7 @@ test('can update contact name from drawer', function(assert) {
 });
 
 test("can set contact's company from dropdown", function(assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   page.visit({type: 'incoming'});
 
@@ -202,10 +203,16 @@ test("can set contact's company from dropdown", function(assert) {
   andThen(function() {
     assert.ok(page.drawer().comapnyDropDownisVisible());
 
+    $('.company .typeahead li:first-of-type').trigger('mouseover');
+
     page.drawer().selectCompany();
   });
 
   andThen(function() {
-    console.log('now what');
+    const contact = fetchers.findModelByProperty(Radium.Contact, "name", 'Bob Hoskins');
+
+    const company = fetchers.findModelByProperty(Radium.Company, "name", "Acme Ltd.");
+
+    assert.equal(company, contact.get('company'));
   });
 });
