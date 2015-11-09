@@ -38,7 +38,8 @@ const page = PageObject.build({
     emptyCompanyText: PageObject.text('.company.inline-autocomplete-component em', {scope: '.drawer-view'}),
     editCompanyName: PageObject.clickable('.company .ss-write', {scope: '.drawer-view'}),
     comapnyDropDownisVisible: PageObject.isVisible('.company .typeahead', {scope: '.drawer-view'}),
-    companyDropDownActive: PageObject.text('.company .typeahead', {scope: '.drawer-view'})
+    companyDropDownActive: PageObject.text('.company .typeahead', {scope: '.drawer-view'}),
+    selectCompany: PageObject.clickable('.company .typeahead li:first-of-type a')
   })
 });
 
@@ -200,5 +201,11 @@ test("can set contact's company from dropdown", function(assert) {
 
   andThen(function() {
     assert.ok(page.drawer().comapnyDropDownisVisible());
+
+    page.drawer().selectCompany();
+  });
+
+  andThen(function() {
+    console.log('now what');
   });
 });

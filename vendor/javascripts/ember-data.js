@@ -5337,7 +5337,7 @@ DS.belongsTo = function(type, options) {
 
   var meta = { type: type, isRelationship: true, options: options, kind: 'belongsTo' };
 
-  var resolveType = function (type, store){
+  var resolveType = function (store){
     if (typeof type === 'string') {
       if (type.indexOf(".") === -1) {
         return store.modelFor(type);
@@ -5379,7 +5379,7 @@ DS.belongsTo = function(type, options) {
     },
     set: function(key, value) {
       var store = get(this, 'store'),
-          type = resolveType(type, store);
+          type = resolveType(store);
 
       Ember.assert("You can only add a record of " + type.toString() + " to this relationship", !value || type.detectInstance(value));
       return value === undefined ? null : value;

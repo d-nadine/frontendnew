@@ -6,5 +6,5 @@ const {
 
 export default Mixin.create({
   createdAt: DS.attr("datetime"),
-  upeatedAt: DS.attr("datetime")
+  updatedAt: DS.attr("datetime")
 });
