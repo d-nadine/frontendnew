@@ -140,3 +140,31 @@ export function aggregate(...properties) {
 
   return computed(args, func);
 }
+
+export function isPrimaryComparer(left, right) {
+  if(left.get('isPrimary')) {
+    return -1;
+  }
+
+  if(right.get('isPrimary')) {
+    return 1;
+  }
+
+  return 0;
+}
+
+export function sortByPrimary(key, relationship) {
+  const path = key + "." + relationship;
+  const arrayProp = path + ".[]";
+  const isPrimaryProp = path + ".@each.isPrimary";
+
+  const func = () => {
+    var coll;
+    if (!(coll = this.get(path))) {
+      return;
+    }
+    return coll.toArray().sort(Radium.isPrimaryComparer);
+  };
+
+  return Ember.computed(arrayProp, isPrimaryProp, func);
+}

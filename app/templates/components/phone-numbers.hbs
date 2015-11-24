@@ -2,7 +2,7 @@
   <dt><i class="ss-standard ss-phone muted"></i></dt>
   <dd>
     {{#if isEditing}}
-      {{#each phoneNumber in phoneNumbers}}
+      {{#each phoneNumbers as |phoneNumber|}}
         {{#multiple-control item=phoneNumber items=phoneNumbers model=model relationship="phoneNumbers" saveModel="stopEditing" labels=Radium.PhoneLabels}}
           {{phone-input type="text" value=value enter="stopEditing" class="field" skipValidation=true}}
         {{/multiple-control}}
@@ -10,9 +10,11 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "toggleEditor" target=view bubbles=false}}></i>
       {{#if model.primaryPhone.value}}
-        {{#each phone in sortedPhoneNumbers}}
+        {{#each sortedPhoneNumbers as |phone|}}
           <a href="tel:{{unbound phone.value}}">
-            <strong {{bind-attr class="phone.isPrimary::hidestar"}}><i class="ss-standard ss-star"></i></strong> <span class="contact-info-field">{{phone.value}}</span>
+            <strong class="{{if phone.isPrimary 'hideStar'}}">
+              <i class="ss-standard ss-star"></i>
+            </strong> <span class="contact-info-field">{{phone.value}}</span>
           </a>
         {{/each}}
       {{else}}

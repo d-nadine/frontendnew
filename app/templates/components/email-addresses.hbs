@@ -3,7 +3,7 @@
   <dd>
     {{#if isEditing}}
       <div>
-        {{#each email in emailAddresses}}
+        {{#each emailAddresses as |email|}}
           {{#multiple-control item=email items=emailAddresses model=model relationship="emailAddresses" saveModel="stopEditing" labels=Radium.EmailLabels}}
           {{validation-input type="email" value=value enter="stopEditing" class="field" validations=_parent.emailValidations validator=_parent validationField="email" isValid=_parentObject.isValid placeholder="Email"}}
           {{/multiple-control}}
@@ -12,8 +12,8 @@
     {{else}}
       <i class="ss-standard ss-write pull-right" {{action "startEditing" bubbles=false}}></i>
       {{#if model.primaryEmail.value}}
-        {{#each email in sortedEmailAddresses}}
-          <strong {{bind-attr class="email.isPrimary::hidestar"}}>
+        {{#each sortedEmailAddresses as |email|}}
+          <strong class="{{if email.isPrimary 'hideStar'}}">
             <i class="ss-standard ss-star"></i>
           </strong>
           <span class="contact-info-field">{{email.value}}</span>
