@@ -2,6 +2,8 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'radium/tests/helpers/module-for-acceptance';
 import PageObject from "../page-object";
 
+import { createCurrentUser } from '../helpers/fixture-helpers';
+
 const {
   visitable
 } = PageObject;
@@ -14,10 +16,7 @@ const page = PageObject.build({
 moduleForAcceptance('Acceptance | activities');
 
 test('a user has an activity feed', function(assert) {
-  let subscriptionPlan = server.create('subscription-plan');
-  let billing = server.create('billing', {subscription_plan_id: subscriptionPlan.id});
-  let account = server.create('account', {billing_id: billing.id});
-  let current_user = server.create('user', {account_id: account.id, first_name: 'Paul', last_name: 'Cowan', email: 'paul@radiumcrm.com'});
+  let current_user = createCurrentUser();
 
   page.visit({user_id: current_user.id});
 

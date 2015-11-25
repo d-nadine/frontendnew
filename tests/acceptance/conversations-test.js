@@ -3,6 +3,7 @@ import { module, test } from 'qunit';
 import startApp from 'radium/tests/helpers/start-app';
 import fetchers from 'radium/tests/helpers/model-fetchers';
 import PageObject from '../page-object';
+import { createCurrentUser } from '../helpers/fixture-helpers';
 
 const {
   visitable
@@ -48,18 +49,15 @@ const page = PageObject.build({
 module('Acceptance | conversations', {
   beforeEach: function() {
     this.application = startApp();
-    let subscriptionPlan = server.create('subscription-plan');
-    let billing = server.create('billing', {subscription_plan_id: subscriptionPlan.id});
-    let account = server.create('account', {billing_id: billing.id});
-    let current_user = server.create('user', {account_id: account.id, first_name: 'Paul', last_name: 'Cowan', email: 'paul@radiumcrm.com'});
-    let other_user = server.create('user', {account_id: account.id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'});
+    let current_user = createCurrentUser();
+    let other_user = server.create('user', {account_id: current_user.account_id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'});
 
-    let contact = server.create('contact', {name: 'Bob Hoskins', account_id: account.id});
+    let contact = server.create('contact', {name: 'Bob Hoskins', account_id: current_user.account_id});
 
-    server.create('company', {name: "Acme Ltd.", account_id: account.id});
+    server.create('company', {name: "Acme Ltd.", account_id: current_user.account_id});
 
     server.create('email',
-                  {account_id: account.id,
+                  {account_id: current_user.account_id,
                    _sender_contact_id: contact.id,
                    to_user_ids: [current_user.id]});
 
