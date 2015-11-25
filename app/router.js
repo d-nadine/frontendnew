@@ -1,3 +1,4 @@
+
 import Ember from 'ember';
 import config from './config/environment';
 
@@ -18,6 +19,10 @@ Router.map(function() {
       this.route('index', {path: '/filter'});
     });
     this.route('companies');
+  });
+
+  this.route('user', {
+    path: '/users/:user_id'
   });
 
   this.route('contact', {

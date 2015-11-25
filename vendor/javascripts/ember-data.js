@@ -2765,6 +2765,14 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
       return key;
     }
 
+    var type;
+
+    Ember.assert('Ensure Radium is configured', window.Radium);
+
+    if((type = Radium[key.capitalize()])) {
+      return type;
+    }
+
     var factory = this.container.lookupFactory('model:'+key);
     factory.store = this;
 
