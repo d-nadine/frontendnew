@@ -17,7 +17,7 @@ Radium.SettingsBillingRoute = Radium.Route.extend
         if hash.card.get('inErrorState')  || error.constructor == Radium.ActiveCard
           delete hash.card
 
-        if hash.subscription.get('inErrorState') || error.constructor == Radium.ActiveSubscription
+        if (hash.subscription && hash.subscription.get('inErrorState')) || error.constructor == Radium.ActiveSubscription
           delete hash.subscription
 
         return hash
