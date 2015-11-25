@@ -7,6 +7,7 @@ import NotificationSettings from 'radium/models/notification-settings';
 import UserNotificationSetting from 'radium/models/notification-setting';
 import SocialProfile from 'radium/models/social-profile';
 import ContactInfo from 'radium/models/contact-info';
+import Activity from 'radium/models/activity';
 import User from 'radium/models/user';
 import ConversationsTotals from 'radium/models/conversations-totals';
 import ListStatus from 'radium/models/list-status';
@@ -52,6 +53,7 @@ export function initialize(application) {
   application.ContactRef = ContactRef;
   application.Deal = Deal;
   application.Company = Company;
+  application.Activity = Activity;
 }
 
 export default {

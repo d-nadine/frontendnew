@@ -29,6 +29,7 @@ const User = Model.extend({
   account: DS.belongsTo('Radium.Account'),
   settings: DS.belongsTo('Radium.UserSettings'),
   contactInfo: DS.belongsTo('Radium.ContactInfo'),
+  activities: DS.hasMany('Radium.Activity', {inverse: 'user'}),
 
   name: computed('firstName', 'lastName', function() {
     return (this.get("firstName")) + " " + (this.get("lastName"));
