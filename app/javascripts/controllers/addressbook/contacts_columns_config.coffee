@@ -290,7 +290,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       id: "status"
       group: "actions"
       classNames: "assign stat"
-      heading: "Status"
+      heading: "Contact<br/>Status"
       sortOn: "status"
       bindings: [
         {name: "model", value: "model"}
