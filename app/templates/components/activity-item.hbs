@@ -1,0 +1,12 @@
+<div class="pull-left timestamp">{{age-in-words activity.time}}</div>
+<div class="pull-left activity-icon">
+  <i class="ss-standard ss-{{unbound icon}} event"></i>
+</div>
+<div class="clearfix activity-content">
+  <p>
+    {{#if activity.reference.isLoaded}}
+      {{resource-linkto resource=activity.reference}} added as a contact<br/>
+      by {{resource-linkto resource=activity.user}}
+    {{/if}}
+  </p>
+</div>

@@ -23,6 +23,18 @@ export default function() {
     return {company: db.companies.where({id: fakeRequest.params.id})[0]};
   });
 
+  this.get('/users/:user_id/activities', function(db) {
+    return {
+      activities: db.activities,
+      meta: {
+        page: 1,
+        total_records: 0,
+        total_pages: 1,
+        last_page: true
+      }
+    };
+  });
+
   this.get('/autocomplete', function(db, fakeRequest) {
     const query = getUrlParts(fakeRequest.url);
     const scope = query[1].scopes;

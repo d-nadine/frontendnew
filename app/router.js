@@ -11,7 +11,9 @@ var Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('conversations', {path: '/conversations/:type'});
+  this.route('conversations', {
+    path: '/conversations/:type'
+  });
 
   this.route('addressbook', function(){
     this.route('people', function() {
@@ -27,6 +29,10 @@ Router.map(function() {
 
   this.route('contact', {
     path: '/contacts/:contact_id'
+  });
+
+  this.route('deal', {
+    path: '/deals/:deal_id'
   });
 });
 

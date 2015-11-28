@@ -11,5 +11,8 @@ export default Mirage.Factory.extend({
   subscription_invalid() {return false;},
   last_logged_in() {return new Date();},
   created_at() {return new Date();},
-  updated_at() {return new Date();}
+  updated_at() {return new Date();},
+  activity_ids() {
+    return {url: `/users/${faker.random.number()}/activities`};
+  }
 });

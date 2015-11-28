@@ -34,6 +34,7 @@ radium.sublime-workspace
 new-test/node_modules
 new-test/bower_components
 .\#*
+/site
 
 # compiled output
 /old_app/dist

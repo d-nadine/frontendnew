@@ -9,8 +9,7 @@ export default Mirage.Factory.extend({
   },
 
   email_addresses() {
-    return [
-      {
+    return [{
         name: "primary",
         value: `${this.name.replace(' ', '.').toLowerCase()}@gmail.com`,
         primary: true
