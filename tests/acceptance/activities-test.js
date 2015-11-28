@@ -53,6 +53,6 @@ test('a user has an activity feed', function(assert) {
 
     assert.ok(createContact.hasCorrectIcon(), 'create contact has create icon');
 
-    assert.equal(`${contact.name} added as a contact by ${current_user.first_name} ${current_user.last_name}`, page.activities(1).description(), 'correct ');
+    assert.equal(`${contact.name} added as a contact by ${current_user.first_name} ${current_user.last_name}`, page.activities(1).description(), 'correct contact event text');
   });
 });

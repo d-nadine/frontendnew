@@ -5,20 +5,30 @@ const {
   computed
 } = Ember;
 
-const iconMap = {
-  'contact-create': 'star'
+const placeHolders = {
+  'contact-create': {
+    icon: 'star',
+    description: 'added as a contact'
+  }
 };
+
 
 export default Component.extend({
   classNames: ['activity', 'row'],
 
-  icon: computed('activity', function() {
+  key: computed('activity', function() {
     const activity = this.get('activity'),
           tag = activity.get('tag'),
           event = activity.get('event');
 
-    const key = `${tag}-${event}`;
+    return `${tag}-${event}`;
+  }),
 
-    return iconMap[key];
+  icon: computed('activity', 'key', function() {
+    return placeHolders[this.get('key')].icon;
+  }),
+
+  description: computed('activity', function() {
+    return placeHolders[this.get('key')].description;
   })
 });

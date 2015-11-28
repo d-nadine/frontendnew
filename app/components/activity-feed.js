@@ -1,9 +1,26 @@
 import Ember from 'ember';
 
 const {
-  Component
+  Component,
+  computed,
+  A:emberArray
 } = Ember;
 
 export default Component.extend({
-  classNames: ['feed']
+  classNames: ['feed'],
+
+  activities: computed('subject.activities.[]', function() {
+    const activities = this.get('subject.activities');
+
+    if(!activities) {
+      return emberArray();
+    }
+    const valid = activities.filter((activity) => {
+      return activity.get('isLoaded') && !activity.get('isDeleted');
+    });
+
+    return valid.toArray().sort((a, b) => {
+      return Ember.DateTime.compare(a.get('time'), b.get('time'));
+    });
+  })
 });
