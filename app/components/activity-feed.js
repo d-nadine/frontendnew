@@ -20,7 +20,7 @@ export default Component.extend({
     });
 
     return valid.toArray().sort((a, b) => {
-      return Ember.DateTime.compare(a.get('time'), b.get('time'));
+      return Ember.DateTime.compare(b.get('time'), a.get('time'));
     });
   })
 });

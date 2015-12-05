@@ -2,13 +2,13 @@
   <div class="control-group">
     <label for="organizationName" class="control-label">Organization Name</label>
     <div class="controls control-box control-box">
-      {{view view.organisationView class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name."}}
+      {{organisationView class="input-block-level" placeholder="Payer's name shown on the receipts, if different from company name."}}
     </div>
   </div>
   <div class="control-group">
     <label for="billingEmail" class="control-label">Billing Email</label>
     <div class="controls control-box">
-      {{view view.billingEmailView class="input-block-level" placeholder="Email address where the receipts are sent to"}}
+      {{billingEmailView class="input-block-level" placeholder="Email address where the receipts are sent to"}}
     </div>
   </div>
 
@@ -65,8 +65,8 @@
           <span> / </span>
           <input id="card-expiry-year" type="text" size="4" maxlength="4" class="input-mini" />
           {{#if hasGatewayAccount}}
-            <button type="button" class="btn" {{action "cancelUpdatingCreditCard"}} {{bind-attr disabled="isPersisting"}}>Cancel</button>
-            <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit" target="view"}} {{bind-attr disabled="isPersisting"}}>Update Credit Card</button>
+            <button type="button" class="btn" {{action "cancelUpdatingCreditCard"}} disable={{isPersisting}}>Cancel</button>
+            <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit"}} disabled={{isPersisting}}>Update Credit Card</button>
           {{/if}}
         </div>
       </div>
@@ -88,7 +88,7 @@
           <td>&nbsp;</td>
           <td>
             {{#unless updatingExistingCreditCard}}
-              <button type="button" class="btn btn-primary" {{action "updatingExistingCreditCard"}} {{bind-attr disabled="isPersisting"}}>Change Credit Card</button>
+              <button type="button" class="btn btn-primary" {{action "updatingExistingCreditCard"}} disabled={{isPersisting}}>Change Credit Card</button>
             {{/unless}}
           </td>
         </tr>
@@ -105,11 +105,11 @@
   {{#unless updatingExistingCreditCard}}
     <div class="pull-right">
       {{#if hasGatewayAccount}}
-        <button type="submit" class="btn btn-primary" {{action "update"}} {{!bind-attr disabled="isPersisting"}}>Save</button>
+        <button type="submit" class="btn btn-primary" {{action "update"}}>Save</button>
       {{else}}
-        <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit" target="view"}} {{bind-attr disabled="isPersisting"}}>Save</button>
+        <button type="submit" class="btn btn-primary" {{action "createTokenAndSubmit"}} disabled={{isPersisting}}>Save</button>
       {{/if}}
-      <button class="btn" {{action "cancel"}} {{bind-attr disabled="isPersisting"}}>Cancel</button>
+      <button class="btn" {{action "cancel"}} disabled={{isPersisting}}>Cancel</button>
     </div>
   {{/unless}}
 </div>

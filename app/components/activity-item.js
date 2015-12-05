@@ -7,8 +7,10 @@ const {
 
 const placeHolders = {
   'contact-create': {
-    icon: 'star',
-    description: 'added as a contact'
+    icon: 'star'
+  },
+  'company-create': {
+    icon: 'star'
   }
 };
 
@@ -26,9 +28,5 @@ export default Component.extend({
 
   icon: computed('activity', 'key', function() {
     return placeHolders[this.get('key')].icon;
-  }),
-
-  description: computed('activity', function() {
-    return placeHolders[this.get('key')].description;
   })
 });

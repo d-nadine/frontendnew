@@ -14,6 +14,7 @@ const Activity = Model.extend({
 
   tag: DS.attr('string'),
   event: DS.attr('string'),
+  description: DS.attr('string'),
   time: DS.attr('datetime'),
   source: DS.attr('string'),
   external: DS.attr('boolean'),

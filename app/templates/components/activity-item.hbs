@@ -5,7 +5,7 @@
 <div class="clearfix activity-content">
   <p>
     {{#if activity.reference.isLoaded}}
-      {{resource-linkto resource=activity.reference}} {{description}}<br/>
+      {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
       by {{resource-linkto resource=activity.user}}
     {{/if}}
   </p>

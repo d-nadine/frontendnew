@@ -9,6 +9,10 @@ export default Mirage.Factory.extend({
     return faker.list.random('create');
   },
 
+  description() {
+    return faker.lorem.sentence();
+  },
+
   time() {
     return new Date();
   },

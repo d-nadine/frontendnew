@@ -31,6 +31,10 @@ Router.map(function() {
     path: '/contacts/:contact_id'
   });
 
+  this.route('company', {
+    path: '/companies/:company_id'
+  });
+
   this.route('deal', {
     path: '/deals/:deal_id'
   });
