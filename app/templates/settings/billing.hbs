@@ -97,8 +97,7 @@
     <a href="#" {{action "changeBilling"}}>
       <h4><i class="ss-standard ss-dollarsign blue"></i> Billing Information</h4>
     </a>
-
-    {{view Radium.BillingFormView}}
+    {{billing-form accountController=controller hasGatewayAccount=hasGatewayAccount isPersisting=isPersisting}}
   </div>
 {{/if}}
 </div>

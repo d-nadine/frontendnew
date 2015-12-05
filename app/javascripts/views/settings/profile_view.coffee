@@ -1,3 +1,5 @@
+require 'lib/radium/value_validation_mixin'
+
 Radium.SettingsProfileView = Radium.View.extend
   firstName: Ember.TextField.extend Radium.ValueIsInvalidMixin, Radium.ActionOnKeydown,
     valueBinding: 'targetObject.firstName'
