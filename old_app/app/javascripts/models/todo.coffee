@@ -32,7 +32,6 @@ Radium.Todo = Radium.Model.extend Radium.CommentsMixin,
 
   activities: DS.hasMany('Radium.Activity', inverse: '_referenceTodo')
 
-  todos: DS.hasMany('Radium.Todo', inverse: null)
   notes: DS.hasMany('Radium.Note', inverse: '_referenceTodo')
   tasks: Radium.computed.tasks('todos')
 

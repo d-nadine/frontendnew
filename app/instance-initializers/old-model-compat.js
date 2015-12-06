@@ -23,6 +23,9 @@ import Technology from 'radium/models/technology';
 import ContactRef from "radium/models/contact-ref";
 import Deal from "radium/models/deal";
 import Company from "radium/models/company";
+import Invitation from 'radium/models/invitation';
+import Meeting from "radium/models/meeting";
+import Todo from "radium/models/todo";
 
 export function initialize(application) {
   // we need to set this reference to the application
@@ -53,6 +56,9 @@ export function initialize(application) {
   application.ContactRef = ContactRef;
   application.Deal = Deal;
   application.Company = Company;
+  application.Invitation = Invitation;
+  application.Meeting = Meeting;
+  application.Todo = Todo;
   application.Activity = Activity;
 }
 

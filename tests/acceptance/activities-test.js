@@ -24,7 +24,7 @@ const page = PageObject.build({
 moduleForAcceptance('Acceptance | activities');
 
 test('a user has an activity feed', function(assert) {
-  assert.expect(8);
+  assert.expect(10);
 
   let current_user = createCurrentUser(),
       contact = server.create('contact', {name: 'Bob Hoskins', account_id: current_user.account_id}),
@@ -50,6 +50,34 @@ test('a user has an activity feed', function(assert) {
     description: "added as a company"
   });
 
+  const todo = server.create('todo', {
+    description: "A todo"
+  });
+
+  server.create('activity', {
+    user_id: current_user.id,
+    account_id: current_user.account_id,
+    tag: 'Todo',
+    event: 'create',
+    time: moment().add(-5, 'd'),
+    _reference_todo_id: todo.id,
+    description: "created"
+  });
+
+  const meeting = server.create('meeting', {
+    _organizer_user_id: current_user.id
+  });
+
+  server.create('activity', {
+    user_id: current_user.id,
+    account_id: current_user.account_id,
+    tag: 'Meeting',
+    event: 'create',
+    time: moment().add(-5, 'd'),
+    _reference_meeting_id: meeting.id,
+    description: "created"
+  });
+
   page.visit({user_id: current_user.id});
 
   andThen(function() {
@@ -57,7 +85,7 @@ test('a user has an activity feed', function(assert) {
 
     assert.ok(page.feedIsVisible(), "feed component is on page");
 
-    assert.equal(2, page.activities().count());
+    assert.equal(4, page.activities().count());
 
     const createContact = page.activities(1);
 
@@ -65,12 +93,20 @@ test('a user has an activity feed', function(assert) {
 
     assert.ok(createContact.hasCorrectIcon(), 'create contact has create icon');
 
-    assert.equal(`${contact.name} added as a contact by ${current_user.first_name} ${current_user.last_name}`, createContact.description(), 'correct contact event text');
+    assert.equal(`Contact ${contact.name} added as a contact by ${current_user.first_name} ${current_user.last_name}`, createContact.description(), 'correct contact event text');
 
     const createCompany = page.activities(2);
 
     assert.equal('4 days', createCompany.time());
 
-    assert.equal(`${company.name} added as a company by ${current_user.first_name} ${current_user.last_name}`, createCompany.description(), 'correct contact event text');
+    assert.equal(`Company ${company.name} added as a company by ${current_user.first_name} ${current_user.last_name}`, createCompany.description(), 'correct company event text');
+
+    const createTodo = page.activities(3);
+
+    assert.equal(`Todo ${todo.description} created by ${current_user.first_name} ${current_user.last_name}`, createTodo.description(), 'correct meeting event text');
+
+    const createMeeting = page.activities(4);
+
+    assert.equal(`Meeting ${meeting.topic} created by ${current_user.first_name} ${current_user.last_name}`, createMeeting.description(), 'correct meeting event text');
   });
 });

@@ -5,11 +5,18 @@ const {
   computed
 } = Ember;
 
+//TODO: remove this has on next commit
 const placeHolders = {
   'contact-create': {
     icon: 'star'
   },
   'company-create': {
+    icon: 'star'
+  },
+  'todo-create': {
+    icon: 'star'
+  },
+  'meeting-create': {
     icon: 'star'
   }
 };
@@ -27,6 +34,10 @@ export default Component.extend({
   }),
 
   icon: computed('activity', 'key', function() {
+    //TODO: remove this has on next commit
+    if(!placeHolders[this.get('key')]) {
+      return 'star';
+    }
     return placeHolders[this.get('key')].icon;
   })
 });

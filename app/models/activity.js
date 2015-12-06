@@ -24,10 +24,13 @@ const Activity = Model.extend({
   _referenceContact: DS.belongsTo('Radium.Contact'),
   _referenceDeal: DS.belongsTo('Radium.Deal'),
   _referenceEmail: DS.belongsTo('Radium.Email'),
+  _referenceTodo: DS.belongsTo('Radium.Todo'),
+  _referenceMeeting: DS.belongsTo('Radium.Meeting'),
+  _referenceInvitation: DS.belongsTo('Radium.Invitation'),
 
-  reference: computed('_referenceCompany', '_referenceContact', '_referenceDeal', '_referenceEmail', {
+  reference: computed('_referenceCompany', '_referenceContact', '_referenceDeal', '_referenceEmail', '_referenceTodo', '_referenceMeeting', '_referenceInvitation', {
     get: function(){
-      return this.get('_referenceCompany') || this.get('_referenceContact') || this.get('_referenceDeal') || this.get('_referenceEmail');
+      return this.get('_referenceCompany') || this.get('_referenceContact') || this.get('_referenceDeal') || this.get('_referenceEmail') || this.get('_referenceTodo') || this.get('_referenceMeeting');
     },
     set: function(key, value){
       const property = value.constructor.toString().split('.')[1],

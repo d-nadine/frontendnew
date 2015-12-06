@@ -418,23 +418,23 @@ RESTAdapter.map('Radium.Address', {
   isPrimary: { key: 'primary'}
 });
 
-// RESTAdapter.map('Radium.Todo', {
-//   isFinished: {key: 'finished'},
-//   finishBy: {key: 'time'},
-//   user: { key: 'assigned_to_id' },
-//   comments: {embedded: 'load'}
-// });
+RESTAdapter.map('Radium.Todo', {
+  isFinished: {key: 'finished'},
+  finishBy: {key: 'time'},
+  user: { key: 'assigned_to_id' },
+  comments: {embedded: 'load'}
+});
 
 // RESTAdapter.map('Radium.Note', {
 //   comments: {embedded: 'load'}
 // });
 
-// RESTAdapter.map('Radium.Meeting', {
-//   isFinished: {key: 'finished'},
-//   finishBy: {key: 'time'},
-//   user: { key: 'assigned_to_id' },
-//   comments: {embedded: 'load'}
-// });
+RESTAdapter.map('Radium.Meeting', {
+  isFinished: {key: 'finished'},
+  finishBy: {key: 'time'},
+  user: { key: 'assigned_to_id' },
+  comments: {embedded: 'load'}
+});
 
 // RESTAdapter.map('Radium.UserInvitation', {
 //   email: {key: 'address'}

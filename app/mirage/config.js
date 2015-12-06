@@ -35,6 +35,14 @@ export default function() {
     };
   });
 
+  this.get('/todos/:id', function(db) {
+    return {todos: db.todos};
+  });
+
+  this.get('/meetings/:id', function(db) {
+    return {meetings: db.meetings};
+  });
+
   this.get('/autocomplete', function(db, fakeRequest) {
     const query = getUrlParts(fakeRequest.url);
     const scope = query[1].scopes;

@@ -38,6 +38,14 @@ Router.map(function() {
   this.route('deal', {
     path: '/deals/:deal_id'
   });
+
+  this.route('todo', {
+    path: '/todos/:todo_id'
+  });
+
+  this.route('meeting', {
+    path: '/meetings/:meeting_id'
+  });
 });
 
 export default Router;

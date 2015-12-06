@@ -5,9 +5,6 @@ const {
 } = Ember;
 
 const typeToLinks = {
-  email: 'emails.show',
-  meeting: 'calendar.task',
-  todo: 'calendar.task'
 };
 
 export default LinkComponent.extend({
@@ -15,16 +12,16 @@ export default LinkComponent.extend({
     // FIXME: allow for css classes and query params
     Ember.assert('you must specify a resource', this.attrs.resource);
 
-    const resource = this.attrs.resource;
+    const resource = this.attrs.resource.value;
 
-    let resourceRoute = resource.value.humanize();
+    let resourceRoute = resource.humanize();
 
     if(typeToLinks[resourceRoute]) {
       resourceRoute = typeToLinks[resourceRoute];
     }
 
     this.set('attrs', {
-      params: [resource.value.get('displayName'), resourceRoute, resource],
+      params: [resource.get('displayName'), resourceRoute, resource],
       view: this.parentView,
       hasBlock: false,
       escaped: true

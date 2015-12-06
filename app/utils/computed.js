@@ -50,8 +50,11 @@ export function primaryAccessor(collection, prop, dependentKey) {
 }
 
 export function tasks(...properties) {
-  const args = properties.map(function(prop) {
-    return args.push.apply(args, [`${prop}.@each.isFinished`, `${prop}.@each.isDeleted`]);
+  const args = emberArray();
+
+  properties.forEach((prop) => {
+    args.push(`${prop}.@each.isFinished`);
+    args.push(`${prop}.@each.isDeleted`);
   });
 
   const sortFunc = (left, right) => {
@@ -74,7 +77,7 @@ export function tasks(...properties) {
     }
   };
 
-  const func = () => {
+  return computed(args, function(){
     const result = emberArray();
 
     properties.forEach((prop) => {
@@ -102,9 +105,7 @@ export function tasks(...properties) {
     });
 
     return result.sort(sortFunc);
-  };
-
-  return computed(args, func);
+  });
 }
 
 export function aggregate(...properties) {
@@ -112,7 +113,7 @@ export function aggregate(...properties) {
     return `${prop}.[]`;
   });
 
-  const func = () => {
+  return computed(args, function() {
     const result = emberArray();
 
     properties.forEach((prop) => {
@@ -136,9 +137,7 @@ export function aggregate(...properties) {
     });
 
     return result;
-  };
-
-  return computed(args, func);
+  });
 }
 
 export function isPrimaryComparer(left, right) {
