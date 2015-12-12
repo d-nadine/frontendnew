@@ -14,6 +14,8 @@ export default LinkComponent.extend({
 
     const resource = this.attrs.resource.value;
 
+    Ember.assert('you must supply a valid resource to resource-linkto', resource);
+
     let resourceRoute = resource.humanize();
 
     if(typeToLinks[resourceRoute]) {

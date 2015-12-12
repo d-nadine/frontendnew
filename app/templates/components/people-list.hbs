@@ -1,0 +1,3 @@
+{{#each people as |person index|}}
+  <a href="#" {{action "itemAction" person}}>{{person.displayName}}{{list-seperator index people.length}}</a>
+{{/each}}

@@ -22,6 +22,8 @@ const Activity = Model.extend({
 
   note: DS.belongsTo('Radium.Note'),
 
+  email: DS.belongsTo('Radium.Email'),
+
   _referenceCompany: DS.belongsTo('Radium.Company'),
   _referenceContact: DS.belongsTo('Radium.Contact'),
   _referenceDeal: DS.belongsTo('Radium.Deal'),

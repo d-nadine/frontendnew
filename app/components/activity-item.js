@@ -6,6 +6,9 @@ const {
 } = Ember;
 
 const placeHolders = {
+  'contact-new_email': {
+    icon: 'mail'
+  },
   'note-create': {
     icon: 'notebook'
   }
@@ -15,7 +18,13 @@ const placeHolders = {
 export default Component.extend({
   classNames: ['activity', 'row'],
 
-  note: computed.readOnly('activity.note'),
+  note: computed('activity.tag', function() {
+    return this.get('activity.tag') === 'note';
+  }),
+
+  email: computed('activity.email', 'activity.email.isLoaded', function() {
+    return this.get('activity.email') && this.get('activity.email.isLoaded');
+  }),
 
   editable: computed('note', function() {
     return this.get('note');
@@ -35,5 +44,9 @@ export default Component.extend({
     }
 
     return placeHolders[this.get('key')].icon;
+  }),
+
+  referenceActivity: computed('email', 'note', function(){
+    return !this.get('email') && !this.get('note');
   })
 });

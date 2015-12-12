@@ -23,6 +23,10 @@ export default function() {
     return {company: db.companies.where({id: fakeRequest.params.id})[0]};
   });
 
+  this.get('/emails/:id', function(db, fakeRequest) {
+    return {email: db.emails.where({id: fakeRequest.params.id})[0]};
+  });
+
   this.get('/users/:user_id/activities', function(db) {
     return {
       activities: db.activities,

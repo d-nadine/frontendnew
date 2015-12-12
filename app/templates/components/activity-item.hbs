@@ -4,7 +4,7 @@
 </div>
 <div class="clearfix activity-content">
   {{#if editable}}
-    <p class=".activity-edit">
+    <p class="activity-edit">
       <a href="#">
         <i class="ss-standard ss-write"></i>
       </a>
@@ -17,20 +17,37 @@
     </p>
   {{/if}}
   <p>
+    {{! FIXME: use actions instead of resource-linkto}}
     {{#if note}}
-      <span>{{resource-linkto resource=activity.user}} added a note:</span>
+      <span class>{{resource-linkto resource=activity.user}} added a note:</span>
       <div class="note-container">
-        {{note.body}}
+        {{activity.note.body}}
       </div>
     {{/if}}
-    {{#if activity.reference.isLoaded}}
-      <span>
-        {{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
-        {{#if activity.reference.activityInfo}}
-          {{activity.reference.activityInfo}}<br/>
-        {{/if}}
-        by {{resource-linkto resource=activity.user}}
-      </span>
+    {{#if email}}
+      <span><a href="#" {{action (action attrs.showResource activity.email.sender)}}>{{activity.email.sender.displayName}}</a> emailed {{people-list people=activity.email.toList itemAction=attrs.showResource}}</span>
+      <div class="pull-right">
+        <a href="#" {{action "replyTo" activity.email}}>
+          <i class="ss-standard ss-reply"></i> Reply
+        </a>
+      </div>
+      <div class="email-subject">
+        <a href="#" {{action (action attrs.showResource activity.email)}}>{{activity.email.resolvedSubject}}</a>
+      </div>
+      <div class="email-container">
+        {{text-expander text=activity.email.textBody}}
+      </div>
+    {{/if}}
+    {{#if referenceActivity}}
+      {{#if activity.reference.isLoaded}}
+        <span>
+          {{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
+          {{#if activity.reference.activityInfo}}
+            {{activity.reference.activityInfo}}<br/>
+          {{/if}}
+          by {{resource-linkto resource=activity.user}}
+        </span>
+      {{/if}}
     {{/if}}
   </p>
 </div>

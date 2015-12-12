@@ -17,13 +17,64 @@ const page = PageObject.build({
       time: PageObject.text('time'),
       hasStarIcon: PageObject.hasClass('ss-star', 'i'),
       hasNoteIcon: PageObject.hasClass('ss-notebook', 'i'),
-      description: PageObject.text('p span'),
-      noteBody: PageObject.text('.note-container')
+      hasEmailIcon: PageObject.hasClass('ss-mail', 'i'),
+      description: PageObject.text('p span:first'),
+      noteBody: PageObject.text('.note-container'),
+      emailBody: PageObject.text('.email-container'),
+      replyIsVisible: PageObject.isVisible('.ss-reply'),
+      emailSubject: PageObject.text('.email-subject')
     }
   })
 });
 
 moduleForAcceptance('Acceptance | activities');
+
+test('activity feed tracks emails', function(assert) {
+  assert.expect(9);
+
+  let current_user = createCurrentUser(),
+      contact = server.create('contact', {name: 'Bob Hoskins', account_id: current_user.account_id}),
+      email = server.create('email', {
+        subject: 'from user subject',
+        body: 'from user body',
+        account_id: current_user.account_id,
+        _sender_contact_id: contact.id,
+        to_user_ids: [current_user.id]
+      });
+
+  server.create('activity', {
+    user_id: current_user.id,
+    account_id: current_user.account_id,
+    tag: 'contact',
+    event: 'new_email',
+    time: moment().add(-3, 'd'),
+    email_id: email.id
+  });
+
+  page.visit({user_id: current_user.id});
+
+  andThen(function() {
+    assert.equal(currentURL(), `/users/${current_user.id}`, 'At users activity feed');
+
+    assert.ok(page.feedIsVisible(), "feed component is on page", 'feed is visible');
+
+    assert.equal(1, page.activities().count());
+
+    const emailActivity = page.activities(1);
+
+    assert.equal('3 days', emailActivity.time(), 'correct activity time lavel');
+
+    assert.ok(emailActivity.hasEmailIcon(), 'activity has correct icon');
+
+    assert.equal(`${contact.name} emailed ${current_user.fullName}`, emailActivity.description(), 'activity has correct description');
+
+    assert.ok(emailActivity.replyIsVisible(), 'reply link is visible');
+
+    assert.equal('from user subject', emailActivity.emailSubject(), 'email subject is visible');
+
+    assert.equal('from user body', emailActivity.emailBody(), 'email body text is visible');
+  });
+});
 
 test('an activity feed item can contain a note', function(assert) {
   assert.expect(7);

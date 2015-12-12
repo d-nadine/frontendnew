@@ -7,6 +7,12 @@ const {
 } = Ember;
 
 export default Component.extend({
+  actions: {
+    showResource(resource) {
+      console.log(resource);
+    }
+  },
+
   classNames: ['feed'],
 
   activities: computed('subject.activities.[]', function() {

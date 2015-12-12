@@ -14,5 +14,8 @@ export default Mirage.Factory.extend({
   updated_at() {return new Date();},
   activity_ids() {
     return {url: `/users/${faker.random.number()}/activities`};
+  },
+  fullName() {
+    return `${this.first_name} ${this.last_name}`;
   }
 });

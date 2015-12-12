@@ -25,6 +25,27 @@ const Email = Model.extend({
     return this.get('_senderUser') || this.get('_senderContact');
   }),
 
+  resolvedSubject: computed('subject', function(){
+    return this.get('subject') || "(no subject)";
+  }),
+
+  textBody: computed('subject', function() {
+    if(this.get('isLoading')) {
+      return "loading.....";
+    }
+
+    const body = this.get('message') || '';
+
+    if(!body.length) {
+      return '';
+    }
+
+    return body.replace(/\\n/g, '<br/>')
+      .replace(/\\n\\n/g, '<br/><br/>')
+      .replace("\n", '<br/>')
+      .replace(/\n/g, '<br/>');
+  }),
+
   toList: aggregate('toUsers', 'toContacts'),
 
   contact: computed('toList.[]', 'sender', function() {
