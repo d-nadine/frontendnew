@@ -4,7 +4,7 @@
 </div>
 <div class="clearfix activity-content">
   {{#if editable}}
-    <p>
+    <p class=".activity-edit">
       <a href="#">
         <i class="ss-standard ss-write"></i>
       </a>
@@ -24,11 +24,13 @@
       </div>
     {{/if}}
     {{#if activity.reference.isLoaded}}
-      <span>{{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
-      {{#if activity.reference.activityInfo}}
-        {{activity.reference.activityInfo}}<br/>
-      {{/if}}
-      by {{resource-linkto resource=activity.user}}</span>
+      <span>
+        {{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
+        {{#if activity.reference.activityInfo}}
+          {{activity.reference.activityInfo}}<br/>
+        {{/if}}
+        by {{resource-linkto resource=activity.user}}
+      </span>
     {{/if}}
   </p>
 </div>
