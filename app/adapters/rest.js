@@ -349,9 +349,9 @@ RESTAdapter.registerTransform('datetime',  {
  }
 });
 
-// RESTAdapter.map('Radium.Activity', {
-//   note: {embedded: 'load'}
-// });
+RESTAdapter.map('Radium.Activity', {
+  note: {embedded: 'load'}
+});
 
 var contactsMapping = {
   isPublic: {key: 'public'},

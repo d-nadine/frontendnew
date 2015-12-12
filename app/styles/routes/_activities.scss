@@ -71,6 +71,51 @@
   }
 }
 
+.activity-content p:first-of-type {
+  float: right;
+}
+
+.activity-content p:first-of-type a {
+  margin-right: 10px;
+  opacity: 0.4;
+}
+
+$border: #dedede;
+
+.activity-content .note-container {
+  border: 1px solid $border;
+  padding: 5px;
+  margin-top: 12px;
+  min-height: 50px;
+  position: relative;
+}
+
+.activity-content .note-container:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(50% - 11px);
+  right: 100%;
+  width: 0;
+  height: 0;
+  border-color: transparent $border transparent transparent;
+  border-style: solid;
+  border-width: 11px;
+}
+
+.activity-content .note-container:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 100%;
+  width: 0;
+  height: 0;
+  border-color: transparent #fff transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+}
+
 .activity-content .modal .modal-body {
   position: static;
   max-height: auto;

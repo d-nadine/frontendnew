@@ -7,6 +7,7 @@ import NotificationSettings from 'radium/models/notification-settings';
 import UserNotificationSetting from 'radium/models/notification-setting';
 import SocialProfile from 'radium/models/social-profile';
 import ContactInfo from 'radium/models/contact-info';
+import Note from 'radium/models/note';
 import Activity from 'radium/models/activity';
 import User from 'radium/models/user';
 import ConversationsTotals from 'radium/models/conversations-totals';
@@ -54,6 +55,7 @@ export function initialize(application) {
   application.MarketCategory = MarketCategory;
   application.Technology = Technology;
   application.ContactRef = ContactRef;
+  application.Note = Note;
   application.Deal = Deal;
   application.Company = Company;
   application.Invitation = Invitation;

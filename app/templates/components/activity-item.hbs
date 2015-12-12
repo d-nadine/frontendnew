@@ -3,13 +3,32 @@
   <i class="ss-standard ss-{{unbound icon}} event"></i>
 </div>
 <div class="clearfix activity-content">
+  {{#if editable}}
+    <p>
+      <a href="#">
+        <i class="ss-standard ss-write"></i>
+      </a>
+      <a href="#">
+        <i class="ss-standard ss-trash"></i>
+      </a>
+      <a href="#">
+        <i class="ss-standard ss-chat"></i>
+      </a>
+    </p>
+  {{/if}}
   <p>
+    {{#if note}}
+      <span>{{resource-linkto resource=activity.user}} added a note:</span>
+      <div class="note-container">
+        {{note.body}}
+      </div>
+    {{/if}}
     {{#if activity.reference.isLoaded}}
-      {{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
+      <span>{{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
       {{#if activity.reference.activityInfo}}
         {{activity.reference.activityInfo}}<br/>
       {{/if}}
-      by {{resource-linkto resource=activity.user}}
+      by {{resource-linkto resource=activity.user}}</span>
     {{/if}}
   </p>
 </div>

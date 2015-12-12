@@ -5,25 +5,21 @@ const {
   computed
 } = Ember;
 
-//TODO: remove this has on next commit
 const placeHolders = {
-  'contact-create': {
-    icon: 'star'
-  },
-  'company-create': {
-    icon: 'star'
-  },
-  'todo-create': {
-    icon: 'star'
-  },
-  'meeting-create': {
-    icon: 'star'
+  'note-create': {
+    icon: 'notebook'
   }
 };
 
 
 export default Component.extend({
   classNames: ['activity', 'row'],
+
+  note: computed.readOnly('activity.note'),
+
+  editable: computed('note', function() {
+    return this.get('note');
+  }),
 
   key: computed('activity', function() {
     const activity = this.get('activity'),
@@ -34,10 +30,10 @@ export default Component.extend({
   }),
 
   icon: computed('activity', 'key', function() {
-    //TODO: remove this has on next commit
     if(!placeHolders[this.get('key')]) {
       return 'star';
     }
+
     return placeHolders[this.get('key')].icon;
   })
 });

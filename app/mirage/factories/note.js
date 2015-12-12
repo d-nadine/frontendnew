@@ -1,0 +1,7 @@
+import Mirage, {faker} from 'ember-cli-mirage';
+
+export default Mirage.Factory.extend({
+  body() {
+    return faker.lorem.sentence();
+  }
+});

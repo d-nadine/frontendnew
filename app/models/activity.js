@@ -20,6 +20,8 @@ const Activity = Model.extend({
   external: DS.attr('boolean'),
   externalLink: DS.attr('string'),
 
+  note: DS.belongsTo('Radium.Note'),
+
   _referenceCompany: DS.belongsTo('Radium.Company'),
   _referenceContact: DS.belongsTo('Radium.Contact'),
   _referenceDeal: DS.belongsTo('Radium.Deal'),
