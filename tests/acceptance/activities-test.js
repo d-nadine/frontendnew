@@ -62,7 +62,7 @@ test('activity feed tracks emails', function(assert) {
 
     const emailActivity = page.activities(1);
 
-    assert.equal('3 days', emailActivity.time(), 'correct activity time lavel');
+    assert.equal('3 days', emailActivity.time(), 'correct activity time');
 
     assert.ok(emailActivity.hasEmailIcon(), 'activity has correct icon');
 
@@ -102,7 +102,7 @@ test('an activity feed item can contain a note', function(assert) {
 
     const noteActivity = page.activities(1);
 
-    assert.equal('3 days', noteActivity.time(), 'correct activity time lavel');
+    assert.equal('3 days', noteActivity.time(), 'correct activity time');
 
     assert.ok(noteActivity.hasNoteIcon(), 'create note has create icon');
 
