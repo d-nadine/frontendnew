@@ -9,6 +9,9 @@ const placeHolders = {
   'contact-new_email': {
     icon: 'mail'
   },
+  'contact-sent_email': {
+    icon: 'mail'
+  },
   'note-create': {
     icon: 'notebook'
   }

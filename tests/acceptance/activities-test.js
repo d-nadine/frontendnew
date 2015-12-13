@@ -30,16 +30,23 @@ const page = PageObject.build({
 moduleForAcceptance('Acceptance | activities');
 
 test('activity feed tracks emails', function(assert) {
-  assert.expect(9);
+  assert.expect(15);
 
   let current_user = createCurrentUser(),
       contact = server.create('contact', {name: 'Bob Hoskins', account_id: current_user.account_id}),
-      email = server.create('email', {
-        subject: 'from user subject',
-        body: 'from user body',
+      fromContactEmail = server.create('email', {
+        subject: 'from contact subject',
+        body: 'from contact body',
         account_id: current_user.account_id,
         _sender_contact_id: contact.id,
         to_user_ids: [current_user.id]
+      }),
+      fromUserEmail = server.create('email', {
+        subject: 'from user subject',
+        body: 'from user body',
+        account_id: current_user.account_id,
+        _sender_user_id: current_user.id,
+        to_contact_ids: [contact.id]
       });
 
   server.create('activity', {
@@ -48,7 +55,16 @@ test('activity feed tracks emails', function(assert) {
     tag: 'contact',
     event: 'new_email',
     time: moment().add(-3, 'd'),
-    email_id: email.id
+    email_id: fromContactEmail.id
+  });
+
+  server.create('activity', {
+    user_id: current_user.id,
+    account_id: current_user.account_id,
+    tag: 'contact',
+    event: 'sent_email',
+    time: moment().add(-5, 'd'),
+    email_id: fromUserEmail.id
   });
 
   page.visit({user_id: current_user.id});
@@ -58,21 +74,36 @@ test('activity feed tracks emails', function(assert) {
 
     assert.ok(page.feedIsVisible(), "feed component is on page", 'feed is visible');
 
-    assert.equal(1, page.activities().count());
+    assert.equal(2, page.activities().count());
 
-    const emailActivity = page.activities(1);
+    const fromContactEmailActivity = page.activities(1);
 
-    assert.equal('3 days', emailActivity.time(), 'correct activity time');
+    assert.equal('3 days', fromContactEmailActivity.time(), 'correct activity time');
 
-    assert.ok(emailActivity.hasEmailIcon(), 'activity has correct icon');
+    assert.ok(fromContactEmailActivity.hasEmailIcon(), 'activity has correct icon');
 
-    assert.equal(`${contact.name} emailed ${current_user.fullName}`, emailActivity.description(), 'activity has correct description');
+    assert.equal(`${contact.name} emailed ${current_user.fullName}`, fromContactEmailActivity.description(), 'activity has correct description');
 
-    assert.ok(emailActivity.replyIsVisible(), 'reply link is visible');
+    assert.ok(fromContactEmailActivity.replyIsVisible(), 'reply link is visible');
 
-    assert.equal('from user subject', emailActivity.emailSubject(), 'email subject is visible');
+    assert.equal('from contact subject', fromContactEmailActivity.emailSubject(), 'email subject from contact is visible');
 
-    assert.equal('from user body', emailActivity.emailBody(), 'email body text is visible');
+    assert.equal('from contact body', fromContactEmailActivity.emailBody(), 'email body text is from contact visible');
+
+    const fromUserEmailActivity = page.activities(2);
+
+    assert.equal('5 days', fromUserEmailActivity.time(), 'correct activity time');
+
+    assert.ok(fromUserEmailActivity.hasEmailIcon(), 'activity has correct icon');
+
+    assert.equal(`${current_user.fullName} emailed ${contact.name}`, fromUserEmailActivity.description(), 'activity has correct description');
+
+    assert.ok(fromUserEmailActivity.replyIsVisible(), 'reply link is visible');
+
+    assert.equal('from user subject', fromUserEmailActivity.emailSubject(), 'email subject from user is visible');
+
+    assert.equal('from user body', fromUserEmailActivity.emailBody(), 'email body text from user is visible');
+
   });
 });
 
