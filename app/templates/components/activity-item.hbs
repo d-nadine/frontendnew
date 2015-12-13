@@ -17,9 +17,8 @@
     </p>
   {{/if}}
   <p>
-    {{! FIXME: use actions instead of resource-linkto}}
     {{#if note}}
-      <span class>{{resource-linkto resource=activity.user}} added a note:</span>
+      <span class><a href="#" {{action (action attrs.showResource activity.user)}}>{{activity.user.displayName}}</a> added a note:</span>
       <div class="note-container">
         {{activity.note.body}}
       </div>
@@ -41,11 +40,11 @@
     {{#if referenceActivity}}
       {{#if activity.reference.isLoaded}}
         <span>
-          {{capitalize activity.tag}} {{resource-linkto resource=activity.reference}} {{activity.description}}<br/>
+          {{capitalize activity.tag}} <a href="#" {{action (action attrs.showResource activity.reference)}}>{{activity.reference.displayName}}</a> {{activity.description}}<br/>
           {{#if activity.reference.activityInfo}}
             {{activity.reference.activityInfo}}<br/>
           {{/if}}
-          by {{resource-linkto resource=activity.user}}
+          by <a href="#" {{action (action attrs.showResource activity.user)}}>{{activity.user.displayName}}</a>
         </span>
       {{/if}}
     {{/if}}
