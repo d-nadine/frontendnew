@@ -17,5 +17,9 @@ export default Mirage.Factory.extend({
     return new Date();
   },
 
+  external_link() {
+    return null;
+  },
+
   public() { return true; }
 });

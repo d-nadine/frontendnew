@@ -18,6 +18,7 @@ const page = PageObject.build({
       hasStarIcon: PageObject.hasClass('ss-star', 'i'),
       hasNoteIcon: PageObject.hasClass('ss-notebook', 'i'),
       hasEmailIcon: PageObject.hasClass('ss-mail', 'i'),
+      hasOpenedIcon: PageObject.hasClass('ss-view', 'i'),
       description: PageObject.text('p span:first'),
       noteBody: PageObject.text('.note-container'),
       emailBody: PageObject.text('.email-container'),
@@ -30,7 +31,7 @@ const page = PageObject.build({
 moduleForAcceptance('Acceptance | activities');
 
 test('activity feed tracks emails', function(assert) {
-  assert.expect(15);
+  assert.expect(21);
 
   let current_user = createCurrentUser(),
       contact = server.create('contact', {name: 'Bob Hoskins', account_id: current_user.account_id}),
@@ -44,6 +45,13 @@ test('activity feed tracks emails', function(assert) {
       fromUserEmail = server.create('email', {
         subject: 'from user subject',
         body: 'from user body',
+        account_id: current_user.account_id,
+        _sender_user_id: current_user.id,
+        to_contact_ids: [contact.id]
+      }),
+      openedEmail = server.create('email', {
+        subject: 'opened email',
+        body: 'opened email body',
         account_id: current_user.account_id,
         _sender_user_id: current_user.id,
         to_contact_ids: [contact.id]
@@ -67,6 +75,29 @@ test('activity feed tracks emails', function(assert) {
     email_id: fromUserEmail.id
   });
 
+  server.create('activity', {
+    user_id: current_user.id,
+    account_id: current_user.account_id,
+    _reference_contact_id: contact.id,
+    tag: 'contact',
+    event: 'open',
+    email_id: openedEmail.id,
+    time: moment().add(-6, 'd'),
+    description: 'opened the email'
+  });
+
+  server.create('activity', {
+    user_id: current_user.id,
+    account_id: current_user.account_id,
+    _reference_contact_id: contact.id,
+    tag: 'contact',
+    event: 'click',
+    email_id: openedEmail.id,
+    time: moment().add(-7, 'd'),
+    description: 'clicked the link',
+    external_link: "http://thesoftwaresimpleton.com"
+  });
+
   page.visit({user_id: current_user.id});
 
   andThen(function() {
@@ -74,7 +105,7 @@ test('activity feed tracks emails', function(assert) {
 
     assert.ok(page.feedIsVisible(), "feed component is on page", 'feed is visible');
 
-    assert.equal(2, page.activities().count());
+    assert.equal(4, page.activities().count());
 
     const fromContactEmailActivity = page.activities(1);
 
@@ -104,6 +135,21 @@ test('activity feed tracks emails', function(assert) {
 
     assert.equal('from user body', fromUserEmailActivity.emailBody(), 'email body text from user is visible');
 
+    const openedEmailActivity = page.activities(3);
+
+    assert.equal('6 days', openedEmailActivity.time(), 'correct activity time');
+
+    assert.ok(openedEmailActivity.hasOpenedIcon(), 'activity has open email icon');
+
+    assert.equal(`${contact.name} opened the email`, openedEmailActivity.description(), 'activity has correct description');
+
+    const clickedLinkActivity = page.activities(4);
+
+    assert.equal('7 days', clickedLinkActivity.time(), 'correct activity time');
+
+    assert.ok(clickedLinkActivity.hasOpenedIcon(), 'activity has open email icon');
+
+    assert.equal(clickedLinkActivity.description(), `${contact.name} clicked the link in the email`, 'activity has correct description');
   });
 });
 

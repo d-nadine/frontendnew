@@ -24,7 +24,20 @@
       </div>
     {{/if}}
     {{#if email}}
-      <span><a href="#" {{action (action attrs.showResource activity.email.sender)}}>{{activity.email.sender.displayName}}</a> emailed {{people-list people=activity.email.toList itemAction=attrs.showResource}}</span>
+      {{#if deliveredEmail}}
+        <span>
+          <a href="#" {{action (action attrs.showResource activity.email.sender)}}>{{activity.email.sender.displayName}}</a> emailed {{people-list people=activity.email.toList itemAction=attrs.showResource}}
+        </span>
+      {{/if}}
+      {{#if openedEmail}}
+        <span>
+          <a href="#" {{action (action attrs.showResource activity.reference)}}>{{activity.reference.displayName}}</a> {{activity.description}}
+          {{#if clickedLink}}
+            {{log activity.externalLink}}
+            <a href='{{unbound activity.externalLink}}' target='_blank'>{{externalLink}}</a> in the email
+          {{/if}}
+        </span>
+      {{/if}}
       <div class="pull-right">
         <a href="#" {{action "replyTo" activity.email}}>
           <i class="ss-standard ss-reply"></i> Reply
