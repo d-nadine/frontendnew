@@ -21,8 +21,9 @@ const Activity = Model.extend({
   externalLink: DS.attr('string'),
 
   note: DS.belongsTo('Radium.Note'),
-
   email: DS.belongsTo('Radium.Email'),
+  todo: DS.belongsTo('Radium.Todo'),
+  assignedToUser: DS.belongsTo('Radium.User'),
 
   _referenceCompany: DS.belongsTo('Radium.Company'),
   _referenceContact: DS.belongsTo('Radium.Contact'),

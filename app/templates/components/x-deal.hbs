@@ -1,0 +1,8 @@
+<div class="sidebar">
+  {{deal-sidebar deal=deal parent=parent showDeleteConfirmation=showDeleteConfirmation showContactDrawer=showContactDrawer showCompanyDrawer=showCompanyDrawer showContactModal=showContactModal showCompanyModal=showCompanyModal}}
+</div>
+{{#unless hideMain}}
+  <div class="main-content">
+    {{deal-main deal=deal parent=parent confirmDeletion="confirmDealDeletion" showDeleteConfirmation=showDeleteConfirmation deleteDeal="deleteDeal"}}
+  </div>
+{{/unless}}

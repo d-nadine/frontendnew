@@ -8,16 +8,16 @@ const {
 } = Ember;
 
 const Deal = Model.extend({
- currentStatus: DS.belongsTo('Radium.ListStatus'),
+  currentStatus: DS.belongsTo('Radium.ListStatus'),
   list: DS.belongsTo('Radium.List'),
   statusLastChangedAt: DS.attr('datetime'),
   expectedCloseDate: DS.attr('datetime'),
   user: DS.belongsTo('Radium.User'),
 
-  //todos: DS.hasMany('Radium.Todo'),
-  //meetings: DS.hasMany('Radium.Meeting'),
+  todos: DS.hasMany('Radium.Todo'),
+  meetings: DS.hasMany('Radium.Meeting'),
 
-  //activities: DS.hasMany('Radium.Activity'),
+  activities: DS.hasMany('Radium.Activity'),
 
   contact: DS.belongsTo('Radium.Contact', {
     inverse: 'deals'

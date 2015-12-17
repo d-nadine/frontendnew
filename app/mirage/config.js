@@ -27,6 +27,38 @@ export default function() {
     return {email: db.emails.where({id: fakeRequest.params.id})[0]};
   });
 
+  this.get('/deals/:id', function(db){
+    return {deals: db.deals};
+  });
+
+  this.get('/deals/:deal_id/activities/', function(db, fakeRequest) {
+    const activities = db.activities.where({_reference_deal_id:fakeRequest.params.deal_id});
+
+    return {
+      activities: activities,
+      meta: {
+        page: 1,
+        total_records: 0,
+        total_pages: 1,
+        last_page: true
+      }
+    };
+  });
+
+  this.get('/contacts/:contact_id/activities/', function(db, fakeRequest) {
+    const activities = db.activities.where({_reference_contact_id:fakeRequest.params.contact_id});
+
+    return {
+      activities: activities,
+      meta: {
+        page: 1,
+        total_records: 0,
+        total_pages: 1,
+        last_page: true
+      }
+    };
+  });
+
   this.get('/users/:user_id/activities', function(db) {
     return {
       activities: db.activities,

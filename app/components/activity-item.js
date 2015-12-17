@@ -15,6 +15,9 @@ function activityIcon(key) {
     return 'view';
   case 'note-create':
     return 'notebook';
+  case 'deal-assign':
+  case 'contact-assign':
+    return 'transfer';
   default:
     return 'star';
   }
@@ -75,14 +78,35 @@ export default Component.extend({
           tag = activity.get('tag'),
           event = activity.get('event');
 
-    return `${tag}-${event}`;
+    return `${tag}-${event}`.toLowerCase();
   }),
 
   icon: computed('activity', 'key', function() {
     return activityIcon(this.get('key'));
   }),
 
-  referenceActivity: computed('email', 'note', function(){
+  resolvedReference: computed('reference', 'todo', function() {
+    const activity = this.get('activity'),
+          reference = activity.get('reference');
+
+    if(!reference) {
+      return null;
+    }
+
+    if(!reference.get('isLoaded')) {
+      return null;
+    }
+
+    let todo;
+
+    if((todo = activity.get('todo'))) {
+      return todo;
+    }
+
+    return reference;
+  }),
+
+  referenceActivity: computed('email', 'note', function() {
     return !this.get('email') && !this.get('note');
   })
 });

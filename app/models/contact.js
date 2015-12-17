@@ -43,6 +43,8 @@ const Contact = Model.extend({
   state: primaryAccessor('addresses', 'state', 'primaryAddress'),
   zipcode: primaryAccessor('addresses', 'zipcode', 'primaryAddress'),
 
+  activities: DS.hasMany('Radium.Activity', {inverse: 'contacts'}),
+
   company: DS.belongsTo('Radium.Company', {inverse: 'contacts'}),
 
   displayName: computed('name', 'primaryEmail', function() {

@@ -33,7 +33,6 @@
         <span>
           <a href="#" {{action (action attrs.showResource activity.reference)}}>{{activity.reference.displayName}}</a> {{activity.description}}
           {{#if clickedLink}}
-            {{log activity.externalLink}}
             <a href='{{unbound activity.externalLink}}' target='_blank'>{{externalLink}}</a> in the email
           {{/if}}
         </span>
@@ -53,7 +52,11 @@
     {{#if referenceActivity}}
       {{#if activity.reference.isLoaded}}
         <span>
-          {{capitalize activity.tag}} <a href="#" {{action (action attrs.showResource activity.reference)}}>{{activity.reference.displayName}}</a> {{activity.description}}<br/>
+          {{capitalize activity.tag}} <a href="#" {{action (action attrs.showResource resolvedReference)}}>{{resolvedReference.displayName}}</a> {{activity.description}}
+          {{#if activity.assignedToUser}}
+            <a href="#" {{action (action attr.showResource activity.assignedToUser)}}>{{activity.assignedToUser.displayName}}</a>
+          {{/if}}
+          <br/>
           {{#if activity.reference.activityInfo}}
             {{activity.reference.activityInfo}}<br/>
           {{/if}}
