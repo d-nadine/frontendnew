@@ -53,6 +53,9 @@
       {{#if activity.reference.isLoaded}}
         <span>
           {{capitalize activity.tag}} <a href="#" {{action (action attrs.showResource resolvedReference)}}>{{resolvedReference.displayName}}</a> {{activity.description}}
+          {{#if statusChange}}
+            {{activity.reference.currentStatus.name}}
+          {{/if}}
           {{#if activity.assignedToUser}}
             <a href="#" {{action (action attr.showResource activity.assignedToUser)}}>{{activity.assignedToUser.displayName}}</a>
           {{/if}}
@@ -60,7 +63,9 @@
           {{#if activity.reference.activityInfo}}
             {{activity.reference.activityInfo}}<br/>
           {{/if}}
-          by <a href="#" {{action (action attrs.showResource activity.user)}}>{{activity.user.displayName}}</a>
+          {{#unless statusChange}}
+            by <a href="#" {{action (action attrs.showResource activity.user)}}>{{activity.user.displayName}}</a>
+          {{/unless}}
         </span>
       {{/if}}
     {{/if}}

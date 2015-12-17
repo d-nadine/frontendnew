@@ -31,6 +31,10 @@ export default function() {
     return {deals: db.deals};
   });
 
+  this.get('/list_statuses/:id', function(db){
+    return {list_statuses: db['list-statuses']};
+  });
+
   this.get('/deals/:deal_id/activities/', function(db, fakeRequest) {
     const activities = db.activities.where({_reference_deal_id:fakeRequest.params.deal_id});
 

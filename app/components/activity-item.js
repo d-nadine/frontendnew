@@ -13,6 +13,8 @@ function activityIcon(key) {
   case 'contact-open':
   case 'contact-click':
     return 'view';
+  case 'deal-status_change':
+    return 'chart';
   case 'note-create':
     return 'notebook';
   case 'deal-assign':
@@ -83,6 +85,10 @@ export default Component.extend({
 
   icon: computed('activity', 'key', function() {
     return activityIcon(this.get('key'));
+  }),
+
+  statusChange: computed('activity.event', function() {
+    return ['status_change'].contains(this.get('activity.event'));
   }),
 
   resolvedReference: computed('reference', 'todo', function() {

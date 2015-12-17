@@ -17,6 +17,7 @@ const activitiesProps = {
     hasEmailIcon: PageObject.hasClass('ss-mail', 'i'),
     hasOpenedIcon: PageObject.hasClass('ss-view', 'i'),
     hasReassignIcon: PageObject.hasClass('ss-transfer', 'i'),
+    hasChartIcon: PageObject.hasClass('ss-chart', 'i'),
     description: PageObject.text('p span:first'),
     noteBody: PageObject.text('.note-container'),
     emailBody: PageObject.text('.email-container'),
@@ -50,8 +51,10 @@ moduleForAcceptance('Acceptance | activities');
 test('a deal can have an activity feed', function(assert) {
 
   let current_user = createCurrentUser(),
-      deal = server.create('deal', {name: 'The deal', account_id: current_user.account_id}),
-      other_user = server.create('user', {account_id: current_user.account_id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'});
+      other_user = server.create('user', {account_id: current_user.account_id, first_name: 'Sue', last_name: 'Barker', email: 'sue@radiumcrm.com'}),
+      list = server.create('list'),
+      list_status = server.create('list-status', {list_id: list.id}),
+      deal = server.create('deal', {name: 'The deal', account_id: current_user.account_id, current_status_id: list_status.id});
 
   server.create('activity', {
     user_id: current_user.id,
@@ -64,18 +67,34 @@ test('a deal can have an activity feed', function(assert) {
     assigned_to_user_id: other_user.id
   });
 
+  server.create('activity', {
+    user_id: current_user.id,
+    _reference_deal_id: deal.id,
+    account_id: current_user.account_id,
+    tag: 'deal',
+    event: 'status_change',
+    time: moment().add(-3, 'd'),
+    description: "is now at"
+  });
+
   dealPage.visit({deal_id: deal.id});
 
-  assert.expect(3);
+  assert.expect(5);
 
   andThen(function() {
-    assert.equal(dealPage.activities().count(), 1, 'correct number of deal activities');
+    assert.equal(dealPage.activities().count(), 2, 'correct number of deal activities');
 
     const assignedToActivity = dealPage.activities(1);
 
     assert.ok(assignedToActivity.hasReassignIcon(), 'activity icon has reassign deal icon');
 
     assert.equal(`Deal ${deal.name} assigned to ${other_user.fullName} by ${current_user.fullName}`, assignedToActivity.description(), 'deal reassign activity has correct description');
+
+    const statusChangeActivity = dealPage.activities(2);
+
+    assert.ok(statusChangeActivity.hasChartIcon(), 'status change activity has correct icon');
+
+    assert.equal(statusChangeActivity.description(), `Deal ${deal.name} is now at ${list_status.name}`, 'status change activity text is correct');
   });
 });
 

@@ -1,10 +1,9 @@
+import Model from 'radium/models/models';
 import Ember from 'ember';
 
 const {
   computed
 } = Ember;
-
-import Model from 'radium/models/models';
 
 const ListStatus = Model.extend({
   name: DS.attr('string'),
@@ -15,8 +14,8 @@ const ListStatus = Model.extend({
   isActive: computed.equal('statusType', 'active')
 });
 
-export default ListStatus;
-
 ListStatus.toString = function() {
   return "Radium.ListStatus";
 };
+
+export default ListStatus;
