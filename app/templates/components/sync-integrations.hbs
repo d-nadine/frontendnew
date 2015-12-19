@@ -1,0 +1,20 @@
+<ul>
+  <li {{action "showIntegration" "intercom"}}>
+    <img src="http://res.cloudinary.com/radium/image/upload/c_scale,h_20,w_20/v1450520164/integrations/intercomio2.png" alt="intercom"/>
+    Add new leads from intercom.  Requires an intercom account.</a>
+  </li>
+  {{#if showIntercomConfig}}
+    <div class="integration-config">
+      <h4 class="underline-heading"><img src="http://res.cloudinary.com/radium/image/upload/c_scale,h_20,w_20/v1450520164/integrations/intercomio2.png" alt="intercom"/> Intercom Settings</h4>
+      <span>Your App ID is available on the <a href="https://app.intercom.io/a/apps/_/rails-integrations/api-keys" target="_blank">API Keys</a> page on Intercom, accessible from your Integration settings.</span>
+      <div class="control-box">
+        <input type="text" placeholder="APP ID"/>
+      </div>
+      <div class="control-box">
+        <input type="text" placeholder="API KEY"/>
+      </div>
+      <div>
+        <button class="btn" {{action "hideIntegration" "intercom"}}>Cancel</button>
+    </div>
+  {{/if}}
+</ul>
