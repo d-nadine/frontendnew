@@ -7,15 +7,23 @@
     <div class="integration-config intercom">
       <h4 class="underline-heading"><img src="http://res.cloudinary.com/radium/image/upload/c_scale,h_20,w_20/v1450520164/integrations/intercomio2.png" alt="intercom"/> Intercom Settings</h4>
       <span>Your App ID is available on the <a href="https://app.intercom.io/a/apps/_/rails-integrations/api-keys" target="_blank">API Keys</a> page on Intercom, accessible from your Integration settings.</span>
-      <div class="control-box">
-        <input type="text" placeholder="APP ID" class="field app_id"/>
-      </div>
-      <div class="control-box">
-        <input type="text" placeholder="API KEY" class="field api_key"/>
-      </div>
-      <div>
-        <button class="btn" {{action "hideIntegration" "intercom"}}>Cancel</button>
-        <button class="btn btn-primary" {{action "updateIntegration" "intercom"}}>Connect</button>
+      {{#unless intercomSet}}
+        <div class="control-box">
+          <input type="text" placeholder="APP ID" class="field app_id"/>
+        </div>
+        <div class="control-box">
+          <input type="text" placeholder="API KEY" class="field api_key"/>
+        </div>
+        <div>
+          <button class="btn" {{action "hideIntegration" "intercom"}}>Cancel</button>
+          <button class="btn btn-primary" {{action "updateIntegration" "intercom"}}>Connect</button>
+        </div>
+      {{else}}
+        <div>
+          <button class="btn" {{action "update" "intercom"}}>Update Configuration</button>
+          <button class="btn" {{action "disconnect" "intercom"}} {{bind-attr disabled=isDeleting}}>Disconnect</button>
+        </div>
+      {{/unless}}
     </div>
   {{/if}}
 </ul>
