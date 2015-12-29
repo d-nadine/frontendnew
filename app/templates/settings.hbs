@@ -7,12 +7,13 @@
         <li>{{#link-to "settings.company"}}Company & Team{{/link-to}}</li>
         {{#if isAdmin}}
           <li>{{#link-to "settings.billing"}}Billing & Upgrade{{/link-to}}</li>
-          <li>{{#link-to "settings.integrations"}}Integrations{{/link-to}}</li>
         {{/if}}
         <li>{{#link-to "settings.general"}}General{{/link-to}}</li>
         <li>{{#link-to "settings.mail"}}Mail Settings{{/link-to}}</li>
         <li>{{#link-to "settings.customFields"}}Custom Fields{{/link-to}}</li>
-        <li>{{#link-to "settings.api"}}Third Party Integrations{{/link-to}}</li>
+        {{#if isAdmin}}
+          <li>{{#link-to "settings.api"}}Third Party Integrations{{/link-to}}</li>
+        {{/if}}
         <li>{{#link-to "settings.contactStatuses" class="edit"}}Contact Statuses{{/link-to}}</li>
         <li>{{#link-to "settings.leadSources"}}Lead Sources{{/link-to}}</li>
         <li>{{#link-to "settings.listStatuses"}}List Statuses{{/link-to}}</li>

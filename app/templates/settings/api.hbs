@@ -1,16 +1,6 @@
-<h3 class="settings-title">Radium API Key</h3>
-<div class="alert alert-info api-key-panel">
-  <div class="form form-horizontal">
-    <div class="control-group">
-      <label class="control-label">Your API key:</label>
-      <div class="controls">
-        {{input value=token class="api-field" readonly="readonly"}}
-      </div>
-    </div>
-  </div>
-</div>
+<h2 class="underline-heading">Create Direct Integration</h2>
+{{sync-integrations integrations=model}}
 <div class="wrap">
-  <h3>Integrations</h3>
   <div class="integrations">
     <div class="service">
       <div {{bind-attr class=":logo currentUser.thirdPartyConnected:connected:disconnected"}}></Div>
@@ -27,5 +17,15 @@
         {{/unless}}
       </div>
     </div>
+  <div class="alert alert-info api-key-panel">
+    <div class="form form-horizontal">
+      <div class="control-group">
+        <label class="control-label">Your API key:</label>
+        <div class="controls">
+          {{input value=currentUser.token class="api-field" readonly="readonly"}}
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </div>

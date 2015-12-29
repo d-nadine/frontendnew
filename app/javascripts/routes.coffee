@@ -70,7 +70,6 @@ Radium.Router.map ->
     @route 'profile'
     @route 'company'
     @route 'billing'
-    @route 'integrations'
     @route 'general'
     @route 'mail'
     @route 'api'
