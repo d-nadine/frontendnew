@@ -12,6 +12,20 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   Radium.CommonModals,
 
   actions:
+    exportToCsv: ->
+      params = @get('model.params')
+
+      delete params.page
+      delete params.page_size
+
+      job = Radium.ExportToCsvJob.createRecord
+        params: params
+
+      job.save().then =>
+        @flashMessenger.success "The CSV job has been created and you will be emailed shortly with the results."
+
+      false
+
     selectContact: (item) ->
       if typeof item == "string"
         @set 'searchText', item

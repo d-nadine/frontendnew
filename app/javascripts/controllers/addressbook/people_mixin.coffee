@@ -71,6 +71,7 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
              private: @get('private')
              filter: filter
 
+
       searchText = $.trim(@get('searchText') || '')
 
       if searchText.length
@@ -96,7 +97,10 @@ Radium.PeopleMixin = Ember.Mixin.create Ember.Evented,
         job.set 'user', user
 
       job.save().then( (result) =>
-        @set 'working', false
+        if job.get('exportToCsvJob')
+          @flashMessenger.success "The export job has been created and you will shortly be emailed the results of the export."
+          return
+
         @flashMessenger.success 'The records have been updated.'
         Ember.run.once this, 'updateLocalRecords', job, detail
         @send 'updateTotals'

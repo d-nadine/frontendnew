@@ -35,7 +35,9 @@ Radium.XQueryComponent = Ember.Component.extend
 
       index = @get('index')
 
-      return unless @get('parent.potentialQueries').objectAt index
+      potentialQueries = @get('parent.potentialQueries')
+
+      return unless potentialQueries && potentialQueries.objectAt(index)
 
       getOperator = (q) =>
                        if isBoolean
