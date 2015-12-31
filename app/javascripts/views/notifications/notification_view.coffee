@@ -19,3 +19,6 @@ Radium.NotificationsOpenContactView = Radium.NotificationView.extend()
 Radium.NotificationsClickContactView = Radium.NotificationView.extend()
 Radium.NotificationsUnsubscribeExternalView = Radium.NotificationView.extend()
 Radium.NotificationsUnsubscribeExternalView = Radium.NotificationView.extend()
+Radium.NotificationsExportFinishedContactView = Radium.NotificationView.extend
+  expiryDate: Ember.computed 'controller.time', ->
+    @get('controller.time').advance(hour: 1)
