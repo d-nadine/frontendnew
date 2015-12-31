@@ -452,12 +452,27 @@
   }
 
   .nav-pills .active a, .nav-pills .active a:hover, .nav-pills .active a:focus {
-    background: $blue;
+    &:not(.submenu-item) {
+      background: $blue;
+      color: #fff;
+
+      i {
+        color: #fff;
+      }
+    }
+  }
+
+  .nav-pills .subactive a, .nav-pills .subactive a:hover, .nav-pills .subactive a:focus {
+    background: lighten($blue, 20%);
     color: #fff;
 
     i {
       color: #fff;
     }
+  }
+
+  .nav.submenu li.subactive .nav-pills-right span {
+    background: lighten($lightblue, 20%);
   }
 
   .nav-pills {
@@ -560,9 +575,10 @@
   }
 
   .nav li.active .nav-pills-right span {
-    background: $lightblue;
+    &:not(.submenu-item) {
+      background: $lightblue;
+    }
   }
-
 
   .nav li a .nav-pills-left span:nth-of-type(1) {
     width: calc(100% - 19px);
@@ -1279,6 +1295,12 @@
   }
   .nav-pills > li {
     float: none;
+  }
+
+  .nav-pills.submenu .nav-pills-left span,
+  .nav-pills .nav-pills-left .shared {
+    position: relative;
+    left: 15px;
   }
 
   .initial-importing {
