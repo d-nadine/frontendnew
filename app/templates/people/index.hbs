@@ -14,43 +14,33 @@
         <span>Lists</span>
       </div>
       <ul class="nav nav-pills">
-        <li {{bind-attr class="isPotential:active"}}>
-          {{#link-to "people.index" "potential" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false)}}
-          <div class="nav-pills-left">
-            <span>Private Contacts</span>
-          </div>
-          <div class="nav-pills-right">
-            <span>{{potential}}</span>
-          </div>
-          {{/link-to}}
-        </li>
         <li {{bind-attr class="isPersonal:active"}}>
-          {{#link-to "people.index" "recent" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false)}}
+          {{#link-to "people.index" "potential" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false)}}
             <div class="nav-pills-left">
               <span>Personal Contacts</span>
             </div>
             <div class="nav-pills-right">
-              <span>2000</span>
+              <span>{{allpersonal}}</span>
             </div>
           {{/link-to}}
           <ul class="nav nav-pills submenu">
-            <li {{bind-attr class="isRecent:subactive"}}>
-              {{#link-to "people.index" "recent" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false) class="submenu-item"}}
+            <li {{bind-attr class="isPotential:subactive"}}>
+              {{#link-to "people.index" "potential" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false) class="submenu-item"}}
                 <div class="nav-pills-left">
                   <span>Recent</span>
                 </div>
                 <div class="nav-pills-right">
-                  <span class="submenu-item">2000</span>
+                  <span class="submenu-item">{{potential}}</span>
                 </div>
               {{/link-to}}
             </li>
             <li {{bind-attr class="isSuggested:subactive"}}>
-              {{#link-to "people.index" "suggested" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false) class="submenu-item"}}
+              {{#link-to "people.index" "filtered" (query-params user="" list="" company="" contactimportjob="" customquery="" hidesidebar=false) class="submenu-item"}}
                 <div class="nav-pills-left">
                   <span>Suggested</span>
                 </div>
                 <div class="nav-pills-right">
-                  <span class="submenu-item">2000</span>
+                  <span class="submenu-item">{{filtered}}</span>
                 </div>
               {{/link-to}}
             </li>
@@ -60,7 +50,7 @@
                   <span>Spam</span>
                 </div>
                 <div class="nav-pills-right">
-                  <span class="submenu-item">2000</span>
+                  <span class="submenu-item">{{spam}}</span>
                 </div>
               {{/link-to}}
             </li>
@@ -143,7 +133,7 @@
                     </li>
                   </ul>
                 </li>
-                {{#unless isPotential}}
+                {{#unless isPersonal}}
                   <li><a href="#" {{action "makePrivateAll"}}>Make Private</a></li>
                 {{else}}
                   <li>
@@ -261,7 +251,6 @@
       <div class="buttons">
         {{#link-to "leads.single" class="btn btn-primary btn-large"}}Single Contact{{/link-to}}
         {{#link-to "leads.import" class="btn btn-primary btn-large"}}Import from CSV{{/link-to}}
-        {{#link-to "untracked.index" "filtered" class="btn btn-primary btn-large"}}Import from Google{{/link-to}}
       </div>
     </div>
   {{/if}}

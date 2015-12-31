@@ -31,8 +31,6 @@ Radium.Router.map ->
     @route 'new'
     @route 'single'
     @route 'import'
-    @resource 'untracked', ->
-      @route 'index', path: '/:filter'
     @route 'match'
     @route 'fromCompany', path: '/new/companies/:company_id'
 
@@ -62,7 +60,6 @@ Radium.Router.map ->
     @resource 'people', ->
       @route 'contacts'
       @route 'index', path: '/:filter'
-    @route 'untracked'
     @route 'companies'
     @route 'contactimportjobs', path: '/contactimportjobs/:contact_import_job_id/contacts'
 

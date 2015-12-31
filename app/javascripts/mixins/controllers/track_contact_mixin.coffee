@@ -11,9 +11,6 @@ Radium.TrackContactMixin = Ember.Mixin.create
       false
 
   # UPGRADE: replace with inject
-  untrackedIndex: Ember.computed ->
-    @container.lookup('controller:untrackedIndex')
-
   peopleIndex: Ember.computed ->
     @container.lookup('controller:peopleIndex')
 

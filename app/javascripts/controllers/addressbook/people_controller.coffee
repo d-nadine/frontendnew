@@ -261,8 +261,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       detail =
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
-        public: false
-        private: true
+        public: @get('public')
+        private: @get('private')
 
       @send "executeActions", "make_private", detail
       false
@@ -297,8 +297,9 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       detail =
         jobType: Radium.BulkActionsJob
         modelType: Radium.Contact
-        public: true
-        private: false
+        public: @get('public')
+        private: @get('private')
+
 
       @send "executeActions", "delete", detail
 
@@ -317,6 +318,12 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
         @set 'noList', totals.get('noList')
         @set 'usersTotals', totals.get('usersTotals')
         @set 'listsTotals', totals.get('listsTotals')
+
+      Radium.UntrackedContactsTotals.find({}).then (results) =>
+        totals = results.get('firstObject')
+        @set 'allpersonal', totals.get('all')
+        @set 'filtered', totals.get('filtered')
+        @set 'spam', totals.get('spam')
 
       false
 
@@ -392,7 +399,7 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   dummy: Ember.A()
 
-  needs: ['addressbook', 'users', 'contactStatuses', 'company', 'untrackedIndex', 'company']
+  needs: ['addressbook', 'users', 'contactStatuses', 'company', 'company']
 
   noContacts: Ember.computed.oneWay 'controllers.addressbook.noContacts'
 
@@ -401,7 +408,6 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   users: Ember.computed.oneWay 'controllers.users'
   contactStatuses: Ember.computed.oneWay 'controllers.contactStatuses'
   contactsTotal: Ember.computed.oneWay 'controllers.addressbook.contactsTotal'
-  untrackedIndex: Ember.computed.oneWay 'controllers.untrackedIndex'
   companiesTotal: Ember.computed.oneWay 'controllers.addressbook.companiesTotal'
 
   queryParams: ['user', 'list', 'company', 'contactimportjob', 'customquery', 'hidesidebar']
@@ -422,9 +428,15 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
   isListed: Ember.computed.equal 'filter', 'listed'
   isAssignedTo: Ember.computed.equal 'filter', 'assigned_to'
   isQuery: Ember.computed.equal 'filter', 'dynamicquery'
+  isSuggested: Ember.computed.equal 'filter', 'filtered'
+  isSpam: Ember.computed.equal 'filter', 'spam'
 
-  public: true
-  private: false
+  isPersonal: Ember.computed 'filter', ->
+    ['potential', 'filtered', 'spam'].contains @get('filter')
+
+  public: Ember.computed.not 'private'
+
+  private: Ember.computed.oneWay 'isPersonal'
 
   # UPGRADE: replace with inject
   contactRoute: Ember.computed ->
@@ -459,8 +471,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   filterParams: Ember.computed 'filter', 'user', 'list', 'company', 'contactimportjob', 'customquery', ->
     params =
-      public: true
-      private: false
+      public: @get('public')
+      private: @get('private')
       filter: @get('filter')
       page_size: @get('pageSize')
 
