@@ -463,7 +463,7 @@
   }
 
   .nav-pills .subactive a, .nav-pills .subactive a:hover, .nav-pills .subactive a:focus {
-    background: lighten($blue, 20%);
+    background: $blue;
     color: #fff;
 
     i {
@@ -472,7 +472,7 @@
   }
 
   .nav.submenu li.subactive .nav-pills-right span {
-    background: lighten($lightblue, 20%);
+    background: $lightblue;
   }
 
   .nav-pills {
