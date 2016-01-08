@@ -553,8 +553,8 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
 
   checkedColumns: Ember.computed.filterBy 'combinedColumns', 'checked'
 
-  displayNoContacts: Ember.computed 'noContacts', 'isPotential', 'potential', 'filter', 'isListed', 'isSuggested', ->
-    return false if @get('isPotential') || @get('isListed') || @get('isSuggested')
+  displayNoContacts: Ember.computed 'noContacts', 'isPotential', 'potential', 'filter', 'isListed', 'isSuggested', 'isSpam', ->
+    return false if @get('isPotential') || @get('isListed') || @get('isSuggested') || @get('isSpam')
 
     !!@get('noContacts')
 
