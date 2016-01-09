@@ -129,6 +129,14 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
+      id: "inactive"
+      group: "activity"
+      classNames: "inactive"
+      heading: "Inactive"
+      binding: "daysInactive"
+      sortOn: "last_activity_at"
+    }
+    {
       id: "street"
       group: "address"
       classNames: "street"
@@ -361,6 +369,14 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       ]
       context: "company"
       component: 'autocomplete-editable-field'
+    }
+    {
+      id: "inactive"
+      group: "activity"
+      classNames: "inactive"
+      heading: "Inactive"
+      binding: "daysInactive"
+      sortOn: "last_activity_at"
     }
     {
       id: "assign"

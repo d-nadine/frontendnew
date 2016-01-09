@@ -67,6 +67,12 @@ Radium.Deal = Radium.Model.extend Radium.AttachmentsMixin,
     else
       return "#{Math.floor(timeDiff / (24 * 60))} day(s)"
 
+  lastActivityAt: DS.attr('datetime')
+
+  daysInactive: Ember.computed 'lastActivityAt', ->
+    if @get("lastActivityAt")?
+      @get('lastActivityAt').readableTimeAgo()
+
   longName: Ember.computed 'name', 'contact', ->
     name = @get('name')
     return name unless @get('contact')
