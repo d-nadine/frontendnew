@@ -14,14 +14,16 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
 
     th = @$()
 
-    rect = th.get(0).getBoundingClientRect()
+    position = th.position()
+
+    p position
 
     dropdown = @$('.dropdown-menu')
 
     dropdown.css
-      position: 'fixed'
-      top: rect.top
-      left: rect.right - dropdown.width() - th.width()
+      position: 'absolute'
+      top: position.top + th.height()
+      left: position.left - dropdown.outerWidth(true) + th.outerWidth()
 
     Radium.Common.addOverlay ->
       Radium.Common.removeOverlay()

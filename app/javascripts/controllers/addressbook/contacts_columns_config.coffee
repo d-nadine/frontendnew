@@ -257,6 +257,28 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       component: 'editable-field'
     }
     {
+      id: "fax"
+      group: "details"
+      classNames: "fax"
+      heading: "Fax"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Fax",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "fax"
+        static: true
+      }]
+      sortOn: "fax"
+      component: 'editable-field'
+    }
+    {
       group: "details"
       id: "source"
       classNames: "source"
@@ -290,7 +312,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
       id: "status"
       group: "actions"
       classNames: "assign stat"
-      heading: "Contact<br/>Status"
+      heading: "Contact Status"
       sortOn: "status"
       bindings: [
         {name: "model", value: "model"}

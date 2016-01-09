@@ -5,18 +5,10 @@
   cursor: pointer;
 
   .column-selector-dialog {
-    position: relative;
     z-index: 1050;
 
     .dropdown-menu {
       padding-bottom: 10px;
-    }
-
-    &.open {
-
-      .dropdown-menu {
-        left: 50% !important;
-      }
     }
 
     .group-heading-column {
