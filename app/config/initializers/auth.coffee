@@ -37,6 +37,8 @@ Ember.Application.initializer
         increments:
           number_of_clicks: 1
 
+      window.Intercom('update', subscription_plan: user.get('account.billing.subscriptionPlan.name'))
+
       $.cloudinary.config({ cloud_name: 'radium', api_key: '472523686765267'})
       account = user.get('account')
 

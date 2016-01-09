@@ -78,6 +78,8 @@ Radium.SettingsBillingController = Radium.ObjectController.extend BufferedProxy,
         Radium.ActiveCard.find(@get('account.id')).then (card) =>
           @set 'activeCard', card
 
+        window.Intercom('update', subscription_plan: billing.get('subscriptionPlan.name'))
+
       @addErrorEvents(billing)
 
       @get('store').commit()

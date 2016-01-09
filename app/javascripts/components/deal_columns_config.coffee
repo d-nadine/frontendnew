@@ -134,7 +134,6 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       classNames: "inactive"
       heading: "Inactive"
       binding: "daysInactive"
-      sortOn: "last_activity_at"
     }
     {
       id: "street"
@@ -371,12 +370,92 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       component: 'autocomplete-editable-field'
     }
     {
+      id: "email"
+      group: "details"
+      classNames: "email"
+      heading: "Email"
+      route: "contact"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add Email",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "email"
+        static: true
+      },
+      {
+        name: 'validator',
+        value: Radium.EMAIL_REGEX,
+        static: true
+      },
+      {
+        name: "routeAction",
+        value: "showCompanyDrawer",
+        static: true
+      }],
+      component: 'editable-field'
+    }
+    {
       id: "inactive"
       group: "activity"
       classNames: "inactive"
       heading: "Inactive"
       binding: "daysInactive"
-      sortOn: "last_activity_at"
+   },
+    {
+      id: "phone"
+      group: "details"
+      classNames: "phone"
+      heading: "Phone"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Phone",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "phone"
+        static: true
+      }]
+      component: 'editable-field'
+    },
+    {
+      id: "fax"
+      group: "details"
+      classNames: "phone"
+      heading: "Fax"
+      bindings: [{
+        name: "model",
+        value: "model.company"
+      }
+      {
+        name: "placeholder",
+        value: "Add Fax",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "fax"
+        static: true
+      }]
+      component: 'editable-field'
+    },
+    {
+      id: "added"
+      group: "activity"
+      classNames: "phone"
+      heading: "Added"
+      binding: "company.added"
     }
     {
       id: "assign"

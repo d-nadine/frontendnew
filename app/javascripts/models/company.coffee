@@ -33,9 +33,19 @@ Radium.Company = Radium.Model.extend Radium.HasTasksMixin,
 
   displayName: Ember.computed.alias 'name'
 
+  lastActivityAt: DS.attr('datetime')
+
   primaryEmail: Radium.computed.primary 'emailAddresses'
   primaryPhone: Radium.computed.primary 'phoneNumbers'
   primaryAddress: Radium.computed.primary 'addresses'
+
+  added: Ember.computed 'createdAt', ->
+    @get('createdAt').toFormattedString("%B %d, %Y")
+
+  daysInactive: Ember.computed 'lastActivityAt', ->
+    if @get("lastActivityAt")?
+      @get('lastActivityAt').readableTimeAgo()
+
 
   email: Radium.computed.primaryAccessor 'emailAddresses', 'value', 'primaryEmail'
   phone: Radium.computed.primaryAccessor 'phoneNumbers', 'value', 'primaryPhone'

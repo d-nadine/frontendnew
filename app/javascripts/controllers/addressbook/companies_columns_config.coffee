@@ -242,6 +242,36 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
       component: 'editable-field'
     },
     {
+      id: "fax"
+      group: "details"
+      classNames: "phone"
+      heading: "Fax"
+      bindings: [{
+        name: "model",
+        value: "model"
+      }
+      {
+        name: "placeholder",
+        value: "Add Fax",
+        static: true
+      },
+      {
+        name: "bufferKey",
+        value: "fax"
+        static: true
+      }]
+      sortOn: "fax"
+      component: 'editable-field'
+    },
+    {
+      id: "added"
+      group: "activity"
+      classNames: "added"
+      heading: "Added"
+      binding: "added"
+      sortOn: "created_at"
+    }
+    {
       id: "lists"
       group: "actions"
       classNames: "lists"
@@ -297,6 +327,14 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
       }]
       component: 'editable-field'
     },
+    {
+      id: "inactive"
+      group: "activity"
+      classNames: "inactive"
+      heading: "Inactive"
+      binding: "daysInactive"
+      sortOn: "last_activity_at"
+    }
     {
       id: "industry"
       group: "details"

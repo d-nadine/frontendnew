@@ -1,6 +1,6 @@
 Radium.ContactColumnsConfig = Ember.Mixin.create
   SAVED_COLUMNS: "contact_saved_checked_columns"
-  initialColumns: ['email', 'company', "assign"]
+  initialColumns: ['email', 'company', "assign", "lists"]
   fixedColumns: Ember.A([
     {
       classNames: "name"
