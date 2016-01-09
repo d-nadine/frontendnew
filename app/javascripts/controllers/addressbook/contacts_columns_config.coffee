@@ -259,7 +259,7 @@ Radium.ContactColumnsConfig = Ember.Mixin.create
     {
       id: "fax"
       group: "details"
-      classNames: "fax"
+      classNames: "phone"
       heading: "Fax"
       bindings: [{
         name: "model",

@@ -11,6 +11,13 @@
       padding-bottom: 10px;
     }
 
+    &.open {
+
+      .dropdown-menu {
+        z-index: 1051;
+      }
+    }
+
     .group-heading-column {
       display: inline-block;
       float: left;

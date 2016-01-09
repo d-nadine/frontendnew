@@ -16,8 +16,6 @@ Radium.ColumnSelectorComponent = Ember.Component.extend
 
     position = th.position()
 
-    p position
-
     dropdown = @$('.dropdown-menu')
 
     dropdown.css
