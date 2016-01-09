@@ -186,6 +186,6 @@ Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
 
     filterParams = @get('filterParams') || {}
 
-    params = Ember.merge filterParams, like: searchText, page_size: @get('pageSize')
+    params = Ember.merge filterParams, like: searchText, list: @get('list.id'), page_size: @get('pageSize')
 
     @get("deals").set("params", Ember.copy(params))
