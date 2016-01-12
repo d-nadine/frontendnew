@@ -32,13 +32,20 @@ Ember.Application.initializer
         email: user.get('email')
         user_id: user.get('id')
         created_at: user.get('createdAt').toUnixTimestamp()
-        subscription_plan: user.get('account.billing.subscriptionPlan.name')
         widget:
           activator: "#IntercomDefaultWidget"
         increments:
           number_of_clicks: 1
 
-      window.Intercom('update', subscription_plan: user.get('account.billing.subscriptionPlan.name'))
+      observer = ->
+        return unless name = user.get('account.billing.subscriptionPlan.name')
+
+        window.Intercom('update', subscription_plan: user.get('account.billing.subscriptionPlan.name'))
+        window.Intercom('reattach_activator')
+
+        user.removeObserver 'account.billing.subscriptionPlan.name'
+
+      user.addObserver 'account.billing.subscriptionPlan.name', observer
 
       $.cloudinary.config({ cloud_name: 'radium', api_key: '472523686765267'})
       account = user.get('account')
