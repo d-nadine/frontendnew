@@ -32,6 +32,7 @@ Ember.Application.initializer
         email: user.get('email')
         user_id: user.get('id')
         created_at: user.get('createdAt').toUnixTimestamp()
+        subscription_plan: user.get('account.billing.subscriptionPlan.name')
         widget:
           activator: "#IntercomDefaultWidget"
         increments:
