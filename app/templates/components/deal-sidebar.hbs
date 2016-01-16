@@ -55,7 +55,7 @@
         <div class="sidebar-panel-content contacts">
           <div class="primary-resource">
             {{avatar deal.contact size="small"}}
-            {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true hoverAction="showContactModal"}}
+            {{inline-autocomplete model=deal bufferKey="contact" scopes="contact" queryKey="displayName" placeholder="Add Contact" saveAction="setPrimaryContact" parent=this actionOnly=true hoverAction="showContactModal" contextCompany="company"}}
           </div>
         </div>
       {{/if}}

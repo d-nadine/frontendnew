@@ -25,9 +25,15 @@ Radium.AddContactsComponent = Ember.Component.extend
       false
 
   queryParameters: (query) ->
-    term: query
-    email_only: false
-    scopes: ['contact']
+    params =
+      term: query
+      email_only: false
+      scopes: ['contact']
+
+    if company = @get('contextCompany')
+      params.context_company_id = company.get('id')
+
+    params
 
   filterResults: (item) ->
     parent = @get('parent')

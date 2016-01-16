@@ -83,6 +83,12 @@ Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
       term: query
       scopes: scopes
 
+    if contextCompany = @get('contextCompany')
+      if contextCompany = "this"
+        params.context_company_id = @get('model.id')
+      else if company = @get('model').get(contextCompany)
+        params.context_company_id = company.get('id')
+
     return params unless @get('tracked_only')
 
     params.tracked_only = true
