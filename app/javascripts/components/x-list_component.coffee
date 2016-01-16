@@ -2,11 +2,13 @@ require 'components/deal_columns_config'
 require "mixins/table_column_selections"
 require "mixins/common_drawer_actions"
 require "controllers/addressbook/people_mixin"
+require 'mixins/set_primary_contact'
 
 Radium.XListComponent = Ember.Component.extend Radium.DealColumnsConfig,
   Radium.TableColumnSelectionsMixin,
   Radium.CommonDrawerActions,
   Radium.PeopleMixin,
+  Radium.SetPrimaryContactMixin,
 
   actions:
     afterContactSave: (component) ->

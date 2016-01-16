@@ -22,7 +22,7 @@ Radium.AutocompleteEditableFieldComponent = Radium.EditableFieldComponent.extend
       else
         saveAction = @get('saveAction')
         Ember.assert "You must have a saveAction specified", saveAction
-        @get('containingController').send saveAction, object
+        @get('containingController').send saveAction, object, @get('model')
 
       @set 'isEditing', false
 

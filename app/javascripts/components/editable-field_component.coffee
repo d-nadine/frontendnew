@@ -174,11 +174,23 @@ Radium.EditableFieldComponent = Ember.Component.extend Radium.KeyConstantsMixin,
     modelDep = "model.#{bufferKey}"
     bufferDep = "bufferedProxy.#{bufferKey}"
 
+    self = this
+
     Ember.defineProperty this, 'markUp', Ember.computed bufferDep, 'route', 'alternativeRoute', modelDep, ->
       value = ((o) =>
         return unless potential = @get('bufferedProxy').get(@get('bufferKey'))
 
         if potential instanceof DS.Model
+          unless potential.get('isLoaded')
+            observer = ->
+              return unless potential.get('isLoaded')
+
+              self.notifyPropertyChange modelDep
+              self.setMarkup()
+
+              potential.removeObserver 'isLoaded', observer
+
+            potential.addObserver 'isLoaded', observer
           # FIXME: need to configure other keys
           return potential.get('displayName')
 

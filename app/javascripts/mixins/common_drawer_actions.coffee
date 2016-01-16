@@ -115,6 +115,9 @@ Radium.CommonDrawerActions = Ember.Mixin.create
     showContactDrawer: (contact, hideMain) ->
       @closeContactDrawer()
 
+      unless contact.constructor is Radium.Contact
+        contact = contact.get('contact')
+
       Ember.assert "You have passed a non contact instance to showContactDrawer", contact.constructor == Radium.Contact
 
       @set 'contactModel', contact

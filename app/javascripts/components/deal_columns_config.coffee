@@ -311,7 +311,7 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       id: "company-name"
       group: "details"
       classNames: "company"
-      heading: "Company-name"
+      heading: "Company Name"
       route: "company"
       bindings: [{
         name: "model",
@@ -408,6 +408,58 @@ Radium.DealColumnsConfig = Ember.Mixin.create
       heading: "Inactive"
       binding: "daysInactive"
    },
+   {
+      id: "primary-contact"
+      group: "company",
+      classNames: "company",
+      heading: "Primary Contact",
+      route: "contact",
+      bindings: [
+        {
+          name: "model",
+          value: "model"
+        },
+        {
+          name: "deal",
+          value: "model"
+        }
+        {
+          name: "bufferKey",
+          value: "contact",
+          static: true
+        },
+        {
+          name: "scopes",
+          value: "contact",
+          static: true
+        },
+        {
+          name: "queryKey",
+          value: "displayName",
+          static: true
+        },
+        {
+          name: "placeholder",
+          value: "Add Contact",
+          static: true
+        },
+        {
+          name: "saveAction",
+          value: "setPrimaryContact",
+          static: true
+        },
+        {
+          name: "actionOnly",
+          value: true,
+          static: true
+        },
+        {
+          name: "routeAction",
+          value: "showContactDrawer",
+          static: true
+        }]
+      component: 'autocomplete-editable-field'
+    }
     {
       id: "phone"
       group: "details"

@@ -66,6 +66,54 @@ Radium.CompaniesColumnConfig = Ember.Mixin.create
       component: 'editable-field'
     },
     {
+      id: "primary-contact"
+      group: "company",
+      classNames: "company",
+      heading: "Primary Contact",
+      route: "contact",
+      bindings: [
+        {
+          name: "model",
+          value: "model"
+        },
+        {
+          name: "bufferKey",
+          value: "primaryContact",
+          static: true
+        },
+        {
+          name: "scopes",
+          value: "contact",
+          static: true
+        },
+        {
+          name: "queryKey",
+          value: "displayName",
+          static: true
+        },
+        {
+          name: "placeholder",
+          value: "Add Contact",
+          static: true
+        },
+        {
+          name: "saveAction",
+          value: "setPrimaryContact",
+          static: true
+        },
+        {
+          name: "actionOnly",
+          value: true,
+          static: true
+        },
+        {
+          name: "routeAction",
+          value: "showContactDrawer",
+          static: true
+        }]
+      component: 'autocomplete-editable-field'
+    }
+    {
       id: "website"
       group: "details"
       classNames: "website"

@@ -8,6 +8,23 @@ Radium.AddressbookCompaniesController = Radium.ArrayController.extend Radium.Peo
   Radium.CommonDrawerActions,
   Radium.TableColumnSelectionsMixin,
   actions:
+    setPrimaryContact: (contact, company) ->
+      Ember.assert "contact must be contact or AutoCompleteItem", [Radium.Contact, Radium.AutocompleteItem].contains(contact.constructor)
+
+      contact = if contact.constructor == Radium.AutocompleteItem
+                  contact.get('person')
+                else
+                  contact
+
+      if contact.get('company') != company
+        contact.set('company', company)
+
+      company.set('primaryContact', contact)
+
+      company.save()
+
+      false
+
     showAddCompany: ->
       $('.new-company').slideToggle('medium', ->
         Ember.$('.new-company input[type=text]').focus()
