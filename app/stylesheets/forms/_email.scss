@@ -1,6 +1,11 @@
 .iframe-container {
   margin-bottom: 10px;
 }
+
+.email-form-body div.field:not(.is-invalid) {
+  border: none;
+}
+
 .email-options-left {
   float: left;
   display: inline-block;

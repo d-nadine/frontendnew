@@ -95,7 +95,7 @@
       </div>
       {{/unless}}
       <div class="textbox-wrap">
-        {{richtext-editor files=files queryKey="display" content=form.html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions files=form.files insertTemplate="insertTemplate"}}
+        {{richtext-editor files=files queryKey="display" content=form.html header="New Email" isInvalid=messageIsInvalid tabindex="3" parent=this source=insertActions files=form.files insertTemplate="insertTempleate"}}
         {{#unless signature}}
           <div class="prompt">
             <a href="#" {{action "addSignature"}} class="add-signature">Add a Signature</a>
@@ -115,10 +115,10 @@
       </div>
     </div>
     <div class="actions">
-      <div {{bind-attr class=":follow-up bulkMode"}}>
+      <div class="follow-up">
         {{x-check checked=checkForResponseSet disabled=allChecked classNames="check" action="cancelCheckForResponse"}}
         <span>Create a task if no reply in</span>
-        <div class="dropdown check-response-opener">
+        <div {{bind-attr class=" :field responseNotSet:is-invalid :dropdown :check-response-opener"}}>
           <a class="drop" role="button"  href="#">
             <span class="inactive">
               {{#if checkForResponse}}

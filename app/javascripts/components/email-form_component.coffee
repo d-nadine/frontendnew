@@ -55,6 +55,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
       false
 
     createBulkEmail: (form) ->
+      if @get('checkForResponseSet') && !@get('checkForResponse')
+        return @flashMessenger.error 'you need to set a check for response time if you want to check for a responese'
       to = form.get('to')
 
       contactIds = to.filter((item) -> item.get('_personContact')).mapProperty('_personContact.id')
@@ -69,6 +71,7 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
         lists: listIds || []
         private: false
         public: true
+        checkForResponse: @get('checkForResponse')
         returnParameters:
           list: undefined
           user: undefined
@@ -373,3 +376,8 @@ Radium.EmailFormComponent = Ember.Component.extend Radium.EditorMixin,
 
   templateQueryParameters: (query) ->
     like: query
+
+  responseNotSet: Ember.computed 'checkForResponseSet', 'checkForResponse', ->
+    return false unless @get('checkForResponseSet')
+
+    !!!@get('checkForResponse')
