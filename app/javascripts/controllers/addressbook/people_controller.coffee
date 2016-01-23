@@ -204,7 +204,14 @@ Radium.PeopleIndexController = Radium.ArrayController.extend Radium.PeopleMixin,
       if @get('isQuery')
         @send "saveCustomQuery", customQuery
       else
-        @get('newCustomQueries').addObject customQuery
+        unless $('.filter-dropdown .editableList').length
+          @get('newCustomQueries').addObject customQuery
+        Ember.run.next ->
+          $('.filter-dropdown').addClass('open')
+
+          setTimeout ->
+            $('.editableList')[0].focus()
+          , 100
 
       @set 'currentCustomQuery', customQuery
 

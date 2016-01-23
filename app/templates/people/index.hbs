@@ -207,6 +207,9 @@
                   </div>
                   {{/link-to}}
                 </li>
+                {{#each customQuery in currentUser.customQueries}}
+                  {{query-item customQuery=customQuery parent=this tagName="li"}}
+                {{/each}}
                 {{#each newCustomQuery in newCustomQueries}}
                   {{new-listitem listItem=newCustomQuery tagName="li"  action="saveCustomQuery" newItemPlaceholder="New dynamic list"}}
                 {{/each}}

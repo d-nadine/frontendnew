@@ -131,5 +131,5 @@ Radium.XQueryComponent = Ember.Component.extend
       if value = @get('query.value')
         @$().text(value)
 
-    # _afterRender: ->
-    #   @$().focus()
+    _afterRender: ->
+      @$().focus()

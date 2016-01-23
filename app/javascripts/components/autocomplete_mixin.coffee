@@ -62,6 +62,8 @@ Radium.AutocompleteMixin = Ember.Mixin.create Radium.KeyConstantsMixin,
       subject.addObserver('isLoaded', observer)
 
   getValue: (item) ->
+    return unless item
+
     if typeof item == "string"
       item
     else

@@ -48,7 +48,7 @@ Radium.NewListitemComponent = Ember.Component.extend Radium.KeyConstantsMixin,
   newItemFocus: ->
     $('.contacts-sidebar li.active').removeClass('active')
     @$().addClass 'active'
-    @$('.editableList').focus()
+    @$('.editableList')[0].focus()
 
     false
 
