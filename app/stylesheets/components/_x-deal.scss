@@ -1,4 +1,8 @@
 .xdeal-component {
+  .close-drawer {
+    z-index: 99999;
+  }
+
   .form > .sidebar-panel:first-of-type .sidebar-panel-content {
     margin-top: 0;
     margin-bottom: 0;
