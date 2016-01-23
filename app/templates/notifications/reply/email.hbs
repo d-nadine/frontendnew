@@ -1,1 +1,1 @@
-<h4>The email - {{#link-to 'emails.show' 'sent' reference}}{{reference.subject}}{{/link-to}} has  {{#link-to 'emails.show' 'inbox' email}}this{{/link-to}} reply.</h4>
+<h4>The email - {{#link-to 'emails.show' 'sent' reference}}{{reference.subject}}{{/link-to}} has  {{#link-to 'emails.show' 'inbox' email}}this{{/link-to}} reply from {{#if email.sender.isLoaded}}{{#resource-link-to email.sender}}{{email.sender.displayName}}{{/resource-link-to}}{{/if}}.</h4>
