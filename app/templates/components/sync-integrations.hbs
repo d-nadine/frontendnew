@@ -14,6 +14,15 @@
         <div class="control-box">
           <input type="text" placeholder="API KEY" class="field api_key"/>
         </div>
+      {{/unless}}
+      <div class="list-integrations">
+        <strong>When a contact is added to Radium which list(s) do you want thems added to?</strong>
+        <div class="sidebar-list">
+          <i class="ss-standard ss-list"></i>
+          {{list-autosuggest destination=integrationLists addList="addList" removeList="removeList" placeholder="Add to lists"}}
+        </div>
+      </div>
+      {{#unless intercomSet}}
         <div>
           <button class="btn" {{action "hideIntegration" "intercom"}}>Cancel</button>
           <button class="btn btn-primary" {{action "updateIntegration" "intercom"}}>Connect</button>
@@ -24,6 +33,8 @@
           <button class="btn" {{action "disconnect" "intercom"}} {{bind-attr disabled=isDeleting}}>Disconnect</button>
         </div>
       {{/unless}}
+
     </div>
   {{/if}}
 </ul>
+{{partial 'modal'}}

@@ -6,9 +6,11 @@ Radium.AddList = Radium.Model.extend
       @set property, value
     else
       @get('_referenceContact') ||
-      @get('_referenceCompany')
+      @get('_referenceCompany') ||
+      @get('_referenceThirdpartyIntegration')
 
   _referenceContact: DS.belongsTo('Radium.Contact')
   _referenceCompany: DS.belongsTo('Radium.Company')
+  _referenceThirdpartyintegration: DS.belongsTo('Radium.ThirdpartyIntegration')
 
 Radium.RemoveList = Radium.AddList.extend()

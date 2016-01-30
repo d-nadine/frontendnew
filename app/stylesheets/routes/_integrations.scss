@@ -6,18 +6,18 @@
 .sync-integrations-component {
   margin-bottom: 50px;
 
-  ul {
+  ul:not(.as-selections):not(.as-list) {
     margin-top: 20px;
     list-style: none;
   }
 
-  ul li {
+  ul:not(.as-selections):not(.as-list) li {
     width: 100%;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
   }
 
-  ul li:hover {
+  ul:not(.as-selections):not(.as-list) li:hover {
     background-color: #eee;
     cursor: pointer;
   }
@@ -28,5 +28,25 @@
 
   .integration-config h4, .integration-config span{
     margin-bottom: 10px;
+  }
+}
+
+.list-integrations .sidebar-list{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  .autocomplete {
+    width: 455px;
+  }
+
+  .as-list {
+    li {
+      background-color: #fff;
+    }
+  }
+
+  .as-selections, .as-list {
+    li {
+      width: auto !IMPORTANT;
+    }
   }
 }

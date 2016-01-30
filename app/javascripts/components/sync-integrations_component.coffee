@@ -1,3 +1,7 @@
+require "mixins/lists_persistence_mixin"
+require 'mixins/user_combobox_props'
+require "mixins/common_modals"
+
 Radium.ThirdpartyIntegrationMap =
   intercom:
     keys: {
@@ -5,13 +9,47 @@ Radium.ThirdpartyIntegrationMap =
       'api_key': ''
     }
 
-Radium.SyncIntegrationsComponent = Ember.Component.extend
+Radium.SyncIntegrationsComponent = Ember.Component.extend Radium.ListsPersistenceMixin,
+  Radium.CommonModals,
   actions:
+    addList: (list) ->
+      model = if integration = @getIntegration('intercom')
+                integration
+              else
+                Ember.Object.create(lists: @get('integrationLists').slice(), isNew: true)
+
+      unless list.constructor is Radium.List
+        Ember.assert "You must include the Radium.CommonModals mixin to create a new list", @_actions['createList']
+
+        return @send 'createList', list, model
+
+      @get('integrationLists').pushObject(list)
+
+      return false if @get('isNew')
+
+      @_super model, list
+
+      false
+
+    removeList: (list) ->
+      model = if integration = @getIntegration('intercom')
+                integration
+              else
+                Ember.Object.create(lists: @get('integrationLists').slice(), isNew: true)
+
+      @get('integrationLists').removeObject(list)
+
+      return false if model.get('isNew')
+
+      @_super model, list
+
+      false
+
     disconnect: (integration) ->
       unless confirm("Are you sure you want to disconnect the #{integration} connection?")
         return
 
-      existing = Radium.ThirdpartyIntegration.all().find (i) -> i.get('name') == integration
+      existing = @getIntegration(integration)
 
       @set 'isDeleting', true
 
@@ -29,14 +67,14 @@ Radium.SyncIntegrationsComponent = Ember.Component.extend
     updateIntegration: (type) ->
       @set 'isUpdating', true
 
-      existing = Radium.ThirdpartyIntegration.all().find (i) -> i.get('name') == type
+      existing = @getIntegration(type)
 
       inputs = @inputs(type)
 
       invalid = inputs.filter (i, input) ->
         val = $(input).val() || ''
 
-        !$.trim(val).length
+        !!!$.trim(val).length
 
       if invalid.length
         invalid[0].focus()
@@ -50,6 +88,9 @@ Radium.SyncIntegrationsComponent = Ember.Component.extend
         configuration[key] = @$(".integration-config.#{type} input[type=text].#{key}").val()
 
       integration.setProperties(name: type, config: configuration)
+
+      if integration.get('isNew')
+        integration.set('newLists', @get('integrationLists').mapProperty('id'))
 
       integration.save().then (integration) =>
         @flashMessenger.success "Integration configuration set!"
@@ -84,6 +125,9 @@ Radium.SyncIntegrationsComponent = Ember.Component.extend
 
       false
 
+  getIntegration: (type) ->
+    Radium.ThirdpartyIntegration.all().find (i) -> i.get('name') == type
+
   showHideIntegration: (integration, action) ->
     method = "show#{integration.capitalize()}Config"
     show = (action == "show")
@@ -91,7 +135,7 @@ Radium.SyncIntegrationsComponent = Ember.Component.extend
     @set method, show
 
   inputs: (integration) ->
-    @$(".integration-config.#{integration} input[type=text]")
+    @$(".integration-config.#{integration} input[type=text]").not('.as-input')
 
   isUpdatingIntercom: false
 
@@ -102,3 +146,13 @@ Radium.SyncIntegrationsComponent = Ember.Component.extend
 
   hasIntegration: (type) ->
     @get('integrations').contains(type)
+
+  lists: Ember.computed.oneWay 'listsService.sortedLists'
+
+  didInsertElement: ->
+    @_super.apply this, arguments
+
+    if integration = @getIntegration('intercom')
+      @set 'integrationLists', integration.get('lists').slice()
+    else
+      @set 'integrationLists', Ember.A()
