@@ -4,4 +4,7 @@
 
   <h3>Click Tracking</h3>
   {{toggle-switch action="setClickTracking" checked=enableClickTracking disabled=isSaving}}
+
+  <h3>Email Alias</h3>
+  {{input type="text" value=alias focus-out="setAlias" enter="setAlias"}}
 </div>
