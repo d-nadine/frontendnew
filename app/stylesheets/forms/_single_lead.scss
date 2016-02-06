@@ -358,7 +358,10 @@
 
   .more {
     display: none;
-    float: left;
+
+    .item {
+      float: none;
+    }
 
     .radio-group {
       position: relative;
