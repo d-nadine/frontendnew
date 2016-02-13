@@ -4,7 +4,8 @@ Radium.SubscriptionMixin = Ember.Mixin.create
 
   activeSubscriptions: Ember.computed 'subscriptionPlans.[]', ->
     @get('subscriptionPlans').reject((plan) =>
-      (plan.get('disabled') && plan != @get('currentPlan')) || /_year$/g.test(plan.get('planId'))
+      return false if plan == @get('currentPlan')
+      plan.get('disabled') || /_year$/g.test(plan.get('planId'))
     ).sort((left, right) ->
       Ember.compare(left.get('displayOrder'), right.get('displayOrder'))
     )
