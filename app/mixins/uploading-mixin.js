@@ -18,6 +18,12 @@ export default Mixin.create({
 
     let i;
 
+    var errorHandler = (error) => {
+      Ember.logger.error(error);
+
+      this.flashMessenger.error('an error has occurred and the file could not be uploaded.');
+    };
+
     for (i = 0; i < files.length; i++) {
       let file = files[i];
 
@@ -42,11 +48,7 @@ export default Mixin.create({
 
       uploader.upload(file, hash)
         .then(this.handlerFactory(wrappedFile).bind(this))
-        .catch((error) => {
-          Ember.logger.error(error);
-
-          this.flashMessenger.error('an error has occurred and the file could not be uploaded.');
-        });
+        .catch(errorHandler);
     }
     return false;
   },
