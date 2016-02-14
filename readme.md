@@ -36,6 +36,83 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 The ember tests use [mirage](http://www.ember-cli-mirage.com/docs/v0.1.x/) to remove some of the drudgerry in creating test data.
 
+### Ember Data
+The frontend codebase uses a patched up version of the old ```0.14.0``` branch.  Any chnages to the code must be made to [this repo](https://github.com/radiumsoftware/data) and deployed to ```~/vendor/javascripts/ember-data.js```.
+
+Any new or existing model class needs to extend ```Radium.Model``` (```~/app/models/models.js```).
+
+For example the ```Contact``` model class located in ```app/models/contact.js``` extends ```Radium.Model``` and any new model classes need to take an identitical approach.
+
+
+```
+import Model from 'radium/models/models';
+import Ember from 'ember';
+
+const {
+  computed
+} = Ember;
+
+const Contact = Model.extend({
+// props
+});
+
+export default Contact;
+
+Contact.toString = function() {
+  return "Radium.Contact";
+};
+
+```
+
+
+All ember-data model classes that extend ```Radium.Model``` need to be added to the global application namespace in the ```old-model-compat``` instance initializer ```~/app/instance-initializers/old-model-compat.js```, e.g:
+
+```
+import Todo from "radium/models/todo";
+
+export function initialize(application) {
+  // we need to set this reference to the application
+  // instance for this version of ember-data
+  window.Radium = application;
+
+  application.Todo = Todo;
+}
+
+
+export default {
+  name: 'old-model-compat',
+  initialize: initialize,
+  before: 'store-compatibility'
+};
+
+```
+
+Ember-data specific mapping and other config can be found in ```~/app/adapters/rest.js```.  Not all the classes and mappings have been migrated from the master branch and the code will need to be uncommented as the remaining classes are migrated.
+
+This version of ember-data has been extended to be promise based:
+
+
+```
+// get all
+// the empty hash is sadly important in this version of ember-data
+Radium.Contact.find({}).then((results) => {
+  //do stuff
+});
+
+//saving or updating
+const contact = Radium.Contact.createRecord({name: 'blah'});
+
+contact.save().then((results) => {
+  //do stuff
+}).finally(() => {
+  //do stuff
+});
+
+// deleting
+contact.delete().then(() => {
+});
+```
+
 ### Building
 
 * `ember build` (development)
@@ -53,3 +130,4 @@ Specify what it takes to deploy your app.
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
 
+``
