@@ -25,6 +25,8 @@ Radium.CurrencyInputComponent = Ember.TextField.extend
     if value == "0.00"
       @set('value', null)
 
+    @formatValue()
+
   focusOut: ->
     @formatValue()
 

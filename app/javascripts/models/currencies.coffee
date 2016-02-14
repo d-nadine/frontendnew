@@ -10,5 +10,5 @@ Radium.Currencies = [
   {key: 'MXN', 'label':'Mexican peso','currencyflag':'','symbol':'$', thousand: ",", decimal: ".", precision: 2},
   {key: 'IDR', 'label':'Indonesian rupiah','currencyflag':'','symbol':'Rp', thousand: ",", decimal: ".", precision: 2},
   {key: 'AOA', 'label':'Angolan kwanza','currencyflag':'','symbol':'Kz', thousand: ",", decimal: ".", precision: 2},
-  {key: 'PLN', 'label':'Polish złoty','currencyflag':'','symbol':'zł', thousand: ",", decimal: ",", precision: 2},
+  {key: 'PLN', 'label':'Polish złoty','currencyflag':'','symbol':'zł', thousand: ",", decimal: ".", precision: 2},
 ]
