@@ -5,43 +5,52 @@ const {
   computed
 } = Ember;
 
-const User = Model.extend({
-  firstName: DS.attr('string'),
-  lastName: DS.attr('string'),
-  title: DS.attr('string'),
-  isAdmin: DS.attr('boolean'),
-  initialMailImported: DS.attr('boolean'),
-  initialContactsImported: DS.attr('boolean'),
-  contactsImported: DS.attr('number'),
-  emailsImported: DS.attr('number'),
-  refreshFailed: DS.attr('boolean'),
-  syncState: DS.attr('string'),
-  thirdPartyConnected: DS.attr('boolean'),
-  shareInbox: DS.attr('boolean'),
-  subscriptionInvalid: DS.attr('boolean'),
-  email: DS.attr('string'),
-  phone: DS.attr('string'),
-  avatarKey: DS.attr('string'),
-  lastLoggedIn: DS.attr('date'),
-  token: DS.attr('string'),
+const {
+  attr,
+  belongsTo,
+  hasMany
+} = DS;
 
-  account: DS.belongsTo('Radium.Account'),
-  settings: DS.belongsTo('Radium.UserSettings'),
-  contactInfo: DS.belongsTo('Radium.ContactInfo'),
-  activities: DS.hasMany('Radium.Activity', {inverse: 'user'}),
+const User = Model.extend({
+  firstName:               attr('string'),
+  lastName:                attr('string'),
+  title:                   attr('string'),
+  isAdmin:                 attr('boolean'),
+  initialMailImported:     attr('boolean'),
+  initialContactsImported: attr('boolean'),
+  contactsImported:        attr('number'),
+  emailsImported:          attr('number'),
+  refreshFailed:           attr('boolean'),
+  syncState:               attr('string'),
+  thirdPartyConnected:     attr('boolean'),
+  shareInbox:              attr('boolean'),
+  subscriptionInvalid:     attr('boolean'),
+  email:                   attr('string'),
+  phone:                   attr('string'),
+  avatarKey:               attr('string'),
+  lastLoggedIn:            attr('date'),
+  token:                   attr('string'),
+
+  account:                 belongsTo('Radium.Account'),
+  settings:                belongsTo('Radium.UserSettings'),
+  contactInfo:             belongsTo('Radium.ContactInfo'),
+  
+  activities:              hasMany('Radium.Activity', {inverse: 'user'}),
 
   name: computed('firstName', 'lastName', function() {
-    return (this.get("firstName")) + " " + (this.get("lastName"));
+    return `${this.get('firstName')} ${this.get('lastName')}`;
   }),
+  
   isSyncing: computed('syncState', function() {
-    return this.get('syncState') !== "waiting";
+    return this.get('syncState') !== 'waiting';
   }),
+  
   displayName: computed.oneWay('name'),
   companyName: computed.oneWay('account.name')
 });
 
-User.toString = function(){
-  return "Radium.User";
+User.toString = function() {
+  return 'Radium.User';
 };
 
 export default User;
