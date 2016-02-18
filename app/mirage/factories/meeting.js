@@ -10,12 +10,12 @@ export default Mirage.Factory.extend({
   },
 
   ends_at() {
-    return moment().add('days', 7);
+    return moment().add(7, 'days');
   },
 
 
   starts_at() {
-    return moment().add('days', 7);
+    return moment().add(7, 'days');
   },
 
   location() {

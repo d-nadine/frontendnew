@@ -14,6 +14,6 @@ export default Mirage.Factory.extend({
   },
 
   expectedCloseDate() {
-    return moment().add('d', 5);
+    return moment().add(5, 'd');
   }
 });

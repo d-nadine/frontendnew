@@ -14,6 +14,6 @@ export default Mirage.Factory.extend({
   },
 
   finishBy() {
-    return moment().add('days', 7);
+    return moment().add(7, 'days');
   }
 });
