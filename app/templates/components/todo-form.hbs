@@ -1,24 +1,17 @@
-<div class="form-container">
-  <div class="ember-view forms-todo-view" id="ember7043" >
-    <div class="form form-inline todo-form" >
-      <div class="primary expander" >
-        <button title="Mark as done" class="ember-view btn btn-link pull-left events-list-item-button finish-todo" id="ember7047">  <i class="ss-standard ss-check"></i>
-        </button>
-        <div class="ember-view field field-blend-in mention-field-view todo" id="ember7051">
-          <textarea class="ember-view ember-text-area" id="ember7052" placeholder="Add a todo" rows="1"></textarea>
-        </div>
+<div class="ember-view forms-todo-view" id="ember7043">
+  <div class="form form-inline todo-form" >
+    <div class="primary expander" >
+      {{todo-finish-component register-as=todoFinishButton parent=this}}
+      <div class="ember-view field field-blend-in mention-field-view todo" id="ember7051">
+        <textarea class="ember-view ember-text-area" id="ember7052" placeholder="Add a todo" rows="1"></textarea>
       </div>
-      <a tabindex="3" class="btn-text pull-right btn-options" >
-        <i class="ss-standard ss-navigatedown"></i>
-      </a>
     </div>
+    <a tabindex="3" class="btn-text pull-right btn-options" >
+      <i class="ss-standard ss-navigatedown"></i>
+    </a>
   </div>
-  <div class="form-box-controls">
-    <button class="btn btn-primary btn-large" >        
-        Add Task
-    </button>
-  </div>
-  <div class="form-row">
+  <div class='expanded-fields'>
+    <div class="form-row">
       <div class="field-group meeting-form-invite">
         {{date-picker date=finishBy class="field" submitForm="trySubmit" ignoreEmpty=true}}
         {{autocomplete-textbox source=users value=user queryKey="displayName" validations=userValidations validator=controller validationField="user" leader="Assigned To"}}
@@ -26,9 +19,6 @@
     </div>
 
     <div class="form-row form-buttons">
-      {{#if showAddAction}}
-        {{partial 'add_action'}}
-      {{/if}}
       <div class="pull-right">
         {{#if showAddAction}}
           <button class="btn btn-link btn-none" {{action "deleteTask" model}}><i class="ss-standard ss-trash"></i></button>
@@ -36,4 +26,5 @@
         <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
       </div>
     </div>
+  </div>
 </div>
