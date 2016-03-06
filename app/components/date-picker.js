@@ -11,8 +11,6 @@ export default Component.extend({
       var datePicker, pickerShown;
       datePicker = this.get('datePicker');
       pickerShown = $('.datepicker-days').is(':visible');
-console.log(this.get('parentView'));
-console.log(this.get('parentView.finishBy'));
       Ember.run.next(function() {
         if (!pickerShown) {
           datePicker.show();

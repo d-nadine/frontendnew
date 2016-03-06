@@ -42,7 +42,7 @@ export default TextField.extend(KeyConstantsMixin, {
     datePicker = input.data('datepicker');
     modelDate = this.get('date');
     //defaultViewDate = modelDate && !modelDate.isBeforeToday() ? modelDate.toJSDate() : Date.parse('tomorrow');
-    defaultViewDate = new Date();
+    defaultViewDate = new Date(); // temporary code
     formatNumber = function(number) {
       return ("0" + number).slice(-2);
     };
@@ -66,7 +66,6 @@ export default TextField.extend(KeyConstantsMixin, {
     if (!(el = this.$())) {
       return;
     }
-    console.log(this.get('date'));
     /*milliseconds = evt.date.add(new Date().getHours() + 1).hours().valueOf();
     this.set('date', Ember.DateTime.create(milliseconds));
     el.data('datepicker').hide();
