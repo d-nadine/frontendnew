@@ -1,39 +1,52 @@
-<div class="form-container">
-  <div class="ember-view forms-todo-view" id="ember7043" >
-    <div class="form form-inline todo-form" >
-      <div class="primary expander" >
-        <button title="Mark as done" class="ember-view btn btn-link pull-left events-list-item-button finish-todo" id="ember7047">  <i class="ss-standard ss-check"></i>
-        </button>
-        <div class="ember-view field field-blend-in mention-field-view todo" id="ember7051">
-          <textarea class="ember-view ember-text-area" id="ember7052" placeholder="Add a todo" rows="1"></textarea>
-        </div>
+<div class="ember-view forms-todo-view" id="ember7043">
+  <div {{bind-attr class="isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
+    <div {{bind-attr class="isFinished view.isFocused :primary :expander"}}>
+      {{todo-finish-component register-as=todoFinishButton parent=this}}
+      {{#if overdue}}
+        <span class="pull-right overdue-alert" data-toggle="tooltip" data-placement="right" {{bind-attr data-original-title="overdueText"}}><i class="ss-standard ss-clock"></i></span>
+      {{/if}}
+
+      {{#if comments.length}}
+        <i class="ss-chat pull-right form-box-comments-icon"></i>
+      {{/if}}
+
+      {{#if showSuccess}}
+        <span class="success-message green pull-right">Todo saved</span>
+      {{/if}}
+
+      <div class="ember-view field field-blend-in mention-field-view todo" id="ember7051">
+        {{todo-form-field register-as=todoField classNames="field field-blend-in" viewName="description"}}
       </div>
-      <a tabindex="3" class="btn-text pull-right btn-options" >
-        <i class="ss-standard ss-navigatedown"></i>
-      </a>
-    </div>
-  </div>
-  <div class="form-box-controls">
-    <button class="btn btn-primary btn-large" >        
-        Add Task
-    </button>
-  </div>
-  <div class="form-row">
-      <div class="field-group meeting-form-invite">
-        {{date-picker date=finishBy class="field" submitForm="trySubmit" ignoreEmpty=true}}
-        {{autocomplete-textbox source=users value=user queryKey="displayName" validations=userValidations validator=controller validationField="user" leader="Assigned To"}}
-      </div>
+
     </div>
 
-    <div class="form-row form-buttons">
-      {{#if showAddAction}}
-        {{partial 'add_action'}}
+    <a tabindex="3" class="btn-text pull-right btn-options" {{action "toggleExpanded" bubbles=false}}>
+      {{#if isExpanded}}
+        <i class="ss-standard ss-navigateup"></i>
+      {{else}}
+        <i class="ss-standard ss-navigatedown"></i>
       {{/if}}
-      <div class="pull-right">
-        {{#if showAddAction}}
-          <button class="btn btn-link btn-none" {{action "deleteTask" model}}><i class="ss-standard ss-trash"></i></button>
-        {{/if}}
-        <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
+    </a>
+  </div>
+
+  {{#if isExpanded}}
+    <div class="expanded-fields">
+      <div class="form-row">
+        <div class="field-group meeting-form-invite">
+          {{date-picker date=finishBy class="field" submitForm="trySubmit" ignoreEmpty=true}}
+          {{autocomplete-textbox source=users value=user queryKey="displayName" validations=userValidations validator=controller validationField="user" leader="Assigned To"}}
+        </div>
       </div>
+
+      <!--<div class="form-row form-buttons">
+        <div class="pull-right">
+          {{#if showAddAction}}
+            <button class="btn btn-link btn-none" {{action "deleteTask" model}}><i class="ss-standard ss-trash"></i></button>
+          {{/if}}
+          <button class="btn btn-main btn-primary" type="submit" {{action "submit"}}>Save</button>
+        </div>
+      </div>-->
+
     </div>
+  {{/if}}
 </div>
