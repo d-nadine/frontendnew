@@ -2,9 +2,9 @@ import Ember from 'ember';
 
 Date.prototype.readableTimeAgo = function() {
   var milliseconds, ret;
-  milliseconds = moment.duration(new Date - this, "milliseconds");
+  milliseconds = moment.duration(new Date() - this, "milliseconds");
   ret = milliseconds.humanize();
-  if ((this - new Date) < 0) {
+  if ((this - new Date()) < 0) {
     ret = ret + " ago";
   }
   return ret;

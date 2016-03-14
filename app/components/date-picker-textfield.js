@@ -61,8 +61,9 @@ export default TextField.extend(KeyConstantsMixin, {
     input.on('hide', this.hideDatePicker.bind(this));
     return input.on('changeDate', this.changeDatePicker.bind(this));
   }),
-  changeDatePicker: function(evt) {
-    var el, milliseconds, target;
+  // changeDatePicker: function(evt) {
+  changeDatePicker: function() {
+    var el;//, milliseconds, target;
     if (!(el = this.$())) {
       return;
     }
@@ -249,7 +250,7 @@ export default TextField.extend(KeyConstantsMixin, {
       return this.$().datepicker('setValue', result);
     }
   },
-  focusIn: function(e) {
+  focusIn: function() {
     return Ember.run.next((function(_this) {
       return function() {
         var ele;

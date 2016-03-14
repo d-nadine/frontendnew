@@ -48,7 +48,7 @@ export default Ember.Component.extend(Ember.Evented, {
       todoForm: this.get('todoForm')
     });
   }),
-  todoForm: Radium.computed.newForm('todo'),
+  todoForm: RadiumComputed.newForm('todo'),
   todoFormDefaults: Ember.computed('model', 'tomorrow', function() {
     return {
       reference: this.get('model'),

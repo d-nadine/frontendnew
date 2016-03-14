@@ -5,6 +5,6 @@ Radium.TextFieldFocusMixin = Ember.Mixin.create({
     return this.get('parentView').set('isFocused', true);
   },
   focusOut: function() {
-    return this.get('parentView').set('isFocused', false)
+    return this.get('parentView').set('isFocused', false);
   }
 });

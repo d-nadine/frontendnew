@@ -192,13 +192,13 @@ export default FormBase.extend({
   isDisabled: Ember.computed.bool('justAdded'),
   isPrimaryInputDisabled: Ember.computed('isDisabled', 'isExpanded', 'isNew', function() {
     return false;   /// temporary
-    if (this.get('isNew')) {
-      return false;
-    }
-    if (!this.get('isExpanded')) {
-      return true;
-    }
-    return this.get('isDisabled');
+    // if (this.get('isNew')) {
+    //   return false;
+    // }
+    // if (!this.get('isExpanded')) {
+    //   return true;
+    // }
+    // return this.get('isDisabled');
   }),
   formSubmitted: function() {
     return this.send('submit');

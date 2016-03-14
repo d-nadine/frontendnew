@@ -1,21 +1,24 @@
+import Ember from 'ember';
+
 var a_slice = Array.prototype.slice;
 
 Radium.computed = {};
 
-Radium.computed.notEqual = function(dependentKey, value) {
+// TODO is it used somewhere? Let's remove this and other dead code.
+Radium.computed.notEqual = function(dependentKey) {
   return Ember.computed(dependentKey, function(key, value) {
     return this.get(dependentKey) !== value;
   });
 };
 
 Radium.computed.isToday = function(dependentKey) {
-  return Ember.computed(dependentKey, function(key) {
+  return Ember.computed(dependentKey, function() {
     return this.get(dependentKey).isToday();
   });
 };
 
 Radium.computed.isPast = function(dependentKey) {
-  return Ember.computed(dependentKey, function(key) {
+  return Ember.computed(dependentKey, function() {
     if (!this.get(dependentKey)) {
       return;
     }
@@ -24,13 +27,13 @@ Radium.computed.isPast = function(dependentKey) {
 };
 
 Radium.computed.isFuture = function(dependentKey) {
-  return Ember.computed(dependentKey, function(key) {
+  return Ember.computed(dependentKey, function() {
     return this.get(dependentKey).isFuture();
   });
 };
 
 Radium.computed.daysOld = function(dependentKey, days) {
-  return Ember.computed(dependentKey, function(key) {
+  return Ember.computed(dependentKey, function() {
     var now;
     now = Ember.DateTime.create();
     return this.get(dependentKey).daysApart(now) >= days;
@@ -63,7 +66,7 @@ Radium.computed.aggregate = function() {
   });
   options = {
     initialValue: [],
-    addedItem: function(array, item, changeMeta, instanceMeta) {
+    addedItem: function(array, item) {
       var observer;
       if (array.contains(item)) {
         return array;
@@ -82,7 +85,7 @@ Radium.computed.aggregate = function() {
       }
       return array;
     },
-    removedItem: function(array, item, changeMeta, instanceMeta) {
+    removedItem: function(array, item) {
       if (!array.length) {
         return array;
       }
@@ -125,7 +128,7 @@ Radium.computed.tasks = function() {
         return compare;
       }
     },
-    addedItem: function(array, item, changeMeta, instanceMeta) {
+    addedItem: function(array, item) {
       var observer;
       if (array.contains(item)) {
         return array;
@@ -157,7 +160,7 @@ Radium.computed.tasks = function() {
       }
       return array;
     },
-    removedItem: function(array, item, changeMeta, instanceMeta) {
+    removedItem: function(array, item) {
       if (!array.length) {
         return array;
       }
@@ -179,7 +182,7 @@ Radium.computed.required = function() {
 };
 
 Radium.computed.kindOf = function(property, type) {
-  return Ember.computed(property, function(key) {
+  return Ember.computed(property, function() {
     return this.get(property) instanceof type;
   });
 };
