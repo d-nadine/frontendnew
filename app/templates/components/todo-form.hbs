@@ -1,9 +1,9 @@
 <div class="ember-view forms-todo-view" id="ember7043">
-  <div {{bind-attr class="isExpanded justAdded :form :form-inline :todo-form hasReference:has-reference"}}>
-    <div {{bind-attr class="isFinished view.isFocused :primary :expander"}}>
+  <div class="{{if justAdded 'just-added'}} {{if isExpanded 'is-expanded'}} form form-inline todo-form {{if hasReference 'has-reference'}}">
+    <div class="{{if isFinished 'is-finished'}} {{if view.isFocused 'is-focused'}} primary expander">
       {{todo-finish-component register-as=todoFinishButton parent=this}}
       {{#if overdue}}
-        <span class="pull-right overdue-alert" data-toggle="tooltip" data-placement="right" {{bind-attr data-original-title="overdueText"}}><i class="ss-standard ss-clock"></i></span>
+        <span class="pull-right overdue-alert" data-toggle="tooltip" data-placement="right" data-original-title="{{overdueText}}"><i class="ss-standard ss-clock"></i></span>
       {{/if}}
 
       {{#if comments.length}}

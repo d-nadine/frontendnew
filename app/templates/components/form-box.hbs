@@ -2,7 +2,7 @@
   <div class="form-box-controls">
 
     {{!--temporary--}}
-    <a {{action "showForm" "todo"}} href="#" {{bind-attr class="showTodoForm:active"}}>
+    <a {{action "showForm" "todo"}} href="#" class="{{if showTodoForm 'active'}}">
       <i class="ss-standard ss-check"></i>Task
     </a>
 
