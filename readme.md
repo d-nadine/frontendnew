@@ -120,7 +120,21 @@ contact.delete().then(() => {
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Preliminary work:
+
+* `ember install ember-cli-deploy`
+* `ember install ember-cli-deploy-build`
+* `ember install ember-cli-deploy-scp`
+
+Deployment process:
+
+* `ember deploy staging`
+OR
+* `ember deploy production`
+
+Our deployment process is super simple. Ember application is built locally and scp to remote host.
+Remote deployment dir is `/var/www/radium-front`.
+Remote latest build symlink is `/var/www/radium-front/current/web`.
 
 ## Further Reading / Useful Links
 
