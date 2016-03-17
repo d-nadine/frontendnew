@@ -8,6 +8,9 @@ module.exports = function(environment){
         host: '45.55.51.62',
         path: '/var/www/radium-front'
     }
+    ENV['build'] = {
+      environment: 'staging'
+    };
   };
 
   if (environment === 'production') {
@@ -16,6 +19,9 @@ module.exports = function(environment){
         host: '<your-host>',
         path: '<your-serverpath>'
     }
+    ENV['build'] = {
+      environment: 'production'
+    };
   };
   return ENV;
 };
