@@ -65,7 +65,7 @@ module.exports = function(environment) {
     ENV.apiHost = 'http://45.55.51.62/api';
     ENV.cookieDomain = '.radiumcrm.com';
     ENV.intercom = {
-      appId: "FU8fdyfydyf9823u2j3f"
+      appId: "d5bd1654e902b81ba0f4161ea5b45bb597bfefdf"
     };
   }
 
