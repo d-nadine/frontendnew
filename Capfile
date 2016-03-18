@@ -5,7 +5,6 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 require 'capistrano/rvm'
 require 'capistrano/bundler'
-require 'capistrano/sidekiq'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 
