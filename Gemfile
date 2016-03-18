@@ -10,11 +10,18 @@ gem 'rake-pipeline', :github => 'livingsocial/rake-pipeline'
 gem 'barber'
 
 gem 'thin'
-gem 'therubyracer'
+gem 'puma'
+# gem 'therubyracer'
 
 group :development do
   gem 'dnote'
   gem 'guard'
+
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 end
 
 group :production do
