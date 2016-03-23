@@ -24,4 +24,4 @@ task :compile_iridium do
   end
 end
 
-after 'deploy:updated', 'compile_iridium'
+after 'deploy:published', 'compile_iridium'
