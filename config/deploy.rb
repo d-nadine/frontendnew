@@ -14,3 +14,12 @@ set :rvm_ruby_version, '2.1.2@radium-frontend'
 
 set :puma_preload_app, true
 set :puma_init_active_record, true
+
+desc "Compile Iridium"
+task :compile_iridium do
+  on roles(:all) do |host|
+    execute "bundle exec iridium compile"
+  end
+end
+
+after 'deploy:updated', 'compile_iridium'
