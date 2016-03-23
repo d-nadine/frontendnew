@@ -20,8 +20,13 @@ task :compile_iridium do
   on roles(:all) do |host|
     within fetch(:release_path) do
       execute :bundle, :exec, "iridium compile"
+
+      # Iridium deltes previously symlinked dirs inside tmp! Create links again.
+      %w{tmp/pids tmp/cache tmp/sockets}.each do |dir|
+        execute :ln, "-fs #{fetch(:deploy_to)}/shared/#{dir} #{fetch(:release_path)}/#{dir}"
+      end
     end
   end
 end
 
-after 'deploy:updating', 'compile_iridium'
+after 'deploy:updated', 'compile_iridium'
