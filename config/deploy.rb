@@ -18,7 +18,9 @@ set :puma_init_active_record, true
 desc "Compile Iridium"
 task :compile_iridium do
   on roles(:all) do |host|
-    execute "bundle exec iridium compile"
+    within "#{fetch(:deploy_to)}/current/" do
+      execute :bundle, :exec, "iridium compile"
+    end
   end
 end
 
