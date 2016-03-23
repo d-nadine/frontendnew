@@ -18,10 +18,10 @@ set :puma_init_active_record, true
 desc "Compile Iridium"
 task :compile_iridium do
   on roles(:all) do |host|
-    within "#{fetch(:deploy_to)}/current/" do
+    within fetch(:release_path) do
       execute :bundle, :exec, "iridium compile"
     end
   end
 end
 
-after 'deploy:published', 'compile_iridium'
+after 'deploy:updating', 'compile_iridium'
