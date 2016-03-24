@@ -19,7 +19,7 @@ desc "Compile Iridium"
 task :compile_iridium do
   on roles(:all) do |host|
     within fetch(:release_path) do
-      execute :bundle, :exec, "iridium compile"
+      execute :bundle, :exec, "iridium compile API_HOST='#{fetch(:api_host)}' INTERCOM_APP_ID='#{fetch(:intercom_app_id)}'"
 
       # Iridium deltes previously symlinked dirs inside tmp! Create links again.
       %w{tmp/pids tmp/cache tmp/sockets}.each do |dir|
