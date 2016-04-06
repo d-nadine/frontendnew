@@ -2,6 +2,8 @@
 # we need to be available globally
 require /lib\/patches/
 
+require 'ember'
+require 'ember-data'
 require 'lib/ember/datetime'
 require 'lib/ember/computed'
 
