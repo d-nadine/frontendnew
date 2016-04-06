@@ -488,17 +488,17 @@ input[type="checkbox"] + label span {
   height: 20px;
   margin-top: -2px;
   vertical-align: middle;
-  background: url('http://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') -40px top no-repeat;
+  background: url('https://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') -40px top no-repeat;
   cursor: pointer;
 }
 input[type="checkbox"] + label span:hover {
-  background: url('http://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') -20px top no-repeat; 
+  background: url('https://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') -20px top no-repeat; 
 }
 input[type="checkbox"]:checked + label {
   color: $blue;
 
   span {
-    background: url('http://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') 0px top no-repeat;
+    background: url('https://res.cloudinary.com/radium/image/upload/v1429231395/checkbox_izmaas.png') 0px top no-repeat;
   }
 }
 
@@ -512,17 +512,17 @@ input[type="radio"] + label span {
   height: 20px;
   margin: -2px 7px 0 0;
   vertical-align: middle;
-  background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -40px top no-repeat;
+  background: url('https://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -40px top no-repeat;
   cursor: pointer;
 }
 input[type="radio"] + label span:hover {
-  background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -20px top no-repeat;
+  background: url('https://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') -20px top no-repeat;
 }
 input[type="radio"]:checked + label {
   color: $blue;
 
   span {
-    background: url('http://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') 0px top no-repeat;
+    background: url('https://res.cloudinary.com/radium/image/upload/v1430329314/radio_qzb9wv.png') 0px top no-repeat;
   }
 }
 

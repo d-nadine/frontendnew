@@ -47,7 +47,7 @@ Ember.Application.initializer
 
       user.addObserver 'account.billing.subscriptionPlan.name', observer
 
-      $.cloudinary.config({ cloud_name: 'radium', api_key: '472523686765267'})
+      $.cloudinary.config({ cloud_name: 'radium', api_key: '472523686765267', secure: true})
       account = user.get('account')
 
       userSettingsController = container.lookup('controller:userSettings')

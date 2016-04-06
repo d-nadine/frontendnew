@@ -23,7 +23,7 @@ Radium.CompanyAutocompleteMixin = Ember.Mixin.create
         logo = item.logo + '?size=25x25'
         img = "<span class='auto-icon'><img  src='#{logo}'/></span>"
       else
-        img = "<span class='auto-icon'><img  src='#{"http://res.cloudinary.com/radium/image/upload/v1441015721/default_avatars/unknown.gif"}'/></span>"
+        img = "<span class='auto-icon'><img  src='#{"https://res.cloudinary.com/radium/image/upload/v1441015721/default_avatars/unknown.gif"}'/></span>"
 
       html = img + html
 
