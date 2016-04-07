@@ -1,41 +1,32 @@
 import Ember from 'ember';
+import FormBase from 'radium/components/form-base';
 
-export default Ember.Component.extend({
-  actions: {
-    showForm: function(form) {
-      this.get("" + form + "Form").reset();
-      this.set('activeForm', form);
-      if (this.get('showMeetingForm')) {
-        this.set('meetingForm.isExpanded', true);
-      }
-      return Ember.run.later(this, (function(_this) {
-        return function() {
-          return _this.trigger('focusTopic');
-        };
-      })(this), 400);
-    },
-    submitForm: function() {
-      var activeForm;
-      activeForm = this.get("" + (this.get('activeForm')) + "Form");
-      this.EventBus.publish("" + this.activeForm + ":formSubmitted");
-      return this.trigger('focusTopic');
-    },
-    saveEmail: function(form) {
-      this.get('parent').send("saveEmail", form);
-      return false;
-    }
-  },
-  activeForm: 'todo',
+export default FormBase.extend({
+  needs: ['userSettings'],
+
+  todoForm: Radium.computed.newForm('todo'),
+  //noteForm: Radium.computed.newForm('note'),
+  //meetingForm: Radium.computed.newForm('meeting'),
+  //emailForm: Radium.computed.newForm('email'),
   showTodoForm: Ember.computed.equal('activeForm', 'todo'),
   showNoteForm: Ember.computed.equal('activeForm', 'note'),
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting'),
   showEmailForm: Ember.computed.equal('activeForm', 'email'),
-  needs: ['userSettings'],
   settings: Ember.computed.alias('controllers.userSettings.model'),
   signature: Ember.computed.alias('settings.signature'),
   template: null,
-  onFormChanged: function(form) {
-    var formName, observer;
+  activeForm: 'todo',
+
+  setup: Ember.on('init', function() {
+    let parent = this.get('parent');
+    if(!parent) {
+      return;
+    }
+    return parent.on('formChanged', this, 'onFormChanged');
+  }),
+
+  onFormChanged(form) {
+    let formName, observer;
     if (!form) {
       return;
     }
@@ -55,11 +46,30 @@ export default Ember.Component.extend({
       return this.addObserver('activeForm', this);
     }
   },
-  setup: Ember.on('init', function() {
-    var parent = this.get('parent');
-    if(!parent) {
-      return;
+
+  actions: {
+    showForm(form) {
+      this.get(`${form}Form`).reset();
+      this.set('activeForm', form);
+      if (this.get('showMeetingForm')) {
+        this.set('meetingForm.isExpanded', true);
+      }
+      return Ember.run.later(this, ((_this) => {
+        return () => {
+          return _this.trigger('focusTopic');
+        };
+      })(this), 400);
+    },
+
+    submitForm() {
+      let activeForm = this.get(`${this.get('activeForm')}Form`);
+      this.EventBus.publish(`${this.activeForm}:formSubmitted`);
+      return this.trigger('focusTopic');
+    },
+
+    saveEmail(form) {
+      this.get('parent').send("saveEmail", form);
+      return false;
     }
-    return parent.on('formChanged', this, 'onFormChanged');
-  })
+  },
 });

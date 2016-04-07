@@ -2,8 +2,126 @@ import Ember from 'ember';
 import FormBase from 'radium/components/form-base';
 
 export default FormBase.extend({
+  needs: ['users'],
+  timer: null,
+
+  isCalendar: Ember.computed.equal('controllers.application.currentPath', 'calendar.task'),
+  animate: Ember.computed.not('isCalendar'),
+  showSuccess: Ember.computed.alias('justAdded'),
+  isDisabled: Ember.computed.bool('justAdded'),
+
+  _initialize: Ember.on('init', function() {
+    this._super.apply(this, arguments);
+    return this.EventBus.subscribe("todo:formSubmitted", this, 'formSubmitted');
+  }),
+
+  overdueText: Ember.computed('finishBy', function() {
+    return "Was due on " + (this.get('finishBy').toHumanFormat());
+  }),
+
+  cantFinish: Ember.computed('isDisabled', 'isNew', function() {
+    return this.get('isDisabled') || this.get('isNew');
+  }),
+
+  isValid: Ember.computed('description.length', 'finishBy', 'user', 'model.submitForm', function() {
+    var finishBy;
+    if (Ember.isEmpty(this.get('description').trim())) {
+      return;
+    }
+    finishBy = this.get('finishBy');
+    if (finishBy && finishBy.isBeforeToday()) {
+      return;
+    }
+    if (!this.get('user')) {
+      return;
+    }
+    return true;
+  }),
+
+  isBulk: Ember.computed('reference', function() {
+    return Ember.isArray(this.get('reference'));
+  }),
+
+  showComments: Ember.computed('isNew', 'justAdded', 'isBulk', function() {
+    if (this.get('isBulk')) {
+      return false;
+    }
+    if (this.get('justAdded')) {
+      return false;
+    }
+    if (!this.get('id')) {
+      return false;
+    }
+    return true;
+  }),
+
+  justAdded: Ember.computed('content.justadded', function() {
+    return this.get('content.justAdded') === true;
+  }),
+
+  hasReference: Ember.computed('reference', 'isNew', function() {
+    var reference;
+    reference = this.get('reference');
+    return !this.get('isNew') && reference;
+  }),
+
+  placeholder: Ember.computed(/*'reference.name', */'finishBy', function() {
+    let pre = '';
+    if(this.get('referenceName') && !this.get('reference.token')) {
+      pre = "Add a todo about #{this.get('referenceName')}";
+    } else {
+      pre = "Add a todo";
+    }
+    if(!this.get('finishBy')) {
+      return pre;
+    }
+    return "#{pre} for #{this.get('finishBy').toHumanFormat()}";
+  }),
+
+  isPrimaryInputDisabled: Ember.computed('isDisabled', 'isExpanded', 'isNew', function() {
+    if (this.get('isNew')) {
+      return false;
+    }
+    if (!this.get('isExpanded')) {
+      return true;
+    }
+    return this.get('isDisabled');
+  }),
+
+  formSubmitted: function() {
+    return this.send('submit');
+  },
+
+
+  didInsertElement: function() {
+    this.set('store', this.get('store'));
+    this.set('model', this.get("model"));
+    if (!this.get('overdue')) {
+      return;
+    }
+    return Ember.run.scheduleOnce('afterRender', this, '_afterRender');
+  },
+  _afterRender: function() {
+    var _ref;
+    if (!this.get('overdue')) {
+      return;
+    }
+    return (_ref = this.$('.overdue-alert')) != null ? _ref.tooltip({
+      html: true
+    }) : void 0;
+  },
+  _teardown: Ember.on('willDestroyElement', function() {
+    var alert;
+    this._super.apply(this, arguments);
+    this.EventBus.unsubscribe("todo:formSubmitted");
+    if (alert = this.$('.overdue-alert')) {
+      return alert.tooltip('destroy');
+    }
+  }),
+  onFormReset: function() {},
+
   actions: {
-    finishTask: function() {
+    finishTask() {
       var timer;
       if (this.get('cantFinish')) {
         return;
@@ -33,7 +151,8 @@ export default FormBase.extend({
       }
       return false;
     },
-    completeFinish: function() {
+
+    completeFinish() {
       var currentPath, ele, finish, model, reference, self, store, user;
       model = this.get('model');
       user = model.get('user');
@@ -65,7 +184,8 @@ export default FormBase.extend({
         return finish();
       });
     },
-    submit: function() {
+
+    submit() {
       this.set('isSubmitted', true);
       if (!this.get('isValid')) {
         this.set('isExpanded', true);
@@ -115,16 +235,16 @@ export default FormBase.extend({
             });
           }
           /*Ember.run.next(function() {
-            var parentController;
-            if (parentController = _this.get('parentController')) {
-              if (parentController instanceof Radium.CalendarTaskController) {
-                return parentController.get('controllers.calendarSidebar').notifyPropertyChange('items');
-              }
-            }
-          });*/ // Will be implemented later
+           var parentController;
+           if (parentController = _this.get('parentController')) {
+           if (parentController instanceof Radium.CalendarTaskController) {
+           return parentController.get('controllers.calendarSidebar').notifyPropertyChange('items');
+           }
+           }
+           });*/ // Will be implemented later
           /*if (_this.get('parentController') instanceof Radium.CalendarTaskController) {
-            _this.set('isExpanded', true);
-          }*/ // Will be converted later
+           _this.set('isExpanded', true);
+           }*/ // Will be converted later
           _this.discardBufferedChanges();
           if (!_this.get('isNew')) {
             return;
@@ -134,115 +254,12 @@ export default FormBase.extend({
         };
       })(this)), 1200);
     },
-    trySubmit: function() {
+
+    trySubmit() {
       if (this.get('isNew')) {
         return;
       }
       return this.send('submit');
     }
   },
-  needs: ['users'],
-  timer: null,
-  overdueText: Ember.computed('finishBy', function() {
-    return "Was due on " + (this.get('finishBy').toHumanFormat());
-  }),
-  isCalendar: Ember.computed.equal('controllers.application.currentPath', 'calendar.task'),
-  animate: Ember.computed.not('isCalendar'),
-  cantFinish: Ember.computed('isDisabled', 'isNew', function() {
-    return this.get('isDisabled') || this.get('isNew');
-  }),
-  isValid: Ember.computed('description.length', 'finishBy', 'user', 'model.submitForm', function() {
-    var finishBy;
-    if (Ember.isEmpty(this.get('description').trim())) {
-      return;
-    }
-    finishBy = this.get('finishBy');
-    if (finishBy && finishBy.isBeforeToday()) {
-      return;
-    }
-    if (!this.get('user')) {
-      return;
-    }
-    return true;
-  }),
-  isBulk: Ember.computed('reference', function() {
-    return Ember.isArray(this.get('reference'));
-  }),
-  showComments: Ember.computed('isNew', 'justAdded', 'isBulk', function() {
-    if (this.get('isBulk')) {
-      return false;
-    }
-    if (this.get('justAdded')) {
-      return false;
-    }
-    if (!this.get('id')) {
-      return false;
-    }
-    return true;
-  }),
-  justAdded: Ember.computed('content.justadded', function() {
-    return this.get('content.justAdded') === true;
-  }),
-  showSuccess: Ember.computed.alias('justAdded'),
-  hasReference: Ember.computed('reference', 'isNew', function() {
-    var reference;
-    reference = this.get('reference');
-    return !this.get('isNew') && reference;
-  }),
-  isDisabled: Ember.computed.bool('justAdded'),
-  isPrimaryInputDisabled: Ember.computed('isDisabled', 'isExpanded', 'isNew', function() {
-    return false;   /// temporary
-    // if (this.get('isNew')) {
-    //   return false;
-    // }
-    // if (!this.get('isExpanded')) {
-    //   return true;
-    // }
-    // return this.get('isDisabled');
-  }),
-  formSubmitted: function() {
-    return this.send('submit');
-  },
-  _initialize: Ember.on('init', function() {
-    this._super.apply(this, arguments);
-    return this.EventBus.subscribe("todo:formSubmitted", this, 'formSubmitted');
-  }),
-  didInsertElement: function() {
-    this.set('store', this.get('store'));
-    this.set('model', this.get("model"));
-    if (!this.get('overdue')) {
-      return;
-    }
-    return Ember.run.scheduleOnce('afterRender', this, '_afterRender');
-  },
-  _afterRender: function() {
-    var _ref;
-    if (!this.get('overdue')) {
-      return;
-    }
-    return (_ref = this.$('.overdue-alert')) != null ? _ref.tooltip({
-      html: true
-    }) : void 0;
-  },
-  _teardown: Ember.on('willDestroyElement', function() {
-    var alert;
-    this._super.apply(this, arguments);
-    this.EventBus.unsubscribe("todo:formSubmitted");
-    if (alert = this.$('.overdue-alert')) {
-      return alert.tooltip('destroy');
-    }
-  }),
-  onFormReset: function() {},
-  placeholder: Ember.computed(/*'reference.name', */'finishBy', function() {
-    let pre = '';
-    if(this.get('referenceName') && !this.get('reference.token')) {
-      pre = "Add a todo about #{this.get('referenceName')}";
-    } else {
-      pre = "Add a todo";
-    }
-    if(!this.get('finishBy')) {
-      return pre;
-    }
-    return "#{pre} for #{this.get('finishBy').toHumanFormat()}";
-  })
 });

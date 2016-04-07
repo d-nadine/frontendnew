@@ -49,3 +49,4 @@ new-test/bower_components
 /old_app/connect.lock
 /old_app/coverage/*
 /libpeerconnection.log
+.idea/

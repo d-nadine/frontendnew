@@ -29,13 +29,18 @@ const User = Model.extend({
   settings: DS.belongsTo('Radium.UserSettings'),
   contactInfo: DS.belongsTo('Radium.ContactInfo'),
   activities: DS.hasMany('Radium.Activity', {inverse: 'user'}),
+  deals: DS.hasMany('Radium.Deal', {inverse: 'user'}),
+  todos: DS.hasMany('Radium.Todo'),
+  meetings: DS.hasMany('Radium.Meeting'),
 
   name: computed('firstName', 'lastName', function() {
-    return (this.get("firstName")) + " " + (this.get("lastName"));
+    return `${this.get("firstName")} ${this.get("lastName")}`;
   }),
+
   isSyncing: computed('syncState', function() {
     return this.get('syncState') !== "waiting";
   }),
+
   displayName: computed.oneWay('name'),
   companyName: computed.oneWay('account.name')
 });

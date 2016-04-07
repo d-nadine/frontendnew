@@ -107,8 +107,7 @@ export default Component.extend(AutocompleteMixin, AutoFillHackMixin, Validation
 
   isAutocompleteTextBox: true,
 
-  sync: Ember.computed.not('isAsync'),
-  classNameBindings: [':autocomplete-textbox', ':field', ':combobox', ':control-box', 'isInvalid', 'isAsync', 'sync'],
+  classNameBindings: [':autocomplete-textbox', ':field', ':combobox', ':control-box', ':sync', 'isInvalid'],
 
   autocompleteElement: function() {
     return this.$('input[type=text].combobox:first');
