@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import FormBase from 'radium/components/form-base';
+import TextareaFocusMixin from 'radium/mixins/textarea-focus-mixin';
 
-export default FormBase.extend({
-  needs: ['userSettings'],
+export default FormBase.extend(TextareaFocusMixin, {
+  //needs: ['userSettings'], rewrite with new style
 
-  todoForm: Radium.computed.newForm('todo'),
+  //todoForm: Radium.computed.newForm('todo'),
   //noteForm: Radium.computed.newForm('note'),
   //meetingForm: Radium.computed.newForm('meeting'),
   //emailForm: Radium.computed.newForm('email'),
@@ -12,8 +13,8 @@ export default FormBase.extend({
   showNoteForm: Ember.computed.equal('activeForm', 'note'),
   showMeetingForm: Ember.computed.equal('activeForm', 'meeting'),
   showEmailForm: Ember.computed.equal('activeForm', 'email'),
-  settings: Ember.computed.alias('controllers.userSettings.model'),
-  signature: Ember.computed.alias('settings.signature'),
+  //settings: Ember.computed.alias('controllers.userSettings.model'),
+  //signature: Ember.computed.alias('settings.signature'),
   template: null,
   activeForm: 'todo',
 
@@ -54,17 +55,15 @@ export default FormBase.extend({
       if (this.get('showMeetingForm')) {
         this.set('meetingForm.isExpanded', true);
       }
-      return Ember.run.later(this, ((_this) => {
-        return () => {
-          return _this.trigger('focusTopic');
-        };
-      })(this), 400);
+      return Ember.run.later(() => {
+        this.onFocusTopic();
+      }, 400);
     },
 
     submitForm() {
-      let activeForm = this.get(`${this.get('activeForm')}Form`);
-      this.EventBus.publish(`${this.activeForm}:formSubmitted`);
-      return this.trigger('focusTopic');
+      //let activeForm = this.get(`${this.get('activeForm')}Form`);
+      this.EventBus.publish(`${this.get('activeForm')}:formSubmitted`);
+      return this.onFocusTopic();
     },
 
     saveEmail(form) {

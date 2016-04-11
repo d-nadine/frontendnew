@@ -10,8 +10,8 @@ export default Ember.TextArea.extend(TextFieldFocusMixin, FocusTextareaMixin, {
   tabIndexBinding: 'parentView.tabIndex',
   placeholderBinding: 'parentView.placeholder',
   //readonlyBinding: 'parentView.readonly',
-  //valueBinding: 'parentView.value'
-  /*keyDown: function(event) {
+  valueBinding: 'parentView.value',
+  keyDown: function(event) {
     if(event.keycode != 13) {
       return;
     }
@@ -19,5 +19,5 @@ export default Ember.TextArea.extend(TextFieldFocusMixin, FocusTextareaMixin, {
     this.get('parentView').send('submit');
 
     event.preventDefault();
-  }*/
+  }
 });

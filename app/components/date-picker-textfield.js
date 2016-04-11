@@ -7,31 +7,32 @@ const {
 } = Ember;
 
 export default TextField.extend(KeyConstantsMixin, {
+  classNameBindings: [":date-picker"],
   valueBinding: 'parentView.text',
   disabledBinding: 'targetObject.disabled',
+  placeholder: Ember.computed.alias('targetObject.placeholder'),
+
+  init() {
+    var allowedKeyCodes;
+    this._super.apply(this, arguments);
+    allowedKeyCodes = Ember.A([this.TAB, this.ENTER, this.ESCAPE, this.DELETE]);
+    return this.set('allowedKeyCodes', allowedKeyCodes);
+  },
+
   date: Ember.computed(function() {
     let date = new Date(this.$().data('datepicker').date);
     let embdate = Ember.DateTime.create(date);
     embdate.timezone = 0;
     return embdate;
   }),
-  classNameBindings: [":date-picker"],
-  placeholder: Ember.computed.alias('targetObject.placeholder'),
-  init: function() {
-    var allowedKeyCodes;
-    this._super.apply(this, arguments);
-    allowedKeyCodes = Ember.A([this.TAB, this.ENTER, this.ESCAPE, this.DELETE]);
-    return this.set('allowedKeyCodes', allowedKeyCodes);
-  },
+
   setup: Ember.on('didInsertElement', function() {
-    var datePicker, defaultViewDate, formatNumber, formatted, input, modelDate, now, nowTemp;
-    this.set('register-as', this);
     this._super.apply(this, arguments);
     this.addObserver('value', this, 'valueDidChange');
-    nowTemp = new Date();
-    now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-    input = this.$().datepicker({
-      onRender: function(date) {
+    let nowTemp = new Date();
+    let now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+    let input = this.$().datepicker({
+      onRender(date) {
         if (date.valueOf() < now.valueOf()) {
           return 'disabled';
         } else {
@@ -39,14 +40,14 @@ export default TextField.extend(KeyConstantsMixin, {
         }
       }
     });
-    datePicker = input.data('datepicker');
-    modelDate = this.get('date');
-    //defaultViewDate = modelDate && !modelDate.isBeforeToday() ? modelDate.toJSDate() : Date.parse('tomorrow');
-    defaultViewDate = new Date(); // temporary code
-    formatNumber = function(number) {
+    let datePicker = input.data('datepicker');
+    let modelDate = this.get('date');
+    let defaultViewDate = modelDate && !modelDate.isBeforeToday() ? modelDate.toJSDate() : Date.parse('tomorrow');
+    //let defaultViewDate = new Date(); // temporary code
+    let formatNumber = function(number) {
       return ("0" + number).slice(-2);
     };
-    formatted = "" + (formatNumber(defaultViewDate.getMonth() + 1)) + "/" + (formatNumber(defaultViewDate.getDate())) + "/" + (defaultViewDate.getFullYear());
+    let formatted = "" + (formatNumber(defaultViewDate.getMonth() + 1)) + "/" + (formatNumber(defaultViewDate.getDate())) + "/" + (defaultViewDate.getFullYear());
     this.$().datepicker('update', formatted);
     $(".scroll-pane").scroll((function(_this) {
       return function() {
@@ -61,16 +62,15 @@ export default TextField.extend(KeyConstantsMixin, {
     input.on('hide', this.hideDatePicker.bind(this));
     return input.on('changeDate', this.changeDatePicker.bind(this));
   }),
-  // changeDatePicker: function(evt) {
-  changeDatePicker: function() {
-    var el;//, milliseconds, target;
-    if (!(el = this.$())) {
-      return;
-    }
-    /*milliseconds = evt.date.add(new Date().getHours() + 1).hours().valueOf();
+
+  changeDatePicker: function(evt) {
+    let el;
+    if (!(el = this.$())) return;
+
+    let milliseconds = evt.date.add(new Date().getHours() + 1).hours().valueOf();
     this.set('date', Ember.DateTime.create(milliseconds));
     el.data('datepicker').hide();
-    target = this.get('targetObject');
+    let target = this.get('targetObject');
     if (evt.dontSubmit) {
       return;
     }
@@ -81,7 +81,7 @@ export default TextField.extend(KeyConstantsMixin, {
       return function() {
         return target.sendAction('submitForm', _this.get('date'));
       };
-    })(this));*/
+    })(this));
   },
   hideDatePicker: function() {
     if (this.isDestroyed) {

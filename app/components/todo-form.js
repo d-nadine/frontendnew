@@ -2,8 +2,9 @@ import Ember from 'ember';
 import FormBase from 'radium/components/form-base';
 
 export default FormBase.extend({
-  needs: ['users'],
+  //needs: ['users'],
   timer: null,
+  description: '',
 
   isCalendar: Ember.computed.equal('controllers.application.currentPath', 'calendar.task'),
   animate: Ember.computed.not('isCalendar'),
@@ -24,11 +25,11 @@ export default FormBase.extend({
   }),
 
   isValid: Ember.computed('description.length', 'finishBy', 'user', 'model.submitForm', function() {
-    var finishBy;
+    let finishBy = this.get('finishBy');
+
     if (Ember.isEmpty(this.get('description').trim())) {
       return;
     }
-    finishBy = this.get('finishBy');
     if (finishBy && finishBy.isBeforeToday()) {
       return;
     }
@@ -65,17 +66,17 @@ export default FormBase.extend({
     return !this.get('isNew') && reference;
   }),
 
-  placeholder: Ember.computed(/*'reference.name', */'finishBy', function() {
+  placeholder: Ember.computed(/*'reference.name',*/ 'finishBy', function() {
     let pre = '';
     if(this.get('referenceName') && !this.get('reference.token')) {
-      pre = "Add a todo about #{this.get('referenceName')}";
+      pre = `Add a todo about ${this.get('referenceName')}`;
     } else {
       pre = "Add a todo";
     }
     if(!this.get('finishBy')) {
       return pre;
     }
-    return "#{pre} for #{this.get('finishBy').toHumanFormat()}";
+    return `${pre} for ${this.get('finishBy').toHumanFormat()}`;
   }),
 
   isPrimaryInputDisabled: Ember.computed('isDisabled', 'isExpanded', 'isNew', function() {

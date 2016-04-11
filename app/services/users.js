@@ -16,5 +16,9 @@ export default Service.extend({
 
       this.notifyPropertyChange('users');
     });
-  }
+  },
+
+  getUsers: Ember.computed('users', function() {
+    return this.get('users');
+  })
 });

@@ -3,7 +3,7 @@ import MentionField from 'radium/components/mention-field';
 
 export default MentionField.extend({
   classNameBindings: ['value:is-valid', 'isInvalid', ':todo'],
-  //valueBinding: 'parentView.description',
+  valueBinding: 'parentView.description',
   dateBinding: 'parentView.finishBy',
   isSubmitted: Ember.computed.oneWay('parentView.isSubmitted'),
   isInvalid: Ember.computed('value', 'isSubmitted', function() {

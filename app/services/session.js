@@ -49,4 +49,3 @@ export default Service.extend({
 
   authManager: Ember.inject.service()
 });
-
