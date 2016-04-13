@@ -45,7 +45,7 @@ Radium.CompanyAutocompleteMixin = Ember.Mixin.create
 
     external =
       $.ajax
-        url: "http://query.yahooapis.com/v1/public/yql",
+        url: "https://query.yahooapis.com/v1/public/yql",
         jsonp: "callback",
 
         dataType: "jsonp",
